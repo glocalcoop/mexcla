@@ -1,7 +1,9 @@
 // Build routes for the application
 define(['views/index', 'views/room'],
        function(IndexView, RoomView) {
+  console.log('MexclaRouter executed');
   var MexclaRouter = Backbone.Router.extend({
+
     currentView: null,
 
     routes: {

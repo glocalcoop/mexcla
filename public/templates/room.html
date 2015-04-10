@@ -1,0 +1,97 @@
+     <h1 id="logo"><img alt="MayFirst/People Link" src="//images/logo.png" class="header-image" /></h1>
+      <h3 id="tagline"><strong>Mexcla</strong>: Simultaneous Interpretation Conference System</h3>
+
+      <div id="language-links">
+        <a id="es-switch-link" class="button espanol" href="/es/">es</a>
+        <a id="en-switch-link" class="button english" href="/en/">en</a></div>
+    </header>
+
+    <main class="main-content" role="main">
+      <header id="connect">
+        <h2 class="conference-id">Conference Room <span class="pstn-instructions-conference-number"></span></h2>
+        <div id="connect-icon-and-button">
+          <!-- <span id="phone" class="button disconnect">Disconnect</span> -->
+          <!-- TODO: Let's append a class here that indicates if Connected or Disconnect -->
+          <button onclick="mexcla_toggle_call_status(); return false;" id="connect-button" class="button">
+            <span id="connect-button-text" class="connect">Connect</span>
+            <span id="connect-dots"></span>
+          </button>
+        </div>
+      </header>
+
+      <section class="options" role="main">
+        <div id="call-options">
+          <h3>Call Options</h3>
+
+          <label><input onclick="mexcla_mic_mute();" type="radio" name="mic" id="mic-mute" value="mute" />Mute</label>
+          <label><input onclick="mexcla_mic_unmute();" type="radio" name="mic" id="mic-unmute" value="unmute" />Unmute</label>
+        </div>
+
+        <div id="interpretation-mode">
+          <h3>Language Options</h3>
+          <label><input onclick="mexcla_mode_original();" type="radio" name="mode" id="mode-original" value="original" />Hear original language</label>
+          <label><input onclick="mexcla_mode_hear_interpretation();" type="radio" name="mode" id="mode-hear-interpretation" value="hear-interpretation" />Hear interpretation</label>
+          <label><input onclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation" />Provide interpretation</label>
+        </div>
+      </section>
+    </main>
+
+    <aside id="connect-instructions" class="sidebar" role="complementary">
+      <h3>Connect By Telephone</h3>
+      <div class="pstn-instructions">
+        <p><strong>Dial</strong> USA +1.718.303.3204 OR 402.772.0337/MEXICO +52.55.85262875</p>
+        <p><strong>Enter</strong> 6</p>
+        <p><strong>Select</strong> Conference number <span class="pstn-instructions-conference-number"></span></p>
+        <p class="alert">Note: This system only works with recent versions Chrome/Chromium.</p>
+      </div>
+    </aside>
+
+    <section id="collaboration" role="main">
+      <!-- <h3>Collaboration</h3> -->
+      <div class="tabs">
+        <div id="iframe-selectors">
+
+          <div class="tab">
+            <input onclick="mexcla_toggle_pad();" type="radio" id="pad-iframe-checkbox" name="tab-group-1" />
+            <label for="pad-iframe-checkbox">Notepad</label>
+            <div class="content pad">
+            <!-- Notepad content - iframe goes here -->
+            </div>
+          </div>
+
+          <div class="tab">
+            <input onclick="mexcla_toggle_calc();" type="radio" id="calc-iframe-checkbox" name="tab-group-1" />
+            <label for="calc-iframe-checkbox">Spreadsheet</label>
+            <div class="content calc">
+            <!-- Spreadsheet content - iframe goes here -->
+            </div>
+          </div>
+
+          <div class="tab">
+            <input onclick="mexcla_toggle_irc();" type="radio" id="irc-iframe-checkbox" name="tab-group-1" />
+            <label for="irc-iframe-checkbox">IRC Chat</label>
+            <div class="content irc">
+            <!-- IRC Chat content - iframe goes here -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div id="user-objects">
+      <table>
+        <tr></tr>
+      </table>
+    </div>
+    <!-- The audio tag is not seen by the user (unless their browser doesn't support it) -->
+    <div id="audio">
+      <audio id="audio-remote" autoplay="autoplay">
+        Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
+      </audio>
+    </div>
+
+    <footer>
+      License info and link to source.
+    </footer>
+

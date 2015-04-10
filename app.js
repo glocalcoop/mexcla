@@ -25,4 +25,8 @@ app.get('/', function(req, res){
   res.render("index.jade");
 });
 
+app.get('/room', function(req, res){
+  res.render("room.jade");
+});
+
 app.listen(8080);
