@@ -1,0 +1,98 @@
+
+// LINKS
+
+a,
+a:visited {
+	color: $anchor-color;
+    text-decoration: none;
+    cursor: pointer;
+    @include transition(all 0.25s ease);
+
+	&:hover,
+	&:focus {
+		color: $anchor-hover;
+	}
+
+	/* on click */
+	&:active {
+
+	}
+
+	/* mobile tap color */
+	&:link {
+		/*
+		this highlights links on iPhones/iPads.
+		so it basically works like the :hover selector
+		for mobile devices.
+		*/
+		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+	}
+}
+
+
+
+// BUTTONS
+
+button,
+.button {
+    @include transition(all 0.25s ease);
+    @include font-size(14);
+	text-transform: uppercase;
+        letter-spacing: $caps-spacing;
+    line-height: 1.2;
+	font-weight: 700;
+    padding: .5em 2em;
+    text-align: center;
+    border: 0;
+    background: $anchor-color;
+    color: $white;
+    display: inline-block;
+    &.disconnect {
+        background: $red;
+    }
+    &.connect {
+        background: $green;
+    }
+    &.espanol {
+        background: $green;
+    }
+    &.english {
+        background: $blue;
+    }
+    &:link,
+    &:visited {
+        color: $white;
+    }
+    &:hover,
+    &:focus {
+        background: $gray9;
+        color: $text-color;
+    }
+
+    @include breakpoint(medium) {@include font-size(16);}
+}
+
+
+// button sizes
+
+%button-large {
+    @include font-size(24);
+    padding: 1em 3em;
+}
+
+%button-small {
+    @include font-size(15);
+    padding: .25em 1em;
+}
+
+
+#call-options,
+#interpretation-mode {
+    label {
+        // display: block;
+    }
+    input[type='radio'] {
+        margin-right: 5px;
+    }
+}
+

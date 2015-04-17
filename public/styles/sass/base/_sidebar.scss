@@ -1,0 +1,30 @@
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+
+
+.sidebar .button,
+.sidebar input[type='submit'] {
+    background: $gray3;
+    background: rgba(0,0,0,.6);
+    font-weight: 700;
+    @include font-size(16);
+    &:hover {
+        background: $white;
+        color: $text-color;
+    }
+}
+
+aside {
+    background: $gray9;
+    padding: 1em;
+
+    h3 {
+        margin-top: 0;
+    }
+    p {
+        margin-bottom: .25em;
+    }
+}
+

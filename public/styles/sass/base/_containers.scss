@@ -1,0 +1,88 @@
+// CONTAINERS
+
+
+// base
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  @include outer-container;
+}
+
+
+hr {
+	border: 0;
+	height: 1px;
+	background: $hr-color;
+	margin: 2rem 0 4rem 0;
+}
+
+body>header,
+main,
+#collaboration,
+footer {
+    @include clearfix;
+
+    @include media($desktop) {
+      padding: 1em;
+    }
+    @include media($tablet) {
+      padding: 1em;
+    }
+    @include media($mobile)  {
+      padding: .5em;
+    }
+}
+
+body>header,
+#collaboration,
+footer {
+  @include span-columns(16);
+}
+
+main {
+  @include span-columns(10);
+
+  section>div {
+    margin-top: 2em;
+    @include span-columns(5 of 10);
+    &:first-child {
+      border-right: 1px solid $hr-color;
+      padding-bottom: 1.5em;
+    }
+    &:last-child {
+      @include omega;
+    }
+  }
+}
+
+aside {
+  @include span-columns(6);
+  @include omega;
+}
+
+@include media($tablet) {
+  main {
+    @include span-columns(16);
+  }
+  aside {
+    display: none;
+  }
+}
+
+@include media($mobile) {
+  main {
+    @include span-columns(16);
+  }
+  aside {
+    display: none;
+  }
+}
+
+footer {
+  background: $gray6;
+}
+

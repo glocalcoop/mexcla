@@ -1,0 +1,62 @@
+.tabs {
+  position: relative;
+  min-height: 400px; /* This part sucks */
+  clear: both;
+  margin: 25px 0;
+  .tab {
+    float: left;
+    label {
+      background: $gray6;
+      padding: 10px;
+      border: 1px solid $gray4;
+      margin-left: -1px;
+      position: relative;
+      left: 1px;
+    }
+  }
+  .content {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background: $white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid $gray4;
+    width: 100%;
+
+    // iframe {
+    //   position: absolute;
+    //   top:40px;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 90%;
+    // }
+
+  }
+  [type=radio]:checked ~ label {
+    background: white;
+    border-bottom: 1px solid $white;
+    z-index: 2;
+  }
+  [type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+  }
+}
+.tab [type=radio] {
+  display: none;
+}
+
+#collaboration {
+  @include clearfix;
+
+  .content iframe {
+    position: absolute;
+    top:40px;
+    left: 0;
+    width: 100%;
+    height: 90%;
+  }
+
+  iframe.resizable {}
+}

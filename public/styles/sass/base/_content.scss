@@ -1,0 +1,25 @@
+.alert {
+	background: lighten(#b0082d, 50%);
+	padding: .5em;
+}
+
+p.alert {
+    @include font-size($small-size-s);
+    @include media($desktop) {@include font-size($small-size-m);}
+    @include media($large) {@include font-size($small-size-l);}
+}
+
+main>header {
+	@include media($tablet) {
+		text-align: center;
+	}
+	@include media($mobile) {
+		text-align: center;
+	}
+}
+
+#collaboration {
+	h3 {
+		margin-top: 0;
+	}
+}

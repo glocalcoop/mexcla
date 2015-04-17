@@ -1,7 +1,96 @@
 extends layout
 
 block content
-  div#content
+  //- div#content
+  header#header
+    h1#logo
+      img(class="header-image" alt="Glocal" src='/images/logo.png')
+    h3#tagline
+      strong.
+        Mexcla
+      |: Simultaneous Interpretation Conference System
+    //- TODO: determine a better way to handle language links
+    div#language-links
+      //- TODO: Define function switch_language()
+      button(id="es-switch-link" class="button espanol" onclick="switch_language()").
+        es
+      button(id="en-switch-link" class="button english" onclick="switch_language()").
+        en
+  main(class="main-content" role="main")
+    header#connect
+      h2.conference-id
+        |Conference Room&nbsp;
+        span.pstn-instructions-conference-number #{roomNum}
+      div#connect-icon-and-button
+        button(id="connect-button" class="button" onclick="mexcla_toggle_call_status(); return false;")
+          span(id="connect-button-text" class="connect").
+            Connect
+          span#connect-dots
+
+    section(class="options" role="main")
+      div#call-options
+        h3.
+          Call Options
+        label
+          input(onclick="mexcla_mic_mute();" type="radio" name="mic" id="mic-mute" value="mute")
+          |Mute
+        label
+          input(onclick="mexcla_mic_unmute();" type="radio" name="mic" id="mic-unmute" value="unmute")
+          |Unmute
+
+      div#interpretation-mode
+        h3.
+          Language Options
+        label
+          input(onclick="mexcla_mode_original();" type="radio" name="mode" id="mode-original" value="original")
+          |Hear original language
+        label
+          input(onclick="mexcla_mode_hear_interpretation();" type="radio" name="mode" id="mode-hear-interpretation" value="hear-interpretation")
+          |Hear interpretation
+        label
+          input(nclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation")
+          |Provide interpretation
+
+  aside(id="connect-instructions" class="sidebar" role="complementary")
+    h3.
+      Connect By Telephone
+    div.pstn-instructions
+      p
+        strong.
+          Dial&nbsp;
+        |USA +1.718.303.3204 OR 402.772.0337/MEXICO +52.55.85262875
+      p
+        strong.
+          Enter&nbsp;
+        | 6
+      p
+        strong.
+          Select&nbsp;
+        |Conference number&nbsp;
+        span.pstn-instructions-conference-number #{roomNum}
+      p.alert.
+        Note: This system only works with recent versions Chrome/Chromium.
+
+  section(id="collaboration" role="main")
+    div.tabs
+      div#iframe-selectors
+        div.tab
+          input(onclick="mexcla_toggle_pad();" type="radio" id="pad-iframe-checkbox" name="tab-group-1")
+          label(for="pad-iframe-checkbox").
+            Notepad
+          div(class="content pad")
+        div.tab
+          input(onclick="mexcla_toggle_calc();" type="radio" id="calc-iframe-checkbox" name="tab-group-1")
+          label(for="calc-iframe-checkbox").
+            Spreadsheet
+          div(class="content calc")
+        div.tab
+          input(onclick="mexcla_toggle_irc();" type="radio" id="irc-iframe-checkbox" name="tab-group-1")
+          label(for="irc-iframe-checkbox").
+            IRC Chat
+          div(class="content irc")
+
+
 
 block scripts
-  script(data-main='js/boot', type='text/javascript',src='/js/libs/require.js')
+  script(data-main='/js/boot', type='text/javascript',src='/js/libs/require.js')

@@ -1,0 +1,65 @@
+// HEADER
+
+body>header {
+    border-bottom: 1px solid $hr-color;
+    display: table;
+
+    h1#logo,
+    h3#tagline,
+    #language-links {
+    	display: table-cell;
+    	vertical-align: middle;
+    	margin-top: 0;
+    	margin-bottom: 0;
+    }
+
+    h1#logo {
+	    margin: 0;
+	    padding-right: .5em;
+
+    	@include media($tablet) {
+    		@include span-columns(16);
+    		text-align: center;
+    	}
+
+    	@include media($mobile) {
+    		@include span-columns(16);
+    		text-align: center;
+    	}
+
+		img {
+			width: auto;
+			max-width: 350px;
+			max-height: 150px;
+		}
+    }
+    h3#tagline {
+    	font-size: $h3-size-l;
+
+		@include media($tablet) {
+			@include span-columns(16);
+			@include font-size($h3-size-m);
+			text-align: center;
+		}
+
+		@include media($mobile) {
+			@include span-columns(16);
+			@include font-size($h3-size-s);
+			text-align: center;
+		}
+    }
+	#language-links {
+		white-space: nowrap;
+		text-align: right;
+
+		@include media($tablet) {
+			@include span-columns(16);
+			text-align: center;
+		}
+
+		@include media($mobile) {
+			@include span-columns(16);
+			text-align: center;
+		}
+	}
+}

@@ -5,11 +5,12 @@ require.config({
     Underscore: '/js/libs/underscore',
     Backbone: '/js/libs/backbone',
     text: '/js/libs/text',
+    mexclajs: '/js/mexcla-html5',
     templates: '../templates'
 },
   shim: {
     'Backbone': ['Underscore', 'jQuery'],
-    'Mexcla': ['Backbone']
+    'Mexcla': ['Backbone', 'mexclajs']
   }
 });
 console.log('boot.js initialized.');

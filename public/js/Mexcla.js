@@ -5,7 +5,7 @@ define(['router'], function(router) {
 
   var runApplication = function() {
     console.log('Mexcla.js initialized.');
-    window.location.hash = 'room';
+    // window.location.hash = 'room';
     Backbone.history.start();
   };
 

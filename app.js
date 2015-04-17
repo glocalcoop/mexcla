@@ -25,8 +25,19 @@ app.get('/', function(req, res){
   res.render("index.jade");
 });
 
-app.get('/room', function(req, res){
-  res.render("room.jade");
+app.get('/room/:roomnum', function(req, res){
+  var num = req.params.roomnum;
+  var sess = req.session;
+  console.log(sess);
+  sess.room = num;
+  expressSession.room = num
+  // console.log(expressSession);
+  res.render("room.jade", {roomNum: num});
+});
+
+app.get('/session', function(req, res) {
+  res.json(req.session);
+  console.log(req.session);
 });
 
 app.listen(8080);

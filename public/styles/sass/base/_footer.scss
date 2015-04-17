@@ -1,0 +1,89 @@
+// FOOTER
+
+.footer {
+    background: $gray8;
+    .global {
+        padding: 30px 0;
+        @include breakpoint(medium) {position: relative;}
+    }
+}
+
+.footer-logo {
+    margin: 0;
+    line-height: 30px;
+}
+
+
+
+// footer widgets
+
+.footer .widget {
+    background: $white;
+    margin-bottom: 30px;
+	@include breakpoint(small) {@include span-columns(4);}
+	ul {
+    	margin-bottom: 0;
+	}
+	li {
+    	@include font-size(16);
+    	color: $text-color;
+    	padding: 0;
+    	margin: 0;
+	}
+	a, a:visited {
+    	color: $teal;
+	}
+}
+
+
+
+// SOCIAL LINKS AND COPYRIGHT
+
+.footer-slug {
+    background: $gray7;
+    clear: both;
+    .wrap {
+        max-width: 1200px;
+    }
+}
+
+
+.nav-social {
+    margin: 15px 15px 15px 0;
+    padding: 0;
+    float: left;
+    li {
+        @include font-size(40);
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 0;
+    }
+    a {
+        display: block;
+        height: 100%;
+        line-height: 22px; // needed to vertically center icons
+    }
+    .facebook a {@include flip-button($navy); @include font-icon-base($family:"entypo-social"); @extend %entypo-social-facebook;}
+    .twitter a {@include flip-button($blue); @include font-icon-base($family:"entypo-social"); @extend %entypo-social-twitter;}
+    .github a {@include flip-button($teal); @include font-icon-base($family:"entypo-social"); @extend %entypo-social-github;}
+    .email a {@include flip-button($green); @include font-icon-base($family:"entypo"); @extend %entypo-mail;}
+    .rss a {@include flip-button($orange); @include font-icon-base($family:"entypo"); @extend %entypo-rss;}
+}
+
+
+.copyright {
+    @include font-size(10);
+    text-transform: uppercase;
+        letter-spacing: $caps-spacing;
+    color: $gray4;
+    display: inline-block;
+    margin: 15px 0;
+    height: 30px;
+    line-height: 30px;
+	@include breakpoint(medium) {@include font-size(12);}
+}
