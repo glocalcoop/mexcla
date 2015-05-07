@@ -31,12 +31,13 @@ app.get('/room/:roomnum', function(req, res){
   console.log(sess);
   sess.room = num;
   expressSession.room = num
-  // console.log(expressSession);
+  console.log(sess);
   res.render("room.jade", {roomNum: num});
 });
 
-app.get('/session', function(req, res) {
+app.get('/session', function(req, res, next) {
   res.json(req.session);
+  return next();
   console.log(req.session);
 });
 

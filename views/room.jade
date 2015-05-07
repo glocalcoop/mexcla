@@ -90,7 +90,14 @@ block content
             IRC Chat
           div(class="content irc")
 
-
+  section(id="audio-handling")
+    div#audio
+      //-
+        The audio tag is not seen by the user (unless their browser doesn't support it)
+      audio(id="audio-remote" autoplay="autoplay")
+        Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
 
 block scripts
+  script(data-main='/js/config', type='text/javascript', src='/js/config.js')
+  script(data-main='/js/jssip-0.6.18', type='text/javascript', src='/js/jssip-0.6.18.js')
   script(data-main='/js/boot', type='text/javascript',src='/js/libs/require.js')

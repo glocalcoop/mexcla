@@ -1,4 +1,10 @@
 var gSession;
+// Temporarily define language strings here.
+var lang_connect = 'Connect';
+var lang_connecting = 'Connecting';
+var lang_disconnect = 'Disconnect';
+var lang_not_yet_connected = 'Your call is not yet connected';
+var lang_direct_link = 'Direct link';
 
 function mexcla_toggle_call_status() {
   if(gSession) {
@@ -10,10 +16,9 @@ function mexcla_toggle_call_status() {
 
 function mexcla_hangup() {
   if(gSession) {
-    gSession.hangup();
+    gSession.terminate();
     // Unset gSession so when the user tries to re-connect
     // we know to re-connect
-    sipStack.stop();
     gSession = null;
   }
   change_submit_button_value(lang_connect);
@@ -59,46 +64,52 @@ function mexcla_init_iframes() {
 }
 
 function mexcla_toggle_irc() {
-  mexcla_toggle_iframe('irc-frame', 'irc', 'https://irc.koumbit.net/?channels=#' + mexcla_get_hash() + '&nick=guest');
+  mexcla_toggle_iframe('irc-frame', 'https://irc.koumbit.net/?channels=#' + mexcla_get_hash() + '&nick=guest');
 }
 
 function mexcla_toggle_pad() {
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
-  mexcla_toggle_iframe('pad-frame', 'pad', 'https://pad.riseup.net/p/' + mexcla_get_hash());
+  mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash());
 }
 
-function mexcla_toggle_iframe(id,element,url, extra)  {
+function mexcla_toggle_iframe(id,url, extra)  {
   if($('#' + id).length == 0) {
     // The element doesn't exist, add it.
-    mexcla_add_iframe(id, element, url, extra);
+    mexcla_add_iframe(id, url, extra);
     $('.draggable').draggable();
   }
   else{
-    // We have made these into tabs which makes
-    // removing the items less intuitive since
-    // the tabs make visible the item that you want.
-    // I see this as a potential bandwidth problem
-    // since the interactive iframes increase bw consumption.
-
-    // $('#' + id).remove();
+    $('#' + id).remove();
   }
 }
 
 function mexcla_toggle_calc() {
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
-  mexcla_toggle_iframe('calc-frame', 'calc', 'https://calc.mayfirst.org/' + mexcla_get_hash());
+  mexcla_toggle_iframe('calc-frame', 'https://calc.mayfirst.org/' + mexcla_get_hash());
 }
 
 // Generate a random-looking hash that will be the same for everyone on the
 // same conference call.
 function mexcla_get_hash() {
-  if(expressSession.room) {
-    return 'mexcla-' + expressSession.room;
-    // return 'mexcla-' + mexcla_get_conference_number();
-  }
+  return 'mexcla-' + mexcla_get_conference_number();
 }
 
 function mexcla_call_init() {
+  var config = {
+    realm: 'talk.mayfirst.org',
+    impi: 'public',
+    impu: 'sip:public@talk.mayfirst.org',
+    password: 'public',
+    enable_rtcweb_breaker: false,
+    outbound_proxy_url: 'udp://talk.mayfirst.org:5060',
+    // use 10062 webrtc2sip and 7443 with freeswitch webrtc
+    // websocket_proxy_url: 'wss://talk.mayfirst.org:10062',
+    websocket_proxy_url: 'wss://talk.mayfirst.org:7443',
+    // websocket_proxy_url: 'ws://paul.mayfirst.org:10060',
+    //websocket_proxy_url: 'ws://paul.mayfirst.org:5066',
+    ice_servers: [{"urls":"turn:talk.mayfirst.org:5349", "username": "mayfirst", "credential":"1IGdfbft23EVjtV"}]
+    // ice_servers: [{"url":"turn:talk.mayfirst.org:5349"}]
+}
   // Ensure we have a conference number
   conf = mexcla_get_conference_number();
   if(conf == 0) {
@@ -110,56 +121,67 @@ function mexcla_call_init() {
     return false;
   }
   // Initialize the engine
-  SIPml.init(
-    function(e){
-      sipStack =  new SIPml.Stack({
-        realm: config.realm,
-        impi: config.impi,
-        impu: config.impu,
-        password: config.password,
-        enable_rtcweb_breaker: config.enable_rtcweb_breaker,
-        outbound_proxy_url: config.outbound_proxy_url,
-        websocket_proxy_url: config.websocket_proxy_url,
-        ice_servers: config.ice_servers,
-        events_listener: {
-          events: 'started',
-          listener: function(e){
-            // Create a new call
-            var callSession = sipStack.newSession(
-              'call-audio',
-              { audio_remote:
-                document.getElementById('audio-remote')
-              }
-            );
-            // Define a listener that will alert the user when we are connecting
-            // and when we are connected.
-            callSession.addEventListener('*', function(se) {
-              // console.log("Event type is: " + se.type);
-              if (se.type == "connecting") {
-                change_submit_button_value(lang_connecting);
-              } else if(se.type == 'connected') {
-                change_submit_button_value(lang_disconnect);
-                mexcla_join_conference();
-              }
-            });
-            // Place the call.
-            callSession.call('9999');
+  var configuration = {
+      'ws_servers': config.websocket_proxy_url,
+      'uri': config.impu,
+      'password': config.password,
+      // Seems like a bug - if this is left out (default true), we get an error:
+      // 422 Session Interval Too Small
+      'session_timers': false
+  };
+  var coolPhone = new JsSIP.UA(configuration);
+  coolPhone.start();
+  var audioRemote =  document.getElementById('audio-remote');
+  var eventHandlers = {
+    'connecting':   function(e){
+      // Setting lang_connecting value at the top of this file
+      // TODO: generate a legitimate mechanism for alternative languages.
+      change_submit_button_value(lang_connecting);
+    },
+    'failed':     function(e){
+      mexcla_handle_error(e);
+    },
+    'confirmed':  function(e){
+      change_submit_button_value(lang_disconnect);
+      mexcla_join_conference();
+      // Attach local stream to selfView
+      // selfView.src = window.URL.createObjectURL(session.connection.getLocalStreams()[0]);
+    },
+    'addstream':  function(e) {
+      var stream = e.stream;
 
-            // Save session in global variable
-            // so we can call the dtmf method
-            // throughout the call
-            gSession = callSession;
-          }
-        }
-      });
-      sipStack.start();
-      // Initialize radio buttons
-      mexcla_check_radio_button('mic-unmute');
-      mexcla_check_radio_button('mode-original');
-    }
-  );
+      // Attach remote stream to remoteView
+      audioRemote.src = window.URL.createObjectURL(stream);
+    },
+    'ended':      function(e){ /* Your code here */ }
+  };
+  var options = {
+    'eventHandlers': eventHandlers,
+    // 'extraHeaders': [ 'X-Foo: foo', 'X-Bar: bar' ],
+    'mediaConstraints': {'audio': true, 'video': false},
+    'pcConfig': {
+      'iceServers': config.ice_servers
+     }
+
+  };
+
+  session = coolPhone.call('sip:9999@talk.mayfirst.org', options);
+  // Initialize radio buttons
+  mexcla_check_radio_button('mic-unmute');
+  mexcla_check_radio_button('mode-original');
+
+  // Save session in global variable
+  // so we can call the dtmf method
+  // throughout the call
+  gSession = session;
 }
 
+function mexcla_handle_error(data) {
+  console.log(data);
+  alert(data.cause);
+
+
+}
 function mexcla_get_url_params() {
   // Split the url by /, skipping the first / so we don't have an empty value first.
   parts = window.location.pathname.substr(1).split('/');
@@ -217,7 +239,7 @@ function mexcla_join_conference() {
 
 function mexcla_dtmf(key) {
   if(gSession) {
-    var ret = gSession.dtmf(key);
+    var ret = gSession.sendDTMF(key);
     // alert("Sent " + key + " got " + ret);
     return true;
   } else {
@@ -241,7 +263,6 @@ function change_submit_button_value(val) {
     // We're disconnecting, so change the picture to the
     // disconnected phone.
     // target_src = current_src.replace('phone.connected.png', 'phone.disconnected.png');
-    $('#connect-icon-and-button').removeClass('connect connected').addClass('disconect disconnected');
   }
   else if(val  == lang_disconnect) {
     // We're connecting... kill the dots animation.
@@ -250,8 +271,6 @@ function change_submit_button_value(val) {
     mexcla_dots('');
     // target_src = current_src.replace('phone.disconnected.png', 'phone.connected.png');
     $('#microphone-status').show();
-    // Add classes to the connected button
-    $('#connect-icon-and-button').addClass('connect connected');
   }
   else {
     // When we are connecting... the picture should remain showing
@@ -343,10 +362,7 @@ function mexcla_pause(s) {
   while(curDate - date < s);
 }
 
-// function mexcla_add_iframe(id, src, extra) {
-//   $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
-// }
-
-function mexcla_add_iframe(id, element, src, extra) {
-  $("#iframe-selectors ." + element).append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
+function mexcla_add_iframe(id, src, extra) {
+  $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
 }
+
