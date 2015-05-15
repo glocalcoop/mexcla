@@ -21,9 +21,12 @@ block content
       h2.conference-id
         |Conference Room&nbsp;
         span.pstn-instructions-conference-number #{roomNum}
+        div(id="userinfo-modal" style="display:none")
+          a(href="/userinfo" rel="ajax:modal")
+
       div#connect-icon-and-button
         button(id="connect-button" class="button" onclick="mexcla_toggle_call_status(); return false;")
-          span(id="connect-button-text" class="connect").
+          span(id="connect-button-text" rel="ajax:modal" class="connect").
             Connect
           span#connect-dots
 
@@ -48,7 +51,7 @@ block content
           input(onclick="mexcla_mode_hear_interpretation();" type="radio" name="mode" id="mode-hear-interpretation" value="hear-interpretation")
           |Hear interpretation
         label
-          input(nclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation")
+          input(onclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation")
           |Provide interpretation
 
   aside(id="connect-instructions" class="sidebar" role="complementary")

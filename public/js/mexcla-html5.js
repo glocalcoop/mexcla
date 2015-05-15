@@ -7,6 +7,7 @@ var lang_not_yet_connected = 'Your call is not yet connected';
 var lang_direct_link = 'Direct link';
 
 function mexcla_toggle_call_status() {
+  check_session();
   if(gSession) {
     mexcla_hangup();
   } else {
@@ -95,21 +96,7 @@ function mexcla_get_hash() {
 }
 
 function mexcla_call_init() {
-  var config = {
-    realm: 'talk.mayfirst.org',
-    impi: 'public',
-    impu: 'sip:public@talk.mayfirst.org',
-    password: 'public',
-    enable_rtcweb_breaker: false,
-    outbound_proxy_url: 'udp://talk.mayfirst.org:5060',
-    // use 10062 webrtc2sip and 7443 with freeswitch webrtc
-    // websocket_proxy_url: 'wss://talk.mayfirst.org:10062',
-    websocket_proxy_url: 'wss://talk.mayfirst.org:7443',
-    // websocket_proxy_url: 'ws://paul.mayfirst.org:10060',
-    //websocket_proxy_url: 'ws://paul.mayfirst.org:5066',
-    ice_servers: [{"urls":"turn:talk.mayfirst.org:5349", "username": "mayfirst", "credential":"1IGdfbft23EVjtV"}]
-    // ice_servers: [{"url":"turn:talk.mayfirst.org:5349"}]
-}
+
   // Ensure we have a conference number
   conf = mexcla_get_conference_number();
   if(conf == 0) {
@@ -239,6 +226,7 @@ function mexcla_join_conference() {
 
 function mexcla_dtmf(key) {
   if(gSession) {
+    console.log(gSession);
     var ret = gSession.sendDTMF(key);
     // alert("Sent " + key + " got " + ret);
     return true;
@@ -365,4 +353,3 @@ function mexcla_pause(s) {
 function mexcla_add_iframe(id, src, extra) {
   $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
 }
-

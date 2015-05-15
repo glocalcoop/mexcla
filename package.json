@@ -4,7 +4,8 @@
   "description": "A multi-lingual webrtc2sip conferencing system.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/.bin/supervisor app",
+    "test": "node_modules/.bin/mocha -w"
   },
   "keywords": [
     "webrtc",
@@ -23,5 +24,9 @@
     "express-session": "^1.10.4",
     "jade": "^1.9.2",
     "mongoose": "^4.0.1"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "mocha": "^2.2.4"
   }
 }

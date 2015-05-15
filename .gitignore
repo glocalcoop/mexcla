@@ -4,3 +4,4 @@
 
 # node-modules
 /public/js/config.js
+npm-debug.log

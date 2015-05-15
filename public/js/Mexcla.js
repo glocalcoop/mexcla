@@ -23,17 +23,16 @@ define(['router'], function(router) {
     console.log('Mexcla.js initialized.');
     var curpath = window.location.pathname;
     var roomPath = curpath.match(/room\/[0-9]+/gi);
+    console.log('roomPath');
     console.log(roomPath);
+    console.log('curpath');
     console.log(curpath);
     console.log(room);
-    if(!room) {
-      window.location.hash = 'index';
-    }else if (!roomPath){
+    if(room == null && curpath != '/') {
+      window.location.assign('/');
+    }else if (roomPath != null && roomPath == null){
       window.location.assign('/room/' + room.room);
       console.log(roomPath);
-    }else{
-      console.log(roomPath);
-    // window.location.hash = 'room';
     }
     Backbone.history.start();
   };
