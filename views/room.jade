@@ -54,25 +54,9 @@ block content
           input(onclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation")
           |Provide interpretation
 
-  aside(id="connect-instructions" class="sidebar" role="complementary")
-    h3.
-      Connect By Telephone
-    div.pstn-instructions
-      p
-        strong.
-          Dial&nbsp;
-        |USA +1.718.303.3204 OR 402.772.0337/MEXICO +52.55.85262875
-      p
-        strong.
-          Enter&nbsp;
-        | 6
-      p
-        strong.
-          Select&nbsp;
-        |Conference number&nbsp;
-        span.pstn-instructions-conference-number #{roomNum}
-      p.alert.
-        Note: This system only works with recent versions Chrome/Chromium.
+  //
+  aside(id="participant-list" class="sidebar" role="complementary")
+    include partials/participants
 
   section(id="collaboration" role="main")
     div.tabs
