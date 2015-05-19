@@ -34,7 +34,9 @@ a:visited {
 // BUTTONS
 
 button,
-.button {
+.button,
+input[type='submit'],
+input[type='button'] {
     @include transition(all 0.25s ease);
     @include font-size(14);
 	text-transform: uppercase;
