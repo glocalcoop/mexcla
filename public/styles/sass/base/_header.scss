@@ -28,9 +28,14 @@ body>header {
     	}
 
 		img {
-			width: auto;
-			max-width: 350px;
-			max-height: 150px;
+            width: auto;
+            max-height: 80px;
+          
+            @include media($desktop) {
+              width: auto;
+              max-width: 350px;
+              max-height: 150px;
+            }
 		}
     }
     h3#tagline {
