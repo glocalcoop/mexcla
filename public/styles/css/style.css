@@ -1391,6 +1391,22 @@ p.alert {
 #collaboration h3 {
   margin-top: 0; }
 
+/* line 5, ../sass/base/_lists.scss */
+#participants {
+  max-height: 250px;
+  overflow-x: scroll; }
+  /* line 8, ../sass/base/_lists.scss */
+  #participants li {
+    padding: 0 .25em;
+    background-color: #fff;
+    margin: 1px 0; }
+    /* line 13, ../sass/base/_lists.scss */
+    #participants li:nth-child(odd) {
+      background-color: #FAFAFA; }
+    /* line 16, ../sass/base/_lists.scss */
+    #participants li.current {
+      font-weight: bold; }
+
 /*********************
 NAVIGATION STYLES
 *********************/

@@ -1,0 +1,20 @@
+ul {
+  li {}
+}
+
+#participants {
+  max-height: 250px;
+  overflow-x: scroll;
+  li {
+    padding: 0 .25em;
+    background-color: $white;
+    margin: 1px 0;
+
+    &:nth-child(odd) {
+       background-color: $gray0;
+    }
+    &.current {
+      font-weight: bold;
+    }
+  }
+}
