@@ -1,5 +1,34 @@
 .options {
-	label {
+  label {
+    display: inline-block;
+    margin-right: .5em;
+  }
+  
+  // Desktop or larger
+  @include media($desktop) {
+    label {
 		display: block;
 	}
+  }
+	
+}
+
+form {
+  fieldset {
+    border: none;
+  }
+  label {
+    font-weight: bold;
+  }
+}
+
+#join-room,
+#create-room {
+  text-align: center;
+  
+  label,
+  input {
+    display: block;
+    margin: .25em auto;
+  }
 }
