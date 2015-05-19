@@ -24,17 +24,13 @@ body>header,
 main,
 #collaboration,
 footer {
-    @include clearfix;
+  @include clearfix;
+  padding: .5em;
 
-    @include media($desktop) {
-      padding: 1em;
-    }
-    @include media($tablet) {
-      padding: 1em;
-    }
-    @include media($mobile)  {
-      padding: .5em;
-    }
+  @include media($tablet) {
+    padding: 1em;
+  }
+
 }
 
 body>header,
@@ -43,44 +39,61 @@ footer {
   @include span-columns(16);
 }
 
-main {
-  @include span-columns(10);
-
-  section>div {
-    margin-top: 2em;
-    @include span-columns(5 of 10);
-    &:first-child {
-      border-right: 1px solid $hr-color;
-      padding-bottom: 1.5em;
-    }
-    &:last-child {
-      @include omega;
-    }
-  }
+aside, main {
+  @include span-columns(16);
 }
 
-aside {
-  @include span-columns(6);
-  @include omega;
-}
-
-@include media($tablet) {
+// Desktop or larger
+@include media($desktop) {
   main {
-    @include span-columns(16);
+    @include span-columns(10);
+
+    section>div {
+      margin-top: 2em;
+      @include span-columns(5 of 10);
+      &:first-child {
+        border-right: 1px solid $hr-color;
+        padding-bottom: 1.5em;
+      }
+      &:last-child {
+        @include omega;
+      }
+    }
   }
+
   aside {
-    display: none;
+    @include span-columns(6);
+    @include omega;
   }
 }
 
-@include media($mobile) {
-  main {
-    @include span-columns(16);
+// Landing Page
+.index main {
+  @include span-columns(16);
+  
+  #join-room,
+  #create-room {
+    //@include span-columns(8);
+
+    @include media($desktop) {
+      @include span-columns(8);
+      min-height: 220px;
+    }
+
   }
-  aside {
-    display: none;
+  #create-room {
+    @include omega;
+    margin-top: .5em;
+    
+     @include media($desktop) {
+      margin-top: 0;
+    }
+
   }
 }
+
+// Conference Room Page
+.room main {}
 
 footer {
   background: $gray6;
