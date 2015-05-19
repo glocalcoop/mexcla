@@ -1,7 +1,26 @@
 extends layout
 
+block beforeBody
+  - bodyClasses.push('index')  
+
 block content
-  div#content
+  include partials/header
+  
+  main(class="main-content" role="main")
+    div#join-room
+      h3 Join a Room
+        form(id="join-room-form" action="/room" method="post")
+          fieldset
+            label(for="roomnumber") Please Enter The Room Number
+            input(id="room-number", type="text", value='', name="roomnumber", placeholder="Room number")
+            input(type="submit", value="Go", data-transition="fade")
+    div#create-room
+      h3 Create a Room
+        form(id="create-room-form" action="/room" method="post")
+          fieldset
+            input(type="submit", value="Create a Room", data-transition="fade")
+  
+  include partials/footer
 
 block scripts
   script(data-main='js/boot', type='text/javascript', src='/js/libs/require.js')

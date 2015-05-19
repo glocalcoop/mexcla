@@ -4,7 +4,11 @@ html(lang="en") <!-- Need to modify language based on user input -->
     title Mexcla Conferencing
     link(rel='stylesheet',href='/styles/css/style.css')
     link(rel='stylesheet',href='/styles/css/jquery.modal.css')
-  body
+    
+  - var bodyClasses = [];
+  block beforeBody
+  
+  body(class=bodyClasses)
     block content
 
     block scripts

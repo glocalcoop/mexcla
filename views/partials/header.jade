@@ -1,0 +1,16 @@
+block content
+  //- div#content
+  header#header
+    h1#logo
+      img(class="header-image" alt="Glocal" src='/images/logo.png')
+    h3#tagline
+      strong.
+        Mexcla
+      |: Simultaneous Interpretation Conference System
+    //- TODO: determine a better way to handle language links
+    div#language-links
+      //- TODO: Define function switch_language()
+      button(id="es-switch-link" class="button espanol" onclick="switch_language()").
+        es
+      button(id="en-switch-link" class="button english" onclick="switch_language()").
+        en
