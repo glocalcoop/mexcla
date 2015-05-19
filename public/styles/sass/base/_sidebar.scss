@@ -3,7 +3,6 @@
 SIDEBARS & ASIDES
 *********************/
 
-
 .sidebar .button,
 .sidebar input[type='submit'] {
     background: $gray3;
@@ -16,7 +15,9 @@ SIDEBARS & ASIDES
     }
 }
 
-aside {
+aside,
+#join-room,
+#create-room {
     background: $gray9;
     padding: 1em;
 
