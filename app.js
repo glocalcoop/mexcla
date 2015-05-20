@@ -80,4 +80,13 @@ app.post('/username', function(req, res) {
   res.redirect(req.get('referer'));
 });
 
+app.post('/gotoroom', function(req, res) {
+  if(req.body.roomnumber) {
+    res.redirect('/room/' + req.body.roomnumber);
+  }else{
+    res.redirect('/room/' + Math.round(Math.random() * (99999 - 1) + 1));
+  }
+});
+
+
 app.listen(8080);
