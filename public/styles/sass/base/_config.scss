@@ -123,11 +123,13 @@ $mobilescreen: em(480);
 $tabletscreen: em(480 + 1);
 $desktopscreen: em(768);
 $largescreen: em(1020);
+$xlargescreen: em(1210);
 
 $mobile: new-breakpoint(max-width $mobilescreen);
 $tablet: new-breakpoint(max-width $desktopscreen min-width $tabletscreen);
 $desktop: new-breakpoint(min-width $desktopscreen);
 $large: new-breakpoint(min-width $largescreen);
+$xlarge: new-breakpoint(min-width $xlargescreen);
 
 
 // CLEARFIX

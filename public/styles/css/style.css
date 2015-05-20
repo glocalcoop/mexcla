@@ -572,29 +572,29 @@ dd {
 .nav-social .facebook a:before {
   content: '\F30C'; }
 
-/* line 136, ../sass/base/_config.scss */
+/* line 138, ../sass/base/_config.scss */
 .clearfix:after {
   content: "";
   display: table;
   clear: both; }
 
-/* line 194, ../sass/base/_config.scss */
+/* line 196, ../sass/base/_config.scss */
 .ratio-16x9 {
   padding-bottom: ratio(9, 16); }
 
-/* line 194, ../sass/base/_config.scss */
+/* line 196, ../sass/base/_config.scss */
 .ratio-4x3 {
   padding-bottom: ratio(3, 4); }
 
-/* line 206, ../sass/base/_config.scss */
+/* line 208, ../sass/base/_config.scss */
 .is-hidden {
   display: none; }
 
-/* line 210, ../sass/base/_config.scss */
+/* line 212, ../sass/base/_config.scss */
 .fullwidth {
   width: 100%; }
 
-/* line 219, ../sass/base/_config.scss */
+/* line 221, ../sass/base/_config.scss */
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -896,7 +896,7 @@ main,
 #collaboration,
 footer {
   *zoom: 1;
-  padding: .5em; }
+  padding: 1em; }
   /* line 17, ../sass/bourbon/addons/_clearfix.scss */
   body > header:before, body > header:after,
   main:before,
@@ -913,15 +913,19 @@ footer {
   #collaboration:after,
   footer:after {
     clear: both; }
-  @media screen and (max-width: 48em) and (min-width: 30.0625em) {
+  @media screen and (min-width: 75.625em) {
     /* line 23, ../sass/base/_containers.scss */
     body > header,
     main,
     #collaboration,
     footer {
-      padding: 1em; } }
+      padding: .5em 0; } }
 
-/* line 36, ../sass/base/_containers.scss */
+/* line 34, ../sass/base/_containers.scss */
+footer {
+  padding: 1em; }
+
+/* line 38, ../sass/base/_containers.scss */
 body > header,
 #collaboration,
 footer {
@@ -935,7 +939,7 @@ footer {
   footer:last-child {
     margin-right: 0; }
 
-/* line 42, ../sass/base/_containers.scss */
+/* line 44, ../sass/base/_containers.scss */
 aside, main {
   display: block;
   float: left;
@@ -946,7 +950,7 @@ aside, main {
     margin-right: 0; }
 
 @media screen and (min-width: 48em) {
-  /* line 48, ../sass/base/_containers.scss */
+  /* line 50, ../sass/base/_containers.scss */
   main {
     display: block;
     float: left;
@@ -955,7 +959,7 @@ aside, main {
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     main:last-child {
       margin-right: 0; }
-    /* line 51, ../sass/base/_containers.scss */
+    /* line 53, ../sass/base/_containers.scss */
     main section > div {
       margin-top: 2em;
       display: block;
@@ -965,15 +969,15 @@ aside, main {
       /* line 41, ../sass/neat/grid/_span-columns.scss */
       main section > div:last-child {
         margin-right: 0; }
-      /* line 54, ../sass/base/_containers.scss */
+      /* line 56, ../sass/base/_containers.scss */
       main section > div:first-child {
         border-right: 1px solid #ccc;
         padding-bottom: 1.5em; }
-      /* line 58, ../sass/base/_containers.scss */
+      /* line 60, ../sass/base/_containers.scss */
       main section > div:last-child {
         margin-right: 0; }
 
-  /* line 64, ../sass/base/_containers.scss */
+  /* line 66, ../sass/base/_containers.scss */
   aside {
     display: block;
     float: left;
@@ -983,7 +987,7 @@ aside, main {
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     aside:last-child {
       margin-right: 0; } }
-/* line 71, ../sass/base/_containers.scss */
+/* line 73, ../sass/base/_containers.scss */
 .index main {
   display: block;
   float: left;
@@ -993,7 +997,7 @@ aside, main {
   .index main:last-child {
     margin-right: 0; }
   @media screen and (min-width: 48em) {
-    /* line 74, ../sass/base/_containers.scss */
+    /* line 76, ../sass/base/_containers.scss */
     .index main #join-room,
     .index main #create-room {
       display: block;
@@ -1005,16 +1009,16 @@ aside, main {
       .index main #join-room:last-child,
       .index main #create-room:last-child {
         margin-right: 0; } }
-  /* line 84, ../sass/base/_containers.scss */
+  /* line 86, ../sass/base/_containers.scss */
   .index main #create-room {
     margin-right: 0;
     margin-top: .5em; }
     @media screen and (min-width: 48em) {
-      /* line 84, ../sass/base/_containers.scss */
+      /* line 86, ../sass/base/_containers.scss */
       .index main #create-room {
         margin-top: 0; } }
 
-/* line 98, ../sass/base/_containers.scss */
+/* line 100, ../sass/base/_containers.scss */
 footer {
   background: #ccc; }
 
@@ -1201,7 +1205,7 @@ body > header {
     background: #247cc9;
     border-color: #247cc9;
     color: #fff !important; }
-    /* line 183, ../sass/base/_config.scss */
+    /* line 185, ../sass/base/_config.scss */
     .nav-social .facebook a:hover, .nav-social .facebook a:focus {
       background: #fff;
       color: #247cc9 !important; }
@@ -1221,7 +1225,7 @@ body > header {
     background: #29abe2;
     border-color: #29abe2;
     color: #fff !important; }
-    /* line 183, ../sass/base/_config.scss */
+    /* line 185, ../sass/base/_config.scss */
     .nav-social .twitter a:hover, .nav-social .twitter a:focus {
       background: #fff;
       color: #29abe2 !important; }
@@ -1241,7 +1245,7 @@ body > header {
     background: #00a99d;
     border-color: #00a99d;
     color: #fff !important; }
-    /* line 183, ../sass/base/_config.scss */
+    /* line 185, ../sass/base/_config.scss */
     .nav-social .github a:hover, .nav-social .github a:focus {
       background: #fff;
       color: #00a99d !important; }
@@ -1261,7 +1265,7 @@ body > header {
     background: #22b573;
     border-color: #22b573;
     color: #fff !important; }
-    /* line 183, ../sass/base/_config.scss */
+    /* line 185, ../sass/base/_config.scss */
     .nav-social .email a:hover, .nav-social .email a:focus {
       background: #fff;
       color: #22b573 !important; }
@@ -1281,7 +1285,7 @@ body > header {
     background: #ff931e;
     border-color: #ff931e;
     color: #fff !important; }
-    /* line 183, ../sass/base/_config.scss */
+    /* line 185, ../sass/base/_config.scss */
     .nav-social .rss a:hover, .nav-social .rss a:focus {
       background: #fff;
       color: #ff931e !important; }
@@ -1402,6 +1406,10 @@ p.alert {
 #collaboration h3 {
   margin-top: 0; }
 
+/* line 27, ../sass/base/_content.scss */
+.telephone-info {
+  text-align: right; }
+
 /* line 5, ../sass/base/_lists.scss */
 #participants {
   max-height: 250px;
@@ -1456,16 +1464,17 @@ nav {
 
 /* line 17, ../sass/base/_forms.scss */
 form fieldset {
-  border: none; }
-/* line 20, ../sass/base/_forms.scss */
+  border: none;
+  margin-bottom: 0; }
+/* line 21, ../sass/base/_forms.scss */
 form label {
   font-weight: bold; }
 
-/* line 25, ../sass/base/_forms.scss */
+/* line 26, ../sass/base/_forms.scss */
 #join-room,
 #create-room {
   text-align: center; }
-  /* line 29, ../sass/base/_forms.scss */
+  /* line 30, ../sass/base/_forms.scss */
   #join-room label,
   #join-room input,
   #create-room label,
