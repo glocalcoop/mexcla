@@ -5,7 +5,7 @@ block beforeBody
 
 block content
   //- div#content
-  include partials/header
+  include header
   
   main(class="main-content" role="main")
     header#connect
@@ -47,7 +47,7 @@ block content
 
   //
   aside(id="participant-list" class="sidebar" role="complementary")
-    include partials/participants
+    include participants
 
   section(id="collaboration" role="main")
     div.tabs
@@ -75,7 +75,7 @@ block content
       audio(id="audio-remote" autoplay="autoplay")
         Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
         
-  include partials/footer
+  include footer
   
 block scripts
   script(data-main='/js/config', type='text/javascript', src='/js/config.js')
