@@ -15,58 +15,61 @@ block content
         div(id="userinfo-modal" style="display:none")
           a(href="/userinfo" rel="ajax:modal")
 
+    section(class="options" role="main")
+    
+      //- Connect Button
       div#connect-icon-and-button
         button(id="connect-button" class="button" onclick="mexcla_toggle_call_status(); return false;")
           span(id="connect-button-text" rel="ajax:modal" class="connect").
             Connect
           span#connect-dots
 
-    section(class="options" role="main")
       div#call-options
-        h3.
-          Call Options
-        label
+        //- Mute Switch
+        div#mute-controls(class="switch-toggle switch-android")
           input(onclick="mexcla_mic_mute();" type="radio" name="mic" id="mic-mute" value="mute")
-          |Mute
-        label
+          label(for="mic-mute") Mute
           input(onclick="mexcla_mic_unmute();" type="radio" name="mic" id="mic-unmute" value="unmute")
-          |Unmute
+          label(for="mic-unmute") Unmute
+          a
 
-      div#interpretation-mode
-        h3.
-          Language Options
-        label
+        //- Language Channel Switch
+        div#interpretation-mode(class="switch-toggle switch-android switch-3")
           input(onclick="mexcla_mode_original();" type="radio" name="mode" id="mode-original" value="original")
-          |Hear original language
-        label
+          label(for="mode-original") Hear original language
           input(onclick="mexcla_mode_hear_interpretation();" type="radio" name="mode" id="mode-hear-interpretation" value="hear-interpretation")
-          |Hear interpretation
-        label
+          label(for="mode-hear-interpretation") Hear interpretation
           input(onclick="mexcla_mode_provide_interpretation();" type="radio" name="mode" id="mode-provide-interpretation" value="provide-interpretation")
-          |Provide interpretation
+          label(for="mode-provide-interpretation") Provide interpretation
+          a
+          
+      div#collaboration
+        div.tabs
+          div#iframe-selectors
+            div.tab
+              input(onclick="mexcla_toggle_pad();" type="radio" id="pad-iframe-checkbox" name="tab-group-1")
+              label(for="pad-iframe-checkbox").
+                Notepad
+              div(class="content pad")
+            div.tab
+              input(onclick="mexcla_toggle_calc();" type="radio" id="calc-iframe-checkbox" name="tab-group-1")
+              label(for="calc-iframe-checkbox").
+                Spreadsheet
+              div(class="content calc")
+            div.tab
+              input(onclick="mexcla_toggle_irc();" type="radio" id="irc-iframe-checkbox" name="tab-group-1")
+              label(for="irc-iframe-checkbox").
+                IRC Chat
+              div(class="content irc")
 
   //
   aside(id="participant-list" class="sidebar" role="complementary")
-    include participants
-
-  section(id="collaboration" role="main")
-    div.tabs
-      div#iframe-selectors
-        div.tab
-          input(onclick="mexcla_toggle_pad();" type="radio" id="pad-iframe-checkbox" name="tab-group-1")
-          label(for="pad-iframe-checkbox").
-            Notepad
-          div(class="content pad")
-        div.tab
-          input(onclick="mexcla_toggle_calc();" type="radio" id="calc-iframe-checkbox" name="tab-group-1")
-          label(for="calc-iframe-checkbox").
-            Spreadsheet
-          div(class="content calc")
-        div.tab
-          input(onclick="mexcla_toggle_irc();" type="radio" id="irc-iframe-checkbox" name="tab-group-1")
-          label(for="irc-iframe-checkbox").
-            IRC Chat
-          div(class="content irc")
+    div#room-link
+      label Room Link
+      a(href="") http://url.org/room/#
+    
+    div#participant-list
+      include participants
 
   section(id="audio-handling")
     div#audio
