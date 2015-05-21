@@ -3,40 +3,37 @@
   min-height: 400px; /* This part sucks */
   clear: both;
   margin: 25px 0;
+//  font-size: 1;
   .tab {
     float: left;
     label {
-      background: $gray6;
+      background: $gray5;
       padding: 10px;
-      border: 1px solid $gray4;
+      border: 1px solid $gray5;
       margin-left: -1px;
       position: relative;
       left: 1px;
+      text-transform: uppercase;
+      font-size: 85%;
+      color: $white;
     }
   }
   .content {
     position: absolute;
-    top: 28px;
+    top: 40px;
     left: 0;
     background: $white;
     right: 0;
     bottom: 0;
     padding: 20px;
-    border: 1px solid $gray4;
+    border: 1px solid $gray5;
     width: 100%;
-
-    // iframe {
-    //   position: absolute;
-    //   top:40px;
-    //   left: 0;
-    //   width: 100%;
-    //   height: 90%;
-    // }
 
   }
   [type=radio]:checked ~ label {
-    background: white;
-    border-bottom: 1px solid $white;
+    background: $blue;
+    border-bottom: 1px solid $blue;
+    color: $white;
     z-index: 2;
   }
   [type=radio]:checked ~ label ~ .content {
@@ -52,7 +49,7 @@
 
   .content iframe {
     position: absolute;
-    top:40px;
+    top: 40px;
     left: 0;
     width: 100%;
     height: 90%;
