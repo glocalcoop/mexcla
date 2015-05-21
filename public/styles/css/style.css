@@ -1580,7 +1580,21 @@ input[type='button'] {
       font-size: 16px;
       font-size: 1rem; } }
 
-/* line 96, ../sass/base/_buttons.scss */
+/* line 78, ../sass/base/_buttons.scss */
+.switch-android {
+  background-color: #b8b6b2;
+  box-shadow: none; }
+  /* line 81, ../sass/base/_buttons.scss */
+  .switch-android a {
+    background-color: #29abe2;
+    box-shadow: none; }
+  /* line 85, ../sass/base/_buttons.scss */
+  .switch-android label, .switch-android > span, .switch-android > span span,
+  .switch-android input + label {
+    line-height: 1.25 !important;
+    padding: .5em !important; }
+
+/* line 117, ../sass/base/_buttons.scss */
 #call-options input[type='radio'],
 #interpretation-mode input[type='radio'] {
   margin-right: 5px; }

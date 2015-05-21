@@ -74,6 +74,27 @@ input[type='button'] {
     @include breakpoint(medium) {@include font-size(16);}
 }
 
+// Toggle/Switch - main styles in vendor/switches
+.switch-android {
+  background-color: $gray5;
+  box-shadow: none;
+  a {
+    background-color: $blue;
+    box-shadow: none;
+  }
+  label,
+  &>span,
+  &>span span,
+  input + label {
+    line-height: 1.25 !important;
+    padding: .5em !important;
+  }
+}
+
+//.switch-android > span span, .switch-android input + label
+
+//.switch-toggle label, .switch-toggle > span 
+
 
 // button sizes
 
