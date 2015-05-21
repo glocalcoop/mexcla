@@ -22,7 +22,6 @@ hr {
 
 body>header,
 main,
-#collaboration,
 footer {
   @include clearfix;
   padding: 1em;
@@ -36,35 +35,21 @@ footer {
 }
 
 body>header,
+aside, main 
 #collaboration,
 footer {
-  @include span-columns(16);
-}
-
-aside, main {
   @include span-columns(16);
 }
 
 // Desktop or larger
 @include media($desktop) {
   main {
-    @include span-columns(10);
+    @include span-columns(11);
 
-    section>div {
-      margin-top: 2em;
-      @include span-columns(5 of 10);
-      &:first-child {
-        border-right: 1px solid $hr-color;
-        padding-bottom: 1.5em;
-      }
-      &:last-child {
-        @include omega;
-      }
-    }
   }
 
   aside {
-    @include span-columns(6);
+    @include span-columns(5);
     @include omega;
   }
 }

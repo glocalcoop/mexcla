@@ -27,3 +27,17 @@ main>header {
 .telephone-info {
   text-align: right;
 }
+
+#join-room,
+#create-room {
+    background: $gray9;
+    padding: 1em;
+
+    h3 {
+        margin-top: 0;
+    }
+    p {
+        margin-bottom: .25em;
+    }
+}
+

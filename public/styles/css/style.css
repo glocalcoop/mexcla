@@ -893,7 +893,6 @@ hr {
 /* line 23, ../sass/base/_containers.scss */
 body > header,
 main,
-#collaboration,
 footer {
   *zoom: 1;
   padding: 1em; }
@@ -901,8 +900,6 @@ footer {
   body > header:before, body > header:after,
   main:before,
   main:after,
-  #collaboration:before,
-  #collaboration:after,
   footer:before,
   footer:after {
     content: " ";
@@ -910,23 +907,22 @@ footer {
   /* line 23, ../sass/bourbon/addons/_clearfix.scss */
   body > header:after,
   main:after,
-  #collaboration:after,
   footer:after {
     clear: both; }
   @media screen and (min-width: 75.625em) {
     /* line 23, ../sass/base/_containers.scss */
     body > header,
     main,
-    #collaboration,
     footer {
       padding: .5em 0; } }
 
-/* line 34, ../sass/base/_containers.scss */
+/* line 33, ../sass/base/_containers.scss */
 footer {
   padding: 1em; }
 
-/* line 38, ../sass/base/_containers.scss */
+/* line 37, ../sass/base/_containers.scss */
 body > header,
+aside, main
 #collaboration,
 footer {
   display: block;
@@ -935,59 +931,33 @@ footer {
   width: 100%; }
   /* line 41, ../sass/neat/grid/_span-columns.scss */
   body > header:last-child,
+  aside:last-child, main
   #collaboration:last-child,
   footer:last-child {
     margin-right: 0; }
 
-/* line 44, ../sass/base/_containers.scss */
-aside, main {
-  display: block;
-  float: left;
-  margin-right: 1.75788%;
-  width: 100%; }
-  /* line 41, ../sass/neat/grid/_span-columns.scss */
-  aside:last-child, main:last-child {
-    margin-right: 0; }
-
 @media screen and (min-width: 48em) {
-  /* line 50, ../sass/base/_containers.scss */
+  /* line 46, ../sass/base/_containers.scss */
   main {
     display: block;
     float: left;
     margin-right: 1.75788%;
-    width: 61.8408%; }
+    width: 68.20066%; }
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     main:last-child {
       margin-right: 0; }
-    /* line 53, ../sass/base/_containers.scss */
-    main section > div {
-      margin-top: 2em;
-      display: block;
-      float: left;
-      margin-right: 2.84259%;
-      width: 48.57871%; }
-      /* line 41, ../sass/neat/grid/_span-columns.scss */
-      main section > div:last-child {
-        margin-right: 0; }
-      /* line 56, ../sass/base/_containers.scss */
-      main section > div:first-child {
-        border-right: 1px solid #ccc;
-        padding-bottom: 1.5em; }
-      /* line 60, ../sass/base/_containers.scss */
-      main section > div:last-child {
-        margin-right: 0; }
 
-  /* line 66, ../sass/base/_containers.scss */
+  /* line 51, ../sass/base/_containers.scss */
   aside {
     display: block;
     float: left;
     margin-right: 1.75788%;
-    width: 36.40133%;
+    width: 30.04146%;
     margin-right: 0; }
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     aside:last-child {
       margin-right: 0; } }
-/* line 73, ../sass/base/_containers.scss */
+/* line 58, ../sass/base/_containers.scss */
 .index main {
   display: block;
   float: left;
@@ -997,7 +967,7 @@ aside, main {
   .index main:last-child {
     margin-right: 0; }
   @media screen and (min-width: 48em) {
-    /* line 76, ../sass/base/_containers.scss */
+    /* line 61, ../sass/base/_containers.scss */
     .index main #join-room,
     .index main #create-room {
       display: block;
@@ -1009,16 +979,16 @@ aside, main {
       .index main #join-room:last-child,
       .index main #create-room:last-child {
         margin-right: 0; } }
-  /* line 86, ../sass/base/_containers.scss */
+  /* line 71, ../sass/base/_containers.scss */
   .index main #create-room {
     margin-right: 0;
     margin-top: .5em; }
     @media screen and (min-width: 48em) {
-      /* line 86, ../sass/base/_containers.scss */
+      /* line 71, ../sass/base/_containers.scss */
       .index main #create-room {
         margin-top: 0; } }
 
-/* line 100, ../sass/base/_containers.scss */
+/* line 85, ../sass/base/_containers.scss */
 footer {
   background: #ccc; }
 
@@ -1335,22 +1305,20 @@ SIDEBARS & ASIDES
     background: #fff;
     color: #454545; }
 
-/* line 18, ../sass/base/_sidebar.scss */
-aside,
-#join-room,
-#create-room {
-  background: #EFEFEF;
-  padding: 1em; }
-  /* line 24, ../sass/base/_sidebar.scss */
-  aside h3,
-  #join-room h3,
-  #create-room h3 {
-    margin-top: 0; }
-  /* line 27, ../sass/base/_sidebar.scss */
-  aside p,
-  #join-room p,
-  #create-room p {
-    margin-bottom: .25em; }
+/* line 19, ../sass/base/_sidebar.scss */
+aside > div {
+  padding: 1em;
+  background: #EFEFEF; }
+/* line 23, ../sass/base/_sidebar.scss */
+aside > div:not(:first-child) {
+  margin-top: .5em; }
+/* line 26, ../sass/base/_sidebar.scss */
+aside label {
+  display: inline-block;
+  padding: .25em;
+  background: #b8b6b2;
+  color: #fff;
+  margin-right: .5em; }
 
 /* line 1, ../sass/base/_modals.scss */
 form.modal {
@@ -1410,9 +1378,23 @@ p.alert {
 .telephone-info {
   text-align: right; }
 
+/* line 31, ../sass/base/_content.scss */
+#join-room,
+#create-room {
+  background: #EFEFEF;
+  padding: 1em; }
+  /* line 36, ../sass/base/_content.scss */
+  #join-room h3,
+  #create-room h3 {
+    margin-top: 0; }
+  /* line 39, ../sass/base/_content.scss */
+  #join-room p,
+  #create-room p {
+    margin-bottom: .25em; }
+
 /* line 5, ../sass/base/_lists.scss */
 #participants {
-  max-height: 250px;
+  max-height: 300px;
   overflow-x: scroll; }
   /* line 8, ../sass/base/_lists.scss */
   #participants li {
@@ -1606,42 +1588,46 @@ input[type='button'] {
   /* This part sucks */
   clear: both;
   margin: 25px 0; }
-  /* line 6, ../sass/base/_tabs.scss */
+  /* line 7, ../sass/base/_tabs.scss */
   .tabs .tab {
     float: left; }
-    /* line 8, ../sass/base/_tabs.scss */
+    /* line 9, ../sass/base/_tabs.scss */
     .tabs .tab label {
-      background: #ccc;
+      background: #b8b6b2;
       padding: 10px;
-      border: 1px solid #979797;
+      border: 1px solid #b8b6b2;
       margin-left: -1px;
       position: relative;
-      left: 1px; }
-  /* line 17, ../sass/base/_tabs.scss */
+      left: 1px;
+      text-transform: uppercase;
+      font-size: 85%;
+      color: #fff; }
+  /* line 21, ../sass/base/_tabs.scss */
   .tabs .content {
     position: absolute;
-    top: 28px;
+    top: 40px;
     left: 0;
     background: #fff;
     right: 0;
     bottom: 0;
     padding: 20px;
-    border: 1px solid #979797;
+    border: 1px solid #b8b6b2;
     width: 100%; }
-  /* line 37, ../sass/base/_tabs.scss */
+  /* line 33, ../sass/base/_tabs.scss */
   .tabs [type=radio]:checked ~ label {
-    background: white;
-    border-bottom: 1px solid #fff;
+    background: #29abe2;
+    border-bottom: 1px solid #29abe2;
+    color: #fff;
     z-index: 2; }
-  /* line 42, ../sass/base/_tabs.scss */
+  /* line 39, ../sass/base/_tabs.scss */
   .tabs [type=radio]:checked ~ label ~ .content {
     z-index: 1; }
 
-/* line 46, ../sass/base/_tabs.scss */
+/* line 43, ../sass/base/_tabs.scss */
 .tab [type=radio] {
   display: none; }
 
-/* line 50, ../sass/base/_tabs.scss */
+/* line 47, ../sass/base/_tabs.scss */
 #collaboration {
   *zoom: 1; }
   /* line 17, ../sass/bourbon/addons/_clearfix.scss */
@@ -1651,7 +1637,7 @@ input[type='button'] {
   /* line 23, ../sass/bourbon/addons/_clearfix.scss */
   #collaboration:after {
     clear: both; }
-  /* line 53, ../sass/base/_tabs.scss */
+  /* line 50, ../sass/base/_tabs.scss */
   #collaboration .content iframe {
     position: absolute;
     top: 40px;

@@ -15,17 +15,21 @@ SIDEBARS & ASIDES
     }
 }
 
-aside,
-#join-room,
-#create-room {
-    background: $gray9;
+aside {
+  &>div {
     padding: 1em;
-
-    h3 {
-        margin-top: 0;
-    }
-    p {
-        margin-bottom: .25em;
-    }
+    background: $gray9;
+  }
+  &>div:not(:first-child) {
+    margin-top: .5em;
+  }
+  label {
+    display: inline-block;
+    padding: .25em;
+    background: $gray5;
+    color: $white;
+    margin-right: .5em;
+  }
 }
+
 
