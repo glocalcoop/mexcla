@@ -18,14 +18,28 @@ main>header {
 	}
 }
 
+#room-info {
+  //padding: .5em 1em;
+//  background: $gray9;
+  border: 1px solid $gray9;
+  label {
+    display: inline-block;
+    padding: .5em;
+    margin: 0 .25em;
+    //border: 1px solid $white;
+    background: $gray8;
+  }
+  .telephone-info {
+    padding-left: .5em;
+    padding-right: .5em;
+  }
+  
+}
+
 #collaboration {
 	h3 {
 		margin-top: 0;
 	}
-}
-
-.telephone-info {
-  text-align: right;
 }
 
 #join-room,

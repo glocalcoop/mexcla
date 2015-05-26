@@ -35,13 +35,15 @@ footer {
 }
 
 body>header,
-aside, main 
-#collaboration,
-footer {
+body>footer {
   @include span-columns(16);
 }
 
-// Desktop or larger
+#options {
+  @include clearfix;
+}
+
+// Room Page
 @include media($desktop) {
   main {
     @include span-columns(11);
@@ -51,6 +53,23 @@ footer {
   aside {
     @include span-columns(5);
     @include omega;
+  }
+  
+  main>header {
+    @include clearfix;
+    h2 {
+      @include span-columns(6 of 11); 
+    }
+    #room-info {
+      @include span-columns(5 of 11); 
+    }
+  }
+  
+  #call-options {
+     @include span-columns(5 of 11); 
+  }
+  #interpretation-options {
+     @include span-columns(6 of 11); 
   }
 }
 

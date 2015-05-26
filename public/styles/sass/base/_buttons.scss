@@ -75,12 +75,22 @@ input[type='button'] {
 }
 
 // Toggle/Switch - main styles in vendor/switches
-.switch-android {
+.switch-android,
+.switch-ios.switch-toggle {
   background-color: $gray5;
   box-shadow: none;
+  input,
+  label,
+  input:checked + label,
+  a {
+    color: $white;
+  }
   a {
     background-color: $blue;
     box-shadow: none;
+  }
+  input:checked + label {
+    font-weight: bold;
   }
   label,
   &>span,
@@ -91,16 +101,15 @@ input[type='button'] {
   }
 }
 
-//.switch-android > span span, .switch-android input + label
-
-//.switch-toggle label, .switch-toggle > span 
-
-
 // button sizes
-
 %button-large {
     @include font-size(24);
     padding: 1em 3em;
+}
+
+%button-medium {
+    @include font-size(22);
+    padding: .5em 1.25em;
 }
 
 %button-small {
@@ -111,11 +120,17 @@ input[type='button'] {
 
 #call-options,
 #interpretation-mode {
-    label {
-        // display: block;
-    }
+    label {}
     input[type='radio'] {
         margin-right: 5px;
     }
 }
 
+#connect-button {
+  @extend %button-medium;
+//  display: block;
+//  margin: 0 auto;
+}
+#mute-controls {
+//  margin: auto;
+}
