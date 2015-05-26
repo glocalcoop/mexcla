@@ -55,6 +55,9 @@ body>footer {
     @include omega;
   }
   
+}
+
+@include media($large) {
   main>header {
     @include clearfix;
     h2 {
@@ -71,6 +74,7 @@ body>footer {
   #interpretation-options {
      @include span-columns(6 of 11); 
   }
+
 }
 
 // Landing Page

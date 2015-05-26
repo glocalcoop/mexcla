@@ -963,9 +963,9 @@ body > footer {
     margin-right: 0; }
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     aside:last-child {
-      margin-right: 0; }
-
-  /* line 58, ../sass/base/_containers.scss */
+      margin-right: 0; } }
+@media screen and (min-width: 63.75em) {
+  /* line 61, ../sass/base/_containers.scss */
   main > header {
     *zoom: 1; }
     /* line 17, ../sass/bourbon/addons/_clearfix.scss */
@@ -975,7 +975,7 @@ body > footer {
     /* line 23, ../sass/bourbon/addons/_clearfix.scss */
     main > header:after {
       clear: both; }
-    /* line 60, ../sass/base/_containers.scss */
+    /* line 63, ../sass/base/_containers.scss */
     main > header h2 {
       display: block;
       float: left;
@@ -984,7 +984,7 @@ body > footer {
       /* line 41, ../sass/neat/grid/_span-columns.scss */
       main > header h2:last-child {
         margin-right: 0; }
-    /* line 63, ../sass/base/_containers.scss */
+    /* line 66, ../sass/base/_containers.scss */
     main > header #room-info {
       display: block;
       float: left;
@@ -994,7 +994,7 @@ body > footer {
       main > header #room-info:last-child {
         margin-right: 0; }
 
-  /* line 68, ../sass/base/_containers.scss */
+  /* line 71, ../sass/base/_containers.scss */
   #call-options {
     display: block;
     float: left;
@@ -1004,7 +1004,7 @@ body > footer {
     #call-options:last-child {
       margin-right: 0; }
 
-  /* line 71, ../sass/base/_containers.scss */
+  /* line 74, ../sass/base/_containers.scss */
   #interpretation-options {
     display: block;
     float: left;
@@ -1013,7 +1013,7 @@ body > footer {
     /* line 41, ../sass/neat/grid/_span-columns.scss */
     #interpretation-options:last-child {
       margin-right: 0; } }
-/* line 77, ../sass/base/_containers.scss */
+/* line 81, ../sass/base/_containers.scss */
 .index main {
   display: block;
   float: left;
@@ -1023,7 +1023,7 @@ body > footer {
   .index main:last-child {
     margin-right: 0; }
   @media screen and (min-width: 48em) {
-    /* line 80, ../sass/base/_containers.scss */
+    /* line 84, ../sass/base/_containers.scss */
     .index main #join-room,
     .index main #create-room {
       display: block;
@@ -1035,16 +1035,16 @@ body > footer {
       .index main #join-room:last-child,
       .index main #create-room:last-child {
         margin-right: 0; } }
-  /* line 90, ../sass/base/_containers.scss */
+  /* line 94, ../sass/base/_containers.scss */
   .index main #create-room {
     margin-right: 0;
     margin-top: .5em; }
     @media screen and (min-width: 48em) {
-      /* line 90, ../sass/base/_containers.scss */
+      /* line 94, ../sass/base/_containers.scss */
       .index main #create-room {
         margin-top: 0; } }
 
-/* line 104, ../sass/base/_containers.scss */
+/* line 108, ../sass/base/_containers.scss */
 footer {
   background: #ccc; }
 
@@ -1428,32 +1428,91 @@ p.alert {
 
 /* line 21, ../sass/base/_content.scss */
 #room-info {
-  border: 1px solid #EFEFEF; }
-  /* line 25, ../sass/base/_content.scss */
+  display: block;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto; }
+  /* line 30, ../sass/base/_content.scss */
+  #room-info a,
   #room-info label {
     display: inline-block;
     padding: .5em;
     margin: 0 .25em;
+    margin: 0; }
+  /* line 39, ../sass/base/_content.scss */
+  #room-info label {
+    border-top: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF;
     background: #B6B6B6; }
-  /* line 32, ../sass/base/_content.scss */
+  /* line 44, ../sass/base/_content.scss */
+  #room-info a#room-link {
+    border-top: 1px solid #EFEFEF;
+    border-right: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF; }
+  /* line 49, ../sass/base/_content.scss */
   #room-info .telephone-info {
     padding-left: .5em;
     padding-right: .5em; }
 
-/* line 40, ../sass/base/_content.scss */
+/* line 61, ../sass/base/_content.scss */
+main > header h2 {
+  text-align: center;
+  margin-bottom: 0; }
+
+/* line 67, ../sass/base/_content.scss */
+#call-options {
+  text-align: center;
+  background: #EFEFEF;
+  padding: .5em;
+  margin: .5em; }
+  /* line 74, ../sass/base/_content.scss */
+  #call-options #mute-controls,
+  #call-options #connect-icon-and-button {
+    display: block;
+    margin: 0 auto; }
+  /* line 81, ../sass/base/_content.scss */
+  #call-options #connect-icon-and-button {
+    margin-bottom: .25em; }
+  /* line 86, ../sass/base/_content.scss */
+  #call-options #mute-controls {
+    width: 130px; }
+
+/* line 93, ../sass/base/_content.scss */
+#interpretation-options #interpretation-mode {
+  margin: 0 auto; }
+
+@media screen and (min-width: 63.75em) {
+  /* line 100, ../sass/base/_content.scss */
+  main > header {
+    margin-bottom: .5em; }
+
+  /* line 104, ../sass/base/_content.scss */
+  #room-info {
+    text-align: right; }
+
+  /* line 108, ../sass/base/_content.scss */
+  #call-options {
+    margin-top: 0; }
+
+  /* line 114, ../sass/base/_content.scss */
+  a,
+  label {
+    line-height: 1.5;
+    font-size: 1rem; } }
+/* line 123, ../sass/base/_content.scss */
 #collaboration h3 {
   margin-top: 0; }
 
-/* line 45, ../sass/base/_content.scss */
+/* line 128, ../sass/base/_content.scss */
 #join-room,
 #create-room {
   background: #EFEFEF;
   padding: 1em; }
-  /* line 50, ../sass/base/_content.scss */
+  /* line 133, ../sass/base/_content.scss */
   #join-room h3,
   #create-room h3 {
     margin-top: 0; }
-  /* line 53, ../sass/base/_content.scss */
+  /* line 136, ../sass/base/_content.scss */
   #join-room p,
   #create-room p {
     margin-bottom: .25em; }

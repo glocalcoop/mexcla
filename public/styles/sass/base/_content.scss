@@ -19,22 +19,105 @@ main>header {
 }
 
 #room-info {
-  //padding: .5em 1em;
-//  background: $gray9;
-  border: 1px solid $gray9;
+  
+  display: block;
+
+  //border: 1px solid $gray9;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  
+  a,
   label {
     display: inline-block;
     padding: .5em;
     margin: 0 .25em;
-    //border: 1px solid $white;
+    //line-height: 1;
+    margin: 0;
+    //font-size: .75rem;
+  }
+  label {
+    border-top: 1px solid $gray9;
+    border-bottom: 1px solid $gray9;
     background: $gray8;
+  }
+  a#room-link {
+    border-top: 1px solid $gray9;
+    border-right: 1px solid $gray9;
+    border-bottom: 1px solid $gray9;
   }
   .telephone-info {
     padding-left: .5em;
     padding-right: .5em;
-  }
+  }  
   
 }
+
+
+// Room Styling
+
+// Header
+main>header {
+  h2 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+#call-options {
+  text-align: center;
+  
+  background: $gray9;
+  padding: .5em;
+  margin: .5em;
+  
+  #mute-controls,
+  #connect-icon-and-button {
+    display: block;
+    margin: 0 auto;
+  }
+    
+  // Connect Button
+  #connect-icon-and-button {
+    margin-bottom: .25em;
+  }
+  
+  // Mute Button
+  #mute-controls {
+    width: 130px;
+  }
+
+}
+
+#interpretation-options {
+  #interpretation-mode {
+    margin: 0 auto;
+  }
+}
+
+@include media($large) {
+  
+  main>header {
+    margin-bottom: .5em;
+  }
+  
+  #room-info {
+    text-align: right;
+  }
+  
+  #call-options {
+    margin-top: 0;
+  }
+  
+  #interpretation-mode {}
+  
+  a,
+  label {
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+}
+
 
 #collaboration {
 	h3 {
