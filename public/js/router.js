@@ -1,5 +1,5 @@
 // Build routes for the application
-define(['views/index', 'views/room'],
+define(['views/index', 'views/room', 'models/Users'],
        function(IndexView, RoomView) {
   console.log('MexclaRouter executed');
   var MexclaRouter = Backbone.Router.extend({
@@ -8,7 +8,7 @@ define(['views/index', 'views/room'],
 
     routes: {
       "index": "index",
-      "room": "room"
+      "room/:num": "room"
     },
 
     changeView: function(view) {
@@ -23,7 +23,8 @@ define(['views/index', 'views/room'],
       this.changeView(new IndexView());
     },
 
-    room: function() {
+    room: function(num) {
+      console.log("Room function in router.js ran.");
       this.changeView(new RoomView());
     }
   });

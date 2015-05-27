@@ -27,7 +27,7 @@ define(['router'], function(router) {
     console.log(roomPath);
     console.log('curpath');
     console.log(curpath);
-    console.log(room);
+    console.log(router);
     if(room == null && curpath != '/') {
       window.location.assign('/');
     }else if (roomPath != null && roomPath == null){
