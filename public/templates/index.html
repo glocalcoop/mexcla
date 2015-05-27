@@ -1,2 +1,20 @@
-<h1>Mexcla Conferencing</h1>
-<p>Something might work!</p>
+<main class="main-content" role="main">
+  <div id="join-room">
+    <h3>Join a Room</h3>
+    <form id="join-room-form" action="/gotoroom" method="post">
+      <fieldset>
+        <label for="roomnumber">Please Enter The Room Number</label>
+          <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
+          <input type="submit" value="Go" data-transition="fade">
+      </fieldset>
+    </form>
+  </div>
+  <div id="create-room">
+    <form id="create-room-form" action="/gotoroom" method="post">
+      <fieldset>
+        <input type="submit" value="Create a Room" data-transition="fade">
+      </fieldset>
+    </form>
+  </div>
+</main>
+

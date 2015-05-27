@@ -25,7 +25,7 @@ app.get('/', function(req, res){
   res.render("index.jade");
 });
 
-app.get('/room/:roomnum', function(req, res){
+/*app.get('/room/:roomnum', function(req, res){
   var num = req.params.roomnum;
   var sess = req.session;
   sess.room = num;
@@ -37,7 +37,7 @@ app.get('/room/:roomnum', function(req, res){
   // expressSession.room = num
   console.log(sess);
   res.render("room.jade", {roomNum: num});
-});
+});*/
 
 app.get('/session', function(req, res, next) {
   res.json(req.session);
@@ -82,9 +82,11 @@ app.post('/username', function(req, res) {
 
 app.post('/gotoroom', function(req, res) {
   if(req.body.roomnumber) {
-    res.redirect('/room/' + req.body.roomnumber);
+    // res.redirect('/room/' + req.body.roomnumber);
+    window.location.hash = 'room/' + req.body.roomnumber;
   }else{
-    res.redirect('/room/' + Math.round(Math.random() * (99999 - 1) + 1));
+    // res.redirect('/room/' + Math.round(Math.random() * (99999 - 1) + 1));
+    window.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
   }
 });
 

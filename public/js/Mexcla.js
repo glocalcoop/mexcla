@@ -28,12 +28,14 @@ define(['router'], function(router) {
     console.log('curpath');
     console.log(curpath);
     console.log(router);
-    if(room == null && curpath != '/') {
-      window.location.assign('/');
+/*    if(room == null && curpath != '/') {
+      // window.location.assign('/');
+      window.location.hash = 'index';
     }else if (roomPath != null && roomPath == null){
       window.location.assign('/room/' + room.room);
       console.log(roomPath);
-    }
+    }*/
+    window.location.hash = 'index';
     Backbone.history.start();
   };
 
