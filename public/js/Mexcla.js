@@ -23,11 +23,11 @@ define(['router'], function(router) {
     console.log('Mexcla.js initialized.');
     var curpath = window.location.pathname;
     var roomPath = curpath.match(/room\/[0-9]+/gi);
-    console.log('roomPath');
+/*    console.log('roomPath');
     console.log(roomPath);
     console.log('curpath');
     console.log(curpath);
-    console.log(router);
+    console.log(router);*/
 /*    if(room == null && curpath != '/') {
       // window.location.assign('/');
       window.location.hash = 'index';

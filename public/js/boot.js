@@ -9,7 +9,8 @@ require.config({
     jssip: '/js/jssip-0.6.18',
     mexclajs: '/js/mexcla-html5',
     extra: '/js/extra',
-    templates: '../templates'
+    templates: '../templates',
+    MexclaView: '/js/MexclaView'
 },
   shim: {
     'Backbone': ['Underscore', 'jQuery'],

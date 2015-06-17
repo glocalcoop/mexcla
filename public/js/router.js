@@ -1,7 +1,8 @@
 // Build routes for the application
-define(['views/index', 'views/room', 'models/Users'],
-       function(IndexView, RoomView) {
+define(['views/index', 'views/room', 'models/Room', 'models/StatusCollection'],
+       function(IndexView, RoomView, Room, StatusCollection) {
   console.log('MexclaRouter executed');
+  console.log(typeof(StatusCollection));
   var MexclaRouter = Backbone.Router.extend({
 
     currentView: null,
@@ -25,7 +26,15 @@ define(['views/index', 'views/room', 'models/Users'],
 
     room: function(num) {
       console.log("Room function in router.js ran.");
-      this.changeView(new RoomView());
+      var StatusCollection = new StatusCollection();
+/*      StatusCollection.url = '/room/' + num + '/users';
+      var StatusCollection = new StatusCollection();
+      console.log("This is StatusCollection from router " + StatusCollection);*/
+      this.changeView(new RoomView({
+        // collection: StatusCollection;
+      }));
+      // StatusCollection.fetch();
+      console.log("Status collection fetched " + StatusCollection);
     }
   });
 

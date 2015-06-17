@@ -25,7 +25,7 @@ app.get('/', function(req, res){
   res.render("index.jade");
 });
 
-/*app.get('/room/:roomnum', function(req, res){
+app.get('/room/:roomnum', function(req, res){
   var num = req.params.roomnum;
   var sess = req.session;
   sess.room = num;
@@ -37,7 +37,7 @@ app.get('/', function(req, res){
   // expressSession.room = num
   console.log(sess);
   res.render("room.jade", {roomNum: num});
-});*/
+});
 
 app.get('/session', function(req, res, next) {
   res.json(req.session);
@@ -54,7 +54,14 @@ app.get('/sess-destroy', function(req, res) {
   res.redirect('/');
 });
 
-app.get('/room/:roomnum/users', function(req, res, next) {
+app.get('/rooms/:roomnum/users', function(req, res, next) {
+  Room.findOne(req.session.room, function(err, room){
+    if(err) res.send(err);
+    res.json(room);
+  });
+});
+
+app.get('/rooms/:roomnum/status', function(req, res, next) {
   Room.findOne(req.session.room, function(err, room){
     if(err) res.send(err);
     res.json(room);
@@ -80,13 +87,15 @@ app.post('/username', function(req, res) {
   res.redirect(req.get('referer'));
 });
 
-app.post('/gotoroom', function(req, res) {
+app.post('/gotoroom', function(req, res, next) {
   if(req.body.roomnumber) {
-    // res.redirect('/room/' + req.body.roomnumber);
-    window.location.hash = 'room/' + req.body.roomnumber;
+    // res.redirect('/#room/' + req.body.roomnumber);
+    res.url = '/#room/' + req.body.roomnumber;
+    // res.location.hash = 'room/' + req.body.roomnumber;
   }else{
-    // res.redirect('/room/' + Math.round(Math.random() * (99999 - 1) + 1));
-    window.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
+    // res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
+    res.url = '/#room/' + Math.round(Math.random() * (99999 - 1) + 1);
+    // res.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
   }
 });
 
