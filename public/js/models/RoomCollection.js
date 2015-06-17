@@ -7,7 +7,8 @@ define(['models/User'], function(User) {
     // for changes.
     longPolling: false,
     intervalMinutes: 1,
-    initialize: function() {
+    initialize: function(model,options) {
+      this.roomNum = options.roomNum;
       _.bindAll(this, 'startLongPolling', 'stopLongPolling', 'executeLongPolling', 'onFetch');
     },
     // Initialize polling for periodic database checks.

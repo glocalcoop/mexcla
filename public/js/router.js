@@ -28,7 +28,7 @@ define(['views/index', 'views/room', 'models/RoomCollection'],
       console.log("Room function in router.js ran.");
       // Initialize a RoomCollection so we can display
       // all the users in the current room.
-      var roomCollection = new RoomCollection();
+      var roomCollection = new RoomCollection([],{roomNum: num});
       // Supply the correct url to pull in the room's users
       roomCollection.url = '/rooms/' + num + '/users';
 
@@ -36,7 +36,8 @@ define(['views/index', 'views/room', 'models/RoomCollection'],
       // to the view so the view can pull in the current participants.
       this.changeView(new RoomView({
         // model: model
-        collection: roomCollection
+        collection: roomCollection,
+        roomNum: num,
       }));
 
     }
