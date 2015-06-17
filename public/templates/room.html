@@ -1,3 +1,22 @@
+<header id="content">
+  <h2 class="conference-id">
+    Conference Room
+    <span class="pstn-instructions-conference-number">
+      RoomNum
+    </span>
+    <div id="userinfo-modal" style="display:none">
+      <a href="/userinfo" rel="ajax:modal"></a>
+    </div>
+  </h2>
+  <div id="room-info">
+    <!-- Placeholder for info modal -->
+    <a href="" class="telephone-info">
+      <i class="fa fa-phone-square"></i>
+      <label for="room-link">Room Link</label>
+      <a href="" id="room-link">http://url.rog/room/#</a>
+    </a>
+  </div>
+</header>
 <section id="options">
   <div id="call-options">
     <div id="connect-icon-and-button">
@@ -50,3 +69,12 @@
     </div>
   </div>
 </section>
+<aside class="sidebar" role="complementary" id="participant-list">
+  <div class="participant-list">
+    <h3>Participant List</h3>
+    <div class="scroll-list">
+      <ul class="user_list" />
+    </div>
+  </div>
+</aside>
+

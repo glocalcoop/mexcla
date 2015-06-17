@@ -19,7 +19,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-var Room = require('./models/Room').Room;
+// var Room = require('./models/Room').Room;
+var models = {
+  User: require('./models/User')(mongoose)
+};
 
 app.get('/', function(req, res){
   res.render("index.jade");
@@ -54,10 +57,10 @@ app.get('/sess-destroy', function(req, res) {
   res.redirect('/');
 });
 
-app.get('/rooms/:roomnum/users', function(req, res, next) {
-  Room.findOne(req.session.room, function(err, room){
-    if(err) res.send(err);
-    res.json(room);
+app.get('/rooms/:num/users', function(req, res, next) {
+  models.User.findUsersByRoom(req.params.num, function(users) {
+    // console.log(users);
+    res.send(users);
   });
 });
 
