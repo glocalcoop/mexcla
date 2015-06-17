@@ -48,6 +48,14 @@ app.get('/session', function(req, res, next) {
   console.log(req.session);
 });
 
+app.get('/sess-room/:roomnum', function(req, res) {
+  // var sess = req.session;
+  req.session.roomnum = req.params.roomnum;
+  console.log(req.session);
+  res.send(200);
+  // return next();
+});
+
 app.get('/userinfo', function(req, res) {
   res.render('user-form.jade');
 });
