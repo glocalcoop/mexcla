@@ -113,7 +113,8 @@ app.post('/username', function(req, res) {
   // console.log(req.get('referer'));
   // res.redirect('/#room/42');
   // res.sendStatus(201);
-  res.send(req.body.username);
+  // res.send(req.body.username);
+  res.redirect('/#room/' + req.session.roomnum);
 });
 
 app.post('/gotoroom', function(req, res, next) {

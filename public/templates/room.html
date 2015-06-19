@@ -1,82 +1,84 @@
-<header id="content">
-  <h2 class="conference-id">
-    Conference Room
-    <span class="pstn-instructions-conference-number">
-      <%= roomNum %>
-    </span>
-  </h2>
-  <div id="userinfo-modal" style="display:none">
-    <a href="/userinfo" rel="ajax:modal"></a>
-  </div>
-  <div id="room-info">
-    <!-- Placeholder for info modal -->
-    <a href="" class="telephone-info">
-      <i class="fa fa-phone-square"></i>
-      <label for="room-link">Room Link</label>
-      <a href="" id="room-link">http://url.rog/room/#</a>
-    </a>
-  </div>
-</header>
-<section id="options">
-  <div id="call-options">
-    <div id="connect-icon-and-button">
-      <button class="button" onclick="mexcla_toggle_call_status(); return false;" id="connect-button">
-        <span class="connect" rel="ajax:modal" id="connect-button-text">Connect</span>
-        <span id="connect-dots"></span>
-      </button>
+<main class="main-content" role="main">
+  <header id="content">
+    <h2 class="conference-id">
+      Conference Room
+      <span class="pstn-instructions-conference-number">
+        <%= roomNum %>
+      </span>
+    </h2>
+    <div id="userinfo-modal" style="display:none">
+      <a href="/userinfo" rel="ajax:modal"></a>
     </div>
-    <div id="mute-controls">
-      <div class="switch-toggle switch-ios" id="mute-button">
-        <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
-        <label for="mic-mute">Mute</label>
-        <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
-        <label for="mic-unmute">Unmute</label>
+    <div id="room-info">
+      <!-- Placeholder for info modal -->
+      <a href="" class="telephone-info">
+        <i class="fa fa-phone-square"></i>
+        <label for="room-link">Room Link</label>
+        <a href="" id="room-link">http://url.rog/room/#</a>
+      </a>
+    </div>
+  </header>
+  <section id="options">
+    <div id="call-options">
+      <div id="connect-icon-and-button">
+        <button class="button" onclick="mexcla_toggle_call_status(); return false;" id="connect-button">
+          <span class="connect" rel="ajax:modal" id="connect-button-text">Connect</span>
+          <span id="connect-dots"></span>
+        </button>
+      </div>
+      <div id="mute-controls">
+        <div class="switch-toggle switch-ios" id="mute-button">
+          <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
+          <label for="mic-mute">Mute</label>
+          <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
+          <label for="mic-unmute">Unmute</label>
+          <a></a>
+        </div>
+      </div>
+    </div>
+    <div id="interpretation-options">
+      <div class="switch-toggle switch-android switch-3" id="interpretation-mode">
+        <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
+        <label for="mode-original">Hear original language</label>
+        <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
+        <label for="mode-hear-interpretation">Hear interpretation</label>
+        <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
+        <label for="mode-provide-interpretation">Provide interpretation</label>
         <a></a>
       </div>
     </div>
-  </div>
-  <div id="interpretation-options">
-    <div class="switch-toggle switch-android switch-3" id="interpretation-mode">
-      <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
-      <label for="mode-original">Hear original language</label>
-      <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
-      <label for="mode-hear-interpretation">Hear interpretation</label>
-      <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
-      <label for="mode-provide-interpretation">Provide interpretation</label>
-      <a></a>
-    </div>
-  </div>
-</section>
-<section id="collaboration">
-  <div class="tabs">
-    <div id="iframe-selectors">
-      <div class="tab">
-        <input type="radio" name="tab-group-1" id="pad-iframe-checkbox" onclick="mexcla_toggle_pad();">
-        <label for="pad-iframe-checkbox">Notepad</label>
-        <div class="content pad">
+  </section>
+  <section id="collaboration">
+    <div class="tabs">
+      <div id="iframe-selectors">
+        <div class="tab">
+          <input type="radio" name="tab-group-1" id="pad-iframe-checkbox" onclick="mexcla_toggle_pad();">
+          <label for="pad-iframe-checkbox">Notepad</label>
+          <div class="content pad">
+          </div>
+        </div>
+        <div class="tab">
+          <input type="radio" name="tab-group-1" id="calc-iframe-checkbox" onclick="mexcla_toggle_calc();">
+          <label for="calc-iframe-checkbox">Spreadsheet</label>
+          <div class="content calc"></div>
+        </div>
+        <div class="tab">
+          <input type="radio" name="tab-group-1" id="irc-iframe-checkbox" onclick="mexcla_toggle_irc();">
+          <label for="irc-iframe-checkbox">IRC Chat</label>
+          <div class="content irc"></div>
         </div>
       </div>
-      <div class="tab">
-        <input type="radio" name="tab-group-1" id="calc-iframe-checkbox" onclick="mexcla_toggle_calc();">
-        <label for="calc-iframe-checkbox">Spreadsheet</label>
-        <div class="content calc"></div>
-      </div>
-      <div class="tab">
-        <input type="radio" name="tab-group-1" id="irc-iframe-checkbox" onclick="mexcla_toggle_irc();">
-        <label for="irc-iframe-checkbox">IRC Chat</label>
-        <div class="content irc"></div>
+    </div>
+  </section>
+</main>
+  <aside class="sidebar" role="complementary" id="participant-list">
+    <div class="participant-list">
+      <h3>Participant List</h3>
+      <div class="scroll-list">
+        <ul id="participants" />
       </div>
     </div>
-  </div>
-</section>
-<aside class="sidebar" role="complementary" id="participant-list">
-  <div class="participant-list">
-    <h3>Participant List</h3>
-    <div class="scroll-list">
-      <ul class="user_list" />
-    </div>
-  </div>
-</aside>
+  </aside>
 <!-- <script data-main='/js/extra.js' type='text/javascript' src='/js/extra.js'></script>
 <script data-main='/js/config' type='text/javascript' src='/js/config.js'></script>
 <script data-main='/js/jssip-0.6.18' type='text/javascript' src='/js/jssip-0.6.18.js'></script>

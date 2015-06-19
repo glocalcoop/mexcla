@@ -1,6 +1,7 @@
 define(['router'], function(router) {
   var initialize = function() {
-    checkRoom(runApplication);
+    // checkRoom(runApplication);
+    checkUser(runApplication);
   };
 
   var checkRoom = function(callback) {
@@ -39,6 +40,31 @@ define(['router'], function(router) {
     return sess;
   };
 
+  var checkUser = function(callback) {
+    $.ajax("/check-user", {
+      method: "GET",
+      success: function(result) {
+        console.log("check-user callback");
+        console.log(result);
+        return callback(result);
+      },
+      error: function() {
+        console.log("session callback");
+        console.log(callback);
+        return callback(false);
+      }
+    });
+  };
+
+  var evalUsername = function(username) {
+    if( null != username && username != undefined
+      && username != "" ) {
+      return true;
+    }else{
+      return false;
+    }
+  };
+
   var runApplication = function(sess) {
     console.log('Mexcla.js initialized.');
     var curpath = window.location.pathname;
@@ -54,10 +80,23 @@ define(['router'], function(router) {
     // room.  Otherwise load the index page.
     if(sess.roomnum != null || sess.roomnum != undefined) {
       updateSession(sessionResult, hash.split('/')[1]);
-      window.location.hash = '#room/' + sess.roomnum;
+
+      if(evalUsername(sess.username) != false) {
+        window.location.hash = 'room/' + sess.roomnum;
+      }else{
+        window.location.hash = 'register/' + sess.roomnum;
+          console.log("this is sess during room load");
+          console.log(sess);
+      }
     }else if(match != null) {
       updateSession(sessionResult, hash.split('/')[1]);
-      window.location.hash = hash;
+      if(evalUsername(sess.username) != false) {
+        window.location.hash = hash;
+      }else{
+        window.location.hash = 'register/' + hash.split('/')[1];
+          console.log("this is sess during room load");
+          console.log(sess);
+      }
     }else{
       window.location.hash = 'index';
     }

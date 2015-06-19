@@ -30,11 +30,11 @@ define(['MexclaView', 'text!templates/room.html', 'text!templates/userlist.html'
       // We use on sync here, because the collection.length
       // would otherwise be zero and our each function would fail.
       this.collection.on('sync', function() {
-        $('.user_list').empty();
+        $('#participants').empty();
         this.each( function(model) {
           // Apply our user list to the userlist.html template.
           var usersHtml = (new userlistView()).render(model).el;
-          $(usersHtml).appendTo('.user_list');
+          $(usersHtml).appendTo('#participants');
         });
       });
 
