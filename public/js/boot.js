@@ -10,7 +10,6 @@ require.config({
     mexclajs: '/js/mexcla-html5',
     extra: '/js/extra',
     config: '/js/config',
-    username: '/js/username-form',
     templates: '../templates',
     MexclaView: '/js/MexclaView'
 },
@@ -18,10 +17,9 @@ require.config({
     'Backbone': ['Underscore', 'jQuery'],
     'jquerymodal': ['Backbone'],
     'extra': {deps: ['Backbone', 'jquerymodal']},
-    'username': { deps: ['extra']},
     'jssip': {deps: ['Backbone']},
     'mexclajs': {deps: ['jssip']},
-    'Mexcla': ['Backbone', 'jquerymodal', 'config', 'username', 'jssip', 'extra', 'mexclajs']
+    'Mexcla': ['Backbone', 'jquerymodal', 'config', 'jssip', 'extra', 'mexclajs']
   }
 });
 console.log('boot.js initialized.');
