@@ -121,10 +121,12 @@ app.post('/gotoroom', function(req, res, next) {
   if(req.body.roomnumber) {
     // res.redirect('/#room/' + req.body.roomnumber);
     res.url = '/#room/' + req.body.roomnumber;
+    res.redirect('/#room/' + req.body.roomnumber);
     // res.location.hash = 'room/' + req.body.roomnumber;
   }else{
     // res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
     res.url = '/#room/' + Math.round(Math.random() * (99999 - 1) + 1);
+    res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
     // res.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
   }
 });

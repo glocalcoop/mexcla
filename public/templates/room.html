@@ -1,4 +1,4 @@
-<main class="main-content" role="main">
+<main class="main-content room" role="main">
   <header id="content">
     <h2 class="conference-id">
       Conference Room
@@ -21,7 +21,7 @@
   <section id="options">
     <div id="call-options">
       <div id="connect-icon-and-button">
-        <button class="button" onclick="mexcla_toggle_call_status(); return false;" id="connect-button">
+        <button class="button" onclick="mexcla_toggle_call_status(<%= roomNum %>); return false;" id="connect-button">
           <span class="connect" rel="ajax:modal" id="connect-button-text">Connect</span>
           <span id="connect-dots"></span>
         </button>

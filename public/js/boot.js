@@ -19,6 +19,8 @@ require.config({
     'jquerymodal': ['Backbone'],
     'extra': {deps: ['Backbone', 'jquerymodal']},
     'username': { deps: ['extra']},
+    'jssip': {deps: ['Backbone']},
+    'mexclajs': {deps: ['jssip']},
     'Mexcla': ['Backbone', 'jquerymodal', 'config', 'username', 'jssip', 'extra', 'mexclajs']
   }
 });

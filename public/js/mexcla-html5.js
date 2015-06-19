@@ -6,12 +6,12 @@ var lang_disconnect = 'Disconnect';
 var lang_not_yet_connected = 'Your call is not yet connected';
 var lang_direct_link = 'Direct link';
 
-function mexcla_toggle_call_status() {
+function mexcla_toggle_call_status(confNum) {
   check_session();
   if(gSession) {
     mexcla_hangup();
   } else {
-    mexcla_call_init();
+    mexcla_call_init(confNum);
   }
 }
 
@@ -95,10 +95,11 @@ function mexcla_get_hash() {
   return 'mexcla-' + mexcla_get_conference_number();
 }
 
-function mexcla_call_init() {
+function mexcla_call_init(confNum) {
 
   // Ensure we have a conference number
   conf = mexcla_get_conference_number();
+  // conf = confNum;
   if(conf == 0) {
     alert("Failed to get the conference number.");
     return false;
@@ -171,7 +172,8 @@ function mexcla_handle_error(data) {
 }
 function mexcla_get_url_params() {
   // Split the url by /, skipping the first / so we don't have an empty value first.
-  parts = window.location.pathname.substr(1).split('/');
+  // parts = window.location.pathname.substr(1).split('/');
+  parts = window.location.hash.substr(1).split('/');
   // Delete empty parts
   for (var i = 0; i < parts.length; i++) {
     if(parts[i] == '') {

@@ -3264,7 +3264,7 @@ body > footer {
 
 @media screen and (min-width: 48em) {
   /* line 48, ../sass/base/_containers.scss */
-  main {
+  .index main.room {
     display: block;
     float: left;
     margin-right: 1.75788%;
