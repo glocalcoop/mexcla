@@ -53,6 +53,7 @@ define(['router'], function(router) {
     // is currently in a room, make reloads direct to the
     // room.  Otherwise load the index page.
     if(sess.roomnum != null || sess.roomnum != undefined) {
+      updateSession(sessionResult, hash.split('/')[1]);
       window.location.hash = '#room/' + sess.roomnum;
     }else if(match != null) {
       updateSession(sessionResult, hash.split('/')[1]);

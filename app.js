@@ -52,12 +52,24 @@ app.get('/sess-room/:roomnum', function(req, res) {
   // var sess = req.session;
   req.session.roomnum = req.params.roomnum;
   console.log(req.session);
-  res.send(200);
+/*  if(req.session.username && req.session.roomnum) {
+    models.User.findOneAndUpdate(req.session.username,
+                                 req.session.roomnum,
+                                 'en',
+                                 req.sessionID);
+  };*/
+  res.sendStatus(200);
   // return next();
 });
 
 app.get('/userinfo', function(req, res) {
   res.render('user-form.jade');
+});
+
+app.get('/check-user', function(req, res, next) {
+  models.User.findBySessionId(req.sessionID, function(user) {
+    res.send(user);
+  });
 });
 
 app.get('/sess-destroy', function(req, res) {
@@ -79,23 +91,29 @@ app.get('/rooms/:roomnum/status', function(req, res, next) {
   });
 });
 
+app.get('/remove', function(req, res) {
+  console.log("Session id from remove");
+  console.log(req.sessionID);
+  models.User.remove(req.sessionID, function(result) {
+    res.send(result);
+  });
+});
+
 app.post('/username', function(req, res) {
+  console.log("This is req.body");
+  console.log(req.body);
   var sess = req.session;
   sess.username = req.body.username;
-  // Update the room document
-  Room.findOneAndUpdate(
-    {roomnum: sess.room},
-    {$push: {users: req.body.username}},
-    {safe: true, upsert: true},
-    function(err, model) {
-      console.log(err);
-    }
-  );
-  console.log("This sould be post session.");
-  console.log(sess);
-  console.log(JSON.stringify(req.body));
-  console.log(req.body);
-  res.redirect(req.get('referer'));
+  // Update the user document with nickname
+  models.User.register(req.body.username, sess.roomnum, 'en', req.sessionID);
+  // console.log("This sould be post session.");
+  // console.log(sess);
+  // console.log(JSON.stringify(req.body));
+  // console.log(req.body);
+  // console.log(req.get('referer'));
+  // res.redirect('/#room/42');
+  // res.sendStatus(201);
+  res.send(req.body.username);
 });
 
 app.post('/gotoroom', function(req, res, next) {

@@ -52,16 +52,33 @@ module.exports = function(mongoose) {
     console.log("resister save function sent.");
   };
 
-  var findOneAndUpdate = function(userName, roomNum, lang, sess, callback) {
+  var remove = function(sessID, callback) {
+    User.remove({sess: sessID}, function(err) {
+      if(!err) {
+        console.log("User removed");
+      }else{
+        console.log("An error occurred, user not removed");
+        callback(err);
+      }
+    });
+  };
+
+  var findOneAndUpdate = function(userName, roomNum, lang, sess) {
     User.findOneAndUpdate(
-      {username: userName},
-      {roomnum: roomNum},
-      {lang: lang},
       {sess: sess},
+      {
+        username: userName,
+        roomnum: roomNum,
+        lang: lang,
+        sess: sess
+      },
       {safe: true, upsert: true},
       function(err, model) {
-        console.log(err);
-        callback(model);
+        if(err) {
+          console.log(err);
+        }else{
+          console.log(model);
+        }
       }
     );
   };
@@ -71,6 +88,7 @@ module.exports = function(mongoose) {
     findBySessionId: findBySessionId,
     findUsersByRoom: findUsersByRoom,
     register: register,
+    remove: remove,
     findOneAndUpdate: findOneAndUpdate,
     User: User
   }

@@ -39,7 +39,7 @@ define(['views/index', 'views/room', 'models/RoomCollection'],
         collection: roomCollection,
         roomNum: num,
       }));
-
+      roomCollection.fetch();
     }
   });
 
