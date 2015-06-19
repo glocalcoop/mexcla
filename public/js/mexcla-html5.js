@@ -11,7 +11,7 @@ function mexcla_toggle_call_status(confNum) {
   if(gSession) {
     mexcla_hangup();
   } else {
-    mexcla_call_init(confNum);
+    mexcla_call_init();
   }
 }
 
@@ -95,8 +95,7 @@ function mexcla_get_hash() {
   return 'mexcla-' + mexcla_get_conference_number();
 }
 
-function mexcla_call_init(confNum) {
-
+function mexcla_call_init() {
   // Ensure we have a conference number
   conf = mexcla_get_conference_number();
   // conf = confNum;
@@ -137,7 +136,6 @@ function mexcla_call_init(confNum) {
     },
     'addstream':  function(e) {
       var stream = e.stream;
-
       // Attach remote stream to remoteView
       audioRemote.src = window.URL.createObjectURL(stream);
     },
