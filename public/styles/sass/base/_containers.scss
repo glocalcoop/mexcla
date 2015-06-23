@@ -21,85 +21,65 @@ hr {
 }
 
 body>header,
-main,
-footer {
-  @include clearfix;
-  padding: 1em;
-
-  @include media($xlarge) {
-    padding: .5em 0;
-  }
-}
-footer {
-  padding: 1em;
-}
-
-body>header,
+div#content,
 body>footer {
-  @include span-columns(16);
+    @include clearfix;
+    padding: 1em;
+    @include span-columns(16);
 }
 
-#options {
-  @include clearfix;
+// Header
+header>nav#utility-nav>div {
+  @include span-columns(8);
 }
 
-// Room Page
+// 2-column Layout (Desktop +)
 @include media($desktop) {
-  main {
-    @include span-columns(11);
-
+  
+  // Header
+  header>nav#utility-nav>div {
+    @include span-columns(16);
   }
-
-  aside {
+  
+  // Index View
+  #content>main.index>div {
+    @include span-columns(8);
+    min-height: 200px;
+  }
+  
+  // Room View
+  #content>main.room {
+    @include span-columns(11);
+    
+    // Room Content Header
+    header#content-header {
+      @include clearfix;
+      
+      h2 {
+        @include span-columns(6 of 11);
+        text-align: left;
+      }
+      #room-info {
+        @include span-columns(5 of 11); 
+      }
+      
+    }
+        
+  }
+  #content>aside {
     @include span-columns(5);
     @include omega;
   }
   
 }
 
-@include media($large) {
-  main>header {
-    @include clearfix;
-    h2 {
-      @include span-columns(6 of 11); 
-    }
-    #room-info {
-      @include span-columns(5 of 11); 
-    }
-  }
+// Main Content Padding (1200px +)
+@include media($xlargescreen) {
   
-  #call-options {
-     @include span-columns(5 of 11); 
-  }
-  #interpretation-options {
-     @include span-columns(6 of 11); 
+   div#content {
+    padding: 1em 0;
   }
 
-}
-
-// Landing Page
-.index main {
-  @include span-columns(16);
-  
-  #join-room,
-  #create-room {
-    //@include span-columns(8);
-
-    @include media($desktop) {
-      @include span-columns(8);
-      min-height: 220px;
-    }
-
-  }
-  #create-room {
-    @include omega;
-    margin-top: .5em;
-    
-     @include media($desktop) {
-      margin-top: 0;
-    }
-
-  }
 }
 
 // Conference Room Page
