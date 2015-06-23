@@ -13,6 +13,7 @@ body>header {
     	margin-bottom: 0;
     }
 
+    // Logo
     h1#logo {
 	    margin: 0;
 	    padding-right: .5em;
@@ -38,6 +39,8 @@ body>header {
             }
 		}
     }
+  
+    // Tagline
     h3#tagline {
     	font-size: $h3-size-l;
 
@@ -53,18 +56,46 @@ body>header {
 			text-align: center;
 		}
     }
-	#language-links {
-		white-space: nowrap;
-		text-align: right;
-
-		@include media($tablet) {
-			@include span-columns(16);
-			text-align: center;
-		}
-
-		@include media($mobile) {
-			@include span-columns(16);
-			text-align: center;
-		}
-	}
+  
+    // Utility Nav
+    nav#utility-nav {
+      
+      @include span-columns(16);
+      border-top: 1px solid $hr-color;
+      
+      #welcome-text,
+      #language-links {}
+      
+      #welcome-text {
+        text-align: center;
+        margin-top: .75em;
+        
+        span {
+          font-weight: bold;
+        }
+      }
+      #language-links{
+        margin-top: .5em;
+        white-space: nowrap;
+        text-align: center;
+      }
+      
+    }
+  
+    @include media($desktop) {
+      nav#utility-nav {
+        border-top: none;
+        
+        #language-links,
+        #welcome-text {
+          text-align: right;
+          margin-top: 0;
+        }
+        
+        #language-links {}
+        #welcome-text {}
+        
+      }
+    }
+  
 }
