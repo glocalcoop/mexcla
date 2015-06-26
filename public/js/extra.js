@@ -114,9 +114,29 @@ function build_modal() {
   check_session();
 };
 
-/*$(window).unload(function() {
-  remove_user();
-});*/
+function update_language(lang) {
+  $.get("/lang/:" + lang, function( data ) {
+    $( ".result").html( data );
+  });
+};
+
+function switch_language(lang) {
+  update_language(lang);
+  var match = window.location.hash.match(/\#room\/[0-9]+/i);
+  window.location = 'http://' + window.location.hostname + ':8080/' + match[0] + '/' + lang;
+};
+
+console.log("this is window hash from extra.js");
+console.log(window.location.hash);
+$(window).unload(function() {
+  var hash = window.location.hash;
+  var match = hash.match(/\#room\/[0-9]+/i);
+  if(null != match) {
+    remove_user();
+  }
+  // console.log("this is closing");
+  //alert("trying again");
+});
 
 /*$(function() {
     $('#user-name-form').submit(function(event) {

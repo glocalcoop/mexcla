@@ -82,7 +82,7 @@ define(['router'], function(router) {
       updateSession(sessionResult, hash.split('/')[1]);
 
       if(evalUsername(sess.username) != false) {
-        window.location.hash = 'room/' + sess.roomnum;
+        window.location.hash = 'room/' + sess.roomnum + '/' + sess.lang;
       }else{
         window.location.hash = 'register/' + sess.roomnum;
           console.log("this is sess during room load");

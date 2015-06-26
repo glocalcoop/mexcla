@@ -1,6 +1,7 @@
 define(['MexclaView', 'text!templates/room.html', 'text!templates/userlist.html',
-        'models/RoomCollection', 'views/userlist'],
-       function (MexclaView, roomTemplate, userlistTemplate, RoomCollection, userlistView) {
+        'models/RoomCollection', 'models/TextTranslation', 'models/User', 'views/userlist'],
+       function (MexclaView, roomTemplate, userlistTemplate, RoomCollection,
+                  TextTranslation, User, userlistView) {
   console.log('room template function happening.');
   var roomView = MexclaView.extend({
     el: $('#content'),
@@ -15,9 +16,15 @@ define(['MexclaView', 'text!templates/room.html', 'text!templates/userlist.html'
       // set roomNum variable with the correct room number
       // to be picked up by the room template.
       roomNum = this.options.roomNum;
-
+      connect = this.options.lang.connect;
+      // this.User = new User();
+      // this.TextTranslation = new TextTranslation();
+      // connect = this.TextTranslation.trans.connect.es;
+      // var TextTranslation = new TextTranslation();
+      // connect = TextTranslation.connect.es;
       // this.collection.roomNum = {"roomNum": this.collection.roomNum};
-
+      console.log("options");
+      console.log(this.options);
       // bind all render functions to this so that
       // we maintain the scope during render.
       _.bindAll(this, 'render');

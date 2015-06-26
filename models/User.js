@@ -63,15 +63,10 @@ module.exports = function(mongoose) {
     });
   };
 
-  var findOneAndUpdate = function(userName, roomNum, lang, sess) {
+  var findOneAndUpdate = function(sess, lang) {
     User.findOneAndUpdate(
       {sess: sess},
-      {
-        username: userName,
-        roomnum: roomNum,
-        lang: lang,
-        sess: sess
-      },
+      {lang: lang},
       {safe: true, upsert: true},
       function(err, model) {
         if(err) {

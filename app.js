@@ -9,7 +9,9 @@ var app = express();
 mongoose.connect('mongodb://localhost/mexcladb');
 app.use(expressSession({
     secret: "Our Secret Key",
-    store: new MongoStore({ mongooseConnection: mongoose.connection   })
+    store: new MongoStore({ mongooseConnection: mongoose.connection   }),
+    autoRemove: 'interval',
+    autoRemoveInterval: 60
 }));
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
@@ -74,6 +76,9 @@ app.get('/check-user', function(req, res, next) {
 
 app.get('/sess-destroy', function(req, res) {
   req.session.destroy();
+  models.User.remove(req.sessionID, function(result) {
+    res.send(result);
+  });
   res.redirect('/');
 });
 
@@ -94,9 +99,19 @@ app.get('/rooms/:roomnum/status', function(req, res, next) {
 app.get('/remove', function(req, res) {
   console.log("Session id from remove");
   console.log(req.sessionID);
-  models.User.remove(req.sessionID, function(result) {
-    res.send(result);
-  });
+  if(!req.session.username) {
+    models.User.remove(req.sessionID, function(result) {
+      res.send(result);
+   });
+  }
+});
+
+app.get('/lang/:lang', function(req, res, next) {
+  console.log(req.params.lang);
+  console.log(req.sessionID);
+  var lang = req.params.lang.replace(/:/g,'');
+  models.User.findOneAndUpdate(req.sessionID, lang);
+  res.send(200);
 });
 
 app.post('/username', function(req, res) {
@@ -119,14 +134,12 @@ app.post('/username', function(req, res) {
 
 app.post('/gotoroom', function(req, res, next) {
   if(req.body.roomnumber) {
-    // res.redirect('/#room/' + req.body.roomnumber);
-    res.url = '/#room/' + req.body.roomnumber;
     res.redirect('/#room/' + req.body.roomnumber);
+    // res.url = '/#room/' + req.body.roomnumber;
     // res.location.hash = 'room/' + req.body.roomnumber;
   }else{
-    // res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
-    res.url = '/#room/' + Math.round(Math.random() * (99999 - 1) + 1);
     res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
+    // res.url = '/#room/' + Math.round(Math.random() * (99999 - 1) + 1);
     // res.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
   }
 });
