@@ -1,6 +1,6 @@
 
 .alert {
-	background: lighten(#b0082d, 50%);
+	background-color: lighten(#b0082d, 50%);
 	padding: .5em;
 }
 
@@ -19,15 +19,16 @@ main>header {
 	}
 }
 
+/*
+ * Room Styles
+ */
+
 #room-info {
   
-  display: block;
-
-  //border: 1px solid $gray9;
-  
-  text-align: center;
+  display: block;  
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
   
   a,
   label {
@@ -41,7 +42,7 @@ main>header {
   label {
     border-top: 1px solid $gray9;
     border-bottom: 1px solid $gray9;
-    background: $gray8;
+    background-color: $gray8;
   }
   a#room-link {
     border-top: 1px solid $gray9;
@@ -55,26 +56,18 @@ main>header {
   
 }
 
-.telephone-info {
-  //@extend %entypo-circled-info;
-}
+.telephone-info {}
 
-// Room Styling
-
-// Header
-main>header {
-  h2 {
+// Room header
+#conference-id {
     text-align: center;
     margin-bottom: 0;
-  }
 }
 
 #call-options {
-  text-align: center;
-  
-  //background: $gray9;
   padding: .5em;
   margin: .5em 0;
+  text-align: center;
   
   #mute-controls,
   #connect-icon-and-button {
@@ -102,7 +95,7 @@ main>header {
 
 @include media($large) {
   
-  main>header {
+  #content-header {
     margin-bottom: .5em;
   }
   
@@ -132,7 +125,7 @@ main>header {
 
 #join-room,
 #create-room {
-    background: $gray9;
+    background-color: $gray9;
     padding: 1em;
 
     h3 {
@@ -146,6 +139,7 @@ main>header {
 div#create-room {
   margin-top: .5em;
 }
+
 @include media($desktop) {
   
   div#create-room {

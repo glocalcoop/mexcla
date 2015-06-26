@@ -1,7 +1,7 @@
 // FOOTER
 
 .footer {
-    background: $gray8;
+    background-color: $gray8;
     .global {
         padding: 30px 0;
         @include breakpoint(medium) {position: relative;}
@@ -18,7 +18,7 @@
 // footer widgets
 
 .footer .widget {
-    background: $white;
+    background-color: $white;
     margin-bottom: 30px;
 	@include breakpoint(small) {@include span-columns(4);}
 	ul {
@@ -40,7 +40,7 @@
 // SOCIAL LINKS AND COPYRIGHT
 
 .footer-slug {
-    background: $gray7;
+    background-color: $gray7;
     clear: both;
     .wrap {
         max-width: 1200px;

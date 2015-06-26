@@ -5,12 +5,12 @@ SIDEBARS & ASIDES
 
 .sidebar .button,
 .sidebar input[type='submit'] {
-    background: $gray3;
-    background: rgba(0,0,0,.6);
+    background-color: $gray3;
+    //background: rgba(0,0,0,.6);
     font-weight: 700;
     @include font-size(16);
     &:hover {
-        background: $white;
+        background-color: $white;
         color: $text-color;
     }
 }
@@ -18,7 +18,7 @@ SIDEBARS & ASIDES
 aside {
   &>div {
     padding: 1em;
-    background: $gray9;
+    background-color: $gray9;
   }
   &>div:not(:first-child) {
     margin-top: .5em;
@@ -26,7 +26,7 @@ aside {
   label {
     display: inline-block;
     padding: .25em;
-    background: $gray5;
+    background-color: $gray5;
     color: $white;
     margin-right: .5em;
   }

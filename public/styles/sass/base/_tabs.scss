@@ -7,34 +7,33 @@
   .tab {
     float: left;
     label {
-      background: $gray5;
+      position: relative;
+      left: 1px;
       padding: 10px;
       border: 1px solid $gray5;
       margin-left: -1px;
-      position: relative;
-      left: 1px;
+      background-color: $gray5;
       text-transform: uppercase;
       font-size: 85%;
       color: $white;
     }
   }
   .content {
+    width: 100%;
     position: absolute;
     top: 28px;
     left: 0;
-    background: $white;
     right: 0;
     bottom: 0;
     padding: 20px;
+    background-color: $white;
     border: 1px solid $gray5;
-    width: 100%;
-
   }
   [type=radio]:checked ~ label {
-    background: $blue;
+    z-index: 2;
     border-bottom: 1px solid $blue;
     color: $white;
-    z-index: 2;
+    background-color: $blue;
   }
   [type=radio]:checked ~ label ~ .content {
     z-index: 1;

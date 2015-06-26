@@ -1,5 +1,25 @@
+/*
+ * Button sizes
+ */
 
-// LINKS
+%button-large {
+    @include font-size(24);
+    padding: 1em 3em;
+}
+
+%button-medium {
+    @include font-size(22);
+    padding: .5em 1.25em;
+}
+
+%button-small {
+    @include font-size(15);
+    padding: .25em 1em;
+}
+
+/*
+ * Links
+ */
 
 a,
 a:visited {
@@ -31,7 +51,10 @@ a:visited {
 
 
 
-// BUTTONS
+/*
+ * Buttons
+ */
+
 
 button,
 .button,
@@ -46,20 +69,20 @@ input[type='button'] {
     padding: .5em 2em;
     text-align: center;
     border: 0;
-    background: $anchor-color;
+    background-color: $anchor-color;
     color: $white;
     display: inline-block;
     &.disconnect {
-        background: $red;
+        background-color: $red;
     }
     &.connect {
-        background: $green;
+        background-color: $green;
     }
     &.espanol {
-        background: $green;
+        background-color: $green;
     }
     &.english {
-        background: $blue;
+        background-color: $blue;
     }
     &:link,
     &:visited {
@@ -67,14 +90,25 @@ input[type='button'] {
     }
     &:hover,
     &:focus {
-        background: $gray7;
+        background-color: $gray7;
         color: $text-color;
     }
 
     @include breakpoint(medium) {@include font-size(16);}
 }
 
-// Toggle/Switch - main styles in vendor/switches
+
+/*
+ * Toggle
+ *
+ *  Main styles in vendor/switches
+ */
+
+// Interpretation toggle button set width
+#interpretation-mode {
+  max-width: 512px;
+}
+
 .switch-android,
 .switch-ios.switch-toggle {
   background-color: $gray5;
@@ -101,22 +135,6 @@ input[type='button'] {
   }
 }
 
-// button sizes
-%button-large {
-    @include font-size(24);
-    padding: 1em 3em;
-}
-
-%button-medium {
-    @include font-size(22);
-    padding: .5em 1.25em;
-}
-
-%button-small {
-    @include font-size(15);
-    padding: .25em 1em;
-}
-
 
 #call-options,
 #interpretation-mode {
@@ -128,9 +146,6 @@ input[type='button'] {
 
 #connect-button {
   @extend %button-medium;
-//  display: block;
-//  margin: 0 auto;
 }
-#mute-controls {
-//  margin: auto;
-}
+
+#mute-controls {}
