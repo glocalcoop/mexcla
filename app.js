@@ -43,7 +43,7 @@ app.get('/', function(req, res){
        res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
                                 username: "" });
     }
-    res.render("index.jade", {title: "Simultaneous Interpretation Conference System"});
+    // res.render("index.jade", {title: "Simultaneous Interpretation Conference System"});
   }
 });
 
