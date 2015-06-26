@@ -6,13 +6,15 @@ block content
     h3#tagline
       strong.
         Mexcla
-      |: Simultaneous Interpretation Conference System
+          : #{title}
+    //-  |: Simultaneous Interpretation Conference System
     //- TODO: determine a better way to handle language links
     nav#utility-nav
       div#welcome-text
-         | Hi,
+          | #{username}
+         //- | Hi,
          //- Insert user name
-         span.user-name User Name
+         //- span.user-name User Name
       div#language-links
         //- TODO: Define function switch_language()
         button(id="es-switch-link" class="button espanol" onclick="switch_language('es')").

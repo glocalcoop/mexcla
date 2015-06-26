@@ -17,6 +17,14 @@ define(['MexclaView', 'text!templates/room.html', 'text!templates/userlist.html'
       // to be picked up by the room template.
       roomNum = this.options.roomNum;
       connect = this.options.lang.connect;
+      conference = this.options.lang.conference;
+      mute = this.options.lang.mute;
+      unmute = this.options.lang.unmute;
+      original = this.options.lang.original;
+      interpretation = this.options.lang.interpretation;
+      provide = this.options.lang.provide;
+      participants = this.options.lang.participants;
+      room = this.options.lang.room;
       // this.User = new User();
       // this.TextTranslation = new TextTranslation();
       // connect = this.TextTranslation.trans.connect.es;

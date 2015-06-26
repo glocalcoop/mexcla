@@ -27,7 +27,24 @@ var models = {
 };
 
 app.get('/', function(req, res){
-  res.render("index.jade");
+  if(req.session.lang == 'es') {
+    if(req.session.username) {
+      res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
+                               username: "Hola, " + req.session.username });
+    }else{
+       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
+                                username: "" });
+    }
+  }else{
+    if(req.session.username) {
+      res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
+                               username: "Hi, " + req.session.username });
+    }else{
+       res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
+                                username: "" });
+    }
+    res.render("index.jade", {title: "Simultaneous Interpretation Conference System"});
+  }
 });
 
 app.get('/room/:roomnum', function(req, res){
@@ -110,7 +127,10 @@ app.get('/lang/:lang', function(req, res, next) {
   console.log(req.params.lang);
   console.log(req.sessionID);
   var lang = req.params.lang.replace(/:/g,'');
-  models.User.findOneAndUpdate(req.sessionID, lang);
+  if(req.session.username) {
+    models.User.findOneAndUpdate(req.sessionID, lang);
+  }
+  req.session.lang = lang;
   res.send(200);
 });
 

@@ -2,6 +2,7 @@ console.log('boot starting');
 require.config({
   paths: {
     jQuery: '/js/libs/jquery',
+    jqueryui: '/js/libs/jquery-ui-1.11.4.custom/jquery-ui.min',
     jquerymodal: '/js/libs/jquery.modal',
     Underscore: '/js/libs/underscore',
     Backbone: '/js/libs/backbone',
@@ -16,10 +17,11 @@ require.config({
   shim: {
     'Backbone': ['Underscore', 'jQuery'],
     'jquerymodal': ['Backbone'],
+    'jqueryui': ['Backbone'],
     'extra': {deps: ['Backbone', 'jquerymodal']},
     'jssip': {deps: ['Backbone']},
     'mexclajs': {deps: ['jssip']},
-    'Mexcla': ['Backbone', 'jquerymodal', 'config', 'jssip', 'extra', 'mexclajs']
+    'Mexcla': ['Backbone', 'jquerymodal', 'jqueryui', 'config', 'jssip', 'extra', 'mexclajs']
   }
 });
 console.log('boot.js initialized.');

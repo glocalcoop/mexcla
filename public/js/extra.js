@@ -115,15 +115,30 @@ function build_modal() {
 };
 
 function update_language(lang) {
+  console.log("this is lang from extra.js");
+  console.log(lang);
   $.get("/lang/:" + lang, function( data ) {
     $( ".result").html( data );
+  })
+  .done(function() {
+    var match = window.location.hash.match(/\#room\/[0-9]+/i);
+    if(!match) {
+      window.location = 'http://' + window.location.hostname + ':8080/' + window.location.hash + '/' + lang;
+      window.location.reload();
+    }
   });
 };
 
 function switch_language(lang) {
   update_language(lang);
   var match = window.location.hash.match(/\#room\/[0-9]+/i);
-  window.location = 'http://' + window.location.hostname + ':8080/' + match[0] + '/' + lang;
+  if(match) {
+    window.location = 'http://' + window.location.hostname + ':8080/' + match[0] + '/' + lang;
+  }else{
+    // window.location = 'http://' + window.location.hostname + ':8080/' + window.location.hash;
+    // setTimeout(window.location.reload(), 500);
+    // window.location.reload();
+  }
 };
 
 console.log("this is window hash from extra.js");

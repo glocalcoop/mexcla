@@ -9,7 +9,7 @@ define(['views/index', 'views/room', 'views/register', 'models/RoomCollection',
     currentView: null,
 
     routes: {
-      "index": "index",
+      "index/:language": "index",
       "register/:num": "register",
       "room/:num/:language": "room",
     },
@@ -22,8 +22,16 @@ define(['views/index', 'views/room', 'views/register', 'models/RoomCollection',
       this.currentView.render();
     },
 
-    index: function() {
-      this.changeView(new IndexView());
+    index: function(language) {
+      var Trans = new TextTranslation();
+      if(language == 'es') {
+        var lang = Trans.es;
+      }else{
+        var lang = Trans.en;
+      }
+      this.changeView(new IndexView({
+        lang: lang
+      }));
     },
 
     register: function(num) {

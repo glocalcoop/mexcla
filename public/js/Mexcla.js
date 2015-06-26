@@ -98,7 +98,7 @@ define(['router'], function(router) {
           console.log(sess);
       }
     }else{
-      window.location.hash = 'index';
+      window.location.hash = 'index/' + sess.lang;
     }
 /*    console.log('roomPath');
     console.log(roomPath);
