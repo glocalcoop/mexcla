@@ -9,9 +9,11 @@ var app = express();
 mongoose.connect('mongodb://localhost/mexcladb');
 app.use(expressSession({
     secret: "Our Secret Key",
-    store: new MongoStore({ mongooseConnection: mongoose.connection   }),
-    autoRemove: 'interval',
-    autoRemoveInterval: 60
+    store: new MongoStore({ mongooseConnection: mongoose.connection,
+                           autoRemove: 'interval',
+                           autoRemoveInterval: 1
+                          }),
+
 }));
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));

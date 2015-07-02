@@ -65,10 +65,14 @@ function mexcla_init_iframes() {
 }
 
 function mexcla_toggle_irc() {
+  $('#calc-frame').hide();
+  $('#pad-frame').hide();
   mexcla_toggle_iframe('irc-frame', 'https://irc.koumbit.net/?channels=#' + mexcla_get_hash() + '&nick=guest');
 }
 
 function mexcla_toggle_pad() {
+  $('#calc-frame').hide();
+  $('#irc-frame').hide();
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
   mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash() + '?showChat=false');
 }
@@ -80,11 +84,13 @@ function mexcla_toggle_iframe(id,url, extra)  {
     $('.draggable').draggable();
   }
   else{
-    $('#' + id).remove();
+    $('#' + id).show();
   }
 }
 
 function mexcla_toggle_calc() {
+  $('#pad-frame').hide();
+  $('#irc-frame').hide();
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
   mexcla_toggle_iframe('calc-frame', 'https://calc.mayfirst.org/' + mexcla_get_hash());
 }
@@ -353,5 +359,5 @@ function mexcla_pause(s) {
 
 function mexcla_add_iframe(id, src, extra) {
   // $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
-  $("#iframe-selectors").append('<div class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" style="min-height:400px;width:100%" src="' + src + '"/></div>');
+  $("#iframe-selectors").append('<div class="user-object" id="' + id + '"><span class="extra">' + extra +     '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' +      src + '</a></span><br /><iframe class="draggable resizable" style="min-height:400px;width:100%" src="'      + src + '"/></div>');
 }
