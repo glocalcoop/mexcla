@@ -72,9 +72,6 @@ define(['router'], function(router) {
     console.log(window.location.hash);
     var hash = window.location.hash;
     var match = hash.match(/\#room\/[0-9]+/i);
-    if(sess.lang == undefined) {
-      sess.lang = 'en';
-    }
     // if the roomnum is set in the session direct the
     // user to that room.  If it's not set, but the user
     // is currently in a room, make reloads direct to the
@@ -98,8 +95,8 @@ define(['router'], function(router) {
           console.log("this is sess during room load");
           console.log(sess);
       }
-    }else if(hash == '#index'){
-      window.location.hash = 'index/' + sess.lang;
+    }else if(hash == '#index' || hash == '#index/undefined'){
+      window.location.hash = 'index/en';
     }else{
       window.location.hash = 'index/' + sess.lang;
     }

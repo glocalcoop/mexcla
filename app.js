@@ -28,8 +28,10 @@ var models = {
 
 app.get('/', function(req, res){
   if(req.session.lang == undefined) {
-    req.session.lang == 'en';
+    req.session.lang = 'en';
   }
+  console.log("languge from /");
+  console.log(req.session.lang);
   if(req.session.lang == 'es') {
     if(req.session.username) {
       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
