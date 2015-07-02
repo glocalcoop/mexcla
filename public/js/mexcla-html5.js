@@ -70,7 +70,7 @@ function mexcla_toggle_irc() {
 
 function mexcla_toggle_pad() {
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
-  mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash()) + '?showChat=false';
+  mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash() + '?showChat=false');
 }
 
 function mexcla_toggle_iframe(id,url, extra)  {
