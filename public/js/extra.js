@@ -115,25 +115,26 @@ function build_modal() {
 };
 
 function update_language(lang) {
-  console.log("this is lang from extra.js");
-  console.log(lang);
   $.get("/lang/:" + lang, function( data ) {
     $( ".result").html( data );
   })
   .done(function() {
     var match = window.location.hash.match(/\#room\/[0-9]+/i);
-    if(!match) {
+    // if(!match) {
       window.location = 'http://' + window.location.hostname + ':8080/' + window.location.hash + '/' + lang;
       window.location.reload();
-    }
+    // }
   });
 };
 
 function switch_language(lang) {
   update_language(lang);
+  console.log("switch_language");
+  console.log(lang);
   var match = window.location.hash.match(/\#room\/[0-9]+/i);
   if(match) {
     window.location = 'http://' + window.location.hostname + ':8080/' + match[0] + '/' + lang;
+    // window.location.reload();
   }else{
     // window.location = 'http://' + window.location.hostname + ':8080/' + window.location.hash;
     // setTimeout(window.location.reload(), 500);
@@ -141,8 +142,6 @@ function switch_language(lang) {
   }
 };
 
-console.log("this is window hash from extra.js");
-console.log(window.location.hash);
 $(window).unload(function() {
   var hash = window.location.hash;
   var match = hash.match(/\#room\/[0-9]+/i);

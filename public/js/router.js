@@ -9,6 +9,7 @@ define(['views/index', 'views/room', 'views/register', 'models/RoomCollection',
     currentView: null,
 
     routes: {
+      "index": "index",
       "index/:language": "index",
       "register/:num": "register",
       "room/:num/:language": "room",

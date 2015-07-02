@@ -70,7 +70,7 @@ function mexcla_toggle_irc() {
 
 function mexcla_toggle_pad() {
   // We use mexcla_get_hash so the calc pages created aren't so trivially discovered.
-  mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash());
+  mexcla_toggle_iframe('pad-frame', 'https://pad.riseup.net/p/' + mexcla_get_hash()) + '?showChat=false';
 }
 
 function mexcla_toggle_iframe(id,url, extra)  {
@@ -259,6 +259,7 @@ function change_submit_button_value(val) {
     mexcla_dots('');
     // target_src = current_src.replace('phone.disconnected.png', 'phone.connected.png');
     $('#microphone-status').show();
+    $('#language-links').hide();
   }
   else {
     // When we are connecting... the picture should remain showing
@@ -352,5 +353,5 @@ function mexcla_pause(s) {
 
 function mexcla_add_iframe(id, src, extra) {
   // $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
-  $("#iframe-selectors").append('<div class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></div>');
+  $("#iframe-selectors").append('<div class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" style="min-height:400px;width:100%" src="' + src + '"/></div>');
 }
