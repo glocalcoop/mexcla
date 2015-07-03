@@ -359,6 +359,6 @@ function mexcla_pause(s) {
 
 function mexcla_add_iframe(id, src, extra) {
   // $("#user-objects").append('<td class="user-object" id="' + id + '"><span class="extra">' + extra + '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' + src + '</a></span><br /><iframe class="draggable resizable" src="' + src + '"/></td>');
-  $("#iframe-content").append('<div class="user-object" id="' + id + '"><span class="extra">' + extra +     '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' +      src + '</a></span><br /><iframe class="draggable resizable" style="min-height:400px;width:100%" src="'      + src + '"/></div>');
+  $("#iframe-content").append('<div class="user-object" id="' + id + '"><div class="collaboration-link"><span class="extra">' + extra +     '</span> <span class="direct-link">' + lang_direct_link + ': <a target="_blank" href="' + src + '">' +      src + '</a></span></div><iframe class="draggable resizable" style="min-height:400px;width:100%" src="'      + src + '"/></div>');
   $('#collaboration > .tabs').addClass('filled');
 }
