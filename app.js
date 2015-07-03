@@ -37,20 +37,24 @@ app.get('/', function(req, res){
   if(req.session.lang == 'es') {
     if(req.session.username) {
       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
-                               username: "Hola, " + req.session.username,
-                               lang: req.session.lang});
+                                salutation: "Hola",
+                                username: req.session.username,
+                                lang: req.session.lang});
     }else{
        res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
+                                salutation: "",
                                 username: "",
                                 lang: req.session.lang});
     }
   }else{
     if(req.session.username) {
       res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
-                               username: "Hi, " + req.session.username,
-                               lang: req.session.lang});
+                                salutation: "Hi",
+                                username: req.session.username,
+                                lang: req.session.lang});
     }else{
        res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
+                                salutation: "",
                                 username: "",
                                 lang: req.session.lang});
     }
