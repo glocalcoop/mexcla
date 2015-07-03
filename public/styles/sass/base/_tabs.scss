@@ -1,58 +1,63 @@
 .tabs {
-  position: relative;
-  min-height: 400px; /* This part sucks */
-  clear: both;
-  margin: 25px 0;
-//  font-size: 1;
+
+  border-bottom: 1px solid $hr-color;
+
   .tab {
-    float: left;
-    label {
-      position: relative;
-      left: 1px;
-      padding: 10px;
-      border: 1px solid $gray5;
-      margin-left: -1px;
-      background-color: $gray5;
-      text-transform: uppercase;
-      font-size: 85%;
-      color: $white;
-    }
-  }
-  .content {
-    width: 100%;
-    position: absolute;
-    top: 28px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 20px;
-    background-color: $white;
-    border: 1px solid $gray5;
-  }
-  [type=radio]:checked ~ label {
-    z-index: 2;
-    border-bottom: 1px solid $blue;
+
+    display: inline-block;
+    padding: .5em;
+    background-color: $gray5;
+    text-transform: uppercase;
     color: $white;
-    background-color: $blue;
+
+    &.active {
+      color: $white;
+      background-color: $blue;
+    }
+
+    label {
+      font-size: .8rem;
+    }
+
+    [type=radio] {
+      display: none;
+    }
+
   }
-  [type=radio]:checked ~ label ~ .content {
-    z-index: 1;
-  }
-}
-.tab [type=radio] {
-  display: none;
+
 }
 
 #collaboration {
-  @include clearfix;
 
-  .content iframe {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 90%;
+  .tabs {}
+
+  .collaboration-link {
+    margin: .25em .5em .25em;
   }
 
-  iframe.resizable {}
+  .collaboration-link,
+  .collaboration-link a {
+    font-size: .85rem;
+  }
+
+  #iframe-content {
+    background-color: $gray9;
+
+    min-height: 400px;
+  }
+
+  &.filled #iframe-content {
+    background-color: $white;
+  }
+
+  #iframe-content  iframe {
+    border: none;
+  }
+
+  iframe body {
+    margin: 0;
+    padding: 0;
+  }
+
 }
+
