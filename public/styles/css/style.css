@@ -2989,161 +2989,164 @@ h2 {
       font-size: 2.25rem; } }
 
 /* line 85, ../sass/base/_typography.scss */
-h3 {
+h3,
+h3 a {
   margin-bottom: .25em;
   font-size: 22px;
   font-size: 1.375rem; }
   @media screen and (min-width: 48em) {
     /* line 85, ../sass/base/_typography.scss */
-    h3 {
+    h3,
+    h3 a {
       font-size: 26px;
       font-size: 1.625rem; } }
   @media screen and (min-width: 63.75em) {
     /* line 85, ../sass/base/_typography.scss */
-    h3 {
+    h3,
+    h3 a {
       font-size: 28px;
       font-size: 1.75rem; } }
 
-/* line 95, ../sass/base/_typography.scss */
+/* line 96, ../sass/base/_typography.scss */
 h4 {
   font-size: 18px;
   font-size: 1.125rem; }
   @media (min-width: 769px) {
-    /* line 95, ../sass/base/_typography.scss */
+    /* line 96, ../sass/base/_typography.scss */
     h4 {
       font-size: 21px;
       font-size: 1.3125rem; } }
   @media (min-width: 1025px) {
-    /* line 95, ../sass/base/_typography.scss */
+    /* line 96, ../sass/base/_typography.scss */
     h4 {
       font-size: 22px;
       font-size: 1.375rem; } }
 
-/* line 101, ../sass/base/_typography.scss */
+/* line 102, ../sass/base/_typography.scss */
 h5 {
   font-size: 14px;
   font-size: 0.875rem;
   font-weight: 700; }
   @media (min-width: 769px) {
-    /* line 101, ../sass/base/_typography.scss */
+    /* line 102, ../sass/base/_typography.scss */
     h5 {
       font-size: 14px;
       font-size: 0.875rem; } }
   @media (min-width: 1025px) {
-    /* line 101, ../sass/base/_typography.scss */
+    /* line 102, ../sass/base/_typography.scss */
     h5 {
       font-size: 16px;
       font-size: 1rem; } }
 
-/* line 108, ../sass/base/_typography.scss */
+/* line 109, ../sass/base/_typography.scss */
 h6 {
   font-size: 14px;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 1px; }
   @media (min-width: 769px) {
-    /* line 108, ../sass/base/_typography.scss */
+    /* line 109, ../sass/base/_typography.scss */
     h6 {
       font-size: 15px;
       font-size: 0.9375rem; } }
   @media (min-width: 1025px) {
-    /* line 108, ../sass/base/_typography.scss */
+    /* line 109, ../sass/base/_typography.scss */
     h6 {
       font-size: 16px;
       font-size: 1rem; } }
 
-/* line 118, ../sass/base/_typography.scss */
+/* line 119, ../sass/base/_typography.scss */
 p {
   font-size: 14px;
   font-size: 0.875rem; }
   @media (min-width: 769px) {
-    /* line 118, ../sass/base/_typography.scss */
+    /* line 119, ../sass/base/_typography.scss */
     p {
       font-size: 14px;
       font-size: 0.875rem; } }
   @media (min-width: 1025px) {
-    /* line 118, ../sass/base/_typography.scss */
+    /* line 119, ../sass/base/_typography.scss */
     p {
       font-size: 16px;
       font-size: 1rem;
       max-width: 40em;
       line-height: 1.75; } }
 
-/* line 125, ../sass/base/_typography.scss */
+/* line 126, ../sass/base/_typography.scss */
 li, dt, dd {
   font-size: 14px;
   font-size: 0.875rem;
   margin-bottom: .75em; }
   @media (min-width: 769px) {
-    /* line 125, ../sass/base/_typography.scss */
+    /* line 126, ../sass/base/_typography.scss */
     li, dt, dd {
       font-size: 14px;
       font-size: 0.875rem; } }
   @media (min-width: 1025px) {
-    /* line 125, ../sass/base/_typography.scss */
+    /* line 126, ../sass/base/_typography.scss */
     li, dt, dd {
       font-size: 16px;
       font-size: 1rem;
       max-width: 40em;
       line-height: 1.75; } }
 
-/* line 132, ../sass/base/_typography.scss */
+/* line 133, ../sass/base/_typography.scss */
 input, label, select, textarea {
   font-size: 14px;
   font-size: 0.875rem;
   font-family: "Lato", Helvetica, Verdana, sans-serif;
   font-weight: 300; }
   @media (min-width: 769px) {
-    /* line 132, ../sass/base/_typography.scss */
+    /* line 133, ../sass/base/_typography.scss */
     input, label, select, textarea {
       font-size: 14px;
       font-size: 0.875rem; } }
   @media (min-width: 1025px) {
-    /* line 132, ../sass/base/_typography.scss */
+    /* line 133, ../sass/base/_typography.scss */
     input, label, select, textarea {
       font-size: 16px;
       font-size: 1rem; } }
 
-/* line 141, ../sass/base/_typography.scss */
+/* line 142, ../sass/base/_typography.scss */
 small {
   font-size: 12px;
   font-size: 0.75rem; }
   @media (min-width: 769px) {
-    /* line 141, ../sass/base/_typography.scss */
+    /* line 142, ../sass/base/_typography.scss */
     small {
       font-size: 13px;
       font-size: 0.8125rem; } }
   @media (min-width: 1025px) {
-    /* line 141, ../sass/base/_typography.scss */
+    /* line 142, ../sass/base/_typography.scss */
     small {
       font-size: 14px;
       font-size: 0.875rem; } }
 
-/* line 149, ../sass/base/_typography.scss */
+/* line 150, ../sass/base/_typography.scss */
 b, strong {
   font-weight: 700; }
 
-/* line 153, ../sass/base/_typography.scss */
+/* line 154, ../sass/base/_typography.scss */
 i, em {
   font-style: italic; }
 
-/* line 159, ../sass/base/_typography.scss */
+/* line 160, ../sass/base/_typography.scss */
 ul, ol {
   margin: 0 0 1.5em; }
-  /* line 161, ../sass/base/_typography.scss */
+  /* line 162, ../sass/base/_typography.scss */
   ul ul, ul ol, ol ul, ol ol {
     margin: .75em 0 1.5em; }
 
-/* line 167, ../sass/base/_typography.scss */
+/* line 168, ../sass/base/_typography.scss */
 blockquote {
   padding: 0 10% 0 0;
   margin: 1.5em 0; }
-  /* line 170, ../sass/base/_typography.scss */
+  /* line 171, ../sass/base/_typography.scss */
   blockquote p, blockquote li {
     color: #b8b6b2;
     font-style: italic; }
 
-/* line 176, ../sass/base/_typography.scss */
+/* line 177, ../sass/base/_typography.scss */
 code,
 kbd,
 pre,
@@ -3152,7 +3155,7 @@ samp {
   font-size: 14px;
   font-size: 0.875rem; }
   @media (min-width: 769px) {
-    /* line 176, ../sass/base/_typography.scss */
+    /* line 177, ../sass/base/_typography.scss */
     code,
     kbd,
     pre,
@@ -3160,7 +3163,7 @@ samp {
       font-size: 14px;
       font-size: 0.875rem; } }
   @media (min-width: 1025px) {
-    /* line 176, ../sass/base/_typography.scss */
+    /* line 177, ../sass/base/_typography.scss */
     code,
     kbd,
     pre,
@@ -3168,7 +3171,7 @@ samp {
       font-size: 16px;
       font-size: 1rem; } }
 
-/* line 186, ../sass/base/_typography.scss */
+/* line 187, ../sass/base/_typography.scss */
 pre {
   padding: 1em 1.5em;
   margin: 1.5em 0;
@@ -3176,7 +3179,7 @@ pre {
   background-color: #454545;
   color: #fff; }
 
-/* line 197, ../sass/base/_typography.scss */
+/* line 198, ../sass/base/_typography.scss */
 .home-intro h1 {
   margin: 0; }
 

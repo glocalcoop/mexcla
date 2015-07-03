@@ -82,7 +82,8 @@ h2 {
 	// @include breakpoint(large) {@include font-size($h2-size-l);}
 }
 
-h3 {
+h3,
+h3 a {
     margin-bottom: .25em;
     @include font-size($h3-size-s);
     @include media($desktop) {@include font-size($h3-size-m);}
