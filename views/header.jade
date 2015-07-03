@@ -2,14 +2,15 @@ block content
   //- div#content
   header#header
     h1#logo
-      img(class="header-image" alt="Glocal" src='/images/logo-new.png')
+      a(href="#index/#{lang}")
+        img(class="header-image" alt="Glocal" src='/images/logo-new.png')
     h3#tagline
       a(href="#index/#{lang}") Mexcla: #{title}
     //-  |: Simultaneous Interpretation Conference System
     //- TODO: determine a better way to handle language links
     nav#utility-nav
       div#welcome-text
-          | #{username}
+          span.user-name #{username}
          //- | Hi,
          //- Insert user name
          //- span.user-name User Name
