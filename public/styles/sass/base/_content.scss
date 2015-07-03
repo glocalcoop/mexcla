@@ -118,6 +118,9 @@ main>header {
 
 
 #collaboration {
+  @include clearfix;
+  margin-top: 1em;
+
 	h3 {
 		margin-top: 0;
 	}
