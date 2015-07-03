@@ -3422,7 +3422,7 @@ body > header {
       text-align: center;
       margin-top: .75em; }
       /* line 73, ../sass/base/_header.scss */
-      body > header nav#utility-nav #welcome-text span {
+      body > header nav#utility-nav #welcome-text .user-name {
         font-weight: bold; }
     /* line 77, ../sass/base/_header.scss */
     body > header nav#utility-nav #language-links {
