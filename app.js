@@ -37,7 +37,7 @@ app.get('/', function(req, res){
   if(req.session.lang == 'es') {
     if(req.session.username) {
       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
-                                salutation: "Hola",
+                                salutation: "Hola,",
                                 username: req.session.username,
                                 lang: req.session.lang});
     }else{
@@ -49,7 +49,7 @@ app.get('/', function(req, res){
   }else{
     if(req.session.username) {
       res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
-                                salutation: "Hi",
+                                salutation: "Hi,",
                                 username: req.session.username,
                                 lang: req.session.lang});
     }else{
