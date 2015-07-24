@@ -69,6 +69,8 @@ function remove_user() {
     method: "GET",
     success: function(result) {
       console.log("User removed");
+      // window.location.replace('http://localhost:8080');
+
     },
     error: function() {
       console.log("User not removed");
@@ -141,8 +143,21 @@ function switch_language(lang) {
     // window.location.reload();
   }
 };
+$(window).on('beforeunload', function() {
+    // return 'Your own message goes here...';
+  // remove_user();
+  var hash = window.location.hash;
+  var match = hash.match(/\#room\/[0-9]+\/[en|es]/i);
+  if(null != match) {
+    remove_user();
+  }
+  console.log("match");
+  console.log(match.input);
+  // remove_user();
+  return "some text";
+});
 
-$(window).unload(function() {
+/*$(window).unload(function() {
   var hash = window.location.hash;
   var match = hash.match(/\#room\/[0-9]+/i);
   if(null != match) {
@@ -150,7 +165,7 @@ $(window).unload(function() {
   }
   // console.log("this is closing");
   //alert("trying again");
-});
+});*/
 
 /*$(function() {
     $('#user-name-form').submit(function(event) {

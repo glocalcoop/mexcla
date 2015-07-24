@@ -8,10 +8,12 @@ var app = express();
 
 mongoose.connect('mongodb://localhost/mexcladb');
 app.use(expressSession({
-    secret: "Our Secret Key",
-    store: new MongoStore({ mongooseConnection: mongoose.connection,
+  secret: "Our Secret Key",
+  cookie: { maxAge: 24 * 60 * 60 },
+  store: new MongoStore({ mongooseConnection: mongoose.connection,
                            autoRemove: 'interval',
-                           autoRemoveInterval: 1
+                           autoRemoveInterval: 60,
+                           clear_interval: 600
                           }),
 
 }));
@@ -33,7 +35,7 @@ app.get('/', function(req, res){
     req.session.lang = 'en';
   }
   console.log("languge from /");
-  console.log(req.session.lang);
+  // console.log(req);
   if(req.session.lang == 'es') {
     if(req.session.username) {
       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
@@ -79,7 +81,12 @@ app.get('/room/:roomnum', function(req, res){
 app.get('/session', function(req, res, next) {
   res.json(req.session);
   return next();
+  console.log('req.session');
   console.log(req.session);
+});
+
+app.get('/sess-room', function(req, res) {
+  res.redirect('/');
 });
 
 app.get('/sess-room/:roomnum', function(req, res) {
@@ -130,20 +137,28 @@ app.get('/rooms/:roomnum/status', function(req, res, next) {
 
 app.get('/remove', function(req, res) {
   console.log("Session id from remove");
-  console.log(req.sessionID);
-  if(!req.session.username) {
-    models.User.remove(req.sessionID, function(result) {
+  console.log("removing user");
+  req.session.destroy();
+  // if(!req.session.username) {
+/*    models.User.remove(req.sessionID, function(result) {
       res.send(result);
-   });
-  }
+   });*/
+  // }
+  var room = null;
+  // var room = "";
+  models.User.findOneAndUpdateRoom(req.sessionID, room);
+  // req.session.roomnum = "";
+  // res.redirect('/#index/' + req.session.lang);
+  res.send(200);
 });
 
 app.get('/lang/:lang', function(req, res, next) {
   console.log(req.params.lang);
   console.log(req.sessionID);
+  var room = req.session.roomnum;
   var lang = req.params.lang.replace(/:/g,'');
   if(req.session.username) {
-    models.User.findOneAndUpdate(req.sessionID, lang);
+    models.User.findOneAndUpdate(req.sessionID, lang, room);
   }
   req.session.lang = lang;
   res.send(200);
@@ -153,9 +168,13 @@ app.post('/username', function(req, res) {
   console.log("This is req.body");
   console.log(req.body);
   var sess = req.session;
-  sess.username = req.body.username;
+  if(!sess.username) {
+    sess.username = req.body.username;
   // Update the user document with nickname
-  models.User.register(req.body.username, sess.roomnum, 'en', req.sessionID);
+    models.User.register(req.body.username, sess.roomnum, 'en', req.sessionID);
+  }else{
+    models.User.findOneAndUpdateUsername(sess.sessionID, req.body.username);
+  }
   // console.log("This sould be post session.");
   // console.log(sess);
   // console.log(JSON.stringify(req.body));

@@ -76,6 +76,7 @@ define(['router'], function(router) {
     // user to that room.  If it's not set, but the user
     // is currently in a room, make reloads direct to the
     // room.  Otherwise load the index page.
+
     if(sess.roomnum != null || sess.roomnum != undefined) {
       updateSession(sessionResult, hash.split('/')[1]);
 
@@ -95,11 +96,14 @@ define(['router'], function(router) {
           console.log("this is sess during room load");
           console.log(sess);
       }
-    }else if(hash == '#index' || hash == '#index/undefined'){
+    }else if(hash == '#index' || hash != '#index/es'){
       window.location.hash = 'index/en';
     }else{
       window.location.hash = 'index/' + sess.lang;
     }
+/*    if(sess.roomnum == null) {
+      window.location.hash = 'index/' + sess.lang;
+    }*/
 /*    console.log('roomPath');
     console.log(roomPath);
     console.log('curpath');

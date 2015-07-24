@@ -67,7 +67,7 @@ module.exports = function(mongoose) {
     User.findOneAndUpdate(
       {sess: sess},
       {lang: lang},
-      {safe: true, upsert: true},
+      {new: true, safe: true, upsert: true},
       function(err, model) {
         if(err) {
           console.log(err);
@@ -78,10 +78,41 @@ module.exports = function(mongoose) {
     );
   };
 
+  var findOneAndUpdateRoom = function(sess, room) {
+    User.findOneAndUpdate(
+      {sess: sess},
+      {roomnum: room},
+      {new: true, safe: true, upsert: true},
+      function(err, model) {
+        if(err) {
+          console.log(err);
+        }else{
+          console.log(model);
+        }
+      }
+    );
+  };
+
+  var findOneAndUpdateUsername = function(sess, username) {
+    User.findOneAndUpdate(
+      {sess: sess},
+      {username: username},
+      {new: true, safe: true, upsert: true},
+      function(err, model) {
+        if(err) {
+          console.log(err);
+        }else{
+          console.log(model);
+        }
+      }
+    );
+  };
   return {
     findByRoom: findByRoom,
     findBySessionId: findBySessionId,
     findUsersByRoom: findUsersByRoom,
+    findOneAndUpdateRoom: findOneAndUpdateRoom,
+    findOneAndUpdateUsername: findOneAndUpdateUsername,
     register: register,
     remove: remove,
     findOneAndUpdate: findOneAndUpdate,
