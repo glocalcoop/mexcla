@@ -27,3 +27,6 @@ build/Release
 node_modules
 
 /public/js/config.js
+
+## SASS cache
+*.sass-cache
