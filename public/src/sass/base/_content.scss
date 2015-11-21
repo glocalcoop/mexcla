@@ -1,0 +1,153 @@
+
+.alert {
+	background-color: lighten(#b0082d, 50%);
+	padding: .5em;
+}
+
+p.alert {
+    @include font-size($small-size-s);
+    @include media($desktop) {@include font-size($small-size-m);}
+    @include media($large) {@include font-size($small-size-l);}
+}
+
+main>header {
+	@include media($tablet) {
+		text-align: center;
+	}
+	@include media($mobile) {
+		text-align: center;
+	}
+}
+
+/*
+ * Room Styles
+ */
+
+#room-info {
+  
+  display: block;  
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  
+  a,
+  label {
+    display: inline-block;
+    padding: .5em;
+    margin: 0 .25em;
+    //line-height: 1;
+    margin: 0;
+    //font-size: .75rem;
+  }
+  label {
+    border-top: 1px solid $gray9;
+    border-bottom: 1px solid $gray9;
+    background-color: $gray8;
+  }
+  a#room-link {
+    border-top: 1px solid $gray9;
+    border-right: 1px solid $gray9;
+    border-bottom: 1px solid $gray9;
+  }
+  .telephone-info {
+    padding-left: .5em;
+    padding-right: .5em;
+  }  
+  
+}
+
+.telephone-info {}
+
+// Room header
+#conference-id {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#call-options {
+  padding: .5em;
+  margin: .5em 0;
+  text-align: center;
+  
+  #mute-controls,
+  #connect-icon-and-button {
+    display: block;
+    margin: 0 auto;
+  }
+    
+  // Connect Button
+  #connect-icon-and-button {
+    margin-bottom: .25em;
+  }
+  
+  // Mute Button
+  #mute-controls {
+    width: 130px;
+  }
+
+}
+
+#interpretation-options {
+  #interpretation-mode {
+    margin: 0 auto;
+  }
+}
+
+@include media($large) {
+  
+  #content-header {
+    margin-bottom: .5em;
+  }
+  
+  #room-info {
+    text-align: right;
+  }
+  
+  #call-options {
+    margin-top: 0;
+  }
+  
+  #interpretation-mode {}
+  
+  a,
+  label {
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+}
+
+
+#collaboration {
+  @include clearfix;
+  margin-top: 1em;
+
+	h3 {
+		margin-top: 0;
+	}
+}
+
+#join-room,
+#create-room {
+    background-color: $gray9;
+    padding: 1em;
+
+    h3 {
+        margin-top: 0;
+    }
+    p {
+        margin-bottom: .25em;
+    }
+}
+
+div#create-room {
+  margin-top: .5em;
+}
+
+@include media($desktop) {
+  
+  div#create-room {
+    margin-top: 0;
+  }
+  
+}
+

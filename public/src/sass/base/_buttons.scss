@@ -1,0 +1,151 @@
+/*
+ * Button sizes
+ */
+
+%button-large {
+    @include font-size(24);
+    padding: 1em 3em;
+}
+
+%button-medium {
+    @include font-size(22);
+    padding: .5em 1.25em;
+}
+
+%button-small {
+    @include font-size(15);
+    padding: .25em 1em;
+}
+
+/*
+ * Links
+ */
+
+a,
+a:visited {
+	color: $anchor-color;
+    text-decoration: none;
+    cursor: pointer;
+    @include transition(all 0.25s ease);
+
+	&:hover,
+	&:focus {
+		color: $anchor-hover;
+	}
+
+	/* on click */
+	&:active {
+
+	}
+
+	/* mobile tap color */
+	&:link {
+		/*
+		this highlights links on iPhones/iPads.
+		so it basically works like the :hover selector
+		for mobile devices.
+		*/
+		-webkit-tap-highlight-color : rgba( 0, 0, 0, 0.3 );
+	}
+}
+
+
+
+/*
+ * Buttons
+ */
+
+
+button,
+.button,
+input[type='submit'],
+input[type='button'] {
+    @include transition(all 0.25s ease);
+    @include font-size(14);
+	text-transform: uppercase;
+        letter-spacing: $caps-spacing;
+    line-height: 1.2;
+	font-weight: 700;
+    padding: .5em 2em;
+    text-align: center;
+    border: 0;
+    background-color: $anchor-color;
+    color: $white;
+    display: inline-block;
+    &.disconnect {
+        background-color: $red;
+    }
+    &.connect {
+        background-color: $green;
+    }
+    &.espanol {
+        background-color: $green;
+    }
+    &.english {
+        background-color: $blue;
+    }
+    &:link,
+    &:visited {
+        color: $white;
+    }
+    &:hover,
+    &:focus {
+        background-color: $gray7;
+        color: $text-color;
+    }
+
+    @include breakpoint(medium) {@include font-size(16);}
+}
+
+
+/*
+ * Toggle
+ *
+ *  Main styles in vendor/switches
+ */
+
+// Interpretation toggle button set width
+#interpretation-mode {
+  max-width: 512px;
+}
+
+.switch-android,
+.switch-ios.switch-toggle {
+  background-color: $gray5;
+  box-shadow: none;
+  input,
+  label,
+  input:checked + label,
+  a {
+    color: $white;
+  }
+  a {
+    background-color: $blue;
+    box-shadow: none;
+  }
+  input:checked + label {
+    font-weight: bold;
+  }
+  label,
+  &>span,
+  &>span span,
+  input + label {
+    line-height: 1.25 !important;
+    padding: .5em !important;
+  }
+}
+
+
+#call-options,
+#interpretation-mode {
+    label {}
+    input[type='radio'] {
+        margin-right: 5px;
+    }
+}
+
+#connect-button {
+  @extend %button-medium;
+}
+
+#mute-controls {}
