@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "A multi-lingual webrtc2sip conferencing system.",
   "main": "app.js",
+  "repository": "https://github.com/glocalcoop/mexcla.git",
+  "homepage": "https://github.com/glocalcoop/mexcla",
   "scripts": {
     "start": "node_modules/.bin/supervisor app",
     "test": "node_modules/.bin/mocha -w"
@@ -14,12 +16,12 @@
     "sip"
   ],
   "author": "Glocal",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "dependencies": {
     "body-parser": "^1.12.2",
     "connect": "^3.3.5",
+    "connect-mongo": "^0.8.2",
     "connect-mongodb-session": "^1.0.6",
-    "connect-mongo": "^0.8.0",
     "cookie-parser": "^1.3.4",
     "express": "^4.12.3",
     "express-session": "^1.10.4",
@@ -38,6 +40,8 @@
     "gulp-sass": "^2.1.0",
     "gulp-uglify": "^1.5.1",
     "gulp-watch": "^4.3.5",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "gulp-jshint": "^2.0",
+    "jshint": "*"
   }
 }
