@@ -42,7 +42,7 @@ gulp.task( 'styles', function() {
     } )
     .pipe( plumber( { errorHandler: onError } ) )
     .pipe( sass() )
-    .pipe( gulp.dest( '.' ) )
+    .pipe( gulp.dest( paths.stylesOutput ) )
     .pipe( minifycss() )
     .pipe( rename( { suffix: '.min' } ) )
     .pipe( gulp.dest( paths.stylesOutput ) )
