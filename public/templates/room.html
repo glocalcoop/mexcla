@@ -11,7 +11,8 @@
     </div>
     <div id="room-info">
       <label for="room-link"><%= room %> Link</label>
-      <a href="" id="room-link">http://url.rog/room/#</a>
+      <!-- TODO: Add real URL -->
+      http://url.org/room/<%= roomNum %>
     </div>
   </header>
   <section id="options">
@@ -47,7 +48,7 @@
   <section id="audio-handling">
     <div id="audio">
       <audio autoplay="autoplay" id="audio-remote">
-        sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
+        Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
       </audio>
     </div>
   </section>
@@ -75,15 +76,12 @@
     <div id="iframe-content"></div>
   </section>
 </main>
-  <aside class="sidebar" role="complementary" id="participant-list">
-    <div class="participant-list">
-      <h3><%= participants %></h3>
-      <div class="scroll-list">
-        <ul id="participants" />
-      </div>
+
+<aside class="sidebar" role="complementary" id="participant-list">
+  <div class="participant-list">
+    <h3><%= participants %></h3>
+    <div class="scroll-list">
+      <ul id="participants" />
     </div>
-  </aside>
-<!-- <script data-main='/js/extra.js' type='text/javascript' src='/js/extra.js'></script>
-<script data-main='/js/config' type='text/javascript' src='/js/config.js'></script>
-<script data-main='/js/jssip-0.6.18' type='text/javascript' src='/js/jssip-0.6.18.js'></script>
-<script type='text/javascript', src='/js/username-form.js'></script> -->
+  </div>
+</aside>
