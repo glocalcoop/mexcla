@@ -1,7 +1,10 @@
+'use strict';
+
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var _ = require('underscore');
 //var expressSession = require('express-session');
 //var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
@@ -23,21 +26,19 @@ var models = {
   Room: require('./models/Room')
 };
 
+var homepage = require('./homepage');
+
 app.get('/', function(req, res){
   // person is logged in
-  console.log('COOKIE: ' + JSON.stringify(req.cookies));
   if (typeof req.cookies.id !== 'undefined') {
     models.User.findById(req.cookies.id, function(err, user){
-      res.send(user.username);
+      // get language details for page
+      var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
+      res.json(_.extend({user: user}, homePageText));
     });
-    // if (isPersonInAnActiveRoom(id)) {
-    //   //take them to that room
-    // } else {
-    //   //take them to the room selection page
-    //}
   } else {
     //prompt them to log in
-    res.send('nope!')
+    res.json(_.extend({user: 'none'}, homepage.en));
   }
 });
 
@@ -52,7 +53,7 @@ app.post('/users/new', function(req, res){
     } else {
       //console.log(user._id);
       res.cookie('id', user._id);
-      res.send(user._id);
+      res.send(user);
     }
   });
   
