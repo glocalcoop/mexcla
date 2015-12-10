@@ -3,6 +3,39 @@ var request = require('superagent');
 
 var url = 'localhost:8080';
 
+describe('homepage', function(){
+  it('should return no user when there are cookies', function(done){
+    request.get(url).end(function(err, res){
+      should.not.exist(err);
+      res.body.user.should.eql('none');
+      res.body.salutation.should.eql('Hi');
+      done();
+    });
+  });
+
+  // make a spanish user for testing
+  var userId;
+  before(function(done){
+    request
+      .post(url + '/users/new')
+      .send({username: 'FAKE SPANISH USER', lang: 'es'})
+      .end(function(err, res){
+        userId = res.body._id;
+        done();
+      });
+  });
+  
+  it('should return user information and correct lang when cookie is sent', function(done){
+    request.get(url)
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        res.body.user._id.should.eql(userId);
+        res.body.salutation.should.eql('Hola');
+        done();
+     });
+  });
+});
+  
 describe('create new user', function(){
   it('should create a new user and return with user details', function(done){
     request
@@ -13,11 +46,9 @@ describe('create new user', function(){
         res.body.username.should.eql('Mr Buttons');
         res.body._id.should.have.length(24);
         done();
-      });
+     });
   });
 });
-
-
 
 
 
