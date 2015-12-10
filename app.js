@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(cookieParser("TOP SECRET"));
 
 
 // var Room = require('./models/Room').Room;
@@ -25,27 +25,34 @@ var models = {
 
 app.get('/', function(req, res){
   // person is logged in
-  if (req.cookie.id) {
-    if (isPersonInAnActiveRoom(id)) {
-      //take them to that room
-    } else {
-      //take them to the room selection page
-    }
+  console.log('COOKIE: ' + JSON.stringify(req.cookies));
+  if (typeof req.cookies.id !== 'undefined') {
+    models.User.findById(req.cookies.id, function(err, user){
+      res.send(user.username);
+    });
+    // if (isPersonInAnActiveRoom(id)) {
+    //   //take them to that room
+    // } else {
+    //   //take them to the room selection page
+    //}
   } else {
     //prompt them to log in
+    res.send('nope!')
   }
 });
 
 app.post('/users/new', function(req, res){
   console.log(req.body);
   var user = new models.User(req.body);
-  user.save(function(err){
+  user.save(function(err, user){
     if (err) {
       //handle error
       console.error(err);
       res.send('ERROR');
     } else {
-      res.send('saved!');
+      //console.log(user._id);
+      res.cookie('id', user._id);
+      res.send(user._id);
     }
   });
   
