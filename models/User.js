@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 
 var userSchema = new mongoose.Schema({
   username: { type: String },
-  currentRoom: {type: ObjectID},
+  currentRoom: {type: Schema.ObjectId, default: null},
   lang: {type: String, default: 'en'},
-  sess: {type: String, unique: true },
-  admin: Boolean
+  //sess: {type: String, unique: true },
+  admin: {type: Boolean, default: false}
 });
 
 var User = mongoose.model( 'User', userSchema );

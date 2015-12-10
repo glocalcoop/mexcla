@@ -3,11 +3,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 //var expressSession = require('express-session');
-var MongoStore = require('connect-mongo')(expressSession);
+//var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
 
 mongoose.connect('mongodb://localhost/mexcladb_test');
-
 
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
@@ -38,6 +37,18 @@ app.get('/', function(req, res){
 });
 
 app.post('/users/new', function(req, res){
+  console.log(req.body);
+  var user = new models.User(req.body);
+  user.save(function(err){
+    if (err) {
+      //handle error
+      console.error(err);
+      res.send('ERROR');
+    } else {
+      res.send('saved!');
+    }
+  });
+  
   //create new users -> take back to room login page
 });
 

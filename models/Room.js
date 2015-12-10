@@ -5,15 +5,15 @@ var Schema = mongoose.Schema;
 
 var channelSchema = new Schema({
   lang: { type: String },
-  users: [{ type: ObjectId }],
-  translator: {type: ObjectID}
+  users: [{ type: Schema.ObjectId }],
+  translator: {type: Schema.ObjectId}
 });
 
 var roomSchema = new Schema({
   roomnum: { type: Number, unique: true },
-  users: [{ type: ObjectId }],
+  users: [{ type: Schema.ObjectId }],
   channels: [channelSchema],
-  moderator: {type: ObjectId},
+  moderator: {type: Schema.ObjectId},
   active: Boolean
 });
 
