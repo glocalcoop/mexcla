@@ -19,8 +19,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser("TOP SECRET"));
 
-
-// var Room = require('./models/Room').Room;
 var models = {
   User: require('./models/User'),
   Room: require('./models/Room')
@@ -30,20 +28,21 @@ var homepage = require('./homepage');
 
 app.get('/', function(req, res){
   // person is logged in
-  if (typeof req.cookies.id !== 'undefined') {
+  if (!_.isUndefined(req.cookies.id)) {
     models.User.findById(req.cookies.id, function(err, user){
       // get language details for page
       var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
+      //send user info + language-specific details for homepage
       res.json(_.extend({user: user}, homePageText));
     });
   } else {
-    //prompt them to log in
+    //send English by default 
     res.json(_.extend({user: 'none'}, homepage.en));
   }
 });
 
+// creates users and sends back info
 app.post('/users/new', function(req, res){
-  console.log(req.body);
   var user = new models.User(req.body);
   user.save(function(err, user){
     if (err) {
@@ -56,8 +55,6 @@ app.post('/users/new', function(req, res){
       res.send(user);
     }
   });
-  
-  //create new users -> take back to room login page
 });
 
 app.get('/room/:roomnum', function(req,res){
@@ -70,13 +67,21 @@ app.get('/room/:roomnum', function(req,res){
   }
 });
 
+// create room
+app.get('/room/:roomnum/create', function(req,res){
+  
+})
+
+//room info
 app.get('/room/:roomnum/info', function(req, res){
   //return with information about room
 });
 
+//leave room
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(id, roomnum);
   // take back to room-splash page
 });
 
 app.listen(8080);
+
