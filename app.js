@@ -2,21 +2,13 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var expressSession = require('express-session');
+//var expressSession = require('express-session');
 var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
 
-mongoose.connect('mongodb://localhost/mexcladb');
-app.use(expressSession({
-  secret: "Our Secret Key",
-  cookie: { maxAge: 24 * 60 * 60 },
-  store: new MongoStore({ mongooseConnection: mongoose.connection,
-                           autoRemove: 'interval',
-                           autoRemoveInterval: 60,
-                           clear_interval: 600
-                          }),
+mongoose.connect('mongodb://localhost/mexcladb_test');
 
-}));
+
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
@@ -25,178 +17,47 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
 // var Room = require('./models/Room').Room;
 var models = {
-  User: require('./models/User')(mongoose)
+  User: require('./models/User'),
+  Room: require('./models/Room')
 };
 
 app.get('/', function(req, res){
-  if(req.session.lang == undefined) {
-    req.session.lang = 'en';
-  }
-  console.log("languge from /");
-  // console.log(req);
-  if(req.session.lang == 'es') {
-    if(req.session.username) {
-      res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
-                                salutation: "Hola,",
-                                username: req.session.username,
-                                lang: req.session.lang});
-    }else{
-       res.render("index.jade", {title: "Sistema de Conferencia Interpretación simultánea",
-                                salutation: "",
-                                username: "",
-                                lang: req.session.lang});
+  // person is logged in
+  if (req.cookie.id) {
+    if (isPersonInAnActiveRoom(id)) {
+      //take them to that room
+    } else {
+      //take them to the room selection page
     }
-  }else{
-    if(req.session.username) {
-      res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
-                                salutation: "Hi,",
-                                username: req.session.username,
-                                lang: req.session.lang});
-    }else{
-       res.render("index.jade", {title: "Simultaneous Interpretation Conference System",
-                                salutation: "",
-                                username: "",
-                                lang: req.session.lang});
-    }
-    // res.render("index.jade", {title: "Simultaneous Interpretation Conference System"});
+  } else {
+    //prompt them to log in
   }
 });
 
-app.get('/room/:roomnum', function(req, res){
-  var num = req.params.roomnum;
-  var sess = req.session;
-  sess.room = num;
-  var roominfo = {
-    roomnum: num,
-    users: []
-  }
-  Room.create(roominfo);
-  // expressSession.room = num
-  console.log(sess);
-  res.render("room.jade", {roomNum: num});
+app.post('/users/new', function(req, res){
+  //create new users -> take back to room login page
 });
 
-app.get('/session', function(req, res, next) {
-  res.json(req.session);
-  return next();
-  console.log('req.session');
-  console.log(req.session);
-});
-
-app.get('/sess-room', function(req, res) {
-  res.redirect('/');
-});
-
-app.get('/sess-room/:roomnum', function(req, res) {
-  // var sess = req.session;
-  req.session.roomnum = req.params.roomnum;
-  console.log(req.session);
-/*  if(req.session.username && req.session.roomnum) {
-    models.User.findOneAndUpdate(req.session.username,
-                                 req.session.roomnum,
-                                 'en',
-                                 req.sessionID);
-  };*/
-  res.sendStatus(200);
-  // return next();
-});
-
-app.get('/userinfo', function(req, res) {
-  res.render('user-form.jade');
-});
-
-app.get('/check-user', function(req, res, next) {
-  models.User.findBySessionId(req.sessionID, function(user) {
-    res.send(user);
-  });
-});
-
-app.get('/sess-destroy', function(req, res) {
-  req.session.destroy();
-  models.User.remove(req.sessionID, function(result) {
-    res.send(result);
-  });
-  res.redirect('/');
-});
-
-app.get('/rooms/:num/users', function(req, res, next) {
-  models.User.findUsersByRoom(req.params.num, function(users) {
-    // console.log(users);
-    res.send(users);
-  });
-});
-
-app.get('/rooms/:roomnum/status', function(req, res, next) {
-  Room.findOne(req.session.room, function(err, room){
-    if(err) res.send(err);
-    res.json(room);
-  });
-});
-
-app.get('/remove', function(req, res) {
-  console.log("Session id from remove");
-  console.log("removing user");
-  req.session.destroy();
-  // if(!req.session.username) {
-/*    models.User.remove(req.sessionID, function(result) {
-      res.send(result);
-   });*/
-  // }
-  var room = null;
-  // var room = "";
-  models.User.findOneAndUpdateRoom(req.sessionID, room);
-  // req.session.roomnum = "";
-  // res.redirect('/#index/' + req.session.lang);
-  res.send(200);
-});
-
-app.get('/lang/:lang', function(req, res, next) {
-  console.log(req.params.lang);
-  console.log(req.sessionID);
-  var room = req.session.roomnum;
-  var lang = req.params.lang.replace(/:/g,'');
-  if(req.session.username) {
-    models.User.findOneAndUpdate(req.sessionID, lang, room);
-  }
-  req.session.lang = lang;
-  res.send(200);
-});
-
-app.post('/username', function(req, res) {
-  console.log("This is req.body");
-  console.log(req.body);
-  var sess = req.session;
-  if(!sess.username) {
-    sess.username = req.body.username;
-  // Update the user document with nickname
-    models.User.register(req.body.username, sess.roomnum, 'en', req.sessionID);
-  }else{
-    models.User.findOneAndUpdateUsername(sess.sessionID, req.body.username);
-  }
-  // console.log("This sould be post session.");
-  // console.log(sess);
-  // console.log(JSON.stringify(req.body));
-  // console.log(req.body);
-  // console.log(req.get('referer'));
-  // res.redirect('/#room/42');
-  // res.sendStatus(201);
-  // res.send(req.body.username);
-  res.redirect('/#room/' + req.session.roomnum);
-});
-
-app.post('/gotoroom', function(req, res, next) {
-  if(req.body.roomnumber) {
-    res.redirect('/#room/' + req.body.roomnumber);
-    // res.url = '/#room/' + req.body.roomnumber;
-    // res.location.hash = 'room/' + req.body.roomnumber;
-  }else{
-    res.redirect('/#room/' + Math.round(Math.random() * (99999 - 1) + 1));
-    // res.url = '/#room/' + Math.round(Math.random() * (99999 - 1) + 1);
-    // res.location.hash = 'room/' + Math.round(Math.random() * (99999 - 1) + 1);
+app.get('/room/:roomnum', function(req,res){
+  var id = req.cookie.id;
+  var roomNum = req.params.roomnum;
+  if (roomExists()) {
+    // put user in the room
+  } else {
+    // create room
   }
 });
 
+app.get('/room/:roomnum/info', function(req, res){
+  //return with information about room
+});
+
+app.get('/room/:roomnum/leave', function(req,res){
+  removeUserFromRoom(id, roomnum);
+  // take back to room-splash page
+});
 
 app.listen(8080);
