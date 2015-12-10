@@ -3,42 +3,19 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// Create the Room model for mongodb
-/*module.exports = function(mongoose) {
-  var RoomSchema = new mongoose.Schema({
-    room: { type: String, unique: true },
-    users: { type: Array },
-  });
+var channelSchema = new Schema({
+  lang: { type: String },
+  users: [{ type: ObjectId }],
+  translator: {type: ObjectID}
+});
 
-  var Room = mongoose.model('Room', RoomSchema);
-
-  var createRoomCallback = function(err) {
-    if (err) {
-      return console.log(err);
-    };
-    return console.log('Room was created');
-  };
-
-  var createRoom = function(roominfo) {
-    console.log('Creating room ' + roominfo.roomnum);
-    var room = new Room({
-      room: roominfo.roomnum,
-      users: roominfo.users
-    });
-    room.save(createRoomCallback);
-    return console.log('Save command was sent');
-  }
-  return {
-    createRoom: createRoom,
-    Room: Room
-  }
-}*/
-
-// define the userSchema
 var roomSchema = new Schema({
-  roomnum   : { type: String, unique: true },
-  users  : { type: Array }
+  roomnum: { type: Number, unique: true },
+  users: [{ type: ObjectId }],
+  channels: [channelSchema],
+  moderator: {type: ObjectId},
+  active: Boolean
 });
 
 // Export the User model
-exports.Room = mongoose.model('Room', roomSchema);
+module.exports = mongoose.model('Room', roomSchema);
