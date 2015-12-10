@@ -3,6 +3,18 @@ var request = require('superagent');
 
 var url = 'localhost:8080';
 
+// make a spanish user for testing
+var userId;
+before(function(done){
+  request
+    .post(url + '/users/new')
+    .send({username: 'FAKE SPANISH USER', lang: 'es'})
+    .end(function(err, res){
+      userId = res.body._id;
+      done();
+    });
+});
+
 describe('homepage', function(){
   it('should return no user when there are cookies', function(done){
     request.get(url).end(function(err, res){
@@ -11,18 +23,6 @@ describe('homepage', function(){
       res.body.salutation.should.eql('Hi');
       done();
     });
-  });
-
-  // make a spanish user for testing
-  var userId;
-  before(function(done){
-    request
-      .post(url + '/users/new')
-      .send({username: 'FAKE SPANISH USER', lang: 'es'})
-      .end(function(err, res){
-        userId = res.body._id;
-        done();
-      });
   });
   
   it('should return user information and correct lang when cookie is sent', function(done){
@@ -50,7 +50,20 @@ describe('create new user', function(){
   });
 });
 
-
+describe('create new room', function(){
+  it('should create a new room and return with room info', function(done){
+    request
+      .get(url + '/room/create')
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        should.not.exist(err);
+        res.body.roomnum.should.eql(1234);
+        res.body.users.length.should.eql(1);
+        res.body.moderator.should.eql(userId);
+        done();
+      });
+  });
+});
 
 
 

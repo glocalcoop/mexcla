@@ -41,7 +41,7 @@ app.get('/', function(req, res){
   }
 });
 
-// creates users and sends back info
+// creates users and sends back info and puts userid in cookie
 app.post('/users/new', function(req, res){
   var user = new models.User(req.body);
   user.save(function(err, user){
@@ -50,14 +50,13 @@ app.post('/users/new', function(req, res){
       console.error(err);
       res.send('ERROR');
     } else {
-      //console.log(user._id);
       res.cookie('id', user._id);
       res.send(user);
     }
   });
 });
 
-app.get('/room/:roomnum', function(req,res){
+app.get('/room/num/:roomnum', function(req,res){
   var id = req.cookie.id;
   var roomNum = req.params.roomnum;
   if (roomExists()) {
@@ -68,9 +67,21 @@ app.get('/room/:roomnum', function(req,res){
 });
 
 // create room
-app.get('/room/:roomnum/create', function(req,res){
-  
-})
+app.get('/room/create', function(req,res){
+  var userId = req.cookies.id;
+  var randomNumber = 1234; // gotta make this actually random some day
+
+  var room = new models.Room({roomnum: randomNumber, active: true, users: [userId], moderator: userId});
+
+  room.save(function(err, roomInfo){
+    if (err) {
+      console.log('error creating room' + err);
+      res.json({'error': 'error creating room'});
+    } else {
+      res.json(room);
+    }
+  });
+});
 
 //room info
 app.get('/room/:roomnum/info', function(req, res){
