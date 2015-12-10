@@ -71,14 +71,27 @@ app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
   var randomNumber = 1234; // gotta make this actually random some day
 
-  var room = new models.Room({roomnum: randomNumber, active: true, users: [userId], moderator: userId});
+  var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId});
 
-  room.save(function(err, roomInfo){
+  //get user info for our logged in user
+  models.User.findById(userId, 'username lang', function(err, user){
     if (err) {
-      console.log('error creating room' + err);
-      res.json({'error': 'error creating room'});
+      console.log(err);
     } else {
-      res.json(room);
+      //add that user to the room
+      room.addUser(user, function(err){
+        if (err) { console.log(err);}
+        //save the room to the db
+        room.save(function(err, roomInfo){
+          if (err) {
+            console.log('error creating room' + err);
+            res.json({'error': 'error creating room'});
+          } else {
+            //send response
+            res.json(room);
+          }
+        });
+      });
     }
   });
 });

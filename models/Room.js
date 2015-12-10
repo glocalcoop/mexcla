@@ -12,16 +12,16 @@ var Schema = mongoose.Schema;
 
 var roomSchema = new Schema({
   roomnum: { type: Number, unique: true },
-  users: [{ type: Schema.ObjectId, default: [] }],
+  users: {type: Array, default: []},
   //channels: [channelSchema],
   moderator: {type: Schema.ObjectId},
   active: Boolean
 });
 
 
-roomSchema.methods.addUser = function(userId) {
-  this.users.push(userId);
-  return this.users;
+roomSchema.methods.addUser = function(userInfo, cb) {
+  this.users.push(userInfo);
+  cb();
 }
 
 roomSchema.methods.setModerator = function(userId) {

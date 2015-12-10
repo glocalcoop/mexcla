@@ -10,13 +10,16 @@ before(function(done){
     .post(url + '/users/new')
     .send({username: 'FAKE SPANISH USER', lang: 'es'})
     .end(function(err, res){
+      if (err) {
+        console.log(err);
+      }
       userId = res.body._id;
       done();
     });
 });
 
 describe('homepage', function(){
-  it('should return no user when there are cookies', function(done){
+  it('should return "none" when there are no cookies', function(done){
     request.get(url).end(function(err, res){
       should.not.exist(err);
       res.body.user.should.eql('none');
@@ -51,7 +54,7 @@ describe('create new user', function(){
 });
 
 describe('create new room', function(){
-  it('should create a new room and return with room info', function(done){
+  it('should create a new room, put user in room, and return with room info', function(done){
     request
       .get(url + '/room/create')
       .set('cookie', 'id=' + userId)
@@ -59,6 +62,7 @@ describe('create new room', function(){
         should.not.exist(err);
         res.body.roomnum.should.eql(1234);
         res.body.users.length.should.eql(1);
+        res.body.users[0].lang.should.eql('es');
         res.body.moderator.should.eql(userId);
         done();
       });
