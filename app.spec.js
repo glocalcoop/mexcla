@@ -118,6 +118,7 @@ describe('rooms', function(){
     
     it('' + roomNumber + ' should not be available', function(done){
       isRoomNumAvailable(roomNumber, function(answer){
+        roomNumber.should.be.type('number');
         answer.should.eql(false);
         done();
       });

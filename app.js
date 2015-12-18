@@ -46,25 +46,24 @@ app.post('/users/new', function(req, res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  var randomNumber = randomInt(100,9999); // room numbers are at least 3 digits and no more than 4
-  var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId, creator: userId});
-
-  //get user info for our logged in user
-  getUsernameAndLang(userId, function(userInfo){
-    room.addUser(userInfo, function(err){
-      if (err) { console.log(err);}
-      //save the room to the db
-      room.save(function(err, roomInfo){
-        if (err) {
-          console.log('error creating room' + err);
-          res.json({'error': 'error creating room'});
-        } else {
-          res.json(room);
-        }
+  generateRoomNumber(function(newRoomNumber){
+    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
+    //get user info for our logged in user
+    getUsernameAndLang(userId, function(userInfo){
+      room.addUser(userInfo, function(err){
+        if (err) { console.log(err);}
+        //save the room to the db
+        room.save(function(err, roomInfo){
+          if (err) {
+            console.log('error creating room' + err);
+            res.json({'error': 'error creating room'});
+          } else {
+            res.json(room);
+          }
+        });
       });
-    });
+    }); 
   });
-  
 });
 
 // join/re-join room
@@ -120,7 +119,7 @@ function homepageRequest(req, res) {
 
 //returns True or False if user is in the room.
 function isUserInRoom(userId, users) {
-    if (_.isUndefined(_.find(users, function(user){
+  if (_.isUndefined(_.find(users, function(user){
     return user._id.equals(userId);
   }))) {
     return false;
@@ -173,6 +172,19 @@ function isRoomNumAvailable(roomNumber, callback) {
           .contains(roomNumber)
           .value();
     callback(!roomInUse);
+  });
+}
+
+//recursive function to find an available room
+//callback with room number
+function generateRoomNumber(callback) {
+  var randomNumber = randomInt(100,9999); // room numbers are at least 3 digits and no more than 4
+  isRoomNumAvailable(randomNumber, function(answer){
+    if (answer) {
+      callback(randomNumber);
+    } else {
+      generateRoomNumber(callback);
+    }
   });
 }
 
