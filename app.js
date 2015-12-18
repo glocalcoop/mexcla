@@ -83,10 +83,7 @@ app.get('/room/create', function(req,res){
 // join/re-join room
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
-  var roomNumber = req.params.roomnum;
-  
-  models.Room.findOne({roomnum: roomNumber}, function(err, room){
-    if (err) {handleError(err);}
+  roomByRoomNumber(req.params.roomnum, function(room){
     if (isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
@@ -136,9 +133,15 @@ function getUserInfo(userId, callback) {
   });
 }
 
-//so something fancier one day
-function handleError(err) {
-  console.error(err);
+function roomByRoomNumber(roomNumber, callback) {
+  models.Room.findOne({roomnum: roomNumber}, function(err, room){
+    if (err) {handleError(err);}
+    callback(room);
+  });
+}
+
+function removeUserFromRoom(id, roomNumber) {
+  models.Room.find({}) 
 }
 
 function isRoomNumAvailable(roomNumber, callback) {
@@ -151,6 +154,11 @@ function isRoomNumAvailable(roomNumber, callback) {
           .value();
     callback(!roomInUse);
   });
+}
+
+//so something fancier one day
+function handleError(err) {
+  console.error(err);
 }
 
 function randomInt (low, high) {
