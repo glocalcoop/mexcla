@@ -56,40 +56,45 @@ app.post('/users/new', function(req, res){
   });
 });
 
-app.get('/room/num/:roomnum', function(req,res){
-  var id = req.cookie.id;
-  var roomNum = req.params.roomnum;
-  if (roomExists()) {
-    // put user in the room
-  } else {
-    // create room
-  }
-});
-
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
   var randomNumber = 1234; // gotta make this actually random some day
-
-  var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId});
+  var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId, creator: userId});
 
   //get user info for our logged in user
-  models.User.findById(userId, 'username lang', function(err, user){
-    if (err) {
-      console.log(err);
+  getUserInfo(userId, function(userInfo){
+    room.addUser(userInfo, function(err){
+      if (err) { console.log(err);}
+      //save the room to the db
+      room.save(function(err, roomInfo){
+        if (err) {
+          console.log('error creating room' + err);
+          res.json({'error': 'error creating room'});
+        } else {
+          res.json(room);
+        }
+      });
+    });
+  });
+  
+});
+
+// join/re-join room
+app.get('/room/:roomnum', function(req,res){
+  var userId = req.cookies.id;
+  var roomNumber = req.params.roomnum;
+  
+  models.Room.findOne({roomnum: roomNumber}, function(err, room){
+    if (err) {handleError(err);}
+    if (isUserInRoom(userId, room.users)) {
+      res.json(room);
     } else {
-      //add that user to the room
-      room.addUser(user, function(err){
-        if (err) { console.log(err);}
-        //save the room to the db
+      getUserInfo(userId, function(userInfo){
+        room.users.push(userInfo);
         room.save(function(err, roomInfo){
-          if (err) {
-            console.log('error creating room' + err);
-            res.json({'error': 'error creating room'});
-          } else {
-            //send response
-            res.json(room);
-          }
+          if (err) {handleError(err);}
+          res.json(roomInfo);
         });
       });
     }
@@ -108,4 +113,31 @@ app.get('/room/:roomnum/leave', function(req,res){
 });
 
 app.listen(8080);
+
+
+//FUNCTIONS//
+
+//returns True or False if user is in the room.
+function isUserInRoom(userId, users) {
+    if (_.isUndefined(_.find(users, function(user){
+    return user._id.equals(userId);
+  }))) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+//passes user info object {_id,username,lang} to callback
+function getUserInfo(userId, callback) {
+  models.User.findById(userId, 'username lang', function(err, user){
+    if (err) {handleError(err);}
+    callback(user);
+  });
+}
+
+//so something fancier one day
+function handleError(err) {
+  console.error(err);
+}
 

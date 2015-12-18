@@ -1,6 +1,7 @@
 var should = require('should');
 var request = require('superagent');
 
+
 var url = 'localhost:8080';
 
 // make a spanish user for testing
@@ -19,7 +20,7 @@ before(function(done){
 });
 
 describe('homepage', function(){
-  it('should return "none" when there are no cookies', function(done){
+  it('should return "none"" when there are no cookies', function(done){
     request.get(url).end(function(err, res){
       should.not.exist(err);
       res.body.user.should.eql('none');
@@ -53,8 +54,8 @@ describe('create new user', function(){
   });
 });
 
-describe('create new room', function(){
-  it('should create a new room, put user in room, and return with room info', function(done){
+describe('rooms', function(){
+  it('should create a new room and return with room info', function(done){
     request
       .get(url + '/room/create')
       .set('cookie', 'id=' + userId)
@@ -67,48 +68,50 @@ describe('create new room', function(){
         done();
       });
   });
+
+  var newUserId;
+  before(function(done){
+    request
+      .post(url + '/users/new')
+      .send({username: 'FAKE ENGLISH USER', lang: 'en'})
+      .end(function(err, res){
+        if (err) {
+          console.log(err);
+        }
+        newUserId = res.body._id;
+        done();
+      });
+  });
+  
+  it('should add a new user to the room', function(done){
+    request
+      .get(url + '/room/1234')
+      .set('cookie', 'id=' + newUserId)
+      .end(function(err, res){
+        //should.not.exist(err);
+        res.body.roomnum.should.eql(1234);
+        res.body.users.length.should.eql(2);
+        res.body.users[0].lang.should.eql('es');
+        res.body.users[1].lang.should.eql('en');
+        res.body.moderator.should.eql(userId);
+        done();
+    });
+  });
+
+  it('should provide room info if user is already in room', function(done){
+    request
+      .get(url + '/room/1234')
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        //should.not.exist(err);
+        res.body.roomnum.should.eql(1234);
+        res.body.users.length.should.eql(2);
+        res.body.users[0].lang.should.eql('es');
+        res.body.users[1].lang.should.eql('en');
+        done();
+      });
+  });
+
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
