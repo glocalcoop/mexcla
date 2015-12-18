@@ -131,5 +131,32 @@ describe('rooms', function(){
       });
      });
   });
+
+  describe('leaving rooms', function(){
+    it('should remove FAKE SPANISH USER from room and return user info', function(done){
+      request
+        .get(url + /room/ + roomNumber + '/leave')
+        .set('cookie', 'id=' + userId)
+        .end(function(err, res){
+          res.body.salutation.should.eql('Hola');
+          res.body.user._id.should.eql(userId);
+          done();
+        });
+    });
+
+    it('FAKE ENGLISH USER should now be the only person in the room (poor lonely fake english user)', function(done){
+        request
+          .get(url + '/room/' + roomNumber)
+          .set('cookie', 'id=' + newUserId)
+          .end(function(err, res){
+            //should.not.exist(err);
+            res.body.roomnum.should.eql(roomNumber);
+            res.body.users.length.should.eql(1);
+            res.body.users[0].lang.should.eql('en');
+            done();
+          });
+      });
+  });
+  
 });
 

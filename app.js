@@ -26,20 +26,7 @@ var models = {
 
 var homepage = require('./homepage');
 
-app.get('/', function(req, res){
-  // person is logged in
-  if (!_.isUndefined(req.cookies.id)) {
-    getUserInfo(req.cookies.id, function(user){
-      // get language details for page
-      var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
-      //send user info + language-specific details for homepage
-      res.json(_.extend({user: user}, homePageText));
-    });
-  } else {
-    //send English by default 
-    res.json(_.extend({user: 'none'}, homepage.en));
-  }
-});
+app.get('/', homepageRequest);
 
 // creates users and sends back info and puts userid in cookie
 app.post('/users/new', function(req, res){
@@ -103,10 +90,11 @@ app.get('/room/:roomnum/info', function(req, res){
   //return with information about room
 });
 
-//leave room
+//leave room and respond with user info
+//NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
 app.get('/room/:roomnum/leave', function(req,res){
-  removeUserFromRoom(id, roomnum, function(room){
-    res.json({}) // take back to room-splash page
+  removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
+    homepageRequest(req, res);
   });
 });
 
@@ -114,6 +102,21 @@ app.listen(8080);
 
 
 //FUNCTIONS//
+
+function homepageRequest(req, res) {
+  // person is logged in
+  if (!_.isUndefined(req.cookies.id)) {
+    getUserInfo(req.cookies.id, function(user){
+      // get language details for page
+      var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
+      //send user info + language-specific details for homepage
+      res.json(_.extend({user: user}, homePageText));
+    });
+  } else {
+    //send English by default 
+    res.json(_.extend({user: 'none'}, homepage.en));
+  }
+}
 
 //returns True or False if user is in the room.
 function isUserInRoom(userId, users) {
