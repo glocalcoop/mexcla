@@ -5,7 +5,7 @@ var es = {
 
 var en = {
  title: "Simultaneous Interpretation Conference System",
- salutation: "Hi,"
+ salutation: "Hi"
 };
 
 module.exports = {
