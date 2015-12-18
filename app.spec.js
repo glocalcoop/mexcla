@@ -55,13 +55,14 @@ describe('create new user', function(){
 });
 
 describe('rooms', function(){
+  var roomNumber;
   it('should create a new room and return with room info', function(done){
     request
       .get(url + '/room/create')
       .set('cookie', 'id=' + userId)
       .end(function(err, res){
         should.not.exist(err);
-        res.body.roomnum.should.eql(1234);
+        roomNumber = res.body.roomnum;
         res.body.users.length.should.eql(1);
         res.body.users[0].lang.should.eql('es');
         res.body.moderator.should.eql(userId);
@@ -85,11 +86,11 @@ describe('rooms', function(){
   
   it('should add a new user to the room', function(done){
     request
-      .get(url + '/room/1234')
+      .get(url + '/room/' + roomNumber)
       .set('cookie', 'id=' + newUserId)
       .end(function(err, res){
         //should.not.exist(err);
-        res.body.roomnum.should.eql(1234);
+        res.body.roomnum.should.eql(roomNumber);
         res.body.users.length.should.eql(2);
         res.body.users[0].lang.should.eql('es');
         res.body.users[1].lang.should.eql('en');
@@ -100,11 +101,11 @@ describe('rooms', function(){
 
   it('should provide room info if user is already in room', function(done){
     request
-      .get(url + '/room/1234')
+      .get(url + '/room/' + roomNumber)
       .set('cookie', 'id=' + userId)
       .end(function(err, res){
         //should.not.exist(err);
-        res.body.roomnum.should.eql(1234);
+        res.body.roomnum.should.eql(roomNumber);
         res.body.users.length.should.eql(2);
         res.body.users[0].lang.should.eql('es');
         res.body.users[1].lang.should.eql('en');
@@ -115,15 +116,16 @@ describe('rooms', function(){
   describe('is room available', function(done){
     var isRoomNumAvailable = require('./app').isRoomNumAvailable;
     
-    it('1234 should not be available', function(done){
-      isRoomNumAvailable(1234, function(answer){
+    it('' + roomNumber + ' should not be available', function(done){
+      isRoomNumAvailable(roomNumber, function(answer){
         answer.should.eql(false);
         done();
       });
     });
-    
-    it('9876 should be available', function(done){
-        isRoomNumAvailable(9876, function(answer){
+
+    it('some other room number should be available', function(done){
+      var otherRoomNumber = (1000 === roomNumber) ? 1001 : 1000;
+      isRoomNumAvailable(otherRoomNumber, function(answer){
           answer.should.eql(true);
           done();
       });

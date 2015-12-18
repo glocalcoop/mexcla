@@ -59,7 +59,7 @@ app.post('/users/new', function(req, res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  var randomNumber = 1234; // gotta make this actually random some day
+  var randomNumber = randomInt(100,9999); // room numbers are at least 3 digits and no more than 4
   var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId, creator: userId});
 
   //get user info for our logged in user
@@ -151,6 +151,10 @@ function isRoomNumAvailable(roomNumber, callback) {
           .value();
     callback(!roomInUse);
   });
+}
+
+function randomInt (low, high) {
+  return Math.floor(Math.random() * (high - low) + low);
 }
 
 module.exports.isRoomNumAvailable = isRoomNumAvailable;
