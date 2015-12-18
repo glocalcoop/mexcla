@@ -105,8 +105,9 @@ app.get('/room/:roomnum/info', function(req, res){
 
 //leave room
 app.get('/room/:roomnum/leave', function(req,res){
-  removeUserFromRoom(id, roomnum);
-  // take back to room-splash page
+  removeUserFromRoom(id, roomnum, function(room){
+    res.json({}) // take back to room-splash page
+  });
 });
 
 app.listen(8080);
@@ -140,8 +141,16 @@ function roomByRoomNumber(roomNumber, callback) {
   });
 }
 
-function removeUserFromRoom(id, roomNumber) {
-  models.Room.find({}) 
+function removeUserFromRoom(id, roomNumber, callback) {
+  roomByRoomNumber(roomNumber, function(room){
+    room.users = _.reject(room.users, function(user){
+        return user._id.equals(id);
+    });
+    room.save(function(err,room){
+      if (err) {handleError(err);}
+      callback(room);
+    });
+  });
 }
 
 function isRoomNumAvailable(roomNumber, callback) {
