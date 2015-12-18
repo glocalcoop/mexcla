@@ -29,7 +29,7 @@ var homepage = require('./homepage');
 app.get('/', function(req, res){
   // person is logged in
   if (!_.isUndefined(req.cookies.id)) {
-    models.User.findById(req.cookies.id, function(err, user){
+    getUserInfo(req.cookies.id, function(user){
       // get language details for page
       var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
       //send user info + language-specific details for homepage
@@ -63,7 +63,7 @@ app.get('/room/create', function(req,res){
   var room = new models.Room({roomnum: randomNumber, active: true, moderator: userId, creator: userId});
 
   //get user info for our logged in user
-  getUserInfo(userId, function(userInfo){
+  getUsernameAndLang(userId, function(userInfo){
     room.addUser(userInfo, function(err){
       if (err) { console.log(err);}
       //save the room to the db
@@ -87,7 +87,7 @@ app.get('/room/:roomnum', function(req,res){
     if (isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
-      getUserInfo(userId, function(userInfo){
+      getUsernameAndLang(userId, function(userInfo){
         room.users.push(userInfo);
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
@@ -128,6 +128,14 @@ function isUserInRoom(userId, users) {
 
 //passes user info object {_id,username,lang} to callback
 function getUserInfo(userId, callback) {
+  models.User.findById(userId, function(err, user){
+    if (err) {handleError(err);}
+    callback(user);
+  });
+}
+
+//passes user info object {_id,username,lang} to callback
+function getUsernameAndLang(userId, callback) {
   models.User.findById(userId, 'username lang', function(err, user){
     if (err) {handleError(err);}
     callback(user);
