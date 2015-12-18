@@ -141,3 +141,16 @@ function handleError(err) {
   console.error(err);
 }
 
+function isRoomNumAvailable(roomNumber, callback) {
+  models.Room.find({},'roomnum', function(err, rooms){
+    var roomInUse = _.chain(rooms)
+          .map(function(room){
+            return room.roomnum;
+          })
+          .contains(roomNumber)
+          .value();
+    callback(!roomInUse);
+  });
+}
+
+module.exports.isRoomNumAvailable = isRoomNumAvailable;

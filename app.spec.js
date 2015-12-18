@@ -112,6 +112,22 @@ describe('rooms', function(){
       });
   });
 
+  describe('is room available', function(done){
+    var isRoomNumAvailable = require('./app').isRoomNumAvailable;
+    
+    it('1234 should not be available', function(done){
+      isRoomNumAvailable(1234, function(answer){
+        answer.should.eql(false);
+        done();
+      });
+    });
+    
+    it('9876 should be available', function(done){
+        isRoomNumAvailable(9876, function(answer){
+          answer.should.eql(true);
+          done();
+      });
+     });
+  });
 });
-
 
