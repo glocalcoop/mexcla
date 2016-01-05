@@ -57,12 +57,17 @@ gulp.task('libs', function() {
 });
 
 gulp.task('js', function(){
-    var basePath = 'src/js/app/';
-    var files = ['app.js'];
-    var scripts = files.map(f => basePath + f);
-    return gulp.src(scripts)
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('./public/js'));
+  var basePath = 'src/js/app/';
+  var files = ['translation.js', 'views.js','app.js'];
+  var scripts = files.map(f => basePath + f);
+  return gulp.src(scripts)
+      .pipe(concat('main.js'))
+      .pipe(gulp.dest('./public/js'));
+});
+
+gulp.task('index', function(){
+  return gulp.src('src/index.html')
+    .pipe(gulp.dest('./public'));
 });
 
 gulp.task( 'watch', function() {
@@ -74,4 +79,4 @@ gulp.task( 'watch', function() {
     } );
 } );
 
-gulp.task( 'default', [ 'libs', 'js'], function() {});
+gulp.task( 'default', [ 'libs', 'js', 'index'], function() {});

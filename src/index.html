@@ -9,11 +9,35 @@
   </head>
   <body>
     <div id="content"></div>
+
+    <script type="text/template" id="index-template">
+      <main class="main-content index" role="main">
+        <div id="join-room">
+          <h3><%= join %></h3>
+          <form id="join-room-form" action="/gotoroom" method="post">
+            <fieldset>
+              <label for="roomnumber"><%= enter %></label>
+              <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
+              <input type="submit" value="Go" data-transition="fade">
+            </fieldset>
+          </form>
+     </div>
+   <div id="create-room">
+    <form id="create-room-form" action="/gotoroom" method="post">
+      <fieldset>
+        <input type="submit" value="<%= create %>" data-transition="fade">
+      </fieldset>
+    </form>
+  </div>
+</main>
+    </script>
+
+    
     <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
     <script type="text/javascript" src="js/libs/jquery.js"></script>
     <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.ui-1.11.4.custom/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/libs/undercore.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/libs/underscore.js"></script>
     <script type="text/javascript" src="js/libs/backbone.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
