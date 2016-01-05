@@ -11,12 +11,13 @@ var gulp = require('gulp'),
     rename = require( 'gulp-rename' ),
     notify = require( 'gulp-notify' ),
     include = require( 'gulp-include' ),
-    sass = require( 'gulp-sass' );
+    sass = require( 'gulp-sass' ),
+    concat = require('gulp-concat');
 
 var onError = function( err ) {
     console.log( 'An error occurred:', err.message );
     this.emit( 'end' );
-}
+};
 
 var paths = {
     /* Source paths */
@@ -36,28 +37,32 @@ var paths = {
     fontsOutput: './public/fonts'
 };
 
-gulp.task( 'styles', function() {
-    return gulp.src( paths.styles, {
-        style: 'expanded'
-    } )
-    .pipe( plumber( { errorHandler: onError } ) )
-    .pipe( sass() )
-    .pipe( gulp.dest( paths.stylesOutput ) )
-    .pipe( minifycss() )
-    .pipe( rename( { suffix: '.min' } ) )
-    .pipe( gulp.dest( paths.stylesOutput ) )
-    .pipe( notify( { message: 'Styles task complete' } ) )
-    .pipe( livereload() );
-} );
+// gulp.task( 'styles', function() {
+//     return gulp.src( paths.styles, {
+//         style: 'expanded'
+//     } )
+//     .pipe( plumber( { errorHandler: onError } ) )
+//     .pipe( sass() )
+//     .pipe( gulp.dest( paths.stylesOutput ) )
+//     .pipe( minifycss() )
+//     .pipe( rename( { suffix: '.min' } ) )
+//     .pipe( gulp.dest( paths.stylesOutput ) )
+//     .pipe( notify( { message: 'Styles task complete' } ) )
+//     .pipe( livereload() );
+// });
 
-gulp.task('scripts', function() {
-  return gulp.src( paths.scripts )
-    .pipe( gulp.dest( paths.scriptsOutput ) )
-    .pipe( rename( { suffix: '.min' } ) )
-    .pipe( uglify() )
-    .pipe( gulp.dest( paths.scriptsOutput ) )
-    .pipe( notify( { message: 'Scripts task complete' } ) )
-    .pipe( livereload() );
+gulp.task('libs', function() {
+    return gulp.src( './src/js/libs/*')
+        .pipe(gulp.dest('./public/js/libs'));
+});
+
+gulp.task('js', function(){
+    var basePath = 'src/js/app/';
+    var files = ['app.js'];
+    var scripts = files.map(f => basePath + f);
+    return gulp.src(scripts)
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest('./public/js'));
 });
 
 gulp.task( 'watch', function() {
@@ -69,6 +74,4 @@ gulp.task( 'watch', function() {
     } );
 } );
 
-gulp.task( 'default', [ 'styles', 'watch' ], function() {
-
-} )
+gulp.task( 'default', [ 'libs', 'js'], function() {});
