@@ -6,10 +6,38 @@
     <link rel="stylesheet" href="/css/jquery.modal.css">
     <link rel="stylesheet" href="/css/vendor/switches/toggle-switch.css">
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/libs/underscore.js"></script>
+    <script type="text/javascript" src="js/libs/backbone.js"></script>
   </head>
   <body>
+    <!-- HEADER  -->
+     <header id="header">
+      <h1 id="logo"><a href="#index/undefined"><img alt="Glocal" src="/images/logo-new.png" class="header-image"></a></h1>
+      <h3 id="tagline"><a href="#index/undefined">Mexcla: </a></h3>
+      <nav id="utility-nav">
+        <div id="welcome-text"><span class="greeting"></span><span class="user-name"></span>
+        </div>
+        <div id="language-links">
+          <button id="es-switch-link" onclick="switch_language('es')" class="button espanol">es</button>
+          <button id="en-switch-link" onclick="switch_language('en')" class="button english">en</button>
+        </div>
+      </nav>
+     </header>
+     <!--CONTENT  -->
     <div id="content"></div>
+    <!-- FOOTER -->
+    <footer id="footer">
+      <p><a href="https://github.com/glocalcoop/mexcla.git" target="_blank">Source</a></p>
+    </footer>
+<!--TEMPLATES  -->
 
+    <!--INDEX -->
     <script type="text/template" id="index-template">
       <main class="main-content index" role="main">
         <div id="join-room">
@@ -21,24 +49,18 @@
               <input type="submit" value="Go" data-transition="fade">
             </fieldset>
           </form>
-     </div>
-   <div id="create-room">
-    <form id="create-room-form" action="/gotoroom" method="post">
-      <fieldset>
-        <input type="submit" value="<%= create %>" data-transition="fade">
-      </fieldset>
-    </form>
-  </div>
-</main>
+        </div>
+        <div id="create-room">
+          <form id="create-room-form" action="/gotoroom" method="post">
+            <fieldset>
+              <input type="submit" value="<%= create %>" data-transition="fade">
+            </fieldset>
+          </form>
+        </div>
+      </main>
     </script>
 
-    
-    <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
-    <script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/libs/underscore.js"></script>
-    <script type="text/javascript" src="js/libs/backbone.js"></script>
+    <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
