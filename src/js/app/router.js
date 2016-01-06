@@ -4,8 +4,11 @@ var MexclaRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    
+    // if no user show log in page
+    // else log-in
   }
 });
 
+
+// routes
 

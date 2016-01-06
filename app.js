@@ -9,7 +9,7 @@ var _ = require('underscore');
 //var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
 
-mongoose.connect('mongodb://localhost/mexcladb_test');
+mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
@@ -17,7 +17,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(cookieParser("TOP SECRET"));
+app.use(cookieParser("TOP SnECRET"));
+
+app.use(express.static('public'));
 
 var models = {
   User: require('./models/User'),
@@ -26,7 +28,7 @@ var models = {
 
 var homepage = require('./homepage');
 
-app.get('/', homepageRequest);
+//app.get('/', homepageRequest);
 
 // creates users and sends back info and puts userid in cookie
 app.post('/users/new', function(req, res){
@@ -37,7 +39,7 @@ app.post('/users/new', function(req, res){
       console.error(err);
       res.send('ERROR');
     } else {
-      res.cookie('id', user._id);
+      res.cookie('id', user.id);
       res.send(user);
     }
   });
@@ -97,7 +99,9 @@ app.get('/room/:roomnum/leave', function(req,res){
   });
 });
 
-app.listen(8080);
+app.listen(8080, function(){
+  console.log('Mexcla is starting up at localhost:8080');
+});
 
 
 //FUNCTIONS//
