@@ -21,7 +21,7 @@
       <h1 id="logo"><a href="#index/undefined"><img alt="Glocal" src="/images/logo-new.png" class="header-image"></a></h1>
       <h3 id="tagline"><a href="#index/undefined">Mexcla: </a></h3>
       <nav id="utility-nav">
-        <div id="welcome-text"><span class="greeting"></span><span class="user-name"></span>
+        <div id="welcome-text">
         </div>
         <div id="language-links">
           <button id="es-switch-link" onclick="switch_language('es')" class="button espanol">es</button>
@@ -35,6 +35,7 @@
     <footer id="footer">
       <p><a href="https://github.com/glocalcoop/mexcla.git" target="_blank">Source</a></p>
     </footer>
+    
 <!--TEMPLATES  -->
 
     <!--INDEX -->
@@ -58,6 +59,11 @@
           </form>
         </div>
       </main>
+    </script>
+
+    <!-- HEADER WELCOME TEXT-->
+    <script type="text/template" id="welcome-text-template">
+      <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
     </script>
 
     <!-- LOAD APP -->

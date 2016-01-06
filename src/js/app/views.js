@@ -14,4 +14,16 @@ var IndexView = Backbone.View.extend({
   }
 });
 
-
+//TODO: make this respond to the user model
+var WelcomeText = Backbone.View.extend({
+  el: $('#welcome-text'),
+  template: _.template($('#welcome-text-template').html()),
+  render: function() {
+    var lang = this.model.attributes.lang;
+    var welcomeText = {
+      greetings: websiteText[lang].salutation + ", ",
+      username: this.model.attributes.username
+    };
+    this.$el.html(this.template(welcomeText));
+  }
+});

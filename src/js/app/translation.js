@@ -11,7 +11,9 @@ var websiteText = {
       room: "Room",
       join: "Join a Room",
       enter: "Please enter the room number",
-      create: "Create a Room"
+      create: "Create a Room",
+      title: "Simultaneous Interpretation Conference System",
+      salutation: "Hi"
     },
     es: {
       connect: "Connectarse",
@@ -25,6 +27,8 @@ var websiteText = {
       room: "Sala",
       join: "Entrar en una sala",
       enter: "Por favor, ingrese el número de la habitación",
-      create: "Crear una sala"
+      create: "Crear una sala",
+      title: "Sistema de Conferencia Interpretación simultánea",
+      salutation: "Hola"
     }
 };
