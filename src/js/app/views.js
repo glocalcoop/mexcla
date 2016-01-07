@@ -14,7 +14,6 @@ var IndexView = Backbone.View.extend({
   }
 });
 
-//TODO: make this respond to the user model
 var WelcomeText = Backbone.View.extend({
   el: $('#welcome-text'),
   template: _.template($('#welcome-text-template').html()),
@@ -27,3 +26,32 @@ var WelcomeText = Backbone.View.extend({
     this.$el.html(this.template(welcomeText));
   }
 });
+
+var Register = Backbone.View.extend({
+  el: $('#content'),
+  template: _.template($('#register-template').html()),
+  render: function() {
+    var that = this;
+    this.$el.html(this.template());
+    this.$('#register-submit-button').click(function(e){
+      var username =  that.$('#user-name').val();
+      var lang = that.$('#lang-select').val();
+      createUserAjax(username,lang).done(function(user){
+        console.log(user);
+      });
+    });
+  }
+});
+
+// input: string, string ('en' or 'es')
+// output: jqXHR-promise
+function createUserAjax(username, lang) {
+  return $.ajax({
+    type: 'POST',
+    url: '/users/new',
+    data: {
+      username: username,
+      lang: lang
+    }
+  });
+}

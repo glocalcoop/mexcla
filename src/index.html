@@ -67,6 +67,22 @@
       <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
     </script>
 
+    <!--REGISTER  -->
+    <script type="text/template" id="register-template">
+      <main class="main-content" role="main">
+          <fieldset>
+            <label for="username">Please Enter Your Name</label>
+            <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+            <select name="lang" id="lang-select">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+            </select>
+            <input type="submit" id="register-submit-button" />
+          </fieldset>
+      </main>
+    </script>
+
+        
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>

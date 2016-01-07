@@ -1,5 +1,3 @@
-
-
 $.ajax({
   type: 'post',
   url: '/users/new',
