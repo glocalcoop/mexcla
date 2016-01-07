@@ -34,10 +34,15 @@ var Register = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template());
     this.$('#register-submit-button').click(function(e){
+      console.log('clicked');
       var username =  that.$('#user-name').val();
       var lang = that.$('#lang-select').val();
       createUserAjax(username,lang).done(function(user){
-        console.log(user);
+        // create user model
+        app.user = new User(user);
+        // follow router back to homepage
+        // the Ajax response creates a cookie, so this time the homepage will not show the register page
+        app.router.navigate("#/", {trigger: true});
       });
     });
   }

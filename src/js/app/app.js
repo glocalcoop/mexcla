@@ -1,7 +1,5 @@
-$.ajax({
-  type: 'post',
-  url: '/users/new',
-  data: {username: 'slothrop', lang: 'es'}
-}).done(function(){
-  console.log('ajax complete');
-});
+var app = {};
+
+app.router = new MexclaRouter();
+
+Backbone.history.start(); // must call this to start router

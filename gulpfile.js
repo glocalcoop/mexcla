@@ -58,7 +58,7 @@ gulp.task('libs', function() {
 
 gulp.task('js', function(){
   var basePath = 'src/js/app/';
-  var files = ['translation.js', 'models.js', 'views.js','app.js'];
+  var files = ['translation.js', 'models.js', 'views.js', 'router.js','app.js'];
   var scripts = files.map(f => basePath + f);
   return gulp.src(scripts)
       .pipe(concat('main.js'))

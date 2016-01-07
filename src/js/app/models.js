@@ -2,6 +2,10 @@ var User = Backbone.Model.extend({
   idAttribute: "_id"
 });
 
+var Room = Backbone.Model.extend({
+  idAttribute: "_id"
+});
+
 /*
 {
  username: ''
