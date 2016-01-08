@@ -40,6 +40,7 @@ Views.IndexView = Backbone.View.extend({
         app.router.navigate('room/' + room.roomnum, {trigger: true});
       }); 
     });
+    return this;
   }
 });
 
@@ -54,6 +55,7 @@ Views.WelcomeText = Backbone.View.extend({
       username: (_.isUndefined(this.model.attributes.username)) ? '' : this.model.attributes.username
     };
     this.$el.html(this.template(welcomeText));
+    return this;
   },
   initialize: function() {
     this.render();
@@ -80,8 +82,20 @@ Views.Register = Backbone.View.extend({
         app.router.navigate("#/", {trigger: true});
       });
     });
+    return this;
   }
 });
+
+// unlike the other Views, this one is appended to #content instead of replacing it
+Views.RoomSidebar = Backbone.View.extend({
+  el: $('#content'),
+  template: _.template($('#room-sidebar-template').html()),
+  render: function() {
+    this.$el.append(this.template(websiteText[app.user.attributes.lang]));
+    return this;
+  }
+});
+
 
 // use: new Views.Room({model: app.room})
 Views.Room = Backbone.View.extend({
@@ -90,6 +104,8 @@ Views.Room = Backbone.View.extend({
   render: function() {
     var templateData = _.extend(websiteText[this.lang], this.model.attributes);
     this.$el.html(this.template(templateData));
+    this.sidebar.render();
+    return this;
   },
   initialize: function() {
     this.lang = app.user.attributes.lang;
@@ -97,6 +113,7 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
+    this.sidebar = new Views.RoomSidebar();
   }
 });
 
