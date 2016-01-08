@@ -79,7 +79,7 @@ Views.Register = Backbone.View.extend({
         app.user = new Models.User(user);
         // follow router back to homepage
         // the Ajax response creates a cookie, so this time the homepage will not show the register page
-        app.router.navigate("#/", {trigger: true});
+        app.router.navigate("#/", {triggennr: true});
       });
     });
     return this;

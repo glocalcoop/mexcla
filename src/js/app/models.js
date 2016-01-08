@@ -4,7 +4,18 @@ Models.User = Backbone.Model.extend({
 });
 
 Models.Room = Backbone.Model.extend({
-  idAttribute: "_id"
+  idAttribute: "_id",
+  fetchByNum: function() {
+    $.ajax({
+      type: 'GET',
+      url: '/room/' + this.attributes.roomnum
+    }).done(function(room){
+      console.log('fetch by num returns');
+      console.log(room);
+      this.set(room);
+    });
+    return this;
+  }
 });
 
 /*

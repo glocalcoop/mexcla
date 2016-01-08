@@ -18,6 +18,9 @@ var MexclaRouter = Backbone.Router.extend({
     }
   },
   room: function(roomnum) {
+    if (_.isUndefined(app.room)) {
+      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    }
     app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
@@ -28,3 +31,4 @@ var MexclaRouter = Backbone.Router.extend({
     app.user = new Models.User({_id: userid});  
   }
 });
+
