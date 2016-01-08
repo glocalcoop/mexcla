@@ -55,6 +55,16 @@ gulp.task('libs', function() {
         .pipe(gulp.dest('./public/js/libs'));
 });
 
+gulp.task('images', function(){
+  return gulp.src(paths.images)
+    .pipe(gulp.dest(paths.imagesOutput));
+});
+
+gulp.task('fonts', function(){
+  return gulp.src(paths.fonts)
+    .pipe(gulp.dest(paths.fontsOutput));
+});
+
 gulp.task('js', function(){
   var basePath = 'src/js/app/';
   var files = ['translation.js', 'models.js', 'views.js', 'router.js','app.js'];
@@ -78,4 +88,4 @@ gulp.task( 'watch', function() {
     } );
 } );
 
-gulp.task( 'default', [ 'libs', 'js', 'index', 'styles'], function() {});
+gulp.task( 'default', [ 'libs', 'js', 'index', 'styles', 'images', 'fonts'], function() {});
