@@ -32,7 +32,6 @@ var homepage = require('./homepage');
 
 // creates users and sends back info and puts userid in cookie
 app.post('/users/new', function(req, res){
-  console.log('/users/new');
   var user = new models.User(req.body);
   user.save(function(err, user){
     if (err) {

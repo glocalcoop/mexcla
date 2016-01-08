@@ -16,7 +16,7 @@ Views.createRoomAjax = function() {
     type: 'GET',
     url: '/room/create'
   });
-}
+};
 
 //.Lang({}) establishes the language text. Pass in object with text for the website.
 // if .lang is not called, then English is used as the default. English as a default requires the presence of a global object 'websiteText', currently housed in the translation.js file
@@ -40,6 +40,12 @@ Views.IndexView = Backbone.View.extend({
         app.router.navigate('room/' + room.roomnum, {trigger: true});
       }); 
     });
+    // Join Room Button
+    this.$('#room-number-button').click(function(e){
+      var roomnum = $('#room-number').val();
+      app.router.navigate('room/' + roomnum, {trigger: true});
+    });
+    
     return this;
   }
 });
@@ -116,4 +122,7 @@ Views.Room = Backbone.View.extend({
     this.sidebar = new Views.RoomSidebar();
   }
 });
+
+
+
 

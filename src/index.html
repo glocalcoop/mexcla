@@ -44,13 +44,11 @@
       <main class="main-content index" role="main">
         <div id="join-room">
           <h3><%= join %></h3>
-          <form id="join-room-form" action="/gotoroom" method="post">
             <fieldset>
               <label for="roomnumber"><%= enter %></label>
               <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
-              <input type="submit" value="Go" data-transition="fade">
+              <input id="room-number-button" type="submit" value="Go" data-transition="fade">
             </fieldset>
-          </form>
         </div>
         <div id="create-room">
             <fieldset>
