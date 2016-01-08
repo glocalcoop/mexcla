@@ -1,5 +1,3 @@
-var Views = {};
-
 // input: string, string ('en' or 'es')
 // output: jqXHR-promise
 Views.createUserAjax = function (username, lang) {
@@ -57,7 +55,6 @@ Views.Register = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template());
     this.$('#register-submit-button').click(function(e){
-      console.log('clicked');
       var username =  that.$('#user-name').val();
       var lang = that.$('#lang-select').val();
       Views.createUserAjax(username,lang).done(function(user){
