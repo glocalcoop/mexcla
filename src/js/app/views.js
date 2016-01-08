@@ -11,6 +11,13 @@ Views.createUserAjax = function (username, lang) {
   });
 };
 
+Views.createRoomAjax = function() {
+  return $.ajax({
+    type: 'GET',
+    url: '/room/create'
+  });
+}
+
 //.Lang({}) establishes the language text. Pass in object with text for the website.
 // if .lang is not called, then English is used as the default. English as a default requires the presence of a global object 'websiteText', currently housed in the translation.js file
 Views.IndexView = Backbone.View.extend({
@@ -21,10 +28,17 @@ Views.IndexView = Backbone.View.extend({
   },
   initialize: function() {
     this.languageText = websiteText.en;
+    this.render();
   },
   render: function () {
     this.$el.html(this.template(this.languageText));
     new Views.WelcomeText({model: app.user});
+    this.$('#create-new-room-button').click(function(e){
+      Views.createRoomAjax().done(function(room){
+        app.room = new Models.Room(room);
+        console.log(room);
+      }); 
+    });
   }
 });
 

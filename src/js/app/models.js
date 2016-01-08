@@ -8,6 +8,8 @@ Models.Room = Backbone.Model.extend({
 });
 
 /*
+USERS
+
 {
  username: ''
  currentRoom: null or ObjectId
@@ -16,6 +18,24 @@ Models.Room = Backbone.Model.extend({
  _id: 
 }
 
+ROOM
+room-template
+room-sidebar-template
+{
+conference
+roomNum
+room
+mute
+unmute
+original
+interpretation
+provide
+Notepad 
+Spreadsheet
+IRC chat
+participants
+
+ }
 
 
 

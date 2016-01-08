@@ -1,6 +1,7 @@
 var MexclaRouter = Backbone.Router.extend({
   routes: {
     "": "index",
+    "room/:roomnum": "room",
     "*page": "default"
   },
 
@@ -13,8 +14,11 @@ var MexclaRouter = Backbone.Router.extend({
       if (_.isUndefined(app.user)){ this.makeNewUser();}
       app.user.fetch();
       // log in to homepage
-      app.homepage = new Views.IndexView().render();
+      app.homepage = new Views.IndexView();
     }
+  },
+  room: function(roomnum) {
+    
   },
   default: function() {
     // this route will be executed if no other route is matched.
