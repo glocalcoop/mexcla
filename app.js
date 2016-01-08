@@ -41,6 +41,8 @@ app.post('/users/new', function(req, res){
       res.send('ERROR');
     } else {
       res.cookie('id', user.id);
+      // store language in a cookie
+      res.cookie('lang', user.lang);
       res.send(user);
     }
   });

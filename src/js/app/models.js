@@ -6,13 +6,12 @@ Models.User = Backbone.Model.extend({
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
   fetchByNum: function() {
+    var that = this;
     $.ajax({
       type: 'GET',
       url: '/room/' + this.attributes.roomnum
     }).done(function(room){
-      console.log('fetch by num returns');
-      console.log(room);
-      this.set(room);
+      that.set(room);
     });
     return this;
   }

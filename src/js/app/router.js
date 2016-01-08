@@ -29,12 +29,13 @@ var MexclaRouter = Backbone.Router.extend({
     // if user is undefined, which would happen when someone returns to the page and has a cookie stored, then it's a new session and we need to create the user object.
     if (_.isUndefined(app.user)){
       var userid = Cookies.get('id');
+      var lang = Cookies.get('lang');
       if (_.isUndefined(userid)) {
         // if no cookies send back to register
-        app.router.navigate("#/", {triggennr: true});
+        app.router.navigate("#/", {trigger: true});
       } else {
         // create user and fetch details
-        app.user = new Models.User({_id: userid});
+        app.user = new Models.User({_id: userid, lang: lang});
         app.user.fetch();
       }
     }
