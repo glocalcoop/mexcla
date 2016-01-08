@@ -82,7 +82,100 @@
       </main>
     </script>
 
-        
+    <!-- ROOM -->
+    <script type="text/template" id="room-template">
+    <main class="main-content room" role="main">
+      <header id="content-header">
+        <h2 class="conference-id">
+          <%= conference %>
+          <span class="pstn-instructions-conference-number">
+            <%= roomNum %>
+          </span>
+        </h2>
+        <div id="userinfo-modal" style="display:none">
+          <a href="/userinfo" rel="ajax:modal"></a>
+        </div>
+        <div id="room-info">
+          <label for="room-link"><%= room %> Link</label>
+          <!-- TODO: Add real URL -->
+          http://url.org/room/<%= roomNum %>
+        </div>
+      </header>
+      <section id="options">
+        <div id="call-options">
+          <div id="connect-icon-and-button">
+            <button class="button" onclick="mexcla_toggle_call_status(<%= roomNum %>); return false;" id="connect-button">
+              <span class="connect" rel="ajax:modal" id="connect-button-text"><%= connect %></span>
+              <span id="connect-dots"></span>
+            </button>
+          </div>
+          <div id="mute-controls">
+            <div class="switch-toggle switch-ios" id="mute-button">
+              <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
+              <label for="mic-mute"><%= mute %></label>
+              <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
+              <label for="mic-unmute"><%= unmute %></label>
+              <a></a>
+            </div>
+          </div>
+        </div>
+        <div id="interpretation-options">
+          <div class="switch-toggle switch-android switch-3" id="interpretation-mode">
+            <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
+            <label for="mode-original"><%= original %></label>
+            <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
+            <label for="mode-hear-interpretation"><%= interpretation %></label>
+            <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
+            <label for="mode-provide-interpretation"><%= provide %></label>
+            <a></a>
+          </div>
+        </div>
+      </section>
+      <section id="audio-handling">
+        <div id="audio">
+          <audio autoplay="autoplay" id="audio-remote">
+            Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
+          </audio>
+        </div>
+      </section>
+      <section id="collaboration">
+        <div class="tabs">
+          <div id="iframe-selectors">
+            <div class="tab">
+              <input type="radio" name="tab-group-1" id="pad-iframe-checkbox" onclick="mexcla_toggle_pad();">
+              <label for="pad-iframe-checkbox">Notepad</label>
+              <!-- <div id="pad-frame" class="content pad">
+                   </div> -->
+            </div>
+            <div class="tab">
+              <input type="radio" name="tab-group-1" id="calc-iframe-checkbox" onclick="mexcla_toggle_calc();">
+              <label for="calc-iframe-checkbox">Spreadsheet</label>
+              <!-- <div class="content calc"></div> -->
+            </div>
+            <div class="tab">
+              <input type="radio" name="tab-group-1" id="irc-iframe-checkbox" onclick="mexcla_toggle_irc();">
+              <label for="irc-iframe-checkbox">IRC Chat</label>
+              <!-- <div class="content irc"></div> -->
+            </div>
+          </div>
+        </div>
+        <div id="iframe-content"></div>
+      </section>
+    </main>
+    </script>
+
+
+    <!-- ROOM SIDEBAR  -->
+    <script type="text/template" id="room-sidebar-template">
+      <aside class="sidebar" role="complementary" id="participant-list">
+        <div class="participant-list">
+          <h3><%= participants %></h3>
+          <div class="scroll-list">
+            <ul id="participants" />
+          </div>
+        </div>
+      </aside>
+    </script>
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>

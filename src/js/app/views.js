@@ -68,3 +68,19 @@ Views.Register = Backbone.View.extend({
   }
 });
 
+Views.Room = Backbone.View.extend({
+  el: $('#content'),
+  template: _.template($('#room-template').html()),
+  render: function() {
+    var templateData = _.extend(websiteText[this.lang], this.model.attributes);
+    this.$el.html(this.template(templateData));
+  },
+  initialize: function() {
+    this.lang = app.user.attributes.lang;
+    this.listenTo(app.user, 'change:lang', function(){
+      this.lang = app.user.attributes.lang;
+      this.render();
+    });
+  }
+});
+
