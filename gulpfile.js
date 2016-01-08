@@ -21,13 +21,13 @@ var onError = function( err ) {
 
 var paths = {
     /* Source paths */
-    styles: ['./public/src/sass/*'],
+    styles: ['./src/sass/*'],
     scripts: [
         './public/src/js/*'
     ],
-    images: ['./public/src/images/**/*'],
+    images: ['./src/images/**/*'],
     fonts: [
-        './public/src/fonts/*'
+        './src/fonts/*'
     ],
 
     /* Output paths */
@@ -37,19 +37,18 @@ var paths = {
     fontsOutput: './public/fonts'
 };
 
-// gulp.task( 'styles', function() {
-//     return gulp.src( paths.styles, {
-//         style: 'expanded'
-//     } )
-//     .pipe( plumber( { errorHandler: onError } ) )
-//     .pipe( sass() )
-//     .pipe( gulp.dest( paths.stylesOutput ) )
-//     .pipe( minifycss() )
-//     .pipe( rename( { suffix: '.min' } ) )
-//     .pipe( gulp.dest( paths.stylesOutput ) )
-//     .pipe( notify( { message: 'Styles task complete' } ) )
-//     .pipe( livereload() );
-// });
+
+gulp.task( 'styles', function() {
+    return gulp.src( paths.styles, {
+        style: 'expanded'
+    } )
+    .pipe( plumber( { errorHandler: onError } ) )
+    .pipe( sass() )
+    .pipe( gulp.dest( paths.stylesOutput ) )
+    .pipe( minifycss() )
+    .pipe( rename( { suffix: '.min' } ) )
+    .pipe( gulp.dest( paths.stylesOutput ) );
+});
 
 gulp.task('libs', function() {
     return gulp.src( './src/js/libs/*')
@@ -79,4 +78,4 @@ gulp.task( 'watch', function() {
     } );
 } );
 
-gulp.task( 'default', [ 'libs', 'js', 'index'], function() {});
+gulp.task( 'default', [ 'libs', 'js', 'index', 'styles'], function() {});
