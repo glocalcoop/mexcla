@@ -1,5 +1,6 @@
 var User = Backbone.Model.extend({
-  idAttribute: "_id"
+  idAttribute: "_id",
+  urlRoot: "/users"
 });
 
 var Room = Backbone.Model.extend({

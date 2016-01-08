@@ -32,6 +32,7 @@ var homepage = require('./homepage');
 
 // creates users and sends back info and puts userid in cookie
 app.post('/users/new', function(req, res){
+  console.log('/users/new');
   var user = new models.User(req.body);
   user.save(function(err, user){
     if (err) {
@@ -42,6 +43,14 @@ app.post('/users/new', function(req, res){
       res.cookie('id', user.id);
       res.send(user);
     }
+  });
+});
+
+// gets user info
+// responds to user.fetch() in backbone
+app.get('/users/:id', function(req,res){
+  getUserInfo(req.params.id, function(user){
+    res.json(user);
   });
 });
 
