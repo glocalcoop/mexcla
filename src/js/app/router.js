@@ -18,7 +18,7 @@ var MexclaRouter = Backbone.Router.extend({
     }
   },
   room: function(roomnum) {
-    
+    app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
     // this route will be executed if no other route is matched.
@@ -28,5 +28,3 @@ var MexclaRouter = Backbone.Router.extend({
     app.user = new Models.User({_id: userid});  
   }
 });
-
-

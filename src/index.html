@@ -87,7 +87,7 @@
         <h2 class="conference-id">
           <%= conference %>
           <span class="pstn-instructions-conference-number">
-            <%= roomNum %>
+            <%= roomnum %>
           </span>
         </h2>
         <div id="userinfo-modal" style="display:none">
@@ -96,13 +96,13 @@
         <div id="room-info">
           <label for="room-link"><%= room %> Link</label>
           <!-- TODO: Add real URL -->
-          http://url.org/room/<%= roomNum %>
+          http://url.org/room/<%= roomnum %>
         </div>
       </header>
       <section id="options">
         <div id="call-options">
           <div id="connect-icon-and-button">
-            <button class="button" onclick="mexcla_toggle_call_status(<%= roomNum %>); return false;" id="connect-button">
+            <button class="button" onclick="mexcla_toggle_call_status(<%= roomnum %>); return false;" id="connect-button">
               <span class="connect" rel="ajax:modal" id="connect-button-text"><%= connect %></span>
               <span id="connect-dots"></span>
             </button>

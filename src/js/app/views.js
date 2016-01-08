@@ -33,10 +33,11 @@ Views.IndexView = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template(this.languageText));
     new Views.WelcomeText({model: app.user});
+    // click on new room button trigger ajax request to create room, creates model, and then navigates to: /room/:roomnum 
     this.$('#create-new-room-button').click(function(e){
       Views.createRoomAjax().done(function(room){
         app.room = new Models.Room(room);
-        console.log(room);
+        app.router.navigate('room/' + room.roomnum, {trigger: true});
       }); 
     });
   }
@@ -82,6 +83,7 @@ Views.Register = Backbone.View.extend({
   }
 });
 
+// use: new Views.Room({model: app.room})
 Views.Room = Backbone.View.extend({
   el: $('#content'),
   template: _.template($('#room-template').html()),
