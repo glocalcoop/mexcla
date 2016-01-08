@@ -18,20 +18,23 @@ Views.createRoomAjax = function() {
   });
 };
 
-//.Lang({}) establishes the language text. Pass in object with text for the website.
-// if .lang is not called, then English is used as the default. English as a default requires the presence of a global object 'websiteText', currently housed in the translation.js file
+// View where user can join a room or create a new one
+// it renders language according to app.user.attributes.lang
+// and re-renders when user model language changes
 Views.IndexView = Backbone.View.extend({
   el: $('#content'),
   template: _.template($("#index-template").html()),
-  lang: function(languageText) {
-    this.languageText = languageText;
-  },
   initialize: function() {
-    this.languageText = websiteText.en;
-    this.render();
+      this.setLang();
+      // watch for changes
+      this.listenTo(app.user, 'change:lang', function(){
+        this.setLang();
+        this.render();
+      });
+      this.render();
   },
   render: function () {
-    this.$el.html(this.template(this.languageText));
+    this.$el.html(this.template(websiteText[this.lang]));
     new Views.WelcomeText({model: app.user});
     // click on new room button trigger ajax request to create room, creates model, and then navigates to: /room/:roomnum 
     this.$('#create-new-room-button').click(function(e){
@@ -47,6 +50,10 @@ Views.IndexView = Backbone.View.extend({
     });
     
     return this;
+  },
+  setLang: function() {
+    // fallback to English if lang is missing
+    this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   }
 });
 
@@ -122,7 +129,3 @@ Views.Room = Backbone.View.extend({
     this.sidebar = new Views.RoomSidebar();
   }
 });
-
-
-
-
