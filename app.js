@@ -95,6 +95,13 @@ app.get('/room/:roomnum', function(req,res){
   });
 });
 
+app.get('/room/id/:id', function(req,res){
+  models.Room.findById(req.params.id, function(err,room){
+    if (err) {console.log(err);}
+    res.json(room);
+  });
+});
+
 //room info
 app.get('/room/:roomnum/info', function(req, res){
   //return with information about room
