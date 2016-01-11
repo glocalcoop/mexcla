@@ -6,8 +6,9 @@
   "repository": "https://github.com/glocalcoop/mexcla.git",
   "homepage": "https://github.com/glocalcoop/mexcla",
   "scripts": {
-    "start": "node_modules/.bin/supervisor app",
-    "test": "node_modules/.bin/mocha -w"
+      "start": "node app",
+      "test": "node_modules/.bin/mocha -w",
+      "dev": "node app & mongod  --dbpath db --port 27018 & "
   },
   "keywords": [
     "webrtc",
