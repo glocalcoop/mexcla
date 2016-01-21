@@ -2,15 +2,24 @@
 // This file contains all styles related to the content of the site/application.
 // -----------------------------------------------------------------------------
 
-.content {
-    h2 {
-        text-align: center;
+#content {
+  @extend .container-fluid;
+  @extend .container;
+
+  form {
+    @extend .form-inline;
+
+    fieldset {
+      @extend .card-block;
+      @extend .form-group;
     }
-}
 
-.tic-tac-toe-board {
-    @extend .center-block;
-    margin-right: auto;
-    margin-left: auto;
-}
+    input[type="text"],
+    select {
+      @extend .form-control;
+    }
 
+  }
+
+
+}

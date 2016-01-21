@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="/css/jquery.modal.css">
     <link rel="stylesheet" href="/css/vendor/switches/toggle-switch.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/theme/css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- SCRIPTS -->
-    <link rel="stylesheet" href="/theme/js/scripts.css">
     <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
     <script type="text/javascript" src="js/libs/jquery.js"></script>
     <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
@@ -22,15 +19,14 @@
   <body>
     <!-- HEADER  -->
      <header id="header">
-      <h1 id="logo"><a href="#index/undefined"><img alt="Glocal" src="/images/logo-new.png" class="header-image"></a></h1>
-      <h3 id="tagline"><a href="#index/undefined">Mexcla: </a></h3>
-      <nav id="utility-nav">
-        <div id="welcome-text">
-        </div>
-        <div id="language-links">
-          <button id="es-switch-link" onclick="switch_language('es')" class="button espanol">es</button>
-          <button id="en-switch-link" onclick="switch_language('en')" class="button english">en</button>
-        </div>
+      <h1 id="logo"><a href="/"><img alt="Glocal" src="/images/logo-new.png" class="header-image"></a></h1>
+      <nav id="utility-nav" class="navbar">  
+        <h3 id="tagline"><a href="/">Mexcla: title<!-- Tagline --></a></h3>
+        <ul id="language-links" class="nav">
+          <li class="nav-item"><div id="welcome-text"><!-- Username --></div></li>
+          <li class="nav-item"><a id="es-switch-link" onclick="switch_language('es')" class="nav-link espanol" href="#">English</a></li>
+          <li class="nav-item"><a id="en-switch-link" onclick="switch_language('en')" class="nav-link english" href="#">Espa&ntilde;ol</a></li>
+        </ul>
       </nav>
      </header>
      <!--CONTENT  -->
@@ -45,19 +41,24 @@
     <!--INDEX -->
     <script type="text/template" id="index-template">
       <main class="main-content index" role="main">
-        <div id="join-room" class="card">
-          <h3><%= join %></h3>
-            <fieldset>
-              <label for="roomnumber"><%= enter %></label>
-              <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
-              <input id="room-number-button" type="submit" value="Go" data-transition="fade">
-            </fieldset>
-        </div>
-        <div id="create-room">
-            <fieldset>
-              <input id="create-new-room-button" type="submit" value="<%= create %>" data-transition="fade">
-            </fieldset>
-        </div>
+          <div id="join-room">
+            <div class="card">
+              <h3><%= join %></h3>
+              <fieldset>
+                <label for="roomnumber"><%= enter %></label>
+                <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
+                <input id="room-number-button" type="submit" value="Go" data-transition="fade">
+              </fieldset>
+            </div>
+          </div>
+          <div id="create-room">
+            <div class="card">
+              <h3><%= create %></h3>
+              <fieldset>
+                <input id="create-new-room-button" type="submit" value="<%= create %>" data-transition="fade">
+              </fieldset>
+            </div>
+          </div>
       </main>
     </script>
 
@@ -66,21 +67,22 @@
       <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
     </script>
 
-    <!-- REGISTER  -->
+    <!--REGISTER  -->
     <script type="text/template" id="register-template">
       <main class="main-content" role="main">
-          <fieldset>
-          <!-- // Needs translation - enter_username -->
-            <label for="username">Enter Your Name</label>
-            <!-- // Needs translation - your_name -->
-            <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
-            <select name="lang" id="lang-select">
-              <option value="en">English</option>
-              <option value="es">Espanol</option>
-            </select>
-            <!-- // Needs translation - submit -->
-            <input type="submit" id="register-submit-button" value="Enter" />
-          </fieldset>
+          <div class="card">
+            <form>
+              <fieldset>
+                <label for="username">Please Enter Your Name</label>
+                <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+                <select name="lang" id="lang-select">
+                  <option value="en">English</option>
+                  <option value="es">Espa&ntilde;ol</option>
+                </select>
+                <input type="submit" id="register-submit-button" value="Submit" />
+              </fieldset>
+            </form>
+          </div>
       </main>
     </script>
 
@@ -97,10 +99,10 @@
         <div id="userinfo-modal" style="display:none">
           <a href="/userinfo" rel="ajax:modal"></a>
         </div>
-        <div id="room-info">
-          <label for="room-link"><%= room %> Link</label>
+        <div id="room-info" class="input-group">
+          <label for="room-link" class="input-group-addon">Link</label>
           <!-- TODO: Add real URL -->
-          http://url.org/room/<%= roomnum %>
+            <span class="form-control" id="room-link">http://url.org/room/<%= roomnum %></span>
         </div>
       </header>
       <section id="options">
@@ -112,24 +114,35 @@
             </button>
           </div>
           <div id="mute-controls">
-            <div class="switch-toggle switch-ios" id="mute-button">
-              <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
-              <label for="mic-mute"><%= mute %></label>
-              <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
-              <label for="mic-unmute"><%= unmute %></label>
-              <a></a>
+            <div class="btn-group" id="mute-button" data-toggle="buttons">
+
+              <label for="mic-mute" class="btn active">
+                <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
+                <%= mute %>
+              </label>
+
+              <label for="mic-unmute" class="btn">
+                <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
+                <%= unmute %>
+              </label>
+
+
             </div>
           </div>
         </div>
         <div id="interpretation-options">
-          <div class="switch-toggle switch-android switch-3" id="interpretation-mode">
-            <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
-            <label for="mode-original"><%= original %></label>
-            <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
-            <label for="mode-hear-interpretation"><%= interpretation %></label>
-            <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
-            <label for="mode-provide-interpretation"><%= provide %></label>
-            <a></a>
+          <div class="btn-group" id="interpretation-mode" data-toggle="buttons">
+            <label for="mode-original" class="btn active">
+              <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
+              <%= original %>
+            </label>
+            <label for="mode-hear-interpretation" class="btn">
+              <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
+              <%= interpretation %></label>
+            <label for="mode-provide-interpretation" class="btn">
+              <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
+              <%= provide %>
+            </label>
           </div>
         </div>
       </section>
@@ -141,30 +154,18 @@
         </div>
       </section>
       <section id="collaboration">
-        <div class="tabs">
-          <div id="iframe-selectors">
-            <div class="tab">
-              <input type="radio" name="tab-group-1" id="pad-iframe-checkbox" onclick="mexcla_toggle_pad();">
-              <!-- // Needs translation - notepad -->
-              <label for="pad-iframe-checkbox">Notepad</label>
-              <!-- <div id="pad-frame" class="content pad">
-                   </div> -->
-            </div>
-            <div class="tab">
-              <input type="radio" name="tab-group-1" id="calc-iframe-checkbox" onclick="mexcla_toggle_calc();">
-              <!-- // Needs translation - spreadsheet -->
-              <label for="calc-iframe-checkbox">Spreadsheet</label>
-              <!-- <div class="content calc"></div> -->
-            </div>
-            <div class="tab">
-              <input type="radio" name="tab-group-1" id="irc-iframe-checkbox" onclick="mexcla_toggle_irc();">
-              <!-- // Needs translation - irc -->
-              <label for="irc-iframe-checkbox">IRC Chat</label>
-              <!-- <div class="content irc"></div> -->
-            </div>
-          </div>
+        <div class="tabs nav nav-tabs">
+          <ul class="nav nav-tabs" id="collaboration-tabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pad-frame" data-target="pad-frame" role="tab" aria-controls="<%= notepad %>"><%= notepad %></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spreadsheet-frame" data-target="spreadsheet-frame" role="tab" aria-controls="<%= spreadsheet %>"><%= spreadsheet %></a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat-frame" data-target="chat-frame" role="tab" aria-controls="<%= chat %>"><%= chat %></a></li>
+          </ul>
         </div>
-        <div id="iframe-content"></div>
+        <div id="tab-content">
+          <div id="pad-frame" class="tab-pane content pad" role="tabpanel">
+          <div id="spreadsheet-frame" class="tab-pane content pad" role="tabpanel">
+          <div id="chat-frame" class="tab-pane content pad" role="tabpanel">
+        </div>
       </section>
     </main>
     </script>
@@ -176,12 +177,31 @@
         <div class="participant-list">
           <h3><%= participants %></h3>
           <div class="scroll-list">
-            <ul id="participants" />
+            <ul id="participants">
+              <li class="active">
+                <div class="info">
+                  <span class="label language">de</span>
+                  <span class="label moderator">!</span>
+                </div>
+                Person
+                <div class="controls">
+                  <span class="label mute">m</span>
+                  <span class="label muted">m</span>
+                  <span class="label raise-hand">r</span>
+                  <span class="label queued">1</span>
+                </div>
+              </li>
+              <li></li>
+              <li></li>
+            </ul>
           </div>
         </div>
       </aside>
     </script>
+
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
+
+ 

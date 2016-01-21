@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the room page.
+// -----------------------------------------------------------------------------
+
+.main-content.room {
+    @extend .col-xs-12;
+    @extend .col-md-8;
+
+    header {
+        @extend .row;
+
+        .conference-id,
+        #room-info {
+            @extend .col-sm-6;
+        }
+    }
+
+}
+
+.participant-list {
+    @extend .col-xs-6;
+    @extend .col-md-4;
+}

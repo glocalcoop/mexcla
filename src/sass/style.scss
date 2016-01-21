@@ -20,21 +20,23 @@
 //   'base/typography',
 //   'base/helpers';
 
-// // 4. Layout-related sections
-// @import
-//   'layout/header',
-//   'layout/footer',
-//   'layout/content';
+// 4. Layout-related sections
+@import
+  'layout/header',
+  'layout/footer',
+  'layout/content';
 
 // // 5. Components
-// @import
-//   'components/buttons',
-//   'components/forms',
-//   'components/alerts';
+@import
+  'components/lists',
+  'components/buttons',
+  'components/forms',
+  'components/alerts';
 
-// // 6. Page-specific styles
-// @import
-//   'pages/home';
+// 6. Page-specific styles
+@import
+  'pages/index',
+  'pages/room';
 
 // 7. Themes
 @import

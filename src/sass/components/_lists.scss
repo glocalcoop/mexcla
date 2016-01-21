@@ -1,3 +1,40 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to lists.
 // -----------------------------------------------------------------------------
+
+#participants {
+    ul {
+        @extend .list-group;
+        li {
+            @extend .list-group-item;
+        }
+    }
+    .label {
+        @extend .label-pill;
+        @extend .label-default;
+
+        &.language {
+            @extend .label-info;
+        }
+        &.moderator {
+            @extend .label-primary;
+        }
+        &.mute {
+            @extend .label-danger;
+        }
+        &.muted {
+            @extend .label-default;
+        }
+        &.raise-hand {
+            @extend .label-warning;
+        }
+        &.queued {
+            @extend .label-success;
+        }
+
+    }
+    .info,
+    .controls {
+        display: inline-block;
+    }
+}

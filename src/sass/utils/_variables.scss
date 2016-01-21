@@ -2,12 +2,37 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+// default-color:              #66615B !default;
+// $default-bg:                 #66615B !default;
+// $default-states-color:       #403D39 !default;
 
-$brand-primary:         #707D82; // #337ab7
-$brand-success:         #5cb85c !default;
-$brand-info:            #5bc0de !default;
-$brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
+// $primary-color:              #7A9E9F !default;
+// $primary-bg:                 #7A9E9F !default;
+// $primary-states-color:       #427C89 !default;
+
+// $success-color:              #7AC29A !default;
+// $success-bg:                 #7AC29A !default;
+// $success-states-color:       #42A084 !default; 
+
+// $info-color:                 #68B3C8 !default;
+// $info-bg:                    #68B3C8 !default;
+// $info-states-color:          #3091B2 !default;
+
+// $warning-color:              #F3BB45 !default;
+// $warning-bg:                 #F3BB45 !default;
+// $warning-states-color:       #BB992F !default;
+
+
+// $danger-color:               #EB5E28 !default;
+// $danger-bg:                  #EB5E28 !default;
+// $danger-states-color:        #B33C12 !default;
+
+
+$brand-primary:         #427C89; //#337ab7
+$brand-success:         #42A084; //#5cb85c
+$brand-info:            #3091B2; //#5bc0de
+$brand-warning:         #BB992F; //#f0ad4e
+$brand-danger:          #EB5E28; //#d9534f
 
 
 $gray-base:              #000 !default;

@@ -87,9 +87,9 @@ body.modal-open {
     }
 }
 
-.card {
-    overflow:hidden;
-}
+// .card {
+//     overflow:hidden;
+// }
 
 .card-block .rotate {
     z-index: 8;
@@ -111,52 +111,3 @@ body.modal-open {
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
 }
-
-/**
- * Header
- */
-
-#utility-nav {
-
-  @extend .navbar-fixed-top;
-  // @extend .navbar-dark;
-  // @extend .bg-inverse;
-  @extend .navbar-light;
-  @extend .bg-faded;
-
-}
-
-#logo {
-  img {
-    @extend .img-fluid;
-    @extend .img-square;
-    max-height: 100px;
-  }
-}
-
-#welcome-text {
-
-  @extend .navbar-brand;
-
-}
-
-#language-links {
-  @extend .nav;
-  @extend .navbar-nav;
-  @extend .pull-xs-right;
-
-  a {
-    @extend .nav-link;
-  }
-}
-
-/**
- * Body
- */
-#content {
-  @extend .container-fluid;
-}
-
-/**
- * Footer
- */
