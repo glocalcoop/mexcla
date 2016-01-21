@@ -1,29 +1,42 @@
-/* COMMUNITY CSS */
-/* This stylesheet was written in Sass and compiled locally */
+@charset 'UTF-8';
+
+// 1. Vendors
+@import
+  'vendor/bootstrap/scss/bootstrap';
+
+  
+
+// 2. Configuration and helpers
+@import
+  'utils/variables',
+  'utils/functions',
+  'utils/mixins';
 
 
-// RESET
-@import "vendor/normalize";
+// // 3. Base stuff
+// @import
+//   'base/base',
+//   'base/fonts',
+//   'base/typography',
+//   'base/helpers';
 
+// // 4. Layout-related sections
+// @import
+//   'layout/header',
+//   'layout/footer',
+//   'layout/content';
 
-// LIBRARIES
-@import "bourbon/bourbon";
-@import "neat/neat";
-@import "webfonts/mixins";
-@import "webfonts/font-awesome/font-awesome";
+// // 5. Components
+// @import
+//   'components/buttons',
+//   'components/forms',
+//   'components/alerts';
 
+// // 6. Page-specific styles
+// @import
+//   'pages/home';
 
-// BASE ELEMENTS
-@import "base/config";
-@import "base/typography";
-@import "base/containers";
-@import "base/header";
-@import "base/footer";
-@import "base/sidebar";
-@import "base/modals";
-@import "base/content";
-@import "base/lists";
-@import "base/menus";
-@import "base/forms";
-@import "base/buttons";
-@import "base/tabs";
+// 7. Themes
+@import
+  'themes/default',
+  'themes/stylish';

@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the form component.
+// -----------------------------------------------------------------------------
+
+
+input[type='text'] {
+
+}
+
+option {
+    @extend .form-control;
+}
+
+form {
+    text-align: center;
+}
+
+

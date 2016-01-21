@@ -1,0 +1,16 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the content of the site/application.
+// -----------------------------------------------------------------------------
+
+.content {
+    h2 {
+        text-align: center;
+    }
+}
+
+.tic-tac-toe-board {
+    @extend .center-block;
+    margin-right: auto;
+    margin-left: auto;
+}
+

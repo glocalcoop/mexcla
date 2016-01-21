@@ -1,0 +1,69 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+
+input[type="submit"],
+button,
+.btn {
+
+    &.new-game {
+        @extend .btn-success;
+    }
+
+    &.play-turn {
+        @extend .btn-danger;
+    }
+
+}
+
+.tic-tac-toe-board {
+
+    td {
+        text-align: center;
+        vertical-align: middle;
+        height: 100px;
+        width: 100px;
+        padding: 2px;
+    }
+
+    .player-X {
+        @extend .btn-warning;
+    }
+
+    .player-X.disabled {
+        background-color: lighten( $brand-warning, 30% );
+        color: $brand-warning;
+    }
+
+    .player-O {
+        @extend .btn-info;
+    }
+
+    .player-O.disabled {
+        background-color: lighten( $brand-info, 30% );
+        color: $brand-info;
+    }
+
+    label {
+        float: left;
+        width: 100%;
+        margin: 4px;
+        border-radius: 4px;
+        overflow: auto;
+
+        span {
+            font-size: 32px;
+            padding: 13px 0px;
+            display: block;
+        }
+
+        input {
+            position: absolute;
+            top: -20px;
+        }
+
+        &:checked + span {}
+           
+    }
+}

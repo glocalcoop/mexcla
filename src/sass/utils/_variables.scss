@@ -1,0 +1,107 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+$brand-primary:         #707D82; // #337ab7
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+
+
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              #5C6265;   // #333
+$gray:                   #79858A; // #555
+$gray-light:             #A2A8AB; // #777
+$gray-lighter:           #BCC1C3; // #eee
+
+$white:     #fff;
+$black:     #000;
+
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-flex:               true;
+// $enable-rounded:            true !default;
+// $enable-shadows:            false !default;
+// $enable-gradients:          false !default;
+// $enable-transitions:        false !default;
+// $enable-hover-media-query:  false !default;
+// $enable-grid-classes:       true !default;
+
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                    $white;
+$body-color:                 $gray-dark !default;
+
+
+// Links
+//
+// Style anchor elements.
+
+$text-color:                 $body-color;
+$link-color:                 $brand-primary !default;
+// $link-decoration:            none !default;
+// $link-hover-color:           darken($link-color, 15%) !default;
+// $link-hover-decoration:      underline !default;
+
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// $font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+// $font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
+// $font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace !default;
+// $font-family-base:           $font-family-sans-serif !default;
+
+
+
+/// Regular font family
+/// @type List
+$text-font-stack: $font-family-sans-serif;
+
+/// Header font family
+/// @type List
+$text-font-stack: $font-family-sans-serif;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: $font-family-monospace;
+
+
+
+
+/// Container's maximum width
+/// Below that is 100%
+/// @type Length
+$max-width: 1200px !default;
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+$breakpoints: (
+  'small': (min-width: 320px),
+  'medium': (min-width: 768px),
+  'large': (min-width: 1024px),
+) !default;
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;
