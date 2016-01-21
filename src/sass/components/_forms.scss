@@ -3,10 +3,13 @@
 // -----------------------------------------------------------------------------
 
 
-input[type='text'] {
+input[type='text'],
+option,
+select {
     @extend .form-control;
 }
 
-option {
-    @extend .form-control;
+
+fieldset {
+    @extend .card-block;
 }

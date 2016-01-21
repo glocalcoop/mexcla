@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the index page.
+// -----------------------------------------------------------------------------
+
+
+// html body div#content main.main-content.register div.card fieldset
+.main-content.register {
+
+    h3 {
+        @extend .card-header;
+    }
+
+    fieldset {
+        // @extend .card-block;
+        @extend .form-inline;
+    }
+
+}
