@@ -5,14 +5,6 @@
 $(function() {
 
     /**
-     * Instantiate Toggler
-     */
-    $('#mic-mute').bootstrapToggle({
-      on: 'Unmuted',
-      off: 'Muted'
-    });
-
-    /**
      * Call Mute and Unmute
      */
     $('#mic-mute').change(function() {

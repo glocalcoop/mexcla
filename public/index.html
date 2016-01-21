@@ -99,8 +99,8 @@
         <div id="userinfo-modal" style="display:none">
           <a href="/userinfo" rel="ajax:modal"></a>
         </div>
-        <div id="room-info" class="input-group">
-          <label for="room-link" class="input-group-addon">Link</label>
+        <div id="room-info">
+          <label for="room-link">Link</label>
           <!-- TODO: Add real URL -->
             <span class="form-control" id="room-link">http://url.org/room/<%= roomnum %></span>
         </div>
@@ -178,25 +178,27 @@
           <h3><%= participants %></h3>
           <div class="scroll-list">
             <ul id="participants">
-              <li class="active">
-                <div class="info">
-                  <span class="label language">de</span>
-                  <span class="label moderator">!</span>
-                </div>
-                Person
-                <div class="controls">
-                  <span class="label mute">m</span>
-                  <span class="label muted">m</span>
-                  <span class="label raise-hand">r</span>
-                  <span class="label queued">1</span>
-                </div>
-              </li>
-              <li></li>
-              <li></li>
             </ul>
           </div>
         </div>
       </aside>
+    </script>
+
+    <!-- ROOM SIDEBAR  -->
+    <script type="text/template" id="participant-row">
+      <li>
+        <div class="info">
+          <span class="label language">de</span>
+          <span class="label moderator">!</span>
+        </div>
+        <%= username %>
+        <div class="controls">
+          <span class="label mute">m</span>
+          <span class="label muted">m</span>
+          <span class="label raise-hand">r</span>
+          <span class="label queued">1</span>
+        </div>
+      </li>
     </script>
 
     <!-- LOAD APP -->
