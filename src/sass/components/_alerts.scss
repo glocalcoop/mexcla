@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to alerts.
+// -----------------------------------------------------------------------------
+
+.error-message {
+    @extend .alert-success;
+}
+
+.success-message {
+    @extend .alert-danger;
+}
+
+.player-turn {
+    @extend .alert-warning;
+}

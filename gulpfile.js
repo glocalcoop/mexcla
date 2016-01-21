@@ -21,7 +21,7 @@ var onError = function( err ) {
 
 var paths = {
     /* Source paths */
-    styles: './src/sass/*',
+    styles: './src/sass/**/*.scss',
     scripts: './src/js/app/',
     images: './src/images/**/*',
     fonts: './src/fonts/*',
@@ -65,7 +65,7 @@ gulp.task('fonts', function(){
 
 gulp.task('scripts', function(){
   var basePath = paths.scripts;
-  var files = ['masterfile.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js'];
+  var files = ['masterfile.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js', 'ui.js'];
   var scripts = files.map(f => basePath + f);
   return gulp.src(scripts)
       .pipe(concat('main.js'))
@@ -91,7 +91,7 @@ gulp.task( 'watch', function() {
     gulp.watch( './src/images/*', [ 'images' ] );
     gulp.watch( './src/fonts/*', [ 'fonts' ] );
     gulp.watch( './src/js/*.js', [ 'libs' ] );
-    gulp.watch( './src/index.html', [ 'index' ] );
+    gulp.watch( paths.index, [ 'index' ] );
 } );
 
 gulp.task( 'default', [ 'watch', 'libs', 'scripts', 'index', 'styles', 'images', 'fonts'], function() {});

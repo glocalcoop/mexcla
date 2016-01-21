@@ -4,7 +4,7 @@ var websiteText = {
       your_name: "Your name",
       enter: "Enter",
       connect: "Connect",
-      conference: "Conference Room",
+      conference: "Conference",
       mute: "Mute",
       unmute: "Unmute",
       original: "Hear original language",

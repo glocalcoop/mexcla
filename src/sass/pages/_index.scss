@@ -1,0 +1,22 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the index page.
+// -----------------------------------------------------------------------------
+
+.main-content.index {
+
+    #join-room,
+    #create-room {
+        @extend .col-sm-6;
+
+        h3 {
+            @extend .card-header;
+        }
+
+        fieldset {
+            @extend .card-block;
+            @extend .form-inline;
+        }
+        
+    }
+
+}

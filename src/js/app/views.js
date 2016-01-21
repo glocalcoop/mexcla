@@ -116,7 +116,7 @@ Views.RoomSidebar = Backbone.View.extend({
     var selector = '#participants';
     $(selector).html('');
    _.each(this.model.attributes.users, function(user){
-       var li =_.template('<li><%= username %></li>');
+       var li =_.template($('#participant-row').html());
      $(selector).append(li(user));
     });
     return this;

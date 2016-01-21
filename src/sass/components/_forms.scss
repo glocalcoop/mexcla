@@ -1,0 +1,12 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the form component.
+// -----------------------------------------------------------------------------
+
+
+input[type='text'] {
+    @extend .form-control;
+}
+
+option {
+    @extend .form-control;
+}

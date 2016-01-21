@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the content of the site/application.
+// -----------------------------------------------------------------------------
+
+#content {
+  @extend .container-fluid;
+  @extend .container;
+
+  form {
+    @extend .form-inline;
+
+    fieldset {
+      @extend .card-block;
+      @extend .form-group;
+    }
+
+    input[type="text"],
+    select {
+      @extend .form-control;
+    }
+
+  }
+
+
+}

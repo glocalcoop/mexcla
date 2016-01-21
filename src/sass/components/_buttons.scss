@@ -1,0 +1,40 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+
+input[type="submit"],
+button {
+
+    @extend .btn;
+
+    &.new-game {
+        @extend .btn-success;
+    }
+
+    &.play-turn {
+        @extend .btn-danger;
+    }
+
+}
+
+#connect-button {
+    @extend .btn-lg;
+    @extend .btn-success;
+
+}
+
+.btn-group {
+    .btn {
+        @extend .btn-info-outline;
+        &.active {
+        }
+    }
+}
+
+#mute-controls {
+    .btn {
+        @extend .btn-danger-outline;
+    }
+}
+

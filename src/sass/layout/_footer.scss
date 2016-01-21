@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+
+ #footer {
+  @extend .navbar-fixed-bottom;
+  @extend .bg-faded;
+  p {
+    @extend .container;
+  }
+  
+  
+ }
+
+ input[type="submit"] {
+  @extend .btn;
+  @extend .btn-primary;
+ }
