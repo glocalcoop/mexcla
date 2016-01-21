@@ -8,7 +8,7 @@
   "scripts": {
       "start": "node app",
       "test": "node_modules/.bin/mocha -w",
-      "dev": "node app & mongod  --dbpath db --port 27018 & "
+      "mongod": "mongod -dbpath db --port 27018"
   },
   "keywords": [
     "webrtc",
