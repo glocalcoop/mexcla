@@ -18,7 +18,7 @@ Views.createRoomAjax = function() {
   });
 };
 
-// View where user can join a room or create a new one
+// View: "main" page where user picks between creating a room or joining an existing one
 // it renders language according to app.user.attributes.lang
 // and re-renders when user model language changes
 Views.IndexView = Backbone.View.extend({
@@ -36,7 +36,7 @@ Views.IndexView = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template(websiteText[this.lang]));
     new Views.WelcomeText({model: app.user});
-    // click on new room button trigger ajax request to create room, creates model, and then navigates to: /room/:roomnum 
+    // click on new room button triggers: ajax request to create room, creates model, and then navigates to: /room/:roomnum 
     this.$('#create-new-room-button').click(function(e){
       Views.createRoomAjax().done(function(room){
         app.room = new Models.Room(room);
@@ -85,14 +85,14 @@ Views.Register = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template());
     this.$('#register-submit-button').click(function(e){
-
+      var username = that.$('#user-name').val();
       var lang = that.$('#lang-select').val();
       Views.createUserAjax(username,lang).done(function(user){
         // create user model
         app.user = new Models.User(user);
         // follow router back to homepage
         // the Ajax response creates a cookie, so this time the homepage will not show the register pae
-        app.router.navigate("#/", {triggennr: true});
+        app.router.navigate("#/", {trigger: true});
       });
     });
     return this;
