@@ -12,6 +12,7 @@ var Schema = mongoose.Schema;
 
 var roomSchema = new Schema({
   roomnum: { type: Number, unique: true },
+  // user: {_id, lang, username}
   users: {type: Array, default: []},
   //channels: [channelSchema],
   moderator: {type: Schema.ObjectId},
