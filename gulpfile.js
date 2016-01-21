@@ -21,20 +21,20 @@ var onError = function( err ) {
 
 var paths = {
     /* Source paths */
-    styles: ['./src/sass/*'],
-    scripts: [
-        './public/src/js/*'
-    ],
-    images: ['./src/images/**/*'],
-    fonts: [
-        './src/fonts/*'
-    ],
+    styles: './src/sass/*',
+    scripts: './src/js/app/',
+    images: './src/images/**/*',
+    fonts: './src/fonts/*',
+    libs: './src/js/libs/*',
+    index: './src/index.html',
 
     /* Output paths */
     stylesOutput: './public/css',
     scriptsOutput: './public/js',
     imagesOutput: './public/images',
-    fontsOutput: './public/fonts'
+    fontsOutput: './public/fonts',
+    indexOutput: './public/',
+    libsOutput: './public/js/libs'
 };
 
 
@@ -47,45 +47,51 @@ gulp.task( 'styles', function() {
     .pipe( gulp.dest( paths.stylesOutput ) )
     .pipe( minifycss() )
     .pipe( rename( { suffix: '.min' } ) )
-    .pipe( gulp.dest( paths.stylesOutput ) );
-});
-
-gulp.task('libs', function() {
-    return gulp.src( './src/js/libs/*')
-        .pipe(gulp.dest('./public/js/libs'));
+    .pipe( gulp.dest( paths.stylesOutput ) )
+    .pipe( notify( { message: 'Styles task complete' } ) );
 });
 
 gulp.task('images', function(){
   return gulp.src(paths.images)
-    .pipe(gulp.dest(paths.imagesOutput));
+    .pipe(gulp.dest(paths.imagesOutput))
+    .pipe( notify( { message: 'Images task complete' } ) );
 });
 
 gulp.task('fonts', function(){
   return gulp.src(paths.fonts)
-    .pipe(gulp.dest(paths.fontsOutput));
+    .pipe(gulp.dest(paths.fontsOutput))
+    .pipe( notify( { message: 'Fonts task complete' } ) );
 });
 
-gulp.task('js', function(){
-  var basePath = 'src/js/app/';
+gulp.task('scripts', function(){
+  var basePath = paths.scripts;
   var files = ['masterfile.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js'];
   var scripts = files.map(f => basePath + f);
   return gulp.src(scripts)
       .pipe(concat('main.js'))
-      .pipe(gulp.dest('./public/js'));
+      .pipe(gulp.dest(paths.scriptsOutput))
+      .pipe( notify( { message: 'Script task complete' } ) );
+});
+
+gulp.task('libs', function() {
+    return gulp.src(paths.libs)
+        .pipe(gulp.dest(paths.libsOutput))
+        .pipe( notify( { message: 'Libs task complete' } ) );
 });
 
 gulp.task('index', function(){
-  return gulp.src('src/index.html')
-    .pipe(gulp.dest('./public'));
+  return gulp.src(paths.index)
+    .pipe(gulp.dest(paths.indexOutput));
 });
 
 gulp.task( 'watch', function() {
     livereload.listen();
-    gulp.watch( './public/src/sass/**/*.scss', [ 'styles' ] );
-    //gulp.watch( './src/js/**/*.js', [ 'scripts' ] );
-    gulp.watch( './**/*.php' ).on( 'change', function( file ) {
-        livereload.changed( file );
-    } );
+    gulp.watch( './src/sass/**/*.scss', [ 'styles' ] );
+    gulp.watch( './src/js/**/*.js', [ 'scripts' ] );
+    gulp.watch( './src/images/*', [ 'images' ] );
+    gulp.watch( './src/fonts/*', [ 'fonts' ] );
+    gulp.watch( './src/js/*.js', [ 'libs' ] );
+    gulp.watch( './src/index.html', [ 'index' ] );
 } );
 
-gulp.task( 'default', [ 'libs', 'js', 'index', 'styles', 'images', 'fonts'], function() {});
+gulp.task( 'default', [ 'watch', 'libs', 'scripts', 'index', 'styles', 'images', 'fonts'], function() {});
