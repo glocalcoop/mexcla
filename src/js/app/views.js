@@ -85,13 +85,13 @@ Views.Register = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template());
     this.$('#register-submit-button').click(function(e){
-      var username =  that.$('#user-name').val();
+
       var lang = that.$('#lang-select').val();
       Views.createUserAjax(username,lang).done(function(user){
         // create user model
         app.user = new Models.User(user);
         // follow router back to homepage
-        // the Ajax response creates a cookie, so this time the homepage will not show the register page
+        // the Ajax response creates a cookie, so this time the homepage will not show the register pae
         app.router.navigate("#/", {triggennr: true});
       });
     });
@@ -100,11 +100,25 @@ Views.Register = Backbone.View.extend({
 });
 
 // unlike the other Views, this one is appended to #content instead of replacing it
+// use; new Views.RoomSidebar({model: app.room});
 Views.RoomSidebar = Backbone.View.extend({
   el: $('#content'),
   template: _.template($('#room-sidebar-template').html()),
+  initialize: function() {
+    this.listenTo(this.model, "change:users", this.renderParticipants);
+  },
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
+    this.renderParticipants();
+    return this;
+  },
+  renderParticipants: function() {
+    var selector = '#participants';
+    $(selector).html('');
+   _.each(this.model.attributes.users, function(user){
+       var li =_.template('<li><%= username %></li>');
+     $(selector).append(li(user));
+    });
     return this;
   }
 });
@@ -126,6 +140,6 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
-    this.sidebar = new Views.RoomSidebar();
+    this.sidebar = new Views.RoomSidebar({model: app.room});
   }
 });
