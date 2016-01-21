@@ -4,15 +4,9 @@
 
 
 input[type='text'] {
-
+    @extend .form-control;
 }
 
 option {
     @extend .form-control;
 }
-
-form {
-    text-align: center;
-}
-
-

@@ -3,10 +3,14 @@
 // -----------------------------------------------------------------------------
 
 #participants {
-    ul {
-        @extend .list-group;
-        li {
-            @extend .list-group-item;
+    @extend .list-group;
+    li {
+        @extend .list-group-item;
+        background-color {
+            &:hover,
+            &:focus {
+                @extend .hover;
+            }
         }
     }
     .label {

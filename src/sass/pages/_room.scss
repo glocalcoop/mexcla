@@ -13,6 +13,19 @@
         #room-info {
             @extend .col-sm-6;
         }
+
+        #room-info {
+            @extend .input-group;
+
+            label {
+                @extend .input-group-addon;
+                @extend .bg-info;
+                border-color: $brand-info;
+            }
+            #room-link {
+                border-color: $brand-info;
+            }
+        }
     }
 
 }

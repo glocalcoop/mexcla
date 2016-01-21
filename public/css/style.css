@@ -1388,7 +1388,7 @@ pre {
     border: 1px solid #BCC1C3; }
 
 .form-control, #content form input[type="text"],
-#content form select, option {
+#content form select, input[type='text'], option {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -1400,24 +1400,24 @@ pre {
   border: 1px solid #ccc;
   border-radius: 0.25rem; }
   .form-control::-ms-expand, #content form input[type="text"]::-ms-expand,
-  #content form select::-ms-expand, option::-ms-expand {
+  #content form select::-ms-expand, input[type='text']::-ms-expand, option::-ms-expand {
     background-color: transparent;
     border: 0; }
   .form-control:focus, #content form input[type="text"]:focus,
-  #content form select:focus, option:focus {
+  #content form select:focus, input[type='text']:focus, option:focus {
     border-color: #66afe9;
     outline: none; }
   .form-control::placeholder, #content form input[type="text"]::placeholder,
-  #content form select::placeholder, option::placeholder {
+  #content form select::placeholder, input[type='text']::placeholder, option::placeholder {
     color: #999;
     opacity: 1; }
   .form-control:disabled, #content form input[type="text"]:disabled,
-  #content form select:disabled, option:disabled, .form-control[readonly], #content form input[readonly][type="text"],
-  #content form select[readonly], option[readonly] {
+  #content form select:disabled, input[type='text']:disabled, option:disabled, .form-control[readonly], #content form input[readonly][type="text"],
+  #content form select[readonly], input[readonly][type='text'], option[readonly] {
     background-color: #BCC1C3;
     opacity: 1; }
   .form-control:disabled, #content form input[type="text"]:disabled,
-  #content form select:disabled, option:disabled {
+  #content form select:disabled, input[type='text']:disabled, option:disabled {
     cursor: not-allowed; }
 
 .form-control-file,
@@ -1429,59 +1429,70 @@ pre {
   margin-bottom: 0; }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  input[type="date"].form-control, #content form input[type="date"][type="text"],
+  input[type="date"].form-control, #content form input[type="date"][type="text"], input[type="date"][type='text'],
   input[type="time"].form-control,
   #content form input[type="time"][type="text"],
+  input[type="time"][type='text'],
   input[type="datetime-local"].form-control,
   #content form input[type="datetime-local"][type="text"],
+  input[type="datetime-local"][type='text'],
   input[type="month"].form-control,
-  #content form input[type="month"][type="text"] {
+  #content form input[type="month"][type="text"],
+  input[type="month"][type='text'] {
     line-height: 2.25rem; }
   input[type="date"].input-sm,
   .input-group-sm input[type="date"].form-control,
   .input-group-sm #content form input[type="date"][type="text"], #content form
   .input-group-sm input[type="date"][type="text"],
+  .input-group-sm input[type="date"][type='text'],
   input[type="time"].input-sm,
   .input-group-sm
   input[type="time"].form-control,
   .input-group-sm #content form input[type="time"][type="text"],
   #content form
   .input-group-sm input[type="time"][type="text"],
+  .input-group-sm input[type="time"][type='text'],
   input[type="datetime-local"].input-sm,
   .input-group-sm
   input[type="datetime-local"].form-control,
   .input-group-sm #content form input[type="datetime-local"][type="text"],
   #content form
   .input-group-sm input[type="datetime-local"][type="text"],
+  .input-group-sm input[type="datetime-local"][type='text'],
   input[type="month"].input-sm,
   .input-group-sm
   input[type="month"].form-control,
   .input-group-sm #content form input[type="month"][type="text"],
   #content form
-  .input-group-sm input[type="month"][type="text"] {
+  .input-group-sm input[type="month"][type="text"],
+  .input-group-sm input[type="month"][type='text'] {
     line-height: 1.8625rem; }
   input[type="date"].input-lg,
   .input-group-lg input[type="date"].form-control,
   .input-group-lg #content form input[type="date"][type="text"], #content form
   .input-group-lg input[type="date"][type="text"],
+  .input-group-lg input[type="date"][type='text'],
   input[type="time"].input-lg,
   .input-group-lg
   input[type="time"].form-control,
   .input-group-lg #content form input[type="time"][type="text"],
   #content form
   .input-group-lg input[type="time"][type="text"],
+  .input-group-lg input[type="time"][type='text'],
   input[type="datetime-local"].input-lg,
   .input-group-lg
   input[type="datetime-local"].form-control,
   .input-group-lg #content form input[type="datetime-local"][type="text"],
   #content form
   .input-group-lg input[type="datetime-local"][type="text"],
+  .input-group-lg input[type="datetime-local"][type='text'],
   input[type="month"].input-lg,
   .input-group-lg
   input[type="month"].form-control,
   .input-group-lg #content form input[type="month"][type="text"],
   #content form
-  .input-group-lg input[type="month"][type="text"] {
+  .input-group-lg input[type="month"][type="text"],
+  .input-group-lg input[type="month"][type='text'] {
     line-height: 3.16667rem; } }
 
 .form-control-static {
@@ -1490,14 +1501,16 @@ pre {
   padding-bottom: 0.375rem;
   margin-bottom: 0; }
   .form-control-static.form-control-sm, .input-group-sm > .form-control-static.form-control, #content form .input-group-sm > input.form-control-static[type="text"],
-  #content form .input-group-sm > select.form-control-static, .input-group-sm > option.form-control-static,
-  .input-group-sm > .form-control-static.input-group-addon,
+  #content form .input-group-sm > select.form-control-static, .input-group-sm > input.form-control-static[type='text'], .input-group-sm > option.form-control-static,
+  .input-group-sm > .form-control-static.input-group-addon, .main-content.room header #room-info
+  .input-group-sm > label.form-control-static,
   .input-group-sm > .input-group-btn > .form-control-static.btn,
   .input-group-sm > .input-group-btn > input.form-control-static[type="submit"],
   .input-group-sm > .input-group-btn >
   button.form-control-static, .form-control-static.form-control-lg, .input-group-lg > .form-control-static.form-control, #content form .input-group-lg > input.form-control-static[type="text"],
-  #content form .input-group-lg > select.form-control-static, .input-group-lg > option.form-control-static,
-  .input-group-lg > .form-control-static.input-group-addon,
+  #content form .input-group-lg > select.form-control-static, .input-group-lg > input.form-control-static[type='text'], .input-group-lg > option.form-control-static,
+  .input-group-lg > .form-control-static.input-group-addon, .main-content.room header #room-info
+  .input-group-lg > label.form-control-static,
   .input-group-lg > .input-group-btn > .form-control-static.btn,
   .input-group-lg > .input-group-btn > input.form-control-static[type="submit"],
   .input-group-lg > .input-group-btn >
@@ -1506,8 +1519,9 @@ pre {
     padding-left: 0; }
 
 .form-control-sm, .input-group-sm > .form-control, #content form .input-group-sm > input[type="text"],
-#content form .input-group-sm > select, .input-group-sm > option,
-.input-group-sm > .input-group-addon,
+#content form .input-group-sm > select, .input-group-sm > input[type='text'], .input-group-sm > option,
+.input-group-sm > .input-group-addon, .main-content.room header #room-info
+.input-group-sm > label,
 .input-group-sm > .input-group-btn > .btn,
 .input-group-sm > .input-group-btn > input[type="submit"],
 .input-group-sm > .input-group-btn >
@@ -1518,8 +1532,9 @@ button {
   border-radius: 0.2rem; }
 
 .form-control-lg, .input-group-lg > .form-control, #content form .input-group-lg > input[type="text"],
-#content form .input-group-lg > select, .input-group-lg > option,
-.input-group-lg > .input-group-addon,
+#content form .input-group-lg > select, .input-group-lg > input[type='text'], .input-group-lg > option,
+.input-group-lg > .input-group-addon, .main-content.room header #room-info
+.input-group-lg > label,
 .input-group-lg > .input-group-btn > .btn,
 .input-group-lg > .input-group-btn > input[type="submit"],
 .input-group-lg > .input-group-btn >
@@ -1609,10 +1624,10 @@ input[type="checkbox"].disabled {
 
 .has-success .form-control, .has-success #content form input[type="text"], #content form .has-success input[type="text"], .has-success
 #content form select,
-#content form .has-success select, .has-success option {
+#content form .has-success select, .has-success input[type='text'], .has-success option {
   border-color: #42A084; }
 
-.has-success .input-group-addon {
+.has-success .input-group-addon, .has-success .main-content.room header #room-info label, .main-content.room header #room-info .has-success label {
   color: #42A084;
   border-color: #42A084;
   background-color: #c6e8de; }
@@ -1637,10 +1652,10 @@ input[type="checkbox"].disabled {
 
 .has-warning .form-control, .has-warning #content form input[type="text"], #content form .has-warning input[type="text"], .has-warning
 #content form select,
-#content form .has-warning select, .has-warning option {
+#content form .has-warning select, .has-warning input[type='text'], .has-warning option {
   border-color: #BB992F; }
 
-.has-warning .input-group-addon {
+.has-warning .input-group-addon, .has-warning .main-content.room header #room-info label, .main-content.room header #room-info .has-warning label {
   color: #BB992F;
   border-color: #BB992F;
   background-color: #f1e6c5; }
@@ -1665,10 +1680,10 @@ input[type="checkbox"].disabled {
 
 .has-danger .form-control, .has-danger #content form input[type="text"], #content form .has-danger input[type="text"], .has-danger
 #content form select,
-#content form .has-danger select, .has-danger option {
+#content form .has-danger select, .has-danger input[type='text'], .has-danger option {
   border-color: #EB5E28; }
 
-.has-danger .input-group-addon {
+.has-danger .input-group-addon, .has-danger .main-content.room header #room-info label, .main-content.room header #room-info .has-danger label {
   color: #EB5E28;
   border-color: #EB5E28;
   background-color: #fceae3; }
@@ -1680,50 +1695,149 @@ input[type="checkbox"].disabled {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjZDk1MzRmIiBkPSJNNDQ3IDU0NC40Yy0xNC40IDE0LjQtMzcuNiAxNC40LTUyIDBsLTg5LTkyLjctODkgOTIuN2MtMTQuNSAxNC40LTM3LjcgMTQuNC01MiAwLTE0LjQtMTQuNC0xNC40LTM3LjYgMC01Mmw5Mi40LTk2LjMtOTIuNC05Ni4zYy0xNC40LTE0LjQtMTQuNC0zNy42IDAtNTJzMzcuNi0xNC4zIDUyIDBsODkgOTIuOCA4OS4yLTkyLjdjMTQuNC0xNC40IDM3LjYtMTQuNCA1MiAwIDE0LjMgMTQuNCAxNC4zIDM3LjYgMCA1MkwzNTQuNiAzOTZsOTIuNCA5Ni40YzE0LjQgMTQuNCAxNC40IDM3LjYgMCA1MnoiLz48L3N2Zz4="); }
 
 @media (min-width: 544px) {
-  .form-inline .form-group, #content form .form-group, #content form fieldset {
+  .form-inline .form-group, #content form .form-group, .main-content.index #join-room fieldset .form-group,
+  .main-content.index #create-room fieldset .form-group, #content form fieldset, .main-content.index #join-room fieldset #content form fieldset, #content form .main-content.index #join-room fieldset fieldset,
+  .main-content.index #create-room fieldset #content form fieldset, #content form
+  .main-content.index #create-room fieldset fieldset {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle; }
-  .form-inline .form-control, #content form .form-control, #content form input[type="text"],
-  #content form select, .form-inline option, #content form option {
+  .form-inline .form-control, #content form .form-control, .main-content.index #join-room fieldset .form-control,
+  .main-content.index #create-room fieldset .form-control, #content form input[type="text"], .main-content.index #join-room fieldset #content form input[type="text"], #content form .main-content.index #join-room fieldset input[type="text"],
+  .main-content.index #create-room fieldset #content form input[type="text"], #content form
+  .main-content.index #create-room fieldset input[type="text"],
+  #content form select, .main-content.index #join-room fieldset
+  #content form select,
+  #content form .main-content.index #join-room fieldset select,
+  .main-content.index #create-room fieldset
+  #content form select,
+  #content form
+  .main-content.index #create-room fieldset select, .form-inline input[type='text'], #content form input[type='text'], .main-content.index #join-room fieldset input[type='text'],
+  .main-content.index #create-room fieldset input[type='text'], .form-inline option, #content form option, .main-content.index #join-room fieldset option,
+  .main-content.index #create-room fieldset option {
     display: inline-block;
     width: auto;
     vertical-align: middle; }
-  .form-inline .form-control-static, #content form .form-control-static {
+  .form-inline .form-control-static, #content form .form-control-static, .main-content.index #join-room fieldset .form-control-static,
+  .main-content.index #create-room fieldset .form-control-static {
     display: inline-block; }
-  .form-inline .input-group, #content form .input-group {
+  .form-inline .input-group, #content form .input-group, .main-content.index #join-room fieldset .input-group,
+  .main-content.index #create-room fieldset .input-group, .form-inline .main-content.room header #room-info, .main-content.room header .form-inline #room-info, #content form .main-content.room header #room-info, .main-content.room header #content form #room-info, .main-content.index #join-room fieldset .main-content.room header #room-info, .main-content.room header .main-content.index #join-room fieldset #room-info,
+  .main-content.index #create-room fieldset .main-content.room header #room-info, .main-content.room header
+  .main-content.index #create-room fieldset #room-info {
     display: inline-table;
     vertical-align: middle; }
-    .form-inline .input-group .input-group-addon, #content form .input-group .input-group-addon,
-    .form-inline .input-group .input-group-btn, #content form .input-group .input-group-btn,
-    .form-inline .input-group .form-control, #content form .input-group .form-control,
-    .form-inline .input-group #content form input[type="text"], #content form .input-group input[type="text"],
+    .form-inline .input-group .input-group-addon, #content form .input-group .input-group-addon, .main-content.index #join-room fieldset .input-group .input-group-addon,
+    .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .main-content.room header #room-info .input-group-addon, .main-content.room header .form-inline #room-info .input-group-addon, #content form .main-content.room header #room-info .input-group-addon, .main-content.room header #content form #room-info .input-group-addon, .main-content.index #join-room fieldset .main-content.room header #room-info .input-group-addon, .main-content.room header .main-content.index #join-room fieldset #room-info .input-group-addon,
+    .main-content.index #create-room fieldset .main-content.room header #room-info .input-group-addon, .main-content.room header
+    .main-content.index #create-room fieldset #room-info .input-group-addon, .main-content.room header #room-info .form-inline .input-group label, .main-content.room header #room-info #content form .input-group label, .main-content.room header #room-info .main-content.index #join-room fieldset .input-group label, .main-content.room header #room-info
+    .main-content.index #create-room fieldset .input-group label, .form-inline .main-content.room header #room-info label, .main-content.room header .form-inline #room-info label, #content form .main-content.room header #room-info label, .main-content.room header #content form #room-info label, .main-content.index #join-room fieldset .main-content.room header #room-info label, .main-content.room header .main-content.index #join-room fieldset #room-info label,
+    .main-content.index #create-room fieldset .main-content.room header #room-info label, .main-content.room header
+    .main-content.index #create-room fieldset #room-info label,
+    .form-inline .input-group .input-group-btn, #content form .input-group .input-group-btn, .main-content.index #join-room fieldset .input-group .input-group-btn,
+    .main-content.index #create-room fieldset .input-group .input-group-btn,
+    .form-inline .main-content.room header #room-info .input-group-btn, .main-content.room header
+    .form-inline #room-info .input-group-btn, #content form .main-content.room header #room-info .input-group-btn, .main-content.room header #content form #room-info .input-group-btn, .main-content.index #join-room fieldset .main-content.room header #room-info .input-group-btn, .main-content.room header .main-content.index #join-room fieldset #room-info .input-group-btn,
+    .main-content.index #create-room fieldset .main-content.room header #room-info .input-group-btn, .main-content.room header
+    .main-content.index #create-room fieldset #room-info .input-group-btn,
+    .form-inline .input-group .form-control, #content form .input-group .form-control, .main-content.index #join-room fieldset .input-group .form-control,
+    .main-content.index #create-room fieldset .input-group .form-control,
+    .form-inline .main-content.room header #room-info .form-control, .main-content.room header
+    .form-inline #room-info .form-control, #content form .main-content.room header #room-info .form-control, .main-content.room header #content form #room-info .form-control, .main-content.index #join-room fieldset .main-content.room header #room-info .form-control, .main-content.room header .main-content.index #join-room fieldset #room-info .form-control,
+    .main-content.index #create-room fieldset .main-content.room header #room-info .form-control, .main-content.room header
+    .main-content.index #create-room fieldset #room-info .form-control,
+    .form-inline .input-group #content form input[type="text"], #content form .input-group input[type="text"], .main-content.index #join-room fieldset .input-group #content form input[type="text"],
+    .main-content.index #create-room fieldset .input-group #content form input[type="text"],
+    .form-inline .main-content.room header #room-info #content form input[type="text"], .main-content.room header
+    .form-inline #room-info #content form input[type="text"], #content form .main-content.room header #room-info input[type="text"], .main-content.room header #content form #room-info input[type="text"], .main-content.index #join-room fieldset .main-content.room header #room-info #content form input[type="text"], .main-content.room header .main-content.index #join-room fieldset #room-info #content form input[type="text"],
+    .main-content.index #create-room fieldset .main-content.room header #room-info #content form input[type="text"], .main-content.room header
+    .main-content.index #create-room fieldset #room-info #content form input[type="text"],
     .form-inline .input-group
     #content form select,
-    #content form .input-group select,
-    .form-inline .input-group option, #content form .input-group option {
+    #content form .input-group select, .main-content.index #join-room fieldset .input-group
+    #content form select,
+    #content form .main-content.index #join-room fieldset .input-group select,
+    .main-content.index #create-room fieldset .input-group
+    #content form select,
+    #content form
+    .main-content.index #create-room fieldset .input-group select,
+    .form-inline .main-content.room header #room-info
+    #content form select, .main-content.room header
+    .form-inline #room-info
+    #content form select,
+    #content form .main-content.room header #room-info select, .main-content.room header
+    #content form #room-info select, .main-content.index #join-room fieldset .main-content.room header #room-info
+    #content form select, .main-content.room header .main-content.index #join-room fieldset #room-info
+    #content form select,
+    .main-content.index #create-room fieldset .main-content.room header #room-info
+    #content form select, .main-content.room header
+    .main-content.index #create-room fieldset #room-info
+    #content form select,
+    .form-inline .input-group input[type='text'], #content form .input-group input[type='text'], .main-content.index #join-room fieldset .input-group input[type='text'],
+    .main-content.index #create-room fieldset .input-group input[type='text'],
+    .form-inline .main-content.room header #room-info input[type='text'], .main-content.room header
+    .form-inline #room-info input[type='text'], #content form .main-content.room header #room-info input[type='text'], .main-content.room header #content form #room-info input[type='text'], .main-content.index #join-room fieldset .main-content.room header #room-info input[type='text'], .main-content.room header .main-content.index #join-room fieldset #room-info input[type='text'],
+    .main-content.index #create-room fieldset .main-content.room header #room-info input[type='text'], .main-content.room header
+    .main-content.index #create-room fieldset #room-info input[type='text'],
+    .form-inline .input-group option, #content form .input-group option, .main-content.index #join-room fieldset .input-group option,
+    .main-content.index #create-room fieldset .input-group option,
+    .form-inline .main-content.room header #room-info option, .main-content.room header
+    .form-inline #room-info option, #content form .main-content.room header #room-info option, .main-content.room header #content form #room-info option, .main-content.index #join-room fieldset .main-content.room header #room-info option, .main-content.room header .main-content.index #join-room fieldset #room-info option,
+    .main-content.index #create-room fieldset .main-content.room header #room-info option, .main-content.room header
+    .main-content.index #create-room fieldset #room-info option {
       width: auto; }
-  .form-inline .input-group > .form-control, #content form .input-group > .form-control, #content form .form-inline .input-group > input[type="text"], #content form .input-group > input[type="text"],
+  .form-inline .input-group > .form-control, #content form .input-group > .form-control, .main-content.index #join-room fieldset .input-group > .form-control,
+  .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .main-content.room header #room-info > .form-control, .main-content.room header .form-inline #room-info > .form-control, #content form .main-content.room header #room-info > .form-control, .main-content.room header #content form #room-info > .form-control, .main-content.index #join-room fieldset .main-content.room header #room-info > .form-control, .main-content.room header .main-content.index #join-room fieldset #room-info > .form-control,
+  .main-content.index #create-room fieldset .main-content.room header #room-info > .form-control, .main-content.room header
+  .main-content.index #create-room fieldset #room-info > .form-control, #content form .form-inline .input-group > input[type="text"], #content form .input-group > input[type="text"], #content form .main-content.index #join-room fieldset .input-group > input[type="text"], #content form
+  .main-content.index #create-room fieldset .input-group > input[type="text"], #content form .main-content.room header .form-inline #room-info > input[type="text"], #content form .main-content.room header #room-info > input[type="text"], .main-content.room header #content form #room-info > input[type="text"], #content form .main-content.room header .main-content.index #join-room fieldset #room-info > input[type="text"], #content form .main-content.room header
+  .main-content.index #create-room fieldset #room-info > input[type="text"],
   #content form .form-inline .input-group > select,
-  #content form .input-group > select, .form-inline .input-group > option, #content form .input-group > option {
+  #content form .input-group > select, .main-content.index #join-room fieldset
+  #content form .input-group > select,
+  #content form .main-content.index #join-room fieldset .input-group > select,
+  .main-content.index #create-room fieldset
+  #content form .input-group > select,
+  #content form
+  .main-content.index #create-room fieldset .input-group > select,
+  #content form .main-content.room header .form-inline #room-info > select,
+  #content form .main-content.room header #room-info > select, .main-content.room header
+  #content form #room-info > select,
+  #content form .main-content.room header .main-content.index #join-room fieldset #room-info > select,
+  #content form .main-content.room header
+  .main-content.index #create-room fieldset #room-info > select, .form-inline .input-group > input[type='text'], #content form .input-group > input[type='text'], .main-content.index #join-room fieldset .input-group > input[type='text'],
+  .main-content.index #create-room fieldset .input-group > input[type='text'], .form-inline .main-content.room header #room-info > input[type='text'], .main-content.room header .form-inline #room-info > input[type='text'], #content form .main-content.room header #room-info > input[type='text'], .main-content.room header #content form #room-info > input[type='text'], .main-content.index #join-room fieldset .main-content.room header #room-info > input[type='text'], .main-content.room header .main-content.index #join-room fieldset #room-info > input[type='text'],
+  .main-content.index #create-room fieldset .main-content.room header #room-info > input[type='text'], .main-content.room header
+  .main-content.index #create-room fieldset #room-info > input[type='text'], .form-inline .input-group > option, #content form .input-group > option, .main-content.index #join-room fieldset .input-group > option,
+  .main-content.index #create-room fieldset .input-group > option, .form-inline .main-content.room header #room-info > option, .main-content.room header .form-inline #room-info > option, #content form .main-content.room header #room-info > option, .main-content.room header #content form #room-info > option, .main-content.index #join-room fieldset .main-content.room header #room-info > option, .main-content.room header .main-content.index #join-room fieldset #room-info > option,
+  .main-content.index #create-room fieldset .main-content.room header #room-info > option, .main-content.room header
+  .main-content.index #create-room fieldset #room-info > option {
     width: 100%; }
-  .form-inline .form-control-label, #content form .form-control-label {
+  .form-inline .form-control-label, #content form .form-control-label, .main-content.index #join-room fieldset .form-control-label,
+  .main-content.index #create-room fieldset .form-control-label {
     margin-bottom: 0;
     vertical-align: middle; }
-  .form-inline .radio, #content form .radio,
-  .form-inline .checkbox, #content form .checkbox {
+  .form-inline .radio, #content form .radio, .main-content.index #join-room fieldset .radio,
+  .main-content.index #create-room fieldset .radio,
+  .form-inline .checkbox, #content form .checkbox, .main-content.index #join-room fieldset .checkbox,
+  .main-content.index #create-room fieldset .checkbox {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
     vertical-align: middle; }
-    .form-inline .radio label, #content form .radio label,
-    .form-inline .checkbox label, #content form .checkbox label {
+    .form-inline .radio label, #content form .radio label, .main-content.index #join-room fieldset .radio label,
+    .main-content.index #create-room fieldset .radio label,
+    .form-inline .checkbox label, #content form .checkbox label, .main-content.index #join-room fieldset .checkbox label,
+    .main-content.index #create-room fieldset .checkbox label {
       padding-left: 0; }
-  .form-inline .radio input[type="radio"], #content form .radio input[type="radio"],
-  .form-inline .checkbox input[type="checkbox"], #content form .checkbox input[type="checkbox"] {
+  .form-inline .radio input[type="radio"], #content form .radio input[type="radio"], .main-content.index #join-room fieldset .radio input[type="radio"],
+  .main-content.index #create-room fieldset .radio input[type="radio"],
+  .form-inline .checkbox input[type="checkbox"], #content form .checkbox input[type="checkbox"], .main-content.index #join-room fieldset .checkbox input[type="checkbox"],
+  .main-content.index #create-room fieldset .checkbox input[type="checkbox"] {
     position: relative;
     margin-left: 0; }
-  .form-inline .has-feedback .form-control-feedback, #content form .has-feedback .form-control-feedback {
+  .form-inline .has-feedback .form-control-feedback, #content form .has-feedback .form-control-feedback, .main-content.index #join-room fieldset .has-feedback .form-control-feedback,
+  .main-content.index #create-room fieldset .has-feedback .form-control-feedback {
     top: 0; } }
 
 .btn, input[type="submit"],
@@ -2430,12 +2544,15 @@ button,
     display: table;
     clear: both; }
   .btn-toolbar .btn-group,
-  .btn-toolbar .input-group {
+  .btn-toolbar .input-group,
+  .btn-toolbar .main-content.room header #room-info, .main-content.room header
+  .btn-toolbar #room-info {
     float: left; }
   .btn-toolbar > .btn, .btn-toolbar > input[type="submit"], .btn-toolbar >
   button,
   .btn-toolbar > .btn-group,
-  .btn-toolbar > .input-group {
+  .btn-toolbar > .input-group, .main-content.room header
+  .btn-toolbar > #room-info {
     margin-left: 5px; }
 
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group >
@@ -2592,57 +2709,71 @@ button input[type="checkbox"] {
   clip: rect(0, 0, 0, 0);
   pointer-events: none; }
 
-.input-group {
+.input-group, .main-content.room header #room-info {
   position: relative;
   display: table;
   border-collapse: separate; }
-  .input-group .form-control, .input-group #content form input[type="text"], #content form .input-group input[type="text"], .input-group
+  .input-group .form-control, .main-content.room header #room-info .form-control, .input-group #content form input[type="text"], #content form .input-group input[type="text"], .main-content.room header #room-info #content form input[type="text"], #content form .main-content.room header #room-info input[type="text"], .input-group
   #content form select,
-  #content form .input-group select, .input-group option {
+  #content form .input-group select, .main-content.room header #room-info
+  #content form select,
+  #content form .main-content.room header #room-info select, .input-group input[type='text'], .main-content.room header #room-info input[type='text'], .input-group option, .main-content.room header #room-info option {
     position: relative;
     z-index: 2;
     float: left;
     width: 100%;
     margin-bottom: 0; }
-    .input-group .form-control:focus, .input-group #content form input[type="text"]:focus, #content form .input-group input[type="text"]:focus, .input-group
+    .input-group .form-control:focus, .main-content.room header #room-info .form-control:focus, .input-group #content form input[type="text"]:focus, #content form .input-group input[type="text"]:focus, .main-content.room header #room-info #content form input[type="text"]:focus, #content form .main-content.room header #room-info input[type="text"]:focus, .input-group
     #content form select:focus,
-    #content form .input-group select:focus, .input-group option:focus, .input-group .form-control:active, .input-group #content form input[type="text"]:active, #content form .input-group input[type="text"]:active, .input-group
+    #content form .input-group select:focus, .main-content.room header #room-info
+    #content form select:focus,
+    #content form .main-content.room header #room-info select:focus, .input-group input[type='text']:focus, .main-content.room header #room-info input[type='text']:focus, .input-group option:focus, .main-content.room header #room-info option:focus, .input-group .form-control:active, .main-content.room header #room-info .form-control:active, .input-group #content form input[type="text"]:active, #content form .input-group input[type="text"]:active, .main-content.room header #room-info #content form input[type="text"]:active, #content form .main-content.room header #room-info input[type="text"]:active, .input-group
     #content form select:active,
-    #content form .input-group select:active, .input-group option:active, .input-group .form-control:hover, .input-group #content form input[type="text"]:hover, #content form .input-group input[type="text"]:hover, .input-group
+    #content form .input-group select:active, .main-content.room header #room-info
+    #content form select:active,
+    #content form .main-content.room header #room-info select:active, .input-group input[type='text']:active, .main-content.room header #room-info input[type='text']:active, .input-group option:active, .main-content.room header #room-info option:active, .input-group .form-control:hover, .main-content.room header #room-info .form-control:hover, .input-group #content form input[type="text"]:hover, #content form .input-group input[type="text"]:hover, .main-content.room header #room-info #content form input[type="text"]:hover, #content form .main-content.room header #room-info input[type="text"]:hover, .input-group
     #content form select:hover,
-    #content form .input-group select:hover, .input-group option:hover {
+    #content form .input-group select:hover, .main-content.room header #room-info
+    #content form select:hover,
+    #content form .main-content.room header #room-info select:hover, .input-group input[type='text']:hover, .main-content.room header #room-info input[type='text']:hover, .input-group option:hover, .main-content.room header #room-info option:hover {
       z-index: 3; }
 
-.input-group-addon,
+.input-group-addon, .main-content.room header #room-info label,
 .input-group-btn,
-.input-group .form-control,
+.input-group .form-control, .main-content.room header #room-info .form-control,
 .input-group #content form input[type="text"], #content form
-.input-group input[type="text"],
+.input-group input[type="text"], .main-content.room header #room-info #content form input[type="text"], #content form .main-content.room header #room-info input[type="text"],
 .input-group
 #content form select,
 #content form
-.input-group select,
-.input-group option {
+.input-group select, .main-content.room header #room-info
+#content form select,
+#content form .main-content.room header #room-info select,
+.input-group input[type='text'], .main-content.room header #room-info input[type='text'],
+.input-group option, .main-content.room header #room-info option {
   display: table-cell; }
-  .input-group-addon:not(:first-child):not(:last-child),
+  .input-group-addon:not(:first-child):not(:last-child), .main-content.room header #room-info label:not(:first-child):not(:last-child),
   .input-group-btn:not(:first-child):not(:last-child),
-  .input-group .form-control:not(:first-child):not(:last-child),
+  .input-group .form-control:not(:first-child):not(:last-child), .main-content.room header #room-info .form-control:not(:first-child):not(:last-child),
   .input-group #content form input[type="text"]:not(:first-child):not(:last-child), #content form
-  .input-group input[type="text"]:not(:first-child):not(:last-child),
+  .input-group input[type="text"]:not(:first-child):not(:last-child), .main-content.room header #room-info #content form input[type="text"]:not(:first-child):not(:last-child), #content form .main-content.room header #room-info input[type="text"]:not(:first-child):not(:last-child),
   .input-group
   #content form select:not(:first-child):not(:last-child),
   #content form
-  .input-group select:not(:first-child):not(:last-child),
-  .input-group option:not(:first-child):not(:last-child) {
+  .input-group select:not(:first-child):not(:last-child), .main-content.room header #room-info
+  #content form select:not(:first-child):not(:last-child),
+  #content form .main-content.room header #room-info select:not(:first-child):not(:last-child),
+  .input-group input[type='text']:not(:first-child):not(:last-child), .main-content.room header #room-info input[type='text']:not(:first-child):not(:last-child),
+  .input-group option:not(:first-child):not(:last-child), .main-content.room header #room-info option:not(:first-child):not(:last-child) {
     border-radius: 0; }
 
-.input-group-addon,
+.input-group-addon, .main-content.room header #room-info label,
 .input-group-btn {
   width: 1%;
   white-space: nowrap;
   vertical-align: middle; }
 
-.input-group-addon {
+.input-group-addon, .main-content.room header #room-info label {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: normal;
@@ -2654,32 +2785,39 @@ button input[type="checkbox"] {
   border-radius: 0.25rem; }
   .input-group-addon.form-control-sm, #content form .input-group-sm > input.input-group-addon[type="text"],
   #content form .input-group-sm > select.input-group-addon,
-  .input-group-sm > .input-group-addon,
+  .input-group-sm > .input-group-addon, .main-content.room header #room-info
+  .input-group-sm > label,
   .input-group-sm > .input-group-btn > .input-group-addon.btn,
   .input-group-sm > .input-group-btn > input.input-group-addon[type="submit"],
   .input-group-sm > .input-group-btn >
-  button.input-group-addon {
+  button.input-group-addon, .main-content.room header #room-info
+  .input-group-sm > .input-group-btn > label.btn, .main-content.room header #room-info label.form-control-sm {
     padding: 0.275rem 0.75rem;
     font-size: 0.875rem;
     border-radius: 0.2rem; }
   .input-group-addon.form-control-lg, #content form .input-group-lg > input.input-group-addon[type="text"],
   #content form .input-group-lg > select.input-group-addon,
-  .input-group-lg > .input-group-addon,
+  .input-group-lg > .input-group-addon, .main-content.room header #room-info
+  .input-group-lg > label,
   .input-group-lg > .input-group-btn > .input-group-addon.btn,
   .input-group-lg > .input-group-btn > input.input-group-addon[type="submit"],
   .input-group-lg > .input-group-btn >
-  button.input-group-addon {
+  button.input-group-addon, .main-content.room header #room-info
+  .input-group-lg > .input-group-btn > label.btn, .main-content.room header #room-info label.form-control-lg {
     padding: 0.75rem 1.25rem;
     font-size: 1.25rem;
     border-radius: 0.3rem; }
-  .input-group-addon input[type="radio"],
-  .input-group-addon input[type="checkbox"] {
+  .input-group-addon input[type="radio"], .main-content.room header #room-info label input[type="radio"],
+  .input-group-addon input[type="checkbox"], .main-content.room header #room-info label input[type="checkbox"] {
     margin-top: 0; }
 
-.input-group .form-control:first-child, .input-group #content form input[type="text"]:first-child, #content form .input-group input[type="text"]:first-child, .input-group
+.input-group .form-control:first-child, .main-content.room header #room-info .form-control:first-child, .input-group #content form input[type="text"]:first-child, #content form .input-group input[type="text"]:first-child, .main-content.room header #room-info #content form input[type="text"]:first-child, #content form .main-content.room header #room-info input[type="text"]:first-child, .input-group
 #content form select:first-child,
-#content form .input-group select:first-child, .input-group option:first-child,
+#content form .input-group select:first-child, .main-content.room header #room-info
+#content form select:first-child,
+#content form .main-content.room header #room-info select:first-child, .input-group input[type='text']:first-child, .main-content.room header #room-info input[type='text']:first-child, .input-group option:first-child, .main-content.room header #room-info option:first-child,
 .input-group-addon:first-child,
+.main-content.room header #room-info label:first-child,
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > input[type="submit"],
 .input-group-btn:first-child >
@@ -2700,13 +2838,16 @@ button {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0; }
 
-.input-group-addon:first-child {
+.input-group-addon:first-child, .main-content.room header #room-info label:first-child {
   border-right: 0; }
 
-.input-group .form-control:last-child, .input-group #content form input[type="text"]:last-child, #content form .input-group input[type="text"]:last-child, .input-group
+.input-group .form-control:last-child, .main-content.room header #room-info .form-control:last-child, .input-group #content form input[type="text"]:last-child, #content form .input-group input[type="text"]:last-child, .main-content.room header #room-info #content form input[type="text"]:last-child, #content form .main-content.room header #room-info input[type="text"]:last-child, .input-group
 #content form select:last-child,
-#content form .input-group select:last-child, .input-group option:last-child,
+#content form .input-group select:last-child, .main-content.room header #room-info
+#content form select:last-child,
+#content form .main-content.room header #room-info select:last-child, .input-group input[type='text']:last-child, .main-content.room header #room-info input[type='text']:last-child, .input-group option:last-child, .main-content.room header #room-info option:last-child,
 .input-group-addon:last-child,
+.main-content.room header #room-info label:last-child,
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > input[type="submit"],
 .input-group-btn:last-child >
@@ -2727,7 +2868,7 @@ button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0; }
 
-.input-group-addon:last-child {
+.input-group-addon:last-child, .main-content.room header #room-info label:last-child {
   border-left: 0; }
 
 .input-group-btn {
@@ -3249,10 +3390,10 @@ button {
 .card-link + .card-link {
   margin-left: 1.25rem; }
 
-.card > .list-group:first-child .list-group-item:first-child, #participants .card > ul:first-child .list-group-item:first-child, .card > .list-group:first-child #participants ul li:first-child, #participants ul .card > .list-group:first-child li:first-child, #participants .card > ul:first-child li:first-child {
+.card > .list-group:first-child .list-group-item:first-child, .card > #participants:first-child .list-group-item:first-child, .card > .list-group:first-child #participants li:first-child, #participants .card > .list-group:first-child li:first-child, .card > #participants:first-child li:first-child {
   border-radius: 0.25rem 0.25rem 0 0; }
 
-.card > .list-group:last-child .list-group-item:last-child, #participants .card > ul:last-child .list-group-item:last-child, .card > .list-group:last-child #participants ul li:last-child, #participants ul .card > .list-group:last-child li:last-child, #participants .card > ul:last-child li:last-child {
+.card > .list-group:last-child .list-group-item:last-child, .card > #participants:last-child .list-group-item:last-child, .card > .list-group:last-child #participants li:last-child, #participants .card > .list-group:last-child li:last-child, .card > #participants:last-child li:last-child {
   border-radius: 0 0 0.25rem 0.25rem; }
 
 .card-header, .main-content.index #join-room h3,
@@ -3836,33 +3977,33 @@ a.label:focus, a.label:hover {
   padding-left: 0;
   list-style: none; }
 
-.list-group, #participants ul {
+.list-group, #participants {
   padding-left: 0;
   margin-bottom: 0; }
 
-.list-group-item, #participants ul li {
+.list-group-item, #participants li {
   position: relative;
   display: block;
   padding: .75rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid #ddd; }
-  .list-group-item:first-child, #participants ul li:first-child {
+  .list-group-item:first-child, #participants li:first-child {
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem; }
-  .list-group-item:last-child, #participants ul li:last-child {
+  .list-group-item:last-child, #participants li:last-child {
     margin-bottom: 0;
     border-bottom-right-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem; }
 
-.list-group-flush .list-group-item, .list-group-flush #participants ul li, #participants ul .list-group-flush li {
+.list-group-flush .list-group-item, .list-group-flush #participants li, #participants .list-group-flush li {
   border-width: 1px 0;
   border-radius: 0; }
 
-.list-group-flush:first-child .list-group-item:first-child, .list-group-flush:first-child #participants ul li:first-child, #participants ul .list-group-flush:first-child li:first-child {
+.list-group-flush:first-child .list-group-item:first-child, .list-group-flush:first-child #participants li:first-child, #participants .list-group-flush:first-child li:first-child {
   border-top: 0; }
 
-.list-group-flush:last-child .list-group-item:last-child, .list-group-flush:last-child #participants ul li:last-child, #participants ul .list-group-flush:last-child li:last-child {
+.list-group-flush:last-child .list-group-item:last-child, .list-group-flush:last-child #participants li:last-child, #participants .list-group-flush:last-child li:last-child {
   border-bottom: 0; }
 
 a.list-group-item,
@@ -3880,29 +4021,29 @@ button.list-group-item {
     text-decoration: none;
     background-color: #f5f5f5; }
 
-.list-group-item.disabled, #participants ul li.disabled, .list-group-item.disabled:focus, #participants ul li.disabled:focus, .list-group-item.disabled:hover, #participants ul li.disabled:hover {
+.list-group-item.disabled, #participants li.disabled, .list-group-item.disabled:focus, #participants li.disabled:focus, .list-group-item.disabled:hover, #participants li.disabled:hover {
   color: #A2A8AB;
   cursor: not-allowed;
   background-color: #BCC1C3; }
-  .list-group-item.disabled .list-group-item-heading, #participants ul li.disabled .list-group-item-heading, .list-group-item.disabled:focus .list-group-item-heading, #participants ul li.disabled:focus .list-group-item-heading, .list-group-item.disabled:hover .list-group-item-heading, #participants ul li.disabled:hover .list-group-item-heading {
+  .list-group-item.disabled .list-group-item-heading, #participants li.disabled .list-group-item-heading, .list-group-item.disabled:focus .list-group-item-heading, #participants li.disabled:focus .list-group-item-heading, .list-group-item.disabled:hover .list-group-item-heading, #participants li.disabled:hover .list-group-item-heading {
     color: inherit; }
-  .list-group-item.disabled .list-group-item-text, #participants ul li.disabled .list-group-item-text, .list-group-item.disabled:focus .list-group-item-text, #participants ul li.disabled:focus .list-group-item-text, .list-group-item.disabled:hover .list-group-item-text, #participants ul li.disabled:hover .list-group-item-text {
+  .list-group-item.disabled .list-group-item-text, #participants li.disabled .list-group-item-text, .list-group-item.disabled:focus .list-group-item-text, #participants li.disabled:focus .list-group-item-text, .list-group-item.disabled:hover .list-group-item-text, #participants li.disabled:hover .list-group-item-text {
     color: #A2A8AB; }
 
-.list-group-item.active, #participants ul li.active, .list-group-item.active:focus, #participants ul li.active:focus, .list-group-item.active:hover, #participants ul li.active:hover {
+.list-group-item.active, #participants li.active, .list-group-item.active:focus, #participants li.active:focus, .list-group-item.active:hover, #participants li.active:hover {
   z-index: 2;
   color: #fff;
   background-color: #427C89;
   border-color: #427C89; }
-  .list-group-item.active .list-group-item-heading, #participants ul li.active .list-group-item-heading,
-  .list-group-item.active .list-group-item-heading > small, #participants ul li.active .list-group-item-heading > small,
-  .list-group-item.active .list-group-item-heading > .small, #participants ul li.active .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading, #participants ul li.active:focus .list-group-item-heading,
-  .list-group-item.active:focus .list-group-item-heading > small, #participants ul li.active:focus .list-group-item-heading > small,
-  .list-group-item.active:focus .list-group-item-heading > .small, #participants ul li.active:focus .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading, #participants ul li.active:hover .list-group-item-heading,
-  .list-group-item.active:hover .list-group-item-heading > small, #participants ul li.active:hover .list-group-item-heading > small,
-  .list-group-item.active:hover .list-group-item-heading > .small, #participants ul li.active:hover .list-group-item-heading > .small {
+  .list-group-item.active .list-group-item-heading, #participants li.active .list-group-item-heading,
+  .list-group-item.active .list-group-item-heading > small, #participants li.active .list-group-item-heading > small,
+  .list-group-item.active .list-group-item-heading > .small, #participants li.active .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading, #participants li.active:focus .list-group-item-heading,
+  .list-group-item.active:focus .list-group-item-heading > small, #participants li.active:focus .list-group-item-heading > small,
+  .list-group-item.active:focus .list-group-item-heading > .small, #participants li.active:focus .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading, #participants li.active:hover .list-group-item-heading,
+  .list-group-item.active:hover .list-group-item-heading > small, #participants li.active:hover .list-group-item-heading > small,
+  .list-group-item.active:hover .list-group-item-heading > .small, #participants li.active:hover .list-group-item-heading > .small {
     color: inherit; }
-  .list-group-item.active .list-group-item-text, #participants ul li.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text, #participants ul li.active:focus .list-group-item-text, .list-group-item.active:hover .list-group-item-text, #participants ul li.active:hover .list-group-item-text {
+  .list-group-item.active .list-group-item-text, #participants li.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text, #participants li.active:focus .list-group-item-text, .list-group-item.active:hover .list-group-item-text, #participants li.active:hover .list-group-item-text {
     color: #b9d7de; }
 
 .list-group-item-success {
@@ -4723,7 +4864,7 @@ a.bg-primary:focus, a.bg-primary:hover {
 a.bg-success:focus, a.bg-success:hover {
   background-color: #337c66; }
 
-.bg-info {
+.bg-info, .main-content.room header #room-info label {
   color: #fff !important;
   background-color: #3091B2 !important; }
 
@@ -5011,8 +5152,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 #participants .controls {
   display: inline-block; }
 
-form {
-  text-align: center; }
+.main-content.room header #room-info label {
+  border-color: #3091B2; }
+
+.main-content.room header #room-info #room-link {
+  border-color: #3091B2; }
 
 body {
   padding-top: 62px; }
