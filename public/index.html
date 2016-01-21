@@ -3,11 +3,14 @@
   <head>
     <title>Mexcla Conferencing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/jquery.modal.css">
-    <link rel="stylesheet" href="/css/vendor/switches/toggle-switch.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/jquery.modal.css">
+    <link rel="stylesheet" href="/css/vendor/switches/toggle-switch.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/theme/css/styles.css">
 
     <!-- SCRIPTS -->
+    <link rel="stylesheet" href="/theme/js/scripts.css">
     <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
     <script type="text/javascript" src="js/libs/jquery.js"></script>
     <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
@@ -42,7 +45,7 @@
     <!--INDEX -->
     <script type="text/template" id="index-template">
       <main class="main-content index" role="main">
-        <div id="join-room">
+        <div id="join-room" class="card">
           <h3><%= join %></h3>
             <fieldset>
               <label for="roomnumber"><%= enter %></label>
@@ -63,17 +66,20 @@
       <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
     </script>
 
-    <!--REGISTER  -->
+    <!-- REGISTER  -->
     <script type="text/template" id="register-template">
       <main class="main-content" role="main">
           <fieldset>
-            <label for="username">Please Enter Your Name</label>
+          <!-- // Needs translation - enter_username -->
+            <label for="username">Enter Your Name</label>
+            <!-- // Needs translation - your_name -->
             <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
             <select name="lang" id="lang-select">
               <option value="en">English</option>
-              <option value="es">Spanish</option>
+              <option value="es">Espanol</option>
             </select>
-            <input type="submit" id="register-submit-button" />
+            <!-- // Needs translation - submit -->
+            <input type="submit" id="register-submit-button" value="Enter" />
           </fieldset>
       </main>
     </script>
@@ -139,17 +145,20 @@
           <div id="iframe-selectors">
             <div class="tab">
               <input type="radio" name="tab-group-1" id="pad-iframe-checkbox" onclick="mexcla_toggle_pad();">
+              <!-- // Needs translation - notepad -->
               <label for="pad-iframe-checkbox">Notepad</label>
               <!-- <div id="pad-frame" class="content pad">
                    </div> -->
             </div>
             <div class="tab">
               <input type="radio" name="tab-group-1" id="calc-iframe-checkbox" onclick="mexcla_toggle_calc();">
+              <!-- // Needs translation - spreadsheet -->
               <label for="calc-iframe-checkbox">Spreadsheet</label>
               <!-- <div class="content calc"></div> -->
             </div>
             <div class="tab">
               <input type="radio" name="tab-group-1" id="irc-iframe-checkbox" onclick="mexcla_toggle_irc();">
+              <!-- // Needs translation - irc -->
               <label for="irc-iframe-checkbox">IRC Chat</label>
               <!-- <div class="content irc"></div> -->
             </div>
@@ -176,5 +185,3 @@
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
-
- 

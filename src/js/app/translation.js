@@ -1,5 +1,8 @@
 var websiteText = {
     en: {
+      username: "Enter Name",
+      your_name: "Your name",
+      enter: "Enter",
       connect: "Connect",
       conference: "Conference Room",
       mute: "Mute",
@@ -13,9 +16,15 @@ var websiteText = {
       enter: "Please enter the room number",
       create: "Create a Room",
       title: "Simultaneous Interpretation Conference System",
-      salutation: "Hi"
+      salutation: "Hi",
+      notepad: "Notepad",
+      spreadsheet: "Spreadsheet",
+      chat: "Chat"
     },
     es: {
+      username: "Ingrese su nombre",
+      your_name: "Su nombre",
+      enter: "Ingrese",
       connect: "Connectarse",
       conference: "Sala De Conferencias",
       mute: "Mícrófono innactivo",
@@ -29,6 +38,9 @@ var websiteText = {
       enter: "Por favor, ingrese el número de la habitación",
       create: "Crear una sala",
       title: "Sistema de Conferencia Interpretación simultánea",
-      salutation: "Hola"
+      salutation: "Hola",
+      notepad: "Notepad",
+      spreadsheet: "Spreadsheet",
+      chat: "Chat"
     }
 };
