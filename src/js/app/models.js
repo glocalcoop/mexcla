@@ -5,6 +5,7 @@ Models.User = Backbone.Model.extend({
 
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
+  urlRoot: "/room/id",
   fetchByNum: function() {
     var that = this;
     $.ajax({
@@ -14,8 +15,24 @@ Models.Room = Backbone.Model.extend({
       that.set(room);
     });
     return this;
+  },
+  createChannel: function(channel) {
+    this.set('channels', this.get('channels').push(channel));
+    this.save();
+    return this;
   }
 });
+
+/*
+
+{
+  lang: '' // 'en', 'es'
+  users; [{users}]
+  interpreter: user,
+}
+
+
+*/
 
 /*
 USERS

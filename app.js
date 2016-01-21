@@ -103,6 +103,8 @@ app.get('/room/id/:id', function(req,res){
   });
 });
 
+
+
 //room info
 app.get('/room/:roomnum/info', function(req, res){
   //return with information about room

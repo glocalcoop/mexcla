@@ -56,6 +56,7 @@ describe('create new user', function(){
 
 describe('rooms', function(){
   var roomNumber;
+  var roomId;
   it('should create a new room and return with room info', function(done){
    request
       .get(url + '/room/create')
@@ -63,6 +64,7 @@ describe('rooms', function(){
       .end(function(err, res){
         should.not.exist(err);
         roomNumber = res.body.roomnum;
+        roomId = res.body._id;
         res.body.users.length.should.eql(1);
         res.body.users[0].lang.should.eql('es');
         res.body.moderator.should.eql(userId);
@@ -156,7 +158,7 @@ describe('rooms', function(){
   describe('leaving rooms', function(){
     it('should remove FAKE SPANISH USER from room and return user info', function(done){
       request
-        .get(url + /room/ + roomNumber + '/leave')
+        .get(url + '/room/' + roomNumber + '/leave')
         .set('cookie', 'id=' + userId)
         .end(function(err, res){
           res.body.salutation.should.eql('Hola');
@@ -177,6 +179,18 @@ describe('rooms', function(){
             done();
           });
       });
+  });
+
+  describe('update room with new channel', function(){
+    it('should add new Spanish channel', function(done){
+      request
+        .put(url + '/room/id/' + roomId)
+        .set('cookie', 'id=' + userId)
+        .end(function(err,res){
+          console.log(res);
+          False.should.be.eql(True);
+        });
+    });
   });
   
 });
