@@ -17,9 +17,28 @@ Models.Room = Backbone.Model.extend({
     return this;
   },
   createChannel: function(channel) {
-    this.set('channels', this.get('channels').push(channel));
-    this.save();
+    var that = this;
+    this.createChannelAjax(channel).done(function(res){
+      if (that.serverErrorCheck(res)) {
+        that.set(res);
+      }
+    });
     return this;
+  },
+  createChannelAjax: function(channel) {
+    return $.ajax({
+      type: 'POST',
+      url: '/room/id/' + this.get('_id') + '/createchannel',
+      data: channel
+    });
+  },
+  serverErrorCheck: function(res) {
+    if (_.has(res, 'error')) {
+      alert(res.error);
+      return false;
+    } else {
+      return true;
+    }
   }
 });
 

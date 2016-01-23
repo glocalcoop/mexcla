@@ -103,7 +103,19 @@ app.get('/room/id/:id', function(req,res){
   });
 });
 
-
+app.post('/room/id/:id/createchannel', function(req,res){
+  models.Room.findById(req.params.id, function(err, room){
+    if (err) {handleError(err);}
+    room.channels.push(req.body);
+    room.save(function(err){
+      if (err) {
+        res.json({error: "error creating the channel"});
+      } else {
+        res.json(room);
+      }
+    });
+  });
+});
 
 //room info
 app.get('/room/:roomnum/info', function(req, res){
