@@ -221,7 +221,7 @@ Views.RoomSidebar = Backbone.View.extend({
     var selector = '#participants';
     $(selector).html('');
    _.each(this.model.attributes.users, function(user){
-       var li =_.template($('#participant-row').html());
+       var li =_.template($('#participant-row-template').html());
      $(selector).append(li(user));
     });
     return this;
@@ -325,4 +325,16 @@ $(function() {
         event.preventDefault()
 
     })
-})
+});
+
+/**
+ * Collaboration Functions
+ */
+
+ // var roomnum = app.room.attributes._id;
+
+ // var collabTools = {
+ //    notepad: 'https://pad.riseup.net/p/' + roomnum + '?showChat=false',
+ //    spreadsheet: 'https://calc.mayfirst.org/' + roomnum, 
+ //    chat: 'https://irc.koumbit.net/?channels=#' + roomnum + '&nick=guest'
+ // }

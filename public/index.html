@@ -69,19 +69,17 @@
 
     <!--REGISTER  -->
     <script type="text/template" id="register-template">
-      <main class="main-content" role="main">
-          <div class="card">
-            <form>
-              <fieldset>
-                <label for="username">Please Enter Your Name</label>
-                <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
-                <select name="lang" id="lang-select">
-                  <option value="en">English</option>
-                  <option value="es">Espa&ntilde;ol</option>
-                </select>
-                <input type="submit" id="register-submit-button" value="Submit" />
-              </fieldset>
-            </form>
+      <main id="register-form" class="main-content register modal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+          <div class="card" role="document">
+            <fieldset>
+              <label for="username">Please Enter Your Name</label>
+              <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+              <select name="lang" id="lang-select">
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+              </select>
+              <input type="submit" id="register-submit-button" value="Submit" />
+            </fieldset>
           </div>
       </main>
     </script>
@@ -185,18 +183,18 @@
     </script>
 
     <!-- ROOM SIDEBAR  -->
-    <script type="text/template" id="participant-row">
+    <script type="text/template" id="participant-row-template">
       <li>
         <div class="info">
           <span class="label language">de</span>
           <span class="label moderator">!</span>
+          <span class="label queued">1</span>
         </div>
         <%= username %>
         <div class="controls">
           <span class="label mute">m</span>
           <span class="label muted">m</span>
           <span class="label raise-hand">r</span>
-          <span class="label queued">1</span>
         </div>
       </li>
     </script>
@@ -205,5 +203,3 @@
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
-
- 

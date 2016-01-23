@@ -18,6 +18,33 @@ Views.createRoomAjax = function() {
   });
 };
 
+Views.isThereAUser = function() {
+  if (_.isUndefined(Cookies.get('id'))) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+Views.RegisterModal = Backbone.View.extend({
+  initialize: function() {
+  },
+  render: function(afterwards) {
+    $('#register-modal').modal("show");
+    $('#register-submit-button').click(function(){
+      var username = $('#register-modal #user-name').val();
+      var lang = $('#register-modal  #lang-select').val();
+      Views.createUserAjax(username, lang).done(function(user){
+        app.user.set(user);
+        // $('#register-modal').modal('hide') -> doesn't appear to work.
+        // the focus is messed up...i'll just deal with it later and do this...
+        $('#register-modal').hide();
+        afterwards();
+      });
+    });
+  }
+});
+
 // View: "main" page where user picks between creating a room or joining an existing one
 // it renders language according to app.user.attributes.lang
 // and re-renders when user model language changes
@@ -26,34 +53,52 @@ Views.IndexView = Backbone.View.extend({
   template: _.template($("#index-template").html()),
   initialize: function() {
       this.setLang();
-      // watch for changes
       this.listenTo(app.user, 'change:lang', function(){
-        this.setLang();
+        this.setLang(); 
         this.render();
       });
       this.render();
   },
   render: function () {
+    var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
-    new Views.WelcomeText({model: app.user});
-    // click on new room button triggers: ajax request to create room, creates model, and then navigates to: /room/:roomnum 
+    this.welcomeText();
     this.$('#create-new-room-button').click(function(e){
-      Views.createRoomAjax().done(function(room){
-        app.room = new Models.Room(room);
-        app.router.navigate('room/' + room.roomnum, {trigger: true});
-      }); 
+      if (Views.isThereAUser()) {
+        that.createRoom();
+      } else {
+        new Views.RegisterModal().render(that.createRoom);
+      }
     });
-    // Join Room Button
     this.$('#room-number-button').click(function(e){
-      var roomnum = $('#room-number').val();
-      app.router.navigate('room/' + roomnum, {trigger: true});
+      if (Views.isThereAUser()) {
+        that.JoinRoom()(); // ()() is not a typo...JoinRoom returns a function.
+      } else {
+        new Views.RegisterModal().render(that.JoinRoom());
+      }
     });
-    
     return this;
   },
   setLang: function() {
     // fallback to English if lang is missing
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
+  },
+  createRoom: function() {
+    Views.createRoomAjax().done(function(room){
+      app.room = new Models.Room(room);
+      app.router.navigate('room/' + room.roomnum, {trigger: true});
+    }); 
+  },
+  JoinRoom: function() {
+    var roomnum = $('#room-number').val();
+    return function() {
+      app.router.navigate('room/' + roomnum, {trigger: true});
+    };
+  },
+  welcomeText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.WelcomeText({model: app.user});
+    }
   }
 });
 
@@ -78,27 +123,6 @@ Views.WelcomeText = Backbone.View.extend({
   }
 });
 
-Views.Register = Backbone.View.extend({
-  el: $('#content'),
-  template: _.template($('#register-template').html()),
-  render: function() {
-    var that = this;
-    this.$el.html(this.template());
-    this.$('#register-submit-button').click(function(e){
-      var username = that.$('#user-name').val();
-      var lang = that.$('#lang-select').val();
-      Views.createUserAjax(username,lang).done(function(user){
-        // create user model
-        app.user = new Models.User(user);
-        // follow router back to homepage
-        // the Ajax response creates a cookie, so this time the homepage will not show the register pae
-        app.router.navigate("#/", {trigger: true});
-      });
-    });
-    return this;
-  }
-});
-
 // unlike the other Views, this one is appended to #content instead of replacing it
 // use; new Views.RoomSidebar({model: app.room});
 Views.RoomSidebar = Backbone.View.extend({
@@ -116,7 +140,7 @@ Views.RoomSidebar = Backbone.View.extend({
     var selector = '#participants';
     $(selector).html('');
    _.each(this.model.attributes.users, function(user){
-       var li =_.template($('#participant-row').html());
+       var li =_.template($('#participant-row-template').html());
      $(selector).append(li(user));
     });
     return this;

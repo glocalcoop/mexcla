@@ -69,19 +69,17 @@
 
     <!--REGISTER  -->
     <script type="text/template" id="register-template">
-      <main class="main-content" role="main">
-          <div class="card">
-            <form>
-              <fieldset>
-                <label for="username">Please Enter Your Name</label>
-                <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
-                <select name="lang" id="lang-select">
-                  <option value="en">English</option>
-                  <option value="es">Espa&ntilde;ol</option>
-                </select>
-                <input type="submit" id="register-submit-button" value="Submit" />
-              </fieldset>
-            </form>
+      <main id="register-form" class="main-content register modal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+          <div class="card" role="document">
+            <fieldset>
+              <label for="username">Please Enter Your Name</label>
+              <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+              <select name="lang" id="lang-select">
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+              </select>
+              <input type="submit" id="register-submit-button" value="Submit" />
+            </fieldset>
           </div>
       </main>
     </script>
@@ -99,8 +97,8 @@
         <div id="userinfo-modal" style="display:none">
           <a href="/userinfo" rel="ajax:modal"></a>
         </div>
-        <div id="room-info" class="input-group">
-          <label for="room-link" class="input-group-addon">Link</label>
+        <div id="room-info">
+          <label for="room-link">Link</label>
           <!-- TODO: Add real URL -->
             <span class="form-control" id="room-link">http://url.org/room/<%= roomnum %></span>
         </div>
@@ -178,30 +176,49 @@
           <h3><%= participants %></h3>
           <div class="scroll-list">
             <ul id="participants">
-              <li class="active">
-                <div class="info">
-                  <span class="label language">de</span>
-                  <span class="label moderator">!</span>
-                </div>
-                Person
-                <div class="controls">
-                  <span class="label mute">m</span>
-                  <span class="label muted">m</span>
-                  <span class="label raise-hand">r</span>
-                  <span class="label queued">1</span>
-                </div>
-              </li>
-              <li></li>
-              <li></li>
             </ul>
           </div>
         </div>
       </aside>
     </script>
 
+    <!-- ROOM SIDEBAR  -->
+    <script type="text/template" id="participant-row-template">
+      <li>
+        <div class="info">
+          <span class="label language">de</span>
+          <span class="label moderator">!</span>
+          <span class="label queued">1</span>
+        </div>
+        <%= username %>
+        <div class="controls">
+          <span class="label mute">m</span>
+          <span class="label muted">m</span>
+          <span class="label raise-hand">r</span>
+        </div>
+      </li>
+    </script>
+
+    <!-- REIGSTER MODAL -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" id="register-modal">
+          <div class="modal-content">
+            <div class="card" role="document">
+            <fieldset>
+              <label for="username">Please Enter Your Name</label>
+              <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+              <select name="lang" id="lang-select">
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+              </select>
+              <input type="submit" id="register-submit-button" value="Submit" />
+            </fieldset>
+          </div>
+          </div>
+        </div>
+      </div>
+
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
-
- 
