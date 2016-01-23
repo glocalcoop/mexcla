@@ -26,4 +26,16 @@ $(function() {
         event.preventDefault()
 
     })
-})
+});
+
+/**
+ * Collaboration Functions
+ */
+
+ // var roomnum = app.room.attributes._id;
+
+ // var collabTools = {
+ //    notepad: 'https://pad.riseup.net/p/' + roomnum + '?showChat=false',
+ //    spreadsheet: 'https://calc.mayfirst.org/' + roomnum, 
+ //    chat: 'https://irc.koumbit.net/?channels=#' + roomnum + '&nick=guest'
+ // }
