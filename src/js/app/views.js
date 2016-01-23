@@ -18,6 +18,23 @@ Views.createRoomAjax = function() {
   });
 };
 
+Views.RegisterModal = Backbone.View.extend({
+  initialize: function() {
+  },
+  render: function(afterwards) {
+    // TODO: LAUNCH MODAL
+    $('#register-modal').modal();
+    // var submitDiv = '#####';
+    // $(submitDiv).click(function(){
+    //   Views.createUserAjax('TODO-get-username', 'TODO-get-lang').done(function(){
+    //     app.user = new Models.User(user);
+    //     afterwards();
+    //   });
+    // });
+  }
+});
+
+
 // View: "main" page where user picks between creating a room or joining an existing one
 // it renders language according to app.user.attributes.lang
 // and re-renders when user model language changes

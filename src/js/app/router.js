@@ -6,11 +6,12 @@ var MexclaRouter = Backbone.Router.extend({
   },
 
   index: function() {
+    this.syncUser();
     // log in to homepage
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
-    this.makeUserIfNeeded();
+    this.syncUser();
     if (_.isUndefined(app.room)) {
       app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
     }
