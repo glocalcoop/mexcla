@@ -2,8 +2,9 @@
 
 // 1. Vendors
 @import
-  'vendor/bootstrap/scss/bootstrap';
-
+  'vendor/bootstrap/scss/bootstrap',
+  'vendor/tether/tether',
+  'vendor/font-awesome/scss/font-awesome';
   
 
 // 2. Configuration and helpers
@@ -24,14 +25,18 @@
 @import
   'layout/header',
   'layout/footer',
-  'layout/content';
+  'layout/content',
+  'layout/aside';
 
 // // 5. Components
 @import
   'components/lists',
   'components/buttons',
   'components/forms',
-  'components/alerts';
+  'components/alerts',
+  'components/widgets',
+  'components/icons',
+  'components/tooltips';
 
 // 6. Page-specific styles
 @import
