@@ -5,8 +5,6 @@ var websiteText = {
       enter: "Enter",
       connect: "Connect",
       conference: "Conference",
-      mute: "Mute",
-      unmute: "Unmute",
       original: "Hear original language",
       interpretation: "Hear Interpretation",
       provide: "Provide Interpretation",
@@ -19,7 +17,17 @@ var websiteText = {
       salutation: "Hi",
       notepad: "Notepad",
       spreadsheet: "Spreadsheet",
-      chat: "Chat"
+      chat: "Chat",
+      channels: "Language Channels",
+      interpret: "Become Interpreter",
+      join_channel: "Join",
+      leave_channel: "Leave",
+      moderator: "Moderator",
+      queued: "Queued",
+      mute: "Mute",
+      unmute: "Unmute",
+      raise_hand: "Raise Hand",
+      lower_hand: "Lower Hand"
     },
     es: {
       username: "Ingrese su nombre",
@@ -27,8 +35,6 @@ var websiteText = {
       enter: "Ingrese",
       connect: "Connectarse",
       conference: "Sala De Conferencias",
-      mute: "Mícrófono innactivo",
-      unmute: "Activar micrófono",
       original: "Escuchar en idioma original",
       interpretation: "Escuchar la interpretación",
       provide: "Proporcionar interpretación",
@@ -41,6 +47,17 @@ var websiteText = {
       salutation: "Hola",
       notepad: "Notepad",
       spreadsheet: "Spreadsheet",
-      chat: "Chat"
+      chat: "Chat",
+      channels: "Language Channels",
+      interpret: "Become Interpreter",
+      join_channel: "Join",
+      leave_channel: "Leave",
+      moderator: "Moderator",
+      queued: "Queued",
+      mute: "Mícrófono innactivo",
+      unmute: "Activar micrófono",
+      raise_hand: "Raise Hand",
+      lower_hand: "Lower Hand"
+
     }
 };
