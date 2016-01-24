@@ -11,8 +11,13 @@
     }
 
     fieldset {
-        // @extend .card-block;
         @extend .form-inline;
+        @extend .form-group;
+        @extend .card-block;
+
+        // option {
+        //     display: block;
+        // }
     }
 
 }

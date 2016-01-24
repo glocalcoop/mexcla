@@ -2,14 +2,21 @@
 // This file contains all styles related to the form component.
 // -----------------------------------------------------------------------------
 
-
-input[type='text'],
-option,
-select {
-    @extend .form-control;
+form {
+    @extend .form-inline;
 }
 
-
 fieldset {
-    @extend .card-block;
+  @extend .card-block;
+  @extend .form-group;
+  @extend .form-inline;
+}
+
+input[type="text"],
+select {
+  @extend .form-control;
+}
+
+label {
+    @extend .form-control-label;
 }

@@ -1,0 +1,113 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to icons.
+// -----------------------------------------------------------------------------
+
+.icon {
+    @extend .fa;
+}
+
+
+.info span,
+.controls span {
+    @extend .label;
+    @extend .label-pill;
+    background-color: transparent;
+    // @extend .btn;
+    // @extend .btn-sm;
+    // @extend .btn-*-outline;
+}
+
+.info,
+.controls {
+
+    .interpret {
+        @include outline($brand-primary);
+        .icon {
+            @extend .fa-futbol-o;
+        }
+    }
+
+    .join {
+        @include outline($brand-success);
+        .icon {
+            @extend .fa-sign-in;
+        }
+    }
+
+    .leave {
+        @include outline($brand-danger);
+        .icon {
+            @extend .fa-sign-out;
+        }
+    }
+
+
+    .language {
+        @include outline($gray-darker);
+    }
+
+    .moderator {
+        @include outline($brand-info);
+        .icon {
+            @extend .fa-gavel;
+        }
+    }
+
+    .queued {
+        @include outline($brand-primary);
+    }
+
+    .mute {
+        @include outline($brand-success);
+        .icon {
+            @extend .fa-microphone;
+        }
+    }
+
+    .muted {
+        @include outline($gray);
+        .icon {
+            @extend .fa-microphone-slash;
+        }
+    }
+
+    .raise-hand{
+        @include outline($brand-warning);
+        .icon {
+            @extend .fa-hand-paper-o;
+        }
+    }
+
+    .lower-hand{
+        @include outline($gray);
+        .icon {
+            @extend .fa-hand-o-down;
+        }
+    }
+}
+
+.add-channel {
+    @extend .btn-primary-outline;
+    &:hover,
+    &:focus {
+        a {
+            color: $white;
+        }
+    }
+
+    .icon {
+        @extend .fa-plus;
+        margin-right: 4px;
+    }
+
+}
+
+.copy-link {
+    @extend .input-group-addon;
+    .icon {
+        @extend .fa;
+        @extend .fa-clipboard;
+    }
+}
+
+

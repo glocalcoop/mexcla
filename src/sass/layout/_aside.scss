@@ -1,12 +1,8 @@
 // -----------------------------------------------------------------------------
-// This file contains all styles related to the content of the site/application.
+// This file contains all styles related to the sidebars of the site/application.
 // -----------------------------------------------------------------------------
 
-#content {
-  @extend .container-fluid;
-  @extend .container;
-
-  
-
-
+aside {
+    @extend .col-xs-6;
+    @extend .col-md-4;
 }

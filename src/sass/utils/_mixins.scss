@@ -32,6 +32,22 @@
   }
 }
 
+@mixin outline($color) {
+  border: 1px solid $color;
+  color: $color;
+  // &:hover,
+  // &:focus {
+  //   border: 1px solid darken($color, 30%);
+  // }
+  a {
+    color: $color;
+    &:hover,
+    &:focus {
+      color: darken($color, 30%);
+    }
+  }
+}
+
 /// Responsive manager
 /// @param {String} $breakpoint - Breakpoint
 /// @requires $breakpoints

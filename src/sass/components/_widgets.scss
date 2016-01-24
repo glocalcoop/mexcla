@@ -1,0 +1,54 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to lists.
+// -----------------------------------------------------------------------------
+
+#participant-list,
+#channel-list {
+
+    .participant-list,
+    .channel-list {
+        @extend .card;
+    }
+
+    h3 {
+        @extend .card-header;
+    }
+
+    ul {
+       @extend .list-group;
+       @extend .list-group-flush;
+    }
+
+    li {
+        @extend .list-group-item;
+        background-color {
+            &:hover,
+            &:focus {
+                @extend .hover;
+            }
+        }
+    }
+
+    footer button {
+        @extend .center-block;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .scroll-list {
+        max-height: 200px;
+        overflow-x: hidden;
+        // @extend .card-block;
+    }
+
+    
+    .info,
+    .controls {
+        display: inline-block;
+    }
+
+    .controls {
+        @extend .pull-xs-right;
+    }
+    
+}

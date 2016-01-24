@@ -8,14 +8,6 @@ button {
 
     @extend .btn;
 
-    &.new-game {
-        @extend .btn-success;
-    }
-
-    &.play-turn {
-        @extend .btn-danger;
-    }
-
 }
 
 #connect-button {

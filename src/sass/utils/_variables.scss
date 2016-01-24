@@ -28,22 +28,26 @@
 // $danger-states-color:        #B33C12 !default;
 
 
-$brand-primary:         #427C89; //#337ab7
+$brand-primary:         #3091B2; //#337ab7
 $brand-success:         #42A084; //#5cb85c
-$brand-info:            #3091B2; //#5bc0de
+$brand-info:            #7A9E9F; //#5bc0de
 $brand-warning:         #BB992F; //#f0ad4e
 $brand-danger:          #EB5E28; //#d9534f
 
+$default-color:         $brand-primary;
 
-$gray-base:              #000 !default;
-$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+
+$gray-base:              #222 !default; //000
+$gray-darker:            #444; // #222
 $gray-dark:              #5C6265;   // #333
 $gray:                   #79858A; // #555
 $gray-light:             #A2A8AB; // #777
-$gray-lighter:           #BCC1C3; // #eee
+$gray-lighter:           #eee;
 
 $white:     #fff;
 $black:     #000;
+
+
 
 
 // Options
@@ -76,6 +80,9 @@ $link-color:                 $brand-primary !default;
 // $link-decoration:            none !default;
 // $link-hover-color:           darken($link-color, 15%) !default;
 // $link-hover-decoration:      underline !default;
+$tooltip-bg:                 $gray-lighter;
+$tooltip-arrow-color:        $gray-lighter;
+$tooltip-color:              $body-color;
 
 
 // Typography

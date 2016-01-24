@@ -9,6 +9,8 @@
     header {
         @extend .row;
 
+        margin-bottom: 4em;
+
         .conference-id,
         #room-info {
             @extend .col-sm-6;
@@ -17,7 +19,8 @@
         #room-info {
             @extend .input-group;
 
-            label {
+            label,
+            .copy-link {
                 @extend .input-group-addon;
                 @extend .bg-info;
                 border-color: $brand-info;
@@ -28,9 +31,23 @@
         }
     }
 
-}
+    #collaboration {
 
-.participant-list {
-    @extend .col-xs-6;
-    @extend .col-md-4;
+        width: 100%;
+
+        ul {
+            @extend .nav-pills;
+        }
+
+    }
+
+    #tab-content {
+        min-height: 300px;
+        background-color: $gray-lighter;
+    }
+
+    #options {
+        display: none;
+    }
+
 }
