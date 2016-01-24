@@ -181,10 +181,11 @@ describe('rooms', function(){
       });
   });
 
+  var channelid;
   describe('update room with new channel', function(){
     it('should add new Spanish channel', function(done){
       request
-        .post(url + '/room/id/' + roomId + '/createchannel')
+        .post(url + '/room/id/' + roomId + '/channel/create')
         .send({lang: 'es'})
         .set('cookie', 'id=' + userId)
         .end(function(err,res){
@@ -193,9 +194,37 @@ describe('rooms', function(){
           res.body.channels.length.should.eql(1);
           res.body.channels[0].lang.should.eql('es');
           res.body.channels[0]._id.should.have.length(24);
+          channelid = res.body.channels[0]._id;
           done();
         });
     });
   });
-  
+
+  describe('update channel', function() {
+    
+    it('should add new interpreter', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
+        .send({interpreter: 'pointsman'})
+        .set('cookie', 'id=' + userId)
+        .end(function(err, res){
+          res.body.interpreter.should.eql('pointsman');
+          res.body._id.should.eql(channelid);
+          done();
+        });
+    });
+
+    it('should change the interpreter and the language', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
+        .send({interpreter: 'der springer', lang: 'gr'})
+        .set('cookie', 'id=' + userId)
+        .end(function(err, res){
+          res.body.interpreter.should.eql('der springer');
+          res.body._id.should.eql(channelid);
+          done();
+        });
+    });
+  });
+
 });

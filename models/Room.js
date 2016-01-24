@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var channelSchema = new Schema({
    lang: { type: String },
    users: { type: Array },
-   interpreter: { type: Schema.ObjectId }
+   interpreter: { type: String }
  });
 
 var roomSchema = new Schema({
@@ -30,4 +30,5 @@ roomSchema.methods.setModerator = function(userId) {
 };
 
 // Export the model
-module.exports = mongoose.model('Room', roomSchema);
+module.exports.Room = mongoose.model('Room', roomSchema);
+module.exports.Channel = mongoose.model('Channel', channelSchema);

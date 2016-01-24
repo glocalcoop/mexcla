@@ -23,7 +23,8 @@ app.use(express.static('public'));
 
 var models = {
   User: require('./models/User'),
-  Room: require('./models/Room')
+  Room: require('./models/Room').Room,
+  Channel: require('./models/Room').Channel
 };
 
 var homepage = require('./homepage');
@@ -103,7 +104,8 @@ app.get('/room/id/:id', function(req,res){
   });
 });
 
-app.post('/room/id/:id/createchannel', function(req,res){
+// create channel //
+app.post('/room/id/:id/channel/create', function(req,res){
   models.Room.findById(req.params.id, function(err, room){
     if (err) {handleError(err);}
     room.channels.push(req.body);
@@ -116,6 +118,22 @@ app.post('/room/id/:id/createchannel', function(req,res){
     });
   });
 });
+
+// update channel // 
+// post data {'channelField': "new data"}. i.e.: {"interpreter": "slothrop", lang: "es"}
+app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
+  getChannel(req.params.roomid, req.params.channelid, function(channelDoc){
+    channelDoc.set(req.body);
+    channelDoc.ownerDocument().save(function(err){
+      if (err) {
+        res.json({error: "Error updating the channel", errorMessage: err});
+      } else {
+        res.json(channelDoc);
+      }
+    });
+  });
+});
+
 
 //room info
 app.get('/room/:roomnum/info', function(req, res){
@@ -198,6 +216,15 @@ function removeUserFromRoom(id, roomNumber, callback) {
   });
 }
 
+// input: string (roomid), string (channelid),
+// output: callback(channelDoc)
+function getChannel(roomid, channelid, callback) {
+  models.Room.findById(roomid, function(err, room){
+    if (err) {handleError(err);}
+    callback(room.channels.id(channelid));
+  });
+}
+
 function isRoomNumAvailable(roomNumber, callback) {
   models.Room.find({},'roomnum', function(err, rooms){
     var roomInUse = _.chain(rooms)
@@ -209,6 +236,7 @@ function isRoomNumAvailable(roomNumber, callback) {
     callback(!roomInUse);
   });
 }
+
 
 //recursive function to find an available room
 //callback with room number

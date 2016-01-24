@@ -156,6 +156,7 @@ Views.Room = Backbone.View.extend({
     var templateData = _.extend(websiteText[this.lang], this.model.attributes);
     this.$el.html(this.template(templateData));
     this.sidebar.render();
+    this.renderChannel();
     return this;
   },
   initialize: function() {
@@ -165,5 +166,27 @@ Views.Room = Backbone.View.extend({
       this.render();
     });
     this.sidebar = new Views.RoomSidebar({model: app.room});
-  }
+    this.listenTo(this.model, 'change:channels', this.renderChannel);
+  },
+  renderChannel: function() {
+    var channels = this.model.get('channels');
+    if (!_.isEmpty(channels)) {
+      _.each(channels, function(channel){
+        // display channel
+        new Views.Channel({});
+      });
+    }
+    return this;
+  }  
 });
+
+Views.Channel = Backbone.View.extend({
+  
+});
+
+Views.ChannelOptions = Backbone.View.extend({
+  // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
+});
+
+
+
