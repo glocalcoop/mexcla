@@ -26,7 +26,22 @@ $(function() {
         event.preventDefault()
 
     })
+
+    /**
+     * Activate Bootstrap tooltips
+     * This isn't working for dynamic elements
+     */
+    $.when.apply($, Views.RoomSidebar).done(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    /**
+     * Activate Clipboard
+     */
+    new Clipboard('.copy-link');
+
 });
+
 
 /**
  * Collaboration Functions
