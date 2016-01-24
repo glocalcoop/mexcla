@@ -25,7 +25,7 @@ var paths = {
     scripts: './src/js/app/',
     images: './src/images/**/*',
     fonts: './src/fonts/*',
-    libs: './src/js/libs/*',
+    libs: './src/js/libs/**/*',
     index: './src/index.html',
 
     /* Output paths */
@@ -90,7 +90,7 @@ gulp.task( 'watch', function() {
     gulp.watch( './src/js/**/*.js', [ 'scripts' ] );
     gulp.watch( './src/images/*', [ 'images' ] );
     gulp.watch( './src/fonts/*', [ 'fonts' ] );
-    gulp.watch( './src/js/*.js', [ 'libs' ] );
+    gulp.watch( './src/js/libs/*.js', [ 'libs' ] );
     gulp.watch( paths.index, [ 'index' ] );
 } );
 
