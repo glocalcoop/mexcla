@@ -56,6 +56,7 @@ describe('create new user', function(){
 
 describe('rooms', function(){
   var roomNumber;
+  var roomId;
   it('should create a new room and return with room info', function(done){
    request
       .get(url + '/room/create')
@@ -63,6 +64,7 @@ describe('rooms', function(){
       .end(function(err, res){
         should.not.exist(err);
         roomNumber = res.body.roomnum;
+        roomId = res.body._id;
         res.body.users.length.should.eql(1);
         res.body.users[0].lang.should.eql('es');
         res.body.moderator.should.eql(userId);
@@ -156,7 +158,7 @@ describe('rooms', function(){
   describe('leaving rooms', function(){
     it('should remove FAKE SPANISH USER from room and return user info', function(done){
       request
-        .get(url + /room/ + roomNumber + '/leave')
+        .get(url + '/room/' + roomNumber + '/leave')
         .set('cookie', 'id=' + userId)
         .end(function(err, res){
           res.body.salutation.should.eql('Hola');
@@ -178,5 +180,51 @@ describe('rooms', function(){
           });
       });
   });
-  
+
+  var channelid;
+  describe('update room with new channel', function(){
+    it('should add new Spanish channel', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/create')
+        .send({lang: 'es'})
+        .set('cookie', 'id=' + userId)
+        .end(function(err,res){
+          res.body.roomnum.should.eql(roomNumber);
+          res.body.users.length.should.eql(1);
+          res.body.channels.length.should.eql(1);
+          res.body.channels[0].lang.should.eql('es');
+          res.body.channels[0]._id.should.have.length(24);
+          channelid = res.body.channels[0]._id;
+          done();
+        });
+    });
+  });
+
+  describe('update channel', function() {
+    
+    it('should add new interpreter', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
+        .send({interpreter: 'pointsman'})
+        .set('cookie', 'id=' + userId)
+        .end(function(err, res){
+          res.body.interpreter.should.eql('pointsman');
+          res.body._id.should.eql(channelid);
+          done();
+        });
+    });
+
+    it('should change the interpreter and the language', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
+        .send({interpreter: 'der springer', lang: 'gr'})
+        .set('cookie', 'id=' + userId)
+        .end(function(err, res){
+          res.body.interpreter.should.eql('der springer');
+          res.body._id.should.eql(channelid);
+          done();
+        });
+    });
+  });
+
 });
