@@ -1533,7 +1533,7 @@ button {
   line-height: 1.33333;
   border-radius: 0.3rem; }
 
-.form-group, fieldset, .main-content.register fieldset {
+.form-group, fieldset {
   margin-bottom: 1rem; }
 
 .radio,
@@ -1690,18 +1690,17 @@ select {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTIgNzkyIj48cGF0aCBmaWxsPSIjZDk1MzRmIiBkPSJNNDQ3IDU0NC40Yy0xNC40IDE0LjQtMzcuNiAxNC40LTUyIDBsLTg5LTkyLjctODkgOTIuN2MtMTQuNSAxNC40LTM3LjcgMTQuNC01MiAwLTE0LjQtMTQuNC0xNC40LTM3LjYgMC01Mmw5Mi40LTk2LjMtOTIuNC05Ni4zYy0xNC40LTE0LjQtMTQuNC0zNy42IDAtNTJzMzcuNi0xNC4zIDUyIDBsODkgOTIuOCA4OS4yLTkyLjdjMTQuNC0xNC40IDM3LjYtMTQuNCA1MiAwIDE0LjMgMTQuNCAxNC4zIDM3LjYgMCA1MkwzNTQuNiAzOTZsOTIuNCA5Ni40YzE0LjQgMTQuNCAxNC40IDM3LjYgMCA1MnoiLz48L3N2Zz4="); }
 
 @media (min-width: 544px) {
-  .form-inline .form-group, form .form-group, fieldset .form-group, .main-content.register fieldset .form-group, .main-content.index #join-room fieldset .form-group,
+  .form-inline .form-group, form .form-group, fieldset .form-group, .main-content.index #join-room fieldset .form-group,
   .main-content.index #create-room fieldset .form-group, .form-inline fieldset, form fieldset, fieldset fieldset, .main-content.index #join-room fieldset fieldset,
-  .main-content.index #create-room fieldset fieldset, .form-inline .main-content.register fieldset, .main-content.register .form-inline fieldset, form .main-content.register fieldset, .main-content.register form fieldset, fieldset .main-content.register fieldset, .main-content.register fieldset fieldset {
+  .main-content.index #create-room fieldset fieldset {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle; }
-  .form-inline .form-control, form .form-control, fieldset .form-control, .main-content.register fieldset .form-control, .main-content.index #join-room fieldset .form-control,
-  .main-content.index #create-room fieldset .form-control, .form-inline input[type="text"], form input[type="text"], fieldset input[type="text"], .main-content.register fieldset input[type="text"], .main-content.index #join-room fieldset input[type="text"],
+  .form-inline .form-control, form .form-control, fieldset .form-control, .main-content.index #join-room fieldset .form-control,
+  .main-content.index #create-room fieldset .form-control, .form-inline input[type="text"], form input[type="text"], fieldset input[type="text"], .main-content.index #join-room fieldset input[type="text"],
   .main-content.index #create-room fieldset input[type="text"], .form-inline
   select, form
   select, fieldset
-  select, .main-content.register fieldset
   select, .main-content.index #join-room fieldset
   select,
   .main-content.index #create-room fieldset
@@ -1709,15 +1708,15 @@ select {
     display: inline-block;
     width: auto;
     vertical-align: middle; }
-  .form-inline .form-control-static, form .form-control-static, fieldset .form-control-static, .main-content.register fieldset .form-control-static, .main-content.index #join-room fieldset .form-control-static,
+  .form-inline .form-control-static, form .form-control-static, fieldset .form-control-static, .main-content.index #join-room fieldset .form-control-static,
   .main-content.index #create-room fieldset .form-control-static {
     display: inline-block; }
-  .form-inline .input-group, form .input-group, fieldset .input-group, .main-content.register fieldset .input-group, .main-content.index #join-room fieldset .input-group,
+  .form-inline .input-group, form .input-group, fieldset .input-group, .main-content.index #join-room fieldset .input-group,
   .main-content.index #create-room fieldset .input-group, .form-inline .main-content.room header #room-info, .main-content.room header .form-inline #room-info, form .main-content.room header #room-info, .main-content.room header form #room-info, fieldset .main-content.room header #room-info, .main-content.room header fieldset #room-info {
     display: inline-table;
     vertical-align: middle; }
-    .form-inline .input-group .input-group-addon, form .input-group .input-group-addon, fieldset .input-group .input-group-addon, .main-content.register fieldset .input-group .input-group-addon, .main-content.index #join-room fieldset .input-group .input-group-addon,
-    .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .main-content.room header #room-info .input-group-addon, .main-content.room header .form-inline #room-info .input-group-addon, form .main-content.room header #room-info .input-group-addon, .main-content.room header form #room-info .input-group-addon, fieldset .main-content.room header #room-info .input-group-addon, .main-content.room header fieldset #room-info .input-group-addon, .form-inline .input-group .copy-link, form .input-group .copy-link, fieldset .input-group .copy-link, .main-content.register fieldset .input-group .copy-link, .main-content.index #join-room fieldset .input-group .copy-link,
+    .form-inline .input-group .input-group-addon, form .input-group .input-group-addon, fieldset .input-group .input-group-addon, .main-content.index #join-room fieldset .input-group .input-group-addon,
+    .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .main-content.room header #room-info .input-group-addon, .main-content.room header .form-inline #room-info .input-group-addon, form .main-content.room header #room-info .input-group-addon, .main-content.room header form #room-info .input-group-addon, fieldset .main-content.room header #room-info .input-group-addon, .main-content.room header fieldset #room-info .input-group-addon, .form-inline .input-group .copy-link, form .input-group .copy-link, fieldset .input-group .copy-link, .main-content.index #join-room fieldset .input-group .copy-link,
     .main-content.index #create-room fieldset .input-group .copy-link, .main-content.room header #room-info .form-inline .input-group label, .main-content.room header #room-info form .input-group label, .main-content.room header #room-info fieldset .input-group label, .form-inline .main-content.room header #room-info label, .main-content.room header .form-inline #room-info label, form .main-content.room header #room-info label, .main-content.room header form #room-info label, fieldset .main-content.room header #room-info label, .main-content.room header fieldset #room-info label,
     .main-content.room header #room-info .form-inline .input-group .copy-link,
     .main-content.room header #room-info form .input-group .copy-link,
@@ -1728,22 +1727,21 @@ select {
     .main-content.room header form #room-info .copy-link, fieldset
     .main-content.room header #room-info .copy-link,
     .main-content.room header fieldset #room-info .copy-link,
-    .form-inline .input-group .input-group-btn, form .input-group .input-group-btn, fieldset .input-group .input-group-btn, .main-content.register fieldset .input-group .input-group-btn, .main-content.index #join-room fieldset .input-group .input-group-btn,
+    .form-inline .input-group .input-group-btn, form .input-group .input-group-btn, fieldset .input-group .input-group-btn, .main-content.index #join-room fieldset .input-group .input-group-btn,
     .main-content.index #create-room fieldset .input-group .input-group-btn,
     .form-inline .main-content.room header #room-info .input-group-btn, .main-content.room header
     .form-inline #room-info .input-group-btn, form .main-content.room header #room-info .input-group-btn, .main-content.room header form #room-info .input-group-btn, fieldset .main-content.room header #room-info .input-group-btn, .main-content.room header fieldset #room-info .input-group-btn,
-    .form-inline .input-group .form-control, form .input-group .form-control, fieldset .input-group .form-control, .main-content.register fieldset .input-group .form-control, .main-content.index #join-room fieldset .input-group .form-control,
+    .form-inline .input-group .form-control, form .input-group .form-control, fieldset .input-group .form-control, .main-content.index #join-room fieldset .input-group .form-control,
     .main-content.index #create-room fieldset .input-group .form-control,
     .form-inline .main-content.room header #room-info .form-control, .main-content.room header
     .form-inline #room-info .form-control, form .main-content.room header #room-info .form-control, .main-content.room header form #room-info .form-control, fieldset .main-content.room header #room-info .form-control, .main-content.room header fieldset #room-info .form-control,
-    .form-inline .input-group input[type="text"], form .input-group input[type="text"], fieldset .input-group input[type="text"], .main-content.register fieldset .input-group input[type="text"], .main-content.index #join-room fieldset .input-group input[type="text"],
+    .form-inline .input-group input[type="text"], form .input-group input[type="text"], fieldset .input-group input[type="text"], .main-content.index #join-room fieldset .input-group input[type="text"],
     .main-content.index #create-room fieldset .input-group input[type="text"],
     .form-inline .main-content.room header #room-info input[type="text"], .main-content.room header
     .form-inline #room-info input[type="text"], form .main-content.room header #room-info input[type="text"], .main-content.room header form #room-info input[type="text"], fieldset .main-content.room header #room-info input[type="text"], .main-content.room header fieldset #room-info input[type="text"],
     .form-inline .input-group
     select, form .input-group
     select, fieldset .input-group
-    select, .main-content.register fieldset .input-group
     select, .main-content.index #join-room fieldset .input-group
     select,
     .main-content.index #create-room fieldset .input-group
@@ -1757,12 +1755,11 @@ select {
     select, .main-content.room header fieldset #room-info
     select {
       width: auto; }
-  .form-inline .input-group > .form-control, form .input-group > .form-control, fieldset .input-group > .form-control, .main-content.register fieldset .input-group > .form-control, .main-content.index #join-room fieldset .input-group > .form-control,
-  .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .main-content.room header #room-info > .form-control, .main-content.room header .form-inline #room-info > .form-control, form .main-content.room header #room-info > .form-control, .main-content.room header form #room-info > .form-control, fieldset .main-content.room header #room-info > .form-control, .main-content.room header fieldset #room-info > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.register fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
+  .form-inline .input-group > .form-control, form .input-group > .form-control, fieldset .input-group > .form-control, .main-content.index #join-room fieldset .input-group > .form-control,
+  .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .main-content.room header #room-info > .form-control, .main-content.room header .form-inline #room-info > .form-control, form .main-content.room header #room-info > .form-control, .main-content.room header form #room-info > .form-control, fieldset .main-content.room header #room-info > .form-control, .main-content.room header fieldset #room-info > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
   .main-content.index #create-room fieldset .input-group > input[type="text"], .form-inline .main-content.room header #room-info > input[type="text"], .main-content.room header .form-inline #room-info > input[type="text"], form .main-content.room header #room-info > input[type="text"], .main-content.room header form #room-info > input[type="text"], fieldset .main-content.room header #room-info > input[type="text"], .main-content.room header fieldset #room-info > input[type="text"], .form-inline .input-group >
   select, form .input-group >
   select, fieldset .input-group >
-  select, .main-content.register fieldset .input-group >
   select, .main-content.index #join-room fieldset .input-group >
   select,
   .main-content.index #create-room fieldset .input-group >
@@ -1774,31 +1771,31 @@ select {
   select, .main-content.room header fieldset #room-info >
   select {
     width: 100%; }
-  .form-inline .form-control-label, form .form-control-label, fieldset .form-control-label, .main-content.register fieldset .form-control-label, .main-content.index #join-room fieldset .form-control-label,
-  .main-content.index #create-room fieldset .form-control-label, .form-inline label, form label, fieldset label, .main-content.register fieldset label, .main-content.index #join-room fieldset label,
+  .form-inline .form-control-label, form .form-control-label, fieldset .form-control-label, .main-content.index #join-room fieldset .form-control-label,
+  .main-content.index #create-room fieldset .form-control-label, .form-inline label, form label, fieldset label, .main-content.index #join-room fieldset label,
   .main-content.index #create-room fieldset label {
     margin-bottom: 0;
     vertical-align: middle; }
-  .form-inline .radio, form .radio, fieldset .radio, .main-content.register fieldset .radio, .main-content.index #join-room fieldset .radio,
+  .form-inline .radio, form .radio, fieldset .radio, .main-content.index #join-room fieldset .radio,
   .main-content.index #create-room fieldset .radio,
-  .form-inline .checkbox, form .checkbox, fieldset .checkbox, .main-content.register fieldset .checkbox, .main-content.index #join-room fieldset .checkbox,
+  .form-inline .checkbox, form .checkbox, fieldset .checkbox, .main-content.index #join-room fieldset .checkbox,
   .main-content.index #create-room fieldset .checkbox {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
     vertical-align: middle; }
-    .form-inline .radio label, form .radio label, fieldset .radio label, .main-content.register fieldset .radio label, .main-content.index #join-room fieldset .radio label,
+    .form-inline .radio label, form .radio label, fieldset .radio label, .main-content.index #join-room fieldset .radio label,
     .main-content.index #create-room fieldset .radio label,
-    .form-inline .checkbox label, form .checkbox label, fieldset .checkbox label, .main-content.register fieldset .checkbox label, .main-content.index #join-room fieldset .checkbox label,
+    .form-inline .checkbox label, form .checkbox label, fieldset .checkbox label, .main-content.index #join-room fieldset .checkbox label,
     .main-content.index #create-room fieldset .checkbox label {
       padding-left: 0; }
-  .form-inline .radio input[type="radio"], form .radio input[type="radio"], fieldset .radio input[type="radio"], .main-content.register fieldset .radio input[type="radio"], .main-content.index #join-room fieldset .radio input[type="radio"],
+  .form-inline .radio input[type="radio"], form .radio input[type="radio"], fieldset .radio input[type="radio"], .main-content.index #join-room fieldset .radio input[type="radio"],
   .main-content.index #create-room fieldset .radio input[type="radio"],
-  .form-inline .checkbox input[type="checkbox"], form .checkbox input[type="checkbox"], fieldset .checkbox input[type="checkbox"], .main-content.register fieldset .checkbox input[type="checkbox"], .main-content.index #join-room fieldset .checkbox input[type="checkbox"],
+  .form-inline .checkbox input[type="checkbox"], form .checkbox input[type="checkbox"], fieldset .checkbox input[type="checkbox"], .main-content.index #join-room fieldset .checkbox input[type="checkbox"],
   .main-content.index #create-room fieldset .checkbox input[type="checkbox"] {
     position: relative;
     margin-left: 0; }
-  .form-inline .has-feedback .form-control-feedback, form .has-feedback .form-control-feedback, fieldset .has-feedback .form-control-feedback, .main-content.register fieldset .has-feedback .form-control-feedback, .main-content.index #join-room fieldset .has-feedback .form-control-feedback,
+  .form-inline .has-feedback .form-control-feedback, form .has-feedback .form-control-feedback, fieldset .has-feedback .form-control-feedback, .main-content.index #join-room fieldset .has-feedback .form-control-feedback,
   .main-content.index #create-room fieldset .has-feedback .form-control-feedback {
     top: 0; } }
 
@@ -3288,7 +3285,7 @@ button {
   border: 1px solid #e5e5e5;
   border-radius: 0.25rem; }
 
-.card-block, fieldset, .main-content.register fieldset, .main-content.index #join-room fieldset,
+.card-block, fieldset, .main-content.index #join-room fieldset,
 .main-content.index #create-room fieldset {
   padding: 1.25rem; }
 
@@ -7604,13 +7601,13 @@ body.modal-open {
   .navbar .navbar-nav, .navbar #language-links {
     float: none !important; } }
 
-.card-block .rotate, fieldset .rotate, .main-content.register fieldset .rotate, .main-content.index #join-room fieldset .rotate,
+.card-block .rotate, fieldset .rotate, .main-content.index #join-room fieldset .rotate,
 .main-content.index #create-room fieldset .rotate {
   z-index: 8;
   float: right;
   height: 100%; }
 
-.card-block .rotate i, fieldset .rotate i, .main-content.register fieldset .rotate i, .main-content.index #join-room fieldset .rotate i,
+.card-block .rotate i, fieldset .rotate i, .main-content.index #join-room fieldset .rotate i,
 .main-content.index #create-room fieldset .rotate i {
   color: rgba(20, 20, 20, 0.15);
   position: absolute;
