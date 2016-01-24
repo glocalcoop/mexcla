@@ -184,11 +184,16 @@ describe('rooms', function(){
   describe('update room with new channel', function(){
     it('should add new Spanish channel', function(done){
       request
-        .put(url + '/room/id/' + roomId)
+        .post(url + '/room/id/' + roomId + '/createchannel')
+        .send({lang: 'es'})
         .set('cookie', 'id=' + userId)
         .end(function(err,res){
-          console.log(res);
-          False.should.be.eql(True);
+          res.body.roomnum.should.eql(roomNumber);
+          res.body.users.length.should.eql(1);
+          res.body.channels.length.should.eql(1);
+          res.body.channels[0].lang.should.eql('es');
+          res.body.channels[0]._id.should.have.length(24);
+          done();
         });
     });
   });
