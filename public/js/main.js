@@ -57,6 +57,7 @@ Models.User = Backbone.Model.extend({
 
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
+  urlRoot: "/room/id",
   fetchByNum: function() {
     var that = this;
     $.ajax({
@@ -66,8 +67,73 @@ Models.Room = Backbone.Model.extend({
       that.set(room);
     });
     return this;
+  },
+  // channel (object) -> adds new channel to room;
+  createChannel: function(channel) {
+    var that = this;
+    this.createChannelAjax(channel).done(function(res){
+      if (that.serverErrorCheck(res)) {
+        that.set(res);
+      }
+    });
+    return this;
+  },
+  createChannelAjax: function(channel) {
+    return $.ajax({
+      type: 'POST',
+      url: '/room/id/' + this.get('_id') + '/channel/create',
+      data: channel
+    });
+  },
+  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreter, channelid) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelid) {
+        channel.interpreter = interpreter;
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },
+  // given a channel (object) it updates the db/server with any of the changed priorities
+  updateChannelAjax: function(channel) {
+    var channelID = channel._id;
+    var channelData = _.omit(channel, '_id');
+    return $.ajax({
+        type: 'POST',
+        url: '/room/id/' + this.get('_id') + '/channel/' + channelID + '/update',
+        data: channelData
+    });
+  },
+  serverErrorCheck: function(res) {
+    if (_.has(res, 'error')) {
+      alert(res.error);
+      return false;
+    } else {
+      return true;
+    }
   }
 });
+
+/*
+
+{
+  lang: '' // 'en', 'es'
+  users; [{users}]
+  interpreter: user,
+}
+
+
+*/
 
 /*
 USERS
@@ -123,6 +189,33 @@ Views.createRoomAjax = function() {
   });
 };
 
+Views.isThereAUser = function() {
+  if (_.isUndefined(Cookies.get('id'))) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+Views.RegisterModal = Backbone.View.extend({
+  initialize: function() {
+  },
+  render: function(afterwards) {
+    $('#register-modal').modal("show");
+    $('#register-submit-button').click(function(){
+      var username = $('#register-modal #user-name').val();
+      var lang = $('#register-modal  #lang-select').val();
+      Views.createUserAjax(username, lang).done(function(user){
+        app.user.set(user);
+        // $('#register-modal').modal('hide') -> doesn't appear to work.
+        // the focus is messed up...i'll just deal with it later and do this...
+        $('#register-modal').hide();
+        afterwards();
+      });
+    });
+  }
+});
+
 // View: "main" page where user picks between creating a room or joining an existing one
 // it renders language according to app.user.attributes.lang
 // and re-renders when user model language changes
@@ -131,34 +224,52 @@ Views.IndexView = Backbone.View.extend({
   template: _.template($("#index-template").html()),
   initialize: function() {
       this.setLang();
-      // watch for changes
       this.listenTo(app.user, 'change:lang', function(){
-        this.setLang();
+        this.setLang(); 
         this.render();
       });
       this.render();
   },
   render: function () {
+    var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
-    new Views.WelcomeText({model: app.user});
-    // click on new room button triggers: ajax request to create room, creates model, and then navigates to: /room/:roomnum 
+    this.welcomeText();
     this.$('#create-new-room-button').click(function(e){
-      Views.createRoomAjax().done(function(room){
-        app.room = new Models.Room(room);
-        app.router.navigate('room/' + room.roomnum, {trigger: true});
-      }); 
+      if (Views.isThereAUser()) {
+        that.createRoom();
+      } else {
+        new Views.RegisterModal().render(that.createRoom);
+      }
     });
-    // Join Room Button
     this.$('#room-number-button').click(function(e){
-      var roomnum = $('#room-number').val();
-      app.router.navigate('room/' + roomnum, {trigger: true});
+      if (Views.isThereAUser()) {
+        that.JoinRoom()(); // ()() is not a typo...JoinRoom returns a function.
+      } else {
+        new Views.RegisterModal().render(that.JoinRoom());
+      }
     });
-    
     return this;
   },
   setLang: function() {
     // fallback to English if lang is missing
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
+  },
+  createRoom: function() {
+    Views.createRoomAjax().done(function(room){
+      app.room = new Models.Room(room);
+      app.router.navigate('room/' + room.roomnum, {trigger: true});
+    }); 
+  },
+  JoinRoom: function() {
+    var roomnum = $('#room-number').val();
+    return function() {
+      app.router.navigate('room/' + roomnum, {trigger: true});
+    };
+  },
+  welcomeText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.WelcomeText({model: app.user});
+    }
   }
 });
 
@@ -180,27 +291,6 @@ Views.WelcomeText = Backbone.View.extend({
     // listen to changes to lang and name
     this.listenTo(this.model, 'change:lang', this.render);
     this.listenTo(this.model, 'change:username', this.render);
-  }
-});
-
-Views.Register = Backbone.View.extend({
-  el: $('#content'),
-  template: _.template($('#register-template').html()),
-  render: function() {
-    var that = this;
-    this.$el.html(this.template());
-    this.$('#register-submit-button').click(function(e){
-      var username = that.$('#user-name').val();
-      var lang = that.$('#lang-select').val();
-      Views.createUserAjax(username,lang).done(function(user){
-        // create user model
-        app.user = new Models.User(user);
-        // follow router back to homepage
-        // the Ajax response creates a cookie, so this time the homepage will not show the register pae
-        app.router.navigate("#/", {trigger: true});
-      });
-    });
-    return this;
   }
 });
 
@@ -237,6 +327,7 @@ Views.Room = Backbone.View.extend({
     var templateData = _.extend(websiteText[this.lang], this.model.attributes);
     this.$el.html(this.template(templateData));
     this.sidebar.render();
+    this.renderChannel();
     return this;
   },
   initialize: function() {
@@ -246,8 +337,30 @@ Views.Room = Backbone.View.extend({
       this.render();
     });
     this.sidebar = new Views.RoomSidebar({model: app.room});
-  }
+    this.listenTo(this.model, 'change:channels', this.renderChannel);
+  },
+  renderChannel: function() {
+    var channels = this.model.get('channels');
+    if (!_.isEmpty(channels)) {
+      _.each(channels, function(channel){
+        // display channel
+        new Views.Channel({});
+      });
+    }
+    return this;
+  }  
 });
+
+Views.Channel = Backbone.View.extend({
+  
+});
+
+Views.ChannelOptions = Backbone.View.extend({
+  // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
+});
+
+
+
 
 var MexclaRouter = Backbone.Router.extend({
   routes: {
@@ -257,17 +370,12 @@ var MexclaRouter = Backbone.Router.extend({
   },
 
   index: function() {
-    if (_.isUndefined(Cookies.get('id'))) {
-      // show register page
-      var register = new Views.Register().render();
-    } else {
-      this.makeUserIfNeeded();
-      // log in to homepage
-      app.homepage = new Views.IndexView();
-    }
+    this.syncUser();
+    // log in to homepage
+    app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
-    this.makeUserIfNeeded();
+    this.syncUser();
     if (_.isUndefined(app.room)) {
       app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
     }
@@ -276,24 +384,23 @@ var MexclaRouter = Backbone.Router.extend({
   default: function() {
     // this route will be executed if no other route is matched.
   },
-  makeUserIfNeeded: function() {
+  syncUser: function() {
     // if user is undefined, which would happen when someone returns to the page and has a cookie stored, then it's a new session and we need to create the user object.
-    if (_.isUndefined(app.user)){
       var userid = Cookies.get('id');
       var lang = Cookies.get('lang');
-      if (_.isUndefined(userid)) {
-        // if no cookies send back to register
-        app.router.navigate("#/", {trigger: true});
-      } else {
-        // create user and fetch details
-        app.user = new Models.User({_id: userid, lang: lang});
+      if (!_.isUndefined(userid)) {
+        // set user
+        app.user.set('_id', userid);
+        if (!_.isUndefined(lang)) {
+          app.user.set('lang', lang);
+        }
         app.user.fetch();
       }
-    }
   }
 });
 
 app.router = new MexclaRouter();
+app.user = new Models.User();
 
 Backbone.history.start(); // must call this to start router
 
