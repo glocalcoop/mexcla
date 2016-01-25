@@ -20,16 +20,19 @@ Change port in app.js if needed. Currently: 8080.
 
 
 ```
-    app.js - the server
-    app.spec.js -- server tests
-    models/ -  mongoose models
-    views/ - (NOT currently used) jade templates
-    src/ - where all front-end code is kept
-    public/ - gulp-built output
-    gulpfile.js - build script
+app.js - the server
+app.spec.js -- server tests
+models/ -  mongoose models
+views/ - (NOT currently used) jade templates
+src/ - where all front-end code is kept
     src/index.html - index file, also contains underscore templates
-    src/js/libs/ - js libraries
-    src/js/app/ - app ks files
+    src/js/libs/ - js libraries compiled to public/js/libs
+    src/js/app/ - app js files compiled to public/js/main.js
+    src/sass/ - scss files compiled to public/css
+public/ - gulp-built output
+bower.js - front library config file
+gulpfile.js - build script
+package.js - npm config file
 ```
 
 src/js/app/*.js - these are the javascript files for the app. They are concatenated into one file -- `main.js` -- during the build process. The order is important (see the gulp task 'js'). Current order and role of each file:
@@ -57,7 +60,7 @@ The app's view changes by replacing or appending to `<div id="content">`
 
 A `user` instance is created and stored at `app.user`, which is referenced by views. If in a room, that `room` is kept at `app.room`. The view's templates are found in index.html. Look for these tags:
 
-```html
+```
 <script id="view-name" type="text/template">
 ``` 
 
