@@ -34,19 +34,40 @@
 
 @mixin outline($color) {
   border: 1px solid $color;
+  background-color: $white;
   color: $color;
-  // &:hover,
-  // &:focus {
-  //   border: 1px solid darken($color, 30%);
-  // }
   a {
     color: $color;
-    &:hover,
-    &:focus {
-      color: darken($color, 30%);
+  }
+}
+
+@mixin outline-hover($color) {
+  &:hover,
+  &:focus {
+    background-color: $color;
+    color: $white;
+    a {
+      color: $white;
     }
   }
 }
+
+@mixin outline-link($color) {
+  @include outline($color);
+  @include outline-hover($color);
+}
+
+@mixin solid-hover($color) {
+  &:hover,
+  &:focus {
+    background-color: $color;
+    color: $white;
+    a {
+      color: $white;
+    }
+  }
+}
+
 
 /// Responsive manager
 /// @param {String} $breakpoint - Breakpoint

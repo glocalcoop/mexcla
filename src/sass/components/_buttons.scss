@@ -2,31 +2,31 @@
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
 
+.btn-default {
+    background-color: $brand-default;
+}
 
 input[type="submit"],
 button {
-
     @extend .btn;
-
+    @extend .center-block;
+    a {
+        color: $white;
+    }
 }
 
 #connect-button {
     @extend .btn-lg;
     @extend .btn-success;
-
 }
 
 .btn-group {
-    .btn {
-        @extend .btn-info-outline;
-        &.active {
-        }
-    }
+    .btn {}
 }
 
 #mute-controls {
     .btn {
-        @extend .btn-danger-outline;
+        @extend .btn-danger;
     }
 }
 

@@ -6,80 +6,82 @@
     @extend .fa;
 }
 
-
 .info span,
-.controls span {
+.info button,
+.controls span,
+.controls button {
     @extend .label;
     @extend .label-pill;
-    background-color: transparent;
-    // @extend .btn;
-    // @extend .btn-sm;
-    // @extend .btn-*-outline;
 }
 
-.info,
+.info {
+    background-color: transparent;
+    span {
+        @include outline($brand-default);
+    }
+}
+
+.info {
+    .moderator {
+        @include outline($brand-primary);
+        .icon {
+            @extend .fa-gavel;
+        }
+    }
+    .language {
+        @include outline($brand-default);
+    }
+    .queued {
+        @include outline($brand-success);
+    }
+}
+
 .controls {
 
     .interpret {
-        @include outline($brand-primary);
+        @extend .btn-warning;
         .icon {
             @extend .fa-futbol-o;
         }
     }
 
     .join {
-        @include outline($brand-success);
+        @extend .btn-success;
         .icon {
             @extend .fa-sign-in;
         }
     }
 
     .leave {
-        @include outline($brand-danger);
+        @extend .btn-danger;
         .icon {
             @extend .fa-sign-out;
         }
     }
 
-
-    .language {
-        @include outline($gray-darker);
-    }
-
-    .moderator {
-        @include outline($brand-info);
-        .icon {
-            @extend .fa-gavel;
-        }
-    }
-
-    .queued {
-        @include outline($brand-primary);
-    }
-
     .mute {
-        @include outline($brand-success);
+        @extend .btn-success;
         .icon {
             @extend .fa-microphone;
         }
     }
 
     .muted {
-        @include outline($gray);
+        @extend .btn-disabled;
         .icon {
             @extend .fa-microphone-slash;
         }
     }
 
-    .raise-hand{
-        @include outline($brand-warning);
+    .raise-hand {
+        @extend .btn-success;
         .icon {
             @extend .fa-hand-paper-o;
         }
     }
 
-    .lower-hand{
-        @include outline($gray);
+    .lower-hand {
+        @extend .btn-disabled;
         .icon {
             @extend .fa-hand-o-down;
         }
@@ -87,13 +89,13 @@
 }
 
 .add-channel {
-    @extend .btn-primary-outline;
-    &:hover,
-    &:focus {
-        a {
-            color: $white;
-        }
-    }
+    @extend .btn-primary;
+    // &:hover,
+    // &:focus {
+    //     a {
+    //         color: $white;
+    //     }
+    // }
 
     .icon {
         @extend .fa-plus;

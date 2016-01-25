@@ -9,7 +9,7 @@
     header {
         @extend .row;
 
-        margin-bottom: 4em;
+        margin-bottom: 1em;
 
         .conference-id,
         #room-info {
@@ -31,22 +31,18 @@
         }
     }
 
+    #connect-button {
+        @extend .center-block;
+    }
+
     #collaboration {
-        width: 100%;
-        margin-bottom: 1em;
-
-        ul {
-            @extend .nav-pills;
-        }
+        margin-top: 1em;
+        margin-bottom: 5em;
 
     }
 
-    #tab-content {
-        min-height: 300px;
-        background-color: $gray-lighter;
-    }
-
-    #options {
+    #mute-controls,
+    #interpretation-options {
         display: none;
     }
 

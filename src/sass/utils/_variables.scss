@@ -34,7 +34,6 @@ $brand-info:            #7A9E9F; //#5bc0de
 $brand-warning:         #BB992F; //#f0ad4e
 $brand-danger:          #EB5E28; //#d9534f
 
-$default-color:         $brand-primary;
 
 
 $gray-base:              #222 !default; //000
@@ -42,11 +41,14 @@ $gray-darker:            #444; // #222
 $gray-dark:              #5C6265;   // #333
 $gray:                   #79858A; // #555
 $gray-light:             #A2A8AB; // #777
-$gray-lighter:           #eee;
+$gray-lighter:           #f5f5f5;
 
 $white:     #fff;
 $black:     #000;
 
+$brand-default:         $gray;
+$bg-disabled:           $gray-lighter;
+$font-disabled:         $gray-darker; 
 
 
 

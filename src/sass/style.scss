@@ -14,9 +14,9 @@
   'utils/mixins';
 
 
-// // 3. Base stuff
-// @import
-//   'base/base',
+// 3. Base stuff
+@import
+  'base/base';
 //   'base/fonts',
 //   'base/typography',
 //   'base/helpers';
@@ -36,7 +36,8 @@
   'components/alerts',
   'components/widgets',
   'components/icons',
-  'components/tooltips';
+  'components/tooltips',
+  'components/tabs';
 
 // 6. Page-specific styles
 @import

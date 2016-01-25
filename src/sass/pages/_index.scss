@@ -16,6 +16,15 @@
             @extend .card-block;
             @extend .form-inline;
         }
+
+        #room-number-button,
+        #create-new-room-button {
+            @extend .btn-lg;
+            @extend .btn-primary;
+        }
+        #room-number-button {
+            margin-top: .5em;
+        }
         
     }
 

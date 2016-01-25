@@ -2,32 +2,79 @@
 // This file contains very basic styles.
 // -----------------------------------------------------------------------------
 
-/**
- * Set up a decent box model on the root element
- */
-html {
-  box-sizing: border-box;
+.btn-default {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-default;
+    }
 }
 
-/**
- * Make all elements from the DOM inherit from the parent box-sizing
- * Since `*` has a specificity of 0, it does not override the `html` value
- * making all elements inheriting from the root box-sizing value
- * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
- */
-*, *::before, *::after {
-  box-sizing: inherit;
-} 
+.btn-primary {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-primary;
+    }
+}
 
-/**
- * Basic styles for links
- */
-a {
-  color: $brand-color;
-  text-decoration: none;
+.btn-success {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-success;
+    }
+}
 
-  @include on-event {
-    color: $text-color;
-    text-decoration: underline;
-  }
+.btn-info {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-info;
+    }
+}
+
+.btn-warning {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-warning;
+    }
+}
+
+.btn-danger {
+    &:hover,
+    &:focus, 
+    &:hover a,
+    &:focus a {
+        background-color: $white;
+        color: $brand-danger;
+    }
+}
+
+.btn-disabled {
+    background-color: $bg-disabled;
+    color: $font-disabled;
+
+    a {
+        color: $font-disabled;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: darken( $bg-disabled, 30% );
+        a {
+          color: $white;  
+        }
+    }
 }

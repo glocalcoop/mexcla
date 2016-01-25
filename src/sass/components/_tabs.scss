@@ -1,0 +1,24 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to tabs.
+// -----------------------------------------------------------------------------
+
+#collaboration {
+
+    .nav {
+        @extend .nav-tabs;
+    }
+
+    .tab-content {
+        background-color: $gray-lighter;
+        // height: 100%;
+        @extend .embed-responsive;
+        @extend .embed-responsive-4by3;
+    }
+
+    .nav-link {
+        border: solid 1px $brand-info;
+    }
+}
+
+// @extend .nav-pills;
+
