@@ -19,13 +19,25 @@ $(function() {
     })
 
     /**
-     * Call Mute and Unmute
+     * Collaboration
+     * Load collaboration iframes when tab is clicked
      */
-    $('#collaboration').click('a', function (event) {
+    $('#collaboration a[data-toggle="tab"]').click(function(event) {
 
-        event.preventDefault()
+        event.preventDefault();
 
-    })
+        $(this).tab('show');
+
+        var panelId = $(event.target).attr('href');
+
+        var src = $(panelId).attr('data-src');
+        // if the iframe hasn't already been loaded once
+        if($(panelId + ' iframe').attr('src')=='') {
+            $(panelId + ' iframe').attr('src',src);
+        }
+
+    });
+
 
     /**
      * Activate Bootstrap tooltips

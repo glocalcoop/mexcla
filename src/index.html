@@ -26,8 +26,8 @@
         <h3 id="tagline"><a href="/">Mexcla: title<!-- Tagline --></a></h3>
         <ul id="language-links" class="nav">
           <li class="nav-item"><div id="welcome-text"><!-- template #welcome-text-template --></div></li>
-          <li class="nav-item"><a id="es-switch-link" onclick="switch_language('es')" class="nav-link espanol" href="#">English</a></li>
-          <li class="nav-item"><a id="en-switch-link" onclick="switch_language('en')" class="nav-link english" href="#">Espa&ntilde;ol</a></li>
+          <li class="nav-item"><a id="es-switch-link" onclick="switch_language('es')" class="nav-link english" href="#">English</a></li>
+          <li class="nav-item"><a id="en-switch-link" onclick="switch_language('en')" class="nav-link espanol" href="#">Espa&ntilde;ol</a></li>
         </ul>
       </nav>
      </header>
@@ -89,6 +89,7 @@
     <!-- ROOM -->
     <script type="text/template" id="room-template">
     <main class="main-content room" role="main">
+
       <header id="content-header">
         <h2 id="conference-<%= roomnum %>" class="conference-id">
           <%= conference %>
@@ -96,9 +97,11 @@
             <%= roomnum %>
           </span>
         </h2>
+
         <div id="userinfo-modal" style="display:none">
           <a href="/userinfo" rel="ajax:modal"></a>
         </div>
+
         <div id="room-info">
           <label for="room-link">Link</label>
           <!-- TODO: Add real URL -->
@@ -106,7 +109,9 @@
           <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="Click to Copy Room Link"><i class="icon"></i></span>
         </div>
       </header>
+
       <section id="options">
+
         <div id="call-options">
           <div id="connect-icon-and-button">
             <button class="button" onclick="mexcla_toggle_call_status(<%= roomnum %>); return false;" id="connect-button">
@@ -114,6 +119,7 @@
               <span id="connect-dots"></span>
             </button>
           </div>
+
           <div id="mute-controls">
             <div class="btn-group" id="mute-button" data-toggle="buttons">
 
@@ -127,10 +133,10 @@
                 <%= unmute %>
               </label>
 
-
             </div>
           </div>
         </div>
+
         <div id="interpretation-options">
           <div class="btn-group" id="interpretation-mode" data-toggle="buttons">
             <label for="mode-original" class="btn active">
@@ -147,6 +153,7 @@
           </div>
         </div>
       </section>
+
       <section id="audio-handling">
         <div id="audio">
           <audio autoplay="autoplay" id="audio-remote">
@@ -154,20 +161,37 @@
           </audio>
         </div>
       </section>
+
       <section id="collaboration">
-        <div class="tabs nav nav-tabs">
-          <ul class="nav" id="collaboration-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pad-frame" data-target="pad-frame" role="tab" aria-controls="<%= notepad %>"><%= notepad %></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spreadsheet-frame" data-target="spreadsheet-frame" role="tab" aria-controls="<%= spreadsheet %>"><%= spreadsheet %></a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat-frame" data-target="chat-frame" role="tab" aria-controls="<%= chat %>"><%= chat %></a></li>
-          </ul>
+
+        <!-- Nav tabs -->
+        <ul class="nav" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#pad-frame" aria-controls="<%= notepad %>" role="tab"><%= notepad %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#spreadsheet-frame" aria-controls="<%= spreadsheet %>" role="tab"><%= spreadsheet %></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#chat-frame" aria-controls="<%= chat %>" role="tab"><%= chat %></a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane" id="pad-frame" data-src="https://pad.riseup.net/p/<%= roomnum %>?showChat=false" role="tabpanel">
+            <iframe src=""></iframe>
+          </div>
+          <div class="tab-pane" id="spreadsheet-frame" data-src="https://calc.mayfirst.org/<%= roomnum %>" role="tabpanel">
+            <iframe src=""></iframe>
+          </div>
+          <div class="tab-pane" id="chat-frame" data-src="https://irc.koumbit.net/?channels=#<%= roomnum %>&nick=guest" role="tabpanel">
+            <iframe src=""></iframe>
+          </div>
         </div>
-        <div id="tab-content">
-          <div id="pad-frame" class="tab-pane content pad" role="tabpanel"></div>
-          <div id="spreadsheet-frame" class="tab-pane content pad" role="tabpanel"></div>
-          <div id="chat-frame" class="tab-pane content pad" role="tabpanel"></div>
-        </div>
+
       </section>
+
     </main>
     </script>
 
@@ -197,26 +221,30 @@
               <li id="channel-id">
                 Channel Name
                 <div class="controls">
-                  <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+                  <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
                   <!-- Join appears when interpreter exists and user is not already in channel -->
-                  <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+                  <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
                   <!-- Leave appears when user is in channel -->
-                  <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+                  <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
                 </div>
               </li>
 
               <li id="channel-id">
                 Channel Name
                 <div class="controls">
-                  <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+                  <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
                   <!-- Join appears when interpreter exists and user is not already in channel -->
-                  <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+                  <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
                   <!-- Leave appears when user is in channel -->
-                  <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+                  <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
                 </div>
               </li>
 
             </ul>
+            <footer class="widget-footer">
+              <button class="add-channel"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>              
+            </footer>
+
           </div>
         </div>
       </aside>
@@ -233,10 +261,10 @@
         </div>
         <%= username %>
         <div class="controls">
-          <span class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></span>
-          <span class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></span>
-          <span class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></span>
-          <span class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></span>
+          <button class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></button>
+          <button class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></button>
+          <button class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></button>
+          <button class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></button>
         </div>
       </li>
     </script>
@@ -248,11 +276,11 @@
       <li id="channel-id">
         Channel Name
         <div class="controls">
-          <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+          <button class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
           <!-- Join appears when interpreter exists and user is not already in channel -->
-          <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+          <button class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
           <!-- Leave appears when user is in channel -->
-          <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+          <button class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
         </div>
       </li>
     </script>
