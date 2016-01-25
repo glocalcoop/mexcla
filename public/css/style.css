@@ -5438,7 +5438,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   font-weight: normal;
   font-style: normal; }
 
-.fa, .icon, .copy-link .icon {
+.fa, .icon, #collaboration .icon, .copy-link .icon {
   display: inline-block;
   font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
@@ -5495,10 +5495,10 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left, .fa-pull-left.icon {
+.fa.fa-pull-left, .fa-pull-left.icon, #collaboration .fa-pull-left.icon {
   margin-right: .3em; }
 
-.fa.fa-pull-right, .fa-pull-right.icon {
+.fa.fa-pull-right, .fa-pull-right.icon, #collaboration .fa-pull-right.icon {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -5508,10 +5508,10 @@ a.bg-danger:focus, a.bg-danger:hover {
 .pull-left {
   float: left; }
 
-.fa.pull-left, .pull-left.icon {
+.fa.pull-left, .pull-left.icon, #collaboration .pull-left.icon {
   margin-right: .3em; }
 
-.fa.pull-right, .pull-right.icon {
+.fa.pull-right, .pull-right.icon, #collaboration .pull-right.icon {
   margin-left: .3em; }
 
 .fa-spin {
@@ -5990,7 +5990,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-cogs:before {
   content: ""; }
 
-.fa-comments:before {
+.fa-comments:before, #collaboration .chat .icon:before {
   content: ""; }
 
 .fa-thumbs-o-up:before {
@@ -7285,7 +7285,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-object-ungroup:before {
   content: ""; }
 
-.fa-sticky-note:before {
+.fa-sticky-note:before, #collaboration .notepad .icon:before {
   content: ""; }
 
 .fa-sticky-note-o:before {
@@ -7601,6 +7601,13 @@ button a {
 .cursor-grabbling {
   cursor: grabbing; }
 
+.clipboard-field input {
+  width: 75%;
+  float: left; }
+
+.clipboard-field .copy-link {
+  width: 40px; }
+
 #participant-list footer button,
 #channel-list footer button {
   margin-top: 1em;
@@ -7668,6 +7675,9 @@ button a {
 
 #collaboration .tab-content {
   background-color: #f5f5f5; }
+  #collaboration .tab-content iframe {
+    margin-top: 40px;
+    height: 90%; }
 
 #collaboration .nav-link {
   border: solid 1px #7A9E9F; }

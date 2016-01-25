@@ -88,14 +88,28 @@
     }
 }
 
+#collaboration {
+
+    .icon {
+        @extend .fa;
+    }
+
+    .notepad {
+        .icon {
+            @extend .fa-sticky-note;
+        }
+    }
+
+    .chat  {
+        .icon {
+            @extend .fa-comments;
+        }
+    }
+
+}
+
 .add-channel {
     @extend .btn-primary;
-    // &:hover,
-    // &:focus {
-    //     a {
-    //         color: $white;
-    //     }
-    // }
 
     .icon {
         @extend .fa-plus;

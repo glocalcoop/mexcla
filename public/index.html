@@ -102,7 +102,7 @@
           <a href="/userinfo" rel="ajax:modal"></a>
         </div>
 
-        <div id="room-info">
+        <div id="room-info" class="clipboard-field">
           <label for="room-link">Link</label>
           <!-- TODO: Add real URL -->
           <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
@@ -167,25 +167,37 @@
         <!-- Nav tabs -->
         <ul class="nav" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#pad-frame" aria-controls="<%= notepad %>" role="tab"><%= notepad %></a>
+            <a class="nav-link notepad" data-toggle="tab" href="#pad-frame" aria-controls="<%= notepad %>" role="tab"><i class="icon"></i> <%= notepad %></a>
           </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link spreadsheet" data-toggle="tab" href="#spreadsheet-frame" aria-controls="<%= spreadsheet %>" role="tab"> <%= spreadsheet %></a>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#spreadsheet-frame" aria-controls="<%= spreadsheet %>" role="tab"><%= spreadsheet %></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#chat-frame" aria-controls="<%= chat %>" role="tab"><%= chat %></a>
+            <a class="nav-link chat" data-toggle="tab" href="#chat-frame" aria-controls="<%= chat %>" role="tab"><i class="icon"></i> <%= chat %></a>
           </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane" id="pad-frame" data-src="https://pad.riseup.net/p/<%= roomnum %>?showChat=false" role="tabpanel">
+
+            <!-- Copiable direct link -->
+            <div class="clipboard-field">
+              <input type="text" value="https://pad.riseup.net/p/<%= roomnum %>" id="pad-link">
+              <span for="pad-link" class="copy-link" data-clipboard-target="#pad-link" data-toggle="tooltip" title="Click to Copy Notepad Link"><i class="icon"></i></span>
+            </div>
+            
             <iframe src=""></iframe>
           </div>
-          <div class="tab-pane" id="spreadsheet-frame" data-src="https://calc.mayfirst.org/<%= roomnum %>" role="tabpanel">
+          <!-- <div class="tab-pane" id="spreadsheet-frame" data-src="https://calc.mayfirst.org/<%= roomnum %>" role="tabpanel">
             <iframe src=""></iframe>
-          </div>
+          </div> -->
           <div class="tab-pane" id="chat-frame" data-src="https://irc.koumbit.net/?channels=#<%= roomnum %>&nick=guest" role="tabpanel">
+            <!-- Copiable direct link -->
+            <div class="clipboard-field">
+              <input type="text" value="https://irc.koumbit.net/?channels=#<%= roomnum %>" id="chat-link">
+              <span for="chat-link" class="copy-link" data-clipboard-target="#chat-link" data-toggle="tooltip" title="Click to Copy Notepad Link"><i class="icon"></i></span>
+            </div>
             <iframe src=""></iframe>
           </div>
         </div>

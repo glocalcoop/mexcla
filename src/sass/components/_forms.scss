@@ -20,3 +20,17 @@ select {
 label {
     @extend .form-control-label;
 }
+
+.clipboard-field {
+    input {
+        width: 75%;
+        float: left;
+    }
+
+    .copy-link {
+        width: 40px;
+    }
+}
+
+
+//col-sm-10
