@@ -6,11 +6,11 @@ Multi-lingual conferencing system built with node.js and webrtc2sip
 
 ### RUN
 
-Ensure the database URI is correct in app.js: mongoose.connect('mongodb://host:port/database')
+Ensure the database URI is correct in app.js: `mongoose.connect('mongodb://host:port/database')`
 
-launch mongodb: mongod [--dbpath path/to/db/folder] [--port portNumber]
+launch mongodb: `mongod [--dbpath path/to/db/folder] [--port portNumber]`
 
-start app: node app
+start app: `node app`
 
 Change port in app.js if needed. Currently: 8080.
 
@@ -20,16 +20,16 @@ Change port in app.js if needed. Currently: 8080.
 
 
 ```
-app.js - the server
-app.spec.js -- server tests
-models/ -  mongoose models
-views/ - (NOT currently used) jade templates
-src/ - where all front-end code is kept
-public/ - gulp-built output
-gulpfile.js - build script
-src/index.html - index file, also contains underscore templates
-src/js/libs/ - js libraries
-src/js/app/ - app ks files
+    app.js - the server
+    app.spec.js -- server tests
+    models/ -  mongoose models
+    views/ - (NOT currently used) jade templates
+    src/ - where all front-end code is kept
+    public/ - gulp-built output
+    gulpfile.js - build script
+    src/index.html - index file, also contains underscore templates
+    src/js/libs/ - js libraries
+    src/js/app/ - app ks files
 ```
 
 src/js/app/*.js - these are the javascript files for the app. They are concatenated into one file -- `main.js` -- during the build process. The order is important (see the gulp task 'js'). Current order and role of each file:
@@ -47,7 +47,8 @@ To build run: `gulp`
 Except for the static files in the public folder, app.js only returns json.
 
 The app stores two cookies:
-  * 'id' which is the mongo `_id` of the user
+
+  * 'id' which is the Mongo `_id` of the user
   * 'lang' the user's current language
   
 *The app won't work without cookies!*
