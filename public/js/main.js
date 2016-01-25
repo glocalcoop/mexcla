@@ -24,7 +24,7 @@ var websiteText = {
       spreadsheet: "Spreadsheet",
       chat: "Chat",
       channels: "Language Channels",
-      interpret: "Become Interpreter",
+      interpret: "Interpret",
       join_channel: "Join",
       leave_channel: "Leave",
       moderator: "Moderator",
@@ -54,7 +54,7 @@ var websiteText = {
       spreadsheet: "Spreadsheet",
       chat: "Chat",
       channels: "Language Channels",
-      interpret: "Become Interpreter",
+      interpret: "Interpret",
       join_channel: "Join",
       leave_channel: "Leave",
       moderator: "Moderator",
@@ -462,6 +462,12 @@ $(function() {
      * Activate Clipboard
      */
     new Clipboard('.copy-link');
+
+    $('.copy-link').click(function() {
+
+        $(this).toggleClass( "cursor-grabbling" );
+
+    });
 
 });
 
