@@ -3,18 +3,20 @@
   <head>
     <title>Mexcla Conferencing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="/css/jquery.modal.css">
-    <link rel="stylesheet" href="/css/vendor/switches/toggle-switch.css"> -->
+
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- SCRIPTS -->
     <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
     <script type="text/javascript" src="js/libs/jquery.js"></script>
-    <script type="text/javascript" src="js/libs/jquery.modal.js"></script>
-    <script type="text/javascript" src="js/libs/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/libs/js.cookie.js"></script>
     <script type="text/javascript" src="js/libs/underscore.js"></script>
     <script type="text/javascript" src="js/libs/backbone.js"></script>
+
+    <script type="text/javascript" src="js/libs/tether/tether.min.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/libs/clipboard/dist/clipboard.min.js"></script>
+
   </head>
   <body>
     <!-- HEADER  -->
@@ -23,7 +25,7 @@
       <nav id="utility-nav" class="navbar">  
         <h3 id="tagline"><a href="/">Mexcla: title<!-- Tagline --></a></h3>
         <ul id="language-links" class="nav">
-          <li class="nav-item"><div id="welcome-text"><!-- Username --></div></li>
+          <li class="nav-item"><div id="welcome-text"><!-- template #welcome-text-template --></div></li>
           <li class="nav-item"><a id="es-switch-link" onclick="switch_language('es')" class="nav-link espanol" href="#">English</a></li>
           <li class="nav-item"><a id="en-switch-link" onclick="switch_language('en')" class="nav-link english" href="#">Espa&ntilde;ol</a></li>
         </ul>
@@ -36,7 +38,7 @@
       <p><a href="https://github.com/glocalcoop/mexcla.git" target="_blank">Source</a></p>
     </footer>
     
-<!--TEMPLATES  -->
+    <!--TEMPLATES  -->
 
     <!--INDEX -->
     <script type="text/template" id="index-template">
@@ -64,7 +66,7 @@
 
     <!-- HEADER WELCOME TEXT-->
     <script type="text/template" id="welcome-text-template">
-      <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
+      <span class="greeting"><%= greetings %></span><span id="<%= app.user.id %>" class="user-name"><%= username %></span>
     </script>
 
     <!--REGISTER  -->
@@ -88,7 +90,7 @@
     <script type="text/template" id="room-template">
     <main class="main-content room" role="main">
       <header id="content-header">
-        <h2 class="conference-id">
+        <h2 id="conference-<%= roomnum %>" class="conference-id">
           <%= conference %>
           <span class="pstn-instructions-conference-number">
             <%= roomnum %>
@@ -100,7 +102,8 @@
         <div id="room-info">
           <label for="room-link">Link</label>
           <!-- TODO: Add real URL -->
-            <span class="form-control" id="room-link">http://url.org/room/<%= roomnum %></span>
+          <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
+          <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="Click to Copy Room Link"><i class="icon"></i></span>
         </div>
       </header>
       <section id="options">
@@ -153,16 +156,16 @@
       </section>
       <section id="collaboration">
         <div class="tabs nav nav-tabs">
-          <ul class="nav nav-tabs" id="collaboration-tabs" role="tablist">
+          <ul class="nav" id="collaboration-tabs" role="tablist">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#pad-frame" data-target="pad-frame" role="tab" aria-controls="<%= notepad %>"><%= notepad %></a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#spreadsheet-frame" data-target="spreadsheet-frame" role="tab" aria-controls="<%= spreadsheet %>"><%= spreadsheet %></a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#chat-frame" data-target="chat-frame" role="tab" aria-controls="<%= chat %>"><%= chat %></a></li>
           </ul>
         </div>
         <div id="tab-content">
-          <div id="pad-frame" class="tab-pane content pad" role="tabpanel">
-          <div id="spreadsheet-frame" class="tab-pane content pad" role="tabpanel">
-          <div id="chat-frame" class="tab-pane content pad" role="tabpanel">
+          <div id="pad-frame" class="tab-pane content pad" role="tabpanel"></div>
+          <div id="spreadsheet-frame" class="tab-pane content pad" role="tabpanel"></div>
+          <div id="chat-frame" class="tab-pane content pad" role="tabpanel"></div>
         </div>
       </section>
     </main>
@@ -171,33 +174,89 @@
 
     <!-- ROOM SIDEBAR  -->
     <script type="text/template" id="room-sidebar-template">
+      <!-- Participants  -->
       <aside class="sidebar" role="complementary" id="participant-list">
         <div class="participant-list">
           <h3><%= participants %></h3>
           <div class="scroll-list">
             <ul id="participants">
+            <!-- template #participant-row-template -->
             </ul>
           </div>
         </div>
       </aside>
+
+      <!-- Channels  -->
+      <aside class="sidebar" role="complementary" id="channel-list">
+        <div class="channel-list">
+          <h3><%= channels %></h3>
+          <div class="scroll-list">
+            <ul id="channels">
+            <!-- template #channel-row-template -->
+            <!-- TODO: Add channel row view -->
+              <li id="channel-id">
+                Channel Name
+                <div class="controls">
+                  <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+                  <!-- Join appears when interpreter exists and user is not already in channel -->
+                  <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+                  <!-- Leave appears when user is in channel -->
+                  <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+                </div>
+              </li>
+
+              <li id="channel-id">
+                Channel Name
+                <div class="controls">
+                  <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+                  <!-- Join appears when interpreter exists and user is not already in channel -->
+                  <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+                  <!-- Leave appears when user is in channel -->
+                  <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </aside>
+
     </script>
 
-    <!-- ROOM SIDEBAR  -->
+    <!-- PARTICIPANTS ROW  -->
     <script type="text/template" id="participant-row-template">
-      <li>
+      <li id="<%= _id %>">
         <div class="info">
-          <span class="label language">de</span>
-          <span class="label moderator">!</span>
-          <span class="label queued">1</span>
+          <span class="language" data-toggle="tooltip" title="de">de</span>
+          <span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>
+          <span class="queued" data-toggle="tooltip" title="Queued">1</span>
         </div>
         <%= username %>
         <div class="controls">
-          <span class="label mute">m</span>
-          <span class="label muted">m</span>
-          <span class="label raise-hand">r</span>
+          <span class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></span>
+          <span class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></span>
+          <span class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></span>
+          <span class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></span>
         </div>
       </li>
     </script>
+
+
+    <!-- LANGUAGE CHANNEL ROW  -->
+    <script type="text/template" id="channel-row-template">
+      <!-- TODO: Add channel name identifier to each row  -->
+      <li id="channel-id">
+        Channel Name
+        <div class="controls">
+          <span class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></span>
+          <!-- Join appears when interpreter exists and user is not already in channel -->
+          <span class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></span>
+          <!-- Leave appears when user is in channel -->
+          <span class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></span>
+        </div>
+      </li>
+    </script>
+
 
     <!-- REIGSTER MODAL -->
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
