@@ -3,6 +3,10 @@
 // -----------------------------------------------------------------------------
 
 aside {
-    @extend .col-xs-6;
+    @extend .col-xs-12;
     @extend .col-md-4;
+
+    &#channel-list {
+        margin-bottom: 5em;
+    }
 }

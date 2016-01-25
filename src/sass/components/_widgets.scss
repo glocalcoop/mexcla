@@ -21,6 +21,7 @@
 
     li {
         @extend .list-group-item;
+        @extend .clearfix;
         background-color {
             &:hover,
             &:focus {
