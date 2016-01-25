@@ -40,6 +40,12 @@ $(function() {
      */
     new Clipboard('.copy-link');
 
+    $('.copy-link').click(function() {
+
+        $(this).toggleClass( "cursor-grabbling" );
+
+    });
+
 });
 
 
