@@ -33,9 +33,16 @@
      </header>
      <!--CONTENT  -->
     <div id="content"></div>
+
     <!-- FOOTER -->
-    <footer id="footer">
-      <p><a href="https://github.com/glocalcoop/mexcla.git" target="_blank">Source</a></p>
+    <footer id="footer" role="contentinfo">
+      <div class="colophon">
+        <span class="license"><a href="http://www.gnu.org/licenses/gpl-3.0-standalone.htmlt" target="_blank"><i class="icon"></i></a>Mexcla</span>
+        <ul>
+          <li class="source"><a href="https://github.com/glocalcoop/mexcla.git" target="_blank"><i class="icon"></i> Source</a></li>
+          <li class="terms"></li>
+        </ul>
+      </div>
     </footer>
     
     <!--TEMPLATES  -->
@@ -69,22 +76,6 @@
       <span class="greeting"><%= greetings %></span><span id="<%= app.user.id %>" class="user-name"><%= username %></span>
     </script>
 
-    <!--REGISTER  -->
-    <script type="text/template" id="register-template">
-      <main id="register-form" class="main-content register modal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
-          <div class="card" role="document">
-            <fieldset>
-              <label for="username">Please Enter Your Name</label>
-              <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
-              <select name="lang" id="lang-select">
-                <option value="en">English</option>
-                <option value="es">Espa&ntilde;ol</option>
-              </select>
-              <input type="submit" id="register-submit-button" value="Submit" />
-            </fieldset>
-          </div>
-      </main>
-    </script>
 
     <!-- ROOM -->
     <script type="text/template" id="room-template">
@@ -103,10 +94,10 @@
         </div>
 
         <div id="room-info" class="clipboard-field">
-          <label for="room-link">Link</label>
+          <label for="room-link">L<%= link %></label>
           <!-- TODO: Add real URL -->
           <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
-          <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="Click to Copy Room Link"><i class="icon"></i></span>
+          <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
         </div>
       </header>
 
@@ -298,24 +289,28 @@
     </script>
 
 
-    <!-- REIGSTER MODAL -->
-    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm" id="register-modal">
-          <div class="modal-content">
-            <div class="card" role="document">
+    <!-- REGISTER MODAL -->
+    <div id="register-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="register-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card" role="document">
+            <header class="modal-header"><h2>Register</h2></header>
             <fieldset>
-              <label for="username">Please Enter Your Name</label>
-              <input id="user-name" type="text" value="" name="username" placeholder="Your name" />
+              <label for="username">Enter Your Name</label>
+              <input id="user-name" type="text" value="" name="username" placeholder="Enter Your Name" />
               <select name="lang" id="lang-select">
+                <option value="">Select Language</option>
                 <option value="en">English</option>
                 <option value="es">Espa&ntilde;ol</option>
               </select>
-              <input type="submit" id="register-submit-button" value="Submit" />
             </fieldset>
-          </div>
+            <footer class="modal-footer">
+              <input type="submit" id="register-submit-button" data-dismiss="modal" value="Enter" />
+            </footer>
           </div>
         </div>
       </div>
+    </div>
 
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>

@@ -214,17 +214,19 @@ th {
   h2,
   h3 {
     page-break-after: avoid; }
-  .navbar {
+  .navbar, #footer {
     display: none; }
-  .btn > .caret, #utility-nav #language-links a.nav-link > .caret, input[type="submit"] > .caret,
+  .btn > .caret, #utility-nav #language-links a.nav-link > .caret, #utility-nav #language-links #footer .colophon ul li a > .caret, #footer .colophon ul li #utility-nav #language-links a > .caret, input[type="submit"] > .caret,
   button > .caret,
   .dropup > .btn > .caret, #utility-nav #language-links
-  .dropup > a.nav-link > .caret,
+  .dropup > a.nav-link > .caret, #utility-nav #language-links #footer .colophon ul li
+  .dropup > a > .caret, #footer .colophon ul li #utility-nav #language-links
+  .dropup > a > .caret,
   .dropup > input[type="submit"] > .caret,
   .dropup >
   button > .caret {
     border-top-color: #000 !important; }
-  .label, #utility-nav #language-links a.nav-link, .info span,
+  .label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .info span,
   .info button,
   .controls span,
   .controls button {
@@ -614,26 +616,26 @@ pre {
   max-height: 340px;
   overflow-y: scroll; }
 
-.container, #header, #footer p, #content {
+.container, #header, #content {
   margin-left: auto;
   margin-right: auto;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
-  .container::after, #header::after, #footer p::after, #content::after {
+  .container::after, #header::after, #content::after {
     content: "";
     display: table;
     clear: both; }
   @media (min-width: 544px) {
-    .container, #header, #footer p, #content {
+    .container, #header, #content {
       max-width: 576px; } }
   @media (min-width: 768px) {
-    .container, #header, #footer p, #content {
+    .container, #header, #content {
       max-width: 720px; } }
   @media (min-width: 992px) {
-    .container, #header, #footer p, #content {
+    .container, #header, #content {
       max-width: 940px; } }
   @media (min-width: 1200px) {
-    .container, #header, #footer p, #content {
+    .container, #header, #content {
       max-width: 1140px; } }
 
 .container-fluid, #content {
@@ -1429,7 +1431,7 @@ select {
 .form-control-range {
   display: block; }
 
-.form-control-label, label {
+.form-control-label {
   padding: 0.375rem 0.75rem;
   margin-bottom: 0; }
 
@@ -1488,7 +1490,9 @@ select {
   .main-content.room header #room-info
   .input-group-sm > .form-control-static.copy-link,
   .input-group-sm > .input-group-btn > .form-control-static.btn, #utility-nav #language-links
-  .input-group-sm > .input-group-btn > a.form-control-static.nav-link,
+  .input-group-sm > .input-group-btn > a.form-control-static.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .input-group-sm > .input-group-btn > a.form-control-static, #footer .colophon ul li #utility-nav #language-links
+  .input-group-sm > .input-group-btn > a.form-control-static,
   .input-group-sm > .input-group-btn > input.form-control-static[type="submit"],
   .input-group-sm > .input-group-btn >
   button.form-control-static, .form-control-static.form-control-lg, .input-group-lg > .form-control-static.form-control, .input-group-lg > input.form-control-static[type="text"], .input-group-lg >
@@ -1499,7 +1503,9 @@ select {
   .main-content.room header #room-info
   .input-group-lg > .form-control-static.copy-link,
   .input-group-lg > .input-group-btn > .form-control-static.btn, #utility-nav #language-links
-  .input-group-lg > .input-group-btn > a.form-control-static.nav-link,
+  .input-group-lg > .input-group-btn > a.form-control-static.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .input-group-lg > .input-group-btn > a.form-control-static, #footer .colophon ul li #utility-nav #language-links
+  .input-group-lg > .input-group-btn > a.form-control-static,
   .input-group-lg > .input-group-btn > input.form-control-static[type="submit"],
   .input-group-lg > .input-group-btn >
   button.form-control-static {
@@ -1514,7 +1520,9 @@ select,
 .main-content.room header #room-info
 .input-group-sm > .copy-link,
 .input-group-sm > .input-group-btn > .btn, #utility-nav #language-links
-.input-group-sm > .input-group-btn > a.nav-link,
+.input-group-sm > .input-group-btn > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-sm > .input-group-btn > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-sm > .input-group-btn > a,
 .input-group-sm > .input-group-btn > input[type="submit"],
 .input-group-sm > .input-group-btn >
 button {
@@ -1531,7 +1539,9 @@ select,
 .main-content.room header #room-info
 .input-group-lg > .copy-link,
 .input-group-lg > .input-group-btn > .btn, #utility-nav #language-links
-.input-group-lg > .input-group-btn > a.nav-link,
+.input-group-lg > .input-group-btn > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-lg > .input-group-btn > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-lg > .input-group-btn > a,
 .input-group-lg > .input-group-btn > input[type="submit"],
 .input-group-lg > .input-group-btn >
 button {
@@ -1608,7 +1618,6 @@ input[type="checkbox"].disabled {
 
 .has-success .text-help,
 .has-success .form-control-label,
-.has-success label,
 .has-success .radio,
 .has-success .checkbox,
 .has-success .radio-inline,
@@ -1638,7 +1647,6 @@ select {
 
 .has-warning .text-help,
 .has-warning .form-control-label,
-.has-warning label,
 .has-warning .radio,
 .has-warning .checkbox,
 .has-warning .radio-inline,
@@ -1668,7 +1676,6 @@ select {
 
 .has-danger .text-help,
 .has-danger .form-control-label,
-.has-danger label,
 .has-danger .radio,
 .has-danger .checkbox,
 .has-danger .radio-inline,
@@ -1779,8 +1786,7 @@ select {
   select {
     width: 100%; }
   .form-inline .form-control-label, form .form-control-label, fieldset .form-control-label, .main-content.index #join-room fieldset .form-control-label,
-  .main-content.index #create-room fieldset .form-control-label, .form-inline label, form label, fieldset label, .main-content.index #join-room fieldset label,
-  .main-content.index #create-room fieldset label {
+  .main-content.index #create-room fieldset .form-control-label {
     margin-bottom: 0;
     vertical-align: middle; }
   .form-inline .radio, form .radio, fieldset .radio, .main-content.index #join-room fieldset .radio,
@@ -1806,7 +1812,7 @@ select {
   .main-content.index #create-room fieldset .has-feedback .form-control-feedback {
     top: 0; } }
 
-.btn, #utility-nav #language-links a.nav-link, input[type="submit"],
+.btn, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, input[type="submit"],
 button {
   display: inline-block;
   font-weight: normal;
@@ -1820,74 +1826,78 @@ button {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem; }
-  .btn:focus, #utility-nav #language-links a.nav-link:focus, input[type="submit"]:focus,
-  button:focus, .btn.focus, #utility-nav #language-links a.focus.nav-link, input.focus[type="submit"],
-  button.focus, .btn:active:focus, #utility-nav #language-links a.nav-link:active:focus, input[type="submit"]:active:focus,
-  button:active:focus, .btn:active.focus, #utility-nav #language-links a.nav-link:active.focus, input[type="submit"]:active.focus,
-  button:active.focus, .btn.active:focus, #utility-nav #language-links a.active.nav-link:focus, input.active[type="submit"]:focus,
-  button.active:focus, .btn.active.focus, #utility-nav #language-links a.active.focus.nav-link, input.active.focus[type="submit"],
+  .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
+  button:focus, .btn.focus, #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #footer .colophon ul li a.focus, #footer .colophon ul li #utility-nav #language-links a.focus, input.focus[type="submit"],
+  button.focus, .btn:active:focus, #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #footer .colophon ul li a:active:focus, #footer .colophon ul li #utility-nav #language-links a:active:focus, input[type="submit"]:active:focus,
+  button:active:focus, .btn:active.focus, #utility-nav #language-links a.nav-link:active.focus, #utility-nav #language-links #footer .colophon ul li a:active.focus, #footer .colophon ul li #utility-nav #language-links a:active.focus, input[type="submit"]:active.focus,
+  button:active.focus, .btn.active:focus, #utility-nav #language-links a.active.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a.active:focus, #footer .colophon ul li #utility-nav #language-links a.active:focus, input.active[type="submit"]:focus,
+  button.active:focus, .btn.active.focus, #utility-nav #language-links a.active.focus.nav-link, #utility-nav #language-links #footer .colophon ul li a.active.focus, #footer .colophon ul li #utility-nav #language-links a.active.focus, input.active.focus[type="submit"],
   button.active.focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px; }
-  .btn:focus, #utility-nav #language-links a.nav-link:focus, input[type="submit"]:focus,
-  button:focus, .btn:hover, #utility-nav #language-links a.nav-link:hover, input[type="submit"]:hover,
+  .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
+  button:focus, .btn:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, input[type="submit"]:hover,
   button:hover {
     text-decoration: none; }
-  .btn.focus, #utility-nav #language-links a.focus.nav-link, input.focus[type="submit"],
+  .btn.focus, #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #footer .colophon ul li a.focus, #footer .colophon ul li #utility-nav #language-links a.focus, input.focus[type="submit"],
   button.focus {
     text-decoration: none; }
-  .btn:active, #utility-nav #language-links a.nav-link:active, input[type="submit"]:active,
-  button:active, .btn.active, #utility-nav #language-links a.active.nav-link, input.active[type="submit"],
+  .btn:active, #utility-nav #language-links a.nav-link:active, #utility-nav #language-links #footer .colophon ul li a:active, #footer .colophon ul li #utility-nav #language-links a:active, input[type="submit"]:active,
+  button:active, .btn.active, #utility-nav #language-links a.active.nav-link, #utility-nav #language-links #footer .colophon ul li a.active, #footer .colophon ul li #utility-nav #language-links a.active, input.active[type="submit"],
   button.active {
     background-image: none;
     outline: 0; }
-  .btn.disabled, #utility-nav #language-links a.disabled.nav-link, input.disabled[type="submit"],
-  button.disabled, .btn:disabled, #utility-nav #language-links a.nav-link:disabled, input[type="submit"]:disabled,
+  .btn.disabled, #utility-nav #language-links a.disabled.nav-link, #utility-nav #language-links #footer .colophon ul li a.disabled, #footer .colophon ul li #utility-nav #language-links a.disabled, input.disabled[type="submit"],
+  button.disabled, .btn:disabled, #utility-nav #language-links a.nav-link:disabled, #utility-nav #language-links #footer .colophon ul li a:disabled, #footer .colophon ul li #utility-nav #language-links a:disabled, input[type="submit"]:disabled,
   button:disabled {
     cursor: not-allowed;
     opacity: .65; }
 
-a.btn.disabled, #utility-nav #language-links a.disabled.nav-link,
+a.btn.disabled, #utility-nav #language-links a.disabled.nav-link, #utility-nav #language-links #footer .colophon ul li a.disabled, #footer .colophon ul li #utility-nav #language-links a.disabled,
 fieldset[disabled] a.btn,
 fieldset[disabled] #utility-nav #language-links a.nav-link, #utility-nav #language-links
-fieldset[disabled] a.nav-link {
+fieldset[disabled] a.nav-link,
+fieldset[disabled] #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li
+fieldset[disabled] a,
+fieldset[disabled] #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links
+fieldset[disabled] a {
   pointer-events: none; }
 
-.btn-primary, input[type="submit"], .add-channel, .main-content.index #join-room #room-number-button,
+.btn-primary, .add-channel, .modal footer input[type="submit"], .main-content.index #join-room #room-number-button,
 .main-content.index #join-room #create-new-room-button,
 .main-content.index #create-room #room-number-button,
 .main-content.index #create-room #create-new-room-button {
   color: #fff;
   background-color: #427C89;
   border-color: #427C89; }
-  .btn-primary:hover, input[type="submit"]:hover, .add-channel:hover, .main-content.index #join-room #room-number-button:hover,
+  .btn-primary:hover, .add-channel:hover, .modal footer input[type="submit"]:hover, .main-content.index #join-room #room-number-button:hover,
   .main-content.index #join-room #create-new-room-button:hover,
   .main-content.index #create-room #room-number-button:hover,
   .main-content.index #create-room #create-new-room-button:hover {
     color: #fff;
     background-color: #315d67;
     border-color: #2e5760; }
-  .btn-primary:focus, input[type="submit"]:focus, .add-channel:focus, .main-content.index #join-room #room-number-button:focus,
+  .btn-primary:focus, .add-channel:focus, .modal footer input[type="submit"]:focus, .main-content.index #join-room #room-number-button:focus,
   .main-content.index #join-room #create-new-room-button:focus,
   .main-content.index #create-room #room-number-button:focus,
-  .main-content.index #create-room #create-new-room-button:focus, .btn-primary.focus, input.focus[type="submit"], .focus.add-channel, .main-content.index #join-room .focus#room-number-button,
+  .main-content.index #create-room #create-new-room-button:focus, .btn-primary.focus, .focus.add-channel, .modal footer input.focus[type="submit"], .main-content.index #join-room .focus#room-number-button,
   .main-content.index #join-room .focus#create-new-room-button,
   .main-content.index #create-room .focus#room-number-button,
   .main-content.index #create-room .focus#create-new-room-button {
     color: #fff;
     background-color: #315d67;
     border-color: #2e5760; }
-  .btn-primary:active, input[type="submit"]:active, .add-channel:active, .main-content.index #join-room #room-number-button:active,
+  .btn-primary:active, .add-channel:active, .modal footer input[type="submit"]:active, .main-content.index #join-room #room-number-button:active,
   .main-content.index #join-room #create-new-room-button:active,
   .main-content.index #create-room #room-number-button:active,
-  .main-content.index #create-room #create-new-room-button:active, .btn-primary.active, input.active[type="submit"], .active.add-channel, .main-content.index #join-room .active#room-number-button,
+  .main-content.index #create-room #create-new-room-button:active, .btn-primary.active, .active.add-channel, .modal footer input.active[type="submit"], .main-content.index #join-room .active#room-number-button,
   .main-content.index #join-room .active#create-new-room-button,
   .main-content.index #create-room .active#room-number-button,
   .main-content.index #create-room .active#create-new-room-button,
   .open > .btn-primary.dropdown-toggle,
-  .open > input.dropdown-toggle[type="submit"],
-  .open > .dropdown-toggle.add-channel, .main-content.index #join-room
+  .open > .dropdown-toggle.add-channel, .modal footer
+  .open > input.dropdown-toggle[type="submit"], .main-content.index #join-room
   .open > .dropdown-toggle#room-number-button,
   .main-content.index #join-room
   .open > .dropdown-toggle#create-new-room-button,
@@ -1899,28 +1909,28 @@ fieldset[disabled] a.nav-link {
     background-color: #315d67;
     border-color: #2e5760;
     background-image: none; }
-    .btn-primary:active:hover, input[type="submit"]:active:hover, .add-channel:active:hover, .main-content.index #join-room #room-number-button:active:hover,
+    .btn-primary:active:hover, .add-channel:active:hover, .modal footer input[type="submit"]:active:hover, .main-content.index #join-room #room-number-button:active:hover,
     .main-content.index #join-room #create-new-room-button:active:hover,
     .main-content.index #create-room #room-number-button:active:hover,
-    .main-content.index #create-room #create-new-room-button:active:hover, .btn-primary:active:focus, input[type="submit"]:active:focus, .add-channel:active:focus, .main-content.index #join-room #room-number-button:active:focus,
+    .main-content.index #create-room #create-new-room-button:active:hover, .btn-primary:active:focus, .add-channel:active:focus, .modal footer input[type="submit"]:active:focus, .main-content.index #join-room #room-number-button:active:focus,
     .main-content.index #join-room #create-new-room-button:active:focus,
     .main-content.index #create-room #room-number-button:active:focus,
-    .main-content.index #create-room #create-new-room-button:active:focus, .btn-primary:active.focus, input[type="submit"]:active.focus, .add-channel:active.focus, .main-content.index #join-room #room-number-button:active.focus,
+    .main-content.index #create-room #create-new-room-button:active:focus, .btn-primary:active.focus, .add-channel:active.focus, .modal footer input[type="submit"]:active.focus, .main-content.index #join-room #room-number-button:active.focus,
     .main-content.index #join-room #create-new-room-button:active.focus,
     .main-content.index #create-room #room-number-button:active.focus,
-    .main-content.index #create-room #create-new-room-button:active.focus, .btn-primary.active:hover, input.active[type="submit"]:hover, .active.add-channel:hover, .main-content.index #join-room .active#room-number-button:hover,
+    .main-content.index #create-room #create-new-room-button:active.focus, .btn-primary.active:hover, .active.add-channel:hover, .modal footer input.active[type="submit"]:hover, .main-content.index #join-room .active#room-number-button:hover,
     .main-content.index #join-room .active#create-new-room-button:hover,
     .main-content.index #create-room .active#room-number-button:hover,
-    .main-content.index #create-room .active#create-new-room-button:hover, .btn-primary.active:focus, input.active[type="submit"]:focus, .active.add-channel:focus, .main-content.index #join-room .active#room-number-button:focus,
+    .main-content.index #create-room .active#create-new-room-button:hover, .btn-primary.active:focus, .active.add-channel:focus, .modal footer input.active[type="submit"]:focus, .main-content.index #join-room .active#room-number-button:focus,
     .main-content.index #join-room .active#create-new-room-button:focus,
     .main-content.index #create-room .active#room-number-button:focus,
-    .main-content.index #create-room .active#create-new-room-button:focus, .btn-primary.active.focus, input.active.focus[type="submit"], .active.focus.add-channel, .main-content.index #join-room .active.focus#room-number-button,
+    .main-content.index #create-room .active#create-new-room-button:focus, .btn-primary.active.focus, .active.focus.add-channel, .modal footer input.active.focus[type="submit"], .main-content.index #join-room .active.focus#room-number-button,
     .main-content.index #join-room .active.focus#create-new-room-button,
     .main-content.index #create-room .active.focus#room-number-button,
     .main-content.index #create-room .active.focus#create-new-room-button,
     .open > .btn-primary.dropdown-toggle:hover,
-    .open > input.dropdown-toggle[type="submit"]:hover,
-    .open > .dropdown-toggle.add-channel:hover, .main-content.index #join-room
+    .open > .dropdown-toggle.add-channel:hover, .modal footer
+    .open > input.dropdown-toggle[type="submit"]:hover, .main-content.index #join-room
     .open > .dropdown-toggle#room-number-button:hover,
     .main-content.index #join-room
     .open > .dropdown-toggle#create-new-room-button:hover,
@@ -1929,8 +1939,8 @@ fieldset[disabled] a.nav-link {
     .main-content.index #create-room
     .open > .dropdown-toggle#create-new-room-button:hover,
     .open > .btn-primary.dropdown-toggle:focus,
-    .open > input.dropdown-toggle[type="submit"]:focus,
-    .open > .dropdown-toggle.add-channel:focus, .main-content.index #join-room
+    .open > .dropdown-toggle.add-channel:focus, .modal footer
+    .open > input.dropdown-toggle[type="submit"]:focus, .main-content.index #join-room
     .open > .dropdown-toggle#room-number-button:focus,
     .main-content.index #join-room
     .open > .dropdown-toggle#create-new-room-button:focus,
@@ -1939,8 +1949,8 @@ fieldset[disabled] a.nav-link {
     .main-content.index #create-room
     .open > .dropdown-toggle#create-new-room-button:focus,
     .open > .btn-primary.dropdown-toggle.focus,
-    .open > input.dropdown-toggle.focus[type="submit"],
-    .open > .dropdown-toggle.focus.add-channel, .main-content.index #join-room
+    .open > .dropdown-toggle.focus.add-channel, .modal footer
+    .open > input.dropdown-toggle.focus[type="submit"], .main-content.index #join-room
     .open > .dropdown-toggle.focus#room-number-button,
     .main-content.index #join-room
     .open > .dropdown-toggle.focus#create-new-room-button,
@@ -1951,25 +1961,25 @@ fieldset[disabled] a.nav-link {
       color: #fff;
       background-color: #26474e;
       border-color: #192e33; }
-  .btn-primary.disabled:focus, input.disabled[type="submit"]:focus, .disabled.add-channel:focus, .main-content.index #join-room .disabled#room-number-button:focus,
+  .btn-primary.disabled:focus, .disabled.add-channel:focus, .modal footer input.disabled[type="submit"]:focus, .main-content.index #join-room .disabled#room-number-button:focus,
   .main-content.index #join-room .disabled#create-new-room-button:focus,
   .main-content.index #create-room .disabled#room-number-button:focus,
-  .main-content.index #create-room .disabled#create-new-room-button:focus, .btn-primary.disabled.focus, input.disabled.focus[type="submit"], .disabled.focus.add-channel, .main-content.index #join-room .disabled.focus#room-number-button,
+  .main-content.index #create-room .disabled#create-new-room-button:focus, .btn-primary.disabled.focus, .disabled.focus.add-channel, .modal footer input.disabled.focus[type="submit"], .main-content.index #join-room .disabled.focus#room-number-button,
   .main-content.index #join-room .disabled.focus#create-new-room-button,
   .main-content.index #create-room .disabled.focus#room-number-button,
-  .main-content.index #create-room .disabled.focus#create-new-room-button, .btn-primary:disabled:focus, input[type="submit"]:disabled:focus, .add-channel:disabled:focus, .main-content.index #join-room #room-number-button:disabled:focus,
+  .main-content.index #create-room .disabled.focus#create-new-room-button, .btn-primary:disabled:focus, .add-channel:disabled:focus, .modal footer input[type="submit"]:disabled:focus, .main-content.index #join-room #room-number-button:disabled:focus,
   .main-content.index #join-room #create-new-room-button:disabled:focus,
   .main-content.index #create-room #room-number-button:disabled:focus,
-  .main-content.index #create-room #create-new-room-button:disabled:focus, .btn-primary:disabled.focus, input[type="submit"]:disabled.focus, .add-channel:disabled.focus, .main-content.index #join-room #room-number-button:disabled.focus,
+  .main-content.index #create-room #create-new-room-button:disabled:focus, .btn-primary:disabled.focus, .add-channel:disabled.focus, .modal footer input[type="submit"]:disabled.focus, .main-content.index #join-room #room-number-button:disabled.focus,
   .main-content.index #join-room #create-new-room-button:disabled.focus,
   .main-content.index #create-room #room-number-button:disabled.focus,
   .main-content.index #create-room #create-new-room-button:disabled.focus {
     background-color: #427C89;
     border-color: #427C89; }
-  .btn-primary.disabled:hover, input.disabled[type="submit"]:hover, .disabled.add-channel:hover, .main-content.index #join-room .disabled#room-number-button:hover,
+  .btn-primary.disabled:hover, .disabled.add-channel:hover, .modal footer input.disabled[type="submit"]:hover, .main-content.index #join-room .disabled#room-number-button:hover,
   .main-content.index #join-room .disabled#create-new-room-button:hover,
   .main-content.index #create-room .disabled#room-number-button:hover,
-  .main-content.index #create-room .disabled#create-new-room-button:hover, .btn-primary:disabled:hover, input[type="submit"]:disabled:hover, .add-channel:disabled:hover, .main-content.index #join-room #room-number-button:disabled:hover,
+  .main-content.index #create-room .disabled#create-new-room-button:hover, .btn-primary:disabled:hover, .add-channel:disabled:hover, .modal footer input[type="submit"]:disabled:hover, .main-content.index #join-room #room-number-button:disabled:hover,
   .main-content.index #join-room #create-new-room-button:disabled:hover,
   .main-content.index #create-room #room-number-button:disabled:hover,
   .main-content.index #create-room #create-new-room-button:disabled:hover {
@@ -2124,29 +2134,33 @@ fieldset[disabled] a.nav-link {
     background-color: #BB992F;
     border-color: #BB992F; }
 
-.btn-danger, #mute-controls .btn, #mute-controls #utility-nav #language-links a.nav-link, #utility-nav #language-links #mute-controls a.nav-link, #mute-controls input[type="submit"], #mute-controls
+.btn-danger, #mute-controls .btn, #mute-controls #utility-nav #language-links a.nav-link, #utility-nav #language-links #mute-controls a.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li #mute-controls a, #mute-controls #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links #mute-controls a, #mute-controls input[type="submit"], #mute-controls
 button, .controls .leave {
   color: #fff;
   background-color: #EB5E28;
   border-color: #EB5E28; }
-  .btn-danger:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls input[type="submit"]:hover, #mute-controls
+  .btn-danger:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover, #mute-controls input[type="submit"]:hover, #mute-controls
   button:hover, .controls .leave:hover {
     color: #fff;
     background-color: #cd4713;
     border-color: #c44312; }
-  .btn-danger:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls input[type="submit"]:focus, #mute-controls
-  button:focus, .controls .leave:focus, .btn-danger.focus, #mute-controls .focus.btn, #mute-controls #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #mute-controls a.focus.nav-link, #mute-controls input.focus[type="submit"], #mute-controls
+  .btn-danger:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus, #mute-controls input[type="submit"]:focus, #mute-controls
+  button:focus, .controls .leave:focus, .btn-danger.focus, #mute-controls .focus.btn, #mute-controls #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #mute-controls a.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.focus, #mute-controls input.focus[type="submit"], #mute-controls
   button.focus, .controls .focus.leave {
     color: #fff;
     background-color: #cd4713;
     border-color: #c44312; }
-  .btn-danger:active, #mute-controls .btn:active, #mute-controls #utility-nav #language-links a.nav-link:active, #utility-nav #language-links #mute-controls a.nav-link:active, #mute-controls input[type="submit"]:active, #mute-controls
-  button:active, .controls .leave:active, .btn-danger.active, #mute-controls .active.btn, #mute-controls #utility-nav #language-links a.active.nav-link, #utility-nav #language-links #mute-controls a.active.nav-link, #mute-controls input.active[type="submit"], #mute-controls
+  .btn-danger:active, #mute-controls .btn:active, #mute-controls #utility-nav #language-links a.nav-link:active, #utility-nav #language-links #mute-controls a.nav-link:active, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active, #mute-controls input[type="submit"]:active, #mute-controls
+  button:active, .controls .leave:active, .btn-danger.active, #mute-controls .active.btn, #mute-controls #utility-nav #language-links a.active.nav-link, #utility-nav #language-links #mute-controls a.active.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active, #mute-controls input.active[type="submit"], #mute-controls
   button.active, .controls .active.leave,
   .open > .btn-danger.dropdown-toggle, #mute-controls
   .open > .dropdown-toggle.btn, #mute-controls #utility-nav #language-links
   .open > a.dropdown-toggle.nav-link, #utility-nav #language-links #mute-controls
-  .open > a.dropdown-toggle.nav-link, #mute-controls
+  .open > a.dropdown-toggle.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li
+  .open > a.dropdown-toggle, #utility-nav #language-links #footer .colophon ul li #mute-controls
+  .open > a.dropdown-toggle, #mute-controls #footer .colophon ul li #utility-nav #language-links
+  .open > a.dropdown-toggle, #footer .colophon ul li #utility-nav #language-links #mute-controls
+  .open > a.dropdown-toggle, #mute-controls
   .open > input.dropdown-toggle[type="submit"], #mute-controls
   .open >
   button.dropdown-toggle, .controls
@@ -2155,17 +2169,21 @@ button, .controls .leave {
     background-color: #cd4713;
     border-color: #c44312;
     background-image: none; }
-    .btn-danger:active:hover, #mute-controls .btn:active:hover, #mute-controls #utility-nav #language-links a.nav-link:active:hover, #utility-nav #language-links #mute-controls a.nav-link:active:hover, #mute-controls input[type="submit"]:active:hover, #mute-controls
-    button:active:hover, .controls .leave:active:hover, .btn-danger:active:focus, #mute-controls .btn:active:focus, #mute-controls #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #mute-controls a.nav-link:active:focus, #mute-controls input[type="submit"]:active:focus, #mute-controls
-    button:active:focus, .controls .leave:active:focus, .btn-danger:active.focus, #mute-controls .btn:active.focus, #mute-controls #utility-nav #language-links a.nav-link:active.focus, #utility-nav #language-links #mute-controls a.nav-link:active.focus, #mute-controls input[type="submit"]:active.focus, #mute-controls
-    button:active.focus, .controls .leave:active.focus, .btn-danger.active:hover, #mute-controls .active.btn:hover, #mute-controls #utility-nav #language-links a.active.nav-link:hover, #utility-nav #language-links #mute-controls a.active.nav-link:hover, #mute-controls input.active[type="submit"]:hover, #mute-controls
-    button.active:hover, .controls .active.leave:hover, .btn-danger.active:focus, #mute-controls .active.btn:focus, #mute-controls #utility-nav #language-links a.active.nav-link:focus, #utility-nav #language-links #mute-controls a.active.nav-link:focus, #mute-controls input.active[type="submit"]:focus, #mute-controls
-    button.active:focus, .controls .active.leave:focus, .btn-danger.active.focus, #mute-controls .active.focus.btn, #mute-controls #utility-nav #language-links a.active.focus.nav-link, #utility-nav #language-links #mute-controls a.active.focus.nav-link, #mute-controls input.active.focus[type="submit"], #mute-controls
+    .btn-danger:active:hover, #mute-controls .btn:active:hover, #mute-controls #utility-nav #language-links a.nav-link:active:hover, #utility-nav #language-links #mute-controls a.nav-link:active:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active:hover, #mute-controls input[type="submit"]:active:hover, #mute-controls
+    button:active:hover, .controls .leave:active:hover, .btn-danger:active:focus, #mute-controls .btn:active:focus, #mute-controls #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #mute-controls a.nav-link:active:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active:focus, #mute-controls input[type="submit"]:active:focus, #mute-controls
+    button:active:focus, .controls .leave:active:focus, .btn-danger:active.focus, #mute-controls .btn:active.focus, #mute-controls #utility-nav #language-links a.nav-link:active.focus, #utility-nav #language-links #mute-controls a.nav-link:active.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active.focus, #mute-controls input[type="submit"]:active.focus, #mute-controls
+    button:active.focus, .controls .leave:active.focus, .btn-danger.active:hover, #mute-controls .active.btn:hover, #mute-controls #utility-nav #language-links a.active.nav-link:hover, #utility-nav #language-links #mute-controls a.active.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:hover, #mute-controls input.active[type="submit"]:hover, #mute-controls
+    button.active:hover, .controls .active.leave:hover, .btn-danger.active:focus, #mute-controls .active.btn:focus, #mute-controls #utility-nav #language-links a.active.nav-link:focus, #utility-nav #language-links #mute-controls a.active.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:focus, #mute-controls input.active[type="submit"]:focus, #mute-controls
+    button.active:focus, .controls .active.leave:focus, .btn-danger.active.focus, #mute-controls .active.focus.btn, #mute-controls #utility-nav #language-links a.active.focus.nav-link, #utility-nav #language-links #mute-controls a.active.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active.focus, #mute-controls input.active.focus[type="submit"], #mute-controls
     button.active.focus, .controls .active.focus.leave,
     .open > .btn-danger.dropdown-toggle:hover, #mute-controls
     .open > .dropdown-toggle.btn:hover, #mute-controls #utility-nav #language-links
     .open > a.dropdown-toggle.nav-link:hover, #utility-nav #language-links #mute-controls
-    .open > a.dropdown-toggle.nav-link:hover, #mute-controls
+    .open > a.dropdown-toggle.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li
+    .open > a.dropdown-toggle:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls
+    .open > a.dropdown-toggle:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links
+    .open > a.dropdown-toggle:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls
+    .open > a.dropdown-toggle:hover, #mute-controls
     .open > input.dropdown-toggle[type="submit"]:hover, #mute-controls
     .open >
     button.dropdown-toggle:hover, .controls
@@ -2173,7 +2191,11 @@ button, .controls .leave {
     .open > .btn-danger.dropdown-toggle:focus, #mute-controls
     .open > .dropdown-toggle.btn:focus, #mute-controls #utility-nav #language-links
     .open > a.dropdown-toggle.nav-link:focus, #utility-nav #language-links #mute-controls
-    .open > a.dropdown-toggle.nav-link:focus, #mute-controls
+    .open > a.dropdown-toggle.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li
+    .open > a.dropdown-toggle:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls
+    .open > a.dropdown-toggle:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links
+    .open > a.dropdown-toggle:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls
+    .open > a.dropdown-toggle:focus, #mute-controls
     .open > input.dropdown-toggle[type="submit"]:focus, #mute-controls
     .open >
     button.dropdown-toggle:focus, .controls
@@ -2181,7 +2203,11 @@ button, .controls .leave {
     .open > .btn-danger.dropdown-toggle.focus, #mute-controls
     .open > .dropdown-toggle.focus.btn, #mute-controls #utility-nav #language-links
     .open > a.dropdown-toggle.focus.nav-link, #utility-nav #language-links #mute-controls
-    .open > a.dropdown-toggle.focus.nav-link, #mute-controls
+    .open > a.dropdown-toggle.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li
+    .open > a.dropdown-toggle.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls
+    .open > a.dropdown-toggle.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links
+    .open > a.dropdown-toggle.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls
+    .open > a.dropdown-toggle.focus, #mute-controls
     .open > input.dropdown-toggle.focus[type="submit"], #mute-controls
     .open >
     button.dropdown-toggle.focus, .controls
@@ -2189,15 +2215,15 @@ button, .controls .leave {
       color: #fff;
       background-color: #ac3b10;
       border-color: #872e0d; }
-  .btn-danger.disabled:focus, #mute-controls .disabled.btn:focus, #mute-controls #utility-nav #language-links a.disabled.nav-link:focus, #utility-nav #language-links #mute-controls a.disabled.nav-link:focus, #mute-controls input.disabled[type="submit"]:focus, #mute-controls
-  button.disabled:focus, .controls .disabled.leave:focus, .btn-danger.disabled.focus, #mute-controls .disabled.focus.btn, #mute-controls #utility-nav #language-links a.disabled.focus.nav-link, #utility-nav #language-links #mute-controls a.disabled.focus.nav-link, #mute-controls input.disabled.focus[type="submit"], #mute-controls
-  button.disabled.focus, .controls .disabled.focus.leave, .btn-danger:disabled:focus, #mute-controls .btn:disabled:focus, #mute-controls #utility-nav #language-links a.nav-link:disabled:focus, #utility-nav #language-links #mute-controls a.nav-link:disabled:focus, #mute-controls input[type="submit"]:disabled:focus, #mute-controls
-  button:disabled:focus, .controls .leave:disabled:focus, .btn-danger:disabled.focus, #mute-controls .btn:disabled.focus, #mute-controls #utility-nav #language-links a.nav-link:disabled.focus, #utility-nav #language-links #mute-controls a.nav-link:disabled.focus, #mute-controls input[type="submit"]:disabled.focus, #mute-controls
+  .btn-danger.disabled:focus, #mute-controls .disabled.btn:focus, #mute-controls #utility-nav #language-links a.disabled.nav-link:focus, #utility-nav #language-links #mute-controls a.disabled.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled:focus, #mute-controls input.disabled[type="submit"]:focus, #mute-controls
+  button.disabled:focus, .controls .disabled.leave:focus, .btn-danger.disabled.focus, #mute-controls .disabled.focus.btn, #mute-controls #utility-nav #language-links a.disabled.focus.nav-link, #utility-nav #language-links #mute-controls a.disabled.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled.focus, #mute-controls input.disabled.focus[type="submit"], #mute-controls
+  button.disabled.focus, .controls .disabled.focus.leave, .btn-danger:disabled:focus, #mute-controls .btn:disabled:focus, #mute-controls #utility-nav #language-links a.nav-link:disabled:focus, #utility-nav #language-links #mute-controls a.nav-link:disabled:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:focus, #mute-controls input[type="submit"]:disabled:focus, #mute-controls
+  button:disabled:focus, .controls .leave:disabled:focus, .btn-danger:disabled.focus, #mute-controls .btn:disabled.focus, #mute-controls #utility-nav #language-links a.nav-link:disabled.focus, #utility-nav #language-links #mute-controls a.nav-link:disabled.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled.focus, #mute-controls input[type="submit"]:disabled.focus, #mute-controls
   button:disabled.focus, .controls .leave:disabled.focus {
     background-color: #EB5E28;
     border-color: #EB5E28; }
-  .btn-danger.disabled:hover, #mute-controls .disabled.btn:hover, #mute-controls #utility-nav #language-links a.disabled.nav-link:hover, #utility-nav #language-links #mute-controls a.disabled.nav-link:hover, #mute-controls input.disabled[type="submit"]:hover, #mute-controls
-  button.disabled:hover, .controls .disabled.leave:hover, .btn-danger:disabled:hover, #mute-controls .btn:disabled:hover, #mute-controls #utility-nav #language-links a.nav-link:disabled:hover, #utility-nav #language-links #mute-controls a.nav-link:disabled:hover, #mute-controls input[type="submit"]:disabled:hover, #mute-controls
+  .btn-danger.disabled:hover, #mute-controls .disabled.btn:hover, #mute-controls #utility-nav #language-links a.disabled.nav-link:hover, #utility-nav #language-links #mute-controls a.disabled.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled:hover, #mute-controls input.disabled[type="submit"]:hover, #mute-controls
+  button.disabled:hover, .controls .disabled.leave:hover, .btn-danger:disabled:hover, #mute-controls .btn:disabled:hover, #mute-controls #utility-nav #language-links a.nav-link:disabled:hover, #utility-nav #language-links #mute-controls a.nav-link:disabled:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:hover, #mute-controls input[type="submit"]:disabled:hover, #mute-controls
   button:disabled:hover, .controls .leave:disabled:hover {
     background-color: #EB5E28;
     border-color: #EB5E28; }
@@ -2334,7 +2360,7 @@ button, .controls .leave {
     color: #A2A8AB;
     text-decoration: none; }
 
-.btn-lg, .btn-group-lg > .btn, #utility-nav #language-links .btn-group-lg > a.nav-link, .btn-group-lg > input[type="submit"], .btn-group-lg >
+.btn-lg, .btn-group-lg > .btn, #utility-nav #language-links .btn-group-lg > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-lg > a, #footer .colophon ul li #utility-nav #language-links .btn-group-lg > a, .btn-group-lg > input[type="submit"], .btn-group-lg >
 button, #connect-button, .main-content.index #join-room #room-number-button,
 .main-content.index #join-room #create-new-room-button,
 .main-content.index #create-room #room-number-button,
@@ -2345,7 +2371,7 @@ button, #connect-button, .main-content.index #join-room #room-number-button,
   border-radius: 0.3rem; }
 
 .btn-sm, .btn-group-sm > .btn, .btn-group-sm > input[type="submit"], .btn-group-sm >
-button, #utility-nav #language-links a.nav-link {
+button, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a {
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
@@ -2363,10 +2389,10 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%; }
 
-.fade {
+.fade, .modal {
   opacity: 0;
   transition: opacity .15s linear; }
-  .fade.in {
+  .fade.in, .in.modal {
     opacity: 1; }
 
 .collapse {
@@ -2511,53 +2537,69 @@ input[type="button"].btn-block {
   position: relative;
   display: inline-block;
   vertical-align: middle; }
-  .btn-group > .btn, #utility-nav #language-links .btn-group > a.nav-link, .btn-group > input[type="submit"], .btn-group >
+  .btn-group > .btn, #utility-nav #language-links .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group > a, #footer .colophon ul li #utility-nav #language-links .btn-group > a, .btn-group > input[type="submit"], .btn-group >
   button,
   .btn-group-vertical > .btn, #utility-nav #language-links
-  .btn-group-vertical > a.nav-link,
+  .btn-group-vertical > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .btn-group-vertical > a, #footer .colophon ul li #utility-nav #language-links
+  .btn-group-vertical > a,
   .btn-group-vertical > input[type="submit"],
   .btn-group-vertical >
   button {
     position: relative;
     float: left; }
-    .btn-group > .btn:focus, #utility-nav #language-links .btn-group > a.nav-link:focus, .btn-group > input[type="submit"]:focus, .btn-group >
-    button:focus, .btn-group > .btn:active, #utility-nav #language-links .btn-group > a.nav-link:active, .btn-group > input[type="submit"]:active, .btn-group >
-    button:active, .btn-group > .btn.active, #utility-nav #language-links .btn-group > a.active.nav-link, .btn-group > input.active[type="submit"], .btn-group >
+    .btn-group > .btn:focus, #utility-nav #language-links .btn-group > a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li .btn-group > a:focus, #footer .colophon ul li #utility-nav #language-links .btn-group > a:focus, .btn-group > input[type="submit"]:focus, .btn-group >
+    button:focus, .btn-group > .btn:active, #utility-nav #language-links .btn-group > a.nav-link:active, #utility-nav #language-links #footer .colophon ul li .btn-group > a:active, #footer .colophon ul li #utility-nav #language-links .btn-group > a:active, .btn-group > input[type="submit"]:active, .btn-group >
+    button:active, .btn-group > .btn.active, #utility-nav #language-links .btn-group > a.active.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group > a.active, #footer .colophon ul li #utility-nav #language-links .btn-group > a.active, .btn-group > input.active[type="submit"], .btn-group >
     button.active,
     .btn-group-vertical > .btn:focus, #utility-nav #language-links
-    .btn-group-vertical > a.nav-link:focus,
+    .btn-group-vertical > a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li
+    .btn-group-vertical > a:focus, #footer .colophon ul li #utility-nav #language-links
+    .btn-group-vertical > a:focus,
     .btn-group-vertical > input[type="submit"]:focus,
     .btn-group-vertical >
     button:focus,
     .btn-group-vertical > .btn:active, #utility-nav #language-links
-    .btn-group-vertical > a.nav-link:active,
+    .btn-group-vertical > a.nav-link:active, #utility-nav #language-links #footer .colophon ul li
+    .btn-group-vertical > a:active, #footer .colophon ul li #utility-nav #language-links
+    .btn-group-vertical > a:active,
     .btn-group-vertical > input[type="submit"]:active,
     .btn-group-vertical >
     button:active,
     .btn-group-vertical > .btn.active, #utility-nav #language-links
-    .btn-group-vertical > a.active.nav-link,
+    .btn-group-vertical > a.active.nav-link, #utility-nav #language-links #footer .colophon ul li
+    .btn-group-vertical > a.active, #footer .colophon ul li #utility-nav #language-links
+    .btn-group-vertical > a.active,
     .btn-group-vertical > input.active[type="submit"],
     .btn-group-vertical >
     button.active {
       z-index: 2; }
-    .btn-group > .btn:hover, #utility-nav #language-links .btn-group > a.nav-link:hover, .btn-group > input[type="submit"]:hover, .btn-group >
+    .btn-group > .btn:hover, #utility-nav #language-links .btn-group > a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li .btn-group > a:hover, #footer .colophon ul li #utility-nav #language-links .btn-group > a:hover, .btn-group > input[type="submit"]:hover, .btn-group >
     button:hover,
     .btn-group-vertical > .btn:hover, #utility-nav #language-links
-    .btn-group-vertical > a.nav-link:hover,
+    .btn-group-vertical > a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li
+    .btn-group-vertical > a:hover, #footer .colophon ul li #utility-nav #language-links
+    .btn-group-vertical > a:hover,
     .btn-group-vertical > input[type="submit"]:hover,
     .btn-group-vertical >
     button:hover {
       z-index: 2; }
 
-.btn-group .btn + .btn, .btn-group #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .btn-group a.nav-link + .btn, .btn-group input[type="submit"] + .btn, .btn-group
+.btn-group .btn + .btn, .btn-group #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .btn-group a.nav-link + .btn, .btn-group #utility-nav #language-links #footer .colophon ul li a + .btn, #utility-nav #language-links #footer .colophon ul li .btn-group a + .btn, .btn-group #footer .colophon ul li #utility-nav #language-links a + .btn, #footer .colophon ul li #utility-nav #language-links .btn-group a + .btn, .btn-group input[type="submit"] + .btn, .btn-group
 button + .btn, .btn-group #utility-nav #language-links .btn + a.nav-link, #utility-nav #language-links .btn-group .btn + a.nav-link, .btn-group #utility-nav #language-links a.nav-link + a.nav-link, #utility-nav #language-links .btn-group a.nav-link + a.nav-link, .btn-group #utility-nav #language-links input[type="submit"] + a.nav-link, #utility-nav #language-links .btn-group input[type="submit"] + a.nav-link, .btn-group #utility-nav #language-links
 button + a.nav-link, #utility-nav #language-links .btn-group
-button + a.nav-link, .btn-group
-button + input[type="submit"], .btn-group .btn + input[type="submit"], .btn-group #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .btn-group a.nav-link + input[type="submit"], .btn-group input[type="submit"] + input[type="submit"], .btn-group
+button + a.nav-link, .btn-group #utility-nav #language-links #footer .colophon ul li .btn + a, #utility-nav #language-links #footer .colophon ul li .btn-group .btn + a, #utility-nav #language-links .btn-group #footer .colophon ul li a.nav-link + a, .btn-group #utility-nav #language-links #footer .colophon ul li a + a, #utility-nav #language-links #footer .colophon ul li .btn-group a + a, .btn-group #utility-nav #language-links #footer .colophon ul li input[type="submit"] + a, #utility-nav #language-links #footer .colophon ul li .btn-group input[type="submit"] + a, .btn-group #utility-nav #language-links #footer .colophon ul li
+button + a, #utility-nav #language-links #footer .colophon ul li .btn-group
+button + a, .btn-group #footer .colophon ul li #utility-nav #language-links .btn + a, #footer .colophon ul li #utility-nav #language-links .btn-group .btn + a, #footer .colophon ul li .btn-group #utility-nav #language-links a.nav-link + a, #utility-nav #language-links #footer .colophon ul li .btn-group #utility-nav #language-links a + a, .btn-group #footer .colophon ul li #utility-nav #language-links a + a, #footer .colophon ul li #utility-nav #language-links .btn-group a + a, .btn-group #footer .colophon ul li #utility-nav #language-links input[type="submit"] + a, #footer .colophon ul li #utility-nav #language-links .btn-group input[type="submit"] + a, .btn-group #footer .colophon ul li #utility-nav #language-links
+button + a, #footer .colophon ul li #utility-nav #language-links .btn-group
+button + a, .btn-group .btn + input[type="submit"], .btn-group #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .btn-group a.nav-link + input[type="submit"], .btn-group #utility-nav #language-links #footer .colophon ul li a + input[type="submit"], #utility-nav #language-links #footer .colophon ul li .btn-group a + input[type="submit"], .btn-group #footer .colophon ul li #utility-nav #language-links a + input[type="submit"], #footer .colophon ul li #utility-nav #language-links .btn-group a + input[type="submit"], .btn-group input[type="submit"] + input[type="submit"], .btn-group
 button + input[type="submit"], .btn-group .btn +
 button, .btn-group #utility-nav #language-links a.nav-link +
 button, #utility-nav #language-links .btn-group a.nav-link +
-button, .btn-group input[type="submit"] +
+button, .btn-group #utility-nav #language-links #footer .colophon ul li a +
+button, #utility-nav #language-links #footer .colophon ul li .btn-group a +
+button, .btn-group #footer .colophon ul li #utility-nav #language-links a +
+button, #footer .colophon ul li #utility-nav #language-links .btn-group a +
 button, .btn-group input[type="submit"] +
 button, .btn-group
 button +
@@ -2565,12 +2607,20 @@ button,
 .btn-group .btn + .btn-group,
 .btn-group #utility-nav #language-links a.nav-link + .btn-group, #utility-nav #language-links
 .btn-group a.nav-link + .btn-group,
+.btn-group #utility-nav #language-links #footer .colophon ul li a + .btn-group, #utility-nav #language-links #footer .colophon ul li
+.btn-group a + .btn-group,
+.btn-group #footer .colophon ul li #utility-nav #language-links a + .btn-group, #footer .colophon ul li #utility-nav #language-links
+.btn-group a + .btn-group,
 .btn-group input[type="submit"] + .btn-group,
 .btn-group
 button + .btn-group,
 .btn-group .btn-group + .btn,
 .btn-group #utility-nav #language-links .btn-group + a.nav-link, #utility-nav #language-links
 .btn-group .btn-group + a.nav-link,
+.btn-group #utility-nav #language-links #footer .colophon ul li .btn-group + a, #utility-nav #language-links #footer .colophon ul li
+.btn-group .btn-group + a,
+.btn-group #footer .colophon ul li #utility-nav #language-links .btn-group + a, #footer .colophon ul li #utility-nav #language-links
+.btn-group .btn-group + a,
 .btn-group .btn-group + input[type="submit"],
 .btn-group .btn-group +
 button,
@@ -2588,26 +2638,26 @@ button,
   .btn-toolbar .main-content.room header #room-info, .main-content.room header
   .btn-toolbar #room-info {
     float: left; }
-  .btn-toolbar > .btn, #utility-nav #language-links .btn-toolbar > a.nav-link, .btn-toolbar > input[type="submit"], .btn-toolbar >
+  .btn-toolbar > .btn, #utility-nav #language-links .btn-toolbar > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-toolbar > a, #footer .colophon ul li #utility-nav #language-links .btn-toolbar > a, .btn-toolbar > input[type="submit"], .btn-toolbar >
   button,
   .btn-toolbar > .btn-group,
   .btn-toolbar > .input-group, .main-content.room header
   .btn-toolbar > #room-info {
     margin-left: 5px; }
 
-.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group >
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group >
 button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
   border-radius: 0; }
 
-.btn-group > .btn:first-child, #utility-nav #language-links .btn-group > a.nav-link:first-child, .btn-group > input[type="submit"]:first-child, .btn-group >
+.btn-group > .btn:first-child, #utility-nav #language-links .btn-group > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group > a:first-child, .btn-group > input[type="submit"]:first-child, .btn-group >
 button:first-child {
   margin-left: 0; }
-  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:first-child:not(:last-child):not(.dropdown-toggle), .btn-group >
+  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:first-child:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li .btn-group > a:first-child:not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links .btn-group > a:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:first-child:not(:last-child):not(.dropdown-toggle), .btn-group >
   button:first-child:not(:last-child):not(.dropdown-toggle) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0; }
 
-.btn-group > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group > a.nav-link:last-child:not(:first-child), .btn-group > input[type="submit"]:last-child:not(:first-child), .btn-group >
+.btn-group > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group > a.nav-link:last-child:not(:first-child), #utility-nav #language-links #footer .colophon ul li .btn-group > a:last-child:not(:first-child), #footer .colophon ul li #utility-nav #language-links .btn-group > a:last-child:not(:first-child), .btn-group > input[type="submit"]:last-child:not(:first-child), .btn-group >
 button:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
   border-bottom-left-radius: 0;
@@ -2616,17 +2666,17 @@ button:last-child:not(:first-child),
 .btn-group > .btn-group {
   float: left; }
 
-.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group > .btn-group:not(:first-child):not(:last-child) > a.nav-link, .btn-group > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group > .btn-group:not(:first-child):not(:last-child) >
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group > .btn-group:not(:first-child):not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:not(:first-child):not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:not(:first-child):not(:last-child) > a, .btn-group > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group > .btn-group:not(:first-child):not(:last-child) >
 button {
   border-radius: 0; }
 
-.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, .btn-group > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group > .btn-group:first-child:not(:last-child) >
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:first-child:not(:last-child) > a:last-child, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:first-child:not(:last-child) > a:last-child, .btn-group > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group > .btn-group:first-child:not(:last-child) >
 button:last-child,
 .btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0; }
 
-.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, .btn-group > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group > .btn-group:last-child:not(:first-child) >
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:last-child:not(:first-child) > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:last-child:not(:first-child) > a:first-child, .btn-group > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group > .btn-group:last-child:not(:first-child) >
 button:first-child {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0; }
@@ -2635,12 +2685,12 @@ button:first-child {
 .btn-group.open .dropdown-toggle {
   outline: 0; }
 
-.btn-group > .btn + .dropdown-toggle, #utility-nav #language-links .btn-group > a.nav-link + .dropdown-toggle, .btn-group > input[type="submit"] + .dropdown-toggle, .btn-group >
+.btn-group > .btn + .dropdown-toggle, #utility-nav #language-links .btn-group > a.nav-link + .dropdown-toggle, #utility-nav #language-links #footer .colophon ul li .btn-group > a + .dropdown-toggle, #footer .colophon ul li #utility-nav #language-links .btn-group > a + .dropdown-toggle, .btn-group > input[type="submit"] + .dropdown-toggle, .btn-group >
 button + .dropdown-toggle {
   padding-right: 8px;
   padding-left: 8px; }
 
-.btn-group > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, #utility-nav #language-links .btn-group-lg.btn-group > a.nav-link + .dropdown-toggle, .btn-group-lg.btn-group > input[type="submit"] + .dropdown-toggle, .btn-group-lg.btn-group >
+.btn-group > .btn-lg + .dropdown-toggle, .btn-group-lg.btn-group > .btn + .dropdown-toggle, #utility-nav #language-links .btn-group-lg.btn-group > a.nav-link + .dropdown-toggle, #utility-nav #language-links #footer .colophon ul li .btn-group-lg.btn-group > a + .dropdown-toggle, #footer .colophon ul li #utility-nav #language-links .btn-group-lg.btn-group > a + .dropdown-toggle, .btn-group-lg.btn-group > input[type="submit"] + .dropdown-toggle, .btn-group-lg.btn-group >
 button + .dropdown-toggle, .btn-group > #connect-button + .dropdown-toggle, .main-content.index #join-room .btn-group > #room-number-button + .dropdown-toggle,
 .main-content.index #join-room .btn-group > #create-new-room-button + .dropdown-toggle,
 .main-content.index #create-room .btn-group > #room-number-button + .dropdown-toggle,
@@ -2648,11 +2698,11 @@ button + .dropdown-toggle, .btn-group > #connect-button + .dropdown-toggle, .mai
   padding-right: 12px;
   padding-left: 12px; }
 
-.btn .caret, #utility-nav #language-links a.nav-link .caret, input[type="submit"] .caret,
+.btn .caret, #utility-nav #language-links a.nav-link .caret, #utility-nav #language-links #footer .colophon ul li a .caret, #footer .colophon ul li #utility-nav #language-links a .caret, input[type="submit"] .caret,
 button .caret {
   margin-left: 0; }
 
-.btn-lg .caret, .btn-group-lg > .btn .caret, #utility-nav #language-links .btn-group-lg > a.nav-link .caret, .btn-group-lg > input[type="submit"] .caret, .btn-group-lg >
+.btn-lg .caret, .btn-group-lg > .btn .caret, #utility-nav #language-links .btn-group-lg > a.nav-link .caret, #utility-nav #language-links #footer .colophon ul li .btn-group-lg > a .caret, #footer .colophon ul li #utility-nav #language-links .btn-group-lg > a .caret, .btn-group-lg > input[type="submit"] .caret, .btn-group-lg >
 button .caret, #connect-button .caret, .main-content.index #join-room #room-number-button .caret,
 .main-content.index #join-room #create-new-room-button .caret,
 .main-content.index #create-room #room-number-button .caret,
@@ -2660,7 +2710,7 @@ button .caret, #connect-button .caret, .main-content.index #join-room #room-numb
   border-width: 0.3em 0.3em 0;
   border-bottom-width: 0; }
 
-.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup #utility-nav #language-links .btn-group-lg > a.nav-link .caret, #utility-nav #language-links .dropup .btn-group-lg > a.nav-link .caret, .dropup .btn-group-lg > input[type="submit"] .caret, .dropup .btn-group-lg >
+.dropup .btn-lg .caret, .dropup .btn-group-lg > .btn .caret, .dropup #utility-nav #language-links .btn-group-lg > a.nav-link .caret, #utility-nav #language-links .dropup .btn-group-lg > a.nav-link .caret, .dropup #utility-nav #language-links #footer .colophon ul li .btn-group-lg > a .caret, #utility-nav #language-links #footer .colophon ul li .dropup .btn-group-lg > a .caret, .dropup #footer .colophon ul li #utility-nav #language-links .btn-group-lg > a .caret, #footer .colophon ul li #utility-nav #language-links .dropup .btn-group-lg > a .caret, .dropup .btn-group-lg > input[type="submit"] .caret, .dropup .btn-group-lg >
 button .caret, .dropup #connect-button .caret, .dropup .main-content.index #join-room #room-number-button .caret, .main-content.index #join-room .dropup #room-number-button .caret, .dropup
 .main-content.index #join-room #create-new-room-button .caret,
 .main-content.index #join-room .dropup #create-new-room-button .caret, .dropup
@@ -2670,11 +2720,13 @@ button .caret, .dropup #connect-button .caret, .dropup .main-content.index #join
 .main-content.index #create-room .dropup #create-new-room-button .caret {
   border-width: 0 0.3em 0.3em; }
 
-.btn-group-vertical > .btn, #utility-nav #language-links .btn-group-vertical > a.nav-link, .btn-group-vertical > input[type="submit"], .btn-group-vertical >
+.btn-group-vertical > .btn, #utility-nav #language-links .btn-group-vertical > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a, .btn-group-vertical > input[type="submit"], .btn-group-vertical >
 button,
 .btn-group-vertical > .btn-group,
 .btn-group-vertical > .btn-group > .btn, #utility-nav #language-links
-.btn-group-vertical > .btn-group > a.nav-link,
+.btn-group-vertical > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.btn-group-vertical > .btn-group > a, #footer .colophon ul li #utility-nav #language-links
+.btn-group-vertical > .btn-group > a,
 .btn-group-vertical > .btn-group > input[type="submit"],
 .btn-group-vertical > .btn-group >
 button {
@@ -2688,28 +2740,34 @@ button {
   display: table;
   clear: both; }
 
-.btn-group-vertical > .btn-group > .btn, #utility-nav #language-links .btn-group-vertical > .btn-group > a.nav-link, .btn-group-vertical > .btn-group > input[type="submit"], .btn-group-vertical > .btn-group >
+.btn-group-vertical > .btn-group > .btn, #utility-nav #language-links .btn-group-vertical > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group > a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group > a, .btn-group-vertical > .btn-group > input[type="submit"], .btn-group-vertical > .btn-group >
 button {
   float: none; }
 
-.btn-group-vertical > .btn + .btn, #utility-nav #language-links .btn-group-vertical > a.nav-link + .btn, .btn-group-vertical > input[type="submit"] + .btn, .btn-group-vertical >
+.btn-group-vertical > .btn + .btn, #utility-nav #language-links .btn-group-vertical > a.nav-link + .btn, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a + .btn, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a + .btn, .btn-group-vertical > input[type="submit"] + .btn, .btn-group-vertical >
 button + .btn, #utility-nav #language-links .btn-group-vertical > .btn + a.nav-link, #utility-nav #language-links .btn-group-vertical > a.nav-link + a.nav-link, #utility-nav #language-links .btn-group-vertical > input[type="submit"] + a.nav-link, #utility-nav #language-links .btn-group-vertical >
-button + a.nav-link, .btn-group-vertical >
-button + input[type="submit"], .btn-group-vertical > .btn + input[type="submit"], #utility-nav #language-links .btn-group-vertical > a.nav-link + input[type="submit"], .btn-group-vertical > input[type="submit"] + input[type="submit"], .btn-group-vertical >
+button + a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn + a, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a + a, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > input[type="submit"] + a, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical >
+button + a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn + a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a + a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > input[type="submit"] + a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical >
+button + a, .btn-group-vertical > .btn + input[type="submit"], #utility-nav #language-links .btn-group-vertical > a.nav-link + input[type="submit"], #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a + input[type="submit"], #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a + input[type="submit"], .btn-group-vertical > input[type="submit"] + input[type="submit"], .btn-group-vertical >
 button + input[type="submit"], .btn-group-vertical > .btn +
 button, #utility-nav #language-links .btn-group-vertical > a.nav-link +
-button, .btn-group-vertical > input[type="submit"] +
+button, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a +
+button, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a +
 button, .btn-group-vertical > input[type="submit"] +
 button, .btn-group-vertical >
 button +
 button,
 .btn-group-vertical > .btn + .btn-group, #utility-nav #language-links
-.btn-group-vertical > a.nav-link + .btn-group,
+.btn-group-vertical > a.nav-link + .btn-group, #utility-nav #language-links #footer .colophon ul li
+.btn-group-vertical > a + .btn-group, #footer .colophon ul li #utility-nav #language-links
+.btn-group-vertical > a + .btn-group,
 .btn-group-vertical > input[type="submit"] + .btn-group,
 .btn-group-vertical >
 button + .btn-group,
 .btn-group-vertical > .btn-group + .btn, #utility-nav #language-links
-.btn-group-vertical > .btn-group + a.nav-link,
+.btn-group-vertical > .btn-group + a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.btn-group-vertical > .btn-group + a, #footer .colophon ul li #utility-nav #language-links
+.btn-group-vertical > .btn-group + a,
 .btn-group-vertical > .btn-group + input[type="submit"],
 .btn-group-vertical > .btn-group +
 button,
@@ -2717,51 +2775,57 @@ button,
   margin-top: -1px;
   margin-left: 0; }
 
-.btn-group-vertical > .btn:not(:first-child):not(:last-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:not(:first-child):not(:last-child), .btn-group-vertical > input[type="submit"]:not(:first-child):not(:last-child), .btn-group-vertical >
+.btn-group-vertical > .btn:not(:first-child):not(:last-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:not(:first-child):not(:last-child), #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a:not(:first-child):not(:last-child), #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a:not(:first-child):not(:last-child), .btn-group-vertical > input[type="submit"]:not(:first-child):not(:last-child), .btn-group-vertical >
 button:not(:first-child):not(:last-child) {
   border-radius: 0; }
 
-.btn-group-vertical > .btn:first-child:not(:last-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:first-child:not(:last-child), .btn-group-vertical > input[type="submit"]:first-child:not(:last-child), .btn-group-vertical >
+.btn-group-vertical > .btn:first-child:not(:last-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:first-child:not(:last-child), #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a:first-child:not(:last-child), #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a:first-child:not(:last-child), .btn-group-vertical > input[type="submit"]:first-child:not(:last-child), .btn-group-vertical >
 button:first-child:not(:last-child) {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0; }
 
-.btn-group-vertical > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:last-child:not(:first-child), .btn-group-vertical > input[type="submit"]:last-child:not(:first-child), .btn-group-vertical >
+.btn-group-vertical > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:last-child:not(:first-child), #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a:last-child:not(:first-child), #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a:last-child:not(:first-child), .btn-group-vertical > input[type="submit"]:last-child:not(:first-child), .btn-group-vertical >
 button:last-child:not(:first-child) {
   border-bottom-left-radius: 0.25rem;
   border-top-right-radius: 0;
   border-top-left-radius: 0; }
 
-.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a.nav-link, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) >
+.btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) >
 button {
   border-radius: 0; }
 
-.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group-vertical > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) >
+.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group-vertical > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:first-child:not(:last-child) > a:last-child, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:first-child:not(:last-child) > a:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) >
 button:last-child,
 .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0; }
 
-.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group-vertical > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) >
+.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group-vertical > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:last-child:not(:first-child) > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:last-child:not(:first-child) > a:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) >
 button:first-child {
   border-top-right-radius: 0;
   border-top-left-radius: 0; }
 
-[data-toggle="buttons"] > .btn input[type="radio"], #utility-nav #language-links [data-toggle="buttons"] > a.nav-link input[type="radio"], [data-toggle="buttons"] > input[type="submit"] input[type="radio"], [data-toggle="buttons"] >
+[data-toggle="buttons"] > .btn input[type="radio"], #utility-nav #language-links [data-toggle="buttons"] > a.nav-link input[type="radio"], #utility-nav #language-links #footer .colophon ul li [data-toggle="buttons"] > a input[type="radio"], #footer .colophon ul li #utility-nav #language-links [data-toggle="buttons"] > a input[type="radio"], [data-toggle="buttons"] > input[type="submit"] input[type="radio"], [data-toggle="buttons"] >
 button input[type="radio"],
 [data-toggle="buttons"] > .btn input[type="checkbox"], #utility-nav #language-links
-[data-toggle="buttons"] > a.nav-link input[type="checkbox"],
+[data-toggle="buttons"] > a.nav-link input[type="checkbox"], #utility-nav #language-links #footer .colophon ul li
+[data-toggle="buttons"] > a input[type="checkbox"], #footer .colophon ul li #utility-nav #language-links
+[data-toggle="buttons"] > a input[type="checkbox"],
 [data-toggle="buttons"] > input[type="submit"] input[type="checkbox"],
 [data-toggle="buttons"] >
 button input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn input[type="radio"], #utility-nav #language-links
-[data-toggle="buttons"] > .btn-group > a.nav-link input[type="radio"],
+[data-toggle="buttons"] > .btn-group > a.nav-link input[type="radio"], #utility-nav #language-links #footer .colophon ul li
+[data-toggle="buttons"] > .btn-group > a input[type="radio"], #footer .colophon ul li #utility-nav #language-links
+[data-toggle="buttons"] > .btn-group > a input[type="radio"],
 [data-toggle="buttons"] > .btn-group > input[type="submit"] input[type="radio"],
 [data-toggle="buttons"] > .btn-group >
 button input[type="radio"],
 [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"], #utility-nav #language-links
-[data-toggle="buttons"] > .btn-group > a.nav-link input[type="checkbox"],
+[data-toggle="buttons"] > .btn-group > a.nav-link input[type="checkbox"], #utility-nav #language-links #footer .colophon ul li
+[data-toggle="buttons"] > .btn-group > a input[type="checkbox"], #footer .colophon ul li #utility-nav #language-links
+[data-toggle="buttons"] > .btn-group > a input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > input[type="submit"] input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group >
 button input[type="checkbox"] {
@@ -2834,7 +2898,11 @@ select {
   .main-content.room header #room-info
   .input-group-sm > .copy-link,
   .input-group-sm > .input-group-btn > .input-group-addon.btn, #utility-nav #language-links
-  .input-group-sm > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links
+  .input-group-sm > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .input-group-sm > .input-group-btn > a.input-group-addon, #footer .colophon ul li #utility-nav #language-links
+  .input-group-sm > .input-group-btn > a.input-group-addon, #utility-nav #language-links #footer .colophon ul li
+  .input-group-sm > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
+  .input-group-sm > .input-group-btn > a.copy-link, #utility-nav #language-links
   .input-group-sm > .input-group-btn > a.nav-link.copy-link,
   .input-group-sm > .input-group-btn > input.input-group-addon[type="submit"],
   .input-group-sm > .input-group-btn > input[type="submit"].copy-link,
@@ -2850,7 +2918,11 @@ select {
   .main-content.room header #room-info
   .input-group-sm > .input-group-btn > .btn.copy-link, #utility-nav #language-links
   .main-content.room header #room-info
-  .input-group-sm > .input-group-btn > a.copy-link.nav-link, .form-control-sm.copy-link, .main-content.room header #room-info label.form-control-sm,
+  .input-group-sm > .input-group-btn > a.copy-link.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .main-content.room header #room-info
+  .input-group-sm > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
+  .main-content.room header #room-info
+  .input-group-sm > .input-group-btn > a.copy-link, .form-control-sm.copy-link, .main-content.room header #room-info label.form-control-sm,
   .main-content.room header #room-info .form-control-sm.copy-link {
     padding: 0.275rem 0.75rem;
     font-size: 0.875rem;
@@ -2862,7 +2934,11 @@ select {
   .main-content.room header #room-info
   .input-group-lg > .copy-link,
   .input-group-lg > .input-group-btn > .input-group-addon.btn, #utility-nav #language-links
-  .input-group-lg > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links
+  .input-group-lg > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .input-group-lg > .input-group-btn > a.input-group-addon, #footer .colophon ul li #utility-nav #language-links
+  .input-group-lg > .input-group-btn > a.input-group-addon, #utility-nav #language-links #footer .colophon ul li
+  .input-group-lg > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
+  .input-group-lg > .input-group-btn > a.copy-link, #utility-nav #language-links
   .input-group-lg > .input-group-btn > a.nav-link.copy-link,
   .input-group-lg > .input-group-btn > input.input-group-addon[type="submit"],
   .input-group-lg > .input-group-btn > input[type="submit"].copy-link,
@@ -2878,7 +2954,11 @@ select {
   .main-content.room header #room-info
   .input-group-lg > .input-group-btn > .btn.copy-link, #utility-nav #language-links
   .main-content.room header #room-info
-  .input-group-lg > .input-group-btn > a.copy-link.nav-link, .form-control-lg.copy-link, .main-content.room header #room-info label.form-control-lg,
+  .input-group-lg > .input-group-btn > a.copy-link.nav-link, #utility-nav #language-links #footer .colophon ul li
+  .main-content.room header #room-info
+  .input-group-lg > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
+  .main-content.room header #room-info
+  .input-group-lg > .input-group-btn > a.copy-link, .form-control-lg.copy-link, .main-content.room header #room-info label.form-control-lg,
   .main-content.room header #room-info .form-control-lg.copy-link {
     padding: 0.75rem 1.25rem;
     font-size: 1.25rem;
@@ -2897,23 +2977,31 @@ select:first-child,
 .main-content.room header #room-info label:first-child,
 .main-content.room header #room-info .copy-link:first-child,
 .input-group-btn:first-child > .btn, #utility-nav #language-links
-.input-group-btn:first-child > a.nav-link,
+.input-group-btn:first-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:first-child > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:first-child > a,
 .input-group-btn:first-child > input[type="submit"],
 .input-group-btn:first-child >
 button,
 .input-group-btn:first-child > .btn-group > .btn, #utility-nav #language-links
-.input-group-btn:first-child > .btn-group > a.nav-link,
+.input-group-btn:first-child > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:first-child > .btn-group > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:first-child > .btn-group > a,
 .input-group-btn:first-child > .btn-group > input[type="submit"],
 .input-group-btn:first-child > .btn-group >
 button,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links
-.input-group-btn:last-child > a.nav-link:not(:last-child):not(.dropdown-toggle),
+.input-group-btn:last-child > a.nav-link:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:last-child > a:not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:last-child > a:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:last-child > input[type="submit"]:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:last-child >
 button:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:last-child > .btn-group:not(:last-child) > .btn, #utility-nav #language-links
-.input-group-btn:last-child > .btn-group:not(:last-child) > a.nav-link,
+.input-group-btn:last-child > .btn-group:not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:last-child > .btn-group:not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:last-child > .btn-group:not(:last-child) > a,
 .input-group-btn:last-child > .btn-group:not(:last-child) > input[type="submit"],
 .input-group-btn:last-child > .btn-group:not(:last-child) >
 button {
@@ -2932,23 +3020,31 @@ select:last-child,
 .main-content.room header #room-info label:last-child,
 .main-content.room header #room-info .copy-link:last-child,
 .input-group-btn:last-child > .btn, #utility-nav #language-links
-.input-group-btn:last-child > a.nav-link,
+.input-group-btn:last-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:last-child > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:last-child > a,
 .input-group-btn:last-child > input[type="submit"],
 .input-group-btn:last-child >
 button,
 .input-group-btn:last-child > .btn-group > .btn, #utility-nav #language-links
-.input-group-btn:last-child > .btn-group > a.nav-link,
+.input-group-btn:last-child > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:last-child > .btn-group > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:last-child > .btn-group > a,
 .input-group-btn:last-child > .btn-group > input[type="submit"],
 .input-group-btn:last-child > .btn-group >
 button,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child), #utility-nav #language-links
-.input-group-btn:first-child > a.nav-link:not(:first-child),
+.input-group-btn:first-child > a.nav-link:not(:first-child), #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:first-child > a:not(:first-child), #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:first-child > a:not(:first-child),
 .input-group-btn:first-child > input[type="submit"]:not(:first-child),
 .input-group-btn:first-child >
 button:not(:first-child),
 .input-group-btn:first-child > .btn-group:not(:first-child) > .btn, #utility-nav #language-links
-.input-group-btn:first-child > .btn-group:not(:first-child) > a.nav-link,
+.input-group-btn:first-child > .btn-group:not(:first-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li
+.input-group-btn:first-child > .btn-group:not(:first-child) > a, #footer .colophon ul li #utility-nav #language-links
+.input-group-btn:first-child > .btn-group:not(:first-child) > a,
 .input-group-btn:first-child > .btn-group:not(:first-child) > input[type="submit"],
 .input-group-btn:first-child > .btn-group:not(:first-child) >
 button {
@@ -2963,38 +3059,40 @@ button {
   position: relative;
   font-size: 0;
   white-space: nowrap; }
-  .input-group-btn > .btn, #utility-nav #language-links .input-group-btn > a.nav-link, .input-group-btn > input[type="submit"], .input-group-btn >
+  .input-group-btn > .btn, #utility-nav #language-links .input-group-btn > a.nav-link, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a, .input-group-btn > input[type="submit"], .input-group-btn >
   button {
     position: relative; }
-    .input-group-btn > .btn + .btn, #utility-nav #language-links .input-group-btn > a.nav-link + .btn, .input-group-btn > input[type="submit"] + .btn, .input-group-btn >
+    .input-group-btn > .btn + .btn, #utility-nav #language-links .input-group-btn > a.nav-link + .btn, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a + .btn, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a + .btn, .input-group-btn > input[type="submit"] + .btn, .input-group-btn >
     button + .btn, #utility-nav #language-links .input-group-btn > .btn + a.nav-link, #utility-nav #language-links .input-group-btn > a.nav-link + a.nav-link, #utility-nav #language-links .input-group-btn > input[type="submit"] + a.nav-link, #utility-nav #language-links .input-group-btn >
-    button + a.nav-link, .input-group-btn >
-    button + input[type="submit"], .input-group-btn > .btn + input[type="submit"], #utility-nav #language-links .input-group-btn > a.nav-link + input[type="submit"], .input-group-btn > input[type="submit"] + input[type="submit"], .input-group-btn >
+    button + a.nav-link, #utility-nav #language-links #footer .colophon ul li .input-group-btn > .btn + a, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a + a, #utility-nav #language-links #footer .colophon ul li .input-group-btn > input[type="submit"] + a, #utility-nav #language-links #footer .colophon ul li .input-group-btn >
+    button + a, #footer .colophon ul li #utility-nav #language-links .input-group-btn > .btn + a, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a + a, #footer .colophon ul li #utility-nav #language-links .input-group-btn > input[type="submit"] + a, #footer .colophon ul li #utility-nav #language-links .input-group-btn >
+    button + a, .input-group-btn > .btn + input[type="submit"], #utility-nav #language-links .input-group-btn > a.nav-link + input[type="submit"], #utility-nav #language-links #footer .colophon ul li .input-group-btn > a + input[type="submit"], #footer .colophon ul li #utility-nav #language-links .input-group-btn > a + input[type="submit"], .input-group-btn > input[type="submit"] + input[type="submit"], .input-group-btn >
     button + input[type="submit"], .input-group-btn > .btn +
     button, #utility-nav #language-links .input-group-btn > a.nav-link +
-    button, .input-group-btn > input[type="submit"] +
+    button, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a +
+    button, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a +
     button, .input-group-btn > input[type="submit"] +
     button, .input-group-btn >
     button +
     button {
       margin-left: -1px; }
-    .input-group-btn > .btn:focus, #utility-nav #language-links .input-group-btn > a.nav-link:focus, .input-group-btn > input[type="submit"]:focus, .input-group-btn >
-    button:focus, .input-group-btn > .btn:active, #utility-nav #language-links .input-group-btn > a.nav-link:active, .input-group-btn > input[type="submit"]:active, .input-group-btn >
-    button:active, .input-group-btn > .btn:hover, #utility-nav #language-links .input-group-btn > a.nav-link:hover, .input-group-btn > input[type="submit"]:hover, .input-group-btn >
+    .input-group-btn > .btn:focus, #utility-nav #language-links .input-group-btn > a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a:focus, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a:focus, .input-group-btn > input[type="submit"]:focus, .input-group-btn >
+    button:focus, .input-group-btn > .btn:active, #utility-nav #language-links .input-group-btn > a.nav-link:active, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a:active, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a:active, .input-group-btn > input[type="submit"]:active, .input-group-btn >
+    button:active, .input-group-btn > .btn:hover, #utility-nav #language-links .input-group-btn > a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li .input-group-btn > a:hover, #footer .colophon ul li #utility-nav #language-links .input-group-btn > a:hover, .input-group-btn > input[type="submit"]:hover, .input-group-btn >
     button:hover {
       z-index: 3; }
-  .input-group-btn:first-child > .btn, #utility-nav #language-links .input-group-btn:first-child > a.nav-link, .input-group-btn:first-child > input[type="submit"], .input-group-btn:first-child >
+  .input-group-btn:first-child > .btn, #utility-nav #language-links .input-group-btn:first-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li .input-group-btn:first-child > a, #footer .colophon ul li #utility-nav #language-links .input-group-btn:first-child > a, .input-group-btn:first-child > input[type="submit"], .input-group-btn:first-child >
   button,
   .input-group-btn:first-child > .btn-group {
     margin-right: -1px; }
-  .input-group-btn:last-child > .btn, #utility-nav #language-links .input-group-btn:last-child > a.nav-link, .input-group-btn:last-child > input[type="submit"], .input-group-btn:last-child >
+  .input-group-btn:last-child > .btn, #utility-nav #language-links .input-group-btn:last-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li .input-group-btn:last-child > a, #footer .colophon ul li #utility-nav #language-links .input-group-btn:last-child > a, .input-group-btn:last-child > input[type="submit"], .input-group-btn:last-child >
   button,
   .input-group-btn:last-child > .btn-group {
     z-index: 2;
     margin-left: -1px; }
-    .input-group-btn:last-child > .btn:focus, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:focus, .input-group-btn:last-child > input[type="submit"]:focus, .input-group-btn:last-child >
-    button:focus, .input-group-btn:last-child > .btn:active, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:active, .input-group-btn:last-child > input[type="submit"]:active, .input-group-btn:last-child >
-    button:active, .input-group-btn:last-child > .btn:hover, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:hover, .input-group-btn:last-child > input[type="submit"]:hover, .input-group-btn:last-child >
+    .input-group-btn:last-child > .btn:focus, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li .input-group-btn:last-child > a:focus, #footer .colophon ul li #utility-nav #language-links .input-group-btn:last-child > a:focus, .input-group-btn:last-child > input[type="submit"]:focus, .input-group-btn:last-child >
+    button:focus, .input-group-btn:last-child > .btn:active, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:active, #utility-nav #language-links #footer .colophon ul li .input-group-btn:last-child > a:active, #footer .colophon ul li #utility-nav #language-links .input-group-btn:last-child > a:active, .input-group-btn:last-child > input[type="submit"]:active, .input-group-btn:last-child >
+    button:active, .input-group-btn:last-child > .btn:hover, #utility-nav #language-links .input-group-btn:last-child > a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li .input-group-btn:last-child > a:hover, #footer .colophon ul li #utility-nav #language-links .input-group-btn:last-child > a:hover, .input-group-btn:last-child > input[type="submit"]:hover, .input-group-btn:last-child >
     button:hover,
     .input-group-btn:last-child > .btn-group:focus,
     .input-group-btn:last-child > .btn-group:active,
@@ -3137,55 +3235,79 @@ button {
   border: 1px solid #ddd;
   border-radius: 0 .25rem .25rem 0; }
 
-.nav, #language-links {
+.nav, #language-links, #footer .colophon ul {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none; }
 
-.nav-link {
+.nav-link, #footer .colophon ul li a {
   display: inline-block; }
-  .nav-link:focus, .nav-link:hover {
+  .nav-link:focus, #footer .colophon ul li a:focus, .nav-link:hover, #footer .colophon ul li a:hover {
     text-decoration: none; }
-  .nav-link.disabled {
+  .nav-link.disabled, #footer .colophon ul li a.disabled {
     color: #A2A8AB; }
-    .nav-link.disabled, .nav-link.disabled:focus, .nav-link.disabled:hover {
+    .nav-link.disabled, #footer .colophon ul li a.disabled, .nav-link.disabled:focus, #footer .colophon ul li a.disabled:focus, .nav-link.disabled:hover, #footer .colophon ul li a.disabled:hover {
       color: #A2A8AB;
       cursor: not-allowed;
       background-color: transparent; }
 
-.nav-inline .nav-item {
+.nav-inline .nav-item, .nav-inline #footer .colophon ul li, #footer .colophon ul .nav-inline li {
   display: inline-block; }
 
-.nav-inline .nav-item + .nav-item,
-.nav-inline .nav-link + .nav-link {
+.nav-inline .nav-item + .nav-item, .nav-inline #footer .colophon ul li + .nav-item, #footer .colophon ul .nav-inline li + .nav-item, .nav-inline #footer .colophon ul .nav-item + li, #footer .colophon ul .nav-inline .nav-item + li, .nav-inline #footer .colophon ul li + li, #footer .colophon ul .nav-inline li + li,
+.nav-inline .nav-link + .nav-link,
+.nav-inline #footer .colophon ul li a + .nav-link, #footer .colophon ul li
+.nav-inline a + .nav-link,
+.nav-inline #footer .colophon ul li .nav-link + a, #footer .colophon ul li
+.nav-inline .nav-link + a,
+.nav-inline #footer .colophon ul li a + a, #footer .colophon ul li
+.nav-inline a + a {
   margin-left: 1rem; }
 
-.nav-tabs, #collaboration .nav, #collaboration #language-links {
+.nav-tabs, #collaboration .nav, #collaboration #language-links, #collaboration #footer .colophon ul, #footer .colophon #collaboration ul {
   border-bottom: 1px solid #ddd; }
-  .nav-tabs::after, #collaboration .nav::after, #collaboration #language-links::after {
+  .nav-tabs::after, #collaboration .nav::after, #collaboration #language-links::after, #collaboration #footer .colophon ul::after, #footer .colophon #collaboration ul::after {
     content: "";
     display: table;
     clear: both; }
-  .nav-tabs .nav-item, #collaboration .nav .nav-item, #collaboration #language-links .nav-item {
+  .nav-tabs .nav-item, #collaboration .nav .nav-item, #collaboration #language-links .nav-item, #collaboration #footer .colophon ul .nav-item, #footer .colophon #collaboration ul .nav-item, .nav-tabs #footer .colophon ul li, #footer .colophon ul .nav-tabs li, #footer .colophon ul #collaboration .nav li, #footer .colophon ul #collaboration #language-links li, #collaboration #footer .colophon ul li, #footer .colophon #collaboration ul li {
     float: left;
     margin-bottom: -1px; }
-    .nav-tabs .nav-item + .nav-item, #collaboration .nav .nav-item + .nav-item, #collaboration #language-links .nav-item + .nav-item {
+    .nav-tabs .nav-item + .nav-item, #collaboration .nav .nav-item + .nav-item, #collaboration #language-links .nav-item + .nav-item, #collaboration #footer .colophon ul .nav-item + .nav-item, #footer .colophon #collaboration ul .nav-item + .nav-item, .nav-tabs #footer .colophon ul li + .nav-item, #footer .colophon ul .nav-tabs li + .nav-item, #footer .colophon ul #collaboration .nav li + .nav-item, #footer .colophon ul #collaboration #language-links li + .nav-item, #collaboration #footer .colophon ul li + .nav-item, #footer .colophon #collaboration ul li + .nav-item, .nav-tabs #footer .colophon ul .nav-item + li, #footer .colophon ul .nav-tabs .nav-item + li, #footer .colophon ul #collaboration .nav .nav-item + li, #footer .colophon ul #collaboration #language-links .nav-item + li, #collaboration #footer .colophon ul .nav-item + li, #footer .colophon #collaboration ul .nav-item + li, .nav-tabs #footer .colophon ul li + li, #footer .colophon ul .nav-tabs li + li, #footer .colophon ul #collaboration .nav li + li, #footer .colophon ul #collaboration #language-links li + li, #collaboration #footer .colophon ul li + li, #footer .colophon #collaboration ul li + li {
       margin-left: .2rem; }
-  .nav-tabs .nav-link, #collaboration .nav .nav-link, #collaboration #language-links .nav-link {
+  .nav-tabs .nav-link, #collaboration .nav .nav-link, #collaboration #language-links .nav-link, #collaboration #footer .colophon ul .nav-link, #footer .colophon #collaboration ul .nav-link, .nav-tabs #footer .colophon ul li a, #footer .colophon ul li .nav-tabs a, #footer .colophon ul li #collaboration .nav a, #footer .colophon ul li #collaboration #language-links a, #collaboration #footer .colophon ul li a, #footer .colophon #collaboration ul li a {
     display: block;
     padding: 0.5em 1em;
     border: 1px solid transparent;
     border-radius: 0.25rem 0.25rem 0 0; }
-    .nav-tabs .nav-link:focus, #collaboration .nav .nav-link:focus, #collaboration #language-links .nav-link:focus, .nav-tabs .nav-link:hover, #collaboration .nav .nav-link:hover, #collaboration #language-links .nav-link:hover {
+    .nav-tabs .nav-link:focus, #collaboration .nav .nav-link:focus, #collaboration #language-links .nav-link:focus, #collaboration #footer .colophon ul .nav-link:focus, #footer .colophon #collaboration ul .nav-link:focus, .nav-tabs #footer .colophon ul li a:focus, #footer .colophon ul li .nav-tabs a:focus, #footer .colophon ul li #collaboration .nav a:focus, #footer .colophon ul li #collaboration #language-links a:focus, #collaboration #footer .colophon ul li a:focus, #footer .colophon #collaboration ul li a:focus, .nav-tabs .nav-link:hover, #collaboration .nav .nav-link:hover, #collaboration #language-links .nav-link:hover, #collaboration #footer .colophon ul .nav-link:hover, #footer .colophon #collaboration ul .nav-link:hover, .nav-tabs #footer .colophon ul li a:hover, #footer .colophon ul li .nav-tabs a:hover, #footer .colophon ul li #collaboration .nav a:hover, #footer .colophon ul li #collaboration #language-links a:hover, #collaboration #footer .colophon ul li a:hover, #footer .colophon #collaboration ul li a:hover {
       border-color: #BCC1C3 #BCC1C3 #ddd; }
-    .nav-tabs .nav-link.disabled, #collaboration .nav .nav-link.disabled, #collaboration #language-links .nav-link.disabled, .nav-tabs .nav-link.disabled:focus, #collaboration .nav .nav-link.disabled:focus, #collaboration #language-links .nav-link.disabled:focus, .nav-tabs .nav-link.disabled:hover, #collaboration .nav .nav-link.disabled:hover, #collaboration #language-links .nav-link.disabled:hover {
+    .nav-tabs .nav-link.disabled, #collaboration .nav .nav-link.disabled, #collaboration #language-links .nav-link.disabled, #collaboration #footer .colophon ul .nav-link.disabled, #footer .colophon #collaboration ul .nav-link.disabled, .nav-tabs #footer .colophon ul li a.disabled, #footer .colophon ul li .nav-tabs a.disabled, #footer .colophon ul li #collaboration .nav a.disabled, #footer .colophon ul li #collaboration #language-links a.disabled, #collaboration #footer .colophon ul li a.disabled, #footer .colophon #collaboration ul li a.disabled, .nav-tabs .nav-link.disabled:focus, #collaboration .nav .nav-link.disabled:focus, #collaboration #language-links .nav-link.disabled:focus, #collaboration #footer .colophon ul .nav-link.disabled:focus, #footer .colophon #collaboration ul .nav-link.disabled:focus, .nav-tabs #footer .colophon ul li a.disabled:focus, #footer .colophon ul li .nav-tabs a.disabled:focus, #footer .colophon ul li #collaboration .nav a.disabled:focus, #footer .colophon ul li #collaboration #language-links a.disabled:focus, #collaboration #footer .colophon ul li a.disabled:focus, #footer .colophon #collaboration ul li a.disabled:focus, .nav-tabs .nav-link.disabled:hover, #collaboration .nav .nav-link.disabled:hover, #collaboration #language-links .nav-link.disabled:hover, #collaboration #footer .colophon ul .nav-link.disabled:hover, #footer .colophon #collaboration ul .nav-link.disabled:hover, .nav-tabs #footer .colophon ul li a.disabled:hover, #footer .colophon ul li .nav-tabs a.disabled:hover, #footer .colophon ul li #collaboration .nav a.disabled:hover, #footer .colophon ul li #collaboration #language-links a.disabled:hover, #collaboration #footer .colophon ul li a.disabled:hover, #footer .colophon #collaboration ul li a.disabled:hover {
       color: #A2A8AB;
       background-color: transparent;
       border-color: transparent; }
-  .nav-tabs .nav-link.active, #collaboration .nav .nav-link.active, #collaboration #language-links .nav-link.active, .nav-tabs .nav-link.active:focus, #collaboration .nav .nav-link.active:focus, #collaboration #language-links .nav-link.active:focus, .nav-tabs .nav-link.active:hover, #collaboration .nav .nav-link.active:hover, #collaboration #language-links .nav-link.active:hover,
-  .nav-tabs .nav-item.open .nav-link, #collaboration .nav .nav-item.open .nav-link, #collaboration #language-links .nav-item.open .nav-link,
-  .nav-tabs .nav-item.open .nav-link:focus, #collaboration .nav .nav-item.open .nav-link:focus, #collaboration #language-links .nav-item.open .nav-link:focus,
-  .nav-tabs .nav-item.open .nav-link:hover, #collaboration .nav .nav-item.open .nav-link:hover, #collaboration #language-links .nav-item.open .nav-link:hover {
+  .nav-tabs .nav-link.active, #collaboration .nav .nav-link.active, #collaboration #language-links .nav-link.active, #collaboration #footer .colophon ul .nav-link.active, #footer .colophon #collaboration ul .nav-link.active, .nav-tabs #footer .colophon ul li a.active, #footer .colophon ul li .nav-tabs a.active, #footer .colophon ul li #collaboration .nav a.active, #footer .colophon ul li #collaboration #language-links a.active, #collaboration #footer .colophon ul li a.active, #footer .colophon #collaboration ul li a.active, .nav-tabs .nav-link.active:focus, #collaboration .nav .nav-link.active:focus, #collaboration #language-links .nav-link.active:focus, #collaboration #footer .colophon ul .nav-link.active:focus, #footer .colophon #collaboration ul .nav-link.active:focus, .nav-tabs #footer .colophon ul li a.active:focus, #footer .colophon ul li .nav-tabs a.active:focus, #footer .colophon ul li #collaboration .nav a.active:focus, #footer .colophon ul li #collaboration #language-links a.active:focus, #collaboration #footer .colophon ul li a.active:focus, #footer .colophon #collaboration ul li a.active:focus, .nav-tabs .nav-link.active:hover, #collaboration .nav .nav-link.active:hover, #collaboration #language-links .nav-link.active:hover, #collaboration #footer .colophon ul .nav-link.active:hover, #footer .colophon #collaboration ul .nav-link.active:hover, .nav-tabs #footer .colophon ul li a.active:hover, #footer .colophon ul li .nav-tabs a.active:hover, #footer .colophon ul li #collaboration .nav a.active:hover, #footer .colophon ul li #collaboration #language-links a.active:hover, #collaboration #footer .colophon ul li a.active:hover, #footer .colophon #collaboration ul li a.active:hover,
+  .nav-tabs .nav-item.open .nav-link, #collaboration .nav .nav-item.open .nav-link, #collaboration #language-links .nav-item.open .nav-link, #collaboration #footer .colophon ul .nav-item.open .nav-link, #footer .colophon #collaboration ul .nav-item.open .nav-link,
+  .nav-tabs #footer .colophon ul li.open .nav-link, #footer .colophon ul
+  .nav-tabs li.open .nav-link, #footer .colophon ul #collaboration .nav li.open .nav-link, #footer .colophon ul #collaboration #language-links li.open .nav-link, #collaboration #footer .colophon ul li.open .nav-link, #footer .colophon #collaboration ul li.open .nav-link,
+  .nav-tabs .nav-item.open #footer .colophon ul li a, #footer .colophon ul li
+  .nav-tabs .nav-item.open a, #collaboration .nav .nav-item.open #footer .colophon ul li a, #footer .colophon ul li #collaboration .nav .nav-item.open a, #collaboration #language-links .nav-item.open #footer .colophon ul li a, #footer .colophon ul li #collaboration #language-links .nav-item.open a, #collaboration #footer .colophon ul .nav-item.open li a, #collaboration #footer .colophon ul li .nav-item.open a, #footer .colophon #collaboration ul .nav-item.open li a, #footer .colophon #collaboration ul li .nav-item.open a,
+  .nav-tabs #footer .colophon ul li.open a, #footer .colophon ul
+  .nav-tabs li.open a, #footer .colophon ul #collaboration .nav li.open a, #footer .colophon ul #collaboration #language-links li.open a, #collaboration #footer .colophon ul li.open a, #footer .colophon #collaboration ul li.open a,
+  .nav-tabs .nav-item.open .nav-link:focus, #collaboration .nav .nav-item.open .nav-link:focus, #collaboration #language-links .nav-item.open .nav-link:focus, #collaboration #footer .colophon ul .nav-item.open .nav-link:focus, #footer .colophon #collaboration ul .nav-item.open .nav-link:focus,
+  .nav-tabs #footer .colophon ul li.open .nav-link:focus, #footer .colophon ul
+  .nav-tabs li.open .nav-link:focus, #footer .colophon ul #collaboration .nav li.open .nav-link:focus, #footer .colophon ul #collaboration #language-links li.open .nav-link:focus, #collaboration #footer .colophon ul li.open .nav-link:focus, #footer .colophon #collaboration ul li.open .nav-link:focus,
+  .nav-tabs .nav-item.open #footer .colophon ul li a:focus, #footer .colophon ul li
+  .nav-tabs .nav-item.open a:focus, #collaboration .nav .nav-item.open #footer .colophon ul li a:focus, #footer .colophon ul li #collaboration .nav .nav-item.open a:focus, #collaboration #language-links .nav-item.open #footer .colophon ul li a:focus, #footer .colophon ul li #collaboration #language-links .nav-item.open a:focus, #collaboration #footer .colophon ul .nav-item.open li a:focus, #collaboration #footer .colophon ul li .nav-item.open a:focus, #footer .colophon #collaboration ul .nav-item.open li a:focus, #footer .colophon #collaboration ul li .nav-item.open a:focus,
+  .nav-tabs #footer .colophon ul li.open a:focus, #footer .colophon ul
+  .nav-tabs li.open a:focus, #footer .colophon ul #collaboration .nav li.open a:focus, #footer .colophon ul #collaboration #language-links li.open a:focus, #collaboration #footer .colophon ul li.open a:focus, #footer .colophon #collaboration ul li.open a:focus,
+  .nav-tabs .nav-item.open .nav-link:hover, #collaboration .nav .nav-item.open .nav-link:hover, #collaboration #language-links .nav-item.open .nav-link:hover, #collaboration #footer .colophon ul .nav-item.open .nav-link:hover, #footer .colophon #collaboration ul .nav-item.open .nav-link:hover,
+  .nav-tabs #footer .colophon ul li.open .nav-link:hover, #footer .colophon ul
+  .nav-tabs li.open .nav-link:hover, #footer .colophon ul #collaboration .nav li.open .nav-link:hover, #footer .colophon ul #collaboration #language-links li.open .nav-link:hover, #collaboration #footer .colophon ul li.open .nav-link:hover, #footer .colophon #collaboration ul li.open .nav-link:hover,
+  .nav-tabs .nav-item.open #footer .colophon ul li a:hover, #footer .colophon ul li
+  .nav-tabs .nav-item.open a:hover, #collaboration .nav .nav-item.open #footer .colophon ul li a:hover, #footer .colophon ul li #collaboration .nav .nav-item.open a:hover, #collaboration #language-links .nav-item.open #footer .colophon ul li a:hover, #footer .colophon ul li #collaboration #language-links .nav-item.open a:hover, #collaboration #footer .colophon ul .nav-item.open li a:hover, #collaboration #footer .colophon ul li .nav-item.open a:hover, #footer .colophon #collaboration ul .nav-item.open li a:hover, #footer .colophon #collaboration ul li .nav-item.open a:hover,
+  .nav-tabs #footer .colophon ul li.open a:hover, #footer .colophon ul
+  .nav-tabs li.open a:hover, #footer .colophon ul #collaboration .nav li.open a:hover, #footer .colophon ul #collaboration #language-links li.open a:hover, #collaboration #footer .colophon ul li.open a:hover, #footer .colophon #collaboration ul li.open a:hover {
     color: #79858A;
     background-color: #fff;
     border-color: #ddd #ddd transparent; }
@@ -3195,28 +3317,46 @@ button {
   display: table;
   clear: both; }
 
-.nav-pills .nav-item, #language-links .nav-item {
+.nav-pills .nav-item, #language-links .nav-item, .nav-pills #footer .colophon ul li, #footer .colophon ul .nav-pills li, #language-links #footer .colophon ul li, #footer .colophon ul #language-links li {
   float: left; }
-  .nav-pills .nav-item + .nav-item, #language-links .nav-item + .nav-item {
+  .nav-pills .nav-item + .nav-item, #language-links .nav-item + .nav-item, .nav-pills #footer .colophon ul li + .nav-item, #footer .colophon ul .nav-pills li + .nav-item, #language-links #footer .colophon ul li + .nav-item, #footer .colophon ul #language-links li + .nav-item, .nav-pills #footer .colophon ul .nav-item + li, #footer .colophon ul .nav-pills .nav-item + li, #language-links #footer .colophon ul .nav-item + li, #footer .colophon ul #language-links .nav-item + li, .nav-pills #footer .colophon ul li + li, #footer .colophon ul .nav-pills li + li, #language-links #footer .colophon ul li + li, #footer .colophon ul #language-links li + li {
     margin-left: .2rem; }
 
-.nav-pills .nav-link, #language-links .nav-link {
+.nav-pills .nav-link, #language-links .nav-link, .nav-pills #footer .colophon ul li a, #footer .colophon ul li .nav-pills a, #language-links #footer .colophon ul li a, #footer .colophon ul li #language-links a {
   display: block;
   padding: 0.5em 1em;
   border-radius: 0.25rem; }
 
-.nav-pills .nav-link.active, #language-links .nav-link.active, .nav-pills .nav-link.active:focus, #language-links .nav-link.active:focus, .nav-pills .nav-link.active:hover, #language-links .nav-link.active:hover,
+.nav-pills .nav-link.active, #language-links .nav-link.active, .nav-pills #footer .colophon ul li a.active, #footer .colophon ul li .nav-pills a.active, #language-links #footer .colophon ul li a.active, #footer .colophon ul li #language-links a.active, .nav-pills .nav-link.active:focus, #language-links .nav-link.active:focus, .nav-pills #footer .colophon ul li a.active:focus, #footer .colophon ul li .nav-pills a.active:focus, #language-links #footer .colophon ul li a.active:focus, #footer .colophon ul li #language-links a.active:focus, .nav-pills .nav-link.active:hover, #language-links .nav-link.active:hover, .nav-pills #footer .colophon ul li a.active:hover, #footer .colophon ul li .nav-pills a.active:hover, #language-links #footer .colophon ul li a.active:hover, #footer .colophon ul li #language-links a.active:hover,
 .nav-pills .nav-item.open .nav-link, #language-links .nav-item.open .nav-link,
+.nav-pills #footer .colophon ul li.open .nav-link, #footer .colophon ul
+.nav-pills li.open .nav-link, #language-links #footer .colophon ul li.open .nav-link, #footer .colophon ul #language-links li.open .nav-link,
+.nav-pills .nav-item.open #footer .colophon ul li a, #footer .colophon ul li
+.nav-pills .nav-item.open a, #language-links .nav-item.open #footer .colophon ul li a, #footer .colophon ul li #language-links .nav-item.open a,
+.nav-pills #footer .colophon ul li.open a, #footer .colophon ul
+.nav-pills li.open a, #language-links #footer .colophon ul li.open a, #footer .colophon ul #language-links li.open a,
 .nav-pills .nav-item.open .nav-link:focus, #language-links .nav-item.open .nav-link:focus,
-.nav-pills .nav-item.open .nav-link:hover, #language-links .nav-item.open .nav-link:hover {
+.nav-pills #footer .colophon ul li.open .nav-link:focus, #footer .colophon ul
+.nav-pills li.open .nav-link:focus, #language-links #footer .colophon ul li.open .nav-link:focus, #footer .colophon ul #language-links li.open .nav-link:focus,
+.nav-pills .nav-item.open #footer .colophon ul li a:focus, #footer .colophon ul li
+.nav-pills .nav-item.open a:focus, #language-links .nav-item.open #footer .colophon ul li a:focus, #footer .colophon ul li #language-links .nav-item.open a:focus,
+.nav-pills #footer .colophon ul li.open a:focus, #footer .colophon ul
+.nav-pills li.open a:focus, #language-links #footer .colophon ul li.open a:focus, #footer .colophon ul #language-links li.open a:focus,
+.nav-pills .nav-item.open .nav-link:hover, #language-links .nav-item.open .nav-link:hover,
+.nav-pills #footer .colophon ul li.open .nav-link:hover, #footer .colophon ul
+.nav-pills li.open .nav-link:hover, #language-links #footer .colophon ul li.open .nav-link:hover, #footer .colophon ul #language-links li.open .nav-link:hover,
+.nav-pills .nav-item.open #footer .colophon ul li a:hover, #footer .colophon ul li
+.nav-pills .nav-item.open a:hover, #language-links .nav-item.open #footer .colophon ul li a:hover, #footer .colophon ul li #language-links .nav-item.open a:hover,
+.nav-pills #footer .colophon ul li.open a:hover, #footer .colophon ul
+.nav-pills li.open a:hover, #language-links #footer .colophon ul li.open a:hover, #footer .colophon ul #language-links li.open a:hover {
   color: #fff;
   cursor: default;
   background-color: #427C89; }
 
-.nav-stacked .nav-item {
+.nav-stacked .nav-item, .nav-stacked #footer .colophon ul li, #footer .colophon ul .nav-stacked li {
   display: block;
   float: none; }
-  .nav-stacked .nav-item + .nav-item {
+  .nav-stacked .nav-item + .nav-item, .nav-stacked #footer .colophon ul li + .nav-item, #footer .colophon ul .nav-stacked li + .nav-item, .nav-stacked #footer .colophon ul .nav-item + li, #footer .colophon ul .nav-stacked .nav-item + li, .nav-stacked #footer .colophon ul li + li, #footer .colophon ul .nav-stacked li + li {
     margin-top: .2rem;
     margin-left: 0; }
 
@@ -3226,20 +3366,20 @@ button {
 .tab-content > .active {
   display: block; }
 
-.nav-tabs .dropdown-menu, #collaboration .nav .dropdown-menu, #collaboration #language-links .dropdown-menu {
+.nav-tabs .dropdown-menu, #collaboration .nav .dropdown-menu, #collaboration #language-links .dropdown-menu, #collaboration #footer .colophon ul .dropdown-menu, #footer .colophon #collaboration ul .dropdown-menu {
   margin-top: -1px;
   border-top-right-radius: 0;
   border-top-left-radius: 0; }
 
-.navbar {
+.navbar, #footer {
   position: relative;
   padding: 0.5rem 1rem; }
-  .navbar::after {
+  .navbar::after, #footer::after {
     content: "";
     display: table;
     clear: both; }
   @media (min-width: 544px) {
-    .navbar {
+    .navbar, #footer {
       border-radius: 0.25rem; } }
 
 .navbar-full {
@@ -3276,15 +3416,15 @@ button {
     .navbar-sticky-top {
       border-radius: 0; } }
 
-.navbar-brand, #tagline, #welcome-text {
+.navbar-brand, #tagline, #welcome-text, #footer .colophon .license {
   float: left;
   padding-top: .25rem;
   padding-bottom: .25rem;
   margin-right: 1rem;
   font-size: 1.25rem; }
-  .navbar-brand:focus, #tagline:focus, #welcome-text:focus, .navbar-brand:hover, #tagline:hover, #welcome-text:hover {
+  .navbar-brand:focus, #tagline:focus, #welcome-text:focus, #footer .colophon .license:focus, .navbar-brand:hover, #tagline:hover, #welcome-text:hover, #footer .colophon .license:hover {
     text-decoration: none; }
-  .navbar-brand > img, #tagline > img, #welcome-text > img {
+  .navbar-brand > img, #tagline > img, #welcome-text > img, #footer .colophon .license > img {
     display: block; }
 
 .navbar-divider {
@@ -3320,85 +3460,193 @@ button {
   .navbar-toggleable-md {
     display: block !important; } }
 
-.navbar-nav .nav-item, #language-links .nav-item {
+.navbar-nav .nav-item, #language-links .nav-item, #footer .colophon ul .nav-item, #footer .colophon ul li {
   float: left; }
 
-.navbar-nav .nav-link, #language-links .nav-link {
+.navbar-nav .nav-link, #language-links .nav-link, #footer .colophon ul .nav-link, #footer .colophon ul li a {
   display: block;
   padding-top: .425rem;
   padding-bottom: .425rem; }
-  .navbar-nav .nav-link + .nav-link, #language-links .nav-link + .nav-link {
+  .navbar-nav .nav-link + .nav-link, #language-links .nav-link + .nav-link, #footer .colophon ul .nav-link + .nav-link, #footer .colophon ul li .navbar-nav a + .nav-link, #footer .colophon ul li #language-links a + .nav-link, #footer .colophon ul li a + .nav-link, #footer .colophon ul li .navbar-nav .nav-link + a, #footer .colophon ul li #language-links .nav-link + a, #footer .colophon ul li .nav-link + a, #footer .colophon ul li .navbar-nav a + a, #footer .colophon ul li #language-links a + a, #footer .colophon ul li a + a {
     margin-left: 1rem; }
 
-.navbar-nav .nav-item + .nav-item, #language-links .nav-item + .nav-item {
+.navbar-nav .nav-item + .nav-item, #language-links .nav-item + .nav-item, #footer .colophon ul .nav-item + .nav-item, #footer .colophon ul .navbar-nav li + .nav-item, #footer .colophon ul #language-links li + .nav-item, #footer .colophon ul li + .nav-item, #footer .colophon ul .navbar-nav .nav-item + li, #footer .colophon ul #language-links .nav-item + li, #footer .colophon ul .nav-item + li, #footer .colophon ul .navbar-nav li + li, #footer .colophon ul #language-links li + li, #footer .colophon ul li + li {
   margin-left: 1rem; }
 
-.navbar-light .navbar-brand, #utility-nav .navbar-brand, .navbar-light #tagline, #utility-nav #tagline, .navbar-light #welcome-text, #utility-nav #welcome-text {
+.navbar-light .navbar-brand, .navbar-light #tagline, .navbar-light #welcome-text, .navbar-light #footer .colophon .license, #footer .colophon .navbar-light .license {
   color: rgba(0, 0, 0, 0.8); }
-  .navbar-light .navbar-brand:focus, #utility-nav .navbar-brand:focus, .navbar-light #tagline:focus, #utility-nav #tagline:focus, .navbar-light #welcome-text:focus, #utility-nav #welcome-text:focus, .navbar-light .navbar-brand:hover, #utility-nav .navbar-brand:hover, .navbar-light #tagline:hover, #utility-nav #tagline:hover, .navbar-light #welcome-text:hover, #utility-nav #welcome-text:hover {
+  .navbar-light .navbar-brand:focus, .navbar-light #tagline:focus, .navbar-light #welcome-text:focus, .navbar-light #footer .colophon .license:focus, #footer .colophon .navbar-light .license:focus, .navbar-light .navbar-brand:hover, .navbar-light #tagline:hover, .navbar-light #welcome-text:hover, .navbar-light #footer .colophon .license:hover, #footer .colophon .navbar-light .license:hover {
     color: rgba(0, 0, 0, 0.8); }
 
-.navbar-light .navbar-nav .nav-link, #utility-nav .navbar-nav .nav-link, .navbar-light #language-links .nav-link, #utility-nav #language-links .nav-link {
+.navbar-light .navbar-nav .nav-link, .navbar-light #language-links .nav-link, .navbar-light #footer .colophon ul .nav-link, #footer .colophon .navbar-light ul .nav-link, #footer .colophon ul li .navbar-light .navbar-nav a, #footer .colophon ul li .navbar-light #language-links a, .navbar-light #footer .colophon ul li a, #footer .colophon .navbar-light ul li a {
   color: rgba(0, 0, 0, 0.3); }
-  .navbar-light .navbar-nav .nav-link:focus, #utility-nav .navbar-nav .nav-link:focus, .navbar-light #language-links .nav-link:focus, #utility-nav #language-links .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover, #utility-nav .navbar-nav .nav-link:hover, .navbar-light #language-links .nav-link:hover, #utility-nav #language-links .nav-link:hover {
+  .navbar-light .navbar-nav .nav-link:focus, .navbar-light #language-links .nav-link:focus, .navbar-light #footer .colophon ul .nav-link:focus, #footer .colophon .navbar-light ul .nav-link:focus, #footer .colophon ul li .navbar-light .navbar-nav a:focus, #footer .colophon ul li .navbar-light #language-links a:focus, .navbar-light #footer .colophon ul li a:focus, #footer .colophon .navbar-light ul li a:focus, .navbar-light .navbar-nav .nav-link:hover, .navbar-light #language-links .nav-link:hover, .navbar-light #footer .colophon ul .nav-link:hover, #footer .colophon .navbar-light ul .nav-link:hover, #footer .colophon ul li .navbar-light .navbar-nav a:hover, #footer .colophon ul li .navbar-light #language-links a:hover, .navbar-light #footer .colophon ul li a:hover, #footer .colophon .navbar-light ul li a:hover {
     color: rgba(0, 0, 0, 0.6); }
 
-.navbar-light .navbar-nav .open > .nav-link, #utility-nav .navbar-nav .open > .nav-link, .navbar-light #language-links .open > .nav-link, #utility-nav #language-links .open > .nav-link, .navbar-light .navbar-nav .open > .nav-link:focus, #utility-nav .navbar-nav .open > .nav-link:focus, .navbar-light #language-links .open > .nav-link:focus, #utility-nav #language-links .open > .nav-link:focus, .navbar-light .navbar-nav .open > .nav-link:hover, #utility-nav .navbar-nav .open > .nav-link:hover, .navbar-light #language-links .open > .nav-link:hover, #utility-nav #language-links .open > .nav-link:hover,
-.navbar-light .navbar-nav .active > .nav-link, #utility-nav .navbar-nav .active > .nav-link,
-.navbar-light #language-links .active > .nav-link, #utility-nav #language-links .active > .nav-link,
-.navbar-light .navbar-nav .active > .nav-link:focus, #utility-nav .navbar-nav .active > .nav-link:focus,
-.navbar-light #language-links .active > .nav-link:focus, #utility-nav #language-links .active > .nav-link:focus,
-.navbar-light .navbar-nav .active > .nav-link:hover, #utility-nav .navbar-nav .active > .nav-link:hover,
-.navbar-light #language-links .active > .nav-link:hover, #utility-nav #language-links .active > .nav-link:hover,
-.navbar-light .navbar-nav .nav-link.open, #utility-nav .navbar-nav .nav-link.open,
-.navbar-light #language-links .nav-link.open, #utility-nav #language-links .nav-link.open,
-.navbar-light .navbar-nav .nav-link.open:focus, #utility-nav .navbar-nav .nav-link.open:focus,
-.navbar-light #language-links .nav-link.open:focus, #utility-nav #language-links .nav-link.open:focus,
-.navbar-light .navbar-nav .nav-link.open:hover, #utility-nav .navbar-nav .nav-link.open:hover,
-.navbar-light #language-links .nav-link.open:hover, #utility-nav #language-links .nav-link.open:hover,
-.navbar-light .navbar-nav .nav-link.active, #utility-nav .navbar-nav .nav-link.active,
-.navbar-light #language-links .nav-link.active, #utility-nav #language-links .nav-link.active,
-.navbar-light .navbar-nav .nav-link.active:focus, #utility-nav .navbar-nav .nav-link.active:focus,
-.navbar-light #language-links .nav-link.active:focus, #utility-nav #language-links .nav-link.active:focus,
-.navbar-light .navbar-nav .nav-link.active:hover, #utility-nav .navbar-nav .nav-link.active:hover,
-.navbar-light #language-links .nav-link.active:hover, #utility-nav #language-links .nav-link.active:hover {
+.navbar-light .navbar-nav .open > .nav-link, .navbar-light #language-links .open > .nav-link, .navbar-light #footer .colophon ul .open > .nav-link, #footer .colophon .navbar-light ul .open > .nav-link, #footer .colophon ul li .navbar-light .navbar-nav .open > a, #footer .colophon ul li .navbar-light #language-links .open > a, .navbar-light #footer .colophon ul li .open > a, #footer .colophon .navbar-light ul li .open > a, .navbar-light .navbar-nav .open > .nav-link:focus, .navbar-light #language-links .open > .nav-link:focus, .navbar-light #footer .colophon ul .open > .nav-link:focus, #footer .colophon .navbar-light ul .open > .nav-link:focus, #footer .colophon ul li .navbar-light .navbar-nav .open > a:focus, #footer .colophon ul li .navbar-light #language-links .open > a:focus, .navbar-light #footer .colophon ul li .open > a:focus, #footer .colophon .navbar-light ul li .open > a:focus, .navbar-light .navbar-nav .open > .nav-link:hover, .navbar-light #language-links .open > .nav-link:hover, .navbar-light #footer .colophon ul .open > .nav-link:hover, #footer .colophon .navbar-light ul .open > .nav-link:hover, #footer .colophon ul li .navbar-light .navbar-nav .open > a:hover, #footer .colophon ul li .navbar-light #language-links .open > a:hover, .navbar-light #footer .colophon ul li .open > a:hover, #footer .colophon .navbar-light ul li .open > a:hover,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light #language-links .active > .nav-link,
+.navbar-light #footer .colophon ul .active > .nav-link, #footer .colophon
+.navbar-light ul .active > .nav-link, #footer .colophon ul li
+.navbar-light .navbar-nav .active > a, #footer .colophon ul li
+.navbar-light #language-links .active > a,
+.navbar-light #footer .colophon ul li .active > a, #footer .colophon
+.navbar-light ul li .active > a,
+.navbar-light .navbar-nav .active > .nav-link:focus,
+.navbar-light #language-links .active > .nav-link:focus,
+.navbar-light #footer .colophon ul .active > .nav-link:focus, #footer .colophon
+.navbar-light ul .active > .nav-link:focus, #footer .colophon ul li
+.navbar-light .navbar-nav .active > a:focus, #footer .colophon ul li
+.navbar-light #language-links .active > a:focus,
+.navbar-light #footer .colophon ul li .active > a:focus, #footer .colophon
+.navbar-light ul li .active > a:focus,
+.navbar-light .navbar-nav .active > .nav-link:hover,
+.navbar-light #language-links .active > .nav-link:hover,
+.navbar-light #footer .colophon ul .active > .nav-link:hover, #footer .colophon
+.navbar-light ul .active > .nav-link:hover, #footer .colophon ul li
+.navbar-light .navbar-nav .active > a:hover, #footer .colophon ul li
+.navbar-light #language-links .active > a:hover,
+.navbar-light #footer .colophon ul li .active > a:hover, #footer .colophon
+.navbar-light ul li .active > a:hover,
+.navbar-light .navbar-nav .nav-link.open,
+.navbar-light #language-links .nav-link.open,
+.navbar-light #footer .colophon ul .nav-link.open, #footer .colophon
+.navbar-light ul .nav-link.open, #footer .colophon ul li
+.navbar-light .navbar-nav a.open, #footer .colophon ul li
+.navbar-light #language-links a.open,
+.navbar-light #footer .colophon ul li a.open, #footer .colophon
+.navbar-light ul li a.open,
+.navbar-light .navbar-nav .nav-link.open:focus,
+.navbar-light #language-links .nav-link.open:focus,
+.navbar-light #footer .colophon ul .nav-link.open:focus, #footer .colophon
+.navbar-light ul .nav-link.open:focus, #footer .colophon ul li
+.navbar-light .navbar-nav a.open:focus, #footer .colophon ul li
+.navbar-light #language-links a.open:focus,
+.navbar-light #footer .colophon ul li a.open:focus, #footer .colophon
+.navbar-light ul li a.open:focus,
+.navbar-light .navbar-nav .nav-link.open:hover,
+.navbar-light #language-links .nav-link.open:hover,
+.navbar-light #footer .colophon ul .nav-link.open:hover, #footer .colophon
+.navbar-light ul .nav-link.open:hover, #footer .colophon ul li
+.navbar-light .navbar-nav a.open:hover, #footer .colophon ul li
+.navbar-light #language-links a.open:hover,
+.navbar-light #footer .colophon ul li a.open:hover, #footer .colophon
+.navbar-light ul li a.open:hover,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light #language-links .nav-link.active,
+.navbar-light #footer .colophon ul .nav-link.active, #footer .colophon
+.navbar-light ul .nav-link.active, #footer .colophon ul li
+.navbar-light .navbar-nav a.active, #footer .colophon ul li
+.navbar-light #language-links a.active,
+.navbar-light #footer .colophon ul li a.active, #footer .colophon
+.navbar-light ul li a.active,
+.navbar-light .navbar-nav .nav-link.active:focus,
+.navbar-light #language-links .nav-link.active:focus,
+.navbar-light #footer .colophon ul .nav-link.active:focus, #footer .colophon
+.navbar-light ul .nav-link.active:focus, #footer .colophon ul li
+.navbar-light .navbar-nav a.active:focus, #footer .colophon ul li
+.navbar-light #language-links a.active:focus,
+.navbar-light #footer .colophon ul li a.active:focus, #footer .colophon
+.navbar-light ul li a.active:focus,
+.navbar-light .navbar-nav .nav-link.active:hover,
+.navbar-light #language-links .nav-link.active:hover,
+.navbar-light #footer .colophon ul .nav-link.active:hover, #footer .colophon
+.navbar-light ul .nav-link.active:hover, #footer .colophon ul li
+.navbar-light .navbar-nav a.active:hover, #footer .colophon ul li
+.navbar-light #language-links a.active:hover,
+.navbar-light #footer .colophon ul li a.active:hover, #footer .colophon
+.navbar-light ul li a.active:hover {
   color: rgba(0, 0, 0, 0.8); }
 
-.navbar-light .navbar-divider, #utility-nav .navbar-divider {
+.navbar-light .navbar-divider {
   background-color: rgba(0, 0, 0, 0.075); }
 
-.navbar-dark .navbar-brand, .navbar-dark #tagline, .navbar-dark #welcome-text {
+.navbar-dark .navbar-brand, #utility-nav .navbar-brand, .navbar-dark #tagline, #utility-nav #tagline, .navbar-dark #welcome-text, #utility-nav #welcome-text, .navbar-dark #footer .colophon .license, #footer .colophon .navbar-dark .license, #utility-nav #footer .colophon .license, #footer .colophon #utility-nav .license {
   color: white; }
-  .navbar-dark .navbar-brand:focus, .navbar-dark #tagline:focus, .navbar-dark #welcome-text:focus, .navbar-dark .navbar-brand:hover, .navbar-dark #tagline:hover, .navbar-dark #welcome-text:hover {
+  .navbar-dark .navbar-brand:focus, #utility-nav .navbar-brand:focus, .navbar-dark #tagline:focus, #utility-nav #tagline:focus, .navbar-dark #welcome-text:focus, #utility-nav #welcome-text:focus, .navbar-dark #footer .colophon .license:focus, #footer .colophon .navbar-dark .license:focus, #utility-nav #footer .colophon .license:focus, #footer .colophon #utility-nav .license:focus, .navbar-dark .navbar-brand:hover, #utility-nav .navbar-brand:hover, .navbar-dark #tagline:hover, #utility-nav #tagline:hover, .navbar-dark #welcome-text:hover, #utility-nav #welcome-text:hover, .navbar-dark #footer .colophon .license:hover, #footer .colophon .navbar-dark .license:hover, #utility-nav #footer .colophon .license:hover, #footer .colophon #utility-nav .license:hover {
     color: white; }
 
-.navbar-dark .navbar-nav .nav-link, .navbar-dark #language-links .nav-link {
+.navbar-dark .navbar-nav .nav-link, #utility-nav .navbar-nav .nav-link, .navbar-dark #language-links .nav-link, #utility-nav #language-links .nav-link, .navbar-dark #footer .colophon ul .nav-link, #footer .colophon .navbar-dark ul .nav-link, #utility-nav #footer .colophon ul .nav-link, #footer .colophon #utility-nav ul .nav-link, #footer .colophon ul li .navbar-dark .navbar-nav a, #footer .colophon ul li #utility-nav .navbar-nav a, #footer .colophon ul li .navbar-dark #language-links a, #footer .colophon ul li #utility-nav #language-links a, .navbar-dark #footer .colophon ul li a, #footer .colophon .navbar-dark ul li a, #utility-nav #footer .colophon ul li a, #footer .colophon #utility-nav ul li a {
   color: rgba(255, 255, 255, 0.5); }
-  .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark #language-links .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark #language-links .nav-link:hover {
+  .navbar-dark .navbar-nav .nav-link:focus, #utility-nav .navbar-nav .nav-link:focus, .navbar-dark #language-links .nav-link:focus, #utility-nav #language-links .nav-link:focus, .navbar-dark #footer .colophon ul .nav-link:focus, #footer .colophon .navbar-dark ul .nav-link:focus, #utility-nav #footer .colophon ul .nav-link:focus, #footer .colophon #utility-nav ul .nav-link:focus, #footer .colophon ul li .navbar-dark .navbar-nav a:focus, #footer .colophon ul li #utility-nav .navbar-nav a:focus, #footer .colophon ul li .navbar-dark #language-links a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, .navbar-dark #footer .colophon ul li a:focus, #footer .colophon .navbar-dark ul li a:focus, #utility-nav #footer .colophon ul li a:focus, #footer .colophon #utility-nav ul li a:focus, .navbar-dark .navbar-nav .nav-link:hover, #utility-nav .navbar-nav .nav-link:hover, .navbar-dark #language-links .nav-link:hover, #utility-nav #language-links .nav-link:hover, .navbar-dark #footer .colophon ul .nav-link:hover, #footer .colophon .navbar-dark ul .nav-link:hover, #utility-nav #footer .colophon ul .nav-link:hover, #footer .colophon #utility-nav ul .nav-link:hover, #footer .colophon ul li .navbar-dark .navbar-nav a:hover, #footer .colophon ul li #utility-nav .navbar-nav a:hover, #footer .colophon ul li .navbar-dark #language-links a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, .navbar-dark #footer .colophon ul li a:hover, #footer .colophon .navbar-dark ul li a:hover, #utility-nav #footer .colophon ul li a:hover, #footer .colophon #utility-nav ul li a:hover {
     color: rgba(255, 255, 255, 0.75); }
 
-.navbar-dark .navbar-nav .open > .nav-link, .navbar-dark #language-links .open > .nav-link, .navbar-dark .navbar-nav .open > .nav-link:focus, .navbar-dark #language-links .open > .nav-link:focus, .navbar-dark .navbar-nav .open > .nav-link:hover, .navbar-dark #language-links .open > .nav-link:hover,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark #language-links .active > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link:focus,
-.navbar-dark #language-links .active > .nav-link:focus,
-.navbar-dark .navbar-nav .active > .nav-link:hover,
-.navbar-dark #language-links .active > .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link.open,
-.navbar-dark #language-links .nav-link.open,
-.navbar-dark .navbar-nav .nav-link.open:focus,
-.navbar-dark #language-links .nav-link.open:focus,
-.navbar-dark .navbar-nav .nav-link.open:hover,
-.navbar-dark #language-links .nav-link.open:hover,
-.navbar-dark .navbar-nav .nav-link.active,
-.navbar-dark #language-links .nav-link.active,
-.navbar-dark .navbar-nav .nav-link.active:focus,
-.navbar-dark #language-links .nav-link.active:focus,
-.navbar-dark .navbar-nav .nav-link.active:hover,
-.navbar-dark #language-links .nav-link.active:hover {
+.navbar-dark .navbar-nav .open > .nav-link, #utility-nav .navbar-nav .open > .nav-link, .navbar-dark #language-links .open > .nav-link, #utility-nav #language-links .open > .nav-link, .navbar-dark #footer .colophon ul .open > .nav-link, #footer .colophon .navbar-dark ul .open > .nav-link, #utility-nav #footer .colophon ul .open > .nav-link, #footer .colophon #utility-nav ul .open > .nav-link, #footer .colophon ul li .navbar-dark .navbar-nav .open > a, #footer .colophon ul li #utility-nav .navbar-nav .open > a, #footer .colophon ul li .navbar-dark #language-links .open > a, #footer .colophon ul li #utility-nav #language-links .open > a, .navbar-dark #footer .colophon ul li .open > a, #footer .colophon .navbar-dark ul li .open > a, #utility-nav #footer .colophon ul li .open > a, #footer .colophon #utility-nav ul li .open > a, .navbar-dark .navbar-nav .open > .nav-link:focus, #utility-nav .navbar-nav .open > .nav-link:focus, .navbar-dark #language-links .open > .nav-link:focus, #utility-nav #language-links .open > .nav-link:focus, .navbar-dark #footer .colophon ul .open > .nav-link:focus, #footer .colophon .navbar-dark ul .open > .nav-link:focus, #utility-nav #footer .colophon ul .open > .nav-link:focus, #footer .colophon #utility-nav ul .open > .nav-link:focus, #footer .colophon ul li .navbar-dark .navbar-nav .open > a:focus, #footer .colophon ul li #utility-nav .navbar-nav .open > a:focus, #footer .colophon ul li .navbar-dark #language-links .open > a:focus, #footer .colophon ul li #utility-nav #language-links .open > a:focus, .navbar-dark #footer .colophon ul li .open > a:focus, #footer .colophon .navbar-dark ul li .open > a:focus, #utility-nav #footer .colophon ul li .open > a:focus, #footer .colophon #utility-nav ul li .open > a:focus, .navbar-dark .navbar-nav .open > .nav-link:hover, #utility-nav .navbar-nav .open > .nav-link:hover, .navbar-dark #language-links .open > .nav-link:hover, #utility-nav #language-links .open > .nav-link:hover, .navbar-dark #footer .colophon ul .open > .nav-link:hover, #footer .colophon .navbar-dark ul .open > .nav-link:hover, #utility-nav #footer .colophon ul .open > .nav-link:hover, #footer .colophon #utility-nav ul .open > .nav-link:hover, #footer .colophon ul li .navbar-dark .navbar-nav .open > a:hover, #footer .colophon ul li #utility-nav .navbar-nav .open > a:hover, #footer .colophon ul li .navbar-dark #language-links .open > a:hover, #footer .colophon ul li #utility-nav #language-links .open > a:hover, .navbar-dark #footer .colophon ul li .open > a:hover, #footer .colophon .navbar-dark ul li .open > a:hover, #utility-nav #footer .colophon ul li .open > a:hover, #footer .colophon #utility-nav ul li .open > a:hover,
+.navbar-dark .navbar-nav .active > .nav-link, #utility-nav .navbar-nav .active > .nav-link,
+.navbar-dark #language-links .active > .nav-link, #utility-nav #language-links .active > .nav-link,
+.navbar-dark #footer .colophon ul .active > .nav-link, #footer .colophon
+.navbar-dark ul .active > .nav-link, #utility-nav #footer .colophon ul .active > .nav-link, #footer .colophon #utility-nav ul .active > .nav-link, #footer .colophon ul li
+.navbar-dark .navbar-nav .active > a, #footer .colophon ul li #utility-nav .navbar-nav .active > a, #footer .colophon ul li
+.navbar-dark #language-links .active > a, #footer .colophon ul li #utility-nav #language-links .active > a,
+.navbar-dark #footer .colophon ul li .active > a, #footer .colophon
+.navbar-dark ul li .active > a, #utility-nav #footer .colophon ul li .active > a, #footer .colophon #utility-nav ul li .active > a,
+.navbar-dark .navbar-nav .active > .nav-link:focus, #utility-nav .navbar-nav .active > .nav-link:focus,
+.navbar-dark #language-links .active > .nav-link:focus, #utility-nav #language-links .active > .nav-link:focus,
+.navbar-dark #footer .colophon ul .active > .nav-link:focus, #footer .colophon
+.navbar-dark ul .active > .nav-link:focus, #utility-nav #footer .colophon ul .active > .nav-link:focus, #footer .colophon #utility-nav ul .active > .nav-link:focus, #footer .colophon ul li
+.navbar-dark .navbar-nav .active > a:focus, #footer .colophon ul li #utility-nav .navbar-nav .active > a:focus, #footer .colophon ul li
+.navbar-dark #language-links .active > a:focus, #footer .colophon ul li #utility-nav #language-links .active > a:focus,
+.navbar-dark #footer .colophon ul li .active > a:focus, #footer .colophon
+.navbar-dark ul li .active > a:focus, #utility-nav #footer .colophon ul li .active > a:focus, #footer .colophon #utility-nav ul li .active > a:focus,
+.navbar-dark .navbar-nav .active > .nav-link:hover, #utility-nav .navbar-nav .active > .nav-link:hover,
+.navbar-dark #language-links .active > .nav-link:hover, #utility-nav #language-links .active > .nav-link:hover,
+.navbar-dark #footer .colophon ul .active > .nav-link:hover, #footer .colophon
+.navbar-dark ul .active > .nav-link:hover, #utility-nav #footer .colophon ul .active > .nav-link:hover, #footer .colophon #utility-nav ul .active > .nav-link:hover, #footer .colophon ul li
+.navbar-dark .navbar-nav .active > a:hover, #footer .colophon ul li #utility-nav .navbar-nav .active > a:hover, #footer .colophon ul li
+.navbar-dark #language-links .active > a:hover, #footer .colophon ul li #utility-nav #language-links .active > a:hover,
+.navbar-dark #footer .colophon ul li .active > a:hover, #footer .colophon
+.navbar-dark ul li .active > a:hover, #utility-nav #footer .colophon ul li .active > a:hover, #footer .colophon #utility-nav ul li .active > a:hover,
+.navbar-dark .navbar-nav .nav-link.open, #utility-nav .navbar-nav .nav-link.open,
+.navbar-dark #language-links .nav-link.open, #utility-nav #language-links .nav-link.open,
+.navbar-dark #footer .colophon ul .nav-link.open, #footer .colophon
+.navbar-dark ul .nav-link.open, #utility-nav #footer .colophon ul .nav-link.open, #footer .colophon #utility-nav ul .nav-link.open, #footer .colophon ul li
+.navbar-dark .navbar-nav a.open, #footer .colophon ul li #utility-nav .navbar-nav a.open, #footer .colophon ul li
+.navbar-dark #language-links a.open, #footer .colophon ul li #utility-nav #language-links a.open,
+.navbar-dark #footer .colophon ul li a.open, #footer .colophon
+.navbar-dark ul li a.open, #utility-nav #footer .colophon ul li a.open, #footer .colophon #utility-nav ul li a.open,
+.navbar-dark .navbar-nav .nav-link.open:focus, #utility-nav .navbar-nav .nav-link.open:focus,
+.navbar-dark #language-links .nav-link.open:focus, #utility-nav #language-links .nav-link.open:focus,
+.navbar-dark #footer .colophon ul .nav-link.open:focus, #footer .colophon
+.navbar-dark ul .nav-link.open:focus, #utility-nav #footer .colophon ul .nav-link.open:focus, #footer .colophon #utility-nav ul .nav-link.open:focus, #footer .colophon ul li
+.navbar-dark .navbar-nav a.open:focus, #footer .colophon ul li #utility-nav .navbar-nav a.open:focus, #footer .colophon ul li
+.navbar-dark #language-links a.open:focus, #footer .colophon ul li #utility-nav #language-links a.open:focus,
+.navbar-dark #footer .colophon ul li a.open:focus, #footer .colophon
+.navbar-dark ul li a.open:focus, #utility-nav #footer .colophon ul li a.open:focus, #footer .colophon #utility-nav ul li a.open:focus,
+.navbar-dark .navbar-nav .nav-link.open:hover, #utility-nav .navbar-nav .nav-link.open:hover,
+.navbar-dark #language-links .nav-link.open:hover, #utility-nav #language-links .nav-link.open:hover,
+.navbar-dark #footer .colophon ul .nav-link.open:hover, #footer .colophon
+.navbar-dark ul .nav-link.open:hover, #utility-nav #footer .colophon ul .nav-link.open:hover, #footer .colophon #utility-nav ul .nav-link.open:hover, #footer .colophon ul li
+.navbar-dark .navbar-nav a.open:hover, #footer .colophon ul li #utility-nav .navbar-nav a.open:hover, #footer .colophon ul li
+.navbar-dark #language-links a.open:hover, #footer .colophon ul li #utility-nav #language-links a.open:hover,
+.navbar-dark #footer .colophon ul li a.open:hover, #footer .colophon
+.navbar-dark ul li a.open:hover, #utility-nav #footer .colophon ul li a.open:hover, #footer .colophon #utility-nav ul li a.open:hover,
+.navbar-dark .navbar-nav .nav-link.active, #utility-nav .navbar-nav .nav-link.active,
+.navbar-dark #language-links .nav-link.active, #utility-nav #language-links .nav-link.active,
+.navbar-dark #footer .colophon ul .nav-link.active, #footer .colophon
+.navbar-dark ul .nav-link.active, #utility-nav #footer .colophon ul .nav-link.active, #footer .colophon #utility-nav ul .nav-link.active, #footer .colophon ul li
+.navbar-dark .navbar-nav a.active, #footer .colophon ul li #utility-nav .navbar-nav a.active, #footer .colophon ul li
+.navbar-dark #language-links a.active, #footer .colophon ul li #utility-nav #language-links a.active,
+.navbar-dark #footer .colophon ul li a.active, #footer .colophon
+.navbar-dark ul li a.active, #utility-nav #footer .colophon ul li a.active, #footer .colophon #utility-nav ul li a.active,
+.navbar-dark .navbar-nav .nav-link.active:focus, #utility-nav .navbar-nav .nav-link.active:focus,
+.navbar-dark #language-links .nav-link.active:focus, #utility-nav #language-links .nav-link.active:focus,
+.navbar-dark #footer .colophon ul .nav-link.active:focus, #footer .colophon
+.navbar-dark ul .nav-link.active:focus, #utility-nav #footer .colophon ul .nav-link.active:focus, #footer .colophon #utility-nav ul .nav-link.active:focus, #footer .colophon ul li
+.navbar-dark .navbar-nav a.active:focus, #footer .colophon ul li #utility-nav .navbar-nav a.active:focus, #footer .colophon ul li
+.navbar-dark #language-links a.active:focus, #footer .colophon ul li #utility-nav #language-links a.active:focus,
+.navbar-dark #footer .colophon ul li a.active:focus, #footer .colophon
+.navbar-dark ul li a.active:focus, #utility-nav #footer .colophon ul li a.active:focus, #footer .colophon #utility-nav ul li a.active:focus,
+.navbar-dark .navbar-nav .nav-link.active:hover, #utility-nav .navbar-nav .nav-link.active:hover,
+.navbar-dark #language-links .nav-link.active:hover, #utility-nav #language-links .nav-link.active:hover,
+.navbar-dark #footer .colophon ul .nav-link.active:hover, #footer .colophon
+.navbar-dark ul .nav-link.active:hover, #utility-nav #footer .colophon ul .nav-link.active:hover, #footer .colophon #utility-nav ul .nav-link.active:hover, #footer .colophon ul li
+.navbar-dark .navbar-nav a.active:hover, #footer .colophon ul li #utility-nav .navbar-nav a.active:hover, #footer .colophon ul li
+.navbar-dark #language-links a.active:hover, #footer .colophon ul li #utility-nav #language-links a.active:hover,
+.navbar-dark #footer .colophon ul li a.active:hover, #footer .colophon
+.navbar-dark ul li a.active:hover, #utility-nav #footer .colophon ul li a.active:hover, #footer .colophon #utility-nav ul li a.active:hover {
   color: white; }
 
-.navbar-dark .navbar-divider {
+.navbar-dark .navbar-divider, #utility-nav .navbar-divider {
   background-color: rgba(255, 255, 255, 0.075); }
 
 .card, #participant-list .participant-list,
@@ -3858,7 +4106,7 @@ button {
 .pager-prev > span {
   float: left; }
 
-.label, #utility-nav #language-links a.nav-link, .info span,
+.label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .info span,
 .info button,
 .controls span,
 .controls button {
@@ -3872,22 +4120,30 @@ button {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0.25rem; }
-  .label:empty, #utility-nav #language-links a.nav-link:empty, .info span:empty,
+  .label:empty, #utility-nav #language-links a.nav-link:empty, #utility-nav #language-links #footer .colophon ul li a:empty, #footer .colophon ul li #utility-nav #language-links a:empty, .info span:empty,
   .info button:empty,
   .controls span:empty,
   .controls button:empty {
     display: none; }
 
-.btn .label, #utility-nav #language-links a.nav-link .label, input[type="submit"] .label,
+.btn .label, #utility-nav #language-links a.nav-link .label, #utility-nav #language-links #footer .colophon ul li a .label, #footer .colophon ul li #utility-nav #language-links a .label, input[type="submit"] .label,
 button .label, .btn #utility-nav #language-links a.nav-link, #utility-nav #language-links .btn a.nav-link, #utility-nav #language-links a.nav-link a.nav-link, input[type="submit"] #utility-nav #language-links a.nav-link, #utility-nav #language-links input[type="submit"] a.nav-link,
 button #utility-nav #language-links a.nav-link, #utility-nav #language-links
-button a.nav-link, .btn .info span, .info .btn span, #utility-nav #language-links a.nav-link .info span, .info #utility-nav #language-links a.nav-link span, input[type="submit"] .info span, .info input[type="submit"] span,
+button a.nav-link, .btn #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li .btn a, #utility-nav #language-links a.nav-link #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li a a, input[type="submit"] #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li input[type="submit"] a,
+button #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li
+button a, .btn #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links .btn a, #footer .colophon ul li #utility-nav #language-links a a, input[type="submit"] #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links input[type="submit"] a,
+button #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links
+button a, .btn .info span, .info .btn span, #utility-nav #language-links a.nav-link .info span, .info #utility-nav #language-links a.nav-link span, #utility-nav #language-links #footer .colophon ul li a .info span, .info #utility-nav #language-links #footer .colophon ul li a span, #footer .colophon ul li #utility-nav #language-links a .info span, .info #footer .colophon ul li #utility-nav #language-links a span, input[type="submit"] .info span, .info input[type="submit"] span,
 button .info span, .info
 button span, .btn
 .info button,
 .info .btn button, #utility-nav #language-links a.nav-link
 .info button,
-.info #utility-nav #language-links a.nav-link button, input[type="submit"]
+.info #utility-nav #language-links a.nav-link button, #utility-nav #language-links #footer .colophon ul li a
+.info button,
+.info #utility-nav #language-links #footer .colophon ul li a button, #footer .colophon ul li #utility-nav #language-links a
+.info button,
+.info #footer .colophon ul li #utility-nav #language-links a button, input[type="submit"]
 .info button,
 .info input[type="submit"] button,
 button
@@ -3897,7 +4153,11 @@ button button, .btn
 .controls span,
 .controls .btn span, #utility-nav #language-links a.nav-link
 .controls span,
-.controls #utility-nav #language-links a.nav-link span, input[type="submit"]
+.controls #utility-nav #language-links a.nav-link span, #utility-nav #language-links #footer .colophon ul li a
+.controls span,
+.controls #utility-nav #language-links #footer .colophon ul li a span, #footer .colophon ul li #utility-nav #language-links a
+.controls span,
+.controls #footer .colophon ul li #utility-nav #language-links a span, input[type="submit"]
 .controls span,
 .controls input[type="submit"] span,
 button
@@ -3907,7 +4167,11 @@ button span, .btn
 .controls button,
 .controls .btn button, #utility-nav #language-links a.nav-link
 .controls button,
-.controls #utility-nav #language-links a.nav-link button, input[type="submit"]
+.controls #utility-nav #language-links a.nav-link button, #utility-nav #language-links #footer .colophon ul li a
+.controls button,
+.controls #utility-nav #language-links #footer .colophon ul li a button, #footer .colophon ul li #utility-nav #language-links a
+.controls button,
+.controls #footer .colophon ul li #utility-nav #language-links a button, input[type="submit"]
 .controls button,
 .controls input[type="submit"] button,
 button
@@ -3917,7 +4181,7 @@ button button {
   position: relative;
   top: -1px; }
 
-a.label:focus, #utility-nav #language-links a.nav-link:focus, a.label:hover, #utility-nav #language-links a.nav-link:hover {
+a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, a.label:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover {
   color: #fff;
   text-decoration: none;
   cursor: pointer; }
@@ -4473,7 +4737,7 @@ button.close {
   overflow: hidden;
   outline: 0;
   -webkit-overflow-scrolling: touch; }
-  .modal.fade .modal-dialog {
+  .modal.fade .modal-dialog, .modal .modal-dialog {
     transition: transform .3s ease-out;
     transform: translate(0, -25%); }
   .modal.in .modal-dialog {
@@ -4504,7 +4768,7 @@ button.close {
   left: 0;
   z-index: 1040;
   background-color: #000; }
-  .modal-backdrop.fade {
+  .modal-backdrop.fade, .modal-backdrop.modal {
     opacity: 0; }
   .modal-backdrop.in {
     opacity: 0.5; }
@@ -4536,30 +4800,42 @@ button.close {
     content: "";
     display: table;
     clear: both; }
-  .modal-footer .btn + .btn, .modal-footer #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .modal-footer a.nav-link + .btn, .modal-footer input[type="submit"] + .btn, .modal-footer
+  .modal-footer .btn + .btn, .modal-footer #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .modal-footer a.nav-link + .btn, .modal-footer #utility-nav #language-links #footer .colophon ul li a + .btn, #utility-nav #language-links #footer .colophon ul li .modal-footer a + .btn, .modal-footer #footer .colophon ul li #utility-nav #language-links a + .btn, #footer .colophon ul li #utility-nav #language-links .modal-footer a + .btn, .modal-footer input[type="submit"] + .btn, .modal-footer
   button + .btn, .modal-footer #utility-nav #language-links .btn + a.nav-link, #utility-nav #language-links .modal-footer .btn + a.nav-link, .modal-footer #utility-nav #language-links a.nav-link + a.nav-link, #utility-nav #language-links .modal-footer a.nav-link + a.nav-link, .modal-footer #utility-nav #language-links input[type="submit"] + a.nav-link, #utility-nav #language-links .modal-footer input[type="submit"] + a.nav-link, .modal-footer #utility-nav #language-links
   button + a.nav-link, #utility-nav #language-links .modal-footer
-  button + a.nav-link, .modal-footer
-  button + input[type="submit"], .modal-footer .btn + input[type="submit"], .modal-footer #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .modal-footer a.nav-link + input[type="submit"], .modal-footer input[type="submit"] + input[type="submit"], .modal-footer
+  button + a.nav-link, .modal-footer #utility-nav #language-links #footer .colophon ul li .btn + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn + a, #utility-nav #language-links .modal-footer #footer .colophon ul li a.nav-link + a, .modal-footer #utility-nav #language-links #footer .colophon ul li a + a, #utility-nav #language-links #footer .colophon ul li .modal-footer a + a, .modal-footer #utility-nav #language-links #footer .colophon ul li input[type="submit"] + a, #utility-nav #language-links #footer .colophon ul li .modal-footer input[type="submit"] + a, .modal-footer #utility-nav #language-links #footer .colophon ul li
+  button + a, #utility-nav #language-links #footer .colophon ul li .modal-footer
+  button + a, .modal-footer #footer .colophon ul li #utility-nav #language-links .btn + a, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn + a, #footer .colophon ul li .modal-footer #utility-nav #language-links a.nav-link + a, #utility-nav #language-links #footer .colophon ul li .modal-footer #utility-nav #language-links a + a, .modal-footer #footer .colophon ul li #utility-nav #language-links a + a, #footer .colophon ul li #utility-nav #language-links .modal-footer a + a, .modal-footer #footer .colophon ul li #utility-nav #language-links input[type="submit"] + a, #footer .colophon ul li #utility-nav #language-links .modal-footer input[type="submit"] + a, .modal-footer #footer .colophon ul li #utility-nav #language-links
+  button + a, #footer .colophon ul li #utility-nav #language-links .modal-footer
+  button + a, .modal-footer .btn + input[type="submit"], .modal-footer #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .modal-footer a.nav-link + input[type="submit"], .modal-footer #utility-nav #language-links #footer .colophon ul li a + input[type="submit"], #utility-nav #language-links #footer .colophon ul li .modal-footer a + input[type="submit"], .modal-footer #footer .colophon ul li #utility-nav #language-links a + input[type="submit"], #footer .colophon ul li #utility-nav #language-links .modal-footer a + input[type="submit"], .modal-footer input[type="submit"] + input[type="submit"], .modal-footer
   button + input[type="submit"], .modal-footer .btn +
   button, .modal-footer #utility-nav #language-links a.nav-link +
   button, #utility-nav #language-links .modal-footer a.nav-link +
-  button, .modal-footer input[type="submit"] +
+  button, .modal-footer #utility-nav #language-links #footer .colophon ul li a +
+  button, #utility-nav #language-links #footer .colophon ul li .modal-footer a +
+  button, .modal-footer #footer .colophon ul li #utility-nav #language-links a +
+  button, #footer .colophon ul li #utility-nav #language-links .modal-footer a +
   button, .modal-footer input[type="submit"] +
   button, .modal-footer
   button +
   button {
     margin-bottom: 0;
     margin-left: 5px; }
-  .modal-footer .btn-group .btn + .btn, .modal-footer .btn-group #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .modal-footer .btn-group a.nav-link + .btn, .modal-footer .btn-group input[type="submit"] + .btn, .modal-footer .btn-group
+  .modal-footer .btn-group .btn + .btn, .modal-footer .btn-group #utility-nav #language-links a.nav-link + .btn, #utility-nav #language-links .modal-footer .btn-group a.nav-link + .btn, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li a + .btn, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group a + .btn, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links a + .btn, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group a + .btn, .modal-footer .btn-group input[type="submit"] + .btn, .modal-footer .btn-group
   button + .btn, .modal-footer .btn-group #utility-nav #language-links .btn + a.nav-link, #utility-nav #language-links .modal-footer .btn-group .btn + a.nav-link, .modal-footer .btn-group #utility-nav #language-links a.nav-link + a.nav-link, #utility-nav #language-links .modal-footer .btn-group a.nav-link + a.nav-link, .modal-footer .btn-group #utility-nav #language-links input[type="submit"] + a.nav-link, #utility-nav #language-links .modal-footer .btn-group input[type="submit"] + a.nav-link, .modal-footer .btn-group #utility-nav #language-links
   button + a.nav-link, #utility-nav #language-links .modal-footer .btn-group
-  button + a.nav-link, .modal-footer .btn-group
-  button + input[type="submit"], .modal-footer .btn-group .btn + input[type="submit"], .modal-footer .btn-group #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .modal-footer .btn-group a.nav-link + input[type="submit"], .modal-footer .btn-group input[type="submit"] + input[type="submit"], .modal-footer .btn-group
+  button + a.nav-link, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li .btn + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group .btn + a, #utility-nav #language-links .modal-footer .btn-group #footer .colophon ul li a.nav-link + a, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li a + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group a + a, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li input[type="submit"] + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group input[type="submit"] + a, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li
+  button + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group
+  button + a, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links .btn + a, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group .btn + a, #footer .colophon ul li .modal-footer .btn-group #utility-nav #language-links a.nav-link + a, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group #utility-nav #language-links a + a, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links a + a, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group a + a, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links input[type="submit"] + a, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group input[type="submit"] + a, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links
+  button + a, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group
+  button + a, .modal-footer .btn-group .btn + input[type="submit"], .modal-footer .btn-group #utility-nav #language-links a.nav-link + input[type="submit"], #utility-nav #language-links .modal-footer .btn-group a.nav-link + input[type="submit"], .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li a + input[type="submit"], #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group a + input[type="submit"], .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links a + input[type="submit"], #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group a + input[type="submit"], .modal-footer .btn-group input[type="submit"] + input[type="submit"], .modal-footer .btn-group
   button + input[type="submit"], .modal-footer .btn-group .btn +
   button, .modal-footer .btn-group #utility-nav #language-links a.nav-link +
   button, #utility-nav #language-links .modal-footer .btn-group a.nav-link +
-  button, .modal-footer .btn-group input[type="submit"] +
+  button, .modal-footer .btn-group #utility-nav #language-links #footer .colophon ul li a +
+  button, #utility-nav #language-links #footer .colophon ul li .modal-footer .btn-group a +
+  button, .modal-footer .btn-group #footer .colophon ul li #utility-nav #language-links a +
+  button, #footer .colophon ul li #utility-nav #language-links .modal-footer .btn-group a +
   button, .modal-footer .btn-group input[type="submit"] +
   button, .modal-footer .btn-group
   button +
@@ -4579,7 +4855,7 @@ button.close {
   .modal-dialog {
     width: 600px;
     margin: 30px auto; }
-  .modal-sm {
+  .modal-sm, .modal .modal-dialog {
     width: 300px; } }
 
 @media (min-width: 768px) {
@@ -4908,7 +5184,7 @@ button.close {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
-  .carousel-caption .btn, .carousel-caption #utility-nav #language-links a.nav-link, #utility-nav #language-links .carousel-caption a.nav-link, .carousel-caption input[type="submit"], .carousel-caption
+  .carousel-caption .btn, .carousel-caption #utility-nav #language-links a.nav-link, #utility-nav #language-links .carousel-caption a.nav-link, .carousel-caption #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li .carousel-caption a, .carousel-caption #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links .carousel-caption a, .carousel-caption input[type="submit"], .carousel-caption
   button {
     text-shadow: none; }
 
@@ -5116,11 +5392,11 @@ a.text-warning:focus, a.text-warning:hover {
 a.text-danger:focus, a.text-danger:hover {
   color: #cd4713; }
 
-.bg-inverse {
+.bg-inverse, #utility-nav {
   color: #BCC1C3;
   background-color: #5C6265; }
 
-.bg-faded, #utility-nav, #footer {
+.bg-faded, #footer {
   background-color: #f7f7f9; }
 
 .bg-primary {
@@ -5438,7 +5714,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   font-weight: normal;
   font-style: normal; }
 
-.fa, .icon, #collaboration .icon, .copy-link .icon {
+.fa, .icon, #collaboration .icon, .copy-link .icon, .source .icon {
   display: inline-block;
   font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
@@ -6941,7 +7217,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-git-square:before {
   content: ""; }
 
-.fa-git:before {
+.fa-git:before, .source .icon:before {
   content: ""; }
 
 .fa-y-combinator-square:before,
@@ -7508,24 +7784,28 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-percent:before {
   content: ""; }
 
-.btn-default:hover, #utility-nav #language-links a.nav-link:hover, .btn-default:focus, #utility-nav #language-links a.nav-link:focus,
-.btn-default:hover a, #utility-nav #language-links a.nav-link:hover a,
-.btn-default:focus a, #utility-nav #language-links a.nav-link:focus a {
+body,
+html {
+  min-height: 100%; }
+
+.btn-default:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, .btn-default:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus,
+.btn-default:hover a, #utility-nav #language-links a.nav-link:hover a, #utility-nav #language-links #footer .colophon ul li a:hover a, #footer .colophon ul li #utility-nav #language-links a:hover a,
+.btn-default:focus a, #utility-nav #language-links a.nav-link:focus a, #utility-nav #language-links #footer .colophon ul li a:focus a, #footer .colophon ul li #utility-nav #language-links a:focus a {
   background-color: #fff;
   color: #79858A; }
 
-.btn-primary:hover, input[type="submit"]:hover, .add-channel:hover, .main-content.index #join-room #room-number-button:hover,
+.btn-primary:hover, .add-channel:hover, .modal footer input[type="submit"]:hover, .main-content.index #join-room #room-number-button:hover,
 .main-content.index #join-room #create-new-room-button:hover,
 .main-content.index #create-room #room-number-button:hover,
-.main-content.index #create-room #create-new-room-button:hover, .btn-primary:focus, input[type="submit"]:focus, .add-channel:focus, .main-content.index #join-room #room-number-button:focus,
+.main-content.index #create-room #create-new-room-button:hover, .btn-primary:focus, .add-channel:focus, .modal footer input[type="submit"]:focus, .main-content.index #join-room #room-number-button:focus,
 .main-content.index #join-room #create-new-room-button:focus,
 .main-content.index #create-room #room-number-button:focus,
 .main-content.index #create-room #create-new-room-button:focus,
-.btn-primary:hover a, input[type="submit"]:hover a, .add-channel:hover a, .main-content.index #join-room #room-number-button:hover a,
+.btn-primary:hover a, .add-channel:hover a, .modal footer input[type="submit"]:hover a, .main-content.index #join-room #room-number-button:hover a,
 .main-content.index #join-room #create-new-room-button:hover a,
 .main-content.index #create-room #room-number-button:hover a,
 .main-content.index #create-room #create-new-room-button:hover a,
-.btn-primary:focus a, input[type="submit"]:focus a, .add-channel:focus a, .main-content.index #join-room #room-number-button:focus a,
+.btn-primary:focus a, .add-channel:focus a, .modal footer input[type="submit"]:focus a, .main-content.index #join-room #room-number-button:focus a,
 .main-content.index #join-room #create-new-room-button:focus a,
 .main-content.index #create-room #room-number-button:focus a,
 .main-content.index #create-room #create-new-room-button:focus a {
@@ -7550,12 +7830,12 @@ a.bg-danger:focus, a.bg-danger:hover {
   background-color: #fff;
   color: #BB992F; }
 
-.btn-danger:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls input[type="submit"]:hover, #mute-controls
-button:hover, .controls .leave:hover, .btn-danger:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls input[type="submit"]:focus, #mute-controls
+.btn-danger:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover, #mute-controls input[type="submit"]:hover, #mute-controls
+button:hover, .controls .leave:hover, .btn-danger:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus, #mute-controls input[type="submit"]:focus, #mute-controls
 button:focus, .controls .leave:focus,
-.btn-danger:hover a, #mute-controls .btn:hover a, #mute-controls #utility-nav #language-links a.nav-link:hover a, #utility-nav #language-links #mute-controls a.nav-link:hover a, #mute-controls input[type="submit"]:hover a, #mute-controls
+.btn-danger:hover a, #mute-controls .btn:hover a, #mute-controls #utility-nav #language-links a.nav-link:hover a, #utility-nav #language-links #mute-controls a.nav-link:hover a, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover a, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover a, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover a, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover a, #mute-controls input[type="submit"]:hover a, #mute-controls
 button:hover a, .controls .leave:hover a,
-.btn-danger:focus a, #mute-controls .btn:focus a, #mute-controls #utility-nav #language-links a.nav-link:focus a, #utility-nav #language-links #mute-controls a.nav-link:focus a, #mute-controls input[type="submit"]:focus a, #mute-controls
+.btn-danger:focus a, #mute-controls .btn:focus a, #mute-controls #utility-nav #language-links a.nav-link:focus a, #utility-nav #language-links #mute-controls a.nav-link:focus a, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus a, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus a, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus a, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus a, #mute-controls input[type="submit"]:focus a, #mute-controls
 button:focus a, .controls .leave:focus a {
   background-color: #fff;
   color: #EB5E28; }
@@ -7569,6 +7849,9 @@ button:focus a, .controls .leave:focus a {
     background-color: darkgray; }
     .btn-disabled:hover a, .controls .muted:hover a, .controls .lower-hand:hover a, .btn-disabled:focus a, .controls .muted:focus a, .controls .lower-hand:focus a {
       color: #fff; }
+
+.bg-inverse a, #utility-nav a {
+  color: #fff; }
 
 #logo {
   margin-top: 90px; }
@@ -7585,8 +7868,16 @@ button:focus a, .controls .leave:focus a {
 aside#channel-list {
   margin-bottom: 5em; }
 
-.btn-default, #utility-nav #language-links a.nav-link {
+.btn-default, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a {
   background-color: #79858A; }
+
+.btn, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, input[type="submit"],
+button {
+  border-width: 2px; }
+  .btn:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, input[type="submit"]:hover,
+  button:hover, .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
+  button:focus {
+    border-width: 2px; }
 
 input[type="submit"] a,
 button a {
@@ -7600,6 +7891,10 @@ button a {
 
 .cursor-grabbling {
   cursor: grabbing; }
+
+label {
+  font-weight: bold;
+  color: #7A9E9F; }
 
 .clipboard-field input {
   width: 75%;
@@ -7657,6 +7952,52 @@ button a {
 .add-channel .icon {
   margin-right: 4px; }
 
+@font-face {
+  font-family: 'gpl3';
+  src: url("../fonts/gpl3.eot?11730615");
+  src: url("../fonts/gpl3.eot?11730615#iefix") format("embedded-opentype"), url("../fonts/gpl3.woff?11730615") format("woff"), url("../fonts/gpl3.ttf?11730615") format("truetype"), url("../fonts/gpl3.svg?11730615#gpl3") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'gpl3';
+    src: url('../font/gpl3.svg?11730615#gpl3') format('svg');
+  }
+}
+*/
+.license .icon:before {
+  font-family: "gpl3";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  content: '\e800'; }
+
+/* '' */
 .tooltip.tooltip-top .tooltip-arrow, .tooltip.bs-tether-element-attached-bottom .tooltip-arrow {
   border-top-color: #f5f5f5; }
 
@@ -7679,7 +8020,7 @@ button a {
     margin-top: 40px;
     height: 90%; }
 
-#collaboration .nav-link {
+#collaboration .nav-link, #collaboration #footer .colophon ul li a, #footer .colophon ul li #collaboration a {
   border: solid 1px #7A9E9F; }
 
 .main-content.index #join-room #room-number-button,
@@ -7757,13 +8098,13 @@ body.modal-open {
 
 /* responsive nav stacked liked 3.x */
 @media (max-width: 34em) {
-  .navbar .navbar-brand, .navbar #tagline, .navbar #welcome-text {
+  .navbar .navbar-brand, #footer .navbar-brand, .navbar #tagline, #footer #tagline, .navbar #welcome-text, #footer #welcome-text, #footer .colophon .license {
     float: none;
     display: block; }
-  .navbar .navbar-nav > .nav-item, .navbar #language-links > .nav-item {
+  .navbar .navbar-nav > .nav-item, #footer .navbar-nav > .nav-item, .navbar #language-links > .nav-item, #footer #language-links > .nav-item, #footer .colophon .navbar ul > .nav-item, #footer .colophon ul > .nav-item, #footer .colophon ul .navbar .navbar-nav > li, #footer .colophon ul .navbar-nav > li, #footer .colophon ul .navbar #language-links > li, #footer .colophon ul #language-links > li, #footer .colophon .navbar ul > li, #footer .colophon ul > li {
     float: none;
     margin-left: .1rem; }
-  .navbar .navbar-nav, .navbar #language-links {
+  .navbar .navbar-nav, #footer .navbar-nav, .navbar #language-links, #footer #language-links, #footer .colophon ul {
     float: none !important; } }
 
 .card-block .rotate, fieldset .rotate, .main-content.index #join-room fieldset .rotate,

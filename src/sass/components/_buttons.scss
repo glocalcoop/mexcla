@@ -6,6 +6,14 @@
     background-color: $brand-default;
 }
 
+.btn {
+    border-width: 2px;
+    &:hover,
+    &:focus {
+        border-width: 2px;
+    }
+}
+
 input[type="submit"],
 button {
     @extend .btn;

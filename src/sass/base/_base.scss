@@ -2,6 +2,15 @@
 // This file contains very basic styles.
 // -----------------------------------------------------------------------------
 
+body,
+html {
+    min-height: 100%;
+}
+
+// #content {
+//     min-height: 100%;
+// }
+
 .btn-default {
     &:hover,
     &:focus, 

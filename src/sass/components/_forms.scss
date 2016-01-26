@@ -18,7 +18,9 @@ select {
 }
 
 label {
-    @extend .form-control-label;
+  font-weight: bold;
+  color: $brand-info;
+    // @extend .form-control-label;
 }
 
 .clipboard-field {
