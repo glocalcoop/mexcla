@@ -318,10 +318,10 @@ blockquote {
   margin: 0 0 1rem; }
 
 a {
-  color: #427C89;
+  color: #3091B2;
   text-decoration: none; }
   a:focus, a:hover {
-    color: #294d55;
+    color: #206076;
     text-decoration: underline; }
   a:focus {
     outline: thin dotted;
@@ -638,33 +638,34 @@ pre {
     .container, #header, #content {
       max-width: 1140px; } }
 
-.container-fluid, #content {
+.container-fluid {
   margin-left: auto;
   margin-right: auto;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
-  .container-fluid::after, #content::after {
+  .container-fluid::after {
     content: "";
     display: table;
     clear: both; }
 
-.row, .main-content.room header {
+.row, .main-content.index {
   margin-left: -0.9375rem;
   margin-right: -0.9375rem; }
-  .row::after, .main-content.room header::after {
+  .row::after, .main-content.index::after {
     content: "";
     display: table;
     clear: both; }
 
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, aside, .main-content.room, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .main-content.index #join-room,
-.main-content.index #create-room, .main-content.room header .conference-id,
-.main-content.room header #room-info, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, aside, #collaboration .clipboard-group, .main-content.index #join-room,
+.main-content.index #create-room, .main-content.room, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .main-content.index .welcome-section,
+.main-content.index .go-to-rooms-section, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
   position: relative;
   min-height: 1px;
   padding-left: 0.9375rem;
   padding-right: 0.9375rem; }
 
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, aside, .main-content.room {
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, aside, #collaboration .clipboard-group, .main-content.index #join-room,
+.main-content.index #create-room, .main-content.room {
   float: left; }
 
 .col-xs-1 {
@@ -700,7 +701,8 @@ pre {
 .col-xs-11 {
   width: 91.66667%; }
 
-.col-xs-12, aside, .main-content.room {
+.col-xs-12, aside, #collaboration .clipboard-group, .main-content.index #join-room,
+.main-content.index #create-room, .main-content.room {
   width: 100%; }
 
 .col-xs-pull-0 {
@@ -822,8 +824,8 @@ pre {
 
 @media (min-width: 544px) {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .main-content.index #join-room,
-  .main-content.index #create-room, .main-content.room header .conference-id,
-  .main-content.room header #room-info, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+  .main-content.index #create-room, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .main-content.index .welcome-section,
+  .main-content.index .go-to-rooms-section {
     float: left; }
   .col-sm-1 {
     width: 8.33333%; }
@@ -836,8 +838,7 @@ pre {
   .col-sm-5 {
     width: 41.66667%; }
   .col-sm-6, .main-content.index #join-room,
-  .main-content.index #create-room, .main-content.room header .conference-id,
-  .main-content.room header #room-info {
+  .main-content.index #create-room {
     width: 50%; }
   .col-sm-7 {
     width: 58.33333%; }
@@ -849,7 +850,8 @@ pre {
     width: 83.33333%; }
   .col-sm-11 {
     width: 91.66667%; }
-  .col-sm-12 {
+  .col-sm-12, .main-content.index .welcome-section,
+  .main-content.index .go-to-rooms-section {
     width: 100%; }
   .col-sm-pull-0 {
     right: auto; }
@@ -1484,10 +1486,10 @@ select {
   margin-bottom: 0; }
   .form-control-static.form-control-sm, .input-group-sm > .form-control-static.form-control, .input-group-sm > input.form-control-static[type="text"], .input-group-sm >
   select.form-control-static,
-  .input-group-sm > .form-control-static.input-group-addon,
-  .input-group-sm > .form-control-static.copy-link, .main-content.room header #room-info
+  .input-group-sm > .form-control-static.input-group-addon, .clipboard-group
   .input-group-sm > label.form-control-static,
-  .main-content.room header #room-info
+  .clipboard-group
+  .input-group-sm > .form-control-static.copy-link,
   .input-group-sm > .form-control-static.copy-link,
   .input-group-sm > .input-group-btn > .form-control-static.btn, #utility-nav #language-links
   .input-group-sm > .input-group-btn > a.form-control-static.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -1497,10 +1499,10 @@ select {
   .input-group-sm > .input-group-btn >
   button.form-control-static, .form-control-static.form-control-lg, .input-group-lg > .form-control-static.form-control, .input-group-lg > input.form-control-static[type="text"], .input-group-lg >
   select.form-control-static,
-  .input-group-lg > .form-control-static.input-group-addon,
-  .input-group-lg > .form-control-static.copy-link, .main-content.room header #room-info
+  .input-group-lg > .form-control-static.input-group-addon, .clipboard-group
   .input-group-lg > label.form-control-static,
-  .main-content.room header #room-info
+  .clipboard-group
+  .input-group-lg > .form-control-static.copy-link,
   .input-group-lg > .form-control-static.copy-link,
   .input-group-lg > .input-group-btn > .form-control-static.btn, #utility-nav #language-links
   .input-group-lg > .input-group-btn > a.form-control-static.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -1514,10 +1516,10 @@ select {
 
 .form-control-sm, .input-group-sm > .form-control, .input-group-sm > input[type="text"], .input-group-sm >
 select,
-.input-group-sm > .input-group-addon,
-.input-group-sm > .copy-link, .main-content.room header #room-info
+.input-group-sm > .input-group-addon, .clipboard-group
 .input-group-sm > label,
-.main-content.room header #room-info
+.clipboard-group
+.input-group-sm > .copy-link,
 .input-group-sm > .copy-link,
 .input-group-sm > .input-group-btn > .btn, #utility-nav #language-links
 .input-group-sm > .input-group-btn > a.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -1533,10 +1535,10 @@ button {
 
 .form-control-lg, .input-group-lg > .form-control, .input-group-lg > input[type="text"], .input-group-lg >
 select,
-.input-group-lg > .input-group-addon,
-.input-group-lg > .copy-link, .main-content.room header #room-info
+.input-group-lg > .input-group-addon, .clipboard-group
 .input-group-lg > label,
-.main-content.room header #room-info
+.clipboard-group
+.input-group-lg > .copy-link,
 .input-group-lg > .copy-link,
 .input-group-lg > .input-group-btn > .btn, #utility-nav #language-links
 .input-group-lg > .input-group-btn > a.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -1632,9 +1634,7 @@ input[type="checkbox"].disabled {
 select {
   border-color: #42A084; }
 
-.has-success .input-group-addon, .has-success .copy-link, .has-success .main-content.room header #room-info label, .main-content.room header #room-info .has-success label, .has-success
-.main-content.room header #room-info .copy-link,
-.main-content.room header #room-info .has-success .copy-link {
+.has-success .input-group-addon, .has-success .clipboard-group label, .clipboard-group .has-success label, .has-success .copy-link {
   color: #42A084;
   border-color: #42A084;
   background-color: #c6e8de; }
@@ -1661,9 +1661,7 @@ select {
 select {
   border-color: #BB992F; }
 
-.has-warning .input-group-addon, .has-warning .copy-link, .has-warning .main-content.room header #room-info label, .main-content.room header #room-info .has-warning label, .has-warning
-.main-content.room header #room-info .copy-link,
-.main-content.room header #room-info .has-warning .copy-link {
+.has-warning .input-group-addon, .has-warning .clipboard-group label, .clipboard-group .has-warning label, .has-warning .copy-link {
   color: #BB992F;
   border-color: #BB992F;
   background-color: #f1e6c5; }
@@ -1690,9 +1688,7 @@ select {
 select {
   border-color: #EB5E28; }
 
-.has-danger .input-group-addon, .has-danger .copy-link, .has-danger .main-content.room header #room-info label, .main-content.room header #room-info .has-danger label, .has-danger
-.main-content.room header #room-info .copy-link,
-.main-content.room header #room-info .has-danger .copy-link {
+.has-danger .input-group-addon, .has-danger .clipboard-group label, .clipboard-group .has-danger label, .has-danger .copy-link {
   color: #EB5E28;
   border-color: #EB5E28;
   background-color: #fceae3; }
@@ -1726,33 +1722,33 @@ select {
   .main-content.index #create-room fieldset .form-control-static {
     display: inline-block; }
   .form-inline .input-group, form .input-group, fieldset .input-group, .main-content.index #join-room fieldset .input-group,
-  .main-content.index #create-room fieldset .input-group, .form-inline .main-content.room header #room-info, .main-content.room header .form-inline #room-info, form .main-content.room header #room-info, .main-content.room header form #room-info, fieldset .main-content.room header #room-info, .main-content.room header fieldset #room-info {
+  .main-content.index #create-room fieldset .input-group, .form-inline .clipboard-group, form .clipboard-group, fieldset .clipboard-group, .main-content.index #join-room fieldset .clipboard-group,
+  .main-content.index #create-room fieldset .clipboard-group {
     display: inline-table;
     vertical-align: middle; }
     .form-inline .input-group .input-group-addon, form .input-group .input-group-addon, fieldset .input-group .input-group-addon, .main-content.index #join-room fieldset .input-group .input-group-addon,
-    .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .main-content.room header #room-info .input-group-addon, .main-content.room header .form-inline #room-info .input-group-addon, form .main-content.room header #room-info .input-group-addon, .main-content.room header form #room-info .input-group-addon, fieldset .main-content.room header #room-info .input-group-addon, .main-content.room header fieldset #room-info .input-group-addon, .form-inline .input-group .copy-link, form .input-group .copy-link, fieldset .input-group .copy-link, .main-content.index #join-room fieldset .input-group .copy-link,
-    .main-content.index #create-room fieldset .input-group .copy-link, .main-content.room header #room-info .form-inline .input-group label, .main-content.room header #room-info form .input-group label, .main-content.room header #room-info fieldset .input-group label, .form-inline .main-content.room header #room-info label, .main-content.room header .form-inline #room-info label, form .main-content.room header #room-info label, .main-content.room header form #room-info label, fieldset .main-content.room header #room-info label, .main-content.room header fieldset #room-info label,
-    .main-content.room header #room-info .form-inline .input-group .copy-link,
-    .main-content.room header #room-info form .input-group .copy-link,
-    .main-content.room header #room-info fieldset .input-group .copy-link, .form-inline
-    .main-content.room header #room-info .copy-link,
-    .main-content.room header .form-inline #room-info .copy-link, form
-    .main-content.room header #room-info .copy-link,
-    .main-content.room header form #room-info .copy-link, fieldset
-    .main-content.room header #room-info .copy-link,
-    .main-content.room header fieldset #room-info .copy-link,
+    .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .clipboard-group .input-group-addon, form .clipboard-group .input-group-addon, fieldset .clipboard-group .input-group-addon, .main-content.index #join-room fieldset .clipboard-group .input-group-addon,
+    .main-content.index #create-room fieldset .clipboard-group .input-group-addon, .form-inline .input-group .clipboard-group label, .clipboard-group .form-inline .input-group label, form .input-group .clipboard-group label, .clipboard-group form .input-group label, fieldset .input-group .clipboard-group label, .clipboard-group fieldset .input-group label, .clipboard-group .main-content.index #join-room fieldset .input-group label, .clipboard-group
+    .main-content.index #create-room fieldset .input-group label, .form-inline .clipboard-group label, form .clipboard-group label, fieldset .clipboard-group label, .main-content.index #join-room fieldset .clipboard-group label,
+    .main-content.index #create-room fieldset .clipboard-group label, form .input-group
+    .clipboard-group .copy-link,
+    .clipboard-group form .input-group .copy-link, fieldset .input-group
+    .clipboard-group .copy-link,
+    .clipboard-group fieldset .input-group .copy-link, .form-inline .input-group .copy-link, form .input-group .copy-link, fieldset .input-group .copy-link, .main-content.index #join-room fieldset .input-group .copy-link,
+    .main-content.index #create-room fieldset .input-group .copy-link, .form-inline .clipboard-group .copy-link, form .clipboard-group .copy-link, fieldset .clipboard-group .copy-link, .main-content.index #join-room fieldset .clipboard-group .copy-link,
+    .main-content.index #create-room fieldset .clipboard-group .copy-link,
     .form-inline .input-group .input-group-btn, form .input-group .input-group-btn, fieldset .input-group .input-group-btn, .main-content.index #join-room fieldset .input-group .input-group-btn,
     .main-content.index #create-room fieldset .input-group .input-group-btn,
-    .form-inline .main-content.room header #room-info .input-group-btn, .main-content.room header
-    .form-inline #room-info .input-group-btn, form .main-content.room header #room-info .input-group-btn, .main-content.room header form #room-info .input-group-btn, fieldset .main-content.room header #room-info .input-group-btn, .main-content.room header fieldset #room-info .input-group-btn,
+    .form-inline .clipboard-group .input-group-btn, form .clipboard-group .input-group-btn, fieldset .clipboard-group .input-group-btn, .main-content.index #join-room fieldset .clipboard-group .input-group-btn,
+    .main-content.index #create-room fieldset .clipboard-group .input-group-btn,
     .form-inline .input-group .form-control, form .input-group .form-control, fieldset .input-group .form-control, .main-content.index #join-room fieldset .input-group .form-control,
     .main-content.index #create-room fieldset .input-group .form-control,
-    .form-inline .main-content.room header #room-info .form-control, .main-content.room header
-    .form-inline #room-info .form-control, form .main-content.room header #room-info .form-control, .main-content.room header form #room-info .form-control, fieldset .main-content.room header #room-info .form-control, .main-content.room header fieldset #room-info .form-control,
+    .form-inline .clipboard-group .form-control, form .clipboard-group .form-control, fieldset .clipboard-group .form-control, .main-content.index #join-room fieldset .clipboard-group .form-control,
+    .main-content.index #create-room fieldset .clipboard-group .form-control,
     .form-inline .input-group input[type="text"], form .input-group input[type="text"], fieldset .input-group input[type="text"], .main-content.index #join-room fieldset .input-group input[type="text"],
     .main-content.index #create-room fieldset .input-group input[type="text"],
-    .form-inline .main-content.room header #room-info input[type="text"], .main-content.room header
-    .form-inline #room-info input[type="text"], form .main-content.room header #room-info input[type="text"], .main-content.room header form #room-info input[type="text"], fieldset .main-content.room header #room-info input[type="text"], .main-content.room header fieldset #room-info input[type="text"],
+    .form-inline .clipboard-group input[type="text"], form .clipboard-group input[type="text"], fieldset .clipboard-group input[type="text"], .main-content.index #join-room fieldset .clipboard-group input[type="text"],
+    .main-content.index #create-room fieldset .clipboard-group input[type="text"],
     .form-inline .input-group
     select, form .input-group
     select, fieldset .input-group
@@ -1760,29 +1756,30 @@ select {
     select,
     .main-content.index #create-room fieldset .input-group
     select,
-    .form-inline .main-content.room header #room-info
-    select, .main-content.room header
-    .form-inline #room-info
-    select, form .main-content.room header #room-info
-    select, .main-content.room header form #room-info
-    select, fieldset .main-content.room header #room-info
-    select, .main-content.room header fieldset #room-info
+    .form-inline .clipboard-group
+    select, form .clipboard-group
+    select, fieldset .clipboard-group
+    select, .main-content.index #join-room fieldset .clipboard-group
+    select,
+    .main-content.index #create-room fieldset .clipboard-group
     select {
       width: auto; }
   .form-inline .input-group > .form-control, form .input-group > .form-control, fieldset .input-group > .form-control, .main-content.index #join-room fieldset .input-group > .form-control,
-  .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .main-content.room header #room-info > .form-control, .main-content.room header .form-inline #room-info > .form-control, form .main-content.room header #room-info > .form-control, .main-content.room header form #room-info > .form-control, fieldset .main-content.room header #room-info > .form-control, .main-content.room header fieldset #room-info > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
-  .main-content.index #create-room fieldset .input-group > input[type="text"], .form-inline .main-content.room header #room-info > input[type="text"], .main-content.room header .form-inline #room-info > input[type="text"], form .main-content.room header #room-info > input[type="text"], .main-content.room header form #room-info > input[type="text"], fieldset .main-content.room header #room-info > input[type="text"], .main-content.room header fieldset #room-info > input[type="text"], .form-inline .input-group >
+  .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .clipboard-group > .form-control, form .clipboard-group > .form-control, fieldset .clipboard-group > .form-control, .main-content.index #join-room fieldset .clipboard-group > .form-control,
+  .main-content.index #create-room fieldset .clipboard-group > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
+  .main-content.index #create-room fieldset .input-group > input[type="text"], .form-inline .clipboard-group > input[type="text"], form .clipboard-group > input[type="text"], fieldset .clipboard-group > input[type="text"], .main-content.index #join-room fieldset .clipboard-group > input[type="text"],
+  .main-content.index #create-room fieldset .clipboard-group > input[type="text"], .form-inline .input-group >
   select, form .input-group >
   select, fieldset .input-group >
   select, .main-content.index #join-room fieldset .input-group >
   select,
   .main-content.index #create-room fieldset .input-group >
-  select, .form-inline .main-content.room header #room-info >
-  select, .main-content.room header .form-inline #room-info >
-  select, form .main-content.room header #room-info >
-  select, .main-content.room header form #room-info >
-  select, fieldset .main-content.room header #room-info >
-  select, .main-content.room header fieldset #room-info >
+  select, .form-inline .clipboard-group >
+  select, form .clipboard-group >
+  select, fieldset .clipboard-group >
+  select, .main-content.index #join-room fieldset .clipboard-group >
+  select,
+  .main-content.index #create-room fieldset .clipboard-group >
   select {
     width: 100%; }
   .form-inline .form-control-label, form .form-control-label, fieldset .form-control-label, .main-content.index #join-room fieldset .form-control-label,
@@ -2344,7 +2341,7 @@ button, .controls .leave {
 
 .btn-link {
   font-weight: normal;
-  color: #427C89;
+  color: #3091B2;
   border-radius: 0; }
   .btn-link, .btn-link:active, .btn-link.active, .btn-link:disabled {
     background-color: transparent; }
@@ -2353,7 +2350,7 @@ button, .controls .leave {
   .btn-link:hover {
     border-color: transparent; }
   .btn-link:focus, .btn-link:hover {
-    color: #294d55;
+    color: #206076;
     text-decoration: underline;
     background-color: transparent; }
   .btn-link:disabled:focus, .btn-link:disabled:hover {
@@ -2635,14 +2632,13 @@ button,
     clear: both; }
   .btn-toolbar .btn-group,
   .btn-toolbar .input-group,
-  .btn-toolbar .main-content.room header #room-info, .main-content.room header
-  .btn-toolbar #room-info {
+  .btn-toolbar .clipboard-group {
     float: left; }
   .btn-toolbar > .btn, #utility-nav #language-links .btn-toolbar > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-toolbar > a, #footer .colophon ul li #utility-nav #language-links .btn-toolbar > a, .btn-toolbar > input[type="submit"], .btn-toolbar >
   button,
   .btn-toolbar > .btn-group,
-  .btn-toolbar > .input-group, .main-content.room header
-  .btn-toolbar > #room-info {
+  .btn-toolbar > .input-group,
+  .btn-toolbar > .clipboard-group {
     margin-left: 5px; }
 
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group >
@@ -2833,55 +2829,54 @@ button input[type="checkbox"] {
   clip: rect(0, 0, 0, 0);
   pointer-events: none; }
 
-.input-group, .main-content.room header #room-info {
+.input-group, .clipboard-group {
   position: relative;
   display: table;
   border-collapse: separate; }
-  .input-group .form-control, .main-content.room header #room-info .form-control, .input-group input[type="text"], .main-content.room header #room-info input[type="text"], .input-group
-  select, .main-content.room header #room-info
+  .input-group .form-control, .clipboard-group .form-control, .input-group input[type="text"], .clipboard-group input[type="text"], .input-group
+  select, .clipboard-group
   select {
     position: relative;
     z-index: 2;
     float: left;
     width: 100%;
     margin-bottom: 0; }
-    .input-group .form-control:focus, .main-content.room header #room-info .form-control:focus, .input-group input[type="text"]:focus, .main-content.room header #room-info input[type="text"]:focus, .input-group
-    select:focus, .main-content.room header #room-info
-    select:focus, .input-group .form-control:active, .main-content.room header #room-info .form-control:active, .input-group input[type="text"]:active, .main-content.room header #room-info input[type="text"]:active, .input-group
-    select:active, .main-content.room header #room-info
-    select:active, .input-group .form-control:hover, .main-content.room header #room-info .form-control:hover, .input-group input[type="text"]:hover, .main-content.room header #room-info input[type="text"]:hover, .input-group
-    select:hover, .main-content.room header #room-info
+    .input-group .form-control:focus, .clipboard-group .form-control:focus, .input-group input[type="text"]:focus, .clipboard-group input[type="text"]:focus, .input-group
+    select:focus, .clipboard-group
+    select:focus, .input-group .form-control:active, .clipboard-group .form-control:active, .input-group input[type="text"]:active, .clipboard-group input[type="text"]:active, .input-group
+    select:active, .clipboard-group
+    select:active, .input-group .form-control:hover, .clipboard-group .form-control:hover, .input-group input[type="text"]:hover, .clipboard-group input[type="text"]:hover, .input-group
+    select:hover, .clipboard-group
     select:hover {
       z-index: 3; }
 
-.input-group-addon, .copy-link, .main-content.room header #room-info label,
-.main-content.room header #room-info .copy-link,
+.input-group-addon, .clipboard-group label,
+.clipboard-group .copy-link, .copy-link,
 .input-group-btn,
-.input-group .form-control, .main-content.room header #room-info .form-control,
-.input-group input[type="text"], .main-content.room header #room-info input[type="text"],
+.input-group .form-control, .clipboard-group .form-control,
+.input-group input[type="text"], .clipboard-group input[type="text"],
 .input-group
-select, .main-content.room header #room-info
+select, .clipboard-group
 select {
   display: table-cell; }
-  .input-group-addon:not(:first-child):not(:last-child), .copy-link:not(:first-child):not(:last-child), .main-content.room header #room-info label:not(:first-child):not(:last-child),
-  .main-content.room header #room-info .copy-link:not(:first-child):not(:last-child),
+  .input-group-addon:not(:first-child):not(:last-child), .clipboard-group label:not(:first-child):not(:last-child), .copy-link:not(:first-child):not(:last-child),
   .input-group-btn:not(:first-child):not(:last-child),
-  .input-group .form-control:not(:first-child):not(:last-child), .main-content.room header #room-info .form-control:not(:first-child):not(:last-child),
-  .input-group input[type="text"]:not(:first-child):not(:last-child), .main-content.room header #room-info input[type="text"]:not(:first-child):not(:last-child),
+  .input-group .form-control:not(:first-child):not(:last-child), .clipboard-group .form-control:not(:first-child):not(:last-child),
+  .input-group input[type="text"]:not(:first-child):not(:last-child), .clipboard-group input[type="text"]:not(:first-child):not(:last-child),
   .input-group
-  select:not(:first-child):not(:last-child), .main-content.room header #room-info
+  select:not(:first-child):not(:last-child), .clipboard-group
   select:not(:first-child):not(:last-child) {
     border-radius: 0; }
 
-.input-group-addon, .copy-link, .main-content.room header #room-info label,
-.main-content.room header #room-info .copy-link,
+.input-group-addon, .clipboard-group label,
+.clipboard-group .copy-link, .copy-link,
 .input-group-btn {
   width: 1%;
   white-space: nowrap;
   vertical-align: middle; }
 
-.input-group-addon, .copy-link, .main-content.room header #room-info label,
-.main-content.room header #room-info .copy-link {
+.input-group-addon, .clipboard-group label,
+.clipboard-group .copy-link, .copy-link {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: normal;
@@ -2892,10 +2887,10 @@ select {
   border: 1px solid #ccc;
   border-radius: 0.25rem; }
   .input-group-addon.form-control-sm,
-  .input-group-sm > .input-group-addon,
-  .input-group-sm > .copy-link, .main-content.room header #room-info
+  .input-group-sm > .input-group-addon, .clipboard-group
   .input-group-sm > label,
-  .main-content.room header #room-info
+  .clipboard-group
+  .input-group-sm > .copy-link,
   .input-group-sm > .copy-link,
   .input-group-sm > .input-group-btn > .input-group-addon.btn, #utility-nav #language-links
   .input-group-sm > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -2905,33 +2900,32 @@ select {
   .input-group-sm > .input-group-btn > a.copy-link, #utility-nav #language-links
   .input-group-sm > .input-group-btn > a.nav-link.copy-link,
   .input-group-sm > .input-group-btn > input.input-group-addon[type="submit"],
+  .clipboard-group
   .input-group-sm > .input-group-btn > input[type="submit"].copy-link,
-  .main-content.room header #room-info
   .input-group-sm > .input-group-btn > input[type="submit"].copy-link,
   .input-group-sm > .input-group-btn >
   button.input-group-addon,
+  .clipboard-group
   .input-group-sm > .input-group-btn > button.copy-link,
-  .main-content.room header #room-info
-  .input-group-sm > .input-group-btn > button.copy-link,
-  .input-group-sm > .input-group-btn > .btn.copy-link, .main-content.room header #room-info
+  .input-group-sm > .input-group-btn > button.copy-link, .clipboard-group
   .input-group-sm > .input-group-btn > label.btn,
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-sm > .input-group-btn > .btn.copy-link, #utility-nav #language-links
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-sm > .input-group-btn > a.copy-link.nav-link, #utility-nav #language-links #footer .colophon ul li
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-sm > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
-  .main-content.room header #room-info
-  .input-group-sm > .input-group-btn > a.copy-link, .form-control-sm.copy-link, .main-content.room header #room-info label.form-control-sm,
-  .main-content.room header #room-info .form-control-sm.copy-link {
+  .clipboard-group
+  .input-group-sm > .input-group-btn > a.copy-link,
+  .input-group-sm > .input-group-btn > .btn.copy-link, .clipboard-group label.form-control-sm, .form-control-sm.copy-link {
     padding: 0.275rem 0.75rem;
     font-size: 0.875rem;
     border-radius: 0.2rem; }
   .input-group-addon.form-control-lg,
-  .input-group-lg > .input-group-addon,
-  .input-group-lg > .copy-link, .main-content.room header #room-info
+  .input-group-lg > .input-group-addon, .clipboard-group
   .input-group-lg > label,
-  .main-content.room header #room-info
+  .clipboard-group
+  .input-group-lg > .copy-link,
   .input-group-lg > .copy-link,
   .input-group-lg > .input-group-btn > .input-group-addon.btn, #utility-nav #language-links
   .input-group-lg > .input-group-btn > a.input-group-addon.nav-link, #utility-nav #language-links #footer .colophon ul li
@@ -2941,41 +2935,37 @@ select {
   .input-group-lg > .input-group-btn > a.copy-link, #utility-nav #language-links
   .input-group-lg > .input-group-btn > a.nav-link.copy-link,
   .input-group-lg > .input-group-btn > input.input-group-addon[type="submit"],
+  .clipboard-group
   .input-group-lg > .input-group-btn > input[type="submit"].copy-link,
-  .main-content.room header #room-info
   .input-group-lg > .input-group-btn > input[type="submit"].copy-link,
   .input-group-lg > .input-group-btn >
   button.input-group-addon,
+  .clipboard-group
   .input-group-lg > .input-group-btn > button.copy-link,
-  .main-content.room header #room-info
-  .input-group-lg > .input-group-btn > button.copy-link,
-  .input-group-lg > .input-group-btn > .btn.copy-link, .main-content.room header #room-info
+  .input-group-lg > .input-group-btn > button.copy-link, .clipboard-group
   .input-group-lg > .input-group-btn > label.btn,
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-lg > .input-group-btn > .btn.copy-link, #utility-nav #language-links
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-lg > .input-group-btn > a.copy-link.nav-link, #utility-nav #language-links #footer .colophon ul li
-  .main-content.room header #room-info
+  .clipboard-group
   .input-group-lg > .input-group-btn > a.copy-link, #footer .colophon ul li #utility-nav #language-links
-  .main-content.room header #room-info
-  .input-group-lg > .input-group-btn > a.copy-link, .form-control-lg.copy-link, .main-content.room header #room-info label.form-control-lg,
-  .main-content.room header #room-info .form-control-lg.copy-link {
+  .clipboard-group
+  .input-group-lg > .input-group-btn > a.copy-link,
+  .input-group-lg > .input-group-btn > .btn.copy-link, .clipboard-group label.form-control-lg, .form-control-lg.copy-link {
     padding: 0.75rem 1.25rem;
     font-size: 1.25rem;
     border-radius: 0.3rem; }
-  .input-group-addon input[type="radio"], .copy-link input[type="radio"], .main-content.room header #room-info label input[type="radio"],
-  .main-content.room header #room-info .copy-link input[type="radio"],
-  .input-group-addon input[type="checkbox"], .copy-link input[type="checkbox"], .main-content.room header #room-info label input[type="checkbox"],
-  .main-content.room header #room-info .copy-link input[type="checkbox"] {
+  .input-group-addon input[type="radio"], .clipboard-group label input[type="radio"], .copy-link input[type="radio"],
+  .input-group-addon input[type="checkbox"], .clipboard-group label input[type="checkbox"], .copy-link input[type="checkbox"] {
     margin-top: 0; }
 
-.input-group .form-control:first-child, .main-content.room header #room-info .form-control:first-child, .input-group input[type="text"]:first-child, .main-content.room header #room-info input[type="text"]:first-child, .input-group
-select:first-child, .main-content.room header #room-info
+.input-group .form-control:first-child, .clipboard-group .form-control:first-child, .input-group input[type="text"]:first-child, .clipboard-group input[type="text"]:first-child, .input-group
+select:first-child, .clipboard-group
 select:first-child,
 .input-group-addon:first-child,
+.clipboard-group label:first-child,
 .copy-link:first-child,
-.main-content.room header #room-info label:first-child,
-.main-content.room header #room-info .copy-link:first-child,
 .input-group-btn:first-child > .btn, #utility-nav #language-links
 .input-group-btn:first-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
 .input-group-btn:first-child > a, #footer .colophon ul li #utility-nav #language-links
@@ -3008,17 +2998,15 @@ button {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0; }
 
-.input-group-addon:first-child, .copy-link:first-child, .main-content.room header #room-info label:first-child,
-.main-content.room header #room-info .copy-link:first-child {
+.input-group-addon:first-child, .clipboard-group label:first-child, .copy-link:first-child {
   border-right: 0; }
 
-.input-group .form-control:last-child, .main-content.room header #room-info .form-control:last-child, .input-group input[type="text"]:last-child, .main-content.room header #room-info input[type="text"]:last-child, .input-group
-select:last-child, .main-content.room header #room-info
+.input-group .form-control:last-child, .clipboard-group .form-control:last-child, .input-group input[type="text"]:last-child, .clipboard-group input[type="text"]:last-child, .input-group
+select:last-child, .clipboard-group
 select:last-child,
 .input-group-addon:last-child,
+.clipboard-group label:last-child,
 .copy-link:last-child,
-.main-content.room header #room-info label:last-child,
-.main-content.room header #room-info .copy-link:last-child,
 .input-group-btn:last-child > .btn, #utility-nav #language-links
 .input-group-btn:last-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
 .input-group-btn:last-child > a, #footer .colophon ul li #utility-nav #language-links
@@ -3051,8 +3039,7 @@ button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0; }
 
-.input-group-addon:last-child, .copy-link:last-child, .main-content.room header #room-info label:last-child,
-.main-content.room header #room-info .copy-link:last-child {
+.input-group-addon:last-child, .clipboard-group label:last-child, .copy-link:last-child {
   border-left: 0; }
 
 .input-group-btn {
@@ -3416,15 +3403,15 @@ button {
     .navbar-sticky-top {
       border-radius: 0; } }
 
-.navbar-brand, #tagline, #welcome-text, #footer .colophon .license {
+.navbar-brand, #tagline, #welcome-text {
   float: left;
   padding-top: .25rem;
   padding-bottom: .25rem;
   margin-right: 1rem;
   font-size: 1.25rem; }
-  .navbar-brand:focus, #tagline:focus, #welcome-text:focus, #footer .colophon .license:focus, .navbar-brand:hover, #tagline:hover, #welcome-text:hover, #footer .colophon .license:hover {
+  .navbar-brand:focus, #tagline:focus, #welcome-text:focus, .navbar-brand:hover, #tagline:hover, #welcome-text:hover {
     text-decoration: none; }
-  .navbar-brand > img, #tagline > img, #welcome-text > img, #footer .colophon .license > img {
+  .navbar-brand > img, #tagline > img, #welcome-text > img {
     display: block; }
 
 .navbar-divider {
@@ -3449,7 +3436,7 @@ button {
     text-decoration: none; }
 
 @media (min-width: 544px) {
-  .navbar-toggleable-xs {
+  .navbar-toggleable-xs, #utility-nav .collapse {
     display: block !important; } }
 
 @media (min-width: 768px) {
@@ -3473,9 +3460,9 @@ button {
 .navbar-nav .nav-item + .nav-item, #language-links .nav-item + .nav-item, #footer .colophon ul .nav-item + .nav-item, #footer .colophon ul .navbar-nav li + .nav-item, #footer .colophon ul #language-links li + .nav-item, #footer .colophon ul li + .nav-item, #footer .colophon ul .navbar-nav .nav-item + li, #footer .colophon ul #language-links .nav-item + li, #footer .colophon ul .nav-item + li, #footer .colophon ul .navbar-nav li + li, #footer .colophon ul #language-links li + li, #footer .colophon ul li + li {
   margin-left: 1rem; }
 
-.navbar-light .navbar-brand, .navbar-light #tagline, .navbar-light #welcome-text, .navbar-light #footer .colophon .license, #footer .colophon .navbar-light .license {
+.navbar-light .navbar-brand, .navbar-light #tagline, .navbar-light #welcome-text {
   color: rgba(0, 0, 0, 0.8); }
-  .navbar-light .navbar-brand:focus, .navbar-light #tagline:focus, .navbar-light #welcome-text:focus, .navbar-light #footer .colophon .license:focus, #footer .colophon .navbar-light .license:focus, .navbar-light .navbar-brand:hover, .navbar-light #tagline:hover, .navbar-light #welcome-text:hover, .navbar-light #footer .colophon .license:hover, #footer .colophon .navbar-light .license:hover {
+  .navbar-light .navbar-brand:focus, .navbar-light #tagline:focus, .navbar-light #welcome-text:focus, .navbar-light .navbar-brand:hover, .navbar-light #tagline:hover, .navbar-light #welcome-text:hover {
     color: rgba(0, 0, 0, 0.8); }
 
 .navbar-light .navbar-nav .nav-link, .navbar-light #language-links .nav-link, .navbar-light #footer .colophon ul .nav-link, #footer .colophon .navbar-light ul .nav-link, #footer .colophon ul li .navbar-light .navbar-nav a, #footer .colophon ul li .navbar-light #language-links a, .navbar-light #footer .colophon ul li a, #footer .colophon .navbar-light ul li a {
@@ -3561,9 +3548,9 @@ button {
 .navbar-light .navbar-divider {
   background-color: rgba(0, 0, 0, 0.075); }
 
-.navbar-dark .navbar-brand, #utility-nav .navbar-brand, .navbar-dark #tagline, #utility-nav #tagline, .navbar-dark #welcome-text, #utility-nav #welcome-text, .navbar-dark #footer .colophon .license, #footer .colophon .navbar-dark .license, #utility-nav #footer .colophon .license, #footer .colophon #utility-nav .license {
+.navbar-dark .navbar-brand, #utility-nav .navbar-brand, .navbar-dark #tagline, #utility-nav #tagline, .navbar-dark #welcome-text, #utility-nav #welcome-text {
   color: white; }
-  .navbar-dark .navbar-brand:focus, #utility-nav .navbar-brand:focus, .navbar-dark #tagline:focus, #utility-nav #tagline:focus, .navbar-dark #welcome-text:focus, #utility-nav #welcome-text:focus, .navbar-dark #footer .colophon .license:focus, #footer .colophon .navbar-dark .license:focus, #utility-nav #footer .colophon .license:focus, #footer .colophon #utility-nav .license:focus, .navbar-dark .navbar-brand:hover, #utility-nav .navbar-brand:hover, .navbar-dark #tagline:hover, #utility-nav #tagline:hover, .navbar-dark #welcome-text:hover, #utility-nav #welcome-text:hover, .navbar-dark #footer .colophon .license:hover, #footer .colophon .navbar-dark .license:hover, #utility-nav #footer .colophon .license:hover, #footer .colophon #utility-nav .license:hover {
+  .navbar-dark .navbar-brand:focus, #utility-nav .navbar-brand:focus, .navbar-dark #tagline:focus, #utility-nav #tagline:focus, .navbar-dark #welcome-text:focus, #utility-nav #welcome-text:focus, .navbar-dark .navbar-brand:hover, #utility-nav .navbar-brand:hover, .navbar-dark #tagline:hover, #utility-nav #tagline:hover, .navbar-dark #welcome-text:hover, #utility-nav #welcome-text:hover {
     color: white; }
 
 .navbar-dark .navbar-nav .nav-link, #utility-nav .navbar-nav .nav-link, .navbar-dark #language-links .nav-link, #utility-nav #language-links .nav-link, .navbar-dark #footer .colophon ul .nav-link, #footer .colophon .navbar-dark ul .nav-link, #utility-nav #footer .colophon ul .nav-link, #footer .colophon #utility-nav ul .nav-link, #footer .colophon ul li .navbar-dark .navbar-nav a, #footer .colophon ul li #utility-nav .navbar-nav a, #footer .colophon ul li .navbar-dark #language-links a, #footer .colophon ul li #utility-nav #language-links a, .navbar-dark #footer .colophon ul li a, #footer .colophon .navbar-dark ul li a, #utility-nav #footer .colophon ul li a, #footer .colophon #utility-nav ul li a {
@@ -4032,12 +4019,12 @@ button {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.5;
-  color: #427C89;
+  color: #3091B2;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #ddd; }
   .page-link:focus, .page-link:hover {
-    color: #294d55;
+    color: #206076;
     background-color: #BCC1C3;
     border-color: #ddd; }
 
@@ -4224,13 +4211,13 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
   .label-danger[href]:focus, .label-danger[href]:hover {
     background-color: #cd4713; }
 
-.jumbotron {
+.jumbotron, .main-content.index .welcome-section {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
   background-color: #BCC1C3;
   border-radius: 0.3rem; }
   @media (min-width: 544px) {
-    .jumbotron {
+    .jumbotron, .main-content.index .welcome-section {
       padding: 4rem 2rem; } }
 
 .jumbotron-hr {
@@ -4893,7 +4880,7 @@ button.close {
       left: 50%;
       margin-left: -5px;
       border-width: 5px 5px 0;
-      border-top-color: #000; }
+      border-top-color: #ddd; }
   .tooltip.tooltip-right, .tooltip.bs-tether-element-attached-left {
     padding: 0 5px;
     margin-left: 3px; }
@@ -4902,7 +4889,7 @@ button.close {
       left: 0;
       margin-top: -5px;
       border-width: 5px 5px 5px 0;
-      border-right-color: #000; }
+      border-right-color: #ddd; }
   .tooltip.tooltip-bottom, .tooltip.bs-tether-element-attached-top {
     padding: 5px 0;
     margin-top: 3px; }
@@ -4911,7 +4898,7 @@ button.close {
       left: 50%;
       margin-left: -5px;
       border-width: 0 5px 5px;
-      border-bottom-color: #000; }
+      border-bottom-color: #ddd; }
   .tooltip.tooltip-left, .tooltip.bs-tether-element-attached-right {
     padding: 0 5px;
     margin-left: -3px; }
@@ -4920,14 +4907,14 @@ button.close {
       right: 0;
       margin-top: -5px;
       border-width: 5px 0 5px 5px;
-      border-left-color: #000; }
+      border-left-color: #ddd; }
 
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #fff;
+  color: #5C6265;
   text-align: center;
-  background-color: #000;
+  background-color: #ddd;
   border-radius: 0.25rem; }
 
 .tooltip-arrow {
@@ -5306,7 +5293,7 @@ button, #participant-list footer button,
 .text-xs-right {
   text-align: right !important; }
 
-.text-xs-center {
+.text-xs-center, .main-content.index .welcome-section {
   text-align: center !important; }
 
 @media (min-width: 544px) {
@@ -5396,8 +5383,8 @@ a.text-danger:focus, a.text-danger:hover {
   color: #BCC1C3;
   background-color: #5C6265; }
 
-.bg-faded, #footer {
-  background-color: #f7f7f9; }
+.bg-faded {
+  background-color: #eee; }
 
 .bg-primary {
   color: #fff !important;
@@ -5413,14 +5400,11 @@ a.bg-primary:focus, a.bg-primary:hover {
 a.bg-success:focus, a.bg-success:hover {
   background-color: #337c66; }
 
-.bg-info, .main-content.room header #room-info label,
-.main-content.room header #room-info .copy-link {
+.bg-info {
   color: #fff !important;
   background-color: #3091B2 !important; }
 
-a.bg-info:focus,
-.main-content.room header #room-info a.copy-link:focus, a.bg-info:hover,
-.main-content.room header #room-info a.copy-link:hover {
+a.bg-info:focus, a.bg-info:hover {
   background-color: #25708a; }
 
 .bg-warning {
@@ -5636,11 +5620,11 @@ a.bg-danger:focus, a.bg-danger:hover {
   display: none !important; }
 
 @media (max-width: 543px) {
-  .hidden-xs-down {
+  .hidden-xs-down, #collaboration {
     display: none !important; } }
 
 @media (min-width: 544px) {
-  .hidden-sm-up {
+  .hidden-sm-up, #utility-nav .navbar-toggler {
     display: none !important; } }
 
 @media (max-width: 767px) {
@@ -5714,7 +5698,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   font-weight: normal;
   font-style: normal; }
 
-.fa, .icon, #collaboration .icon, .copy-link .icon, .source .icon {
+.fa, .icon, #collaboration .icon, .copy-link .icon, .source .icon, .license .icon:before {
   display: inline-block;
   font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
@@ -5771,10 +5755,10 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left, .fa-pull-left.icon, #collaboration .fa-pull-left.icon {
+.fa.fa-pull-left, .fa-pull-left.icon, #collaboration .fa-pull-left.icon, .license .fa-pull-left.icon:before {
   margin-right: .3em; }
 
-.fa.fa-pull-right, .fa-pull-right.icon, #collaboration .fa-pull-right.icon {
+.fa.fa-pull-right, .fa-pull-right.icon, #collaboration .fa-pull-right.icon, .license .fa-pull-right.icon:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -5784,10 +5768,10 @@ a.bg-danger:focus, a.bg-danger:hover {
 .pull-left {
   float: left; }
 
-.fa.pull-left, .pull-left.icon, #collaboration .pull-left.icon {
+.fa.pull-left, .pull-left.icon, #collaboration .pull-left.icon, .license .pull-left.icon:before {
   margin-right: .3em; }
 
-.fa.pull-right, .pull-right.icon, #collaboration .pull-right.icon {
+.fa.pull-right, .pull-right.icon, #collaboration .pull-right.icon, .license .pull-right.icon:before {
   margin-left: .3em; }
 
 .fa-spin {
@@ -7788,70 +7772,11 @@ body,
 html {
   min-height: 100%; }
 
-.btn-default:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, .btn-default:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus,
-.btn-default:hover a, #utility-nav #language-links a.nav-link:hover a, #utility-nav #language-links #footer .colophon ul li a:hover a, #footer .colophon ul li #utility-nav #language-links a:hover a,
-.btn-default:focus a, #utility-nav #language-links a.nav-link:focus a, #utility-nav #language-links #footer .colophon ul li a:focus a, #footer .colophon ul li #utility-nav #language-links a:focus a {
-  background-color: #fff;
-  color: #79858A; }
-
-.btn-primary:hover, .add-channel:hover, .modal footer input[type="submit"]:hover, .main-content.index #join-room #room-number-button:hover,
-.main-content.index #join-room #create-new-room-button:hover,
-.main-content.index #create-room #room-number-button:hover,
-.main-content.index #create-room #create-new-room-button:hover, .btn-primary:focus, .add-channel:focus, .modal footer input[type="submit"]:focus, .main-content.index #join-room #room-number-button:focus,
-.main-content.index #join-room #create-new-room-button:focus,
-.main-content.index #create-room #room-number-button:focus,
-.main-content.index #create-room #create-new-room-button:focus,
-.btn-primary:hover a, .add-channel:hover a, .modal footer input[type="submit"]:hover a, .main-content.index #join-room #room-number-button:hover a,
-.main-content.index #join-room #create-new-room-button:hover a,
-.main-content.index #create-room #room-number-button:hover a,
-.main-content.index #create-room #create-new-room-button:hover a,
-.btn-primary:focus a, .add-channel:focus a, .modal footer input[type="submit"]:focus a, .main-content.index #join-room #room-number-button:focus a,
-.main-content.index #join-room #create-new-room-button:focus a,
-.main-content.index #create-room #room-number-button:focus a,
-.main-content.index #create-room #create-new-room-button:focus a {
-  background-color: #fff;
-  color: #3091B2; }
-
-.btn-success:hover, #connect-button:hover, .controls .join:hover, .controls .mute:hover, .controls .raise-hand:hover, .btn-success:focus, #connect-button:focus, .controls .join:focus, .controls .mute:focus, .controls .raise-hand:focus,
-.btn-success:hover a, #connect-button:hover a, .controls .join:hover a, .controls .mute:hover a, .controls .raise-hand:hover a,
-.btn-success:focus a, #connect-button:focus a, .controls .join:focus a, .controls .mute:focus a, .controls .raise-hand:focus a {
-  background-color: #fff;
-  color: #42A084; }
-
-.btn-info:hover, .btn-info:focus,
-.btn-info:hover a,
-.btn-info:focus a {
-  background-color: #fff;
-  color: #7A9E9F; }
-
-.btn-warning:hover, .controls .interpret:hover, .btn-warning:focus, .controls .interpret:focus,
-.btn-warning:hover a, .controls .interpret:hover a,
-.btn-warning:focus a, .controls .interpret:focus a {
-  background-color: #fff;
-  color: #BB992F; }
-
-.btn-danger:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover, #mute-controls input[type="submit"]:hover, #mute-controls
-button:hover, .controls .leave:hover, .btn-danger:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus, #mute-controls input[type="submit"]:focus, #mute-controls
-button:focus, .controls .leave:focus,
-.btn-danger:hover a, #mute-controls .btn:hover a, #mute-controls #utility-nav #language-links a.nav-link:hover a, #utility-nav #language-links #mute-controls a.nav-link:hover a, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover a, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover a, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover a, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover a, #mute-controls input[type="submit"]:hover a, #mute-controls
-button:hover a, .controls .leave:hover a,
-.btn-danger:focus a, #mute-controls .btn:focus a, #mute-controls #utility-nav #language-links a.nav-link:focus a, #utility-nav #language-links #mute-controls a.nav-link:focus a, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus a, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus a, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus a, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus a, #mute-controls input[type="submit"]:focus a, #mute-controls
-button:focus a, .controls .leave:focus a {
-  background-color: #fff;
-  color: #EB5E28; }
-
-.btn-disabled, .controls .muted, .controls .lower-hand {
-  background-color: #f5f5f5;
-  color: #444; }
-  .btn-disabled a, .controls .muted a, .controls .lower-hand a {
-    color: #444; }
-  .btn-disabled:hover, .controls .muted:hover, .controls .lower-hand:hover, .btn-disabled:focus, .controls .muted:focus, .controls .lower-hand:focus {
-    background-color: darkgray; }
-    .btn-disabled:hover a, .controls .muted:hover a, .controls .lower-hand:hover a, .btn-disabled:focus a, .controls .muted:focus a, .controls .lower-hand:focus a {
-      color: #fff; }
-
 .bg-inverse a, #utility-nav a {
   color: #fff; }
+
+#utility-nav #language-links li {
+  display: inline-block; }
 
 #logo {
   margin-top: 90px; }
@@ -7865,11 +7790,69 @@ button:focus a, .controls .leave:focus a {
   font-size: 80%;
   color: #444; }
 
-aside#channel-list {
+#footer {
+  background-color: #A2A8AB; }
+  #footer .colophon ul li {
+    display: inline-block; }
+
+#content {
+  min-height: 100%; }
+
+.main-content.index {
   margin-bottom: 5em; }
 
-.btn-default, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a {
-  background-color: #79858A; }
+aside #channel-list {
+  margin-bottom: 5em; }
+
+aside:first-child {
+  padding-top: 1em; }
+
+aside:last-child {
+  margin-bottom: 5em; }
+
+#room-info {
+  margin-top: .5em;
+  margin-bottom: .5em; }
+
+.btn-disabled, .controls .muted, .controls .lower-hand {
+  color: #fff;
+  background-color: #ddd;
+  border-color: #ddd; }
+  .btn-disabled:hover, .controls .muted:hover, .controls .lower-hand:hover {
+    color: #fff;
+    background-color: #c4c4c4;
+    border-color: #bebebe; }
+  .btn-disabled:focus, .controls .muted:focus, .controls .lower-hand:focus, .btn-disabled.focus, .controls .focus.muted, .controls .focus.lower-hand {
+    color: #fff;
+    background-color: #c4c4c4;
+    border-color: #bebebe; }
+  .btn-disabled:active, .controls .muted:active, .controls .lower-hand:active, .btn-disabled.active, .controls .active.muted, .controls .active.lower-hand,
+  .open > .btn-disabled.dropdown-toggle, .controls
+  .open > .dropdown-toggle.muted, .controls
+  .open > .dropdown-toggle.lower-hand {
+    color: #fff;
+    background-color: #c4c4c4;
+    border-color: #bebebe;
+    background-image: none; }
+    .btn-disabled:active:hover, .controls .muted:active:hover, .controls .lower-hand:active:hover, .btn-disabled:active:focus, .controls .muted:active:focus, .controls .lower-hand:active:focus, .btn-disabled:active.focus, .controls .muted:active.focus, .controls .lower-hand:active.focus, .btn-disabled.active:hover, .controls .active.muted:hover, .controls .active.lower-hand:hover, .btn-disabled.active:focus, .controls .active.muted:focus, .controls .active.lower-hand:focus, .btn-disabled.active.focus, .controls .active.focus.muted, .controls .active.focus.lower-hand,
+    .open > .btn-disabled.dropdown-toggle:hover, .controls
+    .open > .dropdown-toggle.muted:hover, .controls
+    .open > .dropdown-toggle.lower-hand:hover,
+    .open > .btn-disabled.dropdown-toggle:focus, .controls
+    .open > .dropdown-toggle.muted:focus, .controls
+    .open > .dropdown-toggle.lower-hand:focus,
+    .open > .btn-disabled.dropdown-toggle.focus, .controls
+    .open > .dropdown-toggle.focus.muted, .controls
+    .open > .dropdown-toggle.focus.lower-hand {
+      color: #fff;
+      background-color: #b2b2b2;
+      border-color: #9d9d9d; }
+  .btn-disabled.disabled:focus, .controls .disabled.muted:focus, .controls .disabled.lower-hand:focus, .btn-disabled.disabled.focus, .controls .disabled.focus.muted, .controls .disabled.focus.lower-hand, .btn-disabled:disabled:focus, .controls .muted:disabled:focus, .controls .lower-hand:disabled:focus, .btn-disabled:disabled.focus, .controls .muted:disabled.focus, .controls .lower-hand:disabled.focus {
+    background-color: #ddd;
+    border-color: #ddd; }
+  .btn-disabled.disabled:hover, .controls .disabled.muted:hover, .controls .disabled.lower-hand:hover, .btn-disabled:disabled:hover, .controls .muted:disabled:hover, .controls .lower-hand:disabled:hover {
+    background-color: #ddd;
+    border-color: #ddd; }
 
 .btn, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, input[type="submit"],
 button {
@@ -7894,14 +7877,43 @@ button a {
 
 label {
   font-weight: bold;
-  color: #7A9E9F; }
+  color: #3091B2; }
 
-.clipboard-field input {
+.clipboard-group .copy-link {
+  color: #fff;
+  background-color: #427C89;
+  border-color: #427C89; }
+  .clipboard-group .copy-link:hover {
+    color: #fff;
+    background-color: #315d67;
+    border-color: #2e5760; }
+  .clipboard-group .copy-link:focus, .clipboard-group .copy-link.focus {
+    color: #fff;
+    background-color: #315d67;
+    border-color: #2e5760; }
+  .clipboard-group .copy-link:active, .clipboard-group .copy-link.active,
+  .open > .clipboard-group .copy-link.dropdown-toggle {
+    color: #fff;
+    background-color: #315d67;
+    border-color: #2e5760;
+    background-image: none; }
+    .clipboard-group .copy-link:active:hover, .clipboard-group .copy-link:active:focus, .clipboard-group .copy-link:active.focus, .clipboard-group .copy-link.active:hover, .clipboard-group .copy-link.active:focus, .clipboard-group .copy-link.active.focus,
+    .open > .clipboard-group .copy-link.dropdown-toggle:hover,
+    .open > .clipboard-group .copy-link.dropdown-toggle:focus,
+    .open > .clipboard-group .copy-link.dropdown-toggle.focus {
+      color: #fff;
+      background-color: #26474e;
+      border-color: #192e33; }
+  .clipboard-group .copy-link.disabled:focus, .clipboard-group .copy-link.disabled.focus, .clipboard-group .copy-link:disabled:focus, .clipboard-group .copy-link:disabled.focus {
+    background-color: #427C89;
+    border-color: #427C89; }
+  .clipboard-group .copy-link.disabled:hover, .clipboard-group .copy-link:disabled:hover {
+    background-color: #427C89;
+    border-color: #427C89; }
+
+.clipboard-group input {
   width: 75%;
   float: left; }
-
-.clipboard-field .copy-link {
-  width: 40px; }
 
 #participant-list footer button,
 #channel-list footer button {
@@ -7929,11 +7941,11 @@ label {
       color: #79858A; }
 
 .info .moderator {
-  border: 1px solid #3091B2;
+  border: 1px solid #427C89;
   background-color: #fff;
-  color: #3091B2; }
+  color: #427C89; }
   .info .moderator a {
-    color: #3091B2; }
+    color: #427C89; }
 
 .info .language {
   border: 1px solid #79858A;
@@ -7971,57 +7983,64 @@ label {
 */
 .license .icon:before {
   font-family: "gpl3";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
   /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: .2em;
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Font smoothing. That was taken from TWBS */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
   content: '\e800'; }
 
 /* '' */
 .tooltip.tooltip-top .tooltip-arrow, .tooltip.bs-tether-element-attached-bottom .tooltip-arrow {
-  border-top-color: #f5f5f5; }
+  border-top-color: #ddd; }
 
 .tooltip.tooltip-right .tooltip-arrow, .tooltip.bs-tether-element-attached-left .tooltip-arrow {
-  border-right-color: #f5f5f5; }
+  border-right-color: #ddd; }
 
 .tooltip.tooltip-bottom .tooltip-arrow, .tooltip.bs-tether-element-attached-top .tooltip-arrow {
-  border-bottom-color: #f5f5f5; }
+  border-bottom-color: #ddd; }
 
 .tooltip.tooltip-left .tooltip-arrow, .tooltip.bs-tether-element-attached-right .tooltip-arrow {
-  border-left-color: #f5f5f5; }
+  border-left-color: #ddd; }
 
 .tooltip-inner {
-  background-color: #f5f5f5;
+  background-color: #ddd;
   color: #5C6265; }
 
 #collaboration .tab-content {
-  background-color: #f5f5f5; }
+  background-color: #eee; }
   #collaboration .tab-content iframe {
     margin-top: 40px;
     height: 90%; }
 
 #collaboration .nav-link, #collaboration #footer .colophon ul li a, #footer .colophon ul li #collaboration a {
-  border: solid 1px #7A9E9F; }
+  border: solid 1px #3091B2; }
+
+#collaboration {
+  margin-top: 1em;
+  margin-bottom: 0; }
+  @media (min-width: 768px) {
+    #collaboration {
+      margin-bottom: 5em; } }
+
+.main-content.index .welcome-section {
+  padding-top: 1.75em;
+  padding-bottom: 1.75em;
+  background-color: transparent; }
+  .main-content.index .welcome-section h1 {
+    font-size: 2.5rem;
+    font-weight: 300; }
+    @media (min-width: 544px) {
+      .main-content.index .welcome-section h1 {
+        font-size: 3.5rem; } }
+    @media (min-width: 768px) {
+      .main-content.index .welcome-section h1 {
+        font-size: 4.5rem; } }
 
 .main-content.index #join-room #room-number-button,
 .main-content.index #create-room #room-number-button {
@@ -8029,19 +8048,21 @@ label {
 
 .main-content.room header {
   margin-bottom: 1em; }
-  .main-content.room header #room-info label,
-  .main-content.room header #room-info .copy-link {
-    border-color: #7A9E9F; }
-  .main-content.room header #room-info #room-link {
-    border-color: #7A9E9F; }
-
-.main-content.room #collaboration {
-  margin-top: 1em;
-  margin-bottom: 5em; }
 
 .main-content.room #mute-controls,
 .main-content.room #interpretation-options {
   display: none; }
+
+body {
+  background-color: #eee; }
+
+.container, #header, #content {
+  background-color: #fff;
+  border-right: 1px solid #eee;
+  border-left: 1px solid #eee; }
+
+#content {
+  padding-top: .25em; }
 
 body {
   padding-top: 62px; }
@@ -8054,7 +8075,7 @@ body.modal-open {
   padding-right: 0 !important; }
 
 /* workaround bs 4 horizontal scrollbar */
-.container-fluid > .row, #content > .row, .main-content.room .container-fluid > header, .main-content.room #content > header {
+.container-fluid > .row, .container-fluid > .main-content.index {
   margin-left: -15px;
   margin-right: -10px; }
 
@@ -8098,7 +8119,7 @@ body.modal-open {
 
 /* responsive nav stacked liked 3.x */
 @media (max-width: 34em) {
-  .navbar .navbar-brand, #footer .navbar-brand, .navbar #tagline, #footer #tagline, .navbar #welcome-text, #footer #welcome-text, #footer .colophon .license {
+  .navbar .navbar-brand, #footer .navbar-brand, .navbar #tagline, #footer #tagline, .navbar #welcome-text, #footer #welcome-text {
     float: none;
     display: block; }
   .navbar .navbar-nav > .nav-item, #footer .navbar-nav > .nav-item, .navbar #language-links > .nav-item, #footer #language-links > .nav-item, #footer .colophon .navbar ul > .nav-item, #footer .colophon ul > .nav-item, #footer .colophon ul .navbar .navbar-nav > li, #footer .colophon ul .navbar-nav > li, #footer .colophon ul .navbar #language-links > li, #footer .colophon ul #language-links > li, #footer .colophon .navbar ul > li, #footer .colophon ul > li {
