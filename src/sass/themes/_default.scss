@@ -2,3 +2,17 @@
 // When having several themes, this file contains everything related to the
 // default one.
 // -----------------------------------------------------------------------------
+
+body {
+    background-color: $gray-lightest;
+}
+
+.container {
+    background-color: $white;
+    border-right: 1px solid $gray-lightest;
+    border-left: 1px solid $gray-lightest;
+}
+
+#content {
+    padding-top: .25em;
+}
