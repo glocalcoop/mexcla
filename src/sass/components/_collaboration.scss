@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to collaboration tools.
+// -----------------------------------------------------------------------------
+
+#collaboration {
+    @extend .hidden-xs-down;
+
+    margin-top: 1em;
+    margin-bottom: 0;
+
+    @include media-breakpoint-up(md) {
+        margin-bottom: 5em;
+    }
+
+    .clipboard-group {
+
+        @extend .col-xs-12;
+
+    }
+
+    
+
+}
