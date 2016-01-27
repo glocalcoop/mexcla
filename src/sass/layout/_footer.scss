@@ -3,16 +3,24 @@
 // -----------------------------------------------------------------------------
 
  #footer {
-  @extend .navbar-fixed-bottom;
-  @extend .bg-faded;
-  p {
-    @extend .container;
-  }
-  
-  
- }
+    @extend .navbar;
+    @extend .navbar-fixed-bottom;
 
- input[type="submit"] {
-  @extend .btn;
-  @extend .btn-primary;
+    background-color: $gray-light;
+    .colophon {
+        ul {
+            @extend .nav;
+            @extend .navbar-nav;
+
+            li {
+                @extend .nav-item;
+                display: inline-block;
+
+                a {
+                    @extend .nav-link;
+                }
+            }
+        }
+    }
+  
  }
