@@ -2,8 +2,9 @@
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
 
-.btn-default {
-    background-color: $brand-default;
+
+.btn-disabled {
+  @include button-variant($white, $brand-disabled, $brand-disabled);
 }
 
 .btn {
