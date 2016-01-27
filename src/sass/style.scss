@@ -1,18 +1,19 @@
 @charset 'UTF-8';
 
+// 0. Override variables
+@import
+  'utils/variables';
+
 // 1. Vendors
 @import
   'vendor/bootstrap/scss/bootstrap',
   'vendor/tether/tether',
   'vendor/font-awesome/scss/font-awesome';
   
-
 // 2. Configuration and helpers
 @import
-  'utils/variables',
   'utils/functions',
   'utils/mixins';
-
 
 // 3. Base stuff
 @import
@@ -38,7 +39,8 @@
   'components/icons',
   'components/tooltips',
   'components/tabs',
-  'components/modals';
+  'components/modals',
+  'components/collaboration';
 
 // 6. Page-specific styles
 @import
