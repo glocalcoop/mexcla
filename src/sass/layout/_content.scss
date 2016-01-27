@@ -3,7 +3,14 @@
 // -----------------------------------------------------------------------------
 
 #content {
-  @extend .container-fluid;
+  // @extend .container-fluid;
   @extend .container;
+  @extend .clear-fix;
+  min-height: 100%;
 
+}
+
+.main-content.index {
+    @extend .row;
+    margin-bottom: 5em;
 }
