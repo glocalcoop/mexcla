@@ -6,13 +6,29 @@
   @extend .container;
 }
 
+.bg-inverse {
+  a {
+    color: $white;
+  }
+}
+
 #utility-nav {
   @extend .navbar-fixed-top;
-  @extend .navbar-light;
-  @extend .bg-faded;
+  @extend .navbar-dark;
+  @extend .bg-inverse;
+
+  .navbar-toggler {
+    @extend .hidden-sm-up;
+  }
+  .collapse {
+    @extend .navbar-toggleable-xs;
+  }
 }
 
 #utility-nav #language-links {
+    li {
+      display: inline-block;
+    }
     a.nav-link {
       @extend .btn;
       @extend .btn-sm;
