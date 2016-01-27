@@ -36,17 +36,19 @@ $brand-danger:          #EB5E28; //#d9534f
 
 
 
-$gray-base:              #222 !default; //000
+$gray-base:              #222; //000
 $gray-darker:            #444; // #222
 $gray-dark:              #5C6265;   // #333
 $gray:                   #79858A; // #555
 $gray-light:             #A2A8AB; // #777
-$gray-lighter:           #f5f5f5;
+$gray-lighter:           #ddd;
+$gray-lightest:          #eee;
 
 $white:     #fff;
 $black:     #000;
 
 $brand-default:         $gray;
+$brand-disabled:        $gray-lighter;
 $bg-disabled:           $gray-lighter;
 $font-disabled:         $gray-darker; 
 
@@ -56,13 +58,13 @@ $font-disabled:         $gray-darker;
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-flex:               true;
-// $enable-rounded:            true !default;
-// $enable-shadows:            false !default;
-// $enable-gradients:          false !default;
-// $enable-transitions:        false !default;
-// $enable-hover-media-query:  false !default;
-// $enable-grid-classes:       true !default;
+//$enable-flex:               true;
+// $enable-rounded:            true;
+// $enable-shadows:            true;
+// $enable-gradients:          true;
+// $enable-transitions:        false;
+// $enable-hover-media-query:  true;
+// $enable-grid-classes:       true;
 
 
 // Body
@@ -70,7 +72,7 @@ $enable-flex:               true;
 // Settings for the `<body>` element.
 
 $body-bg:                    $white;
-$body-color:                 $gray-dark !default;
+$body-color:                 $gray-dark;
 
 
 // Links
@@ -78,7 +80,7 @@ $body-color:                 $gray-dark !default;
 // Style anchor elements.
 
 $text-color:                 $body-color;
-$link-color:                 $brand-primary !default;
+$link-color:                 $brand-primary;
 // $link-decoration:            none !default;
 // $link-hover-color:           darken($link-color, 15%) !default;
 // $link-hover-decoration:      underline !default;
@@ -87,55 +89,6 @@ $tooltip-arrow-color:        $gray-lighter;
 $tooltip-color:              $body-color;
 
 
-// Typography
-//
-// Font, line-height, and color for body text, headings, and more.
+// $btn-primary-bg:        $brand-primary;
+// $btn-primary-border:    $brand-primary;
 
-// $font-family-sans-serif:     "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-// $font-family-serif:          Georgia, "Times New Roman", Times, serif !default;
-// $font-family-monospace:      Menlo, Monaco, Consolas, "Courier New", monospace !default;
-// $font-family-base:           $font-family-sans-serif !default;
-
-
-
-/// Regular font family
-/// @type List
-$text-font-stack: $font-family-sans-serif;
-
-/// Header font family
-/// @type List
-$text-font-stack: $font-family-sans-serif;
-
-/// Code (monospace) font family
-/// @type List
-$code-font-stack: $font-family-monospace;
-
-
-
-
-/// Container's maximum width
-/// Below that is 100%
-/// @type Length
-$max-width: 1200px !default;
-
-
-
-
-
-/// Breakpoints map
-/// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-/// @see {mixin} respond-to
-$breakpoints: (
-  'small': (min-width: 320px),
-  'medium': (min-width: 768px),
-  'large': (min-width: 1024px),
-) !default;
-
-
-
-/// Relative or absolute URL where all assets are served from
-/// @type String
-/// @example scss - When using a CDN
-///   $base-url: 'http://cdn.example.com/assets/';
-$base-url: '/assets/' !default;
