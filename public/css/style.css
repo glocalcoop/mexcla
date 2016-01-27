@@ -1407,7 +1407,8 @@ select {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   .form-control::-ms-expand, input[type="text"]::-ms-expand,
   select::-ms-expand {
     background-color: transparent;
@@ -1822,7 +1823,8 @@ button {
   padding: 0.375rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out; }
   .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
   button:focus, .btn.focus, #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #footer .colophon ul li a.focus, #footer .colophon ul li #utility-nav #language-links a.focus, input.focus[type="submit"],
   button.focus, .btn:active:focus, #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #footer .colophon ul li a:active:focus, #footer .colophon ul li #utility-nav #language-links a:active:focus, input[type="submit"]:active:focus,
@@ -5620,7 +5622,7 @@ a.bg-danger:focus, a.bg-danger:hover {
   display: none !important; }
 
 @media (max-width: 543px) {
-  .hidden-xs-down, #collaboration {
+  .hidden-xs-down {
     display: none !important; } }
 
 @media (min-width: 544px) {
@@ -5628,7 +5630,7 @@ a.bg-danger:focus, a.bg-danger:hover {
     display: none !important; } }
 
 @media (max-width: 767px) {
-  .hidden-sm-down {
+  .hidden-sm-down, #collaboration {
     display: none !important; } }
 
 @media (min-width: 768px) {
@@ -7772,6 +7774,31 @@ body,
 html {
   min-height: 100%; }
 
+/**
+ * Basic typography style for copy text
+ */
+h2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  transition: all .2s ease-in-out; }
+  @media (min-width: 544px) {
+    h2 {
+      font-size: 2rem; } }
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 2.5rem; } }
+
+h3 {
+  font-size: 1rem;
+  font-weight: 300;
+  transition: all .2s ease-in-out; }
+  @media (min-width: 544px) {
+    h3 {
+      font-size: 1.25rem; } }
+  @media (min-width: 768px) {
+    h3 {
+      font-size: 1.5rem; } }
+
 .bg-inverse a, #utility-nav a {
   color: #fff; }
 
@@ -7796,7 +7823,8 @@ html {
     display: inline-block; }
 
 #content {
-  min-height: 100%; }
+  min-height: 100%;
+  padding-top: 1em; }
 
 .main-content.index {
   margin-bottom: 5em; }
@@ -8060,9 +8088,6 @@ body {
   background-color: #fff;
   border-right: 1px solid #eee;
   border-left: 1px solid #eee; }
-
-#content {
-  padding-top: .25em; }
 
 body {
   padding-top: 62px; }

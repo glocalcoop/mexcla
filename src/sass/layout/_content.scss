@@ -3,11 +3,10 @@
 // -----------------------------------------------------------------------------
 
 #content {
-  // @extend .container-fluid;
   @extend .container;
   @extend .clear-fix;
   min-height: 100%;
-
+  padding-top: 1em;
 }
 
 .main-content.index {

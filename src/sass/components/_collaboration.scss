@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 #collaboration {
-    @extend .hidden-xs-down;
+    @extend .hidden-sm-down;
 
     margin-top: 1em;
     margin-bottom: 0;
@@ -13,11 +13,7 @@
     }
 
     .clipboard-group {
-
         @extend .col-xs-12;
-
     }
-
-    
 
 }
