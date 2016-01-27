@@ -6,7 +6,23 @@ aside {
     @extend .col-xs-12;
     @extend .col-md-4;
 
-    &#channel-list {
+    #channel-list {
         margin-bottom: 5em;
     }
+
+    &:first-child {
+        padding-top: 1em;
+    }
+
+    &:last-child {
+        margin-bottom: 5em;
+    }
+
+}
+
+#room-info {
+
+    margin-top: .5em;
+    margin-bottom: .5em;
+
 }
