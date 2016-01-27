@@ -175,7 +175,7 @@
             <!-- Copiable direct link -->
             <div class="clipboard-field">
               <input type="text" value="https://pad.riseup.net/p/<%= roomnum %>" id="pad-link">
-              <span for="pad-link" class="copy-link" data-clipboard-target="#pad-link" data-toggle="tooltip" title="Click to Copy Notepad Link"><i class="icon"></i></span>
+              <span for="pad-link" class="copy-link" data-clipboard-target="#pad-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
             </div>
             
             <iframe src=""></iframe>
@@ -187,7 +187,7 @@
             <!-- Copiable direct link -->
             <div class="clipboard-field">
               <input type="text" value="https://irc.koumbit.net/?channels=#<%= roomnum %>" id="chat-link">
-              <span for="chat-link" class="copy-link" data-clipboard-target="#chat-link" data-toggle="tooltip" title="Click to Copy Notepad Link"><i class="icon"></i></span>
+              <span for="chat-link" class="copy-link" data-clipboard-target="#chat-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
             </div>
             <iframe src=""></iframe>
           </div>
