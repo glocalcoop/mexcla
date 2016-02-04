@@ -6,9 +6,9 @@
   "repository": "https://github.com/glocalcoop/mexcla.git",
   "homepage": "https://github.com/glocalcoop/mexcla",
   "scripts": {
-      "start": "node app",
-      "test": "node_modules/.bin/mocha -w",
-      "mongod": "mkdir -p db; mongod -dbpath db --port 27018"
+    "start": "node app",
+    "test": "node_modules/.bin/mocha -w",
+    "mongod": "mkdir -p db; mongod -dbpath db --port 27018"
   },
   "keywords": [
     "webrtc",
@@ -30,6 +30,7 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-include": "^2.0.3",
@@ -43,7 +44,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-watch": "^4.3.5",
     "jshint": "*",
-    "mocha": "^2.3.4",
+    "mocha": "^2.4.5",
     "should": "^8.0.0",
     "superagent": "^1.5.0"
   }
