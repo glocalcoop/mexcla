@@ -116,9 +116,28 @@ describe('rooms', function(){
       });
   });
 
+  describe('moderator', function(){
+    it('should change the moderator', function(done){
+         request
+            .get(url + '/room/id/' + roomId)
+            .end(function(err, res){
+              res.body.moderator.should.eql(userId);
+              request
+                .post(url + '/room/id/' + roomId + '/moderator')
+                .set('cookie', 'id=' + userId)
+                .send({moderator: newUserId})
+                .end(function(err, res){
+                  res.body.moderator.should.eql(newUserId);
+                  done();
+                });
+            });
+        });
+   });
+  
+  
   it('should retrieve info by id', function(done){
     request
-      .get(url + '/room/' + roomNumber)
+     .get(url + '/room/' + roomNumber)
       .set('cookie', 'id=' + userId)
       .end(function(err, res){
         //should.not.exist(err);
@@ -129,7 +148,6 @@ describe('rooms', function(){
             res.body.users.length.should.eql(2);
             res.body.users[0].lang.should.eql('es');
             res.body.users[1].lang.should.eql('en');
-            res.body.moderator.should.eql(userId);
             done();
           });
       });

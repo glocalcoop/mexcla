@@ -104,6 +104,20 @@ app.get('/room/id/:id', function(req,res){
   });
 });
 
+app.post('/room/id/:id/moderator', function(req, res){
+  models.Room.findById(req.params.id, function(err, room){
+    if (err) {console.log(err);}
+    room.moderator = req.body.moderator;
+    room.save(function(err, roomInfo){
+      if (err) {
+        res.json({error: "Error changing the moderator", "message": err});
+      } else {
+        res.json(room);
+      }
+    });
+  });
+});
+
 // create channel //
 app.post('/room/id/:id/channel/create', function(req,res){
   models.Room.findById(req.params.id, function(err, room){
