@@ -192,22 +192,22 @@ Views.ChannelOptions = Backbone.View.extend({
 // use new Views.AddChannelModal({model: app.room})
 Views.AddChannelModal = Backbone.View.extend({
   initialize: function() {
-    new Views.ChannelModeratorOptionsList({model: app.room});
+    new Views.ChannelTranslatorOptionsList({model: app.room});
   },
   render: function(afterwards) {
     $('#channel-modal').modal("show");
   }
 });
 
-Views.ChannelModeratorOptionsList = Backbone.View.extend({
-  el: $('#channel-modal #channel-moderator-options'),
+Views.ChannelTranslatorOptionsList = Backbone.View.extend({
+  el: $('#channel-modal #channel-translator-options'),
   template: _.template('<option><%= username %></option>'),
   initialize: function() {
     this.render();
   },
   render: function(){
     var that = this;
-    var html = '<option value="">Select a moderator</option><option value="none">none</option>';
+    var html = '<option value="">Select a translator</option><option value="none">none</option>';
     this.$el.html(html);
     var users = this.model.get('users');
     _.each(users, function(user){
