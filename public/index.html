@@ -262,7 +262,7 @@
 
             </ul>
             <footer class="widget-footer">
-              <button class="add-channel"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>              
+              <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>              
             </footer>
 
           </div>
@@ -329,6 +329,31 @@
       </div>
     </div>
 
+    <!-- ADD CHANNEL MODAL -->
+    <div id="channel-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="chanel-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card" role="document">
+            <header class="modal-header"><h2>Add a Channel</h2></header>
+            <fieldset>
+              <select name="lang" id="channel-lang-select">
+                <option value="">Select Language</option>
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+              </select>
+              <select name="translator" id="channel-translator-options">
+                <option value="">Select a translator</option>
+                <option value="none">none</option>
+              </select>
+            </fieldset>
+            <footer class="modal-footer">
+              <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Enter" />
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+        
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
