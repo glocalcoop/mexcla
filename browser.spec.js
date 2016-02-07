@@ -25,9 +25,9 @@ describe('home page', function(){
     return browser.init({browserName: 'chrome'});
   });
 
-  beforeEach(function(){
-    return browser.get(URL);
-  });
+  //beforeEach(function(){
+  //    return browser.get(URL);
+  //});
 
   after(function(){
     return browser.quit();
@@ -35,25 +35,28 @@ describe('home page', function(){
 
   it('should have correct title', function(){
     return browser
+      .get(URL)
       .title().should.become('Mexcla Conferencing');
   });
 
   it('should display register popup when create room is clicked', function(){
     return browser
-      .elementById('create-new-room-button')
-      .click()
+      .elementById('create-new-room-button').click()
       .elementById('register-modal')
       .isDisplayed().should.become(true);
   });
 
+  describe('Create new room ', function(){
+    it('should register a new user and go to a new room page', function(){
+      return browser
+        .elementByCssSelector('#user-name').type('slothrop')
+        .elementByCss('#lang-select option[value="en"]').click()
+        .elementById('register-submit-button').click()
+        .isDisplayed().should.become(false)
+        .elementById('welcome-text').text().should.become('Hi, slothrop');
+    });
+  });
+  
 });
-
-
-
-
-
-
-
-
 
 
