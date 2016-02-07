@@ -30,6 +30,12 @@ label {
       @extend .input-group-addon;
   }
 
+  label {
+    @extend .bg-inverse;
+    background-color:       $brand-default;
+    color:                  $white;
+  }
+
   .copy-link {
     @include button-variant($white, $brand-primary, $brand-primary);
   }
@@ -40,3 +46,4 @@ label {
   }
 
 }
+
