@@ -1,0 +1,9 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to cards.
+// -----------------------------------------------------------------------------
+
+.card-header {
+    @extend .bg-inverse;
+    background-color:       $brand-default;
+    color:                  $white;
+}
