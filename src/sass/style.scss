@@ -2,7 +2,8 @@
 
 // 0. Override variables
 @import
-  'utils/variables';
+  'utils/settings',
+  'themes/theme-default';
 
 // 1. Vendors
 @import
@@ -40,7 +41,8 @@
   'components/tooltips',
   'components/tabs',
   'components/modals',
-  'components/collaboration';
+  'components/collaboration',
+  'components/cards';
 
 // 6. Page-specific styles
 @import
@@ -48,7 +50,3 @@
   'pages/index',
   'pages/room';
 
-// 7. Themes
-@import
-  'themes/default',
-  'themes/stylish';

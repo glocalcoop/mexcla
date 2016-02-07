@@ -1,0 +1,21 @@
+$bootstrap-sass-asset-helper: false !default;
+// Flatly 3.3.6
+// Variables
+// --------------------------------------------------
+
+@import
+  'colors/colors-default';
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base:        $font-family-sans-serif !default;
+
+$font-size-root:          16px !default;
+$font-size-base:          1rem !default;
