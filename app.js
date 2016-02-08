@@ -14,6 +14,10 @@ server.listen(8080, function(){
   console.log('Mexcla is starting up at localhost:8080');
 });
 
+// holds room namespaces
+var namespaces = {};
+
+//var io = require('socket.io')(server);
 mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 
 app.set('view engine', 'jade');
@@ -77,6 +81,8 @@ app.get('/room/create', function(req,res){
             res.json({'error': 'error creating room'});
           } else {
             res.json(room);
+            // creates a socket.io namepsace for this room
+            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
           }
         });
       });
@@ -96,6 +102,7 @@ app.get('/room/:roomnum', function(req,res){
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
           res.json(roomInfo);
+          emitRoom(room);
         });
       });
     }
@@ -118,6 +125,7 @@ app.post('/room/id/:id/moderator', function(req, res){
         res.json({error: "Error changing the moderator", "message": err});
       } else {
         res.json(room);
+        emitRoom(room);
       }
     });
   });
@@ -133,6 +141,7 @@ app.post('/room/id/:id/channel/create', function(req,res){
         res.json({error: "error creating the channel"});
       } else {
         res.json(room);
+        emitRoom(room);
       }
     });
   });
@@ -143,6 +152,7 @@ app.post('/room/id/:id/channel/create', function(req,res){
 app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   getChannel(req.params.roomid, req.params.channelid, function(channelDoc){
     channelDoc.set(req.body);
+    // TODO: add emitRoom to this callback
     channelDoc.ownerDocument().save(function(err){
       if (err) {
         res.json({error: "Error updating the channel", errorMessage: err});
@@ -265,6 +275,11 @@ function generateRoomNumber(callback) {
       generateRoomNumber(callback);
     }
   });
+}
+
+// pushes a 'room update' event to the namespace for the given room
+function emitRoom(room) {
+  namespaces[room.roomnum].emit('room update', room);
 }
 
 //so something fancier one day
