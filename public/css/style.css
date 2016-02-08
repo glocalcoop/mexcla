@@ -271,7 +271,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  color: #5C6265;
+  color: #111;
   background-color: #fff; }
 
 [tabindex="-1"]:focus {
@@ -318,10 +318,10 @@ blockquote {
   margin: 0 0 1rem; }
 
 a {
-  color: #3091B2;
+  color: #427C89;
   text-decoration: none; }
   a:focus, a:hover {
-    color: #206076;
+    color: #294d55;
     text-decoration: underline; }
   a:focus {
     outline: thin dotted;
@@ -546,9 +546,6 @@ mark,
   max-width: 100%;
   height: auto; }
 
-.img-rounded {
-  border-radius: 0.3rem; }
-
 .img-thumbnail {
   padding: 0.25rem;
   line-height: 1.5;
@@ -584,15 +581,13 @@ code {
   padding: .2rem .4rem;
   font-size: 90%;
   color: #bd4147;
-  background-color: #f7f7f9;
-  border-radius: 0.25rem; }
+  background-color: #f7f7f9; }
 
 kbd {
   padding: .2rem .4rem;
   font-size: 90%;
   color: #fff;
-  background-color: #333;
-  border-radius: 0.2rem; }
+  background-color: #333; }
   kbd kbd {
     padding: 0;
     font-size: 100%;
@@ -1407,7 +1402,6 @@ select {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  border-radius: 0.25rem;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   .form-control::-ms-expand, input[type="text"]::-ms-expand,
   select::-ms-expand {
@@ -1531,8 +1525,7 @@ select,
 button {
   padding: 0.275rem 0.75rem;
   font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem; }
+  line-height: 1.5; }
 
 .form-control-lg, .input-group-lg > .form-control, .input-group-lg > input[type="text"], .input-group-lg >
 select,
@@ -1550,8 +1543,7 @@ select,
 button {
   padding: 0.75rem 1.25rem;
   font-size: 1.25rem;
-  line-height: 1.33333;
-  border-radius: 0.3rem; }
+  line-height: 1.33333; }
 
 .form-group, fieldset {
   margin-bottom: 1rem; }
@@ -1823,7 +1815,6 @@ button {
   padding: 0.375rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
   transition: all 0.2s ease-in-out; }
   .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
   button:focus, .btn.focus, #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #footer .colophon ul li a.focus, #footer .colophon ul li #utility-nav #language-links a.focus, input.focus[type="submit"],
@@ -2343,7 +2334,7 @@ button, .controls .leave {
 
 .btn-link {
   font-weight: normal;
-  color: #3091B2;
+  color: #427C89;
   border-radius: 0; }
   .btn-link, .btn-link:active, .btn-link.active, .btn-link:disabled {
     background-color: transparent; }
@@ -2352,7 +2343,7 @@ button, .controls .leave {
   .btn-link:hover {
     border-color: transparent; }
   .btn-link:focus, .btn-link:hover {
-    color: #206076;
+    color: #294d55;
     text-decoration: underline;
     background-color: transparent; }
   .btn-link:disabled:focus, .btn-link:disabled:hover {
@@ -2366,15 +2357,13 @@ button, #connect-button, .main-content.index #join-room #room-number-button,
 .main-content.index #create-room #create-new-room-button {
   padding: 0.75rem 1.25rem;
   font-size: 1.25rem;
-  line-height: 1.33333;
-  border-radius: 0.3rem; }
+  line-height: 1.33333; }
 
 .btn-sm, .btn-group-sm > .btn, .btn-group-sm > input[type="submit"], .btn-group-sm >
 button, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a {
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
-  line-height: 1.5;
-  border-radius: 0.2rem; }
+  line-height: 1.5; }
 
 .btn-block {
   display: block;
@@ -2441,13 +2430,12 @@ input[type="button"].btn-block {
   padding: 5px 0;
   margin: 2px 0 0;
   font-size: 1rem;
-  color: #5C6265;
+  color: #111;
   text-align: left;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem; }
+  border: 1px solid rgba(0, 0, 0, 0.15); }
 
 .dropdown-divider {
   height: 1px;
@@ -2650,16 +2638,6 @@ button:not(:first-child):not(:last-child):not(.dropdown-toggle) {
 .btn-group > .btn:first-child, #utility-nav #language-links .btn-group > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group > a:first-child, .btn-group > input[type="submit"]:first-child, .btn-group >
 button:first-child {
   margin-left: 0; }
-  .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:first-child:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li .btn-group > a:first-child:not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links .btn-group > a:first-child:not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:first-child:not(:last-child):not(.dropdown-toggle), .btn-group >
-  button:first-child:not(:last-child):not(.dropdown-toggle) {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0; }
-
-.btn-group > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group > a.nav-link:last-child:not(:first-child), #utility-nav #language-links #footer .colophon ul li .btn-group > a:last-child:not(:first-child), #footer .colophon ul li #utility-nav #language-links .btn-group > a:last-child:not(:first-child), .btn-group > input[type="submit"]:last-child:not(:first-child), .btn-group >
-button:last-child:not(:first-child),
-.btn-group > .dropdown-toggle:not(:first-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
 
 .btn-group > .btn-group {
   float: left; }
@@ -2667,17 +2645,6 @@ button:last-child:not(:first-child),
 .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group > .btn-group:not(:first-child):not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:not(:first-child):not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:not(:first-child):not(:last-child) > a, .btn-group > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group > .btn-group:not(:first-child):not(:last-child) >
 button {
   border-radius: 0; }
-
-.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:first-child:not(:last-child) > a:last-child, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:first-child:not(:last-child) > a:last-child, .btn-group > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group > .btn-group:first-child:not(:last-child) >
-button:last-child,
-.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0; }
-
-.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group > .btn-group:last-child:not(:first-child) > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group > .btn-group:last-child:not(:first-child) > a:first-child, .btn-group > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group > .btn-group:last-child:not(:first-child) >
-button:first-child {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
 
 .btn-group .dropdown-toggle:active,
 .btn-group.open .dropdown-toggle {
@@ -2779,30 +2746,15 @@ button:not(:first-child):not(:last-child) {
 
 .btn-group-vertical > .btn:first-child:not(:last-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:first-child:not(:last-child), #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a:first-child:not(:last-child), #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a:first-child:not(:last-child), .btn-group-vertical > input[type="submit"]:first-child:not(:last-child), .btn-group-vertical >
 button:first-child:not(:last-child) {
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; }
+  border-top-right-radius: 0.25rem; }
 
 .btn-group-vertical > .btn:last-child:not(:first-child), #utility-nav #language-links .btn-group-vertical > a.nav-link:last-child:not(:first-child), #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > a:last-child:not(:first-child), #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > a:last-child:not(:first-child), .btn-group-vertical > input[type="submit"]:last-child:not(:first-child), .btn-group-vertical >
 button:last-child:not(:first-child) {
-  border-bottom-left-radius: 0.25rem;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  border-bottom-left-radius: 0.25rem; }
 
 .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn, #utility-nav #language-links .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > a, .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > input[type="submit"], .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) >
 button {
   border-radius: 0; }
-
-.btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child, #utility-nav #language-links .btn-group-vertical > .btn-group:first-child:not(:last-child) > a.nav-link:last-child, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:first-child:not(:last-child) > a:last-child, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:first-child:not(:last-child) > a:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) > input[type="submit"]:last-child, .btn-group-vertical > .btn-group:first-child:not(:last-child) >
-button:last-child,
-.btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; }
-
-.btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child, #utility-nav #language-links .btn-group-vertical > .btn-group:last-child:not(:first-child) > a.nav-link:first-child, #utility-nav #language-links #footer .colophon ul li .btn-group-vertical > .btn-group:last-child:not(:first-child) > a:first-child, #footer .colophon ul li #utility-nav #language-links .btn-group-vertical > .btn-group:last-child:not(:first-child) > a:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) > input[type="submit"]:first-child, .btn-group-vertical > .btn-group:last-child:not(:first-child) >
-button:first-child {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
 
 [data-toggle="buttons"] > .btn input[type="radio"], #utility-nav #language-links [data-toggle="buttons"] > a.nav-link input[type="radio"], #utility-nav #language-links #footer .colophon ul li [data-toggle="buttons"] > a input[type="radio"], #footer .colophon ul li #utility-nav #language-links [data-toggle="buttons"] > a input[type="radio"], [data-toggle="buttons"] > input[type="submit"] input[type="radio"], [data-toggle="buttons"] >
 button input[type="radio"],
@@ -2861,14 +2813,6 @@ button input[type="checkbox"] {
 select, .clipboard-group
 select {
   display: table-cell; }
-  .input-group-addon:not(:first-child):not(:last-child), .clipboard-group label:not(:first-child):not(:last-child), .copy-link:not(:first-child):not(:last-child),
-  .input-group-btn:not(:first-child):not(:last-child),
-  .input-group .form-control:not(:first-child):not(:last-child), .clipboard-group .form-control:not(:first-child):not(:last-child),
-  .input-group input[type="text"]:not(:first-child):not(:last-child), .clipboard-group input[type="text"]:not(:first-child):not(:last-child),
-  .input-group
-  select:not(:first-child):not(:last-child), .clipboard-group
-  select:not(:first-child):not(:last-child) {
-    border-radius: 0; }
 
 .input-group-addon, .clipboard-group label,
 .clipboard-group .copy-link, .copy-link,
@@ -2886,8 +2830,7 @@ select {
   color: #79858A;
   text-align: center;
   background-color: #BCC1C3;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem; }
+  border: 1px solid #ccc; }
   .input-group-addon.form-control-sm,
   .input-group-sm > .input-group-addon, .clipboard-group
   .input-group-sm > label,
@@ -2921,8 +2864,7 @@ select {
   .input-group-sm > .input-group-btn > a.copy-link,
   .input-group-sm > .input-group-btn > .btn.copy-link, .clipboard-group label.form-control-sm, .form-control-sm.copy-link {
     padding: 0.275rem 0.75rem;
-    font-size: 0.875rem;
-    border-radius: 0.2rem; }
+    font-size: 0.875rem; }
   .input-group-addon.form-control-lg,
   .input-group-lg > .input-group-addon, .clipboard-group
   .input-group-lg > label,
@@ -2956,90 +2898,13 @@ select {
   .input-group-lg > .input-group-btn > a.copy-link,
   .input-group-lg > .input-group-btn > .btn.copy-link, .clipboard-group label.form-control-lg, .form-control-lg.copy-link {
     padding: 0.75rem 1.25rem;
-    font-size: 1.25rem;
-    border-radius: 0.3rem; }
+    font-size: 1.25rem; }
   .input-group-addon input[type="radio"], .clipboard-group label input[type="radio"], .copy-link input[type="radio"],
   .input-group-addon input[type="checkbox"], .clipboard-group label input[type="checkbox"], .copy-link input[type="checkbox"] {
     margin-top: 0; }
 
-.input-group .form-control:first-child, .clipboard-group .form-control:first-child, .input-group input[type="text"]:first-child, .clipboard-group input[type="text"]:first-child, .input-group
-select:first-child, .clipboard-group
-select:first-child,
-.input-group-addon:first-child,
-.clipboard-group label:first-child,
-.copy-link:first-child,
-.input-group-btn:first-child > .btn, #utility-nav #language-links
-.input-group-btn:first-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:first-child > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:first-child > a,
-.input-group-btn:first-child > input[type="submit"],
-.input-group-btn:first-child >
-button,
-.input-group-btn:first-child > .btn-group > .btn, #utility-nav #language-links
-.input-group-btn:first-child > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:first-child > .btn-group > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:first-child > .btn-group > a,
-.input-group-btn:first-child > .btn-group > input[type="submit"],
-.input-group-btn:first-child > .btn-group >
-button,
-.input-group-btn:first-child > .dropdown-toggle,
-.input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links
-.input-group-btn:last-child > a.nav-link:not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:last-child > a:not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:last-child > a:not(:last-child):not(.dropdown-toggle),
-.input-group-btn:last-child > input[type="submit"]:not(:last-child):not(.dropdown-toggle),
-.input-group-btn:last-child >
-button:not(:last-child):not(.dropdown-toggle),
-.input-group-btn:last-child > .btn-group:not(:last-child) > .btn, #utility-nav #language-links
-.input-group-btn:last-child > .btn-group:not(:last-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:last-child > .btn-group:not(:last-child) > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:last-child > .btn-group:not(:last-child) > a,
-.input-group-btn:last-child > .btn-group:not(:last-child) > input[type="submit"],
-.input-group-btn:last-child > .btn-group:not(:last-child) >
-button {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0; }
-
 .input-group-addon:first-child, .clipboard-group label:first-child, .copy-link:first-child {
   border-right: 0; }
-
-.input-group .form-control:last-child, .clipboard-group .form-control:last-child, .input-group input[type="text"]:last-child, .clipboard-group input[type="text"]:last-child, .input-group
-select:last-child, .clipboard-group
-select:last-child,
-.input-group-addon:last-child,
-.clipboard-group label:last-child,
-.copy-link:last-child,
-.input-group-btn:last-child > .btn, #utility-nav #language-links
-.input-group-btn:last-child > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:last-child > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:last-child > a,
-.input-group-btn:last-child > input[type="submit"],
-.input-group-btn:last-child >
-button,
-.input-group-btn:last-child > .btn-group > .btn, #utility-nav #language-links
-.input-group-btn:last-child > .btn-group > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:last-child > .btn-group > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:last-child > .btn-group > a,
-.input-group-btn:last-child > .btn-group > input[type="submit"],
-.input-group-btn:last-child > .btn-group >
-button,
-.input-group-btn:last-child > .dropdown-toggle,
-.input-group-btn:first-child > .btn:not(:first-child), #utility-nav #language-links
-.input-group-btn:first-child > a.nav-link:not(:first-child), #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:first-child > a:not(:first-child), #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:first-child > a:not(:first-child),
-.input-group-btn:first-child > input[type="submit"]:not(:first-child),
-.input-group-btn:first-child >
-button:not(:first-child),
-.input-group-btn:first-child > .btn-group:not(:first-child) > .btn, #utility-nav #language-links
-.input-group-btn:first-child > .btn-group:not(:first-child) > a.nav-link, #utility-nav #language-links #footer .colophon ul li
-.input-group-btn:first-child > .btn-group:not(:first-child) > a, #footer .colophon ul li #utility-nav #language-links
-.input-group-btn:first-child > .btn-group:not(:first-child) > a,
-.input-group-btn:first-child > .btn-group:not(:first-child) > input[type="submit"],
-.input-group-btn:first-child > .btn-group:not(:first-child) >
-button {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
 
 .input-group-addon:last-child, .clipboard-group label:last-child, .copy-link:last-child {
   border-left: 0; }
@@ -3267,8 +3132,7 @@ button {
   .nav-tabs .nav-link, #collaboration .nav .nav-link, #collaboration #language-links .nav-link, #collaboration #footer .colophon ul .nav-link, #footer .colophon #collaboration ul .nav-link, .nav-tabs #footer .colophon ul li a, #footer .colophon ul li .nav-tabs a, #footer .colophon ul li #collaboration .nav a, #footer .colophon ul li #collaboration #language-links a, #collaboration #footer .colophon ul li a, #footer .colophon #collaboration ul li a {
     display: block;
     padding: 0.5em 1em;
-    border: 1px solid transparent;
-    border-radius: 0.25rem 0.25rem 0 0; }
+    border: 1px solid transparent; }
     .nav-tabs .nav-link:focus, #collaboration .nav .nav-link:focus, #collaboration #language-links .nav-link:focus, #collaboration #footer .colophon ul .nav-link:focus, #footer .colophon #collaboration ul .nav-link:focus, .nav-tabs #footer .colophon ul li a:focus, #footer .colophon ul li .nav-tabs a:focus, #footer .colophon ul li #collaboration .nav a:focus, #footer .colophon ul li #collaboration #language-links a:focus, #collaboration #footer .colophon ul li a:focus, #footer .colophon #collaboration ul li a:focus, .nav-tabs .nav-link:hover, #collaboration .nav .nav-link:hover, #collaboration #language-links .nav-link:hover, #collaboration #footer .colophon ul .nav-link:hover, #footer .colophon #collaboration ul .nav-link:hover, .nav-tabs #footer .colophon ul li a:hover, #footer .colophon ul li .nav-tabs a:hover, #footer .colophon ul li #collaboration .nav a:hover, #footer .colophon ul li #collaboration #language-links a:hover, #collaboration #footer .colophon ul li a:hover, #footer .colophon #collaboration ul li a:hover {
       border-color: #BCC1C3 #BCC1C3 #ddd; }
     .nav-tabs .nav-link.disabled, #collaboration .nav .nav-link.disabled, #collaboration #language-links .nav-link.disabled, #collaboration #footer .colophon ul .nav-link.disabled, #footer .colophon #collaboration ul .nav-link.disabled, .nav-tabs #footer .colophon ul li a.disabled, #footer .colophon ul li .nav-tabs a.disabled, #footer .colophon ul li #collaboration .nav a.disabled, #footer .colophon ul li #collaboration #language-links a.disabled, #collaboration #footer .colophon ul li a.disabled, #footer .colophon #collaboration ul li a.disabled, .nav-tabs .nav-link.disabled:focus, #collaboration .nav .nav-link.disabled:focus, #collaboration #language-links .nav-link.disabled:focus, #collaboration #footer .colophon ul .nav-link.disabled:focus, #footer .colophon #collaboration ul .nav-link.disabled:focus, .nav-tabs #footer .colophon ul li a.disabled:focus, #footer .colophon ul li .nav-tabs a.disabled:focus, #footer .colophon ul li #collaboration .nav a.disabled:focus, #footer .colophon ul li #collaboration #language-links a.disabled:focus, #collaboration #footer .colophon ul li a.disabled:focus, #footer .colophon #collaboration ul li a.disabled:focus, .nav-tabs .nav-link.disabled:hover, #collaboration .nav .nav-link.disabled:hover, #collaboration #language-links .nav-link.disabled:hover, #collaboration #footer .colophon ul .nav-link.disabled:hover, #footer .colophon #collaboration ul .nav-link.disabled:hover, .nav-tabs #footer .colophon ul li a.disabled:hover, #footer .colophon ul li .nav-tabs a.disabled:hover, #footer .colophon ul li #collaboration .nav a.disabled:hover, #footer .colophon ul li #collaboration #language-links a.disabled:hover, #collaboration #footer .colophon ul li a.disabled:hover, #footer .colophon #collaboration ul li a.disabled:hover {
@@ -3313,8 +3177,7 @@ button {
 
 .nav-pills .nav-link, #language-links .nav-link, .nav-pills #footer .colophon ul li a, #footer .colophon ul li .nav-pills a, #language-links #footer .colophon ul li a, #footer .colophon ul li #language-links a {
   display: block;
-  padding: 0.5em 1em;
-  border-radius: 0.25rem; }
+  padding: 0.5em 1em; }
 
 .nav-pills .nav-link.active, #language-links .nav-link.active, .nav-pills #footer .colophon ul li a.active, #footer .colophon ul li .nav-pills a.active, #language-links #footer .colophon ul li a.active, #footer .colophon ul li #language-links a.active, .nav-pills .nav-link.active:focus, #language-links .nav-link.active:focus, .nav-pills #footer .colophon ul li a.active:focus, #footer .colophon ul li .nav-pills a.active:focus, #language-links #footer .colophon ul li a.active:focus, #footer .colophon ul li #language-links a.active:focus, .nav-pills .nav-link.active:hover, #language-links .nav-link.active:hover, .nav-pills #footer .colophon ul li a.active:hover, #footer .colophon ul li .nav-pills a.active:hover, #language-links #footer .colophon ul li a.active:hover, #footer .colophon ul li #language-links a.active:hover,
 .nav-pills .nav-item.open .nav-link, #language-links .nav-item.open .nav-link,
@@ -3356,9 +3219,7 @@ button {
   display: block; }
 
 .nav-tabs .dropdown-menu, #collaboration .nav .dropdown-menu, #collaboration #language-links .dropdown-menu, #collaboration #footer .colophon ul .dropdown-menu, #footer .colophon #collaboration ul .dropdown-menu {
-  margin-top: -1px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  margin-top: -1px; }
 
 .navbar, #footer {
   position: relative;
@@ -3367,15 +3228,9 @@ button {
     content: "";
     display: table;
     clear: both; }
-  @media (min-width: 544px) {
-    .navbar, #footer {
-      border-radius: 0.25rem; } }
 
 .navbar-full {
   z-index: 1000; }
-  @media (min-width: 544px) {
-    .navbar-full {
-      border-radius: 0; } }
 
 .navbar-fixed-top, #utility-nav,
 .navbar-fixed-bottom,
@@ -3384,11 +3239,6 @@ button {
   right: 0;
   left: 0;
   z-index: 1030; }
-  @media (min-width: 544px) {
-    .navbar-fixed-top, #utility-nav,
-    .navbar-fixed-bottom,
-    #footer {
-      border-radius: 0; } }
 
 .navbar-fixed-top, #utility-nav {
   top: 0; }
@@ -3401,9 +3251,6 @@ button {
   top: 0;
   z-index: 1030;
   width: 100%; }
-  @media (min-width: 544px) {
-    .navbar-sticky-top {
-      border-radius: 0; } }
 
 .navbar-brand, #tagline, #welcome-text {
   float: left;
@@ -3432,8 +3279,7 @@ button {
   font-size: 1.25rem;
   line-height: 1;
   background: none;
-  border: 1px solid transparent;
-  border-radius: 0.25rem; }
+  border: 1px solid transparent; }
   .navbar-toggler:focus, .navbar-toggler:hover {
     text-decoration: none; }
 
@@ -3646,8 +3492,7 @@ button {
   display: block;
   margin-bottom: 0.75rem;
   background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 0.25rem; }
+  border: 1px solid #e5e5e5; }
 
 .card-block, fieldset, .main-content.index #join-room fieldset,
 .main-content.index #create-room fieldset {
@@ -3669,55 +3514,17 @@ button {
 .card-link + .card-link {
   margin-left: 1.25rem; }
 
-.card > .list-group:first-child .list-group-item:first-child, #participant-list .participant-list > .list-group:first-child .list-group-item:first-child,
-#participant-list .channel-list > .list-group:first-child .list-group-item:first-child,
-#channel-list .participant-list > .list-group:first-child .list-group-item:first-child,
-#channel-list .channel-list > .list-group:first-child .list-group-item:first-child, #participant-list .card > ul:first-child .list-group-item:first-child, #participant-list .participant-list > ul:first-child .list-group-item:first-child, #participant-list .channel-list > ul:first-child .list-group-item:first-child,
-#channel-list .card > ul:first-child .list-group-item:first-child,
-#channel-list .participant-list > ul:first-child .list-group-item:first-child,
-#channel-list .channel-list > ul:first-child .list-group-item:first-child, .card > .list-group:first-child #participant-list li:first-child, #participant-list .card > .list-group:first-child li:first-child, #participant-list .participant-list > .list-group:first-child li:first-child, #participant-list .channel-list > .list-group:first-child li:first-child, #participant-list .card > ul:first-child li:first-child, #participant-list .participant-list > ul:first-child li:first-child, #participant-list .channel-list > ul:first-child li:first-child, .card > .list-group:first-child
-#channel-list li:first-child,
-#channel-list .card > .list-group:first-child li:first-child,
-#channel-list .participant-list > .list-group:first-child li:first-child,
-#channel-list .channel-list > .list-group:first-child li:first-child,
-#channel-list .card > ul:first-child li:first-child,
-#channel-list .participant-list > ul:first-child li:first-child,
-#channel-list .channel-list > ul:first-child li:first-child {
-  border-radius: 0.25rem 0.25rem 0 0; }
-
-.card > .list-group:last-child .list-group-item:last-child, #participant-list .participant-list > .list-group:last-child .list-group-item:last-child,
-#participant-list .channel-list > .list-group:last-child .list-group-item:last-child,
-#channel-list .participant-list > .list-group:last-child .list-group-item:last-child,
-#channel-list .channel-list > .list-group:last-child .list-group-item:last-child, #participant-list .card > ul:last-child .list-group-item:last-child, #participant-list .participant-list > ul:last-child .list-group-item:last-child, #participant-list .channel-list > ul:last-child .list-group-item:last-child,
-#channel-list .card > ul:last-child .list-group-item:last-child,
-#channel-list .participant-list > ul:last-child .list-group-item:last-child,
-#channel-list .channel-list > ul:last-child .list-group-item:last-child, .card > .list-group:last-child #participant-list li:last-child, #participant-list .card > .list-group:last-child li:last-child, #participant-list .participant-list > .list-group:last-child li:last-child, #participant-list .channel-list > .list-group:last-child li:last-child, #participant-list .card > ul:last-child li:last-child, #participant-list .participant-list > ul:last-child li:last-child, #participant-list .channel-list > ul:last-child li:last-child, .card > .list-group:last-child
-#channel-list li:last-child,
-#channel-list .card > .list-group:last-child li:last-child,
-#channel-list .participant-list > .list-group:last-child li:last-child,
-#channel-list .channel-list > .list-group:last-child li:last-child,
-#channel-list .card > ul:last-child li:last-child,
-#channel-list .participant-list > ul:last-child li:last-child,
-#channel-list .channel-list > ul:last-child li:last-child {
-  border-radius: 0 0 0.25rem 0.25rem; }
-
 .card-header, #participant-list h3,
 #channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
 .main-content.index #create-room h3 {
   padding: 0.75rem 1.25rem;
   background-color: #f5f5f5;
   border-bottom: 1px solid #e5e5e5; }
-  .card-header:first-child, #participant-list h3:first-child,
-  #channel-list h3:first-child, .main-content.register h3:first-child, .main-content.index #join-room h3:first-child,
-  .main-content.index #create-room h3:first-child {
-    border-radius: 0.25rem 0.25rem 0 0; }
 
 .card-footer {
   padding: 0.75rem 1.25rem;
   background-color: #f5f5f5;
   border-top: 1px solid #e5e5e5; }
-  .card-footer:last-child {
-    border-radius: 0 0 0.25rem 0.25rem; }
 
 .card-primary {
   background-color: #427C89;
@@ -3794,9 +3601,6 @@ button {
   margin-bottom: 0;
   border-left: 0; }
 
-.card-img {
-  border-radius: 0.25rem; }
-
 .card-img-overlay {
   position: absolute;
   top: 0;
@@ -3804,12 +3608,6 @@ button {
   bottom: 0;
   left: 0;
   padding: 1.25rem; }
-
-.card-img-top {
-  border-radius: 0.25rem 0.25rem 0 0; }
-
-.card-img-bottom {
-  border-radius: 0 0 0.25rem 0.25rem; }
 
 @media (min-width: 544px) {
   .card-deck {
@@ -3870,88 +3668,7 @@ button {
       #channel-list .channel-list + .channel-list,
       #channel-list .card-group .channel-list + .channel-list {
         margin-left: 0;
-        border-left: 0; }
-      .card-group .card:first-child, .card-group #participant-list .participant-list:first-child, #participant-list .card-group .participant-list:first-child, .card-group
-      #participant-list .channel-list:first-child,
-      #participant-list .card-group .channel-list:first-child, .card-group
-      #channel-list .participant-list:first-child,
-      #channel-list .card-group .participant-list:first-child, .card-group
-      #channel-list .channel-list:first-child,
-      #channel-list .card-group .channel-list:first-child {
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0; }
-        .card-group .card:first-child .card-img-top, .card-group #participant-list .participant-list:first-child .card-img-top, #participant-list .card-group .participant-list:first-child .card-img-top, .card-group
-        #participant-list .channel-list:first-child .card-img-top,
-        #participant-list .card-group .channel-list:first-child .card-img-top, .card-group
-        #channel-list .participant-list:first-child .card-img-top,
-        #channel-list .card-group .participant-list:first-child .card-img-top, .card-group
-        #channel-list .channel-list:first-child .card-img-top,
-        #channel-list .card-group .channel-list:first-child .card-img-top {
-          border-top-right-radius: 0; }
-        .card-group .card:first-child .card-img-bottom, .card-group #participant-list .participant-list:first-child .card-img-bottom, #participant-list .card-group .participant-list:first-child .card-img-bottom, .card-group
-        #participant-list .channel-list:first-child .card-img-bottom,
-        #participant-list .card-group .channel-list:first-child .card-img-bottom, .card-group
-        #channel-list .participant-list:first-child .card-img-bottom,
-        #channel-list .card-group .participant-list:first-child .card-img-bottom, .card-group
-        #channel-list .channel-list:first-child .card-img-bottom,
-        #channel-list .card-group .channel-list:first-child .card-img-bottom {
-          border-bottom-right-radius: 0; }
-      .card-group .card:last-child, .card-group #participant-list .participant-list:last-child, #participant-list .card-group .participant-list:last-child, .card-group
-      #participant-list .channel-list:last-child,
-      #participant-list .card-group .channel-list:last-child, .card-group
-      #channel-list .participant-list:last-child,
-      #channel-list .card-group .participant-list:last-child, .card-group
-      #channel-list .channel-list:last-child,
-      #channel-list .card-group .channel-list:last-child {
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0; }
-        .card-group .card:last-child .card-img-top, .card-group #participant-list .participant-list:last-child .card-img-top, #participant-list .card-group .participant-list:last-child .card-img-top, .card-group
-        #participant-list .channel-list:last-child .card-img-top,
-        #participant-list .card-group .channel-list:last-child .card-img-top, .card-group
-        #channel-list .participant-list:last-child .card-img-top,
-        #channel-list .card-group .participant-list:last-child .card-img-top, .card-group
-        #channel-list .channel-list:last-child .card-img-top,
-        #channel-list .card-group .channel-list:last-child .card-img-top {
-          border-top-left-radius: 0; }
-        .card-group .card:last-child .card-img-bottom, .card-group #participant-list .participant-list:last-child .card-img-bottom, #participant-list .card-group .participant-list:last-child .card-img-bottom, .card-group
-        #participant-list .channel-list:last-child .card-img-bottom,
-        #participant-list .card-group .channel-list:last-child .card-img-bottom, .card-group
-        #channel-list .participant-list:last-child .card-img-bottom,
-        #channel-list .card-group .participant-list:last-child .card-img-bottom, .card-group
-        #channel-list .channel-list:last-child .card-img-bottom,
-        #channel-list .card-group .channel-list:last-child .card-img-bottom {
-          border-bottom-left-radius: 0; }
-      .card-group .card:not(:first-child):not(:last-child), .card-group #participant-list .participant-list:not(:first-child):not(:last-child), #participant-list .card-group .participant-list:not(:first-child):not(:last-child), .card-group
-      #participant-list .channel-list:not(:first-child):not(:last-child),
-      #participant-list .card-group .channel-list:not(:first-child):not(:last-child), .card-group
-      #channel-list .participant-list:not(:first-child):not(:last-child),
-      #channel-list .card-group .participant-list:not(:first-child):not(:last-child), .card-group
-      #channel-list .channel-list:not(:first-child):not(:last-child),
-      #channel-list .card-group .channel-list:not(:first-child):not(:last-child) {
-        border-radius: 0; }
-        .card-group .card:not(:first-child):not(:last-child) .card-img-top, .card-group #participant-list .participant-list:not(:first-child):not(:last-child) .card-img-top, #participant-list .card-group .participant-list:not(:first-child):not(:last-child) .card-img-top, .card-group
-        #participant-list .channel-list:not(:first-child):not(:last-child) .card-img-top,
-        #participant-list .card-group .channel-list:not(:first-child):not(:last-child) .card-img-top, .card-group
-        #channel-list .participant-list:not(:first-child):not(:last-child) .card-img-top,
-        #channel-list .card-group .participant-list:not(:first-child):not(:last-child) .card-img-top, .card-group
-        #channel-list .channel-list:not(:first-child):not(:last-child) .card-img-top,
-        #channel-list .card-group .channel-list:not(:first-child):not(:last-child) .card-img-top,
-        .card-group .card:not(:first-child):not(:last-child) .card-img-bottom,
-        .card-group #participant-list .participant-list:not(:first-child):not(:last-child) .card-img-bottom, #participant-list
-        .card-group .participant-list:not(:first-child):not(:last-child) .card-img-bottom,
-        .card-group
-        #participant-list .channel-list:not(:first-child):not(:last-child) .card-img-bottom,
-        #participant-list
-        .card-group .channel-list:not(:first-child):not(:last-child) .card-img-bottom,
-        .card-group
-        #channel-list .participant-list:not(:first-child):not(:last-child) .card-img-bottom,
-        #channel-list
-        .card-group .participant-list:not(:first-child):not(:last-child) .card-img-bottom,
-        .card-group
-        #channel-list .channel-list:not(:first-child):not(:last-child) .card-img-bottom,
-        #channel-list
-        .card-group .channel-list:not(:first-child):not(:last-child) .card-img-bottom {
-          border-radius: 0; } }
+        border-left: 0; } }
 
 @media (min-width: 544px) {
   .card-columns {
@@ -3971,8 +3688,7 @@ button {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #BCC1C3;
-  border-radius: 0.25rem; }
+  background-color: #BCC1C3; }
   .breadcrumb::after {
     content: "";
     display: table;
@@ -3991,18 +3707,12 @@ button {
   display: inline-block;
   padding-left: 0;
   margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 0.25rem; }
+  margin-bottom: 1rem; }
 
 .page-item {
   display: inline; }
   .page-item:first-child .page-link {
-    margin-left: 0;
-    border-bottom-left-radius: 0.25rem;
-    border-top-left-radius: 0.25rem; }
-  .page-item:last-child .page-link {
-    border-bottom-right-radius: 0.25rem;
-    border-top-right-radius: 0.25rem; }
+    margin-left: 0; }
   .page-item.active .page-link, .page-item.active .page-link:focus, .page-item.active .page-link:hover {
     z-index: 2;
     color: #fff;
@@ -4021,12 +3731,12 @@ button {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.5;
-  color: #3091B2;
+  color: #427C89;
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #ddd; }
   .page-link:focus, .page-link:hover {
-    color: #206076;
+    color: #294d55;
     background-color: #BCC1C3;
     border-color: #ddd; }
 
@@ -4035,26 +3745,10 @@ button {
   font-size: 1.25rem;
   line-height: 1.33333; }
 
-.pagination-lg .page-item:first-child .page-link {
-  border-bottom-left-radius: 0.3rem;
-  border-top-left-radius: 0.3rem; }
-
-.pagination-lg .page-item:last-child .page-link {
-  border-bottom-right-radius: 0.3rem;
-  border-top-right-radius: 0.3rem; }
-
 .pagination-sm .page-link {
   padding: 0.275rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5; }
-
-.pagination-sm .page-item:first-child .page-link {
-  border-bottom-left-radius: 0.2rem;
-  border-top-left-radius: 0.2rem; }
-
-.pagination-sm .page-item:last-child .page-link {
-  border-bottom-right-radius: 0.2rem;
-  border-top-right-radius: 0.2rem; }
 
 .pager {
   padding-left: 0;
@@ -4107,8 +3801,7 @@ button {
   color: #fff;
   text-align: center;
   white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem; }
+  vertical-align: baseline; }
   .label:empty, #utility-nav #language-links a.nav-link:empty, #utility-nav #language-links #footer .colophon ul li a:empty, #footer .colophon ul li #utility-nav #language-links a:empty, .info span:empty,
   .info button:empty,
   .controls span:empty,
@@ -4180,8 +3873,7 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 .controls span,
 .controls button {
   padding-right: .6em;
-  padding-left: .6em;
-  border-radius: 10rem; }
+  padding-left: .6em; }
 
 .label-default {
   background-color: #A2A8AB; }
@@ -4216,8 +3908,7 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 .jumbotron, .main-content.index .welcome-section {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #BCC1C3;
-  border-radius: 0.3rem; }
+  background-color: #BCC1C3; }
   @media (min-width: 544px) {
     .jumbotron, .main-content.index .welcome-section {
       padding: 4rem 2rem; } }
@@ -4227,14 +3918,12 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 
 .jumbotron-fluid {
   padding-right: 0;
-  padding-left: 0;
-  border-radius: 0; }
+  padding-left: 0; }
 
 .alert {
   padding: 15px;
   margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem; }
+  border: 1px solid transparent; }
   .alert > p,
   .alert > ul {
     margin-bottom: 0; }
@@ -4309,8 +3998,7 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
   appearance: none; }
 
 .progress[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 0.25rem; }
+  background-color: #eee; }
 
 .progress[value]::-webkit-progress-value::before {
   content: attr(value); }
@@ -4326,8 +4014,7 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 
 @media screen and (min-width: 0\0) {
   .progress {
-    background-color: #eee;
-    border-radius: 0.25rem; }
+    background-color: #eee; }
   .progress-bar {
     display: inline-block;
     height: 1rem;
@@ -4464,15 +4151,9 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
   margin-bottom: -1px;
   background-color: #fff;
   border: 1px solid #ddd; }
-  .list-group-item:first-child, #participant-list li:first-child,
-  #channel-list li:first-child {
-    border-top-right-radius: 0.25rem;
-    border-top-left-radius: 0.25rem; }
   .list-group-item:last-child, #participant-list li:last-child,
   #channel-list li:last-child {
-    margin-bottom: 0;
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem; }
+    margin-bottom: 0; }
 
 .list-group-flush .list-group-item, #participant-list ul .list-group-item,
 #channel-list ul .list-group-item, .list-group-flush #participant-list li, #participant-list .list-group-flush li, #participant-list ul li, .list-group-flush
@@ -4882,7 +4563,7 @@ button.close {
       left: 50%;
       margin-left: -5px;
       border-width: 5px 5px 0;
-      border-top-color: #ddd; }
+      border-top-color: #000; }
   .tooltip.tooltip-right, .tooltip.bs-tether-element-attached-left {
     padding: 0 5px;
     margin-left: 3px; }
@@ -4891,7 +4572,7 @@ button.close {
       left: 0;
       margin-top: -5px;
       border-width: 5px 5px 5px 0;
-      border-right-color: #ddd; }
+      border-right-color: #000; }
   .tooltip.tooltip-bottom, .tooltip.bs-tether-element-attached-top {
     padding: 5px 0;
     margin-top: 3px; }
@@ -4900,7 +4581,7 @@ button.close {
       left: 50%;
       margin-left: -5px;
       border-width: 0 5px 5px;
-      border-bottom-color: #ddd; }
+      border-bottom-color: #000; }
   .tooltip.tooltip-left, .tooltip.bs-tether-element-attached-right {
     padding: 0 5px;
     margin-left: -3px; }
@@ -4909,15 +4590,14 @@ button.close {
       right: 0;
       margin-top: -5px;
       border-width: 5px 0 5px 5px;
-      border-left-color: #ddd; }
+      border-left-color: #000; }
 
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #5C6265;
+  color: #fff;
   text-align: center;
-  background-color: #ddd;
-  border-radius: 0.25rem; }
+  background-color: #000; }
 
 .tooltip-arrow {
   position: absolute;
@@ -4952,8 +4632,7 @@ button.close {
   font-size: 0.875rem;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem; }
+  border: 1px solid rgba(0, 0, 0, 0.2); }
   .popover.popover-top, .popover.bs-tether-element-attached-bottom {
     margin-top: -10px; }
     .popover.popover-top .popover-arrow, .popover.bs-tether-element-attached-bottom .popover-arrow {
@@ -5016,8 +4695,7 @@ button.close {
   margin: 0;
   font-size: 1rem;
   background-color: #f7f7f7;
-  border-bottom: 1px solid #ebebeb;
-  border-radius: -0.7rem -0.7rem 0 0; }
+  border-bottom: 1px solid #ebebeb; }
 
 .popover-content {
   padding: 9px 14px; }
@@ -5381,12 +5059,14 @@ a.text-warning:focus, a.text-warning:hover {
 a.text-danger:focus, a.text-danger:hover {
   color: #cd4713; }
 
-.bg-inverse, #utility-nav {
+.bg-inverse, #utility-nav, .clipboard-group label, .card-header, #participant-list h3,
+#channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
+.main-content.index #create-room h3 {
   color: #BCC1C3;
   background-color: #5C6265; }
 
 .bg-faded {
-  background-color: #eee; }
+  background-color: #f7f7f9; }
 
 .bg-primary {
   color: #fff !important;
@@ -7774,6 +7454,9 @@ body,
 html {
   min-height: 100%; }
 
+#content {
+  margin-top: 2.75em; }
+
 /**
  * Basic typography style for copy text
  */
@@ -7799,7 +7482,9 @@ h3 {
     h3 {
       font-size: 1.5rem; } }
 
-.bg-inverse a, #utility-nav a {
+.bg-inverse a, #utility-nav a, .clipboard-group label a, .card-header a, #participant-list h3 a,
+#channel-list h3 a, .main-content.register h3 a, .main-content.index #join-room h3 a,
+.main-content.index #create-room h3 a {
   color: #fff; }
 
 #utility-nav #language-links li {
@@ -7815,7 +7500,7 @@ h3 {
 
 #welcome-text {
   font-size: 80%;
-  color: #444; }
+  color: #333; }
 
 #footer {
   background-color: #A2A8AB; }
@@ -7844,23 +7529,23 @@ aside:last-child {
 
 .btn-disabled, .controls .muted, .controls .lower-hand {
   color: #fff;
-  background-color: #ddd;
-  border-color: #ddd; }
+  background-color: #BCC1C3;
+  border-color: #BCC1C3; }
   .btn-disabled:hover, .controls .muted:hover, .controls .lower-hand:hover {
     color: #fff;
-    background-color: #c4c4c4;
-    border-color: #bebebe; }
+    background-color: #a1a8ab;
+    border-color: #9ca3a6; }
   .btn-disabled:focus, .controls .muted:focus, .controls .lower-hand:focus, .btn-disabled.focus, .controls .focus.muted, .controls .focus.lower-hand {
     color: #fff;
-    background-color: #c4c4c4;
-    border-color: #bebebe; }
+    background-color: #a1a8ab;
+    border-color: #9ca3a6; }
   .btn-disabled:active, .controls .muted:active, .controls .lower-hand:active, .btn-disabled.active, .controls .active.muted, .controls .active.lower-hand,
   .open > .btn-disabled.dropdown-toggle, .controls
   .open > .dropdown-toggle.muted, .controls
   .open > .dropdown-toggle.lower-hand {
     color: #fff;
-    background-color: #c4c4c4;
-    border-color: #bebebe;
+    background-color: #a1a8ab;
+    border-color: #9ca3a6;
     background-image: none; }
     .btn-disabled:active:hover, .controls .muted:active:hover, .controls .lower-hand:active:hover, .btn-disabled:active:focus, .controls .muted:active:focus, .controls .lower-hand:active:focus, .btn-disabled:active.focus, .controls .muted:active.focus, .controls .lower-hand:active.focus, .btn-disabled.active:hover, .controls .active.muted:hover, .controls .active.lower-hand:hover, .btn-disabled.active:focus, .controls .active.muted:focus, .controls .active.lower-hand:focus, .btn-disabled.active.focus, .controls .active.focus.muted, .controls .active.focus.lower-hand,
     .open > .btn-disabled.dropdown-toggle:hover, .controls
@@ -7873,14 +7558,14 @@ aside:last-child {
     .open > .dropdown-toggle.focus.muted, .controls
     .open > .dropdown-toggle.focus.lower-hand {
       color: #fff;
-      background-color: #b2b2b2;
-      border-color: #9d9d9d; }
+      background-color: #8e979a;
+      border-color: #798387; }
   .btn-disabled.disabled:focus, .controls .disabled.muted:focus, .controls .disabled.lower-hand:focus, .btn-disabled.disabled.focus, .controls .disabled.focus.muted, .controls .disabled.focus.lower-hand, .btn-disabled:disabled:focus, .controls .muted:disabled:focus, .controls .lower-hand:disabled:focus, .btn-disabled:disabled.focus, .controls .muted:disabled.focus, .controls .lower-hand:disabled.focus {
-    background-color: #ddd;
-    border-color: #ddd; }
+    background-color: #BCC1C3;
+    border-color: #BCC1C3; }
   .btn-disabled.disabled:hover, .controls .disabled.muted:hover, .controls .disabled.lower-hand:hover, .btn-disabled:disabled:hover, .controls .muted:disabled:hover, .controls .lower-hand:disabled:hover {
-    background-color: #ddd;
-    border-color: #ddd; }
+    background-color: #BCC1C3;
+    border-color: #BCC1C3; }
 
 .btn, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, input[type="submit"],
 button {
@@ -7906,6 +7591,10 @@ button a {
 label {
   font-weight: bold;
   color: #3091B2; }
+
+.clipboard-group label {
+  background-color: #79858A;
+  color: #fff; }
 
 .clipboard-group .copy-link {
   color: #fff;
@@ -8025,23 +7714,23 @@ label {
 
 /* '' */
 .tooltip.tooltip-top .tooltip-arrow, .tooltip.bs-tether-element-attached-bottom .tooltip-arrow {
-  border-top-color: #ddd; }
+  border-top-color: #000; }
 
 .tooltip.tooltip-right .tooltip-arrow, .tooltip.bs-tether-element-attached-left .tooltip-arrow {
-  border-right-color: #ddd; }
+  border-right-color: #000; }
 
 .tooltip.tooltip-bottom .tooltip-arrow, .tooltip.bs-tether-element-attached-top .tooltip-arrow {
-  border-bottom-color: #ddd; }
+  border-bottom-color: #000; }
 
 .tooltip.tooltip-left .tooltip-arrow, .tooltip.bs-tether-element-attached-right .tooltip-arrow {
-  border-left-color: #ddd; }
+  border-left-color: #000; }
 
 .tooltip-inner {
-  background-color: #ddd;
-  color: #5C6265; }
+  background-color: #000;
+  color: #fff; }
 
 #collaboration .tab-content {
-  background-color: #eee; }
+  background-color: #f7f7f9; }
   #collaboration .tab-content iframe {
     margin-top: 40px;
     height: 90%; }
@@ -8055,6 +7744,12 @@ label {
   @media (min-width: 768px) {
     #collaboration {
       margin-bottom: 5em; } }
+
+.card-header, #participant-list h3,
+#channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
+.main-content.index #create-room h3 {
+  background-color: #79858A;
+  color: #fff; }
 
 .main-content.index .welcome-section {
   padding-top: 1.75em;
@@ -8080,96 +7775,3 @@ label {
 .main-content.room #mute-controls,
 .main-content.room #interpretation-options {
   display: none; }
-
-body {
-  background-color: #eee; }
-
-.container, #header, #content {
-  background-color: #fff;
-  border-right: 1px solid #eee;
-  border-left: 1px solid #eee; }
-
-body {
-  padding-top: 62px; }
-
-body, html {
-  height: 100%; }
-
-/* workaround modal-open padding issue */
-body.modal-open {
-  padding-right: 0 !important; }
-
-/* workaround bs 4 horizontal scrollbar */
-.container-fluid > .row, .container-fluid > .main-content.index {
-  margin-left: -15px;
-  margin-right: -10px; }
-
-#sidebar {
-  padding-left: 0; }
-
-/*
- * Off Canvas at medium breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 48em) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out; }
-  .row-offcanvas-left
-.sidebar-offcanvas {
-    left: -33%; }
-  .row-offcanvas-left.active {
-    left: 33%; }
-  .sidebar-offcanvas {
-    background-color: #f6f6f6;
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%; } }
-
-/*
- * Off Canvas wider at sm breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 34em) {
-  .row-offcanvas-left
-.sidebar-offcanvas {
-    left: -45%; }
-  .row-offcanvas-left.active {
-    left: 45%; }
-  .sidebar-offcanvas {
-    width: 45%; } }
-
-/* responsive nav stacked liked 3.x */
-@media (max-width: 34em) {
-  .navbar .navbar-brand, #footer .navbar-brand, .navbar #tagline, #footer #tagline, .navbar #welcome-text, #footer #welcome-text {
-    float: none;
-    display: block; }
-  .navbar .navbar-nav > .nav-item, #footer .navbar-nav > .nav-item, .navbar #language-links > .nav-item, #footer #language-links > .nav-item, #footer .colophon .navbar ul > .nav-item, #footer .colophon ul > .nav-item, #footer .colophon ul .navbar .navbar-nav > li, #footer .colophon ul .navbar-nav > li, #footer .colophon ul .navbar #language-links > li, #footer .colophon ul #language-links > li, #footer .colophon .navbar ul > li, #footer .colophon ul > li {
-    float: none;
-    margin-left: .1rem; }
-  .navbar .navbar-nav, #footer .navbar-nav, .navbar #language-links, #footer #language-links, #footer .colophon ul {
-    float: none !important; } }
-
-.card-block .rotate, fieldset .rotate, .main-content.index #join-room fieldset .rotate,
-.main-content.index #create-room fieldset .rotate {
-  z-index: 8;
-  float: right;
-  height: 100%; }
-
-.card-block .rotate i, fieldset .rotate i, .main-content.index #join-room fieldset .rotate i,
-.main-content.index #create-room fieldset .rotate i {
-  color: rgba(20, 20, 20, 0.15);
-  position: absolute;
-  left: 0;
-  left: auto;
-  right: -10px;
-  bottom: 0;
-  display: block;
-  -webkit-transform: rotate(-44deg);
-  -moz-transform: rotate(-44deg);
-  -o-transform: rotate(-44deg);
-  -ms-transform: rotate(-44deg);
-  transform: rotate(-44deg); }

@@ -1,0 +1,34 @@
+// Cerulean 3.3.6
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base:              #111 !default;
+$gray-darker:            #333 !default; // #222
+$gray-dark:              #5C6265 !default;   // #333
+$gray:                   #79858A !default; // #555
+$gray-light:             #A2A8AB !default; // #777
+$gray-lighter:           #BCC1C3 !default; // #eee
+$gray-lightest:          #f7f7f9 !default;
+
+
+$brand-primary:         #427C89 !default; //#337ab7
+$brand-success:         #42A084 !default; //#5cb85c
+$brand-info:            #3091B2 !default; //#5bc0de
+$brand-warning:         #BB992F !default; //#f0ad4e
+$brand-danger:          #EB5E28 !default; //#d9534f
+
+$white:     #fff;
+$black:     #000;
+
+$brand-default:         $gray !default;
+$brand-disabled:        $gray-lighter !default;
+$bg-disabled:           $gray-lighter !default;
+$font-disabled:         $gray-darker !default; 
+
+$body-bg:                    #fff !default;
+$body-color:                 $gray-base !default;
