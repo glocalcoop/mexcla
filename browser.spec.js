@@ -47,6 +47,14 @@ describe('home page', function(){
   });
 
   describe('Create new room ', function(){
+    var browser2;
+
+    // before(function(){
+    //   browser2 = wd.promiseChainRemote();
+    //   return browser2.init({browserName: 'chrome'});
+    // });
+
+    
     it('should register a new user and go to a new room page', function(){
       return browser
         .elementByCssSelector('#user-name').type('slothrop')
@@ -55,8 +63,16 @@ describe('home page', function(){
         .isDisplayed().should.become(false)
         .elementById('welcome-text').text().should.become('Hi, slothrop');
     });
+
+    it('when a new user joins the room, everyone else should get notified', function(done){
+      browser
+        .eval("window.location.href")
+        .then(function(location) {
+          console.log(location);
+        })
+        .nodeify(done);
+    });
   });
-  
 });
 
 

@@ -8,6 +8,11 @@ var _ = require('underscore');
 //var expressSession = require('express-session');
 //var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(8080, function(){
+  console.log('Mexcla is starting up at localhost:8080');
+});
 
 mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 
@@ -162,9 +167,6 @@ app.get('/room/:roomnum/leave', function(req,res){
   });
 });
 
-app.listen(8080, function(){
-  console.log('Mexcla is starting up at localhost:8080');
-});
 
 
 //FUNCTIONS//
