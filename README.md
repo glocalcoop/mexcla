@@ -6,11 +6,11 @@ Multi-lingual conferencing system built with node.js and webrtc2sip
 
 ### RUN
 
-Ensure the database URI is correct in app.js: `mongoose.connect('mongodb://host:port/database')`
+Lanuch mongod: ``` npm run mongod `` or:
 
-launch mongodb: `mongod [--dbpath path/to/db/folder] [--port portNumber]`
+Ensure the database URI is correct in app.js: ``` mongoose.connect('mongodb://host:port/database') ``` and  launch mongodb: ``` mongod [--dbpath path/to/db/folder] [--port portNumber] ```
 
-start app: `node app`
+start app: ``` npm start ``` or ```node app```
 
 Change port in app.js if needed. Currently: 8080.
 
@@ -22,6 +22,8 @@ Change port in app.js if needed. Currently: 8080.
 ```
 app.js - the server
 app.spec.js -- server tests
+browser.spec.js -- client & intergration tests using selenium
+test/ -- client javascript tests
 models/ -  mongoose models
 views/ - (NOT currently used) jade templates
 src/ - where all front-end code is kept
@@ -42,6 +44,7 @@ src/js/app/*.js - these are the javascript files for the app. They are concatena
   * models.js - backbone models: `Models.User`, `Models.Room`  * views.js - backbone views
   * router.js - creates `MexclaRouter`
   * app.js -- creates router instance `app.router`.
+  * ui.js -- ui code
     
 #### misc notes
 
