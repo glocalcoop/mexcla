@@ -99,6 +99,9 @@ Models.User = Backbone.Model.extend({
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
   urlRoot: "/room/id",
+  initialize: function() {
+    this.establishSocket();
+  }, 
   fetchByNum: function() {
     var that = this;
     $.ajax({
@@ -162,6 +165,14 @@ Models.Room = Backbone.Model.extend({
     } else {
       return true;
     }
+  },
+  establishSocket: function() {
+    var that = this;
+    var roomnum = this.get('roomnum');
+    this.socket = io('/' + roomnum);
+    this.socket.on('room update', function(room){
+      that.set(room);
+    });
   }
 });
 
