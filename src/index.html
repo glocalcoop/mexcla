@@ -208,21 +208,23 @@
 
     <!-- ROOM SIDEBAR  -->
     <script type="text/template" id="room-sidebar-template">
+      <!-- Room Link  -->
       <aside class="sidebar" id="room-info" role="complementary">
-
-      <div class="clipboard-group">
-          <label for="room-link"><%= link %></label>
-          <!-- TODO: Add real URL -->
-          <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
-          <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
-        </div>
-        
+        <div class="clipboard-group">
+            <label for="room-link"><%= link %></label>
+            <!-- TODO: Add real URL -->
+            <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
+            <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span> 
+          </div>
       </aside>
+
+      
+
       <!-- Participants  -->
       <aside class="sidebar" role="complementary" id="participant-list">
         <div class="participant-list">
-          <h3><%= participants %></h3>
-          <div class="scroll-list">
+          <h3><%= participants %> <button class="accordion" type="button" data-toggle="collapse" data-target="#participants-collapse-list" aria-expanded="true" aria-controls="participants-collapse-list"> </button></h3>
+          <div id="participants-collapse-list" class="scroll-list collapse in">
             <ul id="participants">
             <!-- template #participant-row-template -->
             </ul>
@@ -233,8 +235,8 @@
       <!-- Channels  -->
       <aside class="sidebar" role="complementary" id="channel-list">
         <div class="channel-list">
-          <h3><%= channels %></h3>
-          <div class="scroll-list">
+          <h3><%= channels %> <button class="accordion" type="button" data-toggle="collapse" data-target="#channels-collapse-list" aria-expanded="true" aria-controls="channels-collapse-list"> </button></h3>
+          <div id="channels-collapse-list" class="scroll-list collapse in">
             <ul id="channels">
             <!-- template #channel-row-template -->
             <!-- TODO: Add channel row view -->
@@ -353,6 +355,35 @@
         </div>
       </div>
     </div>
+
+    <!-- CHAT TEMPLATE - FUTURE USE -->
+    <aside class="sidebar" role="complementary" id="chat-list">
+      <div class="chat-list">
+        <h3>Chat <button class="accordion" type="button" data-toggle="collapse" data-target="#chat-collapse-list" aria-expanded="true" aria-controls="chat-collapse-list"> </button></h3>
+        <div id="chat-collapse-list" class="scroll-list collapse in">
+          <ul id="chat">
+            <li class="message">
+              <span id="userid" class="username">{USER}</span>
+              <span class="messageBody">{MESSAGE}</span>
+            </li>
+            <li class="message">
+              <span id="userid" class="username">{USER}</span>
+              <span class="messageBody">{MESSAGE}</span>
+            </li>
+          </ul>
+          <footer class="widget-footer">
+            <div class="chat-group">
+              <input type="text" class="form-control" placeholder="Enter message...">
+              <span class="input-group-btn">
+                <button class="submit-chat" type="button">Send</button>
+              </span>
+            </div><!-- /input-group -->
+          </footer>
+
+        </div>
+      </div>
+    </aside>
+
         
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
