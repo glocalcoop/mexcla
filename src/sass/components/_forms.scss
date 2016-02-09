@@ -22,8 +22,12 @@ label {
   color: $brand-info;
 }
 
-.clipboard-group {
+.clipboard-group,
+.chat-group {
   @extend .input-group;
+}
+
+.clipboard-group {
 
   label,
   .copy-link {
@@ -38,11 +42,6 @@ label {
 
   .copy-link {
     @include button-variant($white, $brand-primary, $brand-primary);
-  }
-
-  input {
-      width: 75%;
-      float: left;
   }
 
 }

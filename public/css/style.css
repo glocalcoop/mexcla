@@ -1716,32 +1716,78 @@ select {
     display: inline-block; }
   .form-inline .input-group, form .input-group, fieldset .input-group, .main-content.index #join-room fieldset .input-group,
   .main-content.index #create-room fieldset .input-group, .form-inline .clipboard-group, form .clipboard-group, fieldset .clipboard-group, .main-content.index #join-room fieldset .clipboard-group,
-  .main-content.index #create-room fieldset .clipboard-group {
+  .main-content.index #create-room fieldset .clipboard-group, .form-inline
+  .chat-group, form
+  .chat-group, fieldset
+  .chat-group, .main-content.index #join-room fieldset
+  .chat-group,
+  .main-content.index #create-room fieldset
+  .chat-group {
     display: inline-table;
     vertical-align: middle; }
     .form-inline .input-group .input-group-addon, form .input-group .input-group-addon, fieldset .input-group .input-group-addon, .main-content.index #join-room fieldset .input-group .input-group-addon,
     .main-content.index #create-room fieldset .input-group .input-group-addon, .form-inline .clipboard-group .input-group-addon, form .clipboard-group .input-group-addon, fieldset .clipboard-group .input-group-addon, .main-content.index #join-room fieldset .clipboard-group .input-group-addon,
-    .main-content.index #create-room fieldset .clipboard-group .input-group-addon, .form-inline .input-group .clipboard-group label, .clipboard-group .form-inline .input-group label, form .input-group .clipboard-group label, .clipboard-group form .input-group label, fieldset .input-group .clipboard-group label, .clipboard-group fieldset .input-group label, .clipboard-group .main-content.index #join-room fieldset .input-group label, .clipboard-group
+    .main-content.index #create-room fieldset .clipboard-group .input-group-addon, .form-inline
+    .chat-group .input-group-addon, form
+    .chat-group .input-group-addon, fieldset
+    .chat-group .input-group-addon, .main-content.index #join-room fieldset
+    .chat-group .input-group-addon,
+    .main-content.index #create-room fieldset
+    .chat-group .input-group-addon, .form-inline .input-group .clipboard-group label, .clipboard-group .form-inline .input-group label, form .input-group .clipboard-group label, .clipboard-group form .input-group label, fieldset .input-group .clipboard-group label, .clipboard-group fieldset .input-group label, .clipboard-group .main-content.index #join-room fieldset .input-group label, .clipboard-group
     .main-content.index #create-room fieldset .input-group label, .form-inline .clipboard-group label, form .clipboard-group label, fieldset .clipboard-group label, .main-content.index #join-room fieldset .clipboard-group label,
-    .main-content.index #create-room fieldset .clipboard-group label, form .input-group
+    .main-content.index #create-room fieldset .clipboard-group label, .form-inline
+    .chat-group .clipboard-group label, .clipboard-group .form-inline
+    .chat-group label, .clipboard-group form
+    .chat-group label, .clipboard-group fieldset
+    .chat-group label, .clipboard-group .main-content.index #join-room fieldset
+    .chat-group label, .clipboard-group
+    .main-content.index #create-room fieldset
+    .chat-group label, form .input-group
     .clipboard-group .copy-link,
     .clipboard-group form .input-group .copy-link, fieldset .input-group
     .clipboard-group .copy-link,
     .clipboard-group fieldset .input-group .copy-link, .form-inline .input-group .copy-link, form .input-group .copy-link, fieldset .input-group .copy-link, .main-content.index #join-room fieldset .input-group .copy-link,
     .main-content.index #create-room fieldset .input-group .copy-link, .form-inline .clipboard-group .copy-link, form .clipboard-group .copy-link, fieldset .clipboard-group .copy-link, .main-content.index #join-room fieldset .clipboard-group .copy-link,
-    .main-content.index #create-room fieldset .clipboard-group .copy-link,
+    .main-content.index #create-room fieldset .clipboard-group .copy-link, .form-inline
+    .chat-group .copy-link, form
+    .chat-group .copy-link, fieldset
+    .chat-group .copy-link, .main-content.index #join-room fieldset
+    .chat-group .copy-link,
+    .main-content.index #create-room fieldset
+    .chat-group .copy-link,
     .form-inline .input-group .input-group-btn, form .input-group .input-group-btn, fieldset .input-group .input-group-btn, .main-content.index #join-room fieldset .input-group .input-group-btn,
     .main-content.index #create-room fieldset .input-group .input-group-btn,
     .form-inline .clipboard-group .input-group-btn, form .clipboard-group .input-group-btn, fieldset .clipboard-group .input-group-btn, .main-content.index #join-room fieldset .clipboard-group .input-group-btn,
     .main-content.index #create-room fieldset .clipboard-group .input-group-btn,
+    .form-inline
+    .chat-group .input-group-btn, form
+    .chat-group .input-group-btn, fieldset
+    .chat-group .input-group-btn, .main-content.index #join-room fieldset
+    .chat-group .input-group-btn,
+    .main-content.index #create-room fieldset
+    .chat-group .input-group-btn,
     .form-inline .input-group .form-control, form .input-group .form-control, fieldset .input-group .form-control, .main-content.index #join-room fieldset .input-group .form-control,
     .main-content.index #create-room fieldset .input-group .form-control,
     .form-inline .clipboard-group .form-control, form .clipboard-group .form-control, fieldset .clipboard-group .form-control, .main-content.index #join-room fieldset .clipboard-group .form-control,
     .main-content.index #create-room fieldset .clipboard-group .form-control,
+    .form-inline
+    .chat-group .form-control, form
+    .chat-group .form-control, fieldset
+    .chat-group .form-control, .main-content.index #join-room fieldset
+    .chat-group .form-control,
+    .main-content.index #create-room fieldset
+    .chat-group .form-control,
     .form-inline .input-group input[type="text"], form .input-group input[type="text"], fieldset .input-group input[type="text"], .main-content.index #join-room fieldset .input-group input[type="text"],
     .main-content.index #create-room fieldset .input-group input[type="text"],
     .form-inline .clipboard-group input[type="text"], form .clipboard-group input[type="text"], fieldset .clipboard-group input[type="text"], .main-content.index #join-room fieldset .clipboard-group input[type="text"],
     .main-content.index #create-room fieldset .clipboard-group input[type="text"],
+    .form-inline
+    .chat-group input[type="text"], form
+    .chat-group input[type="text"], fieldset
+    .chat-group input[type="text"], .main-content.index #join-room fieldset
+    .chat-group input[type="text"],
+    .main-content.index #create-room fieldset
+    .chat-group input[type="text"],
     .form-inline .input-group
     select, form .input-group
     select, fieldset .input-group
@@ -1755,13 +1801,37 @@ select {
     select, .main-content.index #join-room fieldset .clipboard-group
     select,
     .main-content.index #create-room fieldset .clipboard-group
+    select,
+    .form-inline
+    .chat-group
+    select, form
+    .chat-group
+    select, fieldset
+    .chat-group
+    select, .main-content.index #join-room fieldset
+    .chat-group
+    select,
+    .main-content.index #create-room fieldset
+    .chat-group
     select {
       width: auto; }
   .form-inline .input-group > .form-control, form .input-group > .form-control, fieldset .input-group > .form-control, .main-content.index #join-room fieldset .input-group > .form-control,
   .main-content.index #create-room fieldset .input-group > .form-control, .form-inline .clipboard-group > .form-control, form .clipboard-group > .form-control, fieldset .clipboard-group > .form-control, .main-content.index #join-room fieldset .clipboard-group > .form-control,
-  .main-content.index #create-room fieldset .clipboard-group > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
+  .main-content.index #create-room fieldset .clipboard-group > .form-control, .form-inline
+  .chat-group > .form-control, form
+  .chat-group > .form-control, fieldset
+  .chat-group > .form-control, .main-content.index #join-room fieldset
+  .chat-group > .form-control,
+  .main-content.index #create-room fieldset
+  .chat-group > .form-control, .form-inline .input-group > input[type="text"], form .input-group > input[type="text"], fieldset .input-group > input[type="text"], .main-content.index #join-room fieldset .input-group > input[type="text"],
   .main-content.index #create-room fieldset .input-group > input[type="text"], .form-inline .clipboard-group > input[type="text"], form .clipboard-group > input[type="text"], fieldset .clipboard-group > input[type="text"], .main-content.index #join-room fieldset .clipboard-group > input[type="text"],
-  .main-content.index #create-room fieldset .clipboard-group > input[type="text"], .form-inline .input-group >
+  .main-content.index #create-room fieldset .clipboard-group > input[type="text"], .form-inline
+  .chat-group > input[type="text"], form
+  .chat-group > input[type="text"], fieldset
+  .chat-group > input[type="text"], .main-content.index #join-room fieldset
+  .chat-group > input[type="text"],
+  .main-content.index #create-room fieldset
+  .chat-group > input[type="text"], .form-inline .input-group >
   select, form .input-group >
   select, fieldset .input-group >
   select, .main-content.index #join-room fieldset .input-group >
@@ -1773,6 +1843,17 @@ select {
   select, .main-content.index #join-room fieldset .clipboard-group >
   select,
   .main-content.index #create-room fieldset .clipboard-group >
+  select, .form-inline
+  .chat-group >
+  select, form
+  .chat-group >
+  select, fieldset
+  .chat-group >
+  select, .main-content.index #join-room fieldset
+  .chat-group >
+  select,
+  .main-content.index #create-room fieldset
+  .chat-group >
   select {
     width: 100%; }
   .form-inline .form-control-label, form .form-control-label, fieldset .form-control-label, .main-content.index #join-room fieldset .form-control-label,
@@ -1854,38 +1935,39 @@ fieldset[disabled] #footer .colophon ul li #utility-nav #language-links a, #foot
 fieldset[disabled] a {
   pointer-events: none; }
 
-.btn-primary, .add-channel, .modal footer input[type="submit"], .main-content.index #join-room #room-number-button,
+.btn-primary, .submit-chat, .add-channel, .modal footer input[type="submit"], .main-content.index #join-room #room-number-button,
 .main-content.index #join-room #create-new-room-button,
 .main-content.index #create-room #room-number-button,
 .main-content.index #create-room #create-new-room-button {
   color: #fff;
   background-color: #427C89;
   border-color: #427C89; }
-  .btn-primary:hover, .add-channel:hover, .modal footer input[type="submit"]:hover, .main-content.index #join-room #room-number-button:hover,
+  .btn-primary:hover, .submit-chat:hover, .add-channel:hover, .modal footer input[type="submit"]:hover, .main-content.index #join-room #room-number-button:hover,
   .main-content.index #join-room #create-new-room-button:hover,
   .main-content.index #create-room #room-number-button:hover,
   .main-content.index #create-room #create-new-room-button:hover {
     color: #fff;
     background-color: #315d67;
     border-color: #2e5760; }
-  .btn-primary:focus, .add-channel:focus, .modal footer input[type="submit"]:focus, .main-content.index #join-room #room-number-button:focus,
+  .btn-primary:focus, .submit-chat:focus, .add-channel:focus, .modal footer input[type="submit"]:focus, .main-content.index #join-room #room-number-button:focus,
   .main-content.index #join-room #create-new-room-button:focus,
   .main-content.index #create-room #room-number-button:focus,
-  .main-content.index #create-room #create-new-room-button:focus, .btn-primary.focus, .focus.add-channel, .modal footer input.focus[type="submit"], .main-content.index #join-room .focus#room-number-button,
+  .main-content.index #create-room #create-new-room-button:focus, .btn-primary.focus, .focus.submit-chat, .focus.add-channel, .modal footer input.focus[type="submit"], .main-content.index #join-room .focus#room-number-button,
   .main-content.index #join-room .focus#create-new-room-button,
   .main-content.index #create-room .focus#room-number-button,
   .main-content.index #create-room .focus#create-new-room-button {
     color: #fff;
     background-color: #315d67;
     border-color: #2e5760; }
-  .btn-primary:active, .add-channel:active, .modal footer input[type="submit"]:active, .main-content.index #join-room #room-number-button:active,
+  .btn-primary:active, .submit-chat:active, .add-channel:active, .modal footer input[type="submit"]:active, .main-content.index #join-room #room-number-button:active,
   .main-content.index #join-room #create-new-room-button:active,
   .main-content.index #create-room #room-number-button:active,
-  .main-content.index #create-room #create-new-room-button:active, .btn-primary.active, .active.add-channel, .modal footer input.active[type="submit"], .main-content.index #join-room .active#room-number-button,
+  .main-content.index #create-room #create-new-room-button:active, .btn-primary.active, .active.submit-chat, .active.add-channel, .modal footer input.active[type="submit"], .main-content.index #join-room .active#room-number-button,
   .main-content.index #join-room .active#create-new-room-button,
   .main-content.index #create-room .active#room-number-button,
   .main-content.index #create-room .active#create-new-room-button,
   .open > .btn-primary.dropdown-toggle,
+  .open > .dropdown-toggle.submit-chat,
   .open > .dropdown-toggle.add-channel, .modal footer
   .open > input.dropdown-toggle[type="submit"], .main-content.index #join-room
   .open > .dropdown-toggle#room-number-button,
@@ -1899,26 +1981,27 @@ fieldset[disabled] a {
     background-color: #315d67;
     border-color: #2e5760;
     background-image: none; }
-    .btn-primary:active:hover, .add-channel:active:hover, .modal footer input[type="submit"]:active:hover, .main-content.index #join-room #room-number-button:active:hover,
+    .btn-primary:active:hover, .submit-chat:active:hover, .add-channel:active:hover, .modal footer input[type="submit"]:active:hover, .main-content.index #join-room #room-number-button:active:hover,
     .main-content.index #join-room #create-new-room-button:active:hover,
     .main-content.index #create-room #room-number-button:active:hover,
-    .main-content.index #create-room #create-new-room-button:active:hover, .btn-primary:active:focus, .add-channel:active:focus, .modal footer input[type="submit"]:active:focus, .main-content.index #join-room #room-number-button:active:focus,
+    .main-content.index #create-room #create-new-room-button:active:hover, .btn-primary:active:focus, .submit-chat:active:focus, .add-channel:active:focus, .modal footer input[type="submit"]:active:focus, .main-content.index #join-room #room-number-button:active:focus,
     .main-content.index #join-room #create-new-room-button:active:focus,
     .main-content.index #create-room #room-number-button:active:focus,
-    .main-content.index #create-room #create-new-room-button:active:focus, .btn-primary:active.focus, .add-channel:active.focus, .modal footer input[type="submit"]:active.focus, .main-content.index #join-room #room-number-button:active.focus,
+    .main-content.index #create-room #create-new-room-button:active:focus, .btn-primary:active.focus, .submit-chat:active.focus, .add-channel:active.focus, .modal footer input[type="submit"]:active.focus, .main-content.index #join-room #room-number-button:active.focus,
     .main-content.index #join-room #create-new-room-button:active.focus,
     .main-content.index #create-room #room-number-button:active.focus,
-    .main-content.index #create-room #create-new-room-button:active.focus, .btn-primary.active:hover, .active.add-channel:hover, .modal footer input.active[type="submit"]:hover, .main-content.index #join-room .active#room-number-button:hover,
+    .main-content.index #create-room #create-new-room-button:active.focus, .btn-primary.active:hover, .active.submit-chat:hover, .active.add-channel:hover, .modal footer input.active[type="submit"]:hover, .main-content.index #join-room .active#room-number-button:hover,
     .main-content.index #join-room .active#create-new-room-button:hover,
     .main-content.index #create-room .active#room-number-button:hover,
-    .main-content.index #create-room .active#create-new-room-button:hover, .btn-primary.active:focus, .active.add-channel:focus, .modal footer input.active[type="submit"]:focus, .main-content.index #join-room .active#room-number-button:focus,
+    .main-content.index #create-room .active#create-new-room-button:hover, .btn-primary.active:focus, .active.submit-chat:focus, .active.add-channel:focus, .modal footer input.active[type="submit"]:focus, .main-content.index #join-room .active#room-number-button:focus,
     .main-content.index #join-room .active#create-new-room-button:focus,
     .main-content.index #create-room .active#room-number-button:focus,
-    .main-content.index #create-room .active#create-new-room-button:focus, .btn-primary.active.focus, .active.focus.add-channel, .modal footer input.active.focus[type="submit"], .main-content.index #join-room .active.focus#room-number-button,
+    .main-content.index #create-room .active#create-new-room-button:focus, .btn-primary.active.focus, .active.focus.submit-chat, .active.focus.add-channel, .modal footer input.active.focus[type="submit"], .main-content.index #join-room .active.focus#room-number-button,
     .main-content.index #join-room .active.focus#create-new-room-button,
     .main-content.index #create-room .active.focus#room-number-button,
     .main-content.index #create-room .active.focus#create-new-room-button,
     .open > .btn-primary.dropdown-toggle:hover,
+    .open > .dropdown-toggle.submit-chat:hover,
     .open > .dropdown-toggle.add-channel:hover, .modal footer
     .open > input.dropdown-toggle[type="submit"]:hover, .main-content.index #join-room
     .open > .dropdown-toggle#room-number-button:hover,
@@ -1929,6 +2012,7 @@ fieldset[disabled] a {
     .main-content.index #create-room
     .open > .dropdown-toggle#create-new-room-button:hover,
     .open > .btn-primary.dropdown-toggle:focus,
+    .open > .dropdown-toggle.submit-chat:focus,
     .open > .dropdown-toggle.add-channel:focus, .modal footer
     .open > input.dropdown-toggle[type="submit"]:focus, .main-content.index #join-room
     .open > .dropdown-toggle#room-number-button:focus,
@@ -1939,6 +2023,7 @@ fieldset[disabled] a {
     .main-content.index #create-room
     .open > .dropdown-toggle#create-new-room-button:focus,
     .open > .btn-primary.dropdown-toggle.focus,
+    .open > .dropdown-toggle.focus.submit-chat,
     .open > .dropdown-toggle.focus.add-channel, .modal footer
     .open > input.dropdown-toggle.focus[type="submit"], .main-content.index #join-room
     .open > .dropdown-toggle.focus#room-number-button,
@@ -1951,25 +2036,25 @@ fieldset[disabled] a {
       color: #fff;
       background-color: #26474e;
       border-color: #192e33; }
-  .btn-primary.disabled:focus, .disabled.add-channel:focus, .modal footer input.disabled[type="submit"]:focus, .main-content.index #join-room .disabled#room-number-button:focus,
+  .btn-primary.disabled:focus, .disabled.submit-chat:focus, .disabled.add-channel:focus, .modal footer input.disabled[type="submit"]:focus, .main-content.index #join-room .disabled#room-number-button:focus,
   .main-content.index #join-room .disabled#create-new-room-button:focus,
   .main-content.index #create-room .disabled#room-number-button:focus,
-  .main-content.index #create-room .disabled#create-new-room-button:focus, .btn-primary.disabled.focus, .disabled.focus.add-channel, .modal footer input.disabled.focus[type="submit"], .main-content.index #join-room .disabled.focus#room-number-button,
+  .main-content.index #create-room .disabled#create-new-room-button:focus, .btn-primary.disabled.focus, .disabled.focus.submit-chat, .disabled.focus.add-channel, .modal footer input.disabled.focus[type="submit"], .main-content.index #join-room .disabled.focus#room-number-button,
   .main-content.index #join-room .disabled.focus#create-new-room-button,
   .main-content.index #create-room .disabled.focus#room-number-button,
-  .main-content.index #create-room .disabled.focus#create-new-room-button, .btn-primary:disabled:focus, .add-channel:disabled:focus, .modal footer input[type="submit"]:disabled:focus, .main-content.index #join-room #room-number-button:disabled:focus,
+  .main-content.index #create-room .disabled.focus#create-new-room-button, .btn-primary:disabled:focus, .submit-chat:disabled:focus, .add-channel:disabled:focus, .modal footer input[type="submit"]:disabled:focus, .main-content.index #join-room #room-number-button:disabled:focus,
   .main-content.index #join-room #create-new-room-button:disabled:focus,
   .main-content.index #create-room #room-number-button:disabled:focus,
-  .main-content.index #create-room #create-new-room-button:disabled:focus, .btn-primary:disabled.focus, .add-channel:disabled.focus, .modal footer input[type="submit"]:disabled.focus, .main-content.index #join-room #room-number-button:disabled.focus,
+  .main-content.index #create-room #create-new-room-button:disabled:focus, .btn-primary:disabled.focus, .submit-chat:disabled.focus, .add-channel:disabled.focus, .modal footer input[type="submit"]:disabled.focus, .main-content.index #join-room #room-number-button:disabled.focus,
   .main-content.index #join-room #create-new-room-button:disabled.focus,
   .main-content.index #create-room #room-number-button:disabled.focus,
   .main-content.index #create-room #create-new-room-button:disabled.focus {
     background-color: #427C89;
     border-color: #427C89; }
-  .btn-primary.disabled:hover, .disabled.add-channel:hover, .modal footer input.disabled[type="submit"]:hover, .main-content.index #join-room .disabled#room-number-button:hover,
+  .btn-primary.disabled:hover, .disabled.submit-chat:hover, .disabled.add-channel:hover, .modal footer input.disabled[type="submit"]:hover, .main-content.index #join-room .disabled#room-number-button:hover,
   .main-content.index #join-room .disabled#create-new-room-button:hover,
   .main-content.index #create-room .disabled#room-number-button:hover,
-  .main-content.index #create-room .disabled#create-new-room-button:hover, .btn-primary:disabled:hover, .add-channel:disabled:hover, .modal footer input[type="submit"]:disabled:hover, .main-content.index #join-room #room-number-button:disabled:hover,
+  .main-content.index #create-room .disabled#create-new-room-button:hover, .btn-primary:disabled:hover, .submit-chat:disabled:hover, .add-channel:disabled:hover, .modal footer input[type="submit"]:disabled:hover, .main-content.index #join-room #room-number-button:disabled:hover,
   .main-content.index #join-room #create-new-room-button:disabled:hover,
   .main-content.index #create-room #room-number-button:disabled:hover,
   .main-content.index #create-room #create-new-room-button:disabled:hover {
@@ -2503,7 +2588,9 @@ input[type="button"].btn-block {
   left: 0;
   z-index: 990; }
 
-.pull-right > .dropdown-menu {
+.pull-right > .dropdown-menu, #participant-list button.accordion > .dropdown-menu,
+#channel-list button.accordion > .dropdown-menu,
+#chat-list button.accordion > .dropdown-menu {
   right: 0;
   left: auto; }
 
@@ -2622,13 +2709,17 @@ button,
     clear: both; }
   .btn-toolbar .btn-group,
   .btn-toolbar .input-group,
-  .btn-toolbar .clipboard-group {
+  .btn-toolbar .clipboard-group,
+  .btn-toolbar
+  .chat-group {
     float: left; }
   .btn-toolbar > .btn, #utility-nav #language-links .btn-toolbar > a.nav-link, #utility-nav #language-links #footer .colophon ul li .btn-toolbar > a, #footer .colophon ul li #utility-nav #language-links .btn-toolbar > a, .btn-toolbar > input[type="submit"], .btn-toolbar >
   button,
   .btn-toolbar > .btn-group,
   .btn-toolbar > .input-group,
-  .btn-toolbar > .clipboard-group {
+  .btn-toolbar > .clipboard-group,
+  .btn-toolbar >
+  .chat-group {
     margin-left: 5px; }
 
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links .btn-group > a.nav-link:not(:first-child):not(:last-child):not(.dropdown-toggle), #utility-nav #language-links #footer .colophon ul li .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), #footer .colophon ul li #utility-nav #language-links .btn-group > a:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group > input[type="submit"]:not(:first-child):not(:last-child):not(.dropdown-toggle), .btn-group >
@@ -2783,24 +2874,41 @@ button input[type="checkbox"] {
   clip: rect(0, 0, 0, 0);
   pointer-events: none; }
 
-.input-group, .clipboard-group {
+.input-group, .clipboard-group,
+.chat-group {
   position: relative;
   display: table;
   border-collapse: separate; }
-  .input-group .form-control, .clipboard-group .form-control, .input-group input[type="text"], .clipboard-group input[type="text"], .input-group
+  .input-group .form-control, .clipboard-group .form-control,
+  .chat-group .form-control, .input-group input[type="text"], .clipboard-group input[type="text"],
+  .chat-group input[type="text"], .input-group
   select, .clipboard-group
+  select,
+  .chat-group
   select {
     position: relative;
     z-index: 2;
     float: left;
     width: 100%;
     margin-bottom: 0; }
-    .input-group .form-control:focus, .clipboard-group .form-control:focus, .input-group input[type="text"]:focus, .clipboard-group input[type="text"]:focus, .input-group
+    .input-group .form-control:focus, .clipboard-group .form-control:focus,
+    .chat-group .form-control:focus, .input-group input[type="text"]:focus, .clipboard-group input[type="text"]:focus,
+    .chat-group input[type="text"]:focus, .input-group
     select:focus, .clipboard-group
-    select:focus, .input-group .form-control:active, .clipboard-group .form-control:active, .input-group input[type="text"]:active, .clipboard-group input[type="text"]:active, .input-group
+    select:focus,
+    .chat-group
+    select:focus, .input-group .form-control:active, .clipboard-group .form-control:active,
+    .chat-group .form-control:active, .input-group input[type="text"]:active, .clipboard-group input[type="text"]:active,
+    .chat-group input[type="text"]:active, .input-group
     select:active, .clipboard-group
-    select:active, .input-group .form-control:hover, .clipboard-group .form-control:hover, .input-group input[type="text"]:hover, .clipboard-group input[type="text"]:hover, .input-group
+    select:active,
+    .chat-group
+    select:active, .input-group .form-control:hover, .clipboard-group .form-control:hover,
+    .chat-group .form-control:hover, .input-group input[type="text"]:hover, .clipboard-group input[type="text"]:hover,
+    .chat-group input[type="text"]:hover, .input-group
     select:hover, .clipboard-group
+    select:hover,
+    .chat-group
     select:hover {
       z-index: 3; }
 
@@ -2808,9 +2916,13 @@ button input[type="checkbox"] {
 .clipboard-group .copy-link, .copy-link,
 .input-group-btn,
 .input-group .form-control, .clipboard-group .form-control,
+.chat-group .form-control,
 .input-group input[type="text"], .clipboard-group input[type="text"],
+.chat-group input[type="text"],
 .input-group
 select, .clipboard-group
+select,
+.chat-group
 select {
   display: table-cell; }
 
@@ -3486,8 +3598,13 @@ select {
 
 .card, #participant-list .participant-list,
 #participant-list .channel-list,
+#participant-list .chat-list,
 #channel-list .participant-list,
-#channel-list .channel-list {
+#channel-list .channel-list,
+#channel-list .chat-list,
+#chat-list .participant-list,
+#chat-list .channel-list,
+#chat-list .chat-list {
   position: relative;
   display: block;
   margin-bottom: 0.75rem;
@@ -3515,7 +3632,8 @@ select {
   margin-left: 1.25rem; }
 
 .card-header, #participant-list h3,
-#channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
+#channel-list h3,
+#chat-list h3, .main-content.register h3, .main-content.index #join-room h3,
 .main-content.index #create-room h3 {
   padding: 0.75rem 1.25rem;
   background-color: #f5f5f5;
@@ -3572,7 +3690,9 @@ select {
 
 .card-inverse .card-header, .card-inverse #participant-list h3, #participant-list .card-inverse h3, .card-inverse
 #channel-list h3,
-#channel-list .card-inverse h3, .card-inverse .main-content.register h3, .main-content.register .card-inverse h3, .card-inverse .main-content.index #join-room h3, .main-content.index #join-room .card-inverse h3, .card-inverse
+#channel-list .card-inverse h3, .card-inverse
+#chat-list h3,
+#chat-list .card-inverse h3, .card-inverse .main-content.register h3, .main-content.register .card-inverse h3, .card-inverse .main-content.index #join-room h3, .main-content.index #join-room .card-inverse h3, .card-inverse
 .main-content.index #create-room h3,
 .main-content.index #create-room .card-inverse h3,
 .card-inverse .card-footer {
@@ -3580,7 +3700,9 @@ select {
 
 .card-inverse .card-header, .card-inverse #participant-list h3, #participant-list .card-inverse h3, .card-inverse
 #channel-list h3,
-#channel-list .card-inverse h3, .card-inverse .main-content.register h3, .main-content.register .card-inverse h3, .card-inverse .main-content.index #join-room h3, .main-content.index #join-room .card-inverse h3, .card-inverse
+#channel-list .card-inverse h3, .card-inverse
+#chat-list h3,
+#chat-list .card-inverse h3, .card-inverse .main-content.register h3, .main-content.register .card-inverse h3, .card-inverse .main-content.index #join-room h3, .main-content.index #join-room .card-inverse h3, .card-inverse
 .main-content.index #create-room h3,
 .main-content.index #create-room .card-inverse h3,
 .card-inverse .card-footer,
@@ -3617,10 +3739,20 @@ select {
     .card-deck .card, .card-deck #participant-list .participant-list, #participant-list .card-deck .participant-list, .card-deck
     #participant-list .channel-list,
     #participant-list .card-deck .channel-list, .card-deck
+    #participant-list .chat-list,
+    #participant-list .card-deck .chat-list, .card-deck
     #channel-list .participant-list,
     #channel-list .card-deck .participant-list, .card-deck
     #channel-list .channel-list,
-    #channel-list .card-deck .channel-list {
+    #channel-list .card-deck .channel-list, .card-deck
+    #channel-list .chat-list,
+    #channel-list .card-deck .chat-list, .card-deck
+    #chat-list .participant-list,
+    #chat-list .card-deck .participant-list, .card-deck
+    #chat-list .channel-list,
+    #chat-list .card-deck .channel-list, .card-deck
+    #chat-list .chat-list,
+    #chat-list .card-deck .chat-list {
       display: table-cell;
       width: 1%;
       vertical-align: top; }
@@ -3636,37 +3768,103 @@ select {
     .card-group .card, .card-group #participant-list .participant-list, #participant-list .card-group .participant-list, .card-group
     #participant-list .channel-list,
     #participant-list .card-group .channel-list, .card-group
+    #participant-list .chat-list,
+    #participant-list .card-group .chat-list, .card-group
     #channel-list .participant-list,
     #channel-list .card-group .participant-list, .card-group
     #channel-list .channel-list,
-    #channel-list .card-group .channel-list {
+    #channel-list .card-group .channel-list, .card-group
+    #channel-list .chat-list,
+    #channel-list .card-group .chat-list, .card-group
+    #chat-list .participant-list,
+    #chat-list .card-group .participant-list, .card-group
+    #chat-list .channel-list,
+    #chat-list .card-group .channel-list, .card-group
+    #chat-list .chat-list,
+    #chat-list .card-group .chat-list {
       display: table-cell;
       vertical-align: top; }
       .card-group .card + .card, .card-group #participant-list .participant-list + .card, #participant-list .card-group .participant-list + .card, .card-group
       #participant-list .channel-list + .card,
       #participant-list .card-group .channel-list + .card, .card-group
+      #participant-list .chat-list + .card,
+      #participant-list .card-group .chat-list + .card, .card-group
       #channel-list .participant-list + .card,
       #channel-list .card-group .participant-list + .card, .card-group
       #channel-list .channel-list + .card,
-      #channel-list .card-group .channel-list + .card, .card-group #participant-list .card + .participant-list, #participant-list .card-group .card + .participant-list, .card-group #participant-list .participant-list + .participant-list, #participant-list .card-group .participant-list + .participant-list, .card-group #participant-list .channel-list + .participant-list, #participant-list .card-group .channel-list + .participant-list, .card-group
+      #channel-list .card-group .channel-list + .card, .card-group
+      #channel-list .chat-list + .card,
+      #channel-list .card-group .chat-list + .card, .card-group
+      #chat-list .participant-list + .card,
+      #chat-list .card-group .participant-list + .card, .card-group
+      #chat-list .channel-list + .card,
+      #chat-list .card-group .channel-list + .card, .card-group
+      #chat-list .chat-list + .card,
+      #chat-list .card-group .chat-list + .card, .card-group #participant-list .card + .participant-list, #participant-list .card-group .card + .participant-list, .card-group #participant-list .participant-list + .participant-list, #participant-list .card-group .participant-list + .participant-list, .card-group #participant-list .channel-list + .participant-list, #participant-list .card-group .channel-list + .participant-list, .card-group #participant-list .chat-list + .participant-list, #participant-list .card-group .chat-list + .participant-list, .card-group
       #participant-list .card + .channel-list,
       #participant-list .card-group .card + .channel-list, .card-group
       #participant-list .participant-list + .channel-list,
       #participant-list .card-group .participant-list + .channel-list, .card-group
       #participant-list .channel-list + .channel-list,
       #participant-list .card-group .channel-list + .channel-list, .card-group
+      #participant-list .chat-list + .channel-list,
+      #participant-list .card-group .chat-list + .channel-list, .card-group
+      #participant-list .card + .chat-list,
+      #participant-list .card-group .card + .chat-list, .card-group
+      #participant-list .participant-list + .chat-list,
+      #participant-list .card-group .participant-list + .chat-list, .card-group
+      #participant-list .channel-list + .chat-list,
+      #participant-list .card-group .channel-list + .chat-list, .card-group
+      #participant-list .chat-list + .chat-list,
+      #participant-list .card-group .chat-list + .chat-list, .card-group
       #channel-list .card + .participant-list,
       #channel-list .card-group .card + .participant-list, .card-group
       #channel-list .participant-list + .participant-list,
       #channel-list .card-group .participant-list + .participant-list, .card-group
       #channel-list .channel-list + .participant-list,
       #channel-list .card-group .channel-list + .participant-list, .card-group
+      #channel-list .chat-list + .participant-list,
+      #channel-list .card-group .chat-list + .participant-list, .card-group
       #channel-list .card + .channel-list,
       #channel-list .card-group .card + .channel-list, .card-group
       #channel-list .participant-list + .channel-list,
       #channel-list .card-group .participant-list + .channel-list, .card-group
       #channel-list .channel-list + .channel-list,
-      #channel-list .card-group .channel-list + .channel-list {
+      #channel-list .card-group .channel-list + .channel-list, .card-group
+      #channel-list .chat-list + .channel-list,
+      #channel-list .card-group .chat-list + .channel-list, .card-group
+      #channel-list .card + .chat-list,
+      #channel-list .card-group .card + .chat-list, .card-group
+      #channel-list .participant-list + .chat-list,
+      #channel-list .card-group .participant-list + .chat-list, .card-group
+      #channel-list .channel-list + .chat-list,
+      #channel-list .card-group .channel-list + .chat-list, .card-group
+      #channel-list .chat-list + .chat-list,
+      #channel-list .card-group .chat-list + .chat-list, .card-group
+      #chat-list .card + .participant-list,
+      #chat-list .card-group .card + .participant-list, .card-group
+      #chat-list .participant-list + .participant-list,
+      #chat-list .card-group .participant-list + .participant-list, .card-group
+      #chat-list .channel-list + .participant-list,
+      #chat-list .card-group .channel-list + .participant-list, .card-group
+      #chat-list .chat-list + .participant-list,
+      #chat-list .card-group .chat-list + .participant-list, .card-group
+      #chat-list .card + .channel-list,
+      #chat-list .card-group .card + .channel-list, .card-group
+      #chat-list .participant-list + .channel-list,
+      #chat-list .card-group .participant-list + .channel-list, .card-group
+      #chat-list .channel-list + .channel-list,
+      #chat-list .card-group .channel-list + .channel-list, .card-group
+      #chat-list .chat-list + .channel-list,
+      #chat-list .card-group .chat-list + .channel-list, .card-group
+      #chat-list .card + .chat-list,
+      #chat-list .card-group .card + .chat-list, .card-group
+      #chat-list .participant-list + .chat-list,
+      #chat-list .card-group .participant-list + .chat-list, .card-group
+      #chat-list .channel-list + .chat-list,
+      #chat-list .card-group .channel-list + .chat-list, .card-group
+      #chat-list .chat-list + .chat-list,
+      #chat-list .card-group .chat-list + .chat-list {
         margin-left: 0;
         border-left: 0; } }
 
@@ -3677,10 +3875,20 @@ select {
     .card-columns .card, .card-columns #participant-list .participant-list, #participant-list .card-columns .participant-list, .card-columns
     #participant-list .channel-list,
     #participant-list .card-columns .channel-list, .card-columns
+    #participant-list .chat-list,
+    #participant-list .card-columns .chat-list, .card-columns
     #channel-list .participant-list,
     #channel-list .card-columns .participant-list, .card-columns
     #channel-list .channel-list,
-    #channel-list .card-columns .channel-list {
+    #channel-list .card-columns .channel-list, .card-columns
+    #channel-list .chat-list,
+    #channel-list .card-columns .chat-list, .card-columns
+    #chat-list .participant-list,
+    #chat-list .card-columns .participant-list, .card-columns
+    #chat-list .channel-list,
+    #chat-list .card-columns .channel-list, .card-columns
+    #chat-list .chat-list,
+    #chat-list .card-columns .chat-list {
       display: inline-block;
       width: 100%; } }
 
@@ -4139,12 +4347,14 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
   list-style: none; }
 
 .list-group, #participant-list ul,
-#channel-list ul {
+#channel-list ul,
+#chat-list ul {
   padding-left: 0;
   margin-bottom: 0; }
 
 .list-group-item, #participant-list li,
-#channel-list li {
+#channel-list li,
+#chat-list li {
   position: relative;
   display: block;
   padding: .75rem 1.25rem;
@@ -4152,29 +4362,42 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
   background-color: #fff;
   border: 1px solid #ddd; }
   .list-group-item:last-child, #participant-list li:last-child,
-  #channel-list li:last-child {
+  #channel-list li:last-child,
+  #chat-list li:last-child {
     margin-bottom: 0; }
 
 .list-group-flush .list-group-item, #participant-list ul .list-group-item,
-#channel-list ul .list-group-item, .list-group-flush #participant-list li, #participant-list .list-group-flush li, #participant-list ul li, .list-group-flush
+#channel-list ul .list-group-item,
+#chat-list ul .list-group-item, .list-group-flush #participant-list li, #participant-list .list-group-flush li, #participant-list ul li, .list-group-flush
 #channel-list li,
 #channel-list .list-group-flush li,
-#channel-list ul li {
+#channel-list ul li, .list-group-flush
+#chat-list li,
+#chat-list .list-group-flush li,
+#chat-list ul li {
   border-width: 1px 0;
   border-radius: 0; }
 
 .list-group-flush:first-child .list-group-item:first-child, #participant-list ul:first-child .list-group-item:first-child,
-#channel-list ul:first-child .list-group-item:first-child, .list-group-flush:first-child #participant-list li:first-child, #participant-list .list-group-flush:first-child li:first-child, #participant-list ul:first-child li:first-child, .list-group-flush:first-child
+#channel-list ul:first-child .list-group-item:first-child,
+#chat-list ul:first-child .list-group-item:first-child, .list-group-flush:first-child #participant-list li:first-child, #participant-list .list-group-flush:first-child li:first-child, #participant-list ul:first-child li:first-child, .list-group-flush:first-child
 #channel-list li:first-child,
 #channel-list .list-group-flush:first-child li:first-child,
-#channel-list ul:first-child li:first-child {
+#channel-list ul:first-child li:first-child, .list-group-flush:first-child
+#chat-list li:first-child,
+#chat-list .list-group-flush:first-child li:first-child,
+#chat-list ul:first-child li:first-child {
   border-top: 0; }
 
 .list-group-flush:last-child .list-group-item:last-child, #participant-list ul:last-child .list-group-item:last-child,
-#channel-list ul:last-child .list-group-item:last-child, .list-group-flush:last-child #participant-list li:last-child, #participant-list .list-group-flush:last-child li:last-child, #participant-list ul:last-child li:last-child, .list-group-flush:last-child
+#channel-list ul:last-child .list-group-item:last-child,
+#chat-list ul:last-child .list-group-item:last-child, .list-group-flush:last-child #participant-list li:last-child, #participant-list .list-group-flush:last-child li:last-child, #participant-list ul:last-child li:last-child, .list-group-flush:last-child
 #channel-list li:last-child,
 #channel-list .list-group-flush:last-child li:last-child,
-#channel-list ul:last-child li:last-child {
+#channel-list ul:last-child li:last-child, .list-group-flush:last-child
+#chat-list li:last-child,
+#chat-list .list-group-flush:last-child li:last-child,
+#chat-list ul:last-child li:last-child {
   border-bottom: 0; }
 
 a.list-group-item,
@@ -4193,52 +4416,76 @@ button.list-group-item {
     background-color: #f5f5f5; }
 
 .list-group-item.disabled, #participant-list li.disabled,
-#channel-list li.disabled, .list-group-item.disabled:focus, #participant-list li.disabled:focus,
-#channel-list li.disabled:focus, .list-group-item.disabled:hover, #participant-list li.disabled:hover,
-#channel-list li.disabled:hover {
+#channel-list li.disabled,
+#chat-list li.disabled, .list-group-item.disabled:focus, #participant-list li.disabled:focus,
+#channel-list li.disabled:focus,
+#chat-list li.disabled:focus, .list-group-item.disabled:hover, #participant-list li.disabled:hover,
+#channel-list li.disabled:hover,
+#chat-list li.disabled:hover {
   color: #A2A8AB;
   cursor: not-allowed;
   background-color: #BCC1C3; }
   .list-group-item.disabled .list-group-item-heading, #participant-list li.disabled .list-group-item-heading,
-  #channel-list li.disabled .list-group-item-heading, .list-group-item.disabled:focus .list-group-item-heading, #participant-list li.disabled:focus .list-group-item-heading,
-  #channel-list li.disabled:focus .list-group-item-heading, .list-group-item.disabled:hover .list-group-item-heading, #participant-list li.disabled:hover .list-group-item-heading,
-  #channel-list li.disabled:hover .list-group-item-heading {
+  #channel-list li.disabled .list-group-item-heading,
+  #chat-list li.disabled .list-group-item-heading, .list-group-item.disabled:focus .list-group-item-heading, #participant-list li.disabled:focus .list-group-item-heading,
+  #channel-list li.disabled:focus .list-group-item-heading,
+  #chat-list li.disabled:focus .list-group-item-heading, .list-group-item.disabled:hover .list-group-item-heading, #participant-list li.disabled:hover .list-group-item-heading,
+  #channel-list li.disabled:hover .list-group-item-heading,
+  #chat-list li.disabled:hover .list-group-item-heading {
     color: inherit; }
   .list-group-item.disabled .list-group-item-text, #participant-list li.disabled .list-group-item-text,
-  #channel-list li.disabled .list-group-item-text, .list-group-item.disabled:focus .list-group-item-text, #participant-list li.disabled:focus .list-group-item-text,
-  #channel-list li.disabled:focus .list-group-item-text, .list-group-item.disabled:hover .list-group-item-text, #participant-list li.disabled:hover .list-group-item-text,
-  #channel-list li.disabled:hover .list-group-item-text {
+  #channel-list li.disabled .list-group-item-text,
+  #chat-list li.disabled .list-group-item-text, .list-group-item.disabled:focus .list-group-item-text, #participant-list li.disabled:focus .list-group-item-text,
+  #channel-list li.disabled:focus .list-group-item-text,
+  #chat-list li.disabled:focus .list-group-item-text, .list-group-item.disabled:hover .list-group-item-text, #participant-list li.disabled:hover .list-group-item-text,
+  #channel-list li.disabled:hover .list-group-item-text,
+  #chat-list li.disabled:hover .list-group-item-text {
     color: #A2A8AB; }
 
 .list-group-item.active, #participant-list li.active,
-#channel-list li.active, .list-group-item.active:focus, #participant-list li.active:focus,
-#channel-list li.active:focus, .list-group-item.active:hover, #participant-list li.active:hover,
-#channel-list li.active:hover {
+#channel-list li.active,
+#chat-list li.active, .list-group-item.active:focus, #participant-list li.active:focus,
+#channel-list li.active:focus,
+#chat-list li.active:focus, .list-group-item.active:hover, #participant-list li.active:hover,
+#channel-list li.active:hover,
+#chat-list li.active:hover {
   z-index: 2;
   color: #fff;
   background-color: #427C89;
   border-color: #427C89; }
   .list-group-item.active .list-group-item-heading, #participant-list li.active .list-group-item-heading,
   #channel-list li.active .list-group-item-heading,
+  #chat-list li.active .list-group-item-heading,
   .list-group-item.active .list-group-item-heading > small, #participant-list li.active .list-group-item-heading > small,
   #channel-list li.active .list-group-item-heading > small,
+  #chat-list li.active .list-group-item-heading > small,
   .list-group-item.active .list-group-item-heading > .small, #participant-list li.active .list-group-item-heading > .small,
-  #channel-list li.active .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading, #participant-list li.active:focus .list-group-item-heading,
+  #channel-list li.active .list-group-item-heading > .small,
+  #chat-list li.active .list-group-item-heading > .small, .list-group-item.active:focus .list-group-item-heading, #participant-list li.active:focus .list-group-item-heading,
   #channel-list li.active:focus .list-group-item-heading,
+  #chat-list li.active:focus .list-group-item-heading,
   .list-group-item.active:focus .list-group-item-heading > small, #participant-list li.active:focus .list-group-item-heading > small,
   #channel-list li.active:focus .list-group-item-heading > small,
+  #chat-list li.active:focus .list-group-item-heading > small,
   .list-group-item.active:focus .list-group-item-heading > .small, #participant-list li.active:focus .list-group-item-heading > .small,
-  #channel-list li.active:focus .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading, #participant-list li.active:hover .list-group-item-heading,
+  #channel-list li.active:focus .list-group-item-heading > .small,
+  #chat-list li.active:focus .list-group-item-heading > .small, .list-group-item.active:hover .list-group-item-heading, #participant-list li.active:hover .list-group-item-heading,
   #channel-list li.active:hover .list-group-item-heading,
+  #chat-list li.active:hover .list-group-item-heading,
   .list-group-item.active:hover .list-group-item-heading > small, #participant-list li.active:hover .list-group-item-heading > small,
   #channel-list li.active:hover .list-group-item-heading > small,
+  #chat-list li.active:hover .list-group-item-heading > small,
   .list-group-item.active:hover .list-group-item-heading > .small, #participant-list li.active:hover .list-group-item-heading > .small,
-  #channel-list li.active:hover .list-group-item-heading > .small {
+  #channel-list li.active:hover .list-group-item-heading > .small,
+  #chat-list li.active:hover .list-group-item-heading > .small {
     color: inherit; }
   .list-group-item.active .list-group-item-text, #participant-list li.active .list-group-item-text,
-  #channel-list li.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text, #participant-list li.active:focus .list-group-item-text,
-  #channel-list li.active:focus .list-group-item-text, .list-group-item.active:hover .list-group-item-text, #participant-list li.active:hover .list-group-item-text,
-  #channel-list li.active:hover .list-group-item-text {
+  #channel-list li.active .list-group-item-text,
+  #chat-list li.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text, #participant-list li.active:focus .list-group-item-text,
+  #channel-list li.active:focus .list-group-item-text,
+  #chat-list li.active:focus .list-group-item-text, .list-group-item.active:hover .list-group-item-text, #participant-list li.active:hover .list-group-item-text,
+  #channel-list li.active:hover .list-group-item-text,
+  #chat-list li.active:hover .list-group-item-text {
     color: #b9d7de; }
 
 .list-group-item-success {
@@ -4874,14 +5121,15 @@ button.close {
     bottom: 20px; } }
 
 .clearfix::after, #participant-list li::after,
-#channel-list li::after {
+#channel-list li::after,
+#chat-list li::after {
   content: "";
   display: table;
   clear: both; }
 
-.center-block, input[type="submit"],
-button, #participant-list footer button,
-#channel-list footer button, .main-content.room #connect-button {
+.center-block, #participant-list footer button.add-channel,
+#channel-list footer button.add-channel,
+#chat-list footer button.add-channel, .main-content.room #connect-button {
   display: block;
   margin-left: auto;
   margin-right: auto; }
@@ -4890,7 +5138,8 @@ button, #participant-list footer button,
   float: left !important; }
 
 .pull-xs-right, #language-links, #participant-list .controls,
-#channel-list .controls {
+#channel-list .controls,
+#chat-list .controls {
   float: right !important; }
 
 .pull-xs-none {
@@ -5060,7 +5309,8 @@ a.text-danger:focus, a.text-danger:hover {
   color: #cd4713; }
 
 .bg-inverse, #utility-nav, .clipboard-group label, .card-header, #participant-list h3,
-#channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
+#channel-list h3,
+#chat-list h3, .main-content.register h3, .main-content.index #join-room h3,
 .main-content.index #create-room h3 {
   color: #BCC1C3;
   background-color: #5C6265; }
@@ -5380,7 +5630,13 @@ a.bg-danger:focus, a.bg-danger:hover {
   font-weight: normal;
   font-style: normal; }
 
-.fa, .icon, #collaboration .icon, .copy-link .icon, .source .icon, .license .icon:before {
+.fa, .icon, #participant-list button.accordion,
+#channel-list button.accordion,
+#chat-list button.accordion, #collaboration .icon, .submit-chat .icon, .copy-link .icon, .source .icon, .license .icon:before, .license #participant-list button.accordion:before, #participant-list .license button.accordion:before, .license
+#channel-list button.accordion:before,
+#channel-list .license button.accordion:before, .license
+#chat-list button.accordion:before,
+#chat-list .license button.accordion:before {
   display: inline-block;
   font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
@@ -5437,23 +5693,49 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left, .fa-pull-left.icon, #collaboration .fa-pull-left.icon, .license .fa-pull-left.icon:before {
+.fa.fa-pull-left, .fa-pull-left.icon, #participant-list button.fa-pull-left.accordion,
+#channel-list button.fa-pull-left.accordion,
+#chat-list button.fa-pull-left.accordion, #collaboration .fa-pull-left.icon, .license .fa-pull-left.icon:before, .license #participant-list button.fa-pull-left.accordion:before, #participant-list .license button.fa-pull-left.accordion:before, .license
+#channel-list button.fa-pull-left.accordion:before,
+#channel-list .license button.fa-pull-left.accordion:before, .license
+#chat-list button.fa-pull-left.accordion:before,
+#chat-list .license button.fa-pull-left.accordion:before {
   margin-right: .3em; }
 
-.fa.fa-pull-right, .fa-pull-right.icon, #collaboration .fa-pull-right.icon, .license .fa-pull-right.icon:before {
+.fa.fa-pull-right, .fa-pull-right.icon, #participant-list button.fa-pull-right.accordion,
+#channel-list button.fa-pull-right.accordion,
+#chat-list button.fa-pull-right.accordion, #collaboration .fa-pull-right.icon, .license .fa-pull-right.icon:before, .license #participant-list button.fa-pull-right.accordion:before, #participant-list .license button.fa-pull-right.accordion:before, .license
+#channel-list button.fa-pull-right.accordion:before,
+#channel-list .license button.fa-pull-right.accordion:before, .license
+#chat-list button.fa-pull-right.accordion:before,
+#chat-list .license button.fa-pull-right.accordion:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
-.pull-right {
+.pull-right, #participant-list button.accordion,
+#channel-list button.accordion,
+#chat-list button.accordion {
   float: right; }
 
 .pull-left {
   float: left; }
 
-.fa.pull-left, .pull-left.icon, #collaboration .pull-left.icon, .license .pull-left.icon:before {
+.fa.pull-left, .pull-left.icon, #participant-list button.pull-left.accordion,
+#channel-list button.pull-left.accordion,
+#chat-list button.pull-left.accordion, #collaboration .pull-left.icon, .license .pull-left.icon:before, .license #participant-list button.pull-left.accordion:before, #participant-list .license button.pull-left.accordion:before, .license
+#channel-list button.pull-left.accordion:before,
+#channel-list .license button.pull-left.accordion:before, .license
+#chat-list button.pull-left.accordion:before,
+#chat-list .license button.pull-left.accordion:before {
   margin-right: .3em; }
 
-.fa.pull-right, .pull-right.icon, #collaboration .pull-right.icon, .license .pull-right.icon:before {
+.fa.pull-right, #participant-list button.accordion, .license #participant-list button.accordion:before, #participant-list .license button.accordion:before,
+#channel-list button.accordion, .license
+#channel-list button.accordion:before,
+#channel-list .license button.accordion:before,
+#chat-list button.accordion, .license
+#chat-list button.accordion:before,
+#chat-list .license button.accordion:before, .pull-right.icon, #collaboration .pull-right.icon, .license .pull-right.icon:before {
   margin-left: .3em; }
 
 .fa-spin {
@@ -5823,7 +6105,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-arrow-left:before {
   content: ""; }
 
-.fa-arrow-right:before {
+.fa-arrow-right:before, .submit-chat .icon:before, .submit-chat #participant-list button.accordion:before, #participant-list .submit-chat button.accordion:before, .submit-chat
+#channel-list button.accordion:before,
+#channel-list .submit-chat button.accordion:before, .submit-chat
+#chat-list button.accordion:before,
+#chat-list .submit-chat button.accordion:before {
   content: ""; }
 
 .fa-arrow-up:before {
@@ -5842,7 +6128,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-compress:before {
   content: ""; }
 
-.fa-plus:before, .add-channel .icon:before {
+.fa-plus:before, .add-channel .icon:before, .add-channel #participant-list button.accordion:before, #participant-list .add-channel button.accordion:before, .add-channel
+#channel-list button.accordion:before,
+#channel-list .add-channel button.accordion:before, .add-channel
+#chat-list button.accordion:before,
+#chat-list .add-channel button.accordion:before {
   content: ""; }
 
 .fa-minus:before {
@@ -5932,7 +6222,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-cogs:before {
   content: ""; }
 
-.fa-comments:before, #collaboration .chat .icon:before {
+.fa-comments:before, #collaboration .chat .icon:before, #collaboration .chat #participant-list button.accordion:before, #participant-list #collaboration .chat button.accordion:before, #collaboration .chat
+#channel-list button.accordion:before,
+#channel-list #collaboration .chat button.accordion:before, #collaboration .chat
+#chat-list button.accordion:before,
+#chat-list #collaboration .chat button.accordion:before {
   content: ""; }
 
 .fa-thumbs-o-up:before {
@@ -5947,7 +6241,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-heart-o:before {
   content: ""; }
 
-.fa-sign-out:before, .controls .leave .icon:before {
+.fa-sign-out:before, .controls .leave .icon:before, .controls .leave #participant-list button.accordion:before, #participant-list .controls .leave button.accordion:before, .controls .leave
+#channel-list button.accordion:before,
+#channel-list .controls .leave button.accordion:before, .controls .leave
+#chat-list button.accordion:before,
+#chat-list .controls .leave button.accordion:before {
   content: ""; }
 
 .fa-linkedin-square:before {
@@ -5959,7 +6257,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-external-link:before {
   content: ""; }
 
-.fa-sign-in:before, .controls .join .icon:before {
+.fa-sign-in:before, .controls .join .icon:before, .controls .join #participant-list button.accordion:before, #participant-list .controls .join button.accordion:before, .controls .join
+#channel-list button.accordion:before,
+#channel-list .controls .join button.accordion:before, .controls .join
+#chat-list button.accordion:before,
+#chat-list .controls .join button.accordion:before {
   content: ""; }
 
 .fa-trophy:before {
@@ -6027,7 +6329,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-hand-o-up:before {
   content: ""; }
 
-.fa-hand-o-down:before, .controls .lower-hand .icon:before {
+.fa-hand-o-down:before, .controls .lower-hand .icon:before, .controls .lower-hand #participant-list button.accordion:before, #participant-list .controls .lower-hand button.accordion:before, .controls .lower-hand
+#channel-list button.accordion:before,
+#channel-list .controls .lower-hand button.accordion:before, .controls .lower-hand
+#chat-list button.accordion:before,
+#chat-list .controls .lower-hand button.accordion:before {
   content: ""; }
 
 .fa-arrow-circle-left:before {
@@ -6172,7 +6478,15 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 .fa-legal:before,
 .fa-gavel:before,
-.info .moderator .icon:before {
+.info .moderator .icon:before,
+.info .moderator #participant-list button.accordion:before,
+#participant-list .info .moderator button.accordion:before,
+.info .moderator
+#channel-list button.accordion:before,
+#channel-list .info .moderator button.accordion:before,
+.info .moderator
+#chat-list button.accordion:before,
+#chat-list .info .moderator button.accordion:before {
   content: ""; }
 
 .fa-dashboard:before,
@@ -6197,7 +6511,15 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 .fa-paste:before,
 .fa-clipboard:before,
-.copy-link .icon:before {
+.copy-link .icon:before,
+.copy-link #participant-list button.accordion:before,
+#participant-list .copy-link button.accordion:before,
+.copy-link
+#channel-list button.accordion:before,
+#channel-list .copy-link button.accordion:before,
+.copy-link
+#chat-list button.accordion:before,
+#chat-list .copy-link button.accordion:before {
   content: ""; }
 
 .fa-lightbulb-o:before {
@@ -6263,10 +6585,14 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-angle-double-right:before {
   content: ""; }
 
-.fa-angle-double-up:before {
+.fa-angle-double-up:before, #participant-list button.accordion:before,
+#channel-list button.accordion:before,
+#chat-list button.accordion:before {
   content: ""; }
 
-.fa-angle-double-down:before {
+.fa-angle-double-down:before, #participant-list button.accordion.collapsed:before,
+#channel-list button.accordion.collapsed:before,
+#chat-list button.accordion.collapsed:before {
   content: ""; }
 
 .fa-angle-left:before {
@@ -6392,10 +6718,18 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-puzzle-piece:before {
   content: ""; }
 
-.fa-microphone:before, .controls .mute .icon:before {
+.fa-microphone:before, .controls .mute .icon:before, .controls .mute #participant-list button.accordion:before, #participant-list .controls .mute button.accordion:before, .controls .mute
+#channel-list button.accordion:before,
+#channel-list .controls .mute button.accordion:before, .controls .mute
+#chat-list button.accordion:before,
+#chat-list .controls .mute button.accordion:before {
   content: ""; }
 
-.fa-microphone-slash:before, .controls .muted .icon:before {
+.fa-microphone-slash:before, .controls .muted .icon:before, .controls .muted #participant-list button.accordion:before, #participant-list .controls .muted button.accordion:before, .controls .muted
+#channel-list button.accordion:before,
+#channel-list .controls .muted button.accordion:before, .controls .muted
+#chat-list button.accordion:before,
+#chat-list .controls .muted button.accordion:before {
   content: ""; }
 
 .fa-shield:before {
@@ -6883,7 +7217,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-git-square:before {
   content: ""; }
 
-.fa-git:before, .source .icon:before {
+.fa-git:before, .source .icon:before, .source #participant-list button.accordion:before, #participant-list .source button.accordion:before, .source
+#channel-list button.accordion:before,
+#channel-list .source button.accordion:before, .source
+#chat-list button.accordion:before,
+#chat-list .source button.accordion:before {
   content: ""; }
 
 .fa-y-combinator-square:before,
@@ -6935,7 +7273,15 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 .fa-soccer-ball-o:before,
 .fa-futbol-o:before,
-.controls .interpret .icon:before {
+.controls .interpret .icon:before,
+.controls .interpret #participant-list button.accordion:before,
+#participant-list .controls .interpret button.accordion:before,
+.controls .interpret
+#channel-list button.accordion:before,
+#channel-list .controls .interpret button.accordion:before,
+.controls .interpret
+#chat-list button.accordion:before,
+#chat-list .controls .interpret button.accordion:before {
   content: ""; }
 
 .fa-tty:before {
@@ -7227,7 +7573,11 @@ a.bg-danger:focus, a.bg-danger:hover {
 .fa-object-ungroup:before {
   content: ""; }
 
-.fa-sticky-note:before, #collaboration .notepad .icon:before {
+.fa-sticky-note:before, #collaboration .notepad .icon:before, #collaboration .notepad #participant-list button.accordion:before, #participant-list #collaboration .notepad button.accordion:before, #collaboration .notepad
+#channel-list button.accordion:before,
+#channel-list #collaboration .notepad button.accordion:before, #collaboration .notepad
+#chat-list button.accordion:before,
+#chat-list #collaboration .notepad button.accordion:before {
   content: ""; }
 
 .fa-sticky-note-o:before {
@@ -7269,7 +7619,15 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 .fa-hand-stop-o:before,
 .fa-hand-paper-o:before,
-.controls .raise-hand .icon:before {
+.controls .raise-hand .icon:before,
+.controls .raise-hand #participant-list button.accordion:before,
+#participant-list .controls .raise-hand button.accordion:before,
+.controls .raise-hand
+#channel-list button.accordion:before,
+#channel-list .controls .raise-hand button.accordion:before,
+.controls .raise-hand
+#chat-list button.accordion:before,
+#chat-list .controls .raise-hand button.accordion:before {
   content: ""; }
 
 .fa-hand-scissors-o:before {
@@ -7483,7 +7841,8 @@ h3 {
       font-size: 1.5rem; } }
 
 .bg-inverse a, #utility-nav a, .clipboard-group label a, .card-header a, #participant-list h3 a,
-#channel-list h3 a, .main-content.register h3 a, .main-content.index #join-room h3 a,
+#channel-list h3 a,
+#chat-list h3 a, .main-content.register h3 a, .main-content.index #join-room h3 a,
 .main-content.index #create-room h3 a {
   color: #fff; }
 
@@ -7628,25 +7987,39 @@ label {
     background-color: #427C89;
     border-color: #427C89; }
 
-.clipboard-group input {
-  width: 75%;
-  float: left; }
-
-#participant-list footer button,
-#channel-list footer button {
+#participant-list footer,
+#channel-list footer,
+#chat-list footer {
   margin-top: 1em;
   margin-bottom: 1em; }
 
 #participant-list .scroll-list,
-#channel-list .scroll-list {
+#channel-list .scroll-list,
+#chat-list .scroll-list {
   max-height: 200px;
   overflow-x: hidden; }
 
 #participant-list .info,
 #participant-list .controls,
 #channel-list .info,
-#channel-list .controls {
+#channel-list .controls,
+#chat-list .info,
+#chat-list .controls {
   display: inline-block; }
+
+#participant-list button.accordion,
+#channel-list button.accordion,
+#chat-list button.accordion {
+  background-color: transparent;
+  padding: 0; }
+
+.username {
+  font-weight: bold; }
+  .username:after {
+    content: ': '; }
+
+.messageBody {
+  color: #333; }
 
 .info {
   background-color: transparent; }
@@ -7678,7 +8051,11 @@ label {
   .info .queued a {
     color: #42A084; }
 
-.add-channel .icon {
+.add-channel .icon, .add-channel #participant-list button.accordion, #participant-list .add-channel button.accordion, .add-channel
+#channel-list button.accordion,
+#channel-list .add-channel button.accordion, .add-channel
+#chat-list button.accordion,
+#chat-list .add-channel button.accordion {
   margin-right: 4px; }
 
 @font-face {
@@ -7698,18 +8075,12 @@ label {
   }
 }
 */
-.license .icon:before {
+.license .icon:before, .license #participant-list button.accordion:before, #participant-list .license button.accordion:before, .license
+#channel-list button.accordion:before,
+#channel-list .license button.accordion:before, .license
+#chat-list button.accordion:before,
+#chat-list .license button.accordion:before {
   font-family: "gpl3";
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  /* fix buttons height, for twitter bootstrap */
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Font smoothing. That was taken from TWBS */
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
   content: '\e800'; }
 
 /* '' */
@@ -7746,7 +8117,8 @@ label {
       margin-bottom: 5em; } }
 
 .card-header, #participant-list h3,
-#channel-list h3, .main-content.register h3, .main-content.index #join-room h3,
+#channel-list h3,
+#chat-list h3, .main-content.register h3, .main-content.index #join-room h3,
 .main-content.index #create-room h3 {
   background-color: #79858A;
   color: #fff; }

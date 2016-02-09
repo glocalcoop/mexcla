@@ -3,10 +3,12 @@
 // -----------------------------------------------------------------------------
 
 #participant-list,
-#channel-list {
+#channel-list,
+#chat-list {
 
     .participant-list,
-    .channel-list {
+    .channel-list,
+    .chat-list {
         @extend .card;
     }
 
@@ -30,16 +32,18 @@
         }
     }
 
-    footer button {
-        @extend .center-block;
+    footer {
         margin-top: 1em;
         margin-bottom: 1em;
+
+        button.add-channel {
+            @extend .center-block;
+        }
     }
 
     .scroll-list {
         max-height: 200px;
         overflow-x: hidden;
-        // @extend .card-block;
     }
 
     
@@ -51,5 +55,28 @@
     .controls {
         @extend .pull-xs-right;
     }
+
+    button.accordion {
+        @extend .icon;
+        @extend .pull-right;
+        @extend .fa-angle-double-up;
+        background-color: transparent;
+        padding: 0;
+
+        &.collapsed {
+            @extend .fa-angle-double-down;
+        }
+    }
     
+}
+
+.username {
+    font-weight: bold;
+    &:after {
+        content: ': ';
+    }
+}
+
+.messageBody {
+    color: $gray-darker;
 }

@@ -18,7 +18,6 @@
 input[type="submit"],
 button {
     @extend .btn;
-    @extend .center-block;
     a {
         color: $white;
     }
@@ -42,6 +41,9 @@ button {
 .copy-link {
     cursor: pointer;
 }
+.submit-chat {
+    @extend .btn-primary;
+}
 
 .cursor-grab {
     cursor: grab;
@@ -49,4 +51,3 @@ button {
 .cursor-grabbling {
     cursor: grabbing;
 }
-
