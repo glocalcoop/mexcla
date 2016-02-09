@@ -74,10 +74,11 @@ Models.Room = Backbone.Model.extend({
     }
   },
   establishSocket: function() {
+    var that = this;
     var roomnum = this.get('roomnum');
     this.socket = io('/' + roomnum);
     this.socket.on('room update', function(room){
-      console.log(room);
+      that.set(room);
     });
   }
 });
