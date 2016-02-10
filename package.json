@@ -46,6 +46,7 @@
     "gulp-watch": "^4.3.5",
     "jshint": "*",
     "mocha": "^2.4.5",
+    "mongojs": "^2.3.0",
     "should": "^8.0.0",
     "simple-mock": "^0.6.0",
     "socket.io": "^1.4.5",

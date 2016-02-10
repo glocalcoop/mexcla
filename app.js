@@ -18,6 +18,7 @@ server.listen(8080, function(){
 var namespaces = {};
 
 //var io = require('socket.io')(server);
+mongoose.Promise = Promise;
 mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 
 app.set('view engine', 'jade');
@@ -124,8 +125,8 @@ app.post('/room/id/:id/moderator', function(req, res){
       if (err) {
         res.json({error: "Error changing the moderator", "message": err});
       } else {
-        res.json(room);
-        emitRoom(room);
+        res.json(roomInfo);
+        emitRoom(roomInfo);
       }
     });
   });
@@ -163,6 +164,18 @@ app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   });
 });
 
+// HAND RAISE //
+// TODO: error handling
+app.post('/room/id/:id/raisehand', function(req, res){
+  userAndRoom(req.cookies.id, req.params.id, function(user, room){
+    room.handsQueue.push(user);
+    room.save(function(err, roomInfo){
+        if (err) {handleError(err);}
+        res.json(roomInfo);
+        emitRoom(roomInfo);
+      });
+    });
+});
 
 //room info
 app.get('/room/:roomnum/info', function(req, res){
@@ -180,6 +193,24 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 
 //FUNCTIONS//
+
+// string, string -> callback(user, room);
+// if err:
+// callback(err);
+function userAndRoom(userId, roomId, callback) {
+  var userPromise = getUsernameAndLangPromise(userId);
+  var roomPromise = models.Room.findById(roomId).exec();
+  Promise.all([userPromise,roomPromise]).then(function(values){
+    callback(values[0], values[1]);
+  }, function(reason){
+    callback(reason);
+  });
+}
+
+// userId -> promise
+function getUsernameAndLangPromise(userId) {
+  return models.User.findById(userId, 'username lang').exec();
+}
 
 function homepageRequest(req, res) {
   // person is logged in

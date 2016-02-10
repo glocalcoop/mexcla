@@ -1,6 +1,7 @@
 var should = require('should');
 var request = require('superagent');
-
+var mongojs = require('mongojs');
+var db = mongojs('localhost:27018/mexcladb_test', ['rooms']);
 
 var url = 'localhost:8080';
 
@@ -228,13 +229,24 @@ describe('rooms', function(){
   describe('hand raising', function(){
 
     describe('rise hand', function(){
-      it('server should receive request for hand raise', function(){
-        false.should.be.true();
-        
+      it('server should receive request for hand raise', function(done){
+        request
+          .post(url + '/room/id/' + roomId + '/raisehand')
+          .set('cookie', 'id=' + userId)
+          .end(function(err,res){
+            res.body.handsQueue.length.should.eql(1);
+            res.body.handsQueue[0].username.should.eql('FAKE SPANISH USER');
+            done();
+          });
       });
 
-      it('database should have hand raise', function(){
-        false.should.be.true();
+      it('database should have hand raise', function(done){
+        db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+          room.handsQueue[0].lang.should.eql('es');
+          room.handsQueue[0].username.should.eql('FAKE SPANISH USER');
+          room.handsQueue.length.should.eql(1);
+          done();
+        });
       });
     });
 
