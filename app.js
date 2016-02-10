@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var _ = require('underscore');
+var util = require('./util.js');
 //var expressSession = require('express-session');
 //var MongoStore = require('connect-mongo')(expressSession);
 var app = express();
@@ -69,7 +70,7 @@ app.get('/users/:id', function(req,res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  generateRoomNumber(function(newRoomNumber){
+  util.generateRoomNumber(models.Room, function(newRoomNumber){
     var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
     //get user info for our logged in user
     getUsernameAndLang(userId, function(userInfo){
@@ -103,7 +104,7 @@ app.get('/room/:roomnum', function(req,res){
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
           res.json(roomInfo);
-          emitRoom(room);
+          emitRoom(roomInfo);
         });
       });
     }
@@ -282,31 +283,6 @@ function getChannel(roomid, channelid, callback) {
   });
 }
 
-function isRoomNumAvailable(roomNumber, callback) {
-  models.Room.find({},'roomnum', function(err, rooms){
-    var roomInUse = _.chain(rooms)
-          .map(function(room){
-            return room.roomnum;
-          })
-          .contains(roomNumber)
-          .value();
-    callback(!roomInUse);
-  });
-}
-
-
-//recursive function to find an available room
-//callback with room number
-function generateRoomNumber(callback) {
-  var randomNumber = randomInt(100,9999); // room numbers are at least 3 digits and no more than 4
-  isRoomNumAvailable(randomNumber, function(answer){
-    if (answer) {
-      callback(randomNumber);
-    } else {
-      generateRoomNumber(callback);
-    }
-  });
-}
 
 // pushes a 'room update' event to the namespace for the given room
 function emitRoom(room) {
@@ -317,9 +293,3 @@ function emitRoom(room) {
 function handleError(err) {
   console.error(err);
 }
-
-function randomInt (low, high) {
-  return Math.floor(Math.random() * (high - low) + low);
-}
-
-module.exports.isRoomNumAvailable = isRoomNumAvailable;
