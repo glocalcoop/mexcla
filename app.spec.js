@@ -19,26 +19,6 @@ before(function(done){
     });
 });
 
-// describe('homepage', function(){
-//   it('should return "none"" when there are no cookies', function(done){
-//     request.get(url).end(function(err, res){
-//       should.not.exist(err);
-//       res.body.user.should.eql('none');
-//       res.body.salutation.should.eql('Hi');
-//       done();
-//     });
-//   });
-  
-//   it('should return user information and correct lang when cookie is sent', function(done){
-//     request.get(url)
-//       .set('cookie', 'id=' + userId)
-//       .end(function(err, res){
-//         res.body.user._id.should.eql(userId);
-//         res.body.salutation.should.eql('Hola');
-//         done();
-//      });
-//   });
-// });
   
 describe('create new user', function(){
   it('should create a new user and return with user details', function(done){
@@ -245,4 +225,32 @@ describe('rooms', function(){
     });
   });
 
+  describe('hand raising', function(){
+
+    describe('rise hand', function(){
+      it('server should receive request for hand raise', function(){
+        false.should.be.true();
+        
+      });
+
+      it('database should have hand raise', function(){
+        false.should.be.true();
+      });
+    });
+
+    describe('call on', function(){
+      it('server should receive call-on request', function(){
+        false.should.be.true();
+
+      });
+
+      it('database should remove hand raisee from queue and place in called-on position', function() {
+        false.should.be.true();
+
+      });
+
+    });
+  });
+
 });
+
