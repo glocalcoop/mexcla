@@ -157,6 +157,9 @@ Views.Room = Backbone.View.extend({
     this.$el.html(this.template(templateData));
     this.sidebar.render();
     this.renderChannel();
+    if (this.isModerator) {
+      this.renderControls();
+    }
     return this;
   },
   initialize: function() {
@@ -177,7 +180,13 @@ Views.Room = Backbone.View.extend({
       });
     }
     return this;
-  }  
+  },
+  renderControls: function() {
+  
+  },
+  isModerator: function() {
+
+  }
 });
 
 // TODO: turn channel html into template
