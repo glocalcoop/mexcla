@@ -4,7 +4,6 @@ var mongojs = require('mongojs');
 var db = mongojs('localhost:27018/mexcladb_test', ['rooms']);
 
 var url = 'localhost:8080';
-
 var util = require('./util');
 
 var userId;
@@ -261,7 +260,6 @@ describe('rooms', function(){
             res.body.handsQueue[0].username.should.eql('FAKE SPANISH USER');
             res.body.handsQueue[1].username.should.eql('FAKE ENGLISH USER');
             res.body.users.length.should.eql(2);
-            
             done();
           });
       });
@@ -269,30 +267,34 @@ describe('rooms', function(){
     });
 
     describe('call on', function(){
-
       // right now anyone can send call on request
       // TODO: make sure only the moderator can call on people.
       // post data {_id: userId} of the person to call on
       it('server should receive call-on request', function(done){
-        // request
-        //   .post(url + '/room/id/' + roomId + '/callon')
-        //   .set('cookie', 'id=' + newUserId)
-        //   .send({_id: userId})
-        //   .end(function(err, res){
-        //     res.body
-
-        //   });
-        done();
-          
-
-      });
-
-      it('database should remove hand raisee from queue and place in called-on position', function() {
-        false.should.be.true();
+         request
+           .post(url + '/room/id/' + roomId + '/callon')
+           .set('cookie', 'id=' + newUserId)
+           .send({_id: userId}) // fake spanish user
+          .end(function(err, res){
+             res.body.handsQueue.length.should.eql(1);
+             res.body.handsQueue[0].username.should.eql('FAKE ENGLISH USER');
+             res.body.calledon.username.should.eql('FAKE SPANISH USER');
+             res.body.calledon._id.should.eql(userId);
+             done();
+           });
 
       });
 
+      it('database should remove hand raisee from queue and place in called-on position', function(done) {
+        db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+           room.handsQueue.length.should.eql(1);
+           room.handsQueue[0].username.should.eql('FAKE ENGLISH USER');
+           room.calledon.username.should.eql('FAKE SPANISH USER');
+           done();
+        });
+      });
     });
+
   });
 
 });

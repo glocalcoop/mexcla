@@ -168,10 +168,12 @@ app.post('/room/id/:id/raisehand', function(req, res){
     });
 });
 
-//room info
-app.get('/room/:roomnum/info', function(req, res){
-  //return with information about room
+app.post('/room/id/:id/callon', function(req,res){
+  callOn(req.body._id, req.params.id, function(room){
+    res.json(room);
+  });
 });
+
 
 //leave room and respond with user info
 //NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
@@ -187,6 +189,20 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 //FUNCTIONS//
 
+// string, string -> callback({})
+// removes user of userId from Queue and  places them in
+// the called on position.
+function callOn(userId, roomId, callback){
+  userAndRoom(userId, roomId, function(user, room){
+    room.calledon = user;
+    room.handsQueue = _.reject(room.users, function(user){
+      return user._id.equals(userId);
+    });
+    room.save(function(err, roomInfo){
+      (err) ? callback(err) : callback(roomInfo);
+    });
+  });
+}
 // string, string -> callback(user, room);
 // if err:
 // callback(err);
