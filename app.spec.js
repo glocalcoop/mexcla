@@ -146,8 +146,7 @@ describe('rooms', function(){
         .get(url + '/room/' + roomNumber + '/leave')
         .set('cookie', 'id=' + userId)
         .end(function(err, res){
-          res.body.salutation.should.eql('Hola');
-          res.body.user._id.should.eql(userId);
+          res.body._id.should.eql(userId);
           done();
         });
     });

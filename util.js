@@ -30,7 +30,20 @@ function randomInt (low, high) {
   return Math.floor(Math.random() * (high - low) + low);
 }
 
+//returns True or False if user is in the room.
+function isUserInRoom(userId, users) {
+  if (_.isUndefined(_.find(users, function(user){
+    return user._id.equals(userId);
+  }))) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
 module.exports = {
   generateRoomNumber: generateRoomNumber,
-  isRoomNumAvailable: isRoomNumAvailable
+  isRoomNumAvailable: isRoomNumAvailable,
+  isUserInRoom: isUserInRoom
 };

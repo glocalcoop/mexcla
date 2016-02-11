@@ -2,12 +2,13 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+mongoose.Promise = Promise;
+mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var _ = require('underscore');
 var util = require('./util.js');
-//var expressSession = require('express-session');
-//var MongoStore = require('connect-mongo')(expressSession);
+
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -18,19 +19,12 @@ server.listen(8080, function(){
 // holds room namespaces
 var namespaces = {};
 
-//var io = require('socket.io')(server);
-mongoose.Promise = Promise;
-mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
-
-app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(cookieParser("TOP SnECRET"));
-
-app.use(express.static('public'));
+app.use(cookieParser("secret"));
 
 var models = {
   User: require('./models/User'),
@@ -38,11 +32,7 @@ var models = {
   Channel: require('./models/Room').Channel
 };
 
-var homepage = require('./homepage');
-
-//app.get('/', homepageRequest);
-
-// creates users and sends back info and puts userid in cookie
+// creates users,  sends back info and stores userid & lang in cookie
 app.post('/users/new', function(req, res){
   var user = new models.User(req.body);
   user.save(function(err, user){
@@ -54,7 +44,7 @@ app.post('/users/new', function(req, res){
       res.cookie('id', user.id);
       // store language in a cookie
       res.cookie('lang', user.lang);
-      res.send(user);
+      res.json(user);
     }
   });
 });
@@ -96,7 +86,7 @@ app.get('/room/create', function(req,res){
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
   roomByRoomNumber(req.params.roomnum, function(room){
-    if (isUserInRoom(userId, room.users)) {
+    if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
       getUsernameAndLang(userId, function(userInfo){
@@ -187,7 +177,9 @@ app.get('/room/:roomnum/info', function(req, res){
 //NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
-    homepageRequest(req, res);
+    getUserInfo(req.cookies.id, function(user){
+      res.json(user);
+    });
   });
 });
 
@@ -213,31 +205,6 @@ function getUsernameAndLangPromise(userId) {
   return models.User.findById(userId, 'username lang').exec();
 }
 
-function homepageRequest(req, res) {
-  // person is logged in
-  if (!_.isUndefined(req.cookies.id)) {
-    getUserInfo(req.cookies.id, function(user){
-      // get language details for page
-      var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
-      //send user info + language-specific details for homepage
-      res.json(_.extend({user: user}, homePageText));
-    });
-  } else {
-    //send English by default 
-    res.json(_.extend({user: 'none'}, homepage.en));
-  }
-}
-
-//returns True or False if user is in the room.
-function isUserInRoom(userId, users) {
-  if (_.isUndefined(_.find(users, function(user){
-    return user._id.equals(userId);
-  }))) {
-    return false;
-  } else {
-    return true;
-  }
-}
 
 //passes user info object {_id,username,lang} to callback
 function getUserInfo(userId, callback) {
