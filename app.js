@@ -2,11 +2,13 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+mongoose.Promise = Promise;
+mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var _ = require('underscore');
-//var expressSession = require('express-session');
-//var MongoStore = require('connect-mongo')(expressSession);
+var util = require('./util.js');
+
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -17,18 +19,12 @@ server.listen(8080, function(){
 // holds room namespaces
 var namespaces = {};
 
-//var io = require('socket.io')(server);
-mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
-
-app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-app.use(cookieParser("TOP SnECRET"));
-
-app.use(express.static('public'));
+app.use(cookieParser("secret"));
 
 var models = {
   User: require('./models/User'),
@@ -36,11 +32,7 @@ var models = {
   Channel: require('./models/Room').Channel
 };
 
-var homepage = require('./homepage');
-
-//app.get('/', homepageRequest);
-
-// creates users and sends back info and puts userid in cookie
+// creates users,  sends back info and stores userid & lang in cookie
 app.post('/users/new', function(req, res){
   var user = new models.User(req.body);
   user.save(function(err, user){
@@ -52,7 +44,7 @@ app.post('/users/new', function(req, res){
       res.cookie('id', user.id);
       // store language in a cookie
       res.cookie('lang', user.lang);
-      res.send(user);
+      res.json(user);
     }
   });
 });
@@ -68,7 +60,7 @@ app.get('/users/:id', function(req,res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  generateRoomNumber(function(newRoomNumber){
+  util.generateRoomNumber(models.Room, function(newRoomNumber){
     var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
     //get user info for our logged in user
     getUsernameAndLang(userId, function(userInfo){
@@ -94,7 +86,7 @@ app.get('/room/create', function(req,res){
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
   roomByRoomNumber(req.params.roomnum, function(room){
-    if (isUserInRoom(userId, room.users)) {
+    if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
       getUsernameAndLang(userId, function(userInfo){
@@ -102,7 +94,7 @@ app.get('/room/:roomnum', function(req,res){
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
           res.json(roomInfo);
-          emitRoom(room);
+          emitRoom(roomInfo);
         });
       });
     }
@@ -124,8 +116,8 @@ app.post('/room/id/:id/moderator', function(req, res){
       if (err) {
         res.json({error: "Error changing the moderator", "message": err});
       } else {
-        res.json(room);
-        emitRoom(room);
+        res.json(roomInfo);
+        emitRoom(roomInfo);
       }
     });
   });
@@ -163,17 +155,34 @@ app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   });
 });
 
-
-//room info
-app.get('/room/:roomnum/info', function(req, res){
-  //return with information about room
+// HAND RAISE //
+// TODO: error handling
+app.post('/room/id/:id/raisehand', function(req, res){
+  userAndRoom(req.cookies.id, req.params.id, function(user, room){
+    room.handsQueue.push(user);
+    room.save(function(err, roomInfo){
+        if (err) {handleError(err);}
+        res.json(roomInfo);
+        emitRoom(roomInfo);
+      });
+    });
 });
+
+app.post('/room/id/:id/callon', function(req,res){
+  callOn(req.body._id, req.params.id, function(room){
+    res.json(room);
+    emitRoom(room);
+  });
+});
+
 
 //leave room and respond with user info
 //NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
-    homepageRequest(req, res);
+    getUserInfo(req.cookies.id, function(user){
+      res.json(user);
+    });
   });
 });
 
@@ -181,31 +190,38 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 //FUNCTIONS//
 
-function homepageRequest(req, res) {
-  // person is logged in
-  if (!_.isUndefined(req.cookies.id)) {
-    getUserInfo(req.cookies.id, function(user){
-      // get language details for page
-      var homePageText = _.isUndefined(homepage[user.lang]) ? homepage.en : homepage[user.lang];
-      //send user info + language-specific details for homepage
-      res.json(_.extend({user: user}, homePageText));
+// string, string -> callback({})
+// removes user of userId from Queue and  places them in
+// the called on position.
+function callOn(userId, roomId, callback){
+  userAndRoom(userId, roomId, function(user, room){
+    room.calledon = user;
+    room.handsQueue = _.reject(room.users, function(user){
+      return user._id.equals(userId);
     });
-  } else {
-    //send English by default 
-    res.json(_.extend({user: 'none'}, homepage.en));
-  }
+    room.save(function(err, roomInfo){
+      (err) ? callback(err) : callback(roomInfo);
+    });
+  });
+}
+// string, string -> callback(user, room);
+// if err:
+// callback(err);
+function userAndRoom(userId, roomId, callback) {
+  var userPromise = getUsernameAndLangPromise(userId);
+  var roomPromise = models.Room.findById(roomId).exec();
+  Promise.all([userPromise,roomPromise]).then(function(values){
+    callback(values[0], values[1]);
+  }, function(reason){
+    callback(reason);
+  });
 }
 
-//returns True or False if user is in the room.
-function isUserInRoom(userId, users) {
-  if (_.isUndefined(_.find(users, function(user){
-    return user._id.equals(userId);
-  }))) {
-    return false;
-  } else {
-    return true;
-  }
+// userId -> promise
+function getUsernameAndLangPromise(userId) {
+  return models.User.findById(userId, 'username lang').exec();
 }
+
 
 //passes user info object {_id,username,lang} to callback
 function getUserInfo(userId, callback) {
@@ -251,31 +267,6 @@ function getChannel(roomid, channelid, callback) {
   });
 }
 
-function isRoomNumAvailable(roomNumber, callback) {
-  models.Room.find({},'roomnum', function(err, rooms){
-    var roomInUse = _.chain(rooms)
-          .map(function(room){
-            return room.roomnum;
-          })
-          .contains(roomNumber)
-          .value();
-    callback(!roomInUse);
-  });
-}
-
-
-//recursive function to find an available room
-//callback with room number
-function generateRoomNumber(callback) {
-  var randomNumber = randomInt(100,9999); // room numbers are at least 3 digits and no more than 4
-  isRoomNumAvailable(randomNumber, function(answer){
-    if (answer) {
-      callback(randomNumber);
-    } else {
-      generateRoomNumber(callback);
-    }
-  });
-}
 
 // pushes a 'room update' event to the namespace for the given room
 function emitRoom(room) {
@@ -286,9 +277,3 @@ function emitRoom(room) {
 function handleError(err) {
   console.error(err);
 }
-
-function randomInt (low, high) {
-  return Math.floor(Math.random() * (high - low) + low);
-}
-
-module.exports.isRoomNumAvailable = isRoomNumAvailable;

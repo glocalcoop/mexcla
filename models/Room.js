@@ -14,9 +14,15 @@ var roomSchema = new Schema({
   // user: {_id, lang, username}
   users: {type: Array, default: []},
   channels: [channelSchema],
-  moderator: {type: Schema.ObjectId},
+  moderator: {type: Schema.Types.ObjectId},
   active: Boolean,
-  creator: {type: Schema.ObjectId}
+  creator: {type: Schema.Types.ObjectId},
+  handsQueue: {type: Array, default: []},
+  calledon: {
+    username: {type: String},
+    _id: {type: Schema.Types.ObjectId},
+    lang: {type: String}
+  }
 });
 
 roomSchema.methods.addUser = function(userInfo, cb) {
