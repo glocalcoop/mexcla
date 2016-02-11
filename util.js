@@ -41,9 +41,18 @@ function isUserInRoom(userId, users) {
   }
 }
 
+// input: [], string
+// output: []
+// removes user with given userId from queue
+function removeFromQueue(queue, userId) {
+ return  _.reject(queue, function(user){
+      return user._id.equals(userId);
+  });
+}
 
 module.exports = {
   generateRoomNumber: generateRoomNumber,
   isRoomNumAvailable: isRoomNumAvailable,
-  isUserInRoom: isUserInRoom
+  isUserInRoom: isUserInRoom,
+  removeFromQueue: removeFromQueue
 };

@@ -298,12 +298,14 @@ describe('rooms', function(){
     describe('lower hand', function(){
       it('should be received by server', function(done){
         request
-          .post(url + '/room/id' + roomId + '/lowerhand')
+          .post(url + '/room/id/' + roomId + '/lowerhand')
           .set('cookie', 'id=' + newUserId)
           .end(function(err,res){
             res.body.handsQueue.length.should.eql(0);
             done();
           });
+      });
+        
         it('should be removed in the database', function(done){
           db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
             room.handsQueue.length.should.eql(0);
@@ -311,8 +313,6 @@ describe('rooms', function(){
           });
         });
       });
-
-    });
     
   });
 

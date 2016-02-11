@@ -168,6 +168,20 @@ app.post('/room/id/:id/raisehand', function(req, res){
     });
 });
 
+
+// LOWER HAND //
+app.post('/room/id/:id/lowerhand', function(req,res){
+  models.Room.findById(req.params.id, function(err,room){
+    room.handsQueue = util.removeFromQueue(room.handsQueue, req.cookies.id);
+    room.save(function(err, roomInfo){
+      if (err) {handleError(err);}
+      res.json(roomInfo);
+      emitRoom(roomInfo);
+    });
+  });
+});
+
+// CALL ON ///
 app.post('/room/id/:id/callon', function(req,res){
   callOn(req.body._id, req.params.id, function(room){
     res.json(room);
@@ -196,14 +210,14 @@ app.get('/room/:roomnum/leave', function(req,res){
 function callOn(userId, roomId, callback){
   userAndRoom(userId, roomId, function(user, room){
     room.calledon = user;
-    room.handsQueue = _.reject(room.users, function(user){
-      return user._id.equals(userId);
-    });
+    room.handsQueue = util.removeFromQueue(room.handsQueue, userId);
     room.save(function(err, roomInfo){
       (err) ? callback(err) : callback(roomInfo);
     });
   });
 }
+
+
 // string, string -> callback(user, room);
 // if err:
 // callback(err);
@@ -216,6 +230,7 @@ function userAndRoom(userId, roomId, callback) {
     callback(reason);
   });
 }
+
 
 // userId -> promise
 function getUsernameAndLangPromise(userId) {
