@@ -171,6 +171,7 @@ app.post('/room/id/:id/raisehand', function(req, res){
 app.post('/room/id/:id/callon', function(req,res){
   callOn(req.body._id, req.params.id, function(room){
     res.json(room);
+    emitRoom(room);
   });
 });
 
