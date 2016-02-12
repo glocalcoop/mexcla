@@ -277,16 +277,22 @@
     <script type="text/template" id="participant-row-template">
       <li id="<%= _id %>">
         <div class="info">
+          <!-- Show channel participant is in -->
           <span class="language" data-toggle="tooltip" title="de">de</span>
+
+          <!-- Show if participant is moderator -->
           <span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>
+
+          <!-- Show if participant is queued -->
           <span class="queued" data-toggle="tooltip" title="Queued">1</span>
         </div>
         <%= username %>
         <div class="controls">
-          <button class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></button>
-          <button class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></button>
-          <button class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></button>
-          <button class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></button>
+
+          <div class="moderator-controls"></div>
+          <div class="mute-controls"></div>
+          <div class="current-user-controls"></div>
+
         </div>
       </li>
     </script>
@@ -295,7 +301,7 @@
     <!-- LANGUAGE CHANNEL ROW  -->
     <script type="text/template" id="channel-row-template">
       <!-- TODO: Add channel name identifier to each row  -->
-      <li id="channel-id">
+      <li id="{channel-id}">
         Channel Name
         <div class="controls">
           <button class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
@@ -305,6 +311,36 @@
           <button class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
         </div>
       </li>
+    </script>
+
+    <!-- MODERATOR CONTROLS TEMPLATE  -->
+    <script type="text/template" id="moderator-controls-template">
+      <!-- Moderator controls -->
+      <!-- Show if `in queue` and not `called on` -->
+      <button class="call-on" data-toggle="tooltip" title="Call On"><a href="" title="Call On"><i class="icon"></i></a></button>
+
+      <!-- Show if `called on` -->
+      <button class="call-off" data-toggle="tooltip" title="Call Off"><a href="" title="Call Off"><i class="icon"></i></a></button>
+    </script>
+
+
+    <!-- CURRENT PARTICIPANT CONTROLS TEMPLATE -->
+    <script type="text/template" id="current-user-controls-template">
+      <!-- Show if not in queue -->
+      <button class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></button>
+
+      <!-- Show if in queue -->
+      <button class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></button>
+    </script>
+
+
+    <!-- MUTE/UNMUTE CONTROL TEMPLATE -->
+    <script type="text/template" id="mute-controls-template">
+      <!-- Show if not muted -->
+      <button class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></button>
+
+      <!-- Show if muted -->
+      <button class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></button>
     </script>
 
 
