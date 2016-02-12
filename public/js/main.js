@@ -249,6 +249,14 @@ Views.isThereAUser = function() {
   }
 };
 
+Views.isModerator = function() {
+  return app.user.id == app.room.get('moderator');
+}
+
+Views.isCurrentUser = function(userId) {
+  return app.user.id == userId;
+}
+
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
@@ -362,9 +370,15 @@ Views.RoomSidebar = Backbone.View.extend({
   renderParticipants: function() {
     var selector = '#participants';
     $(selector).html('');
-   _.each(this.model.attributes.users, function(user){
-       var li =_.template($('#participant-row-template').html());
-     $(selector).append(li(user));
+    _.each(this.model.attributes.users, function(user){
+      var participantRow = _.template($('#participant-row-template').html());
+      $(selector).append(participantRow(user));
+
+      if(Views.isModerator()) {
+        var moderatorEl = $('#' + user._id + ' .moderator-controls');
+        new Views.ModeratorControls({el: moderatorEl}).render();
+      }
+
     });
     return this;
   }
@@ -380,6 +394,9 @@ Views.Room = Backbone.View.extend({
     this.$el.html(this.template(templateData));
     this.sidebar.render();
     this.renderChannel();
+    if (this.isModerator) {
+      this.renderControls();
+    }
     return this;
   },
   initialize: function() {
@@ -400,7 +417,10 @@ Views.Room = Backbone.View.extend({
       });
     }
     return this;
-  }  
+  },
+  renderControls: function() {
+  
+  }
 });
 
 // TODO: turn channel html into template
@@ -418,6 +438,25 @@ Views.Channel = Backbone.View.extend({
 
 Views.ChannelOptions = Backbone.View.extend({
   // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
+});
+
+Views.ModeratorControls = Backbone.View.extend({
+  // Might need to change to use class, if not unique on page
+  // el: $('.moderator-controls');
+  template: _.template($('#moderator-controls-template').html()),
+  render: function() {
+    this.$el.html(this.template({}));
+  }
+});
+
+Views.CurrentUserControls = Backbone.View.extend({
+  // Might need to change to use class, if not unique on page
+  // el: $('.current-user-control');
+});
+
+Views.MuteControls = Backbone.View.extend({
+  // Might need to change to use class, if not unique on page
+  // el: $('.mute-controls');
 });
 
 
