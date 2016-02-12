@@ -86,6 +86,23 @@
             @extend .fa-hand-o-down;
         }
     }
+
+    .call-on {
+        @extend .btn-danger;
+        a:hover {
+            color: $white;
+        }
+        .icon {
+            @extend .fa-toggle-on;
+        }
+    }
+
+    .call-off {
+        @extend .btn-disabled;
+        .icon {
+            @extend .fa-toggle-off;
+        }
+    }
 }
 
 #collaboration {
