@@ -226,10 +226,9 @@ th {
   .dropup >
   button > .caret {
     border-top-color: #000 !important; }
-  .label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .info span,
-  .info button,
-  .controls span,
-  .controls button {
+  .label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .controls button, .info .language,
+  .info .moderator,
+  .info .queued {
     border: 1px solid #000; }
   .table {
     border-collapse: collapse !important; }
@@ -4001,10 +4000,9 @@ select {
 .pager-prev > span {
   float: left; }
 
-.label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .info span,
-.info button,
-.controls span,
-.controls button {
+.label, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a, .controls button, .info .language,
+.info .moderator,
+.info .queued {
   display: inline-block;
   padding: .25em .4em;
   font-size: 75%;
@@ -4014,10 +4012,9 @@ select {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline; }
-  .label:empty, #utility-nav #language-links a.nav-link:empty, #utility-nav #language-links #footer .colophon ul li a:empty, #footer .colophon ul li #utility-nav #language-links a:empty, .info span:empty,
-  .info button:empty,
-  .controls span:empty,
-  .controls button:empty {
+  .label:empty, #utility-nav #language-links a.nav-link:empty, #utility-nav #language-links #footer .colophon ul li a:empty, #footer .colophon ul li #utility-nav #language-links a:empty, .controls button:empty, .info .language:empty,
+  .info .moderator:empty,
+  .info .queued:empty {
     display: none; }
 
 .btn .label, #utility-nav #language-links a.nav-link .label, #utility-nav #language-links #footer .colophon ul li a .label, #footer .colophon ul li #utility-nav #language-links a .label, input[type="submit"] .label,
@@ -4027,63 +4024,54 @@ button a.nav-link, .btn #utility-nav #language-links #footer .colophon ul li a, 
 button #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li
 button a, .btn #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links .btn a, #footer .colophon ul li #utility-nav #language-links a a, input[type="submit"] #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links input[type="submit"] a,
 button #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links
-button a, .btn .info span, .info .btn span, #utility-nav #language-links a.nav-link .info span, .info #utility-nav #language-links a.nav-link span, #utility-nav #language-links #footer .colophon ul li a .info span, .info #utility-nav #language-links #footer .colophon ul li a span, #footer .colophon ul li #utility-nav #language-links a .info span, .info #footer .colophon ul li #utility-nav #language-links a span, input[type="submit"] .info span, .info input[type="submit"] span,
-button .info span, .info
-button span, .btn
-.info button,
-.info .btn button, #utility-nav #language-links a.nav-link
-.info button,
-.info #utility-nav #language-links a.nav-link button, #utility-nav #language-links #footer .colophon ul li a
-.info button,
-.info #utility-nav #language-links #footer .colophon ul li a button, #footer .colophon ul li #utility-nav #language-links a
-.info button,
-.info #footer .colophon ul li #utility-nav #language-links a button, input[type="submit"]
-.info button,
-.info input[type="submit"] button,
+button a, .btn .controls button, .controls .btn button, #utility-nav #language-links a.nav-link .controls button, .controls #utility-nav #language-links a.nav-link button, #utility-nav #language-links #footer .colophon ul li a .controls button, .controls #utility-nav #language-links #footer .colophon ul li a button, #footer .colophon ul li #utility-nav #language-links a .controls button, .controls #footer .colophon ul li #utility-nav #language-links a button, input[type="submit"] .controls button, .controls input[type="submit"] button,
+button .controls button, .controls
+button button, .btn .info .language, .info .btn .language, #utility-nav #language-links a.nav-link .info .language, .info #utility-nav #language-links a.nav-link .language, #utility-nav #language-links #footer .colophon ul li a .info .language, .info #utility-nav #language-links #footer .colophon ul li a .language, #footer .colophon ul li #utility-nav #language-links a .info .language, .info #footer .colophon ul li #utility-nav #language-links a .language, input[type="submit"] .info .language, .info input[type="submit"] .language,
+button .info .language, .info
+button .language, .btn
+.info .moderator,
+.info .btn .moderator, #utility-nav #language-links a.nav-link
+.info .moderator,
+.info #utility-nav #language-links a.nav-link .moderator, #utility-nav #language-links #footer .colophon ul li a
+.info .moderator,
+.info #utility-nav #language-links #footer .colophon ul li a .moderator, #footer .colophon ul li #utility-nav #language-links a
+.info .moderator,
+.info #footer .colophon ul li #utility-nav #language-links a .moderator, input[type="submit"]
+.info .moderator,
+.info input[type="submit"] .moderator,
 button
-.info button,
+.info .moderator,
 .info
-button button, .btn
-.controls span,
-.controls .btn span, #utility-nav #language-links a.nav-link
-.controls span,
-.controls #utility-nav #language-links a.nav-link span, #utility-nav #language-links #footer .colophon ul li a
-.controls span,
-.controls #utility-nav #language-links #footer .colophon ul li a span, #footer .colophon ul li #utility-nav #language-links a
-.controls span,
-.controls #footer .colophon ul li #utility-nav #language-links a span, input[type="submit"]
-.controls span,
-.controls input[type="submit"] span,
+button .moderator, .btn
+.info .queued,
+.info .btn .queued, #utility-nav #language-links a.nav-link
+.info .queued,
+.info #utility-nav #language-links a.nav-link .queued, #utility-nav #language-links #footer .colophon ul li a
+.info .queued,
+.info #utility-nav #language-links #footer .colophon ul li a .queued, #footer .colophon ul li #utility-nav #language-links a
+.info .queued,
+.info #footer .colophon ul li #utility-nav #language-links a .queued, input[type="submit"]
+.info .queued,
+.info input[type="submit"] .queued,
 button
-.controls span,
-.controls
-button span, .btn
-.controls button,
-.controls .btn button, #utility-nav #language-links a.nav-link
-.controls button,
-.controls #utility-nav #language-links a.nav-link button, #utility-nav #language-links #footer .colophon ul li a
-.controls button,
-.controls #utility-nav #language-links #footer .colophon ul li a button, #footer .colophon ul li #utility-nav #language-links a
-.controls button,
-.controls #footer .colophon ul li #utility-nav #language-links a button, input[type="submit"]
-.controls button,
-.controls input[type="submit"] button,
-button
-.controls button,
-.controls
-button button {
+.info .queued,
+.info
+button .queued {
   position: relative;
   top: -1px; }
 
-a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, a.label:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover {
+a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, .info a.language:focus,
+.info a.moderator:focus,
+.info a.queued:focus, a.label:hover, #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #footer .colophon ul li a:hover, #footer .colophon ul li #utility-nav #language-links a:hover, .info a.language:hover,
+.info a.moderator:hover,
+.info a.queued:hover {
   color: #fff;
   text-decoration: none;
   cursor: pointer; }
 
-.label-pill, .info span,
-.info button,
-.controls span,
-.controls button {
+.label-pill, .controls button, .info .language,
+.info .moderator,
+.info .queued {
   padding-right: .6em;
   padding-left: .6em; }
 
@@ -8039,11 +8027,15 @@ label {
 
 .info {
   background-color: transparent; }
-  .info span {
+  .info .language,
+  .info .moderator,
+  .info .queued {
     border: 1px solid #79858A;
     background-color: #fff;
     color: #79858A; }
-    .info span a {
+    .info .language a,
+    .info .moderator a,
+    .info .queued a {
       color: #79858A; }
 
 .info .moderator {
