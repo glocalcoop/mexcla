@@ -16,7 +16,17 @@ $(function() {
             mexcla_mic_mute(); 
         }
      
-    })
+    });
+
+    $('#participants').on('click', 'button', function(event) {
+
+        $(this).toggleClass('on');
+        console.log($(this));
+
+
+    });
+
+
 
     /**
      * Collaboration
