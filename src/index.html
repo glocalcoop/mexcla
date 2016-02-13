@@ -282,8 +282,8 @@
     <script type="text/template" id="channel-row-template">
       <!-- TODO: Add channel name identifier to each row  -->
 
-      <li id="{channel-id}">
-        Channel Name
+      <li id="<%= _id %>">
+        <%= name %>
         <div class="controls">
           <button class="label interpret" data-toggle="tooltip" title="Become interpreter">Interpret</button>
           <!-- Join appears when interpreter exists and user is not already in channel -->

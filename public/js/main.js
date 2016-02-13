@@ -420,6 +420,7 @@ Views.RoomSidebar = Backbone.View.extend({
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
     this.renderParticipants();
+    this.renderChannels();
     return this;
   },
   renderParticipants: function() {
@@ -436,9 +437,9 @@ Views.RoomSidebar = Backbone.View.extend({
         $(moderatorInfoEl).append(moderatorInfoHtml);
       }
 
-      // Add channel indicator to row if in channel
+      // TODO: Add channel indicator to row if in channel
 
-      // Add queue indicator to row if queued
+      // TODO: Add queue indicator to row if queued
 
       // If current user is moderator, add moderator controls to all but own row
       if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
