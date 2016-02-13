@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var channelSchema = new Schema({
+   name: { type: String },
    lang: { type: String },
    users: { type: Array },
    interpreter: { type: String }
