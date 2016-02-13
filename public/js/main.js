@@ -547,7 +547,6 @@ Views.AddChannelModal = Backbone.View.extend({
     new Views.ChannelTranslatorOptionsList({model: app.room});
   },
   render: function(model) {
-    console.log(app.room);
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
