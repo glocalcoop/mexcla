@@ -6,9 +6,6 @@
     @extend .fa;
 }
 
-.info span,
-.info button,
-.controls span,
 .controls button {
     @extend .label;
     @extend .label-pill;
@@ -16,7 +13,11 @@
 
 .info {
     background-color: transparent;
-    span {
+    .language,
+    .moderator,
+    .queued {
+        @extend .label;
+        @extend .label-pill;
         @include outline($brand-default);
     }
 }
