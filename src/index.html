@@ -239,12 +239,11 @@
           <div id="channels-collapse-list" class="scroll-list collapse in">
             <ul id="channels">
             <!-- template #channel-row-template -->
-            
             </ul>
 
           </div>
-          <footer class="widget-footer">
-            <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>              
+          <footer id="add-channel" class="widget-footer">
+            <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>
           </footer>
         </div>
       </aside>
@@ -254,14 +253,17 @@
     <!-- PARTICIPANTS ROW  -->
     <script type="text/template" id="participant-row-template">
       <li id="<%= _id %>">
+
         <div class="info">
           <!-- Show channel participant is in -->
+          <span class="is-in-channel"></span>
           <span class="language" data-toggle="tooltip" title="de">de</span>
 
           <!-- Show if participant is moderator -->
-          <span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>
+          <span class="is-moderator"></span>
 
           <!-- Show if participant is queued -->
+          <span class="is-queued"></span>
           <span class="queued" data-toggle="tooltip" title="Queued">1</span>
         </div>
         <%= username %>
@@ -279,6 +281,7 @@
     <!-- LANGUAGE CHANNEL ROW  -->
     <script type="text/template" id="channel-row-template">
       <!-- TODO: Add channel name identifier to each row  -->
+
       <li id="{channel-id}">
         Channel Name
         <div class="controls">
