@@ -257,6 +257,14 @@ Views.isCurrentUser = function(userId) {
   return userId == app.user.id;
 }
 
+Views.isInAChannel = function(userId) {
+  //userId is in app.room.attributes.channels[x]
+}
+
+Views.isInQueue = function(userId) {
+  return _.contains(app.room.get('handsQueue'), userId);
+}
+
 /**
  * Register
  */
@@ -438,8 +446,18 @@ Views.RoomSidebar = Backbone.View.extend({
       }
 
       // TODO: Add channel indicator to row if in channel
+      if(Views.isInAChannel( user._id )) {
+        var channelInfoEl = $('#' + user._id + ' .is-in-channel');
+        var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="{lang}"><i class="icon"></i>{lang}</span>';
+        $(channelInfoEl).append(channelInfoHtml);
+      }
 
       // TODO: Add queue indicator to row if queued
+      if(Views.isInQueue( user._id )) {
+        var queueInfoEl = $('#' + user._id + ' .is-queued');
+        var queuelInfoHtml = '<span class="queued" data-toggle="tooltip" title="{index}"><i class="icon"></i>{index}</span>';
+        $(queueInfoEl).append(queuelInfoHtml);
+      }
 
       // If current user is moderator, add moderator controls to all but own row
       if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
@@ -455,6 +473,7 @@ Views.RoomSidebar = Backbone.View.extend({
 
       // Add current user controls to row of current user
       if(Views.isCurrentUser( user._id )) {
+        console.log( user._id + ' is current user' );
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.CurrentUserControls({
@@ -639,7 +658,17 @@ $(function() {
             mexcla_mic_mute(); 
         }
      
-    })
+    });
+
+    $('#participants').on('click', 'button', function(event) {
+
+        $(this).toggleClass('on');
+        console.log($(this));
+
+
+    });
+
+
 
     /**
      * Collaboration
