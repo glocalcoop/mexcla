@@ -161,10 +161,7 @@ Views.Room = Backbone.View.extend({
     this.$el.html(this.template(templateData));
     this.sidebar.render();
     this.renderChannel();
-    if (this.isModerator) {
-      this.renderControls();
-    }
-    return this;
+       return this;
   },
   initialize: function() {
     this.lang = app.user.attributes.lang;
@@ -172,7 +169,7 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
-    this.sidebar = new Views.RoomSidebar({model: app.room});
+    this.sidebar = new Views.RoomSidebar({model: this.model});
     this.listenTo(this.model, 'change:channels', this.renderChannel);
   },
   renderChannel: function() {
@@ -201,6 +198,7 @@ Views.RoomSidebar = Backbone.View.extend({
   initialize: function() {
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
+    // this.listenTo(this.model, "change", this.render());
   },
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
