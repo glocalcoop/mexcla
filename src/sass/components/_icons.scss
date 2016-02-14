@@ -6,9 +6,6 @@
     @extend .fa;
 }
 
-.info span,
-.info button,
-.controls span,
 .controls button {
     @extend .label;
     @extend .label-pill;
@@ -16,7 +13,11 @@
 
 .info {
     background-color: transparent;
-    span {
+    .language,
+    .moderator,
+    .queued {
+        @extend .label;
+        @extend .label-pill;
         @include outline($brand-default);
     }
 }
@@ -64,28 +65,40 @@
         .icon {
             @extend .fa-microphone;
         }
-    }
-
-    .muted {
-        @extend .btn-disabled;
-        .icon {
-            @extend .fa-microphone-slash;
+        &.on {
+            @extend .btn-disabled;
+            .icon {
+                @extend .fa-microphone-slash;
+            }
         }
     }
+
+    // .muted {
+    //     @extend .btn-disabled;
+    //     .icon {
+            
+    //     }
+    // }
 
     .raise-hand {
         @extend .btn-success;
         .icon {
             @extend .fa-hand-paper-o;
         }
-    }
-
-    .lower-hand {
-        @extend .btn-disabled;
-        .icon {
-            @extend .fa-hand-o-down;
+        &.on {
+            @extend .btn-disabled;
+            .icon {
+                @extend .fa-hand-o-down;
+            }
         }
     }
+
+    // .lower-hand {
+    //     @extend .btn-disabled;
+    //     .icon {
+    //         @extend .fa-hand-o-down;
+    //     }
+    // }
 
     .call-on {
         @extend .btn-danger;
@@ -95,14 +108,20 @@
         .icon {
             @extend .fa-toggle-on;
         }
-    }
-
-    .call-off {
-        @extend .btn-disabled;
-        .icon {
-            @extend .fa-toggle-off;
+        &.on {
+            @extend .btn-disabled;
+            .icon {
+                @extend .fa-toggle-off;
+            }
         }
     }
+
+    // .call-off {
+    //     @extend .btn-disabled;
+    //     .icon {
+    //         @extend .fa-toggle-off;
+    //     }
+    // }
 }
 
 #collaboration {

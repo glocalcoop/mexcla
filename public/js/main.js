@@ -249,14 +249,25 @@ Views.isThereAUser = function() {
   }
 };
 
-Views.isModerator = function() {
-  return app.user.id == app.room.get('moderator');
+Views.isModerator = function(userId) {
+  return userId == app.room.get('moderator');
 }
 
 Views.isCurrentUser = function(userId) {
-  return app.user.id == userId;
+  return userId == app.user.id;
 }
 
+Views.isInAChannel = function(userId) {
+  //userId is in app.room.attributes.channels[x]
+}
+
+Views.isInQueue = function(userId) {
+  return _.contains(app.room.get('handsQueue'), userId);
+}
+
+/**
+ * Register
+ */
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
@@ -276,6 +287,9 @@ Views.RegisterModal = Backbone.View.extend({
   }
 });
 
+/**
+ * Index
+ */
 // View: "main" page where user picks between creating a room or joining an existing one
 // it renders language according to app.user.attributes.lang
 // and re-renders when user model language changes
@@ -333,6 +347,9 @@ Views.IndexView = Backbone.View.extend({
   }
 });
 
+/**
+ * Welcome
+ */
 // use: new WelcomeText({model: app.user})
 Views.WelcomeText = Backbone.View.extend({
   el: $('#welcome-text'),
@@ -354,37 +371,10 @@ Views.WelcomeText = Backbone.View.extend({
   }
 });
 
-// unlike the other Views, this one is appended to #content instead of replacing it
-// use; new Views.RoomSidebar({model: app.room});
-Views.RoomSidebar = Backbone.View.extend({
-  el: $('#content'),
-  template: _.template($('#room-sidebar-template').html()),
-  initialize: function() {
-    this.listenTo(this.model, "change:users", this.renderParticipants);
-  },
-  render: function() {
-    this.$el.append(this.template(websiteText[app.user.attributes.lang]));
-    this.renderParticipants();
-    return this;
-  },
-  renderParticipants: function() {
-    var selector = '#participants';
-    $(selector).html('');
-    _.each(this.model.attributes.users, function(user){
-      var participantRow = _.template($('#participant-row-template').html());
-      $(selector).append(participantRow(user));
 
-      if(Views.isModerator()) {
-        var moderatorEl = $('#' + user._id + ' .moderator-controls');
-        new Views.ModeratorControls({el: moderatorEl}).render();
-      }
-
-    });
-    return this;
-  }
-});
-
-
+/**
+ * Room
+ */
 // use: new Views.Room({model: app.room})
 Views.Room = Backbone.View.extend({
   el: $('#content'),
@@ -423,23 +413,97 @@ Views.Room = Backbone.View.extend({
   }
 });
 
-// TODO: turn channel html into template
-// but for now:
-$(document).ready(function(){
-  $('#add-channel-button').click(function(){
-    new Views.AddChannelModal({model: app.room}).render();
-  });
+/**
+ * Room Sidebar
+ */
+// unlike the other Views, this one is appended to #content instead of replacing it
+// use; new Views.RoomSidebar({model: app.room});
+Views.RoomSidebar = Backbone.View.extend({
+  el: $('#content'),
+  template: _.template($('#room-sidebar-template').html()),
+  initialize: function() {
+    this.listenTo(this.model, "change:users", this.renderParticipants);
+    this.listenTo(this.model, "change:channels", this.renderChannels);
+  },
+  render: function() {
+    this.$el.append(this.template(websiteText[app.user.attributes.lang]));
+    this.renderParticipants();
+    this.renderChannels();
+    return this;
+  },
+  renderParticipants: function() {
+    var selector = '#participants';
+    $(selector).html('');
+    _.each(this.model.attributes.users, function(user){
+      var participantRow = _.template($('#participant-row-template').html());
+      $(selector).append(participantRow(user));
+
+      // Add moderator indicator to row of moderator
+      if(Views.isModerator( user._id )) {
+        var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
+        var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
+        $(moderatorInfoEl).append(moderatorInfoHtml);
+      }
+
+      // TODO: Add channel indicator to row if in channel
+      if(Views.isInAChannel( user._id )) {
+        var channelInfoEl = $('#' + user._id + ' .is-in-channel');
+        var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="{lang}"><i class="icon"></i>{lang}</span>';
+        $(channelInfoEl).append(channelInfoHtml);
+      }
+
+      // TODO: Add queue indicator to row if queued
+      if(Views.isInQueue( user._id )) {
+        var queueInfoEl = $('#' + user._id + ' .is-queued');
+        var queuelInfoHtml = '<span class="queued" data-toggle="tooltip" title="{index}"><i class="icon"></i>{index}</span>';
+        $(queueInfoEl).append(queuelInfoHtml);
+      }
+
+      // If current user is moderator, add moderator controls to all but own row
+      if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
+        var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
+        var muteControlsEl = $('#' + user._id + ' .mute-controls');
+        new Views.ModeratorControls({
+          el: moderatorControlsEl
+        }).render();
+        new Views.MuteControls({
+          el: muteControlsEl
+        }).render();
+      }
+
+      // Add current user controls to row of current user
+      if(Views.isCurrentUser( user._id )) {
+        console.log( user._id + ' is current user' );
+        var currentUserEl = $('#' + user._id + ' .current-user-controls');
+        var muteControlsEl = $('#' + user._id + ' .mute-controls');
+        new Views.CurrentUserControls({
+          el: currentUserEl
+        }).render();
+        new Views.MuteControls({
+          el: muteControlsEl
+        }).render();
+    
+      }
+
+    });
+    return this;
+  },
+  renderChannels: function() {
+    var selector = '#channels';
+    $(selector).html('');
+    _.each(this.model.attributes.channels, function(channel){
+      var channelRow = _.template($('#channel-row-template').html());
+      $(selector).append(channelRow(channel));
+    });
+
+    return this;
+  }
+
 });
 
-
-Views.Channel = Backbone.View.extend({
-  
-});
-
-Views.ChannelOptions = Backbone.View.extend({
-  // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
-});
-
+/**
+ * Participant Info and Controls
+ */
 Views.ModeratorControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.moderator-controls');
@@ -452,11 +516,47 @@ Views.ModeratorControls = Backbone.View.extend({
 Views.CurrentUserControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.current-user-control');
+  template: _.template($('#current-user-controls-template').html()),
+  render: function() {
+    this.$el.html(this.template({}));
+  }
+
 });
 
 Views.MuteControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.mute-controls');
+  template: _.template($('#mute-controls-template').html()),
+  render: function() {
+    this.$el.html(this.template({}));
+  }
+
+});
+
+
+/**
+ * Channel
+ */
+Views.Channel = Backbone.View.extend({
+  template: _.template($('#channel-row-template').html()),
+  render: function() {
+    this.$el.html(this.template({}));
+  }
+});
+
+
+Views.ChannelOptions = Backbone.View.extend({
+  // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
+});
+
+// TODO: turn channel html into template
+// but for now:
+$(document).ready(function(){
+  $('#add-channel-button').click(function(){
+    new Views.AddChannelModal({
+      model: app.room
+    }).render();
+  });
 });
 
 
@@ -465,12 +565,17 @@ Views.AddChannelModal = Backbone.View.extend({
   initialize: function() {
     new Views.ChannelTranslatorOptionsList({model: app.room});
   },
-  render: function() {
+  render: function(model) {
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
       var translator = $('#channel-translator-options').val();
-      // this.model.createChannel({'lang': lang, 'translator': translator});
+      var name = $('#channel-name').val();
+      app.room.createChannel({
+        'name': name,
+        'lang': lang, 
+        'translator': translator
+      });
     });
   }
 });
@@ -484,7 +589,7 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
   render: function(){
     var that = this;
     // TODO: have value be id of user
-    var html = '<option value="">Select a translator</option><option value="none">none</option>';
+    var html = '<option value="">Select a translator</option><option value="none">None</option>';
     this.$el.html(html);
     var users = this.model.get('users');
     _.each(users, function(user){
@@ -553,7 +658,17 @@ $(function() {
             mexcla_mic_mute(); 
         }
      
-    })
+    });
+
+    $('#participants').on('click', 'button', function(event) {
+
+        $(this).toggleClass('on');
+        console.log($(this));
+
+
+    });
+
+
 
     /**
      * Collaboration

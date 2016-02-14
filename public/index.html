@@ -239,35 +239,12 @@
           <div id="channels-collapse-list" class="scroll-list collapse in">
             <ul id="channels">
             <!-- template #channel-row-template -->
-            <!-- TODO: Add channel row view -->
-              <li id="channel-id">
-                Channel Name
-                <div class="controls">
-                  <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
-                  <!-- Join appears when interpreter exists and user is not already in channel -->
-                  <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
-                  <!-- Leave appears when user is in channel -->
-                  <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
-                </div>
-              </li>
-
-              <li id="channel-id">
-                Channel Name
-                <div class="controls">
-                  <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
-                  <!-- Join appears when interpreter exists and user is not already in channel -->
-                  <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
-                  <!-- Leave appears when user is in channel -->
-                  <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
-                </div>
-              </li>
-
             </ul>
-            <footer class="widget-footer">
-              <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>              
-            </footer>
 
           </div>
+          <footer id="add-channel" class="widget-footer">
+            <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>
+          </footer>
         </div>
       </aside>
 
@@ -276,22 +253,25 @@
     <!-- PARTICIPANTS ROW  -->
     <script type="text/template" id="participant-row-template">
       <li id="<%= _id %>">
+
         <div class="info">
           <!-- Show channel participant is in -->
+          <span class="is-in-channel"></span>
           <span class="language" data-toggle="tooltip" title="de">de</span>
 
           <!-- Show if participant is moderator -->
-          <span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>
+          <span class="is-moderator"></span>
 
           <!-- Show if participant is queued -->
+          <span class="is-queued"></span>
           <span class="queued" data-toggle="tooltip" title="Queued">1</span>
         </div>
         <%= username %>
         <div class="controls">
 
-          <div class="moderator-controls"></div>
-          <div class="mute-controls"></div>
-          <div class="current-user-controls"></div>
+          <span class="moderator-controls"></span>
+          <span class="mute-controls"></span>
+          <span class="current-user-controls"></span>
 
         </div>
       </li>
@@ -301,14 +281,15 @@
     <!-- LANGUAGE CHANNEL ROW  -->
     <script type="text/template" id="channel-row-template">
       <!-- TODO: Add channel name identifier to each row  -->
-      <li id="{channel-id}">
-        Channel Name
+
+      <li id="<%= _id %>">
+        <%= name %>
         <div class="controls">
-          <button class="label interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
+          <button class="label interpret" data-toggle="tooltip" title="Become interpreter">Interpret</button>
           <!-- Join appears when interpreter exists and user is not already in channel -->
-          <button class="label join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
+          <button class="label join" data-toggle="tooltip" title="Join Channel">Join Channel</button>
           <!-- Leave appears when user is in channel -->
-          <button class="label leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
+          <button class="label leave" data-toggle="tooltip" title="Leave Channel">Leave Channel</button>
         </div>
       </li>
     </script>
@@ -317,30 +298,31 @@
     <script type="text/template" id="moderator-controls-template">
       <!-- Moderator controls -->
       <!-- Show if `in queue` and not `called on` -->
-      <button class="call-on" data-toggle="tooltip" title="Call On"><a href="" title="Call On"><i class="icon"></i></a></button>
-
-      <!-- Show if `called on` -->
-      <button class="call-off" data-toggle="tooltip" title="Call Off"><a href="" title="Call Off"><i class="icon"></i></a></button>
+      <button class="call-on" data-toggle="tooltip" href="" title="Call On"><i class="icon"></i></button>
     </script>
 
 
     <!-- CURRENT PARTICIPANT CONTROLS TEMPLATE -->
     <script type="text/template" id="current-user-controls-template">
-      <!-- Show if not in queue -->
-      <button class="raise-hand" data-toggle="tooltip" title="Raise Hand"><a href="" title="Raise Hand"><i class="icon"></i></a></button>
-
-      <!-- Show if in queue -->
-      <button class="lower-hand" data-toggle="tooltip" title="Lower Hand"><a href="" title="Lower Hand"><i class="icon"></i></a></button>
+      <!-- Show if not in queue - Toggle raise hand/lower hand -->
+      <button class="raise-hand" data-toggle="tooltip" href="" title="Raise Hand"><i class="icon"></i></button>
     </script>
 
 
     <!-- MUTE/UNMUTE CONTROL TEMPLATE -->
     <script type="text/template" id="mute-controls-template">
-      <!-- Show if not muted -->
-      <button class="mute" data-toggle="tooltip" title="Mute"><a href="" title="Mute"><i class="icon"></i></a></button>
+      <!-- Toggle mute/unmute -->
+      <button class="mute" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
+    </script>
 
-      <!-- Show if muted -->
-      <button class="muted" data-toggle="tooltip" title="Unmute"><a href="" title="Unmute"><i class="icon"></i></a></button>
+     <!-- CHANNEL CONTROLS TEMPLATE  -->
+    <script type="text/template" id="channel-controls-template">
+      <!-- Interpreter controls -->
+      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
+      <!-- Join appears when interpreter exists and user is not already in channel -->
+      <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
+      <!-- Leave appears when user is in channel -->
+      <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
     </script>
 
 
@@ -374,6 +356,7 @@
           <div class="card" role="document">
             <header class="modal-header"><h2>Add a Channel</h2></header>
             <fieldset>
+              <input type="text" name="name" id="channel-name" placeholder="Enter Channel Name" />
               <select name="lang" id="channel-lang-select">
                 <option value="">Select Language</option>
                 <option value="en">English</option>
@@ -381,11 +364,11 @@
               </select>
               <select name="translator" id="channel-translator-options">
                 <option value="">Select a translator</option>
-                <option value="none">none</option>
+                <option value="none">None</option>
               </select>
             </fieldset>
             <footer class="modal-footer">
-              <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Enter" />
+              <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Create" />
             </footer>
           </div>
         </div>
