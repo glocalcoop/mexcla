@@ -167,15 +167,43 @@ describe('home page', function(){
               });
             });
         });
+        
+        describe('call on geli in browser 2', function(){
 
-        // describe('call on geli in browser 2', function(){
+          before(function(done){
+            browser
+              .elementById(browser2_userId, function(err, elem){
+                elem.elementByCss('button.call-on').then(function(elem){
+                  elem.click().then(function(){
+                    browser.sleep(750).then(function(){
+                    }).nodeify(done);
+                  });
+                });
+              });
+          });
+
+          it('should update queue in browser', function(done){
+            
+            browser
+              .elementById(browser2_userId, function(err, elem){
+                elem.elementByCss('span.queued').then(function(elem){
+                  elem.text().then(function(text){
+                    text.should.eql('');
+                  }).nodeify(done);
+                });
+              });
+          });
+
+          it('should put user in the called on position', function(){
+            return browser
+              .execute("return app.room.get('calledon');")
+              .then(function(person){
+                person.username.should.equal('Geli');
+              });
+          });
           
-        //   return browser
-        //     .elementById(browser2_userId, function(err, elem){
-        //       elem
-        //     });
-          
-        // });
+
+        });
         
       });
     });

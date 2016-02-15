@@ -96,7 +96,17 @@ Models.raiseHandAjax = function(roomId) {
     type: 'POST',
     url: '/room/id/' + roomId + '/raisehand'
   });
-}
+};
+
+Models.callOnAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
 
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
@@ -106,6 +116,12 @@ Models.User = Backbone.Model.extend({
     Models.raiseHandAjax(roomId).done(function(data){
       // Do something when successful?
       // or show 'raising hand in progress?'
+    });
+  },
+  callOn: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
     });
   }
 });
@@ -479,7 +495,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({
           el: moderatorControlsEl
-        }).render();
+        }).render().callOnClick(user._id);
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
@@ -517,7 +533,6 @@ Views.RoomSidebar = Backbone.View.extend({
   },
   raiseHandClick: function(userId) {
     $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
-      console.log('hand raised');
       app.user.raiseHand();
     });
   },
@@ -543,6 +558,12 @@ Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function() {
     this.$el.html(this.template({}));
+    return this;
+  },
+  callOnClick: function(userId) {
+    $('#' + userId).find('button.call-on').click(function(e){
+      app.user.callOn(userId);
+    });
   }
 });
 

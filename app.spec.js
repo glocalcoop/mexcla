@@ -229,7 +229,7 @@ describe('rooms', function(){
         });
     });
 
-    describe('rise hand', function(){
+    describe('raise hand', function(){
       it('server should receive request for hand raise', function(done){
         request
           .post(url + '/room/id/' + roomId + '/raisehand')
