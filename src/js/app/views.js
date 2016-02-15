@@ -242,7 +242,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({
           el: moderatorControlsEl
-        }).render();
+        }).render().callOnClick(user._id);
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
@@ -306,6 +306,12 @@ Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function() {
     this.$el.html(this.template({}));
+    return this;
+  },
+  callOnClick: function(userId) {
+    $('#' + userId).find('button.call-on').click(function(e){
+      console.log('yes');
+    });
   }
 });
 
