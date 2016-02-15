@@ -19,11 +19,7 @@ var roomSchema = new Schema({
   active: Boolean,
   creator: {type: Schema.Types.ObjectId},
   handsQueue: {type: Array, default: []},
-  calledon: {
-    username: {type: String},
-    _id: {type: Schema.Types.ObjectId},
-    lang: {type: String}
-  }
+  calledon: Schema.Types.Mixed
 });
 
 roomSchema.methods.addUser = function(userInfo, cb) {

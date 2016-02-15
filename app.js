@@ -189,6 +189,14 @@ app.post('/room/id/:id/callon', function(req,res){
   });
 });
 
+// CALL OFF //
+app.post('/room/id/:id/calloff', function(req, res){
+  callOff(req.body._id, req.params.id, function(room){
+    res.json(room);
+    emitRoom(room);
+  });
+
+});
 
 //leave room and respond with user info
 //NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
@@ -217,6 +225,22 @@ function callOn(userId, roomId, callback){
   });
 }
 
+// string, string -> callback({})
+// removes from the calledon position if they are currently called on
+function callOff(userId, roomId, callback){
+  models.Room.findById(roomId, function(err, room){
+    if (err) {handleError(err);}
+    if (room.calledon._id.equals(userId)) {
+      room.calledon = false;
+      room.save(function(err, roomInfo){
+        (err) ? callback(err) : callback(roomInfo);
+      });
+    } else {
+      console.log({'error': "Hey! That person wasn't called on"});
+      callback(room);
+    }
+  });
+}
 
 // string, string -> callback(user, room);
 // if err:
