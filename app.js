@@ -86,6 +86,11 @@ app.get('/room/create', function(req,res){
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
   roomByRoomNumber(req.params.roomnum, function(room){
+    if (!room) {
+      // catch error in case room doesn't exist:
+      res.json({'error': 'this room does not exist'});
+      return;
+    }
     if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
@@ -189,7 +194,7 @@ app.post('/room/id/:id/callon', function(req,res){
   });
 });
 
-// CALL OFF //
+// CALL OFF 
 app.post('/room/id/:id/calloff', function(req, res){
   callOff(req.body._id, req.params.id, function(room){
     res.json(room);
