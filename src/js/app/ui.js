@@ -9,7 +9,6 @@ $(function() {
      */
     $('#mic-mute').change(function() {
         if( $(this).prop('checked') ) {
-
             mexcla_mic_unmute();
 
         } else {
@@ -18,15 +17,25 @@ $(function() {
      
     });
 
-    $('#participants').on('click', 'button', function(event) {
+    /**
+     * Page Language
+     * Switch language when language switched
+     */
+    $('#language-links').on('click', 'a', function(event) {
 
-        $(this).toggleClass('on');
-        console.log($(this));
-
+        $('html')[0].lang = $(this).data('lang');
 
     });
 
+    /**
+     * Participants
+     * Toggle `on` class when participant controls are clicked
+     */
+    $('#participants').on('click', 'button', function(event) {
 
+        $(this).toggleClass('on');
+
+    });
 
     /**
      * Collaboration
