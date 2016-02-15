@@ -17,7 +17,7 @@ var URL = 'localhost:8080/';
 
 
 describe('home page', function(){
-  this.timeout(10000);
+  this.timeout(100000);
   var browser;
 
   before(function(){
@@ -80,7 +80,6 @@ describe('home page', function(){
         .execute("return app.room.get('users')")
         .then(function(users){
           users.should.have.length(1);
-          
           return browser2.get(URL)
             .elementById('room-number').type(roomNumber)
             .elementById('room-number-button').click()
@@ -102,6 +101,113 @@ describe('home page', function(){
           users.should.have.length(2);
         });
     });
+    describe('raise hand', function(){
+      var browser_userId; // slothrop
+      var browser2_userId; // geli
+      it('click should trigger ajax call update hand queue and update backbone model', function(){
+        return browser
+          .execute("return app.user.get('_id');")
+          .then(function(userId){
+            browser_userId = userId;
+            return browser
+              .elementByCss('button.raise-hand')
+              .click()
+              .sleep(1000).then(function(){})
+              .execute("return app.room.get('handsQueue');")
+              .then(function(handsQueue){
+                handsQueue.should.have.length(1);
+              });
+          });
+
+      });
+
+      it('queue should display correctly position in the browser ', function(){
+        return browser
+          .elementById(browser_userId)
+          .elementByCss('span.queued')
+          .text()
+          .should.eventually.become('1');
+      });
+
+      it('queue should display correctly in the other browser', function(){
+        return browser2
+          .elementById(browser_userId)
+          .elementByCss('span.queued')
+          .text()
+          .should.eventually.become('1');
+      });
+
+      describe('another user (browser 2, that is) raises their hand', function(){
+
+        it('queue update in browser2', function(){
+          return browser2
+            .execute("return app.user.get('_id');")
+            .then(function(userId){
+              browser2_userId = userId;
+
+              return browser2
+                .elementByCss('button.raise-hand')
+                .click()
+                .sleep(1000).then(function(){})
+                .execute("return app.room.get('handsQueue');")
+                .then(function(handsQueue){
+                  handsQueue.should.have.length(2);
+                 });
+             });
+        });
+
+        it('queue is displayed  in browser', function(done){
+          
+          browser
+            .elementById(browser2_userId, function(err, elem){
+              elem.elementByCss('span.queued').then(function(elem){
+                elem.text().then(function(text){
+                  text.should.eql('2');
+                }).nodeify(done);
+              });
+            });
+        });
+        
+        describe('call on geli in browser 2', function(){
+
+          before(function(done){
+            browser
+              .elementById(browser2_userId, function(err, elem){
+                elem.elementByCss('button.call-on').then(function(elem){
+                  elem.click().then(function(){
+                    browser.sleep(750).then(function(){
+                    }).nodeify(done);
+                  });
+                });
+              });
+          });
+
+          it('should update queue in browser', function(done){
+            
+            browser
+              .elementById(browser2_userId, function(err, elem){
+                elem.elementByCss('span.queued').then(function(elem){
+                  elem.text().then(function(text){
+                    text.should.eql('');
+                  }).nodeify(done);
+                });
+              });
+          });
+
+          it('should put user in the called on position', function(){
+            return browser
+              .execute("return app.room.get('calledon');")
+              .then(function(person){
+                person.username.should.equal('Geli');
+              });
+          });
+          
+
+        });
+        
+      });
+    });
+    
   });
 });
 

@@ -91,9 +91,39 @@ var websiteText = {
     }
 };
 
+Models.raiseHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/raisehand'
+  });
+};
+
+Models.callOnAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
+
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
-  urlRoot: "/users"
+  urlRoot: "/users",
+  raiseHand: function() {
+    var roomId = app.room.get('_id');
+    Models.raiseHandAjax(roomId).done(function(data){
+      // Do something when successful?
+      // or show 'raising hand in progress?'
+    });
+  },
+  callOn: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
+  }
 });
 
 Models.Room = Backbone.Model.extend({
@@ -420,6 +450,7 @@ Views.RoomSidebar = Backbone.View.extend({
   template: _.template($('#room-sidebar-template').html()),
   initialize: function() {
     this.listenTo(this.model, "change:users", this.renderParticipants);
+    this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
     // this.listenTo(this.model, "change", this.render());
   },
@@ -430,6 +461,7 @@ Views.RoomSidebar = Backbone.View.extend({
     return this;
   },
   renderParticipants: function() {
+    var that = this;
     var selector = '#participants';
     $(selector).html('');
     _.each(this.model.attributes.users, function(user){
@@ -463,7 +495,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({
           el: moderatorControlsEl
-        }).render();
+        }).render().callOnClick(user._id);
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
@@ -480,11 +512,29 @@ Views.RoomSidebar = Backbone.View.extend({
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
-    
-      }
 
-    });
+        that.raiseHandClick(user._id);
+      }
+      
+      that.queueDisplay(user);
+
+    }); // end of each loop
     return this;
+  },
+  queueDisplay: function(user) {
+    var positionZeroIndexed= _.findIndex(app.room.get('handsQueue'), function(userInQueue){
+      return user._id == userInQueue._id;
+    });
+    if (positionZeroIndexed !== -1) {
+      var queuePosition = (positionZeroIndexed + 1).toString();
+      $('#' + user._id).find('span.queued').text(queuePosition);
+    }
+    return this;
+  },
+  raiseHandClick: function(userId) {
+    $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
+      app.user.raiseHand();
+    });
   },
   renderChannels: function() {
     var selector = '#channels';
@@ -508,6 +558,12 @@ Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function() {
     this.$el.html(this.template({}));
+    return this;
+  },
+  callOnClick: function(userId) {
+    $('#' + userId).find('button.call-on').click(function(e){
+      app.user.callOn(userId);
+    });
   }
 });
 

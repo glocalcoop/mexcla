@@ -229,7 +229,7 @@ describe('rooms', function(){
         });
     });
 
-    describe('rise hand', function(){
+    describe('raise hand', function(){
       it('server should receive request for hand raise', function(done){
         request
           .post(url + '/room/id/' + roomId + '/raisehand')
@@ -293,6 +293,38 @@ describe('rooms', function(){
            done();
         });
       });
+    });
+
+    describe('call off', function(){
+
+      it('should not change calledon if the user is not currently calledon', function(done){
+        request
+          .post(url + '/room/id/' + roomId + '/calloff')
+          .send({_id: 12345})
+          .end(function(err, res){
+            res.body.calledon.username.should.eql('FAKE SPANISH USER');
+            done();
+          });
+      });
+
+      it('should be received by server', function(done){
+        request
+          .post(url + '/room/id/' + roomId + '/calloff')
+          .send({_id: userId}) // fake spanish user
+          .end(function(err, res){
+            res.body.calledon.should.eql(false);
+            done();
+          });
+      });
+
+      it('should be removed from the db', function(done){
+        db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+          room.calledon.should.eql(false);
+          done();
+        });
+
+      });
+
     });
     
     describe('lower hand', function(){

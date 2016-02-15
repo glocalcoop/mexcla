@@ -1,6 +1,49 @@
+Models.raiseHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/raisehand'
+  });
+};
+
+Models.lowerHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/lowerhand'
+  });
+};
+
+Models.callOnAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
+
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
-  urlRoot: "/users"
+  urlRoot: "/users",
+  raiseHand: function() {
+    var roomId = app.room.get('_id');
+    Models.raiseHandAjax(roomId).done(function(data){
+      // Do something when successful?
+      // or show 'raising hand in progress?'
+    });
+  },
+  lowerHand: function() {
+    var roomId = app.room.get('_id');
+    Models.lowerHandAjax(roomId).done(function(data){
+      // 
+    });
+  },
+  callOn: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
+  }
 });
 
 Models.Room = Backbone.Model.extend({
