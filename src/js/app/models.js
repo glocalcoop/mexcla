@@ -3,7 +3,17 @@ Models.raiseHandAjax = function(roomId) {
     type: 'POST',
     url: '/room/id/' + roomId + '/raisehand'
   });
-}
+};
+
+Models.callOnAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
 
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
@@ -13,6 +23,12 @@ Models.User = Backbone.Model.extend({
     Models.raiseHandAjax(roomId).done(function(data){
       // Do something when successful?
       // or show 'raising hand in progress?'
+    });
+  },
+  callOn: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
     });
   }
 });

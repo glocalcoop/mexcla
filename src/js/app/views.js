@@ -39,8 +39,21 @@ Views.isInAChannel = function(userId) {
 }
 
 Views.isInQueue = function(userId) {
-  return _.contains(app.room.get('handsQueue'), userId);
+  return  _.chain(app.room.get('handsQueue'))
+      .map(function(user){return user._id; })
+      .contains(userId)
+      .value();
 }
+
+Views.isCalledOn = function(userId) {
+  var whoIsCalledOn = app.room.get('called on');
+  if (!calledon) {
+    // case where no-one is called on
+    return false;
+  } else {
+    return whoIsCalledOn._id == userId;
+  }
+};
 
 /**
  * Register
@@ -229,20 +242,13 @@ Views.RoomSidebar = Backbone.View.extend({
         $(channelInfoEl).append(channelInfoHtml);
       }
 
-      // TODO: Add queue indicator to row if queued
-      if(Views.isInQueue( user._id )) {
-        var queueInfoEl = $('#' + user._id + ' .is-queued');
-        var queuelInfoHtml = '<span class="queued" data-toggle="tooltip" title="{index}"><i class="icon"></i>{index}</span>';
-        $(queueInfoEl).append(queuelInfoHtml);
-      }
-
       // If current user is moderator, add moderator controls to all but own row
       if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
         var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({
           el: moderatorControlsEl
-        }).render().callOnClick(user._id);
+        }).render(user._id);
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
@@ -253,13 +259,8 @@ Views.RoomSidebar = Backbone.View.extend({
         console.log( user._id + ' is current user' );
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.CurrentUserControls({
-          el: currentUserEl
-        }).render();
-        new Views.MuteControls({
-          el: muteControlsEl
-        }).render();
-
+        new Views.CurrentUserControls({ el: currentUserEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render();
         that.raiseHandClick(user._id);
       }
       
@@ -280,7 +281,6 @@ Views.RoomSidebar = Backbone.View.extend({
   },
   raiseHandClick: function(userId) {
     $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
-      console.log('hand raised');
       app.user.raiseHand();
     });
   },
@@ -301,18 +301,29 @@ Views.RoomSidebar = Backbone.View.extend({
  * Participant Info and Controls
  */
 Views.ModeratorControls = Backbone.View.extend({
-  // Might need to change to use class, if not unique on page
-  // el: $('.moderator-controls');
   template: _.template($('#moderator-controls-template').html()),
-  render: function() {
-    this.$el.html(this.template({}));
+  render: function(userId) {
+    // only show if in queue
+    if(Views.isInQueue(userId)){
+      this.$el.html(this.template({}));
+      this.callOnClick(userId);
+      this.ensureCorrectTogglePosition(userId);
+    }
     return this;
   },
   callOnClick: function(userId) {
     $('#' + userId).find('button.call-on').click(function(e){
-      console.log('yes');
+      app.user.callOn(userId);
     });
+  },
+  ensureCorrectTogglePosition: function(userId) {
+    if (Views.isCalledOn) {
+      $('#' + userId).find('button.call-on').removeClass('on');
+    } else {
+      $('#' + userId).find('button.call-on').addClass('on');
+    }
   }
+  
 });
 
 Views.CurrentUserControls = Backbone.View.extend({
