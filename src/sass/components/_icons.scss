@@ -73,13 +73,6 @@
         }
     }
 
-    // .muted {
-    //     @extend .btn-disabled;
-    //     .icon {
-            
-    //     }
-    // }
-
     .raise-hand {
         @extend .btn-success;
         .icon {
@@ -92,13 +85,6 @@
             }
         }
     }
-
-    // .lower-hand {
-    //     @extend .btn-disabled;
-    //     .icon {
-    //         @extend .fa-hand-o-down;
-    //     }
-    // }
 
     .call-on {
         @extend .btn-danger;
@@ -116,12 +102,6 @@
         }
     }
 
-    // .call-off {
-    //     @extend .btn-disabled;
-    //     .icon {
-    //         @extend .fa-toggle-off;
-    //     }
-    // }
 }
 
 #collaboration {
