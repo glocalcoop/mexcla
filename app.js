@@ -60,26 +60,7 @@ app.get('/users/:id', function(req,res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  util.generateRoomNumber(models.Room, function(newRoomNumber){
-    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
-    //get user info for our logged in user
-    getUsernameAndLang(userId, function(userInfo){
-      room.addUser(userInfo, function(err){
-        if (err) { console.log(err);}
-        //save the room to the db
-        room.save(function(err, roomInfo){
-          if (err) {
-            console.log('error creating room' + err);
-            res.json({'error': 'error creating room'});
-          } else {
-            res.json(room);
-            // creates a socket.io namepsace for this room
-            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
-          }
-        });
-      });
-    }); 
-  });
+  createRoom(req,res,userId);
 });
 
 // join/re-join room
@@ -88,7 +69,7 @@ app.get('/room/:roomnum', function(req,res){
   roomByRoomNumber(req.params.roomnum, function(room){
     if (!room) {
       // catch error in case room doesn't exist:
-      res.json({'error': 'this room does not exist'});
+      createRoom(req, res, userId);
       return;
     }
     if (util.isUserInRoom(userId, room.users)) {
@@ -216,6 +197,30 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 
 //FUNCTIONS//
+
+function createRoom(req, res, userId) {
+  util.generateRoomNumber(models.Room, function(newRoomNumber){
+    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
+    //get user info for our logged in user
+    getUsernameAndLang(userId, function(userInfo){
+      room.addUser(userInfo, function(err){
+        if (err) { console.log(err);}
+        //save the room to the db
+        room.save(function(err, roomInfo){
+          if (err) {
+            console.log('error creating room' + err);
+            res.json({'error': 'error creating room'});
+          } else {
+            res.json(room);
+            // creates a socket.io namepsace for this room
+            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
+          }
+        });
+      });
+    }); 
+  });
+}
+
 
 // string, string -> callback({})
 // removes user of userId from Queue and  places them in
