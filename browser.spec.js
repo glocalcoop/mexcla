@@ -17,7 +17,7 @@ var URL = 'localhost:8080/';
 
 
 describe('home page', function(){
-  this.timeout(25000);
+  this.timeout(100000);
   var browser;
 
   before(function(){
@@ -102,7 +102,8 @@ describe('home page', function(){
         });
     });
     describe('raise hand', function(){
-      var browser_userId;
+      var browser_userId; // slothrop
+      var browser2_userId; // geli
       it('click should trigger ajax call update hand queue and update backbone model', function(){
         return browser
           .execute("return app.user.get('_id');")
@@ -136,7 +137,49 @@ describe('home page', function(){
           .should.eventually.become('1');
       });
 
+      describe('another user (browser 2, that is) raises their hand', function(){
+
+        it('queue update in browser2', function(){
+          return browser2
+            .execute("return app.user.get('_id');")
+            .then(function(userId){
+              browser2_userId = userId;
+
+              return browser2
+                .elementByCss('button.raise-hand')
+                .click()
+                .sleep(1000).then(function(){})
+                .execute("return app.room.get('handsQueue');")
+                .then(function(handsQueue){
+                  handsQueue.should.have.length(2);
+                 });
+             });
+        });
+
+        it('queue is displayed  in browser', function(done){
+          
+          browser
+            .elementById(browser2_userId, function(err, elem){
+              elem.elementByCss('span.queued').then(function(elem){
+                elem.text().then(function(text){
+                  text.should.eql('2');
+                }).nodeify(done);
+              });
+            });
+        });
+
+        // describe('call on geli in browser 2', function(){
+          
+        //   return browser
+        //     .elementById(browser2_userId, function(err, elem){
+        //       elem
+        //     });
+          
+        // });
+        
+      });
     });
+    
   });
 });
 
