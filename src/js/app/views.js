@@ -197,6 +197,7 @@ Views.RoomSidebar = Backbone.View.extend({
   template: _.template($('#room-sidebar-template').html()),
   initialize: function() {
     this.listenTo(this.model, "change:users", this.renderParticipants);
+    this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
     // this.listenTo(this.model, "change", this.render());
   },
@@ -261,13 +262,21 @@ Views.RoomSidebar = Backbone.View.extend({
 
         that.raiseHandClick(user._id);
       }
+      
+      that.queueDisplay(user);
 
-    });
+    }); // end of each loop
     return this;
   },
   queueDisplay: function(user) {
-     
-
+    var positionZeroIndexed= _.findIndex(app.room.get('handsQueue'), function(userInQueue){
+      return user._id == userInQueue._id;
+    });
+    if (positionZeroIndexed !== -1) {
+      var queuePosition = (positionZeroIndexed + 1).toString();
+      $('#' + user._id).find('span.queued').text(queuePosition);
+    }
+    return this;
   },
   raiseHandClick: function(userId) {
     $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){

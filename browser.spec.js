@@ -102,12 +102,12 @@ describe('home page', function(){
         });
     });
     describe('raise hand', function(){
-
-      it('click should trigger ajax call update hand queue', function(){
+      var browser_userId;
+      it('click should trigger ajax call update hand queue and update backbone model', function(){
         return browser
           .execute("return app.user.get('_id');")
-          //.sleep(000).then(function(){})
           .then(function(userId){
+            browser_userId = userId;
             return browser
               .elementByCss('button.raise-hand')
               .click()
@@ -118,6 +118,22 @@ describe('home page', function(){
               });
           });
 
+      });
+
+      it('queue should display correctly position in the browser ', function(){
+        return browser
+          .elementById(browser_userId)
+          .elementByCss('span.queued')
+          .text()
+          .should.eventually.become('1');
+      });
+
+      it('queue should display correctly in the other browser', function(){
+        return browser2
+          .elementById(browser_userId)
+          .elementByCss('span.queued')
+          .text()
+          .should.eventually.become('1');
       });
 
     });
