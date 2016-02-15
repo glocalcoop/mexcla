@@ -295,6 +295,8 @@ Views.RoomSidebar = Backbone.View.extend({
 Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function(userId) {
+    // reset 
+    this.$el.html('');
     // only show if in queue or is called on
     if(Views.isInQueue(userId) || Views.isCalledOn(userId)){
       this.$el.html(this.template({}));
