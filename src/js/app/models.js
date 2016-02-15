@@ -22,6 +22,17 @@ Models.callOnAjax = function(roomId, personCalledOnId) {
   });
 };
 
+Models.callOffAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
+
+
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
   urlRoot: "/users",
@@ -43,6 +54,9 @@ Models.User = Backbone.Model.extend({
     Models.callOnAjax(roomId, personCalledOnId).done(function(data){
       // when successful
     });
+  },
+  callOff: function(personCalledOnId) {
+
   }
 });
 

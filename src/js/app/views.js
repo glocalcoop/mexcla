@@ -307,7 +307,11 @@ Views.ModeratorControls = Backbone.View.extend({
   },
   callOnClick: function(userId) {
     $('#' + userId).find('button.call-on').click(function(e){
-      app.user.callOn(userId);
+      if (Views.isCalledOn(userId)) {
+        app.user.callOff(userId);
+      } else {
+        app.user.callOn(userId);
+      }
     });
   },
   ensureCorrectTogglePosition: function(userId) {
