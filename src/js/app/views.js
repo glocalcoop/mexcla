@@ -46,9 +46,9 @@ Views.isInQueue = function(userId) {
 }
 
 Views.isCalledOn = function(userId) {
-  var whoIsCalledOn = app.room.get('called on');
-  if (!calledon) {
-    // case where no-one is called on
+  var whoIsCalledOn = app.room.get('calledon');
+  if (!whoIsCalledOn) {
+    // case where no one is called on and calledon object is empty or undefined
     return false;
   } else {
     return whoIsCalledOn._id == userId;
@@ -246,12 +246,8 @@ Views.RoomSidebar = Backbone.View.extend({
       if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
         var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.ModeratorControls({
-          el: moderatorControlsEl
-        }).render(user._id);
-        new Views.MuteControls({
-          el: muteControlsEl
-        }).render();
+        new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
+        new Views.MuteControls({ el: muteControlsEl }).render();
       }
 
       // Add current user controls to row of current user
@@ -303,8 +299,8 @@ Views.RoomSidebar = Backbone.View.extend({
 Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function(userId) {
-    // only show if in queue
-    if(Views.isInQueue(userId)){
+    // only show if in queue or is called on
+    if(Views.isInQueue(userId) || Views.isCalledOn(userId)){
       this.$el.html(this.template({}));
       this.callOnClick(userId);
       this.ensureCorrectTogglePosition(userId);
@@ -317,10 +313,10 @@ Views.ModeratorControls = Backbone.View.extend({
     });
   },
   ensureCorrectTogglePosition: function(userId) {
-    if (Views.isCalledOn) {
-      $('#' + userId).find('button.call-on').removeClass('on');
-    } else {
+    if (Views.isCalledOn(userId)) {
       $('#' + userId).find('button.call-on').addClass('on');
+    } else {
+      $('#' + userId).find('button.call-on').removeClass('on');
     }
   }
   
