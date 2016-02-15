@@ -336,7 +336,11 @@ Views.CurrentUserControls = Backbone.View.extend({
   },
   raiseHandClick: function(userId) {
     $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
-      app.user.raiseHand();
+      if (Views.isInQueue(userId)) {
+        app.user.lowerHand();
+      } else {
+        app.user.raiseHand();
+      }
     });
   }
 });
