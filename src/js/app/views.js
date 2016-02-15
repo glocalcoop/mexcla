@@ -207,6 +207,7 @@ Views.RoomSidebar = Backbone.View.extend({
     return this;
   },
   renderParticipants: function() {
+    var that = this;
     var selector = '#participants';
     $(selector).html('');
     _.each(this.model.attributes.users, function(user){
@@ -257,11 +258,22 @@ Views.RoomSidebar = Backbone.View.extend({
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
-    
+
+        that.raiseHandClick(user._id);
       }
 
     });
     return this;
+  },
+  queueDisplay: function(user) {
+     
+
+  },
+  raiseHandClick: function(userId) {
+    $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
+      console.log('hand raised');
+      app.user.raiseHand();
+    });
   },
   renderChannels: function() {
     var selector = '#channels';

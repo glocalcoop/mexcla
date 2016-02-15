@@ -17,7 +17,7 @@ var URL = 'localhost:8080/';
 
 
 describe('home page', function(){
-  this.timeout(10000);
+  this.timeout(25000);
   var browser;
 
   before(function(){
@@ -80,7 +80,6 @@ describe('home page', function(){
         .execute("return app.room.get('users')")
         .then(function(users){
           users.should.have.length(1);
-          
           return browser2.get(URL)
             .elementById('room-number').type(roomNumber)
             .elementById('room-number-button').click()
@@ -101,6 +100,26 @@ describe('home page', function(){
         .then(function(users){
           users.should.have.length(2);
         });
+    });
+    describe('raise hand', function(){
+
+      it('click should trigger ajax call update hand queue', function(){
+        return browser
+          .execute("return app.user.get('_id');")
+          //.sleep(000).then(function(){})
+          .then(function(userId){
+            return browser
+              .elementByCss('button.raise-hand')
+              .click()
+              .sleep(1000).then(function(){})
+              .execute("return app.room.get('handsQueue');")
+              .then(function(handsQueue){
+                handsQueue.should.have.length(1);
+              });
+          });
+
+      });
+
     });
   });
 });

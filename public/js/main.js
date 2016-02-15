@@ -91,9 +91,23 @@ var websiteText = {
     }
 };
 
+Models.raiseHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/raisehand'
+  });
+}
+
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
-  urlRoot: "/users"
+  urlRoot: "/users",
+  raiseHand: function() {
+    var roomId = app.room.get('_id');
+    Models.raiseHandAjax(roomId).done(function(data){
+      // Do something when successful?
+      // or show 'raising hand in progress?'
+    });
+  }
 });
 
 Models.Room = Backbone.Model.extend({
@@ -430,6 +444,7 @@ Views.RoomSidebar = Backbone.View.extend({
     return this;
   },
   renderParticipants: function() {
+    var that = this;
     var selector = '#participants';
     $(selector).html('');
     _.each(this.model.attributes.users, function(user){
@@ -480,11 +495,22 @@ Views.RoomSidebar = Backbone.View.extend({
         new Views.MuteControls({
           el: muteControlsEl
         }).render();
-    
+
+        that.raiseHandClick(user._id);
       }
 
     });
     return this;
+  },
+  queueDisplay: function(user) {
+     
+
+  },
+  raiseHandClick: function(userId) {
+    $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
+      console.log('hand raised');
+      app.user.raiseHand();
+    });
   },
   renderChannels: function() {
     var selector = '#channels';
