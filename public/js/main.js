@@ -713,7 +713,12 @@ Views.Channel = Backbone.View.extend({
       data: channel
     };
     this.$el.append(this.template(data));
-    this.renderControls(data);
+
+    // Moderator can't be interpreter or join a channel
+    if( Views.isModerator(app.user.id) ) {
+      this.renderControls(data);
+    }
+    
     return this;
   },
   renderControls: function(data) {
@@ -738,6 +743,7 @@ Views.ChannelJoinControls = Backbone.View.extend({
     this.$el.html(this.template({text: data.text}));
   }
 });
+
 
 // TODO: turn channel html into template
 // but for now:
@@ -773,12 +779,12 @@ Views.AddChannelModal = Backbone.View.extend({
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
-      var translator = $('#channel-translator-options').val();
+      var interpreter = $('#channel-translator-options').val();
       var name = $('#channel-name').val();
       app.room.createChannel({
         'name': name,
         'lang': lang, 
-        'translator': translator
+        'interpreter': interpreter
       });
     });
   }
@@ -883,6 +889,19 @@ $(function() {
 
         event.preventDefault();
         $('html')[0].lang = $(this).data('lang');
+
+    });
+
+//html body div#content aside#channel-list.sidebar div.channel-list div#channels-collapse-list.scroll-list.collapse.in ul#channels li#56c2d7c6aa28823d8407c535 div.controls span.join-controls button.join
+    /**
+     * Channel Controls
+     * Toggle Channel Controls
+     */
+    $('#channels button').click(function(event) {
+
+        console.log($(this));
+
+        // $(this).toggleClass('on');
 
     });
 

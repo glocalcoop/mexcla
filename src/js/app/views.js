@@ -418,7 +418,12 @@ Views.Channel = Backbone.View.extend({
       data: channel
     };
     this.$el.append(this.template(data));
-    this.renderControls(data);
+
+    // Moderator can't be interpreter or join a channel
+    if( Views.isModerator(app.user.id) ) {
+      this.renderControls(data);
+    }
+    
     return this;
   },
   renderControls: function(data) {
@@ -443,6 +448,7 @@ Views.ChannelJoinControls = Backbone.View.extend({
     this.$el.html(this.template({text: data.text}));
   }
 });
+
 
 // TODO: turn channel html into template
 // but for now:
@@ -478,12 +484,12 @@ Views.AddChannelModal = Backbone.View.extend({
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
-      var translator = $('#channel-translator-options').val();
+      var interpreter = $('#channel-translator-options').val();
       var name = $('#channel-name').val();
       app.room.createChannel({
         'name': name,
         'lang': lang, 
-        'translator': translator
+        'interpreter': interpreter
       });
     });
   }
