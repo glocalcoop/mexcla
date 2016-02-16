@@ -14,7 +14,9 @@
 .label {
     visibility: visible;
     opacity: 1;
-    transition: opacity 5s ease-out;
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
     &:empty {
         visibility: hidden;
         opacity: 0;
@@ -54,6 +56,9 @@
 }
 
 .controls {
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
 
     .interpret {
         @extend .btn-warning;
@@ -64,15 +69,27 @@
 
     .join {
         @extend .btn-success;
+        visibility: visible;
+        opacity: 1;
         .icon {
             @extend .fa-sign-in;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
         }
     }
 
     .leave {
         @extend .btn-danger;
+        visibility: visible;
+        opacity: 1;
         .icon {
             @extend .fa-sign-out;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
         }
     }
 

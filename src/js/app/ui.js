@@ -46,6 +46,26 @@ $(function() {
     });
 
     /**
+     * Channel Controls
+     * Toggle Channel Controls
+     */
+    $('#channels').on('click', 'button.join', function(event) {
+
+        $(this).toggleClass('on');
+        $('#channels button.leave').toggleClass('on');
+        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
+
+    });
+
+    $('#channels').on('click', 'button.leave', function(event) {
+
+        $(this).toggleClass('on');
+        $('#channels button.join').toggleClass('on');
+        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
+
+    });
+
+    /**
      * Collaboration
      * Load collaboration iframes when tab is clicked
      */

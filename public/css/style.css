@@ -8030,7 +8030,9 @@ label {
 .info .queued {
   visibility: visible;
   opacity: 1;
-  transition: opacity 5s ease-out; }
+  transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -webkit-transition: all .25s ease-in-out; }
   .label:empty, #utility-nav #language-links a.nav-link:empty, #utility-nav #language-links #footer .colophon ul li a:empty, #footer .colophon ul li #utility-nav #language-links a:empty, .controls button:empty, .info .language:empty,
   .info .moderator:empty,
   .info .queued:empty {
@@ -8075,8 +8077,22 @@ label {
     .info .queued a {
       color: #42A084; }
 
-.controls .call-on a:hover {
-  color: #fff; }
+.controls {
+  transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -webkit-transition: all .25s ease-in-out; }
+  .controls .join {
+    visibility: visible;
+    opacity: 1; }
+    .controls .join.on {
+      display: none; }
+  .controls .leave {
+    visibility: visible;
+    opacity: 1; }
+    .controls .leave.on {
+      display: none; }
+  .controls .call-on a:hover {
+    color: #fff; }
 
 .add-channel .icon, .add-channel #participant-list button.accordion, #participant-list .add-channel button.accordion, .add-channel
 #channel-list button.accordion,
