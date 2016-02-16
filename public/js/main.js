@@ -685,11 +685,24 @@ Views.ChannelJoinControls = Backbone.View.extend({
 // TODO: turn channel html into template
 // but for now:
 $(document).ready(function(){
+
+  // $('#add-channel-button').click(function(){
+  //   new Views.AddChannelModal({
+  //     model: app.room
+  //   }).render();
+  // });
+
   $('#add-channel-button').click(function(){
-    new Views.AddChannelModal({
-      model: app.room
-    }).render();
+    if( app.room.get('channels').length < 1 ) {
+      new Views.AddChannelModal({
+        model: app.room
+      }).render();
+    }
+    else {
+      $(this).prop('disabled', true);
+    }
   });
+
 });
 
 
