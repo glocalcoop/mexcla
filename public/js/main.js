@@ -811,6 +811,7 @@ $(function() {
      */
     $('#language-links').on('click', 'a', function(event) {
 
+        event.preventDefault();
         $('html')[0].lang = $(this).data('lang');
 
     });
