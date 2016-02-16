@@ -35,7 +35,10 @@ Views.isCurrentUser = function(userId) {
 }
 
 Views.isInAChannel = function(userId) {
-  //userId is in app.room.attributes.channels[x]
+    return  _.chain(app.room.get('channels'))
+      .map(function(user){return user._id; })
+      .contains(userId)
+      .value();
 }
 
 Views.isInQueue = function(userId) {
