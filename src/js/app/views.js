@@ -102,6 +102,7 @@ Views.IndexView = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
     this.welcomeText();
+    this.brandingText();
     this.$('#create-new-room-button').click(function(e){
       if (Views.isThereAUser()) {
         that.createRoom();
@@ -138,6 +139,11 @@ Views.IndexView = Backbone.View.extend({
     if (!_.isUndefined(app.user)) {
       new Views.WelcomeText({model: app.user});
     }
+  },
+  brandingText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.BrandingText({model: app.user});
+    }
   }
 });
 
@@ -165,6 +171,29 @@ Views.WelcomeText = Backbone.View.extend({
   }
 });
 
+/**
+ * Branding
+ */
+// use: new WelcomeText({model: app.user})
+Views.BrandingText = Backbone.View.extend({
+  el: $('#tagline'),
+  template: _.template($('#branding-text-template').html()),
+  render: function() {
+    var lang = (_.isUndefined(this.model.attributes.lang)) ? 'en' : this.model.attributes.lang;
+    var brandingText = {
+      title: websiteText[lang].title
+    };
+    this.$el.html(this.template(brandingText ));
+    return this;
+  },
+  initialize: function() {
+    this.render();
+    // listen to changes to lang and name
+    this.listenTo(this.model, 'change:lang', this.render);
+    this.listenTo(this.model, 'change:username', this.render);
+  }
+});
+
 
 /**
  * Room
@@ -176,6 +205,8 @@ Views.Room = Backbone.View.extend({
   render: function() {
     var templateData = _.extend(websiteText[this.lang], this.model.attributes);
     this.$el.html(this.template(templateData));
+    this.welcomeText();
+    this.brandingText();
     this.sidebar.render();
     // this.renderChannel();
     return this;
@@ -188,7 +219,18 @@ Views.Room = Backbone.View.extend({
     });
     this.sidebar = new Views.RoomSidebar({model: this.model});
     //this.listenTo(this.model, 'change:channels', this.renderChannel);
+  },
+  welcomeText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.WelcomeText({model: app.user});
+    }
+  },
+  brandingText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.BrandingText({model: app.user});
+    }
   }
+
   // renderChannel: function() {
   //   var channels = this.model.get('channels');
   //   if (!_.isEmpty(channels)) {
