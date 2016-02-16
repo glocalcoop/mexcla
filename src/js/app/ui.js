@@ -21,12 +21,19 @@ $(function() {
      * Page Language
      * Switch language when language switched
      */
-    $('#language-links').on('click', 'a', function(event) {
+    $('#language-links a').click(function(event) {
 
         event.preventDefault();
         $('html')[0].lang = $(this).data('lang');
 
     });
+
+
+    /**
+     * Room Link
+     * Add URL to room-link field so it can be copied
+     */
+    $('#room-link').val( $(location).attr('href') );
 
     /**
      * Participants
