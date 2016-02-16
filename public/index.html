@@ -213,6 +213,7 @@
         <div class="clipboard-group">
             <label for="room-link"><%= link %></label>
             <!-- TODO: Add real URL -->
+
             <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
             <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span> 
           </div>
@@ -257,14 +258,12 @@
         <div class="info">
           <!-- Show channel participant is in -->
           <span class="is-in-channel"></span>
-          <span class="language" data-toggle="tooltip" title="de">de</span>
 
           <!-- Show if participant is moderator -->
           <span class="is-moderator"></span>
 
           <!-- Show if participant is queued -->
           <span class="is-queued"></span>
-          <span class="queued" data-toggle="tooltip" title="Queued"></span>
         </div>
         <%= username %>
         <div class="controls">
