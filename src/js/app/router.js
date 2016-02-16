@@ -11,11 +11,16 @@ var MexclaRouter = Backbone.Router.extend({
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
-    this.syncUser();
-    if (_.isUndefined(app.room)) {
-      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    if (this.noUserCookie()) {
+      this.navigate("/", {trigger: true});
+    } else {
+      this.syncUser();
+      if (_.isUndefined(app.room)) {
+        app.room = new Models.Room({roomnum: roomnum}).fetchByNum(this.createRoomView);
+      } else {
+        this.createRoomView();
+      }
     }
-    app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
     // this route will be executed if no other route is matched.
@@ -32,5 +37,11 @@ var MexclaRouter = Backbone.Router.extend({
         }
         app.user.fetch();
       }
+  },
+  createRoomView: function () {
+    app.roomView = new Views.Room({model: app.room}).render();    
+  },
+  noUserCookie: function() {
+    return _.isUndefined(Cookies.get('id'));
   }
 });

@@ -158,14 +158,15 @@ Models.Room = Backbone.Model.extend({
   urlRoot: "/room/id",
   initialize: function() {
     this.establishSocket();
-  }, 
-  fetchByNum: function() {
+  },
+  fetchByNum: function(callback) {
     var that = this;
     $.ajax({
       type: 'GET',
       url: '/room/' + this.attributes.roomnum
     }).done(function(room){
       that.set(room);
+      callback();
     });
     return this;
   },
@@ -719,11 +720,16 @@ var MexclaRouter = Backbone.Router.extend({
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
-    this.syncUser();
-    if (_.isUndefined(app.room)) {
-      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    if (this.noUserCookie()) {
+      this.navigate("/", {trigger: true});
+    } else {
+      this.syncUser();
+      if (_.isUndefined(app.room)) {
+        app.room = new Models.Room({roomnum: roomnum}).fetchByNum(this.createRoomView);
+      } else {
+        this.createRoomView();
+      }
     }
-    app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
     // this route will be executed if no other route is matched.
@@ -740,6 +746,12 @@ var MexclaRouter = Backbone.Router.extend({
         }
         app.user.fetch();
       }
+  },
+  createRoomView: function () {
+    app.roomView = new Views.Room({model: app.room}).render();    
+  },
+  noUserCookie: function() {
+    return _.isUndefined(Cookies.get('id'));
   }
 });
 
@@ -759,7 +771,6 @@ $(function() {
      */
     $('#mic-mute').change(function() {
         if( $(this).prop('checked') ) {
-
             mexcla_mic_unmute();
 
         } else {
@@ -768,15 +779,25 @@ $(function() {
      
     });
 
-    $('#participants').on('click', 'button', function(event) {
+    /**
+     * Page Language
+     * Switch language when language switched
+     */
+    $('#language-links').on('click', 'a', function(event) {
 
-        $(this).toggleClass('on');
-        console.log($(this));
-
+        $('html')[0].lang = $(this).data('lang');
 
     });
 
+    /**
+     * Participants
+     * Toggle `on` class when participant controls are clicked
+     */
+    $('#participants').on('click', 'button', function(event) {
 
+        $(this).toggleClass('on');
+
+    });
 
     /**
      * Collaboration
