@@ -282,12 +282,9 @@
 
     <!-- LANGUAGE CHANNEL ROW  -->
     <script type="text/template" id="channel-row-template">
-      <!-- TODO: Add channel name identifier to each row  -->
-
-      <li id="<%= _id %>">
-        <%= name %>
+      <li id="<%= data._id %>">
+        <%= data.name %>
         <div class="controls">
-
           <span class="interpret-controls">
           <!-- template #interpret-controls-template -->
           </span>
@@ -322,16 +319,16 @@
 
     <!-- INTERPRET CONTROLS TEMPLATE  -->
     <script type="text/template" id="interpret-controls-template">
-      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
+      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= text.interpret %></button>
       <!-- Join appears when interpreter exists and user is not already in channel -->
     </script>
 
     <!-- JOIN CONTROLS TEMPLATE  -->
     <script type="text/template" id="join-channel-controls-template">
       <!-- Join appears when interpreter exists and user is not already in channel -->
-      <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
+      <button class="join" data-toggle="tooltip" title="Join Channel"><%= text.join_channel %></button>
       <!-- Leave appears when user is in channel -->
-      <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
+      <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= text.leave_channel %></button>
     </script>
 
 
