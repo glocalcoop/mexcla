@@ -11,6 +11,18 @@
     @extend .label-pill;
 }
 
+.label {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 5s ease-out;
+    &:empty {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
 .info {
     background-color: transparent;
     .language,
@@ -23,6 +35,10 @@
 }
 
 .info {
+   transition: all .25s ease-in-out;
+   -moz-transition: all .25s ease-in-out;
+   -webkit-transition: all .25s ease-in-out;
+
     .moderator {
         @include outline($brand-primary);
         .icon {
