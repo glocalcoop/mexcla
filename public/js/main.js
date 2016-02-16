@@ -715,7 +715,7 @@ Views.Channel = Backbone.View.extend({
     this.$el.append(this.template(data));
 
     // Moderator can't be interpreter or join a channel
-    if( Views.isModerator(app.user.id) ) {
+    if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
     
@@ -892,19 +892,6 @@ $(function() {
 
     });
 
-//html body div#content aside#channel-list.sidebar div.channel-list div#channels-collapse-list.scroll-list.collapse.in ul#channels li#56c2d7c6aa28823d8407c535 div.controls span.join-controls button.join
-    /**
-     * Channel Controls
-     * Toggle Channel Controls
-     */
-    $('#channels button').click(function(event) {
-
-        console.log($(this));
-
-        // $(this).toggleClass('on');
-
-    });
-
 
     /**
      * Room Link
@@ -919,6 +906,26 @@ $(function() {
     $('#participants').on('click', 'button', function(event) {
 
         $(this).toggleClass('on');
+
+    });
+
+    /**
+     * Channel Controls
+     * Toggle Channel Controls
+     */
+    $('#channels').on('click', 'button.join', function(event) {
+
+        $(this).toggleClass('on');
+        $('#channels button.leave').toggleClass('on');
+        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
+
+    });
+
+    $('#channels').on('click', 'button.leave', function(event) {
+
+        $(this).toggleClass('on');
+        $('#channels button.join').toggleClass('on');
+        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
 
     });
 

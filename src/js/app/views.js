@@ -420,7 +420,7 @@ Views.Channel = Backbone.View.extend({
     this.$el.append(this.template(data));
 
     // Moderator can't be interpreter or join a channel
-    if( Views.isModerator(app.user.id) ) {
+    if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
     
