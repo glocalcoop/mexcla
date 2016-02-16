@@ -35,7 +35,10 @@ Views.isCurrentUser = function(userId) {
 }
 
 Views.isInAChannel = function(userId) {
-  //userId is in app.room.attributes.channels[x]
+    return  _.chain(app.room.get('channels'))
+      .map(function(user){return user._id; })
+      .contains(userId)
+      .value();
 }
 
 Views.isInQueue = function(userId) {
@@ -99,6 +102,7 @@ Views.IndexView = Backbone.View.extend({
     var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
     this.welcomeText();
+    this.brandingText();
     this.$('#create-new-room-button').click(function(e){
       if (Views.isThereAUser()) {
         that.createRoom();
@@ -135,6 +139,11 @@ Views.IndexView = Backbone.View.extend({
     if (!_.isUndefined(app.user)) {
       new Views.WelcomeText({model: app.user});
     }
+  },
+  brandingText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.BrandingText({model: app.user});
+    }
   }
 });
 
@@ -162,6 +171,29 @@ Views.WelcomeText = Backbone.View.extend({
   }
 });
 
+/**
+ * Branding
+ */
+// use: new WelcomeText({model: app.user})
+Views.BrandingText = Backbone.View.extend({
+  el: $('#tagline'),
+  template: _.template($('#branding-text-template').html()),
+  render: function() {
+    var lang = (_.isUndefined(this.model.attributes.lang)) ? 'en' : this.model.attributes.lang;
+    var brandingText = {
+      title: websiteText[lang].title
+    };
+    this.$el.html(this.template(brandingText ));
+    return this;
+  },
+  initialize: function() {
+    this.render();
+    // listen to changes to lang and name
+    this.listenTo(this.model, 'change:lang', this.render);
+    this.listenTo(this.model, 'change:username', this.render);
+  }
+});
+
 
 /**
  * Room
@@ -173,9 +205,11 @@ Views.Room = Backbone.View.extend({
   render: function() {
     var templateData = _.extend(websiteText[this.lang], this.model.attributes);
     this.$el.html(this.template(templateData));
+    this.welcomeText();
+    this.brandingText();
     this.sidebar.render();
-    this.renderChannel();
-       return this;
+    // this.renderChannel();
+    return this;
   },
   initialize: function() {
     this.lang = app.user.attributes.lang;
@@ -184,21 +218,29 @@ Views.Room = Backbone.View.extend({
       this.render();
     });
     this.sidebar = new Views.RoomSidebar({model: this.model});
-    this.listenTo(this.model, 'change:channels', this.renderChannel);
+    //this.listenTo(this.model, 'change:channels', this.renderChannel);
   },
-  renderChannel: function() {
-    var channels = this.model.get('channels');
-    if (!_.isEmpty(channels)) {
-      _.each(channels, function(channel){
-        // display channel
-        new Views.Channel({});
-      });
+  welcomeText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.WelcomeText({model: app.user});
     }
-    return this;
   },
-  renderControls: function() {
-  
+  brandingText: function() {
+    if (!_.isUndefined(app.user)) {
+      new Views.BrandingText({model: app.user});
+    }
   }
+
+  // renderChannel: function() {
+  //   var channels = this.model.get('channels');
+  //   if (!_.isEmpty(channels)) {
+  //     _.each(channels, function(channel){
+  //       // display channel
+  //       new Views.Channel({});
+  //     });
+  //   }
+  //   return this;
+  // }
 });
 
 /**
@@ -253,7 +295,6 @@ Views.RoomSidebar = Backbone.View.extend({
 
       // Add current user controls to row of current user
       if(Views.isCurrentUser( user._id )) {
-        console.log( user._id + ' is current user' );
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
@@ -277,14 +318,18 @@ Views.RoomSidebar = Backbone.View.extend({
   },
   
   renderChannels: function() {
-    var selector = '#channels';
-    $(selector).html('');
-    _.each(this.model.attributes.channels, function(channel){
-      var channelRow = _.template($('#channel-row-template').html());
-      $(selector).append(channelRow(channel));
-    });
+    var channels = this.model.get('channels');
+    var channelsEl = '#channels';
+    //$(channelsEl).html('');
 
+    if (!_.isEmpty(channels)) {
+      _.each(channels, function(channel){
+        // display channel
+        new Views.Channel({ el: channelsEl }).render(channel);
+      });
+    }
     return this;
+
   }
 
 });
@@ -367,24 +412,66 @@ Views.MuteControls = Backbone.View.extend({
  */
 Views.Channel = Backbone.View.extend({
   template: _.template($('#channel-row-template').html()),
-  render: function() {
-    this.$el.html(this.template({}));
+  render: function(channel) {
+    var data = {
+      text: websiteText[app.user.attributes.lang],
+      data: channel
+    };
+    this.$el.append(this.template(data));
+
+    // Moderator can't be interpreter or join a channel
+    if( !Views.isModerator(app.user.id) ) {
+      this.renderControls(data);
+    }
+    
+    return this;
+  },
+  renderControls: function(data) {
+    var interpretControlsEl = $('.interpret-controls');
+    var joinControlsEl = $('.join-controls');
+    new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
+    new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
   }
 });
 
 
-Views.ChannelOptions = Backbone.View.extend({
-  // where we will provide the options to modify a channel: add interpreter, join, leave, delete, etc.
+Views.ChannelInterpretControls = Backbone.View.extend({
+  template: _.template($('#interpret-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  }
 });
+
+Views.ChannelJoinControls = Backbone.View.extend({
+  template: _.template($('#join-channel-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  }
+});
+
 
 // TODO: turn channel html into template
 // but for now:
 $(document).ready(function(){
+
+  // $('#add-channel-button').click(function(){
+  //   new Views.AddChannelModal({
+  //     model: app.room
+  //   }).render();
+  // });
+
+  // Disabled once channel added
   $('#add-channel-button').click(function(){
-    new Views.AddChannelModal({
-      model: app.room
-    }).render();
+    if( app.room.get('channels').length < 1 ) {
+      new Views.AddChannelModal({
+        model: app.room
+      }).render();
+    }
+    else {
+      $(this).prop('disabled', true);
+    }
   });
+
 });
 
 
@@ -397,12 +484,12 @@ Views.AddChannelModal = Backbone.View.extend({
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
-      var translator = $('#channel-translator-options').val();
+      var interpreter = $('#channel-translator-options').val();
       var name = $('#channel-name').val();
       app.room.createChannel({
         'name': name,
         'lang': lang, 
-        'translator': translator
+        'interpreter': interpreter
       });
     });
   }
@@ -410,18 +497,30 @@ Views.AddChannelModal = Backbone.View.extend({
 
 Views.ChannelTranslatorOptionsList = Backbone.View.extend({
   el: $('#channel-modal #channel-translator-options'),
-  template: _.template('<option><%= username %></option>'),
+  template: _.template('<option value="<%= _id %>"><%= username %></option>'),
   initialize: function() {
     this.render();
   },
   render: function(){
     var that = this;
     // TODO: have value be id of user
-    var html = '<option value="">Select a translator</option><option value="none">None</option>';
+    var html = '<option value="">Select a Translator</option>';
+    html += '<option value="none">None</option>';
     this.$el.html(html);
+    
+    // Let's use a dynamic list someday
+    // var languageList = new Models.Languages();
+
+    // languageList.fetch({
+    //   success: function(response) {
+    //     var languages = languageList.toJSON();
+    //   }
+    // });
+
     var users = this.model.get('users');
     _.each(users, function(user){
        that.$el.append(that.template(user));
     });
   }
 });
+

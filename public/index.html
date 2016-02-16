@@ -3,6 +3,8 @@
   <head>
     <title>Mexcla Conferencing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Mexcla is the free Simultaneous Interpretation Conference System">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -29,8 +31,8 @@
           <h3 id="tagline"><a href="/">Mexcla: title<!-- Tagline --></a></h3>
           <ul id="language-links" class="nav">
             <li class="nav-item"><div id="welcome-text"><!-- template #welcome-text-template --></div></li>
-            <li class="nav-item"><a id="es-switch-link" onclick="switch_language('es')" class="nav-link english" href="#">English</a></li>
-            <li class="nav-item"><a id="en-switch-link" onclick="switch_language('en')" class="nav-link espanol" href="#">Espa&ntilde;ol</a></li>
+            <li class="nav-item"><a id="es-switch-link" data-lang="en" class="nav-link english" href="#">English</a></li>
+            <li class="nav-item"><a id="en-switch-link" data-lang="es" class="nav-link espanol" href="#">Espa&ntilde;ol</a></li>
           </ul>
         </div>
       </nav>
@@ -82,6 +84,13 @@
           </section>
       </main>
     </script>
+
+
+    <!-- HEADER BRANDING TEXT-->
+    <script type="text/template" id="branding-text-template">
+      <a href="/">Mexcla: <%= title %></a>
+    </script>
+
 
     <!-- HEADER WELCOME TEXT-->
     <script type="text/template" id="welcome-text-template">
@@ -279,16 +288,16 @@
 
     <!-- LANGUAGE CHANNEL ROW  -->
     <script type="text/template" id="channel-row-template">
-      <!-- TODO: Add channel name identifier to each row  -->
-
-      <li id="<%= _id %>">
-        <%= name %>
+      <li id="<%= data._id %>">
+        <%= data.name %>
         <div class="controls">
-          <button class="label interpret" data-toggle="tooltip" title="Become interpreter">Interpret</button>
-          <!-- Join appears when interpreter exists and user is not already in channel -->
-          <button class="label join" data-toggle="tooltip" title="Join Channel">Join Channel</button>
-          <!-- Leave appears when user is in channel -->
-          <button class="label leave" data-toggle="tooltip" title="Leave Channel">Leave Channel</button>
+          <span class="interpret-controls">
+          <!-- template #interpret-controls-template -->
+          </span>
+
+          <span class="join-controls">
+          <!-- template #join-channel-controls-template -->
+          </span>
         </div>
       </li>
     </script>
@@ -314,14 +323,18 @@
       <button class="mute" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
     </script>
 
-     <!-- CHANNEL CONTROLS TEMPLATE  -->
-    <script type="text/template" id="channel-controls-template">
-      <!-- Interpreter controls -->
-      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= interpret %></button>
+    <!-- INTERPRET CONTROLS TEMPLATE  -->
+    <script type="text/template" id="interpret-controls-template">
+      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= text.interpret %></button>
       <!-- Join appears when interpreter exists and user is not already in channel -->
-      <button class="join" data-toggle="tooltip" title="Join Channel"><%= join_channel %></button>
+    </script>
+
+    <!-- JOIN CONTROLS TEMPLATE  -->
+    <script type="text/template" id="join-channel-controls-template">
+      <!-- Join appears when interpreter exists and user is not already in channel -->
+      <button class="join" data-toggle="tooltip" title="Join Channel"><%= text.join_channel %></button>
       <!-- Leave appears when user is in channel -->
-      <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= leave_channel %></button>
+      <button class="leave on" data-toggle="tooltip" title="Leave Channel"><%= text.leave_channel %></button>
     </script>
 
 
@@ -358,8 +371,10 @@
               <input type="text" name="name" id="channel-name" placeholder="Enter Channel Name" />
               <select name="lang" id="channel-lang-select">
                 <option value="">Select Language</option>
+                <option value="de">Deutsch</option>
                 <option value="en">English</option>
                 <option value="es">Espa&ntilde;ol</option>
+                <option value="fr">Fran&ccedil;ais</option>
               </select>
               <select name="translator" id="channel-translator-options">
                 <option value="">Select a translator</option>

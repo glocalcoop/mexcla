@@ -11,6 +11,20 @@
     @extend .label-pill;
 }
 
+.label {
+    visibility: visible;
+    opacity: 1;
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+    &:empty {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
 .info {
     background-color: transparent;
     .language,
@@ -23,6 +37,10 @@
 }
 
 .info {
+   transition: all .25s ease-in-out;
+   -moz-transition: all .25s ease-in-out;
+   -webkit-transition: all .25s ease-in-out;
+
     .moderator {
         @include outline($brand-primary);
         .icon {
@@ -38,6 +56,9 @@
 }
 
 .controls {
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
 
     .interpret {
         @extend .btn-warning;
@@ -48,15 +69,27 @@
 
     .join {
         @extend .btn-success;
+        visibility: visible;
+        opacity: 1;
         .icon {
             @extend .fa-sign-in;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
         }
     }
 
     .leave {
         @extend .btn-danger;
+        visibility: visible;
+        opacity: 1;
         .icon {
             @extend .fa-sign-out;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
         }
     }
 
