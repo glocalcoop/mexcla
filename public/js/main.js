@@ -715,6 +715,8 @@ var MexclaRouter = Backbone.Router.extend({
   },
 
   index: function() {
+    // clear app.room
+    app.room = null;
     this.syncUser();
     // log in to homepage
     app.homepage = new Views.IndexView();
@@ -724,7 +726,7 @@ var MexclaRouter = Backbone.Router.extend({
       this.navigate("/", {trigger: true});
     } else {
       this.syncUser();
-      if (_.isUndefined(app.room)) {
+      if (_.isUndefined(app.room) || _.isNull(app.room)) {
         app.room = new Models.Room({roomnum: roomnum}).fetchByNum(this.createRoomView);
       } else {
         this.createRoomView();
@@ -748,7 +750,7 @@ var MexclaRouter = Backbone.Router.extend({
       }
   },
   createRoomView: function () {
-    app.roomView = new Views.Room({model: app.room}).render();    
+    app.roomView = new Views.Room({model: app.room}).render();
   },
   noUserCookie: function() {
     return _.isUndefined(Cookies.get('id'));

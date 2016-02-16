@@ -69,7 +69,7 @@ app.get('/room/:roomnum', function(req,res){
   roomByRoomNumber(req.params.roomnum, function(room){
     if (!room) {
       // catch error in case room doesn't exist:
-      createRoom(req, res, userId);
+      createRoom(req, res, userId, req.params.roomnum);
       return;
     }
     if (util.isUserInRoom(userId, room.users)) {
@@ -198,8 +198,16 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 //FUNCTIONS//
 
-function createRoom(req, res, userId) {
-  util.generateRoomNumber(models.Room, function(newRoomNumber){
+// req, res, string, [number]
+function createRoom(req, res, userId, userProvidedRoomNum) {
+  if (!_.isUndefined(userProvidedRoomNum)) {
+    // a user tries to join a room that already exists, we'll permit it:
+    createRoomInternal(parseInt(userProvidedRoomNum, 10));
+  } else {
+    util.generateRoomNumber(models.Room, createRoomInternal);
+  } 
+
+  function createRoomInternal (newRoomNumber) {
     var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
     //get user info for our logged in user
     getUsernameAndLang(userId, function(userInfo){
@@ -217,9 +225,11 @@ function createRoom(req, res, userId) {
           }
         });
       });
-    }); 
-  });
+    });
+  }
+
 }
+
 
 
 // string, string -> callback({})
