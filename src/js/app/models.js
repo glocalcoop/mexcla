@@ -65,14 +65,15 @@ Models.Room = Backbone.Model.extend({
   urlRoot: "/room/id",
   initialize: function() {
     this.establishSocket();
-  }, 
-  fetchByNum: function() {
+  },
+  fetchByNum: function(callback) {
     var that = this;
     $.ajax({
       type: 'GET',
       url: '/room/' + this.attributes.roomnum
     }).done(function(room){
       that.set(room);
+      callback();
     });
     return this;
   },

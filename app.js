@@ -60,32 +60,18 @@ app.get('/users/:id', function(req,res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  util.generateRoomNumber(models.Room, function(newRoomNumber){
-    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
-    //get user info for our logged in user
-    getUsernameAndLang(userId, function(userInfo){
-      room.addUser(userInfo, function(err){
-        if (err) { console.log(err);}
-        //save the room to the db
-        room.save(function(err, roomInfo){
-          if (err) {
-            console.log('error creating room' + err);
-            res.json({'error': 'error creating room'});
-          } else {
-            res.json(room);
-            // creates a socket.io namepsace for this room
-            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
-          }
-        });
-      });
-    }); 
-  });
+  createRoom(req,res,userId);
 });
 
 // join/re-join room
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
   roomByRoomNumber(req.params.roomnum, function(room){
+    if (!room) {
+      // catch error in case room doesn't exist:
+      createRoom(req, res, userId, req.params.roomnum);
+      return;
+    }
     if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
@@ -189,7 +175,7 @@ app.post('/room/id/:id/callon', function(req,res){
   });
 });
 
-// CALL OFF //
+// CALL OFF 
 app.post('/room/id/:id/calloff', function(req, res){
   callOff(req.body._id, req.params.id, function(room){
     res.json(room);
@@ -211,6 +197,40 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 
 //FUNCTIONS//
+
+// req, res, string, [number]
+function createRoom(req, res, userId, userProvidedRoomNum) {
+  if (!_.isUndefined(userProvidedRoomNum)) {
+    // a user tries to join a room that already exists, we'll permit it:
+    createRoomInternal(parseInt(userProvidedRoomNum, 10));
+  } else {
+    util.generateRoomNumber(models.Room, createRoomInternal);
+  } 
+
+  function createRoomInternal (newRoomNumber) {
+    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
+    //get user info for our logged in user
+    getUsernameAndLang(userId, function(userInfo){
+      room.addUser(userInfo, function(err){
+        if (err) { console.log(err);}
+        //save the room to the db
+        room.save(function(err, roomInfo){
+          if (err) {
+            console.log('error creating room' + err);
+            res.json({'error': 'error creating room'});
+          } else {
+            res.json(room);
+            // creates a socket.io namepsace for this room
+            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
+          }
+        });
+      });
+    });
+  }
+
+}
+
+
 
 // string, string -> callback({})
 // removes user of userId from Queue and  places them in
