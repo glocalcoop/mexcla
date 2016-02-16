@@ -140,6 +140,21 @@ Models.Room = Backbone.Model.extend({
   }
 });
 
+
+
+Models.Language = Backbone.Model.extend({});
+
+Models.Languages = Backbone.Collection.extend({
+  model: Models.Language
+});
+
+Models.LanguageList = new Models.Languages();
+
+Models.LanguageList.fetch({ url: '/js/languages.json' }).complete(function() {
+  console.log(Models.LanguageList);
+});
+
+
 /*
 
 {
