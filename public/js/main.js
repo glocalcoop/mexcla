@@ -233,6 +233,21 @@ Models.Room = Backbone.Model.extend({
   }
 });
 
+
+
+Models.Language = Backbone.Model.extend({});
+
+Models.Languages = Backbone.Collection.extend({
+  model: Models.Language,
+  url: '/js/languages.json',
+
+  parse: function(response){
+      return response;
+  }
+});
+
+
+
 /*
 
 {
@@ -734,6 +749,7 @@ $(document).ready(function(){
   //   }).render();
   // });
 
+  // Disabled once channel added
   $('#add-channel-button').click(function(){
     if( app.room.get('channels').length < 1 ) {
       new Views.AddChannelModal({
@@ -770,21 +786,33 @@ Views.AddChannelModal = Backbone.View.extend({
 
 Views.ChannelTranslatorOptionsList = Backbone.View.extend({
   el: $('#channel-modal #channel-translator-options'),
-  template: _.template('<option><%= username %></option>'),
+  template: _.template('<option value="<%= _id %>"><%= username %></option>'),
   initialize: function() {
     this.render();
   },
   render: function(){
     var that = this;
     // TODO: have value be id of user
-    var html = '<option value="">Select a translator</option><option value="none">None</option>';
+    var html = '<option value="">Select a Translator</option>';
+    html += '<option value="none">None</option>';
     this.$el.html(html);
+    
+    // Let's use a dynamic list someday
+    // var languageList = new Models.Languages();
+
+    // languageList.fetch({
+    //   success: function(response) {
+    //     var languages = languageList.toJSON();
+    //   }
+    // });
+
     var users = this.model.get('users');
     _.each(users, function(user){
        that.$el.append(that.template(user));
     });
   }
 });
+
 
 var MexclaRouter = Backbone.Router.extend({
   routes: {
