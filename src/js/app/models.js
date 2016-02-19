@@ -1,3 +1,20 @@
+Models.createAjaxPath = function(roomId, path, userId) {
+
+  var options = {
+    type: 'POST',
+    url: '/room/id/' + roomId + '/' + path
+  }
+
+  if(! _.isUndefined(userId)) {
+    options.data = {
+      _id: userId
+    }
+  }
+
+  return $.ajax(options);
+
+}
+
 Models.raiseHandAjax = function(roomId) {
   return $.ajax({
     type: 'POST',
@@ -31,6 +48,27 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
     }
   });
 };
+
+Models.muteOnAjax = function(roomId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/muteon',
+    data: {
+      _id: userId
+    }
+  });
+};
+
+Models.muteOffAjax = function(roomId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/muteoff',
+    data: {
+      _id: userId
+    }
+  });
+};
+
 
 
 Models.User = Backbone.Model.extend({
