@@ -161,6 +161,8 @@ Models.util.audio.dtmf = function (cur_call, key) {
   }
 };
 
+
+// there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
   verto: null,
   cur_call: null,
@@ -189,7 +191,6 @@ Models.Audio = Backbone.Model.extend({
       iceServers: true
     }, {});
   },
-  call_init: function() {
     var conf = this.get("conf");
     var name = this.get("name");
     var callbacksObj = this.get("verto_call_callbacks");
@@ -227,15 +228,18 @@ Models.Audio = Backbone.Model.extend({
         switch (d.state) {
         case $.verto.enum.state.requesting:
           connecting();
+          that.trigger('connecting');
           break;
         case $.verto.enum.state.active:
           active();
+          that.trigger('active');
           Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           break;
         case $.verto.enum.state.hangup:
           hangup();
+          that.trigger('hangup');
           that.hangup();
           break;
         }
