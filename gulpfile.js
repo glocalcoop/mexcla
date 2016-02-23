@@ -67,7 +67,7 @@ gulp.task('fonts', function(){
 
 gulp.task('scripts', function(){
   var basePath = paths.scripts;
-  var files = ['masterfile.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js', 'ui.js', 'config.js', 'audio.js'];
+  var files = ['masterfile.js', 'config.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js', 'ui.js'];
   var scripts = files.map(f => basePath + f);
   return gulp.src(scripts)
       .pipe(concat('main.js'))

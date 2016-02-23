@@ -140,8 +140,6 @@ Models.Room = Backbone.Model.extend({
   }
 });
 
-
-
 Models.Language = Backbone.Model.extend({});
 
 Models.Languages = Backbone.Collection.extend({
@@ -153,49 +151,100 @@ Models.Languages = Backbone.Collection.extend({
   }
 });
 
+Models.util.audio.dtmf = function (cur_call, key) {
+  if(cur_call) {
+    var ret = cur_call.dtmf(key);
+    return true;
+  } else {
+    console.error('error joining conference');
+    return false;
+  }
+};
+
+Models.Audio = Backbone.Model.extend({
+  verto: null,
+  cur_call: null,
+  defaults: {
+    "conf": null,
+    "my_key": null,
+    verto_call_callbacks: null
+  },
+  initialize: function() {
+    this.set('conf', app.room.get('roomnum'));
+    this.set('name', app.user.get('username'));
+    this.setCallbacks(_.noop, _.noop, _.noop);
+  },
+  login: function() { 
+    this.verto = new $.verto({
+      login: config.impi,
+      passwd: config.password,
+      socketUrl: config.websocket_proxy_url,
+      tag: "audio-remote",
+      videoParams: {},
+      audioParams: {
+        googAutoGainControl: false,
+        googNoiseSuppression: false,
+        googHighpassFilter: false
+      },
+      iceServers: true
+    }, {});
+  },
+  call_init: function() {
+    var conf = this.get("conf");
+    var name = this.get("name");
+    var callbacksObj = this.get("verto_call_callbacks");
+    
+    if(this.cur_call) {
+      console.error("There is already a calling going on. Hand up first if you'd like to start another call.");
+      return;
+    }
+
+    this.cur_call =  this.verto.newCall({
+      destination_number: "9999",
+      caller_id_name: name,
+      caller_id_number: conf,
+      useVideo: false,
+      useStereo: false
+    }, callbacksObj);
+
+    // Specify function to run if the user navigates away from this page.
+    $.verto.unloadJobs = [ this.hangup ];
+  },
+  hangup: function() {
+    if(this.cur_call) {
+      this.cur_call.hangup();
+      // Unset cur_call so when the user tries to re-connect we know to re-connect
+      this.cur_call = null;
+    }
+  },
+  // these are functions that will run during their associated phase of the call
+  setCallbacks: function(connecting, active, hangup) {
+    var that = this;
+    var confNum = this.get('conf');
+    var verto_call_callbacks = {
+      onDialogState: function(d) {
+        that.cur_call = d;
+        switch (d.state) {
+        case $.verto.enum.state.requesting:
+          connecting();
+          break;
+        case $.verto.enum.state.active:
+          active();
+          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          // Record what my unique key is so I can reference it when sending special chat messages.
+          that.set('my_key', that.cur_call.callID);
+          break;
+        case $.verto.enum.state.hangup:
+          hangup();
+          that.hangup();
+          break;
+        }
+      }
+    };
+    this.set('verto_call_callbacks', verto_call_callbacks);
+  }
+  
+});
+  
 
 
-/*
-
-{
-  lang: '' // 'en', 'es'
-  users; [{users}]
-  interpreter: user,
-}
-
-
-*/
-
-/*
-USERS
-
-{
- username: ''
- currentRoom: null or ObjectId
- lang: ''
- admin: boolean
- _id: 
-}
-
-ROOM
-room-template
-room-sidebar-template
-{
-conference
-roomNum
-room
-mute
-unmute
-original
-interpretation
-provide
-Notepad 
-Spreadsheet
-IRC chat
-participants
-
- }
-
-
-
-*/
