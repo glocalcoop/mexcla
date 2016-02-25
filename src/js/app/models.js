@@ -190,7 +190,7 @@ Models.Audio = Backbone.Model.extend({
       },
       iceServers: true
     }, {});
-  },
+  
     var conf = this.get("conf");
     var name = this.get("name");
     var callbacksObj = this.get("verto_call_callbacks");
