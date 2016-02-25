@@ -186,8 +186,18 @@ Models.User = Backbone.Model.extend({
       // when successful
     });
   },
-  callOff: function(personCalledOnId) {
-
+  callOff: function(userId) {},
+  muteOn: function(userId) {
+    var roomId = app.room.get('_id');
+    Models.muteOnAjax(roomId, userId).done(function(data){
+      // when successful
+    });
+  },
+  muteOff: function(userId) {
+    var roomId = app.room.get('_id');
+    Models.muteOffAjax(roomId, userId).done(function(data){
+      // when successful
+    });
   }
 });
 
@@ -225,12 +235,32 @@ Models.Room = Backbone.Model.extend({
     });
   },
   // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreter, channelid) {
+  addUserToChannel: function(userId, channelId) {
     var that = this;
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        channel.interpreter = interpreter;
+      if (channel._id === channelId) {
+        channel.users.push(userId);
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },
+  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreterId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      that.addUserToChannel(interpreterId, channelId);
+      if (channel._id === channelId) {
+        channel.interpreter = interpreterId;
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
@@ -564,16 +594,6 @@ Views.Room = Backbone.View.extend({
     }
   }
 
-  // renderChannel: function() {
-  //   var channels = this.model.get('channels');
-  //   if (!_.isEmpty(channels)) {
-  //     _.each(channels, function(channel){
-  //       // display channel
-  //       new Views.Channel({});
-  //     });
-  //   }
-  //   return this;
-  // }
 });
 
 /**
@@ -588,7 +608,6 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    // this.listenTo(this.model, "change", this.render());
   },
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
@@ -623,7 +642,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
 
       // Add current user controls to row of current user
@@ -631,7 +650,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
       
       that.queueDisplay(user);
@@ -733,8 +752,20 @@ Views.MuteControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
-  render: function() {
+  render: function(userId) {
     this.$el.html(this.template({}));
+    this.muteOnUser(userId);
+    this.muteOffUser(userId);
+  },
+  muteOnUser: function(userId) {
+    $('#' + userId + ' .mute:not(.on)').click(function(event) {
+      app.user.muteOn(userId);
+    });
+  },
+  muteOffUser: function(userId) {
+    $('#' + userId + ' .mute.on').click(function(event) {
+      console.log($(this));
+    });
   }
 
 });
