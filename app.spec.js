@@ -345,6 +345,31 @@ describe('rooms', function(){
           });
         });
       });
+
+    describe('mute', function(){
+
+      it('request should be recieved by the server', function(done){
+        request
+          .post(url + '/room/id/' + roomId + '/muteon')
+          .send({_id: userId})
+          .set('cookie', 'id=' + newUserId)
+          .end(function(err, res){
+            res.body.users[1].mute.should.eql(true);
+            done();
+          });
+      });
+
+      it('should be set to true in the db', function(done){
+          db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+            if (err) {console.log(err);}
+            console.log(room);
+            room.users[1].mute.should.eql(true);
+            done();
+          });
+        });
+
+
+    });
     
   });
 
