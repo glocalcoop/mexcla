@@ -93,8 +93,18 @@ Models.User = Backbone.Model.extend({
       // when successful
     });
   },
-  callOff: function(personCalledOnId) {
-
+  callOff: function(userId) {},
+  muteOn: function(userId) {
+    var roomId = app.room.get('_id');
+    Models.muteOnAjax(roomId, userId).done(function(data){
+      // when successful
+    });
+  },
+  muteOff: function(userId) {
+    var roomId = app.room.get('_id');
+    Models.muteOffAjax(roomId, userId).done(function(data){
+      // when successful
+    });
   }
 });
 
@@ -132,12 +142,32 @@ Models.Room = Backbone.Model.extend({
     });
   },
   // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreter, channelid) {
+  addUserToChannel: function(userId, channelId) {
     var that = this;
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        channel.interpreter = interpreter;
+      if (channel._id === channelId) {
+        channel.users.push(userId);
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },
+  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreterId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      that.addUserToChannel(interpreterId, channelId);
+      if (channel._id === channelId) {
+        channel.interpreter = interpreterId;
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
