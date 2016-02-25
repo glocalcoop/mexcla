@@ -32,6 +32,16 @@ roomSchema.methods.setModerator = function(userId) {
   return userId;
 };
 
+channelSchema.methods.addUser = function(userInfo, cb) {
+  this.users.push(userInfo);
+  cb();
+};
+
+channelSchema.methods.setInterpreter = function(userId) {
+  this.interpreter = userId;
+  return userId;
+}
+
 // Export the model
 module.exports.Room = mongoose.model('Room', roomSchema);
 module.exports.Channel = mongoose.model('Channel', channelSchema);
