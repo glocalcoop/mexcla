@@ -247,8 +247,25 @@ Models.Audio = Backbone.Model.extend({
       }
     };
     this.set('verto_call_callbacks', verto_call_callbacks);
+  },
+  // input: "main", "hear", "interpret"
+  // output: false or self
+  switchChannel: function(option) {
+    if (!this.cur_call) {
+      console.error('You must start a call before you switch channels.');
+      return false;
+    }
+    if (option === 'main') {
+      Models.util.audio.dtmf(this.cur_call, '0');
+    } else if (option === 'hear') {
+      Models.util.audio.dtmf(this.cur_call, '1');
+    } else if (option === 'interpret') {
+      Models.util.audio.dtmf(this.cur_call, '2');
+    } else {
+      console.error('Switch Channel takes these options: "main", "hear", "interpret"');
+      return false;
+    }
+    return this;
   }
-  
-});
-  
+ });
 
