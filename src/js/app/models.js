@@ -32,6 +32,25 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
   });
 };
 
+/**
+ * Interpretation Rules
+ *
+ * Interpret
+ *   When user opts to become interpreter
+ *   - She is added to the channel's users array
+ *   - She is added as channel interpreter
+ *   - Only Leave button appears
+ *   Interpret button appears when channel has no interpreter
+ * Hear (Join)
+ *   When user opts to become a listener
+ *   - She is added to the channel's users array
+ *   - Only the Leave button appears
+ *   Join button appears when user is not already in the channel (as 
+ *   listener or interpreter)
+ * Main (Leave)
+ *   Leave button appears when user is in the channel
+ *
+ */
 
 Models.User = Backbone.Model.extend({
   idAttribute: "_id",
