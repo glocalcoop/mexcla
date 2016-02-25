@@ -181,7 +181,23 @@ app.post('/room/id/:id/calloff', function(req, res){
     res.json(room);
     emitRoom(room);
   });
+});
 
+// MUTE ON
+app.post('/room/id/:id/muteon', function(req, res){
+  console.log('here');
+   mute(true, req.body._id, req.params.id, function(room){
+    res.json(room);
+    emitRoom(room);
+  });
+});
+
+// MUTE OFF
+app.post('/room/id/:id/muteoff', function(req, res){
+  mute(false, req.body._id, req.params.id, function(room){
+    res.json(room);
+    emitRoom(room);
+  });
 });
 
 //leave room and respond with user info
@@ -221,6 +237,24 @@ function createRoom(req, res, userId) {
   });
 }
 
+function mute(bool, userId, roomId, callback) {
+  models.Room.findById(roomId, function(err, room){
+    var newUsers =_.map(room.users, function(user){
+        if(user._id.equals(userId)) {
+          user.mute = bool;
+          return user;
+        } else {
+          return user;
+        }
+    });
+    room.users = newUsers;
+    room.save(function(err, roomInfo){
+      if (err) {console.error(err);}
+      // TODO: ERROR HANDLING
+      callback(roomInfo);
+    });
+  })
+}
 
 // string, string -> callback({})
 // removes user of userId from Queue and  places them in
