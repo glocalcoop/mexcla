@@ -127,9 +127,10 @@
         <div id="call-options">
           <div id="connect-icon-and-button">
             <!-- TODO: Button should toggle to Disconnect once connected. Promises, promises... -->
-            <button class="button" onclick="mexcla_toggle_call_status(<%= roomnum %>); return false;" data-toggle="tooltip" title="<%= connect %>" id="connect-button">
-              <span class="connect" rel="ajax:modal" id="connect-button-text"><%= connect %></span>
-              <span id="connect-dots"></span>
+            <!-- Add connecting class once clicked -->
+            <!-- Add connected class once connected -->
+            <button class="button" data-toggle="tooltip" title="<%= connect %>" id="connect-button">
+              <%= connect %> <i class="icon"></i>
             </button>
           </div>
 
