@@ -59,12 +59,12 @@
     button.accordion {
         @extend .icon;
         @extend .pull-right;
-        @extend .fa-angle-double-up;
+        @extend %fa-angle-double-up;
         background-color: transparent;
         padding: 0;
 
         &.collapsed {
-            @extend .fa-angle-double-down;
+            @extend %fa-angle-double-down;
         }
     }
     
