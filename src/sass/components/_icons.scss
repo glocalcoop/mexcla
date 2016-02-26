@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 .icon {
-    @extend .fa;
+    @include fa-icon();
 }
 
 .controls button {
@@ -17,6 +17,7 @@
     transition: all .25s ease-in-out;
     -moz-transition: all .25s ease-in-out;
     -webkit-transition: all .25s ease-in-out;
+    
     &:empty {
         visibility: hidden;
         opacity: 0;
@@ -44,7 +45,7 @@
     .moderator {
         @include outline($brand-primary);
         .icon {
-            @extend .fa-gavel;
+            @extend %fa-gavel;
         }
     }
     .language {
@@ -63,7 +64,7 @@
     .interpret {
         @extend .btn-warning;
         .icon {
-            @extend .fa-futbol-o;
+            @extend %fa-futbol-o;
         }
     }
 
@@ -72,7 +73,7 @@
         visibility: visible;
         opacity: 1;
         .icon {
-            @extend .fa-sign-in;
+            @extend %fa-sign-in;
         }
         &.on {
             // @extend .btn-danger;
@@ -85,7 +86,7 @@
         visibility: visible;
         opacity: 1;
         .icon {
-            @extend .fa-sign-out;
+            @extend %fa-sign-out;
         }
         &.on {
             // @extend .btn-danger;
@@ -96,12 +97,12 @@
     .mute {
         @extend .btn-success;
         .icon {
-            @extend .fa-microphone;
+            @extend %fa-microphone;
         }
         &.on {
             @extend .btn-disabled;
             .icon {
-                @extend .fa-microphone-slash;
+                @extend %fa-microphone-slash;
             }
         }
     }
@@ -109,12 +110,12 @@
     .raise-hand {
         @extend .btn-success;
         .icon {
-            @extend .fa-hand-paper-o;
+            @extend %fa-hand-paper-o;
         }
         &.on {
             @extend .btn-disabled;
             .icon {
-                @extend .fa-hand-o-down;
+                @extend %fa-hand-o-down;
             }
         }
     }
@@ -125,12 +126,12 @@
             color: $white;
         }
         .icon {
-            @extend .fa-toggle-on;
+            @extend %fa-toggle-on;
         }
         &.on {
             @extend .btn-disabled;
             .icon {
-                @extend .fa-toggle-off;
+                @extend %fa-toggle-off;
             }
         }
     }
@@ -140,18 +141,18 @@
 #collaboration {
 
     .icon {
-        @extend .fa;
+        @extend %fa;
     }
 
     .notepad {
         .icon {
-            @extend .fa-sticky-note;
+            @extend %fa-sticky-note;
         }
     }
 
     .chat  {
         .icon {
-            @extend .fa-comments;
+            @extend %fa-comments;
         }
     }
 
@@ -161,7 +162,7 @@
     @extend .btn-primary;
 
     .icon {
-        @extend .fa-plus;
+        @extend %fa-plus;
         margin-right: 4px;
     }
 
@@ -169,23 +170,23 @@
 
 .submit-chat {
     .icon {
-        @extend .fa;
-        @extend .fa-arrow-right;
+        @extend %fa;
+        @extend %fa-arrow-right;
     }
 }
 
 .copy-link {
     @extend .input-group-addon;
     .icon {
-        @extend .fa;
-        @extend .fa-clipboard;
+        @extend %fa;
+        @extend %fa-clipboard;
     }
 }
 
 .source {
   .icon {
-    @extend .fa;
-    @extend .fa-git;
+    @extend %fa;
+    @extend %fa-git;
   }
 }
 
@@ -212,7 +213,7 @@
 */
  
 .license .icon:before {
-  @extend .fa;
+  @extend %fa;
   font-family: "gpl3";
   content: '\e800';
 } /* '' */

@@ -60,7 +60,7 @@ app.get('/users/:id', function(req,res){
 // create room
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
-  createRoom(req,res,userId);
+  createRoomRandom(req,res,userId);
 });
 
 // join/re-join room
@@ -69,7 +69,7 @@ app.get('/room/:roomnum', function(req,res){
   roomByRoomNumber(req.params.roomnum, function(room){
     if (!room) {
       // catch error in case room doesn't exist:
-      createRoom(req, res, userId);
+      createRoom(req, res, userId, req.params.roomnum);
       return;
     }
     if (util.isUserInRoom(userId, room.users)) {
@@ -181,23 +181,7 @@ app.post('/room/id/:id/calloff', function(req, res){
     res.json(room);
     emitRoom(room);
   });
-});
 
-// MUTE ON
-app.post('/room/id/:id/muteon', function(req, res){
-  console.log('here');
-   mute(true, req.body._id, req.params.id, function(room){
-    res.json(room);
-    emitRoom(room);
-  });
-});
-
-// MUTE OFF
-app.post('/room/id/:id/muteoff', function(req, res){
-  mute(false, req.body._id, req.params.id, function(room){
-    res.json(room);
-    emitRoom(room);
-  });
 });
 
 //leave room and respond with user info
@@ -214,46 +198,35 @@ app.get('/room/:roomnum/leave', function(req,res){
 
 //FUNCTIONS//
 
-function createRoom(req, res, userId) {
+// creates a room with a random number
+function createRoomRandom(req, res, userId) {
   util.generateRoomNumber(models.Room, function(newRoomNumber){
-    var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
-    //get user info for our logged in user
-    getUsernameAndLang(userId, function(userInfo){
-      room.addUser(userInfo, function(err){
-        if (err) { console.log(err);}
-        //save the room to the db
-        room.save(function(err, roomInfo){
-          if (err) {
-            console.log('error creating room' + err);
-            res.json({'error': 'error creating room'});
-          } else {
-            res.json(room);
-            // creates a socket.io namepsace for this room
-            namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
-          }
-        });
-      });
-    }); 
+    createRoom(req,res,userId,newRoomNumber);
   });
 }
 
-function mute(bool, userId, roomId, callback) {
-  models.Room.findById(roomId, function(err, room){
-    var newUsers =_.map(room.users, function(user){
-        if(user._id.equals(userId)) {
-          user.mute = bool;
-          return user;
+// Create a new room with the provided room number
+// note: this does NOT check if the room number exists.
+// When used by createRoomRandom, util.generateRoomNumber only generate a random number that is available, ensuring there are no duplicates. When used in route /room/:room,  it checks for existing rooms first by attempting to get info for an existing room.
+function createRoom(req, res, userId, newRoomNumber) {
+  var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
+  //get user info for our logged in user
+  getUsernameAndLang(userId, function(userInfo){
+    room.addUser(userInfo, function(err){
+      if (err) { console.log(err);}
+      //save the room to the db
+      room.save(function(err, roomInfo){
+        if (err) {
+          console.log('error creating room' + err);
+          res.json({'error': 'error creating room'});
         } else {
-          return user;
+          res.json(room);
+          // creates a socket.io namepsace for this room
+          namespaces['' + newRoomNumber] = io.of('/' + newRoomNumber);
         }
+      });
     });
-    room.users = newUsers;
-    room.save(function(err, roomInfo){
-      if (err) {console.error(err);}
-      // TODO: ERROR HANDLING
-      callback(roomInfo);
-    });
-  })
+  });
 }
 
 // string, string -> callback({})

@@ -27,6 +27,7 @@ var paths = {
     images: './src/images/**/*',
     fonts: './src/fonts/*',
     libs: './src/js/libs/**/*',
+    vertoLibs: './src/js/verto/*',
     index: './src/index.html',
 
     /* Output paths */
@@ -66,7 +67,7 @@ gulp.task('fonts', function(){
 
 gulp.task('scripts', function(){
   var basePath = paths.scripts;
-  var files = ['masterfile.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js', 'ui.js'];
+  var files = ['masterfile.js', 'config.js', 'translation.js', 'models.js', 'views.js', 'router.js','app.js', 'ui.js'];
   var scripts = files.map(f => basePath + f);
   return gulp.src(scripts)
       .pipe(concat('main.js'))
@@ -78,6 +79,12 @@ gulp.task('libs', function() {
     return gulp.src(paths.libs)
         .pipe(gulp.dest(paths.libsOutput))
         .pipe( notify( { message: 'Libs task complete' } ) );
+});
+
+gulp.task('vertoLibs', function(){
+  return gulp.src(paths.vertoLibs)
+    .pipe(gulp.dest(paths.libsOutput))
+    .pipe( notify( { message: 'Verto Libs task complete' } ) );
 });
 
 gulp.task('index', function(){
@@ -95,4 +102,4 @@ gulp.task( 'watch', function() {
     gulp.watch( paths.index, [ 'index' ] );
 } );
 
-gulp.task( 'default', [ 'watch', 'libs', 'scripts', 'index', 'styles', 'images', 'fonts'], function() {});
+gulp.task( 'default', [ 'watch', 'libs', 'vertoLibs', 'scripts', 'index', 'styles', 'images', 'fonts'], function() {});
