@@ -418,9 +418,9 @@ Views.ConnectAudio = Backbone.View.extend({
     this.render(connect, userId);
   },
   render: function(connect, userId) {
-    this.connectAudio(userId);
+    this.connectAudio(connect, userId);
     this.connectingAudio(userId);
-    this.disconnectAudio(userId);
+    this.disconnectAudio(connect, userId);
   },
   connectAudio: function(connect, userId) {
     $('#connect-button.connect').click(function(event) {
