@@ -413,16 +413,22 @@ Views.MuteControls = Backbone.View.extend({
 Views.ConnectAudio = Backbone.View.extend({
   template: '',
   // el: $('#connect-icon-and-button');
-  initialize: function(userId) {},
-  render: function(userId) {
+  initialize: function(userId) {
+    var connect = new Models.Audio();
+    this.render(connect, userId);
+  },
+  render: function(connect, userId) {
     this.connectAudio(userId);
     this.connectingAudio(userId);
     this.disconnectAudio(userId);
   },
-  connectAudio: function(userId) {
+  connectAudio: function(connect, userId) {
     $('#connect-button.connect').click(function(event) {
-      $().removeClass('connect');
-      $().addClass('connecting');
+      connect.login();
+      // Once logged in
+      connect.call_init();
+      $(this).removeClass('connect');
+      $(this).addClass('connecting');
     });
     /**
      * Conditions: user is registered, in room and not connected
@@ -442,10 +448,11 @@ Views.ConnectAudio = Backbone.View.extend({
      *   Connecting button should be replaced by Disconnect button
      */
   },
-  disconnectAudio: function(userId) {
+  disconnectAudio: function(connect, userId) {
     $('#connect-button.disconnect').click(function(event) {
-      $().removeClass('disconnect');
-      $().addClass('connect');
+      connect.hangup();
+      $(this).removeClass('disconnect');
+      $(this).addClass('connect');
     });
     /**
      * Conditions: user is connected to audio

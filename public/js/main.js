@@ -627,16 +627,6 @@ Views.Room = Backbone.View.extend({
     }
   }
 
-  // renderChannel: function() {
-  //   var channels = this.model.get('channels');
-  //   if (!_.isEmpty(channels)) {
-  //     _.each(channels, function(channel){
-  //       // display channel
-  //       new Views.Channel({});
-  //     });
-  //   }
-  //   return this;
-  // }
 });
 
 /**
@@ -651,7 +641,6 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    // this.listenTo(this.model, "change", this.render());
   },
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
@@ -686,7 +675,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
 
       // Add current user controls to row of current user
@@ -694,7 +683,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
       
       that.queueDisplay(user);
@@ -796,8 +785,20 @@ Views.MuteControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
-  render: function() {
+  render: function(userId) {
     this.$el.html(this.template({}));
+    this.muteOnUser(userId);
+    this.muteOffUser(userId);
+  },
+  muteOnUser: function(userId) {
+    $('#' + userId + ' .mute:not(.on)').click(function(event) {
+      app.user.muteOn(userId);
+    });
+  },
+  muteOffUser: function(userId) {
+    $('#' + userId + ' .mute.on').click(function(event) {
+      console.log($(this));
+    });
   }
 
 });
@@ -805,13 +806,58 @@ Views.MuteControls = Backbone.View.extend({
 /**
  * Audio Connect
  */
-Views.Connect = Backbone.View.extend({
+Views.ConnectAudio = Backbone.View.extend({
   template: '',
-  initialize: function() {},
-  render: function() {},
-  connect: function() {},
-  connecting: function() {},
-  disconnect: function() {}
+  // el: $('#connect-icon-and-button');
+  initialize: function(userId) {
+    var connect = new Models.Audio();
+    this.render(connect, userId);
+  },
+  render: function(connect, userId) {
+    this.connectAudio(userId);
+    this.connectingAudio(userId);
+    this.disconnectAudio(userId);
+  },
+  connectAudio: function(connect, userId) {
+    $('#connect-button.connect').click(function(event) {
+      connect.login();
+      // Once logged in
+      connect.call_init();
+      $(this).removeClass('connect');
+      $(this).addClass('connecting');
+    });
+    /**
+     * Conditions: user is registered, in room and not connected
+     * On click:
+     *   Audio connection should be initiated
+     *   Connect button should be replaced by Connecting button
+     */
+  },
+  connectingAudio: function(userId) {
+    /**
+     * Need to know when connection is complete
+     */
+    /**
+     * Conditions: user is in the process of being connected
+     * On connection:
+     *   User should be connected to audio
+     *   Connecting button should be replaced by Disconnect button
+     */
+  },
+  disconnectAudio: function(connect, userId) {
+    $('#connect-button.disconnect').click(function(event) {
+      connect.hangup();
+      $(this).removeClass('disconnect');
+      $(this).addClass('connect');
+    });
+    /**
+     * Conditions: user is connected to audio
+     * On click:
+     *   Audio connection hangup should be initiated
+     * On disconnection:
+     *   Disconnect button should be replaced by Connect button
+     */
+  }
 });
 
 
@@ -847,6 +893,40 @@ Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
+  },
+  renderInterpret: function(data) {
+    /**
+     * Conditions: no interpreter assigned to channel and 
+     * user isn't moderator
+     * On click:
+     *   User should be added to channel users
+     *   User should be added as moderator
+     *   Interpret button should disappear
+     */
+  },
+  renderJoin: function(data) {
+    /**
+     * Conditions: user isn't in channel and user isn't moderator
+     * On click:
+     *   User should be added to channel users
+     *   Join button should disappear
+     *   Leave button should appear
+     */
+  },
+  renderLeave: function(data) {
+    /**
+     * Conditions: user is in channel
+     * On click:
+     *   Condition: User is moderator
+     *      User should be removed as moderator
+     *      User should be removed from channel users
+     *      Leave button should disappear
+     *      Join button should appear
+     *   Condition: User is not moderator
+     *      User should be removed from channel users
+     *      Leave button should disappear
+     *      Join button should appear
+     */
   }
 });
 
