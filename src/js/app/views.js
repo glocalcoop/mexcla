@@ -636,7 +636,9 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
      * Only display users that aren't moderators
      */
     _.each(users, function(user){
-       that.$el.append(that.template(user));
+       if(!Views.isModerator(user._id)) {
+         that.$el.append(that.template(user));
+       }
     });
   }
 });
