@@ -22,6 +22,43 @@ describe('create new user', function(){
   });
 });
 
+describe('Create Room Moderation Options', function(){
+
+  it('should create a moderated room', function(done){
+    request
+      .get(url + '/room/create')
+      .query({moderated: true})
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        res.body.isModerated.should.eql(true);
+        done();
+      });
+  });
+
+  it('should create a non-moderated room', function(done){
+    request
+      .get(url + '/room/create')
+      .query({moderated: false})
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        res.body.isModerated.should.eql(false);
+        done();
+      });
+  });
+
+  
+  it('should create a non-moderated room by default', function(done){
+    request
+      .get(url + '/room/create')
+      .set('cookie', 'id=' + userId)
+      .end(function(err, res){
+        res.body.isModerated.should.eql(false);
+        done();
+      });
+  });
+
+});
+
 describe('rooms', function(){
   var roomNumber;
   var roomId;
@@ -44,6 +81,7 @@ describe('rooms', function(){
   it('should create a new room and return with room info', function(done){
    request
       .get(url + '/room/create')
+      .query({moderated: true})
       .set('cookie', 'id=' + userId)
       .end(function(err, res){
         should.not.exist(err);
@@ -52,6 +90,7 @@ describe('rooms', function(){
         res.body.users.length.should.eql(1);
         res.body.users[0].lang.should.eql('es');
         res.body.moderator.should.eql(userId);
+        res.body.isModerated.should.eql(true);
         done();
       });
   });

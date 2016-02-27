@@ -411,10 +411,16 @@ Views.createUserAjax = function (username, lang) {
   });
 };
 
-Views.createRoomAjax = function() {
+/**
+ * Create Room Ajax Call
+ * @param {boolean}
+ * @returns {jqXHR} 
+ */
+Views.createRoomAjax = function(moderated) {
   return $.ajax({
     type: 'GET',
-    url: '/room/create'
+    url: '/room/create',
+    data: {'moderated': moderated}
   });
 };
 
@@ -503,10 +509,14 @@ Views.IndexView = Backbone.View.extend({
     this.welcomeText();
     this.brandingText();
     this.$('#create-new-room-button').click(function(e){
+      var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
-        that.createRoom();
+        that.createRoom(moderationChecked);
       } else {
-        new Views.RegisterModal().render(that.createRoom);
+        var wrappedCreateRoom = _.wrap(that.createRoom, function(func){
+          func(moderationChecked);
+        });
+        new Views.RegisterModal().render(wrappedCreateRoom);
       }
     });
     this.$('#room-number-button').click(function(e){
@@ -528,8 +538,8 @@ Views.IndexView = Backbone.View.extend({
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
-  createRoom: function() {
-    Views.createRoomAjax().done(function(room){
+  createRoom: function(moderated) {
+    Views.createRoomAjax(moderated).done(function(room){
       app.room = new Models.Room(room);
       app.router.navigate('room/' + room.roomnum, {trigger: true});
     }); 

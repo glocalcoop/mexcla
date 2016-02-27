@@ -306,3 +306,42 @@ describe('Direct linking to pages', function(){
 
   });
 });
+
+describe('create room with moderation options', function(){
+  this.timeout(10000);
+  var browser;
+
+  before(function(){
+    browser = wd.promiseChainRemote();
+    return browser.init({browserName: 'chrome'});
+  });
+
+  after(function(){
+    return browser.quit();
+  });
+
+  it('should be, by default an unmoderated room', function(){
+    return browser.get(URL)
+      .elementById('create-new-room-button').click()
+      .elementByCssSelector('#user-name').type('Alice')
+      .elementByCss('#lang-select option[value="en"]').click()
+      .elementById('register-submit-button').click()
+      .sleep(500).then(function(){})
+      .execute("return app.room.get('isModerated')")
+      .then(function(mod){
+        mod.should.eql(false);
+      });
+  });
+
+  it('should create a moderated room', function(){
+    return browser.get(URL)
+      .elementById('moderation-option').click()
+      .elementById('create-new-room-button').click()
+      .sleep(500).then(function(){})
+      .execute("return app.room.get('isModerated')")
+      .then(function(mod){
+        mod.should.eql(true);
+      });
+  });
+
+});

@@ -241,12 +241,13 @@ function createRoomRandom(req, res, userId) {
  *
  */
 function createRoom(req, res, userId, newRoomNumber) {
-  console.log(req);
+  var moderated = (_.isUndefined(req.query.moderated)) ? false : req.query.moderated;
   var room = new models.Room({
     roomnum: newRoomNumber, 
     active: true, 
     moderator: userId, 
-    creator: userId
+    creator: userId,
+    isModerated: moderated
   });
   //get user info for our logged in user
   getUsernameAndLang(userId, function(userInfo){
