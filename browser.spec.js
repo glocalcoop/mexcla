@@ -15,7 +15,7 @@ var db = mongojs('localhost:27018/mexcladb_test', ['rooms']);
 var URL = 'localhost:8080/';
 
 describe('home page', function(){
-  this.timeout(100000);
+  this.timeout(25000);
   var browser;
 
   before(function(){
@@ -287,11 +287,22 @@ describe('Direct linking to pages', function(){
 
     it('should prompt register modal when going to directly linked room page', function(){
       return browser2.get(URL + '#room/1234')
-        //.elementById('register-modal')
-        //.isDisplayed().should.become(true)
-        //.sleep(20000).then(function(){})
+        .elementById('register-modal')
+        .isDisplayed().should.become(true);
     });
-    
+
+    it('should allow user to register and then join the room', function(){
+      return browser2
+        .elementByCssSelector('#user-name').type('Alice')
+        .elementByCss('#lang-select option[value="en"]').click()
+        .elementById('register-submit-button').click()
+        .isDisplayed().should.become(false)
+        .elementById('welcome-text').text().should.become('Hi, Alice')
+        .execute("return app.room.get('users')")
+        .then(function(users){
+          users.should.have.length(2);
+        });
+    });
 
   });
 });

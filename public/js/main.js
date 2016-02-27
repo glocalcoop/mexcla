@@ -465,15 +465,16 @@ Views.isCalledOn = function(userId) {
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
-  render: function(afterwards) {
+  /**
+   * @param {function} afterwards - callback to be executed after user is created.
+   */
+render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
       var lang = $('#register-modal  #lang-select').val();
       Views.createUserAjax(username, lang).done(function(user){
         app.user.set(user);
-        // $('#register-modal').modal('hide') -> doesn't appear to work.
-        // the focus is messed up...i'll just deal with it later and do this...
         $('#register-modal').hide();
         afterwards();
       });
@@ -1054,16 +1055,22 @@ var MexclaRouter = Backbone.Router.extend({
     this.syncUser();
     var roomNumAsInt = parseInt(roomnum, 10);
     if (!this.isLoggedIn()) {
-      //displayRegisterModal()
+      var wrappedGoToRoom = _.wrap(this.goToRoom, function(func){
+        func(roomNumAsInt);
+      });
+      new Views.RegisterModal().render(wrappedGoToRoom);
     } else {
-      if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
-        app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
-      }
-      app.roomView = new Views.Room({model: app.room}).render();
+      this.goToRoom(roomNumAsInt);
     }
   },
   default: function() {
     // this route will be executed if no other route is matched.
+  },
+  goToRoom: function(roomNumAsInt) {
+    if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
+      app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
+    }
+    app.roomView = new Views.Room({model: app.room}).render();
   },
   // Handles creation of Model.User for a few different scenarios:
   // - If user is not logged in, it sets app.user to be an empty user model.

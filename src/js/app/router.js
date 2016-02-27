@@ -13,16 +13,22 @@ var MexclaRouter = Backbone.Router.extend({
     this.syncUser();
     var roomNumAsInt = parseInt(roomnum, 10);
     if (!this.isLoggedIn()) {
-      //displayRegisterModal()
+      var wrappedGoToRoom = _.wrap(this.goToRoom, function(func){
+        func(roomNumAsInt);
+      });
+      new Views.RegisterModal().render(wrappedGoToRoom);
     } else {
-      if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
-        app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
-      }
-      app.roomView = new Views.Room({model: app.room}).render();
+      this.goToRoom(roomNumAsInt);
     }
   },
   default: function() {
     // this route will be executed if no other route is matched.
+  },
+  goToRoom: function(roomNumAsInt) {
+    if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
+      app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
+    }
+    app.roomView = new Views.Room({model: app.room}).render();
   },
   // Handles creation of Model.User for a few different scenarios:
   // - If user is not logged in, it sets app.user to be an empty user model.

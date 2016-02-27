@@ -68,15 +68,16 @@ Views.isCalledOn = function(userId) {
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
-  render: function(afterwards) {
+  /**
+   * @param {function} afterwards - callback to be executed after user is created.
+   */
+render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
       var lang = $('#register-modal  #lang-select').val();
       Views.createUserAjax(username, lang).done(function(user){
         app.user.set(user);
-        // $('#register-modal').modal('hide') -> doesn't appear to work.
-        // the focus is messed up...i'll just deal with it later and do this...
         $('#register-modal').hide();
         afterwards();
       });
