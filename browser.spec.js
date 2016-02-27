@@ -5,16 +5,14 @@ var chai = require("chai");
 var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.should();
-
 var wd = require('wd');
 // enables chai assertion chaining
 chaiAsPromised.transferPromiseness = wd.transferPromiseness;
 
+var mongojs = require('mongojs');
+var db = mongojs('localhost:27018/mexcladb_test', ['rooms']);
+
 var URL = 'localhost:8080/';
-
-// to run the tests, selenium-standalone must be installed and started:
-// selenium-standalone start
-
 
 describe('home page', function(){
   this.timeout(100000);
@@ -204,7 +202,7 @@ describe('home page', function(){
 });
 
 
-describe.only('Direct linking to pages', function(){
+describe('Direct linking to pages', function(){
   this.timeout(10000);
   var browser;
   var userid;
@@ -216,6 +214,15 @@ describe.only('Direct linking to pages', function(){
 
   after(function(){
     return browser.quit();
+  });
+
+  after(function(done){
+    db.rooms.remove({ roomnum: 9999}, function(err, room){
+      if (err) {
+        console.err(err);
+      }
+      done();
+    });
   });
 
   it('should create a new room implicitly', function(){
@@ -247,10 +254,9 @@ describe.only('Direct linking to pages', function(){
   });
 
   it('Logged-in user should be able to return to room by going directly to /#room/:roomnum', function(){
-    // browser.get(URL + '#room/9999')
-    //   .elementById('participant-list')
+    return browser.get(URL + '#room/9999')
+      .hasElementById('participant-list').should.become(true)
+      .hasElementById('room-info').should.become(true);
   });
   
 });
-
-
