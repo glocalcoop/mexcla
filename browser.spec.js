@@ -217,7 +217,7 @@ describe('Direct linking to pages', function(){
   });
 
   after(function(done){
-    db.rooms.remove({ roomnum: 9999}, function(err, room){
+   db.rooms.remove({ roomnum: { $in: [9999,1234] }}, function(err, room){
       if (err) {
         console.err(err);
       }
@@ -249,7 +249,11 @@ describe('Direct linking to pages', function(){
     return browser.get(URL)
       .elementById('welcome-text').text()
       .should.become('Hola, Geli')
-      .hasElementById('participant-list').should.become(false);
+      .hasElementById('participant-list').should.become(false)
+      .execute('return app.router.isLoggedIn()')
+      .then(function(answer){
+        answer.should.eql(true);
+      });
       
   });
 
@@ -269,5 +273,25 @@ describe('Direct linking to pages', function(){
       });
   });
 
-  
+  describe('also works with non-logged-in user', function(){
+    var browser2;
+
+    before(function(){
+      browser2 = wd.promiseChainRemote();
+      return browser2.init({browserName: 'chrome'});
+    });
+
+    after(function(){
+      return browser2.quit();
+    });
+
+    it('should prompt register modal when going to directly linked room page', function(){
+      return browser2.get(URL + '#room/1234')
+        //.elementById('register-modal')
+        //.isDisplayed().should.become(true)
+        //.sleep(20000).then(function(){})
+    });
+    
+
+  });
 });
