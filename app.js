@@ -16,7 +16,9 @@ server.listen(8080, function(){
   console.log('Mexcla is starting up at localhost:8080');
 });
 
-// holds room namespaces
+/**
+ * Hold Room Namespaces
+ */
 var namespaces = {};
 
 app.use(express.static(__dirname + '/public'));
@@ -32,7 +34,10 @@ var models = {
   Channel: require('./models/Room').Channel
 };
 
-// creates users,  sends back info and stores userid & lang in cookie
+/**
+ * Create User
+ * Creates users,  sends back info and stores userid & lang in cookie
+ */
 app.post('/users/new', function(req, res){
   var user = new models.User(req.body);
   user.save(function(err, user){
@@ -49,21 +54,27 @@ app.post('/users/new', function(req, res){
   });
 });
 
-// gets user info
-// responds to user.fetch() in backbone
+/**
+ * Get User Info
+ * Responds to user.fetch() in backbone
+ */
 app.get('/users/:id', function(req,res){
   getUserInfo(req.params.id, function(user){
     res.json(user);
   });
 });
 
-// create room
+/**
+ * Create Room
+ */
 app.get('/room/create', function(req,res){
   var userId = req.cookies.id;
   createRoomRandom(req,res,userId);
 });
 
-// join/re-join room
+/**
+ * Join/re-join room
+ */
 app.get('/room/:roomnum', function(req,res){
   var userId = req.cookies.id;
   roomByRoomNumber(req.params.roomnum, function(room){
@@ -109,7 +120,9 @@ app.post('/room/id/:id/moderator', function(req, res){
   });
 });
 
-// create channel //
+/**
+ * Create Channel
+ */
 app.post('/room/id/:id/channel/create', function(req,res){
   models.Room.findById(req.params.id, function(err, room){
     if (err) {handleError(err);}
@@ -125,8 +138,11 @@ app.post('/room/id/:id/channel/create', function(req,res){
   });
 });
 
-// update channel // 
-// post data {'channelField': "new data"}. i.e.: {"interpreter": "slothrop", lang: "es"}
+
+/**
+ * Update Channel
+ * post data {'channelField': "new data"}. i.e.: {"interpreter": "slothrop", lang: "es"}
+ */
 app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   getChannel(req.params.roomid, req.params.channelid, function(channelDoc){
     channelDoc.set(req.body);
@@ -141,8 +157,11 @@ app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   });
 });
 
-// HAND RAISE //
-// TODO: error handling
+
+/**
+ * Raise Hand
+ * TODO: error handling
+ */
 app.post('/room/id/:id/raisehand', function(req, res){
   userAndRoom(req.cookies.id, req.params.id, function(user, room){
     room.handsQueue.push(user);
@@ -155,7 +174,9 @@ app.post('/room/id/:id/raisehand', function(req, res){
 });
 
 
-// LOWER HAND //
+/**
+ * Lower Hand
+ */
 app.post('/room/id/:id/lowerhand', function(req,res){
   models.Room.findById(req.params.id, function(err,room){
     room.handsQueue = util.removeFromQueue(room.handsQueue, req.cookies.id);
@@ -167,7 +188,9 @@ app.post('/room/id/:id/lowerhand', function(req,res){
   });
 });
 
-// CALL ON ///
+/**
+ * Create On
+ */
 app.post('/room/id/:id/callon', function(req,res){
   callOn(req.body._id, req.params.id, function(room){
     res.json(room);
@@ -175,7 +198,9 @@ app.post('/room/id/:id/callon', function(req,res){
   });
 });
 
-// CALL OFF 
+/**
+ * Create Off
+ */
 app.post('/room/id/:id/calloff', function(req, res){
   callOff(req.body._id, req.params.id, function(room){
     res.json(room);
@@ -184,8 +209,11 @@ app.post('/room/id/:id/calloff', function(req, res){
 
 });
 
-//leave room and respond with user info
-//NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
+/**
+ * Leave Room
+ * Leave room and respond with user info
+ * NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
+ */
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
     getUserInfo(req.cookies.id, function(user){
@@ -194,22 +222,32 @@ app.get('/room/:roomnum/leave', function(req,res){
   });
 });
 
-
-
 //FUNCTIONS//
-
-// creates a room with a random number
+/**
+ * Create Random Room Number
+ * Creates a room with a random number
+ */
 function createRoomRandom(req, res, userId) {
   util.generateRoomNumber(models.Room, function(newRoomNumber){
     createRoom(req,res,userId,newRoomNumber);
   });
 }
 
-// Create a new room with the provided room number
-// note: this does NOT check if the room number exists.
-// When used by createRoomRandom, util.generateRoomNumber only generate a random number that is available, ensuring there are no duplicates. When used in route /room/:room,  it checks for existing rooms first by attempting to get info for an existing room.
+/**
+ * Create Room
+ * Create a new room with the provided room number
+ * Note: this does NOT check if the room number exists.
+ * When used by createRoomRandom, util.generateRoomNumber only generate a random number that is available, ensuring there are no duplicates. When used in route /room/:room,  it checks for existing rooms first by attempting to get info for an existing room.
+ *
+ */
 function createRoom(req, res, userId, newRoomNumber) {
-  var room = new models.Room({roomnum: newRoomNumber, active: true, moderator: userId, creator: userId});
+  console.log(req);
+  var room = new models.Room({
+    roomnum: newRoomNumber, 
+    active: true, 
+    moderator: userId, 
+    creator: userId
+  });
   //get user info for our logged in user
   getUsernameAndLang(userId, function(userInfo){
     room.addUser(userInfo, function(err){
@@ -229,9 +267,11 @@ function createRoom(req, res, userId, newRoomNumber) {
   });
 }
 
-// string, string -> callback({})
-// removes user of userId from Queue and  places them in
-// the called on position.
+/**
+ * Call On
+ * String, string -> callback({})
+ * Removes user of userId from Queue and  places them in the called on position.
+ */
 function callOn(userId, roomId, callback){
   userAndRoom(userId, roomId, function(user, room){
     room.calledon = user;
@@ -242,8 +282,11 @@ function callOn(userId, roomId, callback){
   });
 }
 
-// string, string -> callback({})
-// removes from the calledon position if they are currently called on
+/**
+ * Call Off
+ * String, string -> callback({})
+ * Removes from the calledon position if they are currently called on
+ */
 function callOff(userId, roomId, callback){
   models.Room.findById(roomId, function(err, room){
     if (err) {handleError(err);}
@@ -259,9 +302,11 @@ function callOff(userId, roomId, callback){
   });
 }
 
-// string, string -> callback(user, room);
-// if err:
-// callback(err);
+/**
+ * User and Room
+ * string, string -> callback(user, room);
+ * if err: callback(err);
+ */
 function userAndRoom(userId, roomId, callback) {
   var userPromise = getUsernameAndLangPromise(userId);
   var roomPromise = models.Room.findById(roomId).exec();
@@ -272,14 +317,16 @@ function userAndRoom(userId, roomId, callback) {
   });
 }
 
-
-// userId -> promise
+/**
+ * userId -> promise
+ */
 function getUsernameAndLangPromise(userId) {
   return models.User.findById(userId, 'username lang').exec();
 }
 
-
-//passes user info object {_id,username,lang} to callback
+/**
+ * passes user info object {_id,username,lang} to callback
+ */
 function getUserInfo(userId, callback) {
   models.User.findById(userId, function(err, user){
     if (err) {handleError(err);}
@@ -287,7 +334,9 @@ function getUserInfo(userId, callback) {
   });
 }
 
-//passes user info object {_id,username,lang} to callback
+/**
+ * passes user info object {_id,username,lang} to callback
+ */
 function getUsernameAndLang(userId, callback) {
   models.User.findById(userId, 'username lang', function(err, user){
     if (err) {handleError(err);}
@@ -314,8 +363,10 @@ function removeUserFromRoom(id, roomNumber, callback) {
   });
 }
 
-// input: string (roomid), string (channelid),
-// output: callback(channelDoc)
+/**
+ * Input: @string roomid, @string channelid
+ * Output: @callback channelDoc
+ */
 function getChannel(roomid, channelid, callback) {
   models.Room.findById(roomid, function(err, room){
     if (err) {handleError(err);}
@@ -323,13 +374,16 @@ function getChannel(roomid, channelid, callback) {
   });
 }
 
-
-// pushes a 'room update' event to the namespace for the given room
+/**
+ * pushes a 'room update' event to the namespace for the given room
+ */
 function emitRoom(room) {
   namespaces[room.roomnum].emit('room update', room);
 }
 
-//so something fancier one day
+/**
+ * Add fancier error handling some day
+ */
 function handleError(err) {
   console.error(err);
 }
