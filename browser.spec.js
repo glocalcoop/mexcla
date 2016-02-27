@@ -202,7 +202,7 @@ describe('home page', function(){
 });
 
 
-describe.only('Direct linking to pages', function(){
+describe('Direct linking to pages', function(){
   this.timeout(10000);
   var browser;
   var userid;

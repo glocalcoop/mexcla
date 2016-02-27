@@ -11,9 +11,10 @@ var MexclaRouter = Backbone.Router.extend({
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
+    var roomNumAsInt = parseInt(roomnum, 10);
     this.syncUser();
-    if (_.isUndefined(app.room)) {
-      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
+      app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
     }
     app.roomView = new Views.Room({model: app.room}).render();
   },
