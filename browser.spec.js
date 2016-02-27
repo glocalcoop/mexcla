@@ -202,7 +202,7 @@ describe('home page', function(){
 });
 
 
-describe('Direct linking to pages', function(){
+describe.only('Direct linking to pages', function(){
   this.timeout(10000);
   var browser;
   var userid;
@@ -258,5 +258,16 @@ describe('Direct linking to pages', function(){
       .hasElementById('participant-list').should.become(true)
       .hasElementById('room-info').should.become(true);
   });
+
+  it('Logged-in user should be able to implicitly create room by going directly to /#room/:roomnum', function(){
+    return browser.get(URL + '#room/1234')
+      .hasElementById('participant-list').should.become(true)
+      .hasElementById('room-info').should.become(true)
+      .execute("return app.room.get('roomnum')")
+      .then(function(roomnum){
+        roomnum.should.eql(1234);
+      });
+  });
+
   
 });
