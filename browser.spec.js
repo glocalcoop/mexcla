@@ -25,10 +25,6 @@ describe('home page', function(){
     return browser.init({browserName: 'chrome'});
   });
 
-  //beforeEach(function(){
-  //    return browser.get(URL);
-  //});
-
   after(function(){
     return browser.quit();
   });
@@ -201,14 +197,42 @@ describe('home page', function(){
                 person.username.should.equal('Geli');
               });
           });
-          
-
         });
-        
       });
     });
-    
   });
+});
+
+
+describe.('Direct linking to pages', function(){
+  this.timeout(10000);
+  var browser;
+
+  before(function(){
+    browser = wd.promiseChainRemote();
+    return browser.init({browserName: 'chrome'});
+  });
+
+  after(function(){
+    return browser.quit();
+  });
+
+  it('should create a new room implicitly', function(){
+    return browser.get(URL)
+      .elementById('room-number').type('9999')
+      .elementById('room-number-button').click()
+      .elementByCssSelector('#user-name').type('Geli')
+      .elementByCss('#lang-select option[value="es"]').click()
+      .elementById('register-submit-button').click()
+      .isDisplayed().should.become(false)
+      .elementById('welcome-text').text().should.become('Hola, Geli')
+      .execute("return app.room.get('roomnum')")
+      .then(function(roomnum){
+        console.log(roomnum);
+        roomnum.should.eql(9999);
+      });
+  });
+
 });
 
 
