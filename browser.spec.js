@@ -204,9 +204,10 @@ describe('home page', function(){
 });
 
 
-describe.('Direct linking to pages', function(){
+describe.only('Direct linking to pages', function(){
   this.timeout(10000);
   var browser;
+  var userid;
 
   before(function(){
     browser = wd.promiseChainRemote();
@@ -226,13 +227,30 @@ describe.('Direct linking to pages', function(){
       .elementById('register-submit-button').click()
       .isDisplayed().should.become(false)
       .elementById('welcome-text').text().should.become('Hola, Geli')
+      .hasElementById('participant-list').should.become(true)
       .execute("return app.room.get('roomnum')")
       .then(function(roomnum){
-        console.log(roomnum);
         roomnum.should.eql(9999);
+      })
+      .execute("return app.user.get('_id')")
+      .then(function(id){
+        userid = id;
       });
   });
 
+  it('Going back to homepage keeps user logged in', function(){
+    return browser.get(URL)
+      .elementById('welcome-text').text()
+      .should.become('Hola, Geli')
+      .hasElementById('participant-list').should.become(false);
+      
+  });
+
+  it('Logged-in user should be able to return to room by going directly to /#room/:roomnum', function(){
+    // browser.get(URL + '#room/9999')
+    //   .elementById('participant-list')
+  });
+  
 });
 
 
