@@ -241,7 +241,6 @@ function createRoomRandom(req, res, userId) {
  *
  */
 function createRoom(req, res, userId, newRoomNumber) {
-  console.log(req);
   var room = new models.Room({
     roomnum: newRoomNumber, 
     active: true, 
