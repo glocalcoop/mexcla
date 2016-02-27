@@ -26,6 +26,14 @@ button {
 #connect-button {
     @extend .btn-lg;
     @extend .btn-success;
+
+    &.connecting {
+        @extend .btn-warning;
+    }
+
+    &.connected {
+        @extend .btn-danger;
+    }
 }
 
 .btn-group {

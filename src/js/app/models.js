@@ -25,7 +25,7 @@ Models.callOnAjax = function(roomId, personCalledOnId) {
 Models.callOffAjax = function(roomId, personCalledOnId) {
   return $.ajax({
     type: 'POST',
-    url: '/room/id/' + roomId + '/callon',
+    url: '/room/id/' + roomId + '/calloff',
     data: {
       _id: personCalledOnId
     }

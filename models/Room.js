@@ -15,7 +15,9 @@ var roomSchema = new Schema({
   // user: {_id, lang, username}
   users: {type: Array, default: []},
   channels: [channelSchema],
+  isModerated: Boolean,
   moderator: {type: Schema.Types.ObjectId},
+  isPrivate: Boolean,
   active: Boolean,
   creator: {type: Schema.Types.ObjectId},
   handsQueue: {type: Array, default: []},

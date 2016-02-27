@@ -11,6 +11,7 @@ var config = {
   password: 'public',
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -23,6 +24,8 @@ var websiteText = {
       select_language: "Select Your Language",
       enter: "Enter",
       connect: "Connect",
+      connecting: "Connecting",
+      disconnect: "Disconnect",
       conference: "Conference",
       link: "Link",
       original: "Hear Original Language",
@@ -59,12 +62,14 @@ var websiteText = {
       welcome: "Bienvenido a Mexcla",
       subhead: "Mexcla es el Sistema de Conferencia Interpretación Simultánea",
       salutation: "Hola",
-      register: "Please Register",
+      register: "Please Register [es]",
       username: "Ingrese su Nombre",
       your_name: "Su Nombre",
-      select_language: "Select Your Language",
+      select_language: "Select Your Language [es]",
       enter: "Ingrese",
       connect: "Connectarse",
+      connecting: "Connecting [es]",
+      disconnect: "Disconnect [es]",
       conference: "Sala De Conferencias",
       link: "Hipervínculo",
       original: "Escuchar en Idioma Original",
@@ -75,25 +80,25 @@ var websiteText = {
       join: "Entrar en una Sala",
       enter: "Por Favor, Ingrese el Número de la Habitación",
       create: "Crear una Sala",
-      room_options: "Room Options",
-      private_room: "Private Room",
-      moderated_room: "Moderated Room",
+      room_options: "Room Options [es]",
+      private_room: "Private Room [es]",
+      moderated_room: "Moderated Room [es]",
       notepad: "Añadir Notas",
-      spreadsheet: "Spreadsheet",
+      spreadsheet: "Spreadsheet [es]",
       chat: "Añadir el Chat",
-      channels: "Language Channels",
-      add_channel: "Add a Channel",
-      channel_language: "Channel Language",
-      channel_abbreviation: "Language Abbreviation",
-      interpret: "Interpret",
-      join_channel: "Join",
-      leave_channel: "Leave",
-      moderator: "Moderator",
-      queued: "Queued",
+      channels: "Language Channels [es]",
+      add_channel: "Add a Channel [es]",
+      channel_language: "Channel Language [es]",
+      channel_abbreviation: "Language Abbreviation [es]",
+      interpret: "Interpret [es]",
+      join_channel: "Join [es]",
+      leave_channel: "Leave [es]",
+      moderator: "Moderator [es]",
+      queued: "Queued [es]",
       mute: "Mícrófono Innactivo",
       unmute: "Activar Micrófono",
-      raise_hand: "Raise Hand",
-      lower_hand: "Lower Hand",
+      raise_hand: "Raise Hand [es]",
+      lower_hand: "Lower Hand [es]",
       click_copy: "Copia"
 
     }
@@ -126,7 +131,7 @@ Models.callOnAjax = function(roomId, personCalledOnId) {
 Models.callOffAjax = function(roomId, personCalledOnId) {
   return $.ajax({
     type: 'POST',
-    url: '/room/id/' + roomId + '/callon',
+    url: '/room/id/' + roomId + '/calloff',
     data: {
       _id: personCalledOnId
     }
@@ -390,8 +395,11 @@ Models.Audio = Backbone.Model.extend({
  });
 
 
-// input: string, string ('en' or 'es')
-// output: jqXHR-promise
+/**
+ * Create User
+ * input: string, string ('en' or 'es')
+ * output: jqXHR-promise
+ */
 Views.createUserAjax = function (username, lang) {
   return $.ajax({
     type: 'POST',
@@ -475,10 +483,8 @@ Views.RegisterModal = Backbone.View.extend({
 
 /**
  * Index
+ * View: "main" page where user picks between creating a room or joining an existing one it renders language according to app.user.attributes.lang and re-renders when user model language changes
  */
-// View: "main" page where user picks between creating a room or joining an existing one
-// it renders language according to app.user.attributes.lang
-// and re-renders when user model language changes
 Views.IndexView = Backbone.View.extend({
   el: $('#content'),
   template: _.template($("#index-template").html()),
@@ -504,7 +510,11 @@ Views.IndexView = Backbone.View.extend({
     });
     this.$('#room-number-button').click(function(e){
       if (Views.isThereAUser()) {
-        that.JoinRoom()(); // ()() is not a typo...JoinRoom returns a function.
+        /**
+         * JoinRoom()() is not a typo
+         * JoinRoom @returns a function
+         */
+        that.JoinRoom()();
       } else {
         new Views.RegisterModal().render(that.JoinRoom());
       }
@@ -512,7 +522,9 @@ Views.IndexView = Backbone.View.extend({
     return this;
   },
   setLang: function() {
-    // fallback to English if lang is missing
+    /**
+     * Fallback to English if lang is missing
+     */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
   createRoom: function() {
@@ -541,8 +553,8 @@ Views.IndexView = Backbone.View.extend({
 
 /**
  * Welcome
+ * use: new WelcomeText({model: app.user})
  */
-// use: new WelcomeText({model: app.user})
 Views.WelcomeText = Backbone.View.extend({
   el: $('#welcome-text'),
   template: _.template($('#welcome-text-template').html()),
@@ -565,8 +577,8 @@ Views.WelcomeText = Backbone.View.extend({
 
 /**
  * Branding
+ * use: new WelcomeText({model: app.user})
  */
-// use: new WelcomeText({model: app.user})
 Views.BrandingText = Backbone.View.extend({
   el: $('#tagline'),
   template: _.template($('#branding-text-template').html()),
@@ -589,8 +601,8 @@ Views.BrandingText = Backbone.View.extend({
 
 /**
  * Room
+ * use: new Views.Room({model: app.room})
  */
-// use: new Views.Room({model: app.room})
 Views.Room = Backbone.View.extend({
   el: $('#content'),
   template: _.template($('#room-template').html()),
@@ -600,7 +612,7 @@ Views.Room = Backbone.View.extend({
     this.welcomeText();
     this.brandingText();
     this.sidebar.render();
-    // this.renderChannel();
+    this.connect.render();
     return this;
   },
   initialize: function() {
@@ -609,6 +621,7 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
+    this.connect = new Views.ConnectAudio({model: this.model});
     this.sidebar = new Views.RoomSidebar({model: this.model});
     //this.listenTo(this.model, 'change:channels', this.renderChannel);
   },
@@ -623,23 +636,13 @@ Views.Room = Backbone.View.extend({
     }
   }
 
-  // renderChannel: function() {
-  //   var channels = this.model.get('channels');
-  //   if (!_.isEmpty(channels)) {
-  //     _.each(channels, function(channel){
-  //       // display channel
-  //       new Views.Channel({});
-  //     });
-  //   }
-  //   return this;
-  // }
 });
 
 /**
  * Room Sidebar
+ * unlike the other Views, this one is appended to #content instead of replacing it
+ * use: new Views.RoomSidebar({model: app.room});
  */
-// unlike the other Views, this one is appended to #content instead of replacing it
-// use; new Views.RoomSidebar({model: app.room});
 Views.RoomSidebar = Backbone.View.extend({
   el: $('#content'),
   template: _.template($('#room-sidebar-template').html()),
@@ -647,7 +650,6 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    // this.listenTo(this.model, "change", this.render());
   },
   render: function() {
     this.$el.append(this.template(websiteText[app.user.attributes.lang]));
@@ -682,7 +684,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
 
       // Add current user controls to row of current user
@@ -690,7 +692,7 @@ Views.RoomSidebar = Backbone.View.extend({
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
         new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render();
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
       
       that.queueDisplay(user);
@@ -761,6 +763,9 @@ Views.ModeratorControls = Backbone.View.extend({
   
 });
 
+/**
+ * Current User Controls
+ */
 Views.CurrentUserControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.current-user-control');
@@ -788,14 +793,87 @@ Views.CurrentUserControls = Backbone.View.extend({
   }
 });
 
+/**
+ * Mute Controls
+ */
 Views.MuteControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
-  render: function() {
+  render: function(userId) {
     this.$el.html(this.template({}));
+    this.muteOnUser(userId);
+    this.muteOffUser(userId);
+  },
+  muteOnUser: function(userId) {
+    $('#' + userId + ' .mute:not(.on)').click(function(event) {
+      app.user.muteOn(userId);
+    });
+  },
+  muteOffUser: function(userId) {
+    $('#' + userId + ' .mute.on').click(function(event) {
+      console.log($(this));
+    });
   }
 
+});
+
+/**
+ * Audio Connect
+ */
+Views.ConnectAudio = Backbone.View.extend({
+  template: '',
+  // el: $('#connect-icon-and-button');
+  initialize: function(userId) {
+    this.render(userId);
+  },
+  render: function(userId) {
+    this.connectAudio(userId);
+    this.connectingAudio(userId);
+    this.disconnectAudio(userId);
+  },
+  connectAudio: function(userId) {
+    $('#connect-button.connect').click(function(event) {
+      var connect = new Models.Audio();
+      connect.login();
+      // Once logged in
+      connect.call_init();
+      $(this).removeClass('connect').addClass('disconnect');
+    });
+    /**
+     * Conditions: user is registered, in room and not connected
+     * On click:
+     *   Audio connection should be initiated
+     *   Connect button should be replaced by Connecting button
+     */
+  },
+  connectingAudio: function(userId) {
+    /**
+     * Need to know when connection is complete
+     * Can we check?
+     * connect.cur_call.gotAnswer
+     * connect.cur_call.state.name
+     */
+    /**
+     * Conditions: user is in the process of being connected
+     * On connection:
+     *   User should be connected to audio
+     *   Connecting button should be replaced by Disconnect button
+     */
+  },
+  disconnectAudio: function(userId) {
+    $('#connect-button.disconnect').click(function(event) {
+      connect.hangup();
+      $(this).removeClass('disconnect').addClass('connect');
+    });
+    /**
+     * Conditions: user is connected to audio
+     * On click:
+     *   Audio connection hangup should be initiated
+     * On disconnection:
+     *   Disconnect button should be replaced by Connect button
+     */
+  }
 });
 
 
@@ -811,7 +889,10 @@ Views.Channel = Backbone.View.extend({
     };
     this.$el.append(this.template(data));
 
-    // Moderator can't be interpreter or join a channel
+    /**
+     * Moderator can't be interpreter
+     * Moderator can't join a channel
+     */
     if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
@@ -831,6 +912,40 @@ Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
+  },
+  renderInterpret: function(data) {
+    /**
+     * Conditions: no interpreter assigned to channel and 
+     * user isn't moderator
+     * On click:
+     *   User should be added to channel users
+     *   User should be added as moderator
+     *   Interpret button should disappear
+     */
+  },
+  renderJoin: function(data) {
+    /**
+     * Conditions: user isn't in channel and user isn't moderator
+     * On click:
+     *   User should be added to channel users
+     *   Join button should disappear
+     *   Leave button should appear
+     */
+  },
+  renderLeave: function(data) {
+    /**
+     * Conditions: user is in channel
+     * On click:
+     *   Condition: User is moderator
+     *      User should be removed as moderator
+     *      User should be removed from channel users
+     *      Leave button should disappear
+     *      Join button should appear
+     *   Condition: User is not moderator
+     *      User should be removed from channel users
+     *      Leave button should disappear
+     *      Join button should appear
+     */
   }
 });
 
@@ -867,7 +982,10 @@ $(document).ready(function(){
 });
 
 
-// use new Views.AddChannelModal({model: app.room})
+/**
+ * Add Channel Modal
+ * use: new Views.AddChannelModal({model: app.room})
+ */
 Views.AddChannelModal = Backbone.View.extend({
   initialize: function() {
     new Views.ChannelTranslatorOptionsList({model: app.room});
@@ -910,6 +1028,10 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
     // });
 
     var users = this.model.get('users');
+    /**
+     * Conditions: user must not be moderator
+     * Only display users that aren't moderators
+     */
     _.each(users, function(user){
        that.$el.append(that.template(user));
     });
@@ -923,39 +1045,56 @@ var MexclaRouter = Backbone.Router.extend({
     "room/:roomnum": "room",
     "*page": "default"
   },
-
   index: function() {
-    this.syncUser();
+   this.syncUser();
     // log in to homepage
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
     this.syncUser();
-    if (_.isUndefined(app.room)) {
-      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    var roomNumAsInt = parseInt(roomnum, 10);
+    if (!this.isLoggedIn()) {
+      //displayRegisterModal()
+    } else {
+      if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
+        app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
+      }
+      app.roomView = new Views.Room({model: app.room}).render();
     }
-    app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
     // this route will be executed if no other route is matched.
   },
+  // Handles creation of Model.User for a few different scenarios:
+  // - If user is not logged in, it sets app.user to be an empty user model.
+  // - If the user is logged in, but the user model has not been created, it provides the user model with the ID of the user and fetches the details from the server.
+  // If there is a language cookie it updates the user model accordingly.
   syncUser: function() {
-    // if user is undefined, which would happen when someone returns to the page and has a cookie stored, then it's a new session and we need to create the user object.
+    var lang = Cookies.get('lang');
+    if (!app.user) {
+      app.user = new Models.User();
+    }
+    if (this.isLoggedIn() && _.isUndefined(app.user.get('_id'))) {
       var userid = Cookies.get('id');
-      var lang = Cookies.get('lang');
-      if (!_.isUndefined(userid)) {
-        // set user
-        app.user.set('_id', userid);
-        if (!_.isUndefined(lang)) {
-          app.user.set('lang', lang);
-        }
-        app.user.fetch();
-      }
+      app.user.set('_id', userid);
+      app.user.fetch();
+    }
+    this.setUserLang();
+  },
+  isLoggedIn: function() {
+    return !_.isUndefined(Cookies.get('id'));
+  },
+  setUserLang: function() {
+    var lang = Cookies.get('lang');
+    if (!_.isUndefined(lang)) {
+      app.user.set('lang', lang);
+    }
   }
 });
 
 app.router = new MexclaRouter();
-app.user = new Models.User();
+// app.user = new Models.User();
+app.user = null;
 
 Backbone.history.start(); // must call this to start router
 
