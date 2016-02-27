@@ -217,13 +217,32 @@ Models.Room = Backbone.Model.extend({
       data: channel
     });
   },
-  // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreter, channelid) {
+  // string, string -> adds user to channel
+  addUserToChannel: function(userId, channelId) {
     var that = this;
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        channel.interpreter = interpreter;
+        channel.users.push(userId);
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreterId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelId) {
+        that.addUserToChannel(interpreterId, channelId);
+        channel.interpreter = interpreterId;
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
@@ -236,6 +255,28 @@ Models.Room = Backbone.Model.extend({
     this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
     return this;
   },
+  // string, string -> removes user from channel
+  removeUserFromChannel: function(userId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelid) {
+        _.without(channel.users, userId);
+        if (channel.interpreter === userId) {
+          channel.interpreter = null;
+        }
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
   // given a channel (object) it updates the db/server with any of the changed priorities
   updateChannelAjax: function(channel) {
     var channelID = channel._id;
@@ -1032,7 +1073,9 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
      * Only display users that aren't moderators
      */
     _.each(users, function(user){
-       that.$el.append(that.template(user));
+       if(!Views.isModerator(user._id)) {
+         that.$el.append(that.template(user));
+       }
     });
   }
 });
