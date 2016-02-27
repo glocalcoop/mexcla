@@ -83,6 +83,15 @@
                 <h3><%= create %></h3>
                 <fieldset>
                   <input id="create-new-room-button" type="submit" value="<%= create %>" data-transition="fade">
+                  <label for="moderation-option">
+                    <input id="moderation-option" name="moderation-option" type="checkbox" value="0"> 
+                    <%= moderated_room %>
+                  </label>
+                  <label for="private-option">
+                    <input id="private-option" name="private-option" type="checkbox" value="0">
+                    <%= private_room %>
+                  </label>
+                  
                 </fieldset>
               </div>
             </div>
@@ -134,21 +143,6 @@
             </button>
           </div>
 
-          <div id="mute-controls">
-            <div class="btn-group" id="mute-button" data-toggle="buttons">
-
-              <label for="mic-mute" class="btn active">
-                <input type="radio" value="mute" id="mic-mute" name="mic" onclick="mexcla_mic_mute();">
-                <%= mute %>
-              </label>
-
-              <label for="mic-unmute" class="btn">
-                <input type="radio" value="unmute" id="mic-unmute" name="mic" onclick="mexcla_mic_unmute();">
-                <%= unmute %>
-              </label>
-
-            </div>
-          </div>
         </div>
 
         <div id="interpretation-options">
