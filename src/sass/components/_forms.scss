@@ -22,6 +22,14 @@ label {
   color: $brand-info;
 }
 
+input[type="checkbox"]{
+  @extend .checkbox;
+}
+
+input[type="radio"]{
+  @extend .radio;
+}
+
 .clipboard-group,
 .chat-group {
   @extend .input-group;

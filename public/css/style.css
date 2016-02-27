@@ -1547,31 +1547,33 @@ button {
 .form-group, fieldset {
   margin-bottom: 1rem; }
 
-.radio,
-.checkbox {
+.radio, input[type="radio"],
+.checkbox,
+input[type="checkbox"] {
   position: relative;
   display: block;
   margin-bottom: 0.75rem; }
-  .radio label,
-  .checkbox label {
+  .radio label, input[type="radio"] label,
+  .checkbox label, input[type="checkbox"] label {
     padding-left: 1.25rem;
     margin-bottom: 0;
     font-weight: normal;
     cursor: pointer; }
-    .radio label input:only-child,
-    .checkbox label input:only-child {
+    .radio label input:only-child, input[type="radio"] label input:only-child,
+    .checkbox label input:only-child, input[type="checkbox"] label input:only-child {
       position: static; }
 
-.radio input[type="radio"],
+.radio input[type="radio"], input[type="radio"] input[type="radio"],
 .radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
+.checkbox input[type="checkbox"], input[type="checkbox"] input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   position: absolute;
   margin-top: .25rem;
   margin-left: -1.25rem; }
 
-.radio + .radio,
-.checkbox + .checkbox {
+.radio + .radio, input[type="radio"] + .radio, .radio + input[type="radio"], input[type="radio"] + input[type="radio"],
+.checkbox + .checkbox, input[type="checkbox"] + .checkbox,
+.checkbox + input[type="checkbox"], input[type="checkbox"] + input[type="checkbox"] {
   margin-top: -.25rem; }
 
 .radio-inline,
@@ -1598,8 +1600,8 @@ input[type="checkbox"].disabled {
 .checkbox-inline.disabled {
   cursor: not-allowed; }
 
-.radio.disabled label,
-.checkbox.disabled label {
+.radio.disabled label, input.disabled[type="radio"] label,
+.checkbox.disabled label, input.disabled[type="checkbox"] label {
   cursor: not-allowed; }
 
 .form-control-success,
@@ -1613,11 +1615,13 @@ input[type="checkbox"].disabled {
 .has-success .text-help,
 .has-success .form-control-label,
 .has-success .radio,
+.has-success input[type="radio"],
 .has-success .checkbox,
+.has-success input[type="checkbox"],
 .has-success .radio-inline,
 .has-success .checkbox-inline,
-.has-success.radio label,
-.has-success.checkbox label,
+.has-success.radio label, input.has-success[type="radio"] label,
+.has-success.checkbox label, input.has-success[type="checkbox"] label,
 .has-success.radio-inline label,
 .has-success.checkbox-inline label {
   color: #42A084; }
@@ -1640,11 +1644,13 @@ select {
 .has-warning .text-help,
 .has-warning .form-control-label,
 .has-warning .radio,
+.has-warning input[type="radio"],
 .has-warning .checkbox,
+.has-warning input[type="checkbox"],
 .has-warning .radio-inline,
 .has-warning .checkbox-inline,
-.has-warning.radio label,
-.has-warning.checkbox label,
+.has-warning.radio label, input.has-warning[type="radio"] label,
+.has-warning.checkbox label, input.has-warning[type="checkbox"] label,
 .has-warning.radio-inline label,
 .has-warning.checkbox-inline label {
   color: #BB992F; }
@@ -1667,11 +1673,13 @@ select {
 .has-danger .text-help,
 .has-danger .form-control-label,
 .has-danger .radio,
+.has-danger input[type="radio"],
 .has-danger .checkbox,
+.has-danger input[type="checkbox"],
 .has-danger .radio-inline,
 .has-danger .checkbox-inline,
-.has-danger.radio label,
-.has-danger.checkbox label,
+.has-danger.radio label, input.has-danger[type="radio"] label,
+.has-danger.checkbox label, input.has-danger[type="checkbox"] label,
 .has-danger.radio-inline label,
 .has-danger.checkbox-inline label {
   color: #EB5E28; }
@@ -1860,22 +1868,31 @@ select {
     margin-bottom: 0;
     vertical-align: middle; }
   .form-inline .radio, form .radio, fieldset .radio, .main-content.index #join-room fieldset .radio,
-  .main-content.index #create-room fieldset .radio,
+  .main-content.index #create-room fieldset .radio, .form-inline input[type="radio"], form input[type="radio"], fieldset input[type="radio"], .main-content.index #join-room fieldset input[type="radio"],
+  .main-content.index #create-room fieldset input[type="radio"],
   .form-inline .checkbox, form .checkbox, fieldset .checkbox, .main-content.index #join-room fieldset .checkbox,
-  .main-content.index #create-room fieldset .checkbox {
+  .main-content.index #create-room fieldset .checkbox,
+  .form-inline input[type="checkbox"], form input[type="checkbox"], fieldset input[type="checkbox"], .main-content.index #join-room fieldset input[type="checkbox"],
+  .main-content.index #create-room fieldset input[type="checkbox"] {
     display: inline-block;
     margin-top: 0;
     margin-bottom: 0;
     vertical-align: middle; }
     .form-inline .radio label, form .radio label, fieldset .radio label, .main-content.index #join-room fieldset .radio label,
-    .main-content.index #create-room fieldset .radio label,
+    .main-content.index #create-room fieldset .radio label, .form-inline input[type="radio"] label, form input[type="radio"] label, fieldset input[type="radio"] label, .main-content.index #join-room fieldset input[type="radio"] label,
+    .main-content.index #create-room fieldset input[type="radio"] label,
     .form-inline .checkbox label, form .checkbox label, fieldset .checkbox label, .main-content.index #join-room fieldset .checkbox label,
-    .main-content.index #create-room fieldset .checkbox label {
+    .main-content.index #create-room fieldset .checkbox label,
+    .form-inline input[type="checkbox"] label, form input[type="checkbox"] label, fieldset input[type="checkbox"] label, .main-content.index #join-room fieldset input[type="checkbox"] label,
+    .main-content.index #create-room fieldset input[type="checkbox"] label {
       padding-left: 0; }
   .form-inline .radio input[type="radio"], form .radio input[type="radio"], fieldset .radio input[type="radio"], .main-content.index #join-room fieldset .radio input[type="radio"],
-  .main-content.index #create-room fieldset .radio input[type="radio"],
+  .main-content.index #create-room fieldset .radio input[type="radio"], .form-inline input[type="radio"] input[type="radio"], form input[type="radio"] input[type="radio"], fieldset input[type="radio"] input[type="radio"], .main-content.index #join-room fieldset input[type="radio"] input[type="radio"],
+  .main-content.index #create-room fieldset input[type="radio"] input[type="radio"],
   .form-inline .checkbox input[type="checkbox"], form .checkbox input[type="checkbox"], fieldset .checkbox input[type="checkbox"], .main-content.index #join-room fieldset .checkbox input[type="checkbox"],
-  .main-content.index #create-room fieldset .checkbox input[type="checkbox"] {
+  .main-content.index #create-room fieldset .checkbox input[type="checkbox"],
+  .form-inline input[type="checkbox"] input[type="checkbox"], form input[type="checkbox"] input[type="checkbox"], fieldset input[type="checkbox"] input[type="checkbox"], .main-content.index #join-room fieldset input[type="checkbox"] input[type="checkbox"],
+  .main-content.index #create-room fieldset input[type="checkbox"] input[type="checkbox"] {
     position: relative;
     margin-left: 0; }
   .form-inline .has-feedback .form-control-feedback, form .has-feedback .form-control-feedback, fieldset .has-feedback .form-control-feedback, .main-content.index #join-room fieldset .has-feedback .form-control-feedback,
@@ -6191,6 +6208,23 @@ label {
 .main-content.index #join-room #room-number-button,
 .main-content.index #create-room #room-number-button {
   margin-top: .5em; }
+
+.main-content.index #join-room label,
+.main-content.index #create-room label {
+  display: block; }
+
+.main-content.index #join-room label[for="roomnumber"],
+.main-content.index #create-room label[for="roomnumber"] {
+  margin-bottom: 0; }
+
+.main-content.index #join-room label[for="moderation-option"],
+.main-content.index #create-room label[for="moderation-option"] {
+  margin-top: .5em;
+  clear: both; }
+
+.main-content.index #join-room label[for="private-option"],
+.main-content.index #create-room label[for="private-option"] {
+  display: none; }
 
 .main-content.room header {
   margin-bottom: 1em; }
