@@ -5966,6 +5966,9 @@ button a {
 .cursor-grabbling {
   cursor: grabbing; }
 
+button.accordion {
+  float: right !important; }
+
 label {
   font-weight: bold;
   color: #3091B2; }

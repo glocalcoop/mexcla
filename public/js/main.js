@@ -130,7 +130,7 @@ Models.callOnAjax = function(roomId, personCalledOnId) {
 Models.callOffAjax = function(roomId, personCalledOnId) {
   return $.ajax({
     type: 'POST',
-    url: '/room/id/' + roomId + '/callon',
+    url: '/room/id/' + roomId + '/calloff',
     data: {
       _id: personCalledOnId
     }
@@ -451,10 +451,16 @@ Views.createUserAjax = function (username, lang) {
   });
 };
 
-Views.createRoomAjax = function() {
+/**
+ * Create Room Ajax Call
+ * @param {boolean}
+ * @returns {jqXHR} 
+ */
+Views.createRoomAjax = function(moderated) {
   return $.ajax({
     type: 'GET',
-    url: '/room/create'
+    url: '/room/create',
+    data: {'moderated': moderated}
   });
 };
 
@@ -505,15 +511,16 @@ Views.isCalledOn = function(userId) {
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
-  render: function(afterwards) {
+  /**
+   * @param {function} afterwards - callback to be executed after user is created.
+   */
+render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
       var lang = $('#register-modal  #lang-select').val();
       Views.createUserAjax(username, lang).done(function(user){
         app.user.set(user);
-        // $('#register-modal').modal('hide') -> doesn't appear to work.
-        // the focus is messed up...i'll just deal with it later and do this...
         $('#register-modal').hide();
         afterwards();
       });
@@ -542,10 +549,14 @@ Views.IndexView = Backbone.View.extend({
     this.welcomeText();
     this.brandingText();
     this.$('#create-new-room-button').click(function(e){
+      var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
-        that.createRoom();
+        that.createRoom(moderationChecked);
       } else {
-        new Views.RegisterModal().render(that.createRoom);
+        var wrappedCreateRoom = _.wrap(that.createRoom, function(func){
+          func(moderationChecked);
+        });
+        new Views.RegisterModal().render(wrappedCreateRoom);
       }
     });
     this.$('#room-number-button').click(function(e){
@@ -567,8 +578,8 @@ Views.IndexView = Backbone.View.extend({
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
-  createRoom: function() {
-    Views.createRoomAjax().done(function(room){
+  createRoom: function(moderated) {
+    Views.createRoomAjax(moderated).done(function(room){
       app.room = new Models.Room(room);
       app.router.navigate('room/' + room.roomnum, {trigger: true});
     }); 
@@ -1087,39 +1098,62 @@ var MexclaRouter = Backbone.Router.extend({
     "room/:roomnum": "room",
     "*page": "default"
   },
-
   index: function() {
-    this.syncUser();
+   this.syncUser();
     // log in to homepage
     app.homepage = new Views.IndexView();
   },
   room: function(roomnum) {
     this.syncUser();
-    if (_.isUndefined(app.room)) {
-      app.room = new Models.Room({roomnum: roomnum}).fetchByNum();
+    var roomNumAsInt = parseInt(roomnum, 10);
+    if (!this.isLoggedIn()) {
+      var wrappedGoToRoom = _.wrap(this.goToRoom, function(func){
+        func(roomNumAsInt);
+      });
+      new Views.RegisterModal().render(wrappedGoToRoom);
+    } else {
+      this.goToRoom(roomNumAsInt);
     }
-    app.roomView = new Views.Room({model: app.room}).render();
   },
   default: function() {
     // this route will be executed if no other route is matched.
   },
+  goToRoom: function(roomNumAsInt) {
+    if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
+      app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
+    }
+    app.roomView = new Views.Room({model: app.room}).render();
+  },
+  // Handles creation of Model.User for a few different scenarios:
+  // - If user is not logged in, it sets app.user to be an empty user model.
+  // - If the user is logged in, but the user model has not been created, it provides the user model with the ID of the user and fetches the details from the server.
+  // If there is a language cookie it updates the user model accordingly.
   syncUser: function() {
-    // if user is undefined, which would happen when someone returns to the page and has a cookie stored, then it's a new session and we need to create the user object.
+    var lang = Cookies.get('lang');
+    if (!app.user) {
+      app.user = new Models.User();
+    }
+    if (this.isLoggedIn() && _.isUndefined(app.user.get('_id'))) {
       var userid = Cookies.get('id');
-      var lang = Cookies.get('lang');
-      if (!_.isUndefined(userid)) {
-        // set user
-        app.user.set('_id', userid);
-        if (!_.isUndefined(lang)) {
-          app.user.set('lang', lang);
-        }
-        app.user.fetch();
-      }
+      app.user.set('_id', userid);
+      app.user.fetch();
+    }
+    this.setUserLang();
+  },
+  isLoggedIn: function() {
+    return !_.isUndefined(Cookies.get('id'));
+  },
+  setUserLang: function() {
+    var lang = Cookies.get('lang');
+    if (!_.isUndefined(lang)) {
+      app.user.set('lang', lang);
+    }
   }
 });
 
 app.router = new MexclaRouter();
-app.user = new Models.User();
+// app.user = new Models.User();
+app.user = null;
 
 Backbone.history.start(); // must call this to start router
 

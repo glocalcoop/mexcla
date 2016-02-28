@@ -59,3 +59,7 @@ button {
 .cursor-grabbling {
     cursor: grabbing;
 }
+
+button.accordion {
+    @include pull-right;
+}

@@ -14,10 +14,16 @@ Views.createUserAjax = function (username, lang) {
   });
 };
 
-Views.createRoomAjax = function() {
+/**
+ * Create Room Ajax Call
+ * @param {boolean}
+ * @returns {jqXHR} 
+ */
+Views.createRoomAjax = function(moderated) {
   return $.ajax({
     type: 'GET',
-    url: '/room/create'
+    url: '/room/create',
+    data: {'moderated': moderated}
   });
 };
 
@@ -68,15 +74,16 @@ Views.isCalledOn = function(userId) {
 Views.RegisterModal = Backbone.View.extend({
   initialize: function() {
   },
-  render: function(afterwards) {
+  /**
+   * @param {function} afterwards - callback to be executed after user is created.
+   */
+render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
       var lang = $('#register-modal  #lang-select').val();
       Views.createUserAjax(username, lang).done(function(user){
         app.user.set(user);
-        // $('#register-modal').modal('hide') -> doesn't appear to work.
-        // the focus is messed up...i'll just deal with it later and do this...
         $('#register-modal').hide();
         afterwards();
       });
@@ -105,10 +112,14 @@ Views.IndexView = Backbone.View.extend({
     this.welcomeText();
     this.brandingText();
     this.$('#create-new-room-button').click(function(e){
+      var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
-        that.createRoom();
+        that.createRoom(moderationChecked);
       } else {
-        new Views.RegisterModal().render(that.createRoom);
+        var wrappedCreateRoom = _.wrap(that.createRoom, function(func){
+          func(moderationChecked);
+        });
+        new Views.RegisterModal().render(wrappedCreateRoom);
       }
     });
     this.$('#room-number-button').click(function(e){
@@ -130,8 +141,8 @@ Views.IndexView = Backbone.View.extend({
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
-  createRoom: function() {
-    Views.createRoomAjax().done(function(room){
+  createRoom: function(moderated) {
+    Views.createRoomAjax(moderated).done(function(room){
       app.room = new Models.Room(room);
       app.router.navigate('room/' + room.roomnum, {trigger: true});
     }); 
