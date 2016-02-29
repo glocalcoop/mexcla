@@ -189,6 +189,7 @@ Models.Room = Backbone.Model.extend({
   urlRoot: "/room/id",
   initialize: function() {
     this.establishSocket();
+    Models.util.audio.init();
   }, 
   fetchByNum: function() {
     var that = this;
@@ -302,7 +303,7 @@ Models.Room = Backbone.Model.extend({
     this.socket.on('room update', function(room){
       that.set(room);
     });
-  }
+  },
 });
 
 Models.Language = Backbone.Model.extend({});
@@ -325,6 +326,10 @@ Models.util.audio.dtmf = function (cur_call, key) {
     return false;
   }
 };
+
+Models.util.audio.init = function(){
+    app.audio = new Models.Audio();
+}
 
 
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
