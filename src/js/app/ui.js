@@ -17,17 +17,6 @@ $(function() {
      
     });
 
-    /**
-     * Page Language
-     * Switch language when language switched
-     */
-    $('#language-links a').click(function(event) {
-
-        event.preventDefault();
-        $('html')[0].lang = $(this).data('lang');
-
-    });
-
 
     /**
      * Room Link
@@ -45,25 +34,6 @@ $(function() {
 
     });
 
-    /**
-     * Channel Controls
-     * Toggle Channel Controls
-     */
-    $('#channels').on('click', 'button.join', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.leave').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
-
-    $('#channels').on('click', 'button.leave', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.join').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
 
     /**
      * Collaboration
@@ -107,15 +77,3 @@ $(function() {
 
 });
 
-
-/**
- * Collaboration Functions
- */
-
- // var roomnum = app.room.attributes._id;
-
- // var collabTools = {
- //    notepad: 'https://pad.riseup.net/p/' + roomnum + '?showChat=false',
- //    spreadsheet: 'https://calc.mayfirst.org/' + roomnum, 
- //    chat: 'https://irc.koumbit.net/?channels=#' + roomnum + '&nick=guest'
- // }

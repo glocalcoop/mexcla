@@ -1166,7 +1166,7 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
      * Only display users that aren't moderators
      */
     _.each(users, function(user){
-       if(!Views.isModerator(user._id)) {
+       if(!Views.isModerator(app.user.id)) {
          that.$el.append(that.template(user));
        }
     });
@@ -1261,17 +1261,6 @@ $(function() {
      
     });
 
-    /**
-     * Page Language
-     * Switch language when language switched
-     */
-    $('#language-links a').click(function(event) {
-
-        event.preventDefault();
-        $('html')[0].lang = $(this).data('lang');
-
-    });
-
 
     /**
      * Room Link
@@ -1289,25 +1278,6 @@ $(function() {
 
     });
 
-    /**
-     * Channel Controls
-     * Toggle Channel Controls
-     */
-    $('#channels').on('click', 'button.join', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.leave').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
-
-    $('#channels').on('click', 'button.leave', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.join').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
 
     /**
      * Collaboration
