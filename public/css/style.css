@@ -6009,6 +6009,12 @@ label {
     background-color: #427C89;
     border-color: #427C89; }
 
+#participant-list li.current-user,
+#channel-list li.current-user,
+#chat-list li.current-user {
+  font-weight: bold;
+  font-style: italic; }
+
 #participant-list footer,
 #channel-list footer,
 #chat-list footer {

@@ -11,7 +11,6 @@ var config = {
   password: 'public',
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
-
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -548,6 +547,7 @@ Views.IndexView = Backbone.View.extend({
     this.$el.html(this.template(websiteText[this.lang]));
     this.welcomeText();
     this.brandingText();
+    this.switchLang();
     this.$('#create-new-room-button').click(function(e){
       var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
@@ -563,7 +563,7 @@ Views.IndexView = Backbone.View.extend({
       if (Views.isThereAUser()) {
         /**
          * JoinRoom()() is not a typo
-         * JoinRoom @returns a (function)
+         * JoinRoom @returns a {function}
          */
         that.JoinRoom()();
       } else {
@@ -577,6 +577,16 @@ Views.IndexView = Backbone.View.extend({
      * Fallback to English if lang is missing
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
+    console.log(this.lang);
+  },
+  switchLang: function() {
+    $('#language-links a').click(function(event) {
+      event.preventDefault();
+      // console.log();
+      app.user.attributes.lang = $(this).data('lang');
+      console.log(app.user.attributes.lang);
+      // Views.IndexView.setLang();
+    });
   },
   createRoom: function(moderated) {
     Views.createRoomAjax(moderated).done(function(room){
@@ -1171,7 +1181,6 @@ var MexclaRouter = Backbone.Router.extend({
 
 app.router = new MexclaRouter();
 // app.user = new Models.User();
-app.audio = null;
 app.user = null;
 
 Backbone.history.start(); // must call this to start router
