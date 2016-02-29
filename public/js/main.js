@@ -480,10 +480,35 @@ Views.isCurrentUser = function(userId) {
 }
 
 Views.isInAChannel = function(userId) {
-    return  _.chain(app.room.get('channels'))
-      .map(function(user){return user._id; })
-      .contains(userId)
-      .value();
+  return  _.chain(app.room.get('channels'))
+    .map(function(user){return user._id; })
+    .contains(userId)
+    .value();
+}
+
+Views.hasChannelInterpreter = function(channelId) {
+  var channel = _.findWhere(app.room.get('channels'), {
+    _id: channelId
+  });
+  return channel.interpreter !== 'none';
+}
+
+Views.isChannelInterpreter = function(channelId, userId) {
+  return _.findWhere(app.room.get('channels'), {
+    _id: channelId, 
+    interpreter: userId
+  });
+}
+
+Views.isInChannel = function(channelId, userId) {
+  var channel = _.findWhere(app.room.get('channels'), {
+    _id: channelId
+  });
+  if (_.isUndefined(channel.users)) {
+    return false;
+  } else {
+    return _.contains(channel.users, userId);
+  }
 }
 
 Views.isInQueue = function(userId) {
@@ -501,19 +526,18 @@ Views.isCalledOn = function(userId) {
   } else {
     return whoIsCalledOn._id == userId;
   }
-};
+}
 
 
 /**
  * Register
  */
 Views.RegisterModal = Backbone.View.extend({
-  initialize: function() {
-  },
+  initialize: function() {},
   /**
    * @param {function} afterwards - callback to be executed after user is created.
    */
-render: function(afterwards) {
+  render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
@@ -545,9 +569,9 @@ Views.IndexView = Backbone.View.extend({
   render: function () {
     var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
+    this.switchLang();
     this.welcomeText();
     this.brandingText();
-    this.switchLang();
     this.$('#create-new-room-button').click(function(e){
       var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
@@ -579,9 +603,8 @@ Views.IndexView = Backbone.View.extend({
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
   switchLang: function() {
-    $('#language-links a').click(function(event) {
-      event.preventDefault();
-      app.user.attributes.lang = $(this).data('lang');
+    $('#language-links').on('click', 'a', function(event) {
+      app.user.set('lang', $(this).data('lang'));
     });
   },
   createRoom: function(moderated) {
@@ -786,7 +809,6 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
-    //$(channelsEl).html('');
 
     if (!_.isEmpty(channels)) {
       _.each(channels, function(channel){
@@ -899,27 +921,28 @@ Views.ConnectAudio = Backbone.View.extend({
   initialize: function(userId) {
     this.render(userId);
   },
-  render: function(userId) {
-    this.connectAudio(userId);
-    this.connectingAudio(userId);
-    this.disconnectAudio(userId);
+  render: function() {
+    this.connectAudio();
+    this.connectedAudio();
+    this.disconnectAudio();
   },
-  connectAudio: function(userId) {
-    $('#connect-button.connect').click(function(event) {
-      var connect = new Models.Audio();
-      connect.login();
-      // Once logged in
-      connect.call_init();
-      $(this).removeClass('connect').addClass('disconnect');
-    });
+   connectAudio: function() {
+    var that = this;
     /**
      * Conditions: user is registered, in room and not connected
      * On click:
      *   Audio connection should be initiated
      *   Connect button should be replaced by Connecting button
      */
+    $('#connect-button.connect').click(function() {
+      // app.audio.login();
+      // app.audio.call_init();
+      $(this).removeClass('connect');
+      $(this).addClass('connecting');
+      $('#connect-button').text(websiteText[app.user.attributes.lang].connecting);
+    });
   },
-  connectingAudio: function(userId) {
+  connectedAudio: function() {
     /**
      * Need to know when connection is complete
      * Can we check?
@@ -932,12 +955,13 @@ Views.ConnectAudio = Backbone.View.extend({
      *   User should be connected to audio
      *   Connecting button should be replaced by Disconnect button
      */
+      $(this).removeClass('connecting');
+      $(this).addClass('connected');
+      $('#connect-button.connected').text(websiteText[app.user.attributes.lang].connecting);
+
   },
-  disconnectAudio: function(userId) {
-    $('#connect-button.disconnect').click(function(event) {
-      connect.hangup();
-      $(this).removeClass('disconnect').addClass('connect');
-    });
+  disconnectAudio: function() {
+    var that = this;
     /**
      * Conditions: user is connected to audio
      * On click:
@@ -945,6 +969,12 @@ Views.ConnectAudio = Backbone.View.extend({
      * On disconnection:
      *   Disconnect button should be replaced by Connect button
      */
+    $('#connect-button.connected').click(function() {
+      // app.audio.hangup();
+      $(this).removeClass('connected');
+      $(this).addClass('connect');
+      $('#connect-button.connect').text(websiteText[app.user.attributes.lang].connect);
+    });
   }
 });
 
@@ -972,61 +1002,92 @@ Views.Channel = Backbone.View.extend({
     return this;
   },
   renderControls: function(data) {
+    if(!Views.hasChannelInterpreter(data.data._id)) {
+      this.becomeInterpreter(data);
+    }
+
+    if(!Views.isInChannel(data.data._id, app.user.id)) {
+      this.joinChannel(data);
+    }
+
+    if(Views.isInChannel(data.data._id, app.user.id)) {
+      this.leaveChannel(data);
+    }
+    return this;
+  },
+  becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
-    var joinControlsEl = $('.join-controls');
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
+    $('#interpret-controls.interpret').click(function() {
+
+    });
+  },
+  joinChannel: function(data) {
+    var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
+    $('#interpret-controls.join').click(function() {
+      console.log($(this));
+      // Models.RoomaddUserToChannel();
+    });
+  },
+  leaveChannel: function(data) {
+    var leaveControlsEl = $('.leave-controls');
+    new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
+    $('#interpret-controls.leave').click(function() {
+
+    });
   }
 });
 
-
+/**
+ * Conditions: no interpreter assigned to channel and 
+ * user isn't moderator
+ * On click:
+ *   User should be added to channel users
+ *   User should be added as moderator
+ *   Interpret button should disappear
+ */
 Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   },
-  renderInterpret: function(data) {
-    /**
-     * Conditions: no interpreter assigned to channel and 
-     * user isn't moderator
-     * On click:
-     *   User should be added to channel users
-     *   User should be added as moderator
-     *   Interpret button should disappear
-     */
-  },
-  renderJoin: function(data) {
-    /**
-     * Conditions: user isn't in channel and user isn't moderator
-     * On click:
-     *   User should be added to channel users
-     *   Join button should disappear
-     *   Leave button should appear
-     */
-  },
-  renderLeave: function(data) {
-    /**
-     * Conditions: user is in channel
-     * On click:
-     *   Condition: User is moderator
-     *      User should be removed as moderator
-     *      User should be removed from channel users
-     *      Leave button should disappear
-     *      Join button should appear
-     *   Condition: User is not moderator
-     *      User should be removed from channel users
-     *      Leave button should disappear
-     *      Join button should appear
-     */
-  }
 });
 
+/**
+ * Conditions: user isn't in channel and user isn't moderator
+ * On click:
+ *   User should be added to channel users
+ *   Join button should disappear
+ *   Leave button should appear
+ */
 Views.ChannelJoinControls = Backbone.View.extend({
   template: _.template($('#join-channel-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   }
 });
+
+/**
+ * Conditions: user is in channel
+ * On click:
+ *   Condition: User is moderator
+ *      User should be removed as moderator
+ *      User should be removed from channel users
+ *      Leave button should disappear
+ *      Join button should appear
+ *   Condition: User is not moderator
+ *      User should be removed from channel users
+ *      Leave button should disappear
+ *      Join button should appear
+ */
+Views.ChannelLeaveControls = Backbone.View.extend({
+  template: _.template($('#leave-channel-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  }
+});
+
 
 
 // TODO: turn channel html into template
@@ -1290,15 +1351,3 @@ $(function() {
 
 });
 
-
-/**
- * Collaboration Functions
- */
-
- // var roomnum = app.room.attributes._id;
-
- // var collabTools = {
- //    notepad: 'https://pad.riseup.net/p/' + roomnum + '?showChat=false',
- //    spreadsheet: 'https://calc.mayfirst.org/' + roomnum, 
- //    chat: 'https://irc.koumbit.net/?channels=#' + roomnum + '&nick=guest'
- // }
