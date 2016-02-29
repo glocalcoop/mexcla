@@ -11,6 +11,7 @@ var config = {
   password: 'public',
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -189,7 +190,6 @@ Models.Room = Backbone.Model.extend({
   urlRoot: "/room/id",
   initialize: function() {
     this.establishSocket();
-    Models.util.audio.init();
   }, 
   fetchByNum: function() {
     var that = this;
@@ -326,11 +326,6 @@ Models.util.audio.dtmf = function (cur_call, key) {
     return false;
   }
 };
-
-Models.util.audio.init = function(){
-    app.audio = new Models.Audio();
-}
-
 
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
@@ -1142,6 +1137,9 @@ var MexclaRouter = Backbone.Router.extend({
     if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
       app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
     }
+    if (!app.audio) {
+      app.audio = new Models.Audio();
+    }
     app.roomView = new Views.Room({model: app.room}).render();
   },
   // Handles creation of Model.User for a few different scenarios:
@@ -1173,7 +1171,7 @@ var MexclaRouter = Backbone.Router.extend({
 
 app.router = new MexclaRouter();
 // app.user = new Models.User();
-app.audio = new Models.Audio();
+app.audio = null;
 app.user = null;
 
 Backbone.history.start(); // must call this to start router
