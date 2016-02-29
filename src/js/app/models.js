@@ -75,7 +75,10 @@ Models.User = Backbone.Model.extend({
     });
   },
   callOff: function(personCalledOnId) {
-
+    var roomId = app.room.get('_id');
+    Models.callOffAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
   }
 });
 
@@ -118,7 +121,9 @@ Models.Room = Backbone.Model.extend({
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        channel.users.push(userId);
+        if(!_.contains(channel, userId)) {
+          channel.users.push(userId);
+        }
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
@@ -307,8 +312,10 @@ Models.Audio = Backbone.Model.extend({
     };
     this.set('verto_call_callbacks', verto_call_callbacks);
   },
-  // input: "main", "hear", "interpret"
-  // output: false or self
+  /**
+   * input: "main", "hear", "interpret"
+   * output: false or self
+   */
   switchChannel: function(option) {
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
@@ -322,6 +329,25 @@ Models.Audio = Backbone.Model.extend({
       Models.util.audio.dtmf(this.cur_call, '2');
     } else {
       console.error('Switch Channel takes these options: "main", "hear", "interpret"');
+      return false;
+    }
+    return this;
+  },
+  /**
+   * @param "mute", "unmute"
+   * @return false or self
+   */
+  muteAudio: function(option) {
+    if (!this.cur_call) {
+      console.error('You must start a call before you mute yourself.');
+      return false;
+    }
+    if (option === 'mute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else if (option === 'unmute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else {
+      console.error('Mute user takes these options: "mute", "unmute"');
       return false;
     }
     return this;

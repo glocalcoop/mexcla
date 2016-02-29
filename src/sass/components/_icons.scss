@@ -99,7 +99,7 @@
         .icon {
             @extend %fa-microphone;
         }
-        &.on {
+        &.muted {
             @extend .btn-disabled;
             .icon {
                 @extend %fa-microphone-slash;

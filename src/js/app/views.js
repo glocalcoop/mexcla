@@ -167,7 +167,8 @@ Views.IndexView = Backbone.View.extend({
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
   },
   switchLang: function() {
-    $('#language-links').on('click', 'a', function(event) {
+    $('#language-links a').click(function(event) {
+      event.preventDefault();
       app.user.set('lang', $(this).data('lang'));
     });
   },
@@ -278,7 +279,13 @@ Views.Room = Backbone.View.extend({
     if (!_.isUndefined(app.user)) {
       new Views.BrandingText({model: app.user});
     }
-  }
+  },
+  switchLang: function() {
+    $('#language-links').on('click', 'a', function(event) {
+      event.preventDefault();
+      app.user.set('lang', $(this).data('lang'));
+    });
+  },
 
 });
 
@@ -345,8 +352,8 @@ Views.RoomSidebar = Backbone.View.extend({
         // If room is moderated
         if( app.room.attributes.isModerated ) {
           new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-          new Views.MuteControls({ el: muteControlsEl }).render(user._id);
         }
+        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
       
       // If room is moderated
@@ -460,18 +467,25 @@ Views.MuteControls = Backbone.View.extend({
   template: _.template($('#mute-controls-template').html()),
   render: function(userId) {
     this.$el.html(this.template({}));
-    this.muteOnUser(userId);
-    this.muteOffUser(userId);
+    // this.muteOnUser(userId);
+    this.muteToggle(userId);
   },
-  muteOnUser: function(userId) {
-    $('#' + userId + ' .mute:not(.on)').click(function(event) {
-      app.user.muteOn(userId);
-    });
-  },
-  muteOffUser: function(userId) {
-    $('#' + userId + ' .mute.on').click(function(event) {
-      console.log($(this));
-    });
+  muteToggle: function(userId) {
+    if(true === app.user.attributes.isMuted) {
+      $('#' + userId + ' .mute').click(function(event) {
+        event.preventDefault();
+        $(this).toggleClass('muted');
+        app.user.set('isMuted', false);
+        app.audio.muteAudio('unmute');
+      });
+    } else if (false === app.user.attributes.isMuted) {
+      $('#' + userId + ' .mute').click(function(event) {
+        event.preventDefault();
+        $(this).toggleClass('muted');
+        app.user.set('isMuted', true);
+        app.audio.muteAudio('mute');
+      });
+    }
   }
 
 });
@@ -487,7 +501,7 @@ Views.ConnectAudio = Backbone.View.extend({
   },
   render: function() {
     this.connectAudio();
-    this.connectedAudio();
+    this.connectingAudio();
     this.disconnectAudio();
   },
    connectAudio: function() {
@@ -506,7 +520,7 @@ Views.ConnectAudio = Backbone.View.extend({
       $('#connect-button').text(websiteText[app.user.attributes.lang].connecting);
     });
   },
-  connectedAudio: function() {
+  connectingAudio: function() {
     /**
      * Need to know when connection is complete
      * Can we check?
@@ -582,23 +596,25 @@ Views.Channel = Backbone.View.extend({
   becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
-    $('#interpret-controls.interpret').click(function() {
-
+    $('#channels .interpret').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
   },
   joinChannel: function(data) {
     var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
-    $('#interpret-controls.join').click(function() {
-      console.log($(this));
-      // Models.RoomaddUserToChannel();
+    $('#channels .join').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
   },
   leaveChannel: function(data) {
     var leaveControlsEl = $('.leave-controls');
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
-    $('#interpret-controls.leave').click(function() {
-
+    $('#channels .leave').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.removeUserFromChannel(data.data._id, app.user.id);
     });
   }
 });
@@ -696,7 +712,8 @@ Views.AddChannelModal = Backbone.View.extend({
       app.room.createChannel({
         'name': name,
         'lang': lang, 
-        'interpreter': interpreter
+        'interpreter': interpreter,
+        'users': [app.user.id]
       });
     });
   }

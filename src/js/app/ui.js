@@ -28,11 +28,11 @@ $(function() {
      * Participants
      * Toggle `on` class when participant controls are clicked
      */
-    $('#participants').on('click', 'button', function(event) {
+    // $('#participants').on('click', 'button', function(event) {
 
-        $(this).toggleClass('on');
+    //     $(this).toggleClass('on');
 
-    });
+    // });
 
 
     /**
