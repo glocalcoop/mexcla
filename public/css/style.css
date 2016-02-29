@@ -5796,11 +5796,11 @@ h3 {
 #chat-list .controls .mute button.accordion:before {
   content: ""; }
 
-.controls .mute.on .icon:before, .controls .mute.on #participant-list button.accordion:before, #participant-list .controls .mute.on button.accordion:before, .controls .mute.on
+.controls .mute.muted .icon:before, .controls .mute.muted #participant-list button.accordion:before, #participant-list .controls .mute.muted button.accordion:before, .controls .mute.muted
 #channel-list button.accordion:before,
-#channel-list .controls .mute.on button.accordion:before, .controls .mute.on
+#channel-list .controls .mute.muted button.accordion:before, .controls .mute.muted
 #chat-list button.accordion:before,
-#chat-list .controls .mute.on button.accordion:before {
+#chat-list .controls .mute.muted button.accordion:before {
   content: ""; }
 
 .source .icon:before, .source #participant-list button.accordion:before, #participant-list .source button.accordion:before, .source
@@ -5901,47 +5901,47 @@ aside:last-child {
   margin-top: .5em;
   margin-bottom: .5em; }
 
-.btn-disabled, .controls .mute.on, .controls .raise-hand.on, .controls .call-on.on {
+.btn-disabled, .controls .mute.muted, .controls .raise-hand.on, .controls .call-on.on {
   color: #fff;
   background-color: #BCC1C3;
   border-color: #BCC1C3; }
-  .btn-disabled:hover, .controls .mute.on:hover, .controls .raise-hand.on:hover, .controls .call-on.on:hover {
+  .btn-disabled:hover, .controls .mute.muted:hover, .controls .raise-hand.on:hover, .controls .call-on.on:hover {
     color: #fff;
     background-color: #a1a8ab;
     border-color: #9ca3a6; }
-  .btn-disabled:focus, .controls .mute.on:focus, .controls .raise-hand.on:focus, .controls .call-on.on:focus, .btn-disabled.focus, .controls .focus.mute.on, .controls .focus.raise-hand.on, .controls .focus.call-on.on {
+  .btn-disabled:focus, .controls .mute.muted:focus, .controls .raise-hand.on:focus, .controls .call-on.on:focus, .btn-disabled.focus, .controls .focus.mute.muted, .controls .focus.raise-hand.on, .controls .focus.call-on.on {
     color: #fff;
     background-color: #a1a8ab;
     border-color: #9ca3a6; }
-  .btn-disabled:active, .controls .mute.on:active, .controls .raise-hand.on:active, .controls .call-on.on:active, .btn-disabled.active, .controls .active.mute.on, .controls .active.raise-hand.on, .controls .active.call-on.on,
+  .btn-disabled:active, .controls .mute.muted:active, .controls .raise-hand.on:active, .controls .call-on.on:active, .btn-disabled.active, .controls .active.mute.muted, .controls .active.raise-hand.on, .controls .active.call-on.on,
   .open > .btn-disabled.dropdown-toggle, .controls
-  .open > .dropdown-toggle.mute.on, .controls
+  .open > .dropdown-toggle.mute.muted, .controls
   .open > .dropdown-toggle.raise-hand.on, .controls
   .open > .dropdown-toggle.call-on.on {
     color: #fff;
     background-color: #a1a8ab;
     border-color: #9ca3a6;
     background-image: none; }
-    .btn-disabled:active:hover, .controls .mute.on:active:hover, .controls .raise-hand.on:active:hover, .controls .call-on.on:active:hover, .btn-disabled:active:focus, .controls .mute.on:active:focus, .controls .raise-hand.on:active:focus, .controls .call-on.on:active:focus, .btn-disabled:active.focus, .controls .mute.on:active.focus, .controls .raise-hand.on:active.focus, .controls .call-on.on:active.focus, .btn-disabled.active:hover, .controls .active.mute.on:hover, .controls .active.raise-hand.on:hover, .controls .active.call-on.on:hover, .btn-disabled.active:focus, .controls .active.mute.on:focus, .controls .active.raise-hand.on:focus, .controls .active.call-on.on:focus, .btn-disabled.active.focus, .controls .active.focus.mute.on, .controls .active.focus.raise-hand.on, .controls .active.focus.call-on.on,
+    .btn-disabled:active:hover, .controls .mute.muted:active:hover, .controls .raise-hand.on:active:hover, .controls .call-on.on:active:hover, .btn-disabled:active:focus, .controls .mute.muted:active:focus, .controls .raise-hand.on:active:focus, .controls .call-on.on:active:focus, .btn-disabled:active.focus, .controls .mute.muted:active.focus, .controls .raise-hand.on:active.focus, .controls .call-on.on:active.focus, .btn-disabled.active:hover, .controls .active.mute.muted:hover, .controls .active.raise-hand.on:hover, .controls .active.call-on.on:hover, .btn-disabled.active:focus, .controls .active.mute.muted:focus, .controls .active.raise-hand.on:focus, .controls .active.call-on.on:focus, .btn-disabled.active.focus, .controls .active.focus.mute.muted, .controls .active.focus.raise-hand.on, .controls .active.focus.call-on.on,
     .open > .btn-disabled.dropdown-toggle:hover, .controls
-    .open > .dropdown-toggle.mute.on:hover, .controls
+    .open > .dropdown-toggle.mute.muted:hover, .controls
     .open > .dropdown-toggle.raise-hand.on:hover, .controls
     .open > .dropdown-toggle.call-on.on:hover,
     .open > .btn-disabled.dropdown-toggle:focus, .controls
-    .open > .dropdown-toggle.mute.on:focus, .controls
+    .open > .dropdown-toggle.mute.muted:focus, .controls
     .open > .dropdown-toggle.raise-hand.on:focus, .controls
     .open > .dropdown-toggle.call-on.on:focus,
     .open > .btn-disabled.dropdown-toggle.focus, .controls
-    .open > .dropdown-toggle.focus.mute.on, .controls
+    .open > .dropdown-toggle.focus.mute.muted, .controls
     .open > .dropdown-toggle.focus.raise-hand.on, .controls
     .open > .dropdown-toggle.focus.call-on.on {
       color: #fff;
       background-color: #8e979a;
       border-color: #798387; }
-  .btn-disabled.disabled:focus, .controls .disabled.mute.on:focus, .controls .disabled.raise-hand.on:focus, .controls .disabled.call-on.on:focus, .btn-disabled.disabled.focus, .controls .disabled.focus.mute.on, .controls .disabled.focus.raise-hand.on, .controls .disabled.focus.call-on.on, .btn-disabled:disabled:focus, .controls .mute.on:disabled:focus, .controls .raise-hand.on:disabled:focus, .controls .call-on.on:disabled:focus, .btn-disabled:disabled.focus, .controls .mute.on:disabled.focus, .controls .raise-hand.on:disabled.focus, .controls .call-on.on:disabled.focus {
+  .btn-disabled.disabled:focus, .controls .disabled.mute.muted:focus, .controls .disabled.raise-hand.on:focus, .controls .disabled.call-on.on:focus, .btn-disabled.disabled.focus, .controls .disabled.focus.mute.muted, .controls .disabled.focus.raise-hand.on, .controls .disabled.focus.call-on.on, .btn-disabled:disabled:focus, .controls .mute.muted:disabled:focus, .controls .raise-hand.on:disabled:focus, .controls .call-on.on:disabled:focus, .btn-disabled:disabled.focus, .controls .mute.muted:disabled.focus, .controls .raise-hand.on:disabled.focus, .controls .call-on.on:disabled.focus {
     background-color: #BCC1C3;
     border-color: #BCC1C3; }
-  .btn-disabled.disabled:hover, .controls .disabled.mute.on:hover, .controls .disabled.raise-hand.on:hover, .controls .disabled.call-on.on:hover, .btn-disabled:disabled:hover, .controls .mute.on:disabled:hover, .controls .raise-hand.on:disabled:hover, .controls .call-on.on:disabled:hover {
+  .btn-disabled.disabled:hover, .controls .disabled.mute.muted:hover, .controls .disabled.raise-hand.on:hover, .controls .disabled.call-on.on:hover, .btn-disabled:disabled:hover, .controls .mute.muted:disabled:hover, .controls .raise-hand.on:disabled:hover, .controls .call-on.on:disabled:hover {
     background-color: #BCC1C3;
     border-color: #BCC1C3; }
 

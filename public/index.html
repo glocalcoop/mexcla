@@ -74,7 +74,7 @@
                 <fieldset>
                   <label for="roomnumber"><%= enter %></label>
                   <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
-                  <input id="room-number-button" type="submit" value="Go" data-transition="fade">
+                  <input id="room-number-button" type="submit" value="<%= enter_button %>" data-transition="fade">
                 </fieldset>
               </div>
             </div>
@@ -325,7 +325,7 @@
     <!-- MUTE/UNMUTE CONTROL TEMPLATE -->
     <script type="text/template" id="mute-controls-template">
       <!-- Toggle mute/unmute -->
-      <button class="mute off" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
+      <button class="mute" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
     </script>
 
     <!-- INTERPRET CONTROLS TEMPLATE  -->

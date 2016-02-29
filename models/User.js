@@ -8,7 +8,8 @@ var userSchema = new mongoose.Schema({
   currentRoom: {type: Schema.ObjectId, default: null},
   lang: {type: String, default: 'en'},
   //sess: {type: String, unique: true },
-  admin: {type: Boolean, default: false}
+  admin: {type: Boolean, default: false},
+  isMuted: {type: Boolean, default: false}
 });
 
 var User = mongoose.model( 'User', userSchema );
