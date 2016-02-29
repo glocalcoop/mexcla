@@ -14,12 +14,12 @@ var roomSchema = new Schema({
   roomnum: { type: Number, unique: true },
   // user: {_id, lang, username}
   users: {type: Array, default: []},
-  channels: [channelSchema],
+  creator: {type: Schema.Types.ObjectId},
+  active: Boolean,
   isModerated: Boolean,
   moderator: {type: Schema.Types.ObjectId},
+  channels: [channelSchema],
   isPrivate: Boolean,
-  active: Boolean,
-  creator: {type: Schema.Types.ObjectId},
   handsQueue: {type: Array, default: []},
   calledon: Schema.Types.Mixed
 });
@@ -30,6 +30,7 @@ roomSchema.methods.addUser = function(userInfo, cb) {
 };
 
 roomSchema.methods.setModerator = function(userId) {
+  userId = (this.isModerated) ? userId : '';
   this.moderator = userId;
   return userId;
 };
