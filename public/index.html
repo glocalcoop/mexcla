@@ -262,7 +262,7 @@
 
     <!-- PARTICIPANTS ROW  -->
     <script type="text/template" id="participant-row-template">
-      <li id="<%= _id %>">
+      <li id="<%= _id %>" class="<%= app.user.id == _id ? 'current-user' : '' %>">
 
         <div class="info">
           <!-- Show channel participant is in -->
@@ -273,16 +273,16 @@
 
           <!-- Show if participant is queued -->
           <span class="is-queued"></span>
-          <span class="queued" data-toggle="tooltip" title="Queued"></span>
         </div>
-        <%= username %>
-        <div class="controls">
 
+        <%= username %>
+
+        <div class="controls">
           <span class="moderator-controls"></span>
           <span class="mute-controls"></span>
           <span class="current-user-controls"></span>
-
         </div>
+
       </li>
     </script>
 
@@ -321,7 +321,7 @@
     <!-- MUTE/UNMUTE CONTROL TEMPLATE -->
     <script type="text/template" id="mute-controls-template">
       <!-- Toggle mute/unmute -->
-      <button class="mute" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
+      <button class="mute off" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
     </script>
 
     <!-- INTERPRET CONTROLS TEMPLATE  -->

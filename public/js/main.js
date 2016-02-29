@@ -563,7 +563,7 @@ Views.IndexView = Backbone.View.extend({
       if (Views.isThereAUser()) {
         /**
          * JoinRoom()() is not a typo
-         * JoinRoom @returns a function
+         * JoinRoom @returns a (function)
          */
         that.JoinRoom()();
       } else {
@@ -716,11 +716,15 @@ Views.RoomSidebar = Backbone.View.extend({
       var participantRow = _.template($('#participant-row-template').html());
       $(selector).append(participantRow(user));
 
-      // Add moderator indicator to row of moderator
-      if(Views.isModerator( user._id )) {
-        var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
-        var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
-        $(moderatorInfoEl).append(moderatorInfoHtml);
+      // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        // Add moderator indicator to row of moderator
+        if(Views.isModerator( user._id )) {
+          var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
+          var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
+          $(moderatorInfoEl).append(moderatorInfoHtml);
+        }
+
       }
 
       // TODO: Add channel indicator to row if in channel
@@ -730,23 +734,32 @@ Views.RoomSidebar = Backbone.View.extend({
         $(channelInfoEl).append(channelInfoHtml);
       }
 
-      // If current user is moderator, add moderator controls to all but own row
-      if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
-        var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
-        var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+       // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        // If current user is moderator, add moderator controls to all but own row
+        if(Views.isModerator( app.user.id )) {
+          var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
+          var muteControlsEl = $('#' + user._id + ' .mute-controls');
+          new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
+          new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+        }
       }
 
       // Add current user controls to row of current user
       if(Views.isCurrentUser( user._id )) {
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+        // If room is moderated
+        if( app.room.attributes.isModerated ) {
+          new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
+          new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+        }
       }
       
-      that.queueDisplay(user);
+      // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        that.queueDisplay(user);
+      }
 
     }); // end of each loop
     return this;
@@ -757,7 +770,9 @@ Views.RoomSidebar = Backbone.View.extend({
     });
     if (positionZeroIndexed !== -1) {
       var queuePosition = (positionZeroIndexed + 1).toString();
-      $('#' + user._id).find('span.queued').text(queuePosition);
+      var queueInfoEl = $('#' + user._id + ' .is-queued');
+      var queueInfoHtml = '<span class="queued" data-toggle="tooltip" title="Queued">' + queuePosition + '</span>';
+      $(queueInfoEl).append(queueInfoHtml);
     }
     return this;
   },
