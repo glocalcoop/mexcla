@@ -141,15 +141,11 @@ Views.IndexView = Backbone.View.extend({
      * Fallback to English if lang is missing
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
-    console.log(this.lang);
   },
   switchLang: function() {
     $('#language-links a').click(function(event) {
       event.preventDefault();
-      // console.log();
       app.user.attributes.lang = $(this).data('lang');
-      console.log(app.user.attributes.lang);
-      // Views.IndexView.setLang();
     });
   },
   createRoom: function(moderated) {
