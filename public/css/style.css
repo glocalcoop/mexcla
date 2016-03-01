@@ -5659,7 +5659,11 @@ a.bg-danger:focus, a.bg-danger:hover {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
 
-.fa-pulse {
+.fa-pulse, #connect-button.connecting .icon, #connect-button.connecting #participant-list button.accordion, #participant-list #connect-button.connecting button.accordion, #connect-button.connecting
+#channel-list button.accordion,
+#channel-list #connect-button.connecting button.accordion, #connect-button.connecting
+#chat-list button.accordion,
+#chat-list #connect-button.connecting button.accordion {
   -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8); }
 
@@ -5734,7 +5738,11 @@ h3 {
 #chat-list #collaboration .chat button.accordion:before {
   content: ""; }
 
-.controls .leave .icon:before, .controls .leave #participant-list button.accordion:before, #participant-list .controls .leave button.accordion:before, .controls .leave
+#connect-button.connected .icon:before, #connect-button.connected #participant-list button.accordion:before, #participant-list #connect-button.connected button.accordion:before, #connect-button.connected
+#channel-list button.accordion:before,
+#channel-list #connect-button.connected button.accordion:before, #connect-button.connected
+#chat-list button.accordion:before,
+#chat-list #connect-button.connected button.accordion:before, .controls .leave .icon:before, .controls .leave #participant-list button.accordion:before, #participant-list .controls .leave button.accordion:before, .controls .leave
 #channel-list button.accordion:before,
 #channel-list .controls .leave button.accordion:before, .controls .leave
 #chat-list button.accordion:before,
@@ -5747,6 +5755,13 @@ h3 {
 #chat-list button.accordion:before,
 #chat-list .controls .join button.accordion:before {
   content: ""; }
+
+#connect-button .icon:before, #connect-button #participant-list button.accordion:before, #participant-list #connect-button button.accordion:before, #connect-button
+#channel-list button.accordion:before,
+#channel-list #connect-button button.accordion:before, #connect-button
+#chat-list button.accordion:before,
+#chat-list #connect-button button.accordion:before {
+  content: ""; }
 
 .controls .raise-hand.on .icon:before, .controls .raise-hand.on #participant-list button.accordion:before, #participant-list .controls .raise-hand.on button.accordion:before, .controls .raise-hand.on
 #channel-list button.accordion:before,
@@ -5788,6 +5803,13 @@ h3 {
 #channel-list button.accordion.collapsed:before,
 #chat-list button.accordion.collapsed:before {
   content: ""; }
+
+#connect-button.connecting .icon:before, #connect-button.connecting #participant-list button.accordion:before, #participant-list #connect-button.connecting button.accordion:before, #connect-button.connecting
+#channel-list button.accordion:before,
+#channel-list #connect-button.connecting button.accordion:before, #connect-button.connecting
+#chat-list button.accordion:before,
+#chat-list #connect-button.connecting button.accordion:before {
+  content: ""; }
 
 .controls .mute .icon:before, .controls .mute #participant-list button.accordion:before, #participant-list .controls .mute button.accordion:before, .controls .mute
 #channel-list button.accordion:before,
@@ -5956,6 +5978,9 @@ button {
 input[type="submit"] a,
 button a {
   color: #fff; }
+
+#connect-button {
+  transition: all 1s fade-in; }
 
 .copy-link {
   cursor: pointer; }
