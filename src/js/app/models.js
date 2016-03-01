@@ -351,6 +351,21 @@ Models.Audio = Backbone.Model.extend({
       return false;
     }
     return this;
-  }
+  },
+  /**
+   * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
+    * Can we set user as `moderator` if they are moderator?
+    * `mute`, `unmute`
+      * `dtmf` Send DTMF to any member of the conference `conference <confname> dtmf <member_id>|all|last|non_moderator <digits>`
+      * `mute` Mutes a conference member `conference <confname> mute <member_id>|all|last|non_moderator [quiet]`
+      * `unmute` Unmute a conference member  `conference <confname> unmute <member_id>|all|last|non_moderator [quiet]`
+    * Is our call-on the same as `floor`?
+      * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
+    * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
+      * `conference_flags` and `conference_member_flags`
+   */
+  setFloor: function() {},
+  setMute: function() {},
+
  });
 

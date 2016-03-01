@@ -256,8 +256,8 @@ Views.Room = Backbone.View.extend({
     this.$el.html(this.template(templateData));
     this.welcomeText();
     this.brandingText();
-    this.sidebar.render();
     this.connect.render();
+    this.sidebar.render();
     return this;
   },
   initialize: function() {
@@ -467,27 +467,23 @@ Views.MuteControls = Backbone.View.extend({
   template: _.template($('#mute-controls-template').html()),
   render: function(userId) {
     this.$el.html(this.template({}));
-    // this.muteOnUser(userId);
     this.muteToggle(userId);
   },
   muteToggle: function(userId) {
-    if(true === app.user.attributes.isMuted) {
-      $('#' + userId + ' .mute').click(function(event) {
-        event.preventDefault();
-        $(this).toggleClass('muted');
+    $('#' + userId + ' .mute').click(function(event) {
+      event.preventDefault();
+      if(true === app.user.attributes.isMuted) {
         app.user.set('isMuted', false);
         app.audio.muteAudio('unmute');
-      });
-    } else if (false === app.user.attributes.isMuted) {
-      $('#' + userId + ' .mute').click(function(event) {
-        event.preventDefault();
         $(this).toggleClass('muted');
+      } else if (false === app.user.attributes.isMuted) {
         app.user.set('isMuted', true);
         app.audio.muteAudio('mute');
-      });
-    }
-  }
+        $(this).toggleClass('muted');
+      }
 
+    });
+  }
 });
 
 /**
@@ -495,65 +491,64 @@ Views.MuteControls = Backbone.View.extend({
  */
 Views.ConnectAudio = Backbone.View.extend({
   template: '',
-  // el: $('#connect-icon-and-button');
+  el: $('#connect-button'),
   initialize: function(userId) {
     this.render(userId);
   },
   render: function() {
     this.connectAudio();
-    this.connectingAudio();
-    this.disconnectAudio();
   },
-   connectAudio: function() {
+  connectAudio: function() {
     var that = this;
-    /**
-     * Conditions: user is registered, in room and not connected
-     * On click:
-     *   Audio connection should be initiated
-     *   Connect button should be replaced by Connecting button
-     */
-    $('#connect-button.connect').click(function() {
-      // app.audio.login();
-      // app.audio.call_init();
-      $(this).removeClass('connect');
-      $(this).addClass('connecting');
-      $('#connect-button').text(websiteText[app.user.attributes.lang].connecting);
-    });
-  },
-  connectingAudio: function() {
-    /**
-     * Need to know when connection is complete
-     * Can we check?
-     * connect.cur_call.gotAnswer
-     * connect.cur_call.state.name
-     */
-    /**
-     * Conditions: user is in the process of being connected
-     * On connection:
-     *   User should be connected to audio
-     *   Connecting button should be replaced by Disconnect button
-     */
-      $(this).removeClass('connecting');
-      $(this).addClass('connected');
-      $('#connect-button.connected').text(websiteText[app.user.attributes.lang].connecting);
 
-  },
-  disconnectAudio: function() {
-    var that = this;
-    /**
-     * Conditions: user is connected to audio
-     * On click:
-     *   Audio connection hangup should be initiated
-     * On disconnection:
-     *   Disconnect button should be replaced by Connect button
-     */
-    $('#connect-button.connected').click(function() {
-      // app.audio.hangup();
-      $(this).removeClass('connected');
-      $(this).addClass('connect');
-      $('#connect-button.connect').text(websiteText[app.user.attributes.lang].connect);
+    $('#connect-button').click(function(event) {
+      event.preventDefault();
+      var text = websiteText[app.user.attributes.lang];
+      var currCall = (null != app.audio.cur_call) ? app.audio.cur_call : null;
+
+      /**
+       * Conditions: user is registered, in room and not connected
+       * On click:
+       *   Audio connection should be initiated
+       *   Connect button should be replaced by Connecting button
+       */
+      if(!currCall) {
+        // Call not active
+        app.audio.login();
+        app.audio.call_init();
+        $(this).addClass('connecting');
+        $(this).html(websiteText[app.user.attributes.lang].connecting + ' <i class="icon"></i>');
+
+      /**
+       * Conditions: user is in the process of being connected
+       * On connection:
+       *   User should be connected to audio
+       *   Connecting button should be replaced by Disconnect button
+       */
+        setTimeout(function(){
+             $('#connect-button').removeClass('connecting');
+             $('#connect-button').addClass('connected');
+             $('#connect-button').html(websiteText[app.user.attributes.lang].disconnect + ' <i class="icon"></i>');
+        }, 3000);
+
+      } else {
+      /**
+       * Conditions: user is connected to audio
+       * On click:
+       *   Audio connection hangup should be initiated
+       * On disconnection:
+       *   Disconnect button should be replaced by Connect button
+       */
+        app.audio.hangup();
+        currCall = null;
+        $(this).removeClass('connected');
+        $(this).html(websiteText[app.user.attributes.lang].connect + ' <i class="icon"></i>');
+      }
+
     });
+
   }
+
 });
 
 
