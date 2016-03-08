@@ -30,7 +30,7 @@ roomSchema.methods.addUser = function(userInfo, cb) {
 };
 
 roomSchema.methods.setModerator = function(userId) {
-  userId = (this.isModerated) ? userId : '';
+  userId = (this.isModerated) ? userId : null;
   this.moderator = userId;
   return userId;
 };

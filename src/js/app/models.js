@@ -121,7 +121,7 @@ Models.Room = Backbone.Model.extend({
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        if(!_.contains(channel, userId)) {
+        if(!_.contains(channel.users, userId)) {
           channel.users.push(userId);
         }
         that.updateChannelAjax(channel).done(function(channel){
