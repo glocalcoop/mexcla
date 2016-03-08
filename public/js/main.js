@@ -226,7 +226,7 @@ Models.Room = Backbone.Model.extend({
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        if(!_.contains(channel, userId)) {
+        if(!_.contains(channel.users, userId)) {
           channel.users.push(userId);
         }
         that.updateChannelAjax(channel).done(function(channel){
@@ -1068,7 +1068,8 @@ Views.Channel = Backbone.View.extend({
   becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
-    $('#channels .interpret').click(function() {
+    $('#channels .interpret').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
       app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
@@ -1076,7 +1077,8 @@ Views.Channel = Backbone.View.extend({
   joinChannel: function(data) {
     var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
-    $('#channels .join').click(function() {
+    $('#channels .join').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
       app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
@@ -1084,7 +1086,8 @@ Views.Channel = Backbone.View.extend({
   leaveChannel: function(data) {
     var leaveControlsEl = $('.leave-controls');
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
-    $('#channels .leave').click(function() {
+    $('#channels .leave').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
       app.room.removeUserFromChannel(data.data._id, app.user.id);
     });
@@ -1177,15 +1180,17 @@ Views.AddChannelModal = Backbone.View.extend({
   },
   render: function(model) {
     $('#channel-modal').modal("show");
-    $('#channel-submit-button').click(function(e){
+    $('#channel-submit-button').click(function(event){
+      event.preventDefault();
+      var name = $('#channel-name').val();
       var lang = $('#channel-lang-select').val();
       var interpreter = $('#channel-translator-options').val();
-      var name = $('#channel-name').val();
+      var user = (null != interpreter) ? interpreter : app.user.id;
       app.room.createChannel({
         'name': name,
         'lang': lang, 
         'interpreter': interpreter,
-        'users': [app.user.id]
+        'users': [user]
       });
     });
   }
