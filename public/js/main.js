@@ -22,7 +22,7 @@ var websiteText = {
       username: "Enter Name",
       your_name: "Your Name",
       select_language: "Select Your Language",
-      enter: "Enter",
+      enter_button: "Enter",
       connect: "Connect",
       connecting: "Connecting",
       disconnect: "Disconnect",
@@ -66,7 +66,7 @@ var websiteText = {
       username: "Ingrese su Nombre",
       your_name: "Su Nombre",
       select_language: "Select Your Language [es]",
-      enter: "Ingrese",
+      enter_button: "Ingrese",
       connect: "Connectarse",
       connecting: "Connecting [es]",
       disconnect: "Disconnect [es]",
@@ -181,7 +181,10 @@ Models.User = Backbone.Model.extend({
     });
   },
   callOff: function(personCalledOnId) {
-
+    var roomId = app.room.get('_id');
+    Models.callOffAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
   }
 });
 
@@ -218,13 +221,34 @@ Models.Room = Backbone.Model.extend({
       data: channel
     });
   },
-  // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreter, channelid) {
+  // string, string -> adds user to channel
+  addUserToChannel: function(userId, channelId) {
     var that = this;
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        channel.interpreter = interpreter;
+        if(!_.contains(channel, userId)) {
+          channel.users.push(userId);
+        }
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreterId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelId) {
+        that.addUserToChannel(interpreterId, channelId);
+        channel.interpreter = interpreterId;
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
@@ -237,6 +261,28 @@ Models.Room = Backbone.Model.extend({
     this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
     return this;
   },
+  // string, string -> removes user from channel
+  removeUserFromChannel: function(userId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelid) {
+        _.without(channel.users, userId);
+        if (channel.interpreter === userId) {
+          channel.interpreter = null;
+        }
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
   // given a channel (object) it updates the db/server with any of the changed priorities
   updateChannelAjax: function(channel) {
     var channelID = channel._id;
@@ -262,7 +308,7 @@ Models.Room = Backbone.Model.extend({
     this.socket.on('room update', function(room){
       that.set(room);
     });
-  }
+  },
 });
 
 Models.Language = Backbone.Model.extend({});
@@ -286,6 +332,12 @@ Models.util.audio.dtmf = function (cur_call, key) {
   }
 };
 
+Models.util.audio.onWSLogin = function (verto, success) {
+  if (success) {
+    this.verto.hangup();
+    this.trigger('logged_in');
+  }
+};
 
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
@@ -300,6 +352,7 @@ Models.Audio = Backbone.Model.extend({
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
     this.setCallbacks(_.noop, _.noop, _.noop);
+    this.login();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -314,7 +367,9 @@ Models.Audio = Backbone.Model.extend({
         googHighpassFilter: false
       },
       iceServers: true
-    }, {});
+    },{ 
+      onWSLogin: _.bind(Models.util.audio.onWSLogin, this)
+    });
   },
   call_init: function() {
     var conf = this.get("conf");
@@ -354,27 +409,29 @@ Models.Audio = Backbone.Model.extend({
         switch (d.state) {
         case $.verto.enum.state.requesting:
           connecting();
-          that.trigger('connecting');
+          that.trigger('status', 'connecting');
           break;
         case $.verto.enum.state.active:
           active();
-          that.trigger('active');
           Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
+          that.trigger('status', 'active');
           break;
         case $.verto.enum.state.hangup:
           hangup();
-          that.trigger('hangup');
           that.hangup();
+          that.trigger('status', 'hangup');
           break;
         }
       }
     };
     this.set('verto_call_callbacks', verto_call_callbacks);
   },
-  // input: "main", "hear", "interpret"
-  // output: false or self
+  /**
+   * input: "main", "hear", "interpret"
+   * output: false or self
+   */
   switchChannel: function(option) {
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
@@ -391,7 +448,43 @@ Models.Audio = Backbone.Model.extend({
       return false;
     }
     return this;
-  }
+  },
+  /**
+   * @param "mute", "unmute"
+   * @return false or self
+   */
+  muteAudio: function(option) {
+    if (!this.cur_call) {
+      console.error('You must start a call before you mute yourself.');
+      return false;
+    }
+    if (option === 'mute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else if (option === 'unmute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else {
+      console.error('Mute user takes these options: "mute", "unmute"');
+      return false;
+    }
+    return this;
+  },
+  /**
+   * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
+    * Can we set user as `moderator` if they are moderator?
+    * `mute`, `unmute`
+      * `dtmf` Send DTMF to any member of the conference `conference <confname> dtmf <member_id>|all|last|non_moderator <digits>`
+      * `mute` Mutes a conference member `conference <confname> mute <member_id>|all|last|non_moderator [quiet]`
+      * `unmute` Unmute a conference member  `conference <confname> unmute <member_id>|all|last|non_moderator [quiet]`
+    * Is our call-on the same as `floor`?
+      * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
+    * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
+      * `conference_flags` and `conference_member_flags`
+
+     * evoluxbr.github.io/verto-docs
+   */
+  setFloor: function() {},
+  setMute: function() {},
+
  });
 
 
@@ -441,10 +534,35 @@ Views.isCurrentUser = function(userId) {
 }
 
 Views.isInAChannel = function(userId) {
-    return  _.chain(app.room.get('channels'))
-      .map(function(user){return user._id; })
-      .contains(userId)
-      .value();
+  return  _.chain(app.room.get('channels'))
+    .map(function(user){return user._id; })
+    .contains(userId)
+    .value();
+}
+
+Views.hasChannelInterpreter = function(channelId) {
+  var channel = _.findWhere(app.room.get('channels'), {
+    _id: channelId
+  });
+  return channel.interpreter !== 'none';
+}
+
+Views.isChannelInterpreter = function(channelId, userId) {
+  return _.findWhere(app.room.get('channels'), {
+    _id: channelId, 
+    interpreter: userId
+  });
+}
+
+Views.isInChannel = function(channelId, userId) {
+  var channel = _.findWhere(app.room.get('channels'), {
+    _id: channelId
+  });
+  if (_.isUndefined(channel.users)) {
+    return false;
+  } else {
+    return _.contains(channel.users, userId);
+  }
 }
 
 Views.isInQueue = function(userId) {
@@ -462,19 +580,18 @@ Views.isCalledOn = function(userId) {
   } else {
     return whoIsCalledOn._id == userId;
   }
-};
+}
 
 
 /**
  * Register
  */
 Views.RegisterModal = Backbone.View.extend({
-  initialize: function() {
-  },
+  initialize: function() {},
   /**
    * @param {function} afterwards - callback to be executed after user is created.
    */
-render: function(afterwards) {
+  render: function(afterwards) {
     $('#register-modal').modal("show");
     $('#register-submit-button').click(function(){
       var username = $('#register-modal #user-name').val();
@@ -506,6 +623,7 @@ Views.IndexView = Backbone.View.extend({
   render: function () {
     var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
+    this.switchLang();
     this.welcomeText();
     this.brandingText();
     this.$('#create-new-room-button').click(function(e){
@@ -523,7 +641,7 @@ Views.IndexView = Backbone.View.extend({
       if (Views.isThereAUser()) {
         /**
          * JoinRoom()() is not a typo
-         * JoinRoom @returns a function
+         * JoinRoom @returns a {function}
          */
         that.JoinRoom()();
       } else {
@@ -537,6 +655,12 @@ Views.IndexView = Backbone.View.extend({
      * Fallback to English if lang is missing
      */
     this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
+  },
+  switchLang: function() {
+    $('#language-links a').click(function(event) {
+      event.preventDefault();
+      app.user.set('lang', $(this).data('lang'));
+    });
   },
   createRoom: function(moderated) {
     Views.createRoomAjax(moderated).done(function(room){
@@ -622,8 +746,8 @@ Views.Room = Backbone.View.extend({
     this.$el.html(this.template(templateData));
     this.welcomeText();
     this.brandingText();
-    this.sidebar.render();
     this.connect.render();
+    this.sidebar.render();
     return this;
   },
   initialize: function() {
@@ -632,7 +756,7 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
-    this.connect = new Views.ConnectAudio({model: this.model});
+    this.connect = new Views.ConnectAudio({model: app.audio});
     this.sidebar = new Views.RoomSidebar({model: this.model});
     //this.listenTo(this.model, 'change:channels', this.renderChannel);
   },
@@ -645,7 +769,13 @@ Views.Room = Backbone.View.extend({
     if (!_.isUndefined(app.user)) {
       new Views.BrandingText({model: app.user});
     }
-  }
+  },
+  switchLang: function() {
+    $('#language-links').on('click', 'a', function(event) {
+      event.preventDefault();
+      app.user.set('lang', $(this).data('lang'));
+    });
+  },
 
 });
 
@@ -676,11 +806,15 @@ Views.RoomSidebar = Backbone.View.extend({
       var participantRow = _.template($('#participant-row-template').html());
       $(selector).append(participantRow(user));
 
-      // Add moderator indicator to row of moderator
-      if(Views.isModerator( user._id )) {
-        var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
-        var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
-        $(moderatorInfoEl).append(moderatorInfoHtml);
+      // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        // Add moderator indicator to row of moderator
+        if(Views.isModerator( user._id )) {
+          var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
+          var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
+          $(moderatorInfoEl).append(moderatorInfoHtml);
+        }
+
       }
 
       // TODO: Add channel indicator to row if in channel
@@ -690,23 +824,32 @@ Views.RoomSidebar = Backbone.View.extend({
         $(channelInfoEl).append(channelInfoHtml);
       }
 
-      // If current user is moderator, add moderator controls to all but own row
-      if(Views.isModerator( app.user.id ) && !Views.isModerator( user._id ) ) {
-        var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
-        var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+       // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        // If current user is moderator, add moderator controls to all but own row
+        if(Views.isModerator( app.user.id )) {
+          var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
+          var muteControlsEl = $('#' + user._id + ' .mute-controls');
+          new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
+          new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+        }
       }
 
       // Add current user controls to row of current user
       if(Views.isCurrentUser( user._id )) {
         var currentUserEl = $('#' + user._id + ' .current-user-controls');
         var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
+        // If room is moderated
+        if( app.room.attributes.isModerated ) {
+          new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
+        }
         new Views.MuteControls({ el: muteControlsEl }).render(user._id);
       }
       
-      that.queueDisplay(user);
+      // If room is moderated
+      if( app.room.attributes.isModerated ) {
+        that.queueDisplay(user);
+      }
 
     }); // end of each loop
     return this;
@@ -717,7 +860,9 @@ Views.RoomSidebar = Backbone.View.extend({
     });
     if (positionZeroIndexed !== -1) {
       var queuePosition = (positionZeroIndexed + 1).toString();
-      $('#' + user._id).find('span.queued').text(queuePosition);
+      var queueInfoEl = $('#' + user._id + ' .is-queued');
+      var queueInfoHtml = '<span class="queued" data-toggle="tooltip" title="Queued">' + queuePosition + '</span>';
+      $(queueInfoEl).append(queueInfoHtml);
     }
     return this;
   },
@@ -725,7 +870,6 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
-    //$(channelsEl).html('');
 
     if (!_.isEmpty(channels)) {
       _.each(channels, function(channel){
@@ -813,77 +957,100 @@ Views.MuteControls = Backbone.View.extend({
   template: _.template($('#mute-controls-template').html()),
   render: function(userId) {
     this.$el.html(this.template({}));
-    this.muteOnUser(userId);
-    this.muteOffUser(userId);
+    this.muteToggle(userId);
   },
-  muteOnUser: function(userId) {
-    $('#' + userId + ' .mute:not(.on)').click(function(event) {
-      app.user.muteOn(userId);
-    });
-  },
-  muteOffUser: function(userId) {
-    $('#' + userId + ' .mute.on').click(function(event) {
-      console.log($(this));
+  muteToggle: function(userId) {
+    $('#' + userId + ' .mute').click(function(event) {
+      event.preventDefault();
+      if(true === app.user.attributes.isMuted) {
+        app.user.set('isMuted', false);
+        app.audio.muteAudio('unmute');
+        $(this).toggleClass('muted');
+      } else if (false === app.user.attributes.isMuted) {
+        app.user.set('isMuted', true);
+        app.audio.muteAudio('mute');
+        $(this).toggleClass('muted');
+      }
+
     });
   }
-
 });
 
 /**
  * Audio Connect
+ * use: new Views.ConnectAudio({model: app.audio})
  */
 Views.ConnectAudio = Backbone.View.extend({
   template: '',
-  // el: $('#connect-icon-and-button');
+  el: $('#connect-button'),
   initialize: function(userId) {
     this.render(userId);
+    this.listenTo(this.model, 'status', this.updateCallStatus);
   },
-  render: function(userId) {
-    this.connectAudio(userId);
-    this.connectingAudio(userId);
-    this.disconnectAudio(userId);
+  render: function() {
+    this.connectAudio();
   },
-  connectAudio: function(userId) {
-    $('#connect-button.connect').click(function(event) {
-      var connect = new Models.Audio();
-      connect.login();
-      // Once logged in
-      connect.call_init();
-      $(this).removeClass('connect').addClass('disconnect');
+  updateCallStatus: function(status){
+    switch(status) {
+    case 'connecting':
+      $('#connect-button').addClass('connecting');
+      $('#connect-button').html(websiteText[app.user.get('lang')].connecting + ' <i class="icon"></i>');
+      break;
+    case 'active':
+      /**
+       * Conditions: user is in the process of being connected
+       * On connection:
+       *   User should be connected to audio
+       *   Connecting button should be replaced by Disconnect button
+       */
+      $('#connect-button').removeClass('connecting');
+      $('#connect-button').addClass('connected');
+      $('#connect-button').html(websiteText[app.user.get('lang')].disconnect + ' <i class="icon"></i>');
+      break;
+    case 'hangup':
+      /**
+       *  On disconnection:
+       *  Disconnect button should be replaced by Connect button
+       */
+      $('#connect-button').removeClass('connected');
+      $('#connect-button').html(websiteText[app.user.get('lang')].connect + ' <i class="icon"></i>');
+      break;
+    }
+  },
+  connectAudio: function() {
+    var that = this;
+    $('#connect-button').click(function(event) {
+      event.preventDefault();
+      var text = websiteText[app.user.get('lang')];
+      var currCall = (null != that.model.cur_call) ? that.model.cur_call : null;
+      /**
+       * Conditions: user is registered, in room and not connected
+       * On click:
+       *   Audio connection should be initiated
+       *   Connect button should be replaced by Connecting button
+       */
+      if(!currCall) {
+        // Call not active
+        if (!that.model.verto) {
+          that.model.login();
+          that.updateCallStatus('connecting');
+          that.model.on('logged_in', function(){
+            that.model.call_init();
+            });
+        } else {
+          that.updateCallStatus('connecting');
+          that.model.call_init();
+        } 
+      }
+      else {
+        /**
+         * Conditions: user is connected to audio
+         * On click:
+         *   Audio connection hangup should be initiated
+         */
+        that.model.hangup();
+       }
     });
-    /**
-     * Conditions: user is registered, in room and not connected
-     * On click:
-     *   Audio connection should be initiated
-     *   Connect button should be replaced by Connecting button
-     */
-  },
-  connectingAudio: function(userId) {
-    /**
-     * Need to know when connection is complete
-     * Can we check?
-     * connect.cur_call.gotAnswer
-     * connect.cur_call.state.name
-     */
-    /**
-     * Conditions: user is in the process of being connected
-     * On connection:
-     *   User should be connected to audio
-     *   Connecting button should be replaced by Disconnect button
-     */
-  },
-  disconnectAudio: function(userId) {
-    $('#connect-button.disconnect').click(function(event) {
-      connect.hangup();
-      $(this).removeClass('disconnect').addClass('connect');
-    });
-    /**
-     * Conditions: user is connected to audio
-     * On click:
-     *   Audio connection hangup should be initiated
-     * On disconnection:
-     *   Disconnect button should be replaced by Connect button
-     */
   }
 });
 
@@ -911,61 +1078,94 @@ Views.Channel = Backbone.View.extend({
     return this;
   },
   renderControls: function(data) {
+    if(!Views.hasChannelInterpreter(data.data._id)) {
+      this.becomeInterpreter(data);
+    }
+
+    if(!Views.isInChannel(data.data._id, app.user.id)) {
+      this.joinChannel(data);
+    }
+
+    if(Views.isInChannel(data.data._id, app.user.id)) {
+      this.leaveChannel(data);
+    }
+    return this;
+  },
+  becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
-    var joinControlsEl = $('.join-controls');
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
+    $('#channels .interpret').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.data._id, app.user.id);
+    });
+  },
+  joinChannel: function(data) {
+    var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
+    $('#channels .join').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.data._id, app.user.id);
+    });
+  },
+  leaveChannel: function(data) {
+    var leaveControlsEl = $('.leave-controls');
+    new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
+    $('#channels .leave').click(function() {
+      console.log(data.data._id, app.user.id);
+      app.room.removeUserFromChannel(data.data._id, app.user.id);
+    });
   }
 });
 
-
+/**
+ * Conditions: no interpreter assigned to channel and 
+ * user isn't moderator
+ * On click:
+ *   User should be added to channel users
+ *   User should be added as moderator
+ *   Interpret button should disappear
+ */
 Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   },
-  renderInterpret: function(data) {
-    /**
-     * Conditions: no interpreter assigned to channel and 
-     * user isn't moderator
-     * On click:
-     *   User should be added to channel users
-     *   User should be added as moderator
-     *   Interpret button should disappear
-     */
-  },
-  renderJoin: function(data) {
-    /**
-     * Conditions: user isn't in channel and user isn't moderator
-     * On click:
-     *   User should be added to channel users
-     *   Join button should disappear
-     *   Leave button should appear
-     */
-  },
-  renderLeave: function(data) {
-    /**
-     * Conditions: user is in channel
-     * On click:
-     *   Condition: User is moderator
-     *      User should be removed as moderator
-     *      User should be removed from channel users
-     *      Leave button should disappear
-     *      Join button should appear
-     *   Condition: User is not moderator
-     *      User should be removed from channel users
-     *      Leave button should disappear
-     *      Join button should appear
-     */
-  }
 });
 
+/**
+ * Conditions: user isn't in channel and user isn't moderator
+ * On click:
+ *   User should be added to channel users
+ *   Join button should disappear
+ *   Leave button should appear
+ */
 Views.ChannelJoinControls = Backbone.View.extend({
   template: _.template($('#join-channel-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   }
 });
+
+/**
+ * Conditions: user is in channel
+ * On click:
+ *   Condition: User is moderator
+ *      User should be removed as moderator
+ *      User should be removed from channel users
+ *      Leave button should disappear
+ *      Join button should appear
+ *   Condition: User is not moderator
+ *      User should be removed from channel users
+ *      Leave button should disappear
+ *      Join button should appear
+ */
+Views.ChannelLeaveControls = Backbone.View.extend({
+  template: _.template($('#leave-channel-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  }
+});
+
 
 
 // TODO: turn channel html into template
@@ -1010,7 +1210,8 @@ Views.AddChannelModal = Backbone.View.extend({
       app.room.createChannel({
         'name': name,
         'lang': lang, 
-        'interpreter': interpreter
+        'interpreter': interpreter,
+        'users': [app.user.id]
       });
     });
   }
@@ -1044,7 +1245,9 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
      * Only display users that aren't moderators
      */
     _.each(users, function(user){
-       that.$el.append(that.template(user));
+       if(!Views.isModerator(app.user.id)) {
+         that.$el.append(that.template(user));
+       }
     });
   }
 });
@@ -1079,6 +1282,9 @@ var MexclaRouter = Backbone.Router.extend({
   goToRoom: function(roomNumAsInt) {
     if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
       app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
+    }
+    if (!app.audio) {
+      app.audio = new Models.Audio();
     }
     app.roomView = new Views.Room({model: app.room}).render();
   },
@@ -1134,17 +1340,6 @@ $(function() {
      
     });
 
-    /**
-     * Page Language
-     * Switch language when language switched
-     */
-    $('#language-links a').click(function(event) {
-
-        event.preventDefault();
-        $('html')[0].lang = $(this).data('lang');
-
-    });
-
 
     /**
      * Room Link
@@ -1156,31 +1351,12 @@ $(function() {
      * Participants
      * Toggle `on` class when participant controls are clicked
      */
-    $('#participants').on('click', 'button', function(event) {
+    // $('#participants').on('click', 'button', function(event) {
 
-        $(this).toggleClass('on');
+    //     $(this).toggleClass('on');
 
-    });
+    // });
 
-    /**
-     * Channel Controls
-     * Toggle Channel Controls
-     */
-    $('#channels').on('click', 'button.join', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.leave').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
-
-    $('#channels').on('click', 'button.leave', function(event) {
-
-        $(this).toggleClass('on');
-        $('#channels button.join').toggleClass('on');
-        //$(this).hasClass('on').attr('title', 'Leave Channel').html('Leave');
-
-    });
 
     /**
      * Collaboration
@@ -1224,15 +1400,3 @@ $(function() {
 
 });
 
-
-/**
- * Collaboration Functions
- */
-
- // var roomnum = app.room.attributes._id;
-
- // var collabTools = {
- //    notepad: 'https://pad.riseup.net/p/' + roomnum + '?showChat=false',
- //    spreadsheet: 'https://calc.mayfirst.org/' + roomnum, 
- //    chat: 'https://irc.koumbit.net/?channels=#' + roomnum + '&nick=guest'
- // }

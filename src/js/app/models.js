@@ -75,7 +75,10 @@ Models.User = Backbone.Model.extend({
     });
   },
   callOff: function(personCalledOnId) {
-
+    var roomId = app.room.get('_id');
+    Models.callOffAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
   }
 });
 
@@ -112,13 +115,34 @@ Models.Room = Backbone.Model.extend({
       data: channel
     });
   },
-  // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreter, channelid) {
+  // string, string -> adds user to channel
+  addUserToChannel: function(userId, channelId) {
     var that = this;
     var channels = this.get('channels');
     var updatedChannels = _.map(channels, function(channel){
       if (channel._id === channelid) {
-        channel.interpreter = interpreter;
+        if(!_.contains(channel, userId)) {
+          channel.users.push(userId);
+        }
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
+  addInterpreterToChannel: function(interpreterId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelId) {
+        that.addUserToChannel(interpreterId, channelId);
+        channel.interpreter = interpreterId;
         that.updateChannelAjax(channel).done(function(channel){
           // callback...could check for errors here
           // console.log(channel);
@@ -131,6 +155,28 @@ Models.Room = Backbone.Model.extend({
     this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
     return this;
   },
+  // string, string -> removes user from channel
+  removeUserFromChannel: function(userId, channelId) {
+    var that = this;
+    var channels = this.get('channels');
+    var updatedChannels = _.map(channels, function(channel){
+      if (channel._id === channelid) {
+        _.without(channel.users, userId);
+        if (channel.interpreter === userId) {
+          channel.interpreter = null;
+        }
+        that.updateChannelAjax(channel).done(function(channel){
+          // callback...could check for errors here
+          // console.log(channel);
+        });
+        return channel;
+      } else {
+        return channel;
+      }
+    });
+    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
+    return this;
+  },  // string, string -> changes interpreter of channel
   // given a channel (object) it updates the db/server with any of the changed priorities
   updateChannelAjax: function(channel) {
     var channelID = channel._id;
@@ -156,7 +202,7 @@ Models.Room = Backbone.Model.extend({
     this.socket.on('room update', function(room){
       that.set(room);
     });
-  }
+  },
 });
 
 Models.Language = Backbone.Model.extend({});
@@ -180,6 +226,12 @@ Models.util.audio.dtmf = function (cur_call, key) {
   }
 };
 
+Models.util.audio.onWSLogin = function (verto, success) {
+  if (success) {
+    this.verto.hangup();
+    this.trigger('logged_in');
+  }
+};
 
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
@@ -194,6 +246,7 @@ Models.Audio = Backbone.Model.extend({
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
     this.setCallbacks(_.noop, _.noop, _.noop);
+    this.login();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -208,7 +261,9 @@ Models.Audio = Backbone.Model.extend({
         googHighpassFilter: false
       },
       iceServers: true
-    }, {});
+    },{ 
+      onWSLogin: _.bind(Models.util.audio.onWSLogin, this)
+    });
   },
   call_init: function() {
     var conf = this.get("conf");
@@ -248,27 +303,29 @@ Models.Audio = Backbone.Model.extend({
         switch (d.state) {
         case $.verto.enum.state.requesting:
           connecting();
-          that.trigger('connecting');
+          that.trigger('status', 'connecting');
           break;
         case $.verto.enum.state.active:
           active();
-          that.trigger('active');
           Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
+          that.trigger('status', 'active');
           break;
         case $.verto.enum.state.hangup:
           hangup();
-          that.trigger('hangup');
           that.hangup();
+          that.trigger('status', 'hangup');
           break;
         }
       }
     };
     this.set('verto_call_callbacks', verto_call_callbacks);
   },
-  // input: "main", "hear", "interpret"
-  // output: false or self
+  /**
+   * input: "main", "hear", "interpret"
+   * output: false or self
+   */
   switchChannel: function(option) {
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
@@ -285,6 +342,42 @@ Models.Audio = Backbone.Model.extend({
       return false;
     }
     return this;
-  }
+  },
+  /**
+   * @param "mute", "unmute"
+   * @return false or self
+   */
+  muteAudio: function(option) {
+    if (!this.cur_call) {
+      console.error('You must start a call before you mute yourself.');
+      return false;
+    }
+    if (option === 'mute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else if (option === 'unmute') {
+      Models.util.audio.dtmf(this.cur_call, '*');
+    } else {
+      console.error('Mute user takes these options: "mute", "unmute"');
+      return false;
+    }
+    return this;
+  },
+  /**
+   * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
+    * Can we set user as `moderator` if they are moderator?
+    * `mute`, `unmute`
+      * `dtmf` Send DTMF to any member of the conference `conference <confname> dtmf <member_id>|all|last|non_moderator <digits>`
+      * `mute` Mutes a conference member `conference <confname> mute <member_id>|all|last|non_moderator [quiet]`
+      * `unmute` Unmute a conference member  `conference <confname> unmute <member_id>|all|last|non_moderator [quiet]`
+    * Is our call-on the same as `floor`?
+      * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
+    * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
+      * `conference_flags` and `conference_member_flags`
+
+     * evoluxbr.github.io/verto-docs
+   */
+  setFloor: function() {},
+  setMute: function() {},
+
  });
 

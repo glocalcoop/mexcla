@@ -30,6 +30,11 @@
                 @extend .hover;
             }
         }
+
+        &.current-user {
+            font-weight: bold;
+            font-style: italic;
+        }
     }
 
     footer {

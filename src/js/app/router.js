@@ -28,6 +28,9 @@ var MexclaRouter = Backbone.Router.extend({
     if (_.isUndefined(app.room) || app.room.get('roomnum') !==  roomNumAsInt) {
       app.room = new Models.Room({roomnum: roomNumAsInt}).fetchByNum();
     }
+    if (!app.audio) {
+      app.audio = new Models.Audio();
+    }
     app.roomView = new Views.Room({model: app.room}).render();
   },
   // Handles creation of Model.User for a few different scenarios:
