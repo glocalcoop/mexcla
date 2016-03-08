@@ -11,6 +11,7 @@ var config = {
   password: 'public',
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -331,6 +332,13 @@ Models.util.audio.dtmf = function (cur_call, key) {
   }
 };
 
+Models.util.audio.onWSLogin = function (verto, success) {
+  if (success) {
+    this.verto.hangup();
+    this.trigger('logged_in');
+  }
+};
+
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
   verto: null,
@@ -344,6 +352,7 @@ Models.Audio = Backbone.Model.extend({
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
     this.setCallbacks(_.noop, _.noop, _.noop);
+    this.login();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -358,7 +367,9 @@ Models.Audio = Backbone.Model.extend({
         googHighpassFilter: false
       },
       iceServers: true
-    }, {});
+    },{ 
+      onWSLogin: _.bind(Models.util.audio.onWSLogin, this)
+    });
   },
   call_init: function() {
     var conf = this.get("conf");
@@ -398,19 +409,19 @@ Models.Audio = Backbone.Model.extend({
         switch (d.state) {
         case $.verto.enum.state.requesting:
           connecting();
-          that.trigger('connecting');
+          that.trigger('status', 'connecting');
           break;
         case $.verto.enum.state.active:
           active();
-          that.trigger('active');
           Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
+          that.trigger('status', 'active');
           break;
         case $.verto.enum.state.hangup:
           hangup();
-          that.trigger('hangup');
           that.hangup();
+          that.trigger('status', 'hangup');
           break;
         }
       }
@@ -468,6 +479,8 @@ Models.Audio = Backbone.Model.extend({
       * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
     * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
       * `conference_flags` and `conference_member_flags`
+
+     * evoluxbr.github.io/verto-docs
    */
   setFloor: function() {},
   setMute: function() {},
@@ -743,7 +756,7 @@ Views.Room = Backbone.View.extend({
       this.lang = app.user.attributes.lang;
       this.render();
     });
-    this.connect = new Views.ConnectAudio({model: this.model});
+    this.connect = new Views.ConnectAudio({model: app.audio});
     this.sidebar = new Views.RoomSidebar({model: this.model});
     //this.listenTo(this.model, 'change:channels', this.renderChannel);
   },
@@ -965,24 +978,51 @@ Views.MuteControls = Backbone.View.extend({
 
 /**
  * Audio Connect
+ * use: new Views.ConnectAudio({model: app.audio})
  */
 Views.ConnectAudio = Backbone.View.extend({
   template: '',
   el: $('#connect-button'),
   initialize: function(userId) {
     this.render(userId);
+    this.listenTo(this.model, 'status', this.updateCallStatus);
   },
   render: function() {
     this.connectAudio();
   },
+  updateCallStatus: function(status){
+    switch(status) {
+    case 'connecting':
+      $('#connect-button').addClass('connecting');
+      $('#connect-button').html(websiteText[app.user.get('lang')].connecting + ' <i class="icon"></i>');
+      break;
+    case 'active':
+      /**
+       * Conditions: user is in the process of being connected
+       * On connection:
+       *   User should be connected to audio
+       *   Connecting button should be replaced by Disconnect button
+       */
+      $('#connect-button').removeClass('connecting');
+      $('#connect-button').addClass('connected');
+      $('#connect-button').html(websiteText[app.user.get('lang')].disconnect + ' <i class="icon"></i>');
+      break;
+    case 'hangup':
+      /**
+       *  On disconnection:
+       *  Disconnect button should be replaced by Connect button
+       */
+      $('#connect-button').removeClass('connected');
+      $('#connect-button').html(websiteText[app.user.get('lang')].connect + ' <i class="icon"></i>');
+      break;
+    }
+  },
   connectAudio: function() {
     var that = this;
-
     $('#connect-button').click(function(event) {
       event.preventDefault();
-      var text = websiteText[app.user.attributes.lang];
-      var currCall = (null != app.audio.cur_call) ? app.audio.cur_call : null;
-
+      var text = websiteText[app.user.get('lang')];
+      var currCall = (null != that.model.cur_call) ? that.model.cur_call : null;
       /**
        * Conditions: user is registered, in room and not connected
        * On click:
@@ -991,41 +1031,27 @@ Views.ConnectAudio = Backbone.View.extend({
        */
       if(!currCall) {
         // Call not active
-        app.audio.login();
-        app.audio.call_init();
-        $(this).addClass('connecting');
-        $(this).html(websiteText[app.user.attributes.lang].connecting + ' <i class="icon"></i>');
-
-      /**
-       * Conditions: user is in the process of being connected
-       * On connection:
-       *   User should be connected to audio
-       *   Connecting button should be replaced by Disconnect button
-       */
-        setTimeout(function(){
-             $('#connect-button').removeClass('connecting');
-             $('#connect-button').addClass('connected');
-             $('#connect-button').html(websiteText[app.user.attributes.lang].disconnect + ' <i class="icon"></i>');
-        }, 3000);
-
-      } else {
-      /**
-       * Conditions: user is connected to audio
-       * On click:
-       *   Audio connection hangup should be initiated
-       * On disconnection:
-       *   Disconnect button should be replaced by Connect button
-       */
-        app.audio.hangup();
-        currCall = null;
-        $(this).removeClass('connected');
-        $(this).html(websiteText[app.user.attributes.lang].connect + ' <i class="icon"></i>');
+        if (!that.model.verto) {
+          that.model.login();
+          that.updateCallStatus('connecting');
+          that.model.on('logged_in', function(){
+            that.model.call_init();
+            });
+        } else {
+          that.updateCallStatus('connecting');
+          that.model.call_init();
+        } 
       }
-
+      else {
+        /**
+         * Conditions: user is connected to audio
+         * On click:
+         *   Audio connection hangup should be initiated
+         */
+        that.model.hangup();
+       }
     });
-
   }
-
 });
 
 

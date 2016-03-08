@@ -226,6 +226,13 @@ Models.util.audio.dtmf = function (cur_call, key) {
   }
 };
 
+Models.util.audio.onWSLogin = function (verto, success) {
+  if (success) {
+    this.verto.hangup();
+    this.trigger('logged_in');
+  }
+};
+
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
   verto: null,
@@ -239,6 +246,7 @@ Models.Audio = Backbone.Model.extend({
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
     this.setCallbacks(_.noop, _.noop, _.noop);
+    this.login();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -253,7 +261,9 @@ Models.Audio = Backbone.Model.extend({
         googHighpassFilter: false
       },
       iceServers: true
-    }, {});
+    },{ 
+      onWSLogin: _.bind(Models.util.audio.onWSLogin, this)
+    });
   },
   call_init: function() {
     var conf = this.get("conf");
@@ -293,19 +303,19 @@ Models.Audio = Backbone.Model.extend({
         switch (d.state) {
         case $.verto.enum.state.requesting:
           connecting();
-          that.trigger('connecting');
+          that.trigger('status', 'connecting');
           break;
         case $.verto.enum.state.active:
           active();
-          that.trigger('active');
           Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
+          that.trigger('status', 'active');
           break;
         case $.verto.enum.state.hangup:
           hangup();
-          that.trigger('hangup');
           that.hangup();
+          that.trigger('status', 'hangup');
           break;
         }
       }
@@ -363,6 +373,8 @@ Models.Audio = Backbone.Model.extend({
       * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
     * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
       * `conference_flags` and `conference_member_flags`
+
+     * evoluxbr.github.io/verto-docs
    */
   setFloor: function() {},
   setMute: function() {},
