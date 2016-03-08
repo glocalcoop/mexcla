@@ -22,7 +22,6 @@ describe('home page', function(){
     browser = wd.promiseChainRemote();
     return browser.init({browserName: 'chrome'});
   });
-
   after(function(){
     return browser.quit();
   });
@@ -35,6 +34,7 @@ describe('home page', function(){
 
   it('should display register popup when create room is clicked', function(){
     return browser
+      .elementById('moderation-option').click()
       .elementById('create-new-room-button').click()
       .elementById('register-modal')
       .isDisplayed().should.become(true);
@@ -163,7 +163,7 @@ describe('home page', function(){
         });
         
         describe('call on geli in browser 2', function(){
-
+          
           before(function(done){
             browser
               .elementById(browser2_userId, function(err, elem){
