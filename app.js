@@ -241,8 +241,8 @@ function createRoomRandom(req, res, userId) {
  *
  */
 function createRoom(req, res, userId, newRoomNumber) {
-  var moderated = (_.isUndefined(req.query.moderated)) ? false : req.query.moderated;
-  var moderator = ( moderated ) ? userId : null;
+  var moderated = (!_.isUndefined(req.query.moderated) && req.query.moderated == 'true') ? true : false;
+  var moderator = (moderated) ? userId : null;
   var room = new models.Room({
     roomnum: newRoomNumber, 
     active: true, 
