@@ -261,9 +261,9 @@ Views.Room = Backbone.View.extend({
     return this;
   },
   initialize: function() {
-    this.lang = app.user.attributes.lang;
+    this.lang = app.user.get('lang');
     this.listenTo(app.user, 'change:lang', function(){
-      this.lang = app.user.attributes.lang;
+      this.lang = app.user.get('lang');
       this.render();
     });
     this.connect = new Views.ConnectAudio({model: app.audio});
@@ -604,7 +604,8 @@ Views.Channel = Backbone.View.extend({
   becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
-    $('#channels .interpret').click(function() {
+    $('#channels .interpret').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
       app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
@@ -612,15 +613,17 @@ Views.Channel = Backbone.View.extend({
   joinChannel: function(data) {
     var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
-    $('#channels .join').click(function() {
+    $('#channels .join').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
-      app.room.addInterpreterToChannel(data.data._id, app.user.id);
+      app.room.addUserToChannel(data.data._id, app.user.id);
     });
   },
   leaveChannel: function(data) {
     var leaveControlsEl = $('.leave-controls');
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
-    $('#channels .leave').click(function() {
+    $('#channels .leave').click(function(event) {
+      event.preventDefault();
       console.log(data.data._id, app.user.id);
       app.room.removeUserFromChannel(data.data._id, app.user.id);
     });
@@ -737,7 +740,7 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
     var that = this;
     // TODO: have value be id of user
     var html = '<option value="">Select a Translator</option>';
-    html += '<option value="none">None</option>';
+    html += '<option value="null">None</option>';
     this.$el.html(html);
     
     // Let's use a dynamic list someday
