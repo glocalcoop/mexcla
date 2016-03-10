@@ -157,6 +157,42 @@ app.post('/room/id/:roomid/channel/:channelid/update', function(req,res){
   });
 });
 
+/**
+ * Join Channel
+ * 
+ */
+app.post('/room/id/:roomid/channel/:channelid/join', function(req,res){
+  models.Room.findById(req.params.roomid, function(err, room) {
+    var channel = room.channels.id(req.params.channelid);
+    channel.users.push(req.body._id);
+    room.save(function(err, roomInfo){
+      if (err) {handleError(err);}
+      res.json(roomInfo);
+      emitRoom(roomInfo);
+    });
+  });
+});
+
+
+
+
+/**
+ * Leave Channel
+ * 
+ */
+app.post('/room/id/:roomid/channel/:channelid/leave', function(req,res){
+  models.Room.findById(req.params.roomid, function(err, room) {
+    var channel = room.channels.id(req.params.channelid);
+    channel.users = removeUserFromChannel(channel.users, req.body._id);
+    room.save(function(err, roomInfo){
+      if (err) {handleError(err);}
+      res.json(roomInfo);
+      emitRoom(roomInfo);
+     });
+    });
+});
+
+
 
 /**
  * Raise Hand
@@ -365,6 +401,18 @@ function removeUserFromRoom(id, roomNumber, callback) {
     });
   });
 }
+
+/**
+ * @param {array} - Channels
+ * @param {string} - Userid of user that shoulbe removed
+ */
+function removeUserFromChannel (users, userToRemove) {
+  return _.reject(users, function(userid){
+    return userid === userToRemove;
+  });
+}
+
+
 
 /**
  * Input: @string roomid, @string channelid
