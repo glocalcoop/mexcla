@@ -12,8 +12,6 @@ var config = {
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
 
-
-
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -744,7 +742,8 @@ Views.Room = Backbone.View.extend({
   el: $('#content'),
   template: _.template($('#room-template').html()),
   render: function() {
-    var templateData = _.extend(websiteText[this.lang], this.model.attributes);
+    var templateData =  _.clone(websiteText[app.user.get('lang')]);
+    templateData.roomnum = this.model.get('roomnum');
     this.$el.html(this.template(templateData));
     this.welcomeText();
     this.brandingText();
@@ -795,7 +794,9 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:channels", this.renderChannels);
   },
   render: function() {
-    this.$el.append(this.template(websiteText[app.user.attributes.lang]));
+    var templateData =  _.clone(websiteText[app.user.get('lang')]);
+    templateData.roomnum = this.model.get('roomnum');
+    this.$el.append(this.template(templateData));
     this.renderParticipants();
     this.renderChannels();
     return this;
