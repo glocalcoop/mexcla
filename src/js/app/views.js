@@ -302,6 +302,7 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
+    this.addChannelButton();
   },
   render: function() {
     var templateData =  _.clone(websiteText[app.user.get('lang')]);
@@ -391,6 +392,20 @@ Views.RoomSidebar = Backbone.View.extend({
       });
     }
     return this;
+
+  },
+  /**
+   * Adds click handler to #add-channel-button, which launches Views.AddChannelModal
+   */
+  addChannelButton: function() {
+    $('#add-channel-button').click(function(){
+      if( app.room.get('channels').length < 1 ) {
+        new Views.AddChannelModal({model: app.room}).render();
+      }
+      else {
+        $(this).prop('disabled', true);
+      }
+  });
 
   }
 
@@ -680,32 +695,6 @@ Views.ChannelLeaveControls = Backbone.View.extend({
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   }
-});
-
-
-
-// TODO: turn channel html into template
-// but for now:
-$(document).ready(function(){
-
-  // $('#add-channel-button').click(function(){
-  //   new Views.AddChannelModal({
-  //     model: app.room
-  //   }).render();
-  // });
-
-  // Disabled once channel added
-  $('#add-channel-button').click(function(){
-    if( app.room.get('channels').length < 1 ) {
-      new Views.AddChannelModal({
-        model: app.room
-      }).render();
-    }
-    else {
-      $(this).prop('disabled', true);
-    }
-  });
-
 });
 
 
