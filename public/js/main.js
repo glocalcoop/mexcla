@@ -208,6 +208,7 @@ Models.Room = Backbone.Model.extend({
   // channel (object) -> adds new channel to room;
   createChannel: function(channel) {
     var that = this;
+    
     this.createChannelAjax(channel).done(function(res){
       if (that.serverErrorCheck(res)) {
         that.set(res);
@@ -534,11 +535,20 @@ Views.isCurrentUser = function(userId) {
   return userId == app.user.id;
 }
 
+/**
+ * Checks if user is in a Channel
+ * @param {string} UserId
+ * @returns {false|string} 
+ */
+
 Views.isInAChannel = function(userId) {
-  return  _.chain(app.room.get('channels'))
-    .map(function(user){return user._id; })
-    .contains(userId)
-    .value();
+  
+  var channel = _.find(app.room.get('channels'), function(channel){
+    return _.contains(channel.users, userId);
+  });
+
+  return (_.isUndefined(channel)) ? false : channel.lang;
+  
 }
 
 Views.hasChannelInterpreter = function(channelId) {
@@ -820,13 +830,13 @@ Views.RoomSidebar = Backbone.View.extend({
           var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
           $(moderatorInfoEl).append(moderatorInfoHtml);
         }
-
       }
 
       // TODO: Add channel indicator to row if in channel
-      if(Views.isInAChannel( user._id )) {
+      var inAChannel = Views.isInAChannel( user._id );
+      if(inAChannel) {
         var channelInfoEl = $('#' + user._id + ' .is-in-channel');
-        var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="{lang}"><i class="icon"></i>{lang}</span>';
+        var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="' + inAChannel + '"<i class="icon"></i>' + inAChannel + '</span>';
         $(channelInfoEl).append(channelInfoHtml);
       }
 
@@ -885,17 +895,8 @@ Views.RoomSidebar = Backbone.View.extend({
     }
     return this;
 
-  },
-  addChannelButton: function() {
-    $('#add-channel-button').click(function(){
-      if( app.room.get('channels').length < 1 ) {
-        new Views.AddChannelModal({model: app.room}).render();
-      }
-      else {
-        $(this).prop('disabled', true);
-      }
-    });
   }
+
 
 });
 
