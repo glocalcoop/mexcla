@@ -33,6 +33,23 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
 };
 
 /**
+ * @param {string} - action: 'join' or 'leave'
+ * @param {string} - roomId
+ * @param {string} - channelId
+ * @param {string} - userId
+ * @returns {jqHXR}
+ */
+Models.updateChannelAjax = function(action, roomId, channelId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/channel/' + channelId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+/**
  * Interpretation Rules
  *
  * Interpret
@@ -101,6 +118,7 @@ Models.Room = Backbone.Model.extend({
   // channel (object) -> adds new channel to room;
   createChannel: function(channel) {
     var that = this;
+    
     this.createChannelAjax(channel).done(function(res){
       if (that.serverErrorCheck(res)) {
         that.set(res);
@@ -114,28 +132,8 @@ Models.Room = Backbone.Model.extend({
       url: '/room/id/' + this.get('_id') + '/channel/create',
       data: channel
     });
-  },
-  // string, string -> adds user to channel
-  addUserToChannel: function(userId, channelId) {
-    var that = this;
-    var channels = this.get('channels');
-    var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        if(!_.contains(channel, userId)) {
-          channel.users.push(userId);
-        }
-        that.updateChannelAjax(channel).done(function(channel){
-          // callback...could check for errors here
-          // console.log(channel);
-        });
-        return channel;
-      } else {
-        return channel;
-      }
-    });
-    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
-    return this;
-  },  // string, string -> changes interpreter of channel
+  }, 
+  // string, string -> changes interpreter of channel
   addInterpreterToChannel: function(interpreterId, channelId) {
     var that = this;
     var channels = this.get('channels');
@@ -156,37 +154,17 @@ Models.Room = Backbone.Model.extend({
     return this;
   },
   // string, string -> removes user from channel
-  removeUserFromChannel: function(userId, channelId) {
-    var that = this;
-    var channels = this.get('channels');
-    var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        _.without(channel.users, userId);
-        if (channel.interpreter === userId) {
-          channel.interpreter = null;
-        }
-        that.updateChannelAjax(channel).done(function(channel){
-          // callback...could check for errors here
-          // console.log(channel);
-        });
-        return channel;
-      } else {
-        return channel;
-      }
-    });
-    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
-    return this;
-  },  // string, string -> changes interpreter of channel
-  // given a channel (object) it updates the db/server with any of the changed priorities
-  updateChannelAjax: function(channel) {
-    var channelID = channel._id;
-    var channelData = _.omit(channel, '_id');
-    return $.ajax({
-        type: 'POST',
-        url: '/room/id/' + this.get('_id') + '/channel/' + channelID + '/update',
-        data: channelData
+  leaveChannel: function(userId, channelId) {
+    Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
+      //
     });
   },
+  joinChannel: function(userId, channelId) {
+    Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
+      //
+    });
+  },// string, string -> changes interpreter of channel
+  // given a channel (object) it updates the db/server with any of the changed priorities
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
       alert(res.error);
@@ -202,7 +180,7 @@ Models.Room = Backbone.Model.extend({
     this.socket.on('room update', function(room){
       that.set(room);
     });
-  },
+  }
 });
 
 Models.Language = Backbone.Model.extend({});

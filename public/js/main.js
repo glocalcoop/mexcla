@@ -140,6 +140,23 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
 };
 
 /**
+ * @param {string} - action: 'join' or 'leave'
+ * @param {string} - roomId
+ * @param {string} - channelId
+ * @param {string} - userId
+ * @returns {jqHXR}
+ */
+Models.updateChannelAjax = function(action, roomId, channelId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/channel/' + channelId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+/**
  * Interpretation Rules
  *
  * Interpret
@@ -222,28 +239,8 @@ Models.Room = Backbone.Model.extend({
       url: '/room/id/' + this.get('_id') + '/channel/create',
       data: channel
     });
-  },
-  // string, string -> adds user to channel
-  addUserToChannel: function(userId, channelId) {
-    var that = this;
-    var channels = this.get('channels');
-    var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        if(!_.contains(channel, userId)) {
-          channel.users.push(userId);
-        }
-        that.updateChannelAjax(channel).done(function(channel){
-          // callback...could check for errors here
-          // console.log(channel);
-        });
-        return channel;
-      } else {
-        return channel;
-      }
-    });
-    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
-    return this;
-  },  // string, string -> changes interpreter of channel
+  }, 
+  // string, string -> changes interpreter of channel
   addInterpreterToChannel: function(interpreterId, channelId) {
     var that = this;
     var channels = this.get('channels');
@@ -264,37 +261,17 @@ Models.Room = Backbone.Model.extend({
     return this;
   },
   // string, string -> removes user from channel
-  removeUserFromChannel: function(userId, channelId) {
-    var that = this;
-    var channels = this.get('channels');
-    var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelid) {
-        _.without(channel.users, userId);
-        if (channel.interpreter === userId) {
-          channel.interpreter = null;
-        }
-        that.updateChannelAjax(channel).done(function(channel){
-          // callback...could check for errors here
-          // console.log(channel);
-        });
-        return channel;
-      } else {
-        return channel;
-      }
-    });
-    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
-    return this;
-  },  // string, string -> changes interpreter of channel
-  // given a channel (object) it updates the db/server with any of the changed priorities
-  updateChannelAjax: function(channel) {
-    var channelID = channel._id;
-    var channelData = _.omit(channel, '_id');
-    return $.ajax({
-        type: 'POST',
-        url: '/room/id/' + this.get('_id') + '/channel/' + channelID + '/update',
-        data: channelData
+  leaveChannel: function(userId, channelId) {
+    Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
+      //
     });
   },
+  joinChannel: function(userId, channelId) {
+    Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
+      //
+    });
+  },// string, string -> changes interpreter of channel
+  // given a channel (object) it updates the db/server with any of the changed priorities
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
       alert(res.error);
@@ -310,7 +287,7 @@ Models.Room = Backbone.Model.extend({
     this.socket.on('room update', function(room){
       that.set(room);
     });
-  },
+  }
 });
 
 Models.Language = Backbone.Model.extend({});
@@ -529,18 +506,17 @@ Views.isThereAUser = function() {
 
 Views.isModerator = function(userId) {
   return userId == app.room.get('moderator');
-}
+};
 
 Views.isCurrentUser = function(userId) {
   return userId == app.user.id;
-}
+};
 
 /**
  * Checks if user is in a Channel
  * @param {string} UserId
  * @returns {false|string} 
  */
-
 Views.isInAChannel = function(userId) {
   
   var channel = _.find(app.room.get('channels'), function(channel){
@@ -548,22 +524,21 @@ Views.isInAChannel = function(userId) {
   });
 
   return (_.isUndefined(channel)) ? false : channel.lang;
-  
-}
+};
 
 Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId
   });
   return channel.interpreter !== '';
-}
+};
 
 Views.isChannelInterpreter = function(channelId, userId) {
   return _.findWhere(app.room.get('channels'), {
     _id: channelId, 
     interpreter: userId
   });
-}
+};
 
 Views.isInChannel = function(channelId, userId) {
   var channel = _.findWhere(app.room.get('channels'), {_id: channelId });
@@ -572,14 +547,14 @@ Views.isInChannel = function(channelId, userId) {
   } else {
     return _.contains(channel.users, userId);
   }
-}
+};
 
 Views.isInQueue = function(userId) {
   return  _.chain(app.room.get('handsQueue'))
       .map(function(user){return user._id; })
       .contains(userId)
       .value();
-}
+};
 
 Views.isCalledOn = function(userId) {
   var whoIsCalledOn = app.room.get('calledon');
@@ -589,7 +564,7 @@ Views.isCalledOn = function(userId) {
   } else {
     return whoIsCalledOn._id == userId;
   }
-}
+};
 
 
 /**
@@ -801,6 +776,7 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
+    this.listenTo(this.model, "change:channels", this.renderParticipants);
     
   },
   render: function() {
@@ -830,7 +806,6 @@ Views.RoomSidebar = Backbone.View.extend({
         }
       }
 
-      // TODO: Add channel indicator to row if in channel
       var inAChannel = Views.isInAChannel( user._id );
       if(inAChannel) {
         var channelInfoEl = $('#' + user._id + ' .is-in-channel');
@@ -884,6 +859,7 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
+    $(channelsEl).empty();
     _.each(channels, function(channel){
         // display channel
         new Views.Channel({ el: channelsEl }).render(channel);
@@ -1126,27 +1102,16 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.addInterpreterToChannel(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.channel._id, app.user.id);
     });
   },
   joinChannel: function(data) {
     var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
-    $('#channels .join').click(function(event) {
-      event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.addUserToChannel(data.data._id, app.user.id);
-    });
   },
   leaveChannel: function(data) {
     var leaveControlsEl = $('.leave-controls');
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
-    $('#channels .leave').click(function(event) {
-      event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.removeUserFromChannel(data.data._id, app.user.id);
-    });
   }
 });
 
@@ -1175,7 +1140,10 @@ Views.ChannelInterpretControls = Backbone.View.extend({
 Views.ChannelJoinControls = Backbone.View.extend({
   template: _.template($('#join-channel-controls-template').html()),
   render: function(data) {
-    this.$el.html(this.template({text: data.text}));
+    this.$el.html(this.template(data));
+    this.$el.find('button.join').click(function(e){
+      app.room.joinChannel(app.user.id, data.channel._id);
+    });
   }
 });
 
@@ -1195,7 +1163,10 @@ Views.ChannelJoinControls = Backbone.View.extend({
 Views.ChannelLeaveControls = Backbone.View.extend({
   template: _.template($('#leave-channel-controls-template').html()),
   render: function(data) {
-    this.$el.html(this.template({text: data.text}));
+    this.$el.html(this.template(data));
+    this.$el.find('button.leave').click(function(e){
+      app.room.leaveChannel(app.user.id, data.channel._id);
+    });
   }
 });
 

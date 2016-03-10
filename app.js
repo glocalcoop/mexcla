@@ -184,12 +184,13 @@ app.post('/room/id/:roomid/channel/:channelid/leave', function(req,res){
   models.Room.findById(req.params.roomid, function(err, room) {
     var channel = room.channels.id(req.params.channelid);
     channel.users = removeUserFromChannel(channel.users, req.body._id);
-    room.save(function(err, roomInfo){
+    room.save(function(err){
       if (err) {handleError(err);}
-      res.json(roomInfo);
-      emitRoom(roomInfo);
+      res.json(room);
+      emitRoom(room);
      });
     });
+
 });
 
 
