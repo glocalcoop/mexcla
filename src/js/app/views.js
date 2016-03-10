@@ -63,7 +63,7 @@ Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId
   });
-  return channel.interpreter !== 'none';
+  return channel.interpreter !== '';
 }
 
 Views.isChannelInterpreter = function(channelId, userId) {
@@ -74,9 +74,7 @@ Views.isChannelInterpreter = function(channelId, userId) {
 }
 
 Views.isInChannel = function(channelId, userId) {
-  var channel = _.findWhere(app.room.get('channels'), {
-    _id: channelId
-  });
+  var channel = _.findWhere(app.room.get('channels'), {_id: channelId });
   if (_.isUndefined(channel.users)) {
     return false;
   } else {
@@ -394,17 +392,12 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
-
-    if (!_.isEmpty(channels)) {
-      _.each(channels, function(channel){
+    _.each(channels, function(channel){
         // display channel
         new Views.Channel({ el: channelsEl }).render(channel);
       });
-    }
     return this;
-
   }
-
 
 });
 
@@ -608,7 +601,7 @@ Views.Channel = Backbone.View.extend({
   render: function(channel) {
     var data = {
       text: websiteText[app.user.attributes.lang],
-      data: channel
+      channel: channel
     };
     this.$el.append(this.template(data));
 
@@ -623,18 +616,18 @@ Views.Channel = Backbone.View.extend({
     return this;
   },
   renderControls: function(data) {
-    if(!Views.hasChannelInterpreter(data.data._id)) {
+    if(!Views.hasChannelInterpreter(data.channel._id)) {
       this.becomeInterpreter(data);
     }
 
-    if(!Views.isInChannel(data.data._id, app.user.id)) {
+    if(Views.isInChannel(data.channel._id, app.user.id)) {
+      this.leaveChannel(data);
+    } else {
       this.joinChannel(data);
     }
 
-    if(Views.isInChannel(data.data._id, app.user.id)) {
-      this.leaveChannel(data);
-    }
     return this;
+
   },
   becomeInterpreter: function(data) {
     var interpretControlsEl = $('.interpret-controls');
