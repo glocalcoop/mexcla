@@ -250,14 +250,19 @@
             <ul id="channels">
             <!-- template #channel-row-template -->
             </ul>
-
           </div>
-          <footer id="add-channel" class="widget-footer">
-            <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i>Add a Channel</a></button>
-          </footer>
+          <div id="add-channel-button-container"></div>
+          <!-- Add Channel Button Template -->
         </div>
       </aside>
 
+    </script>
+
+    <!-- Add Channel Button Template -->
+    <script type="text/template" id="add-channel-button-template">
+      <footer id="add-channel" class="widget-footer">
+        <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i><%= add_channel %></a></button>
+      </footer>
     </script>
 
     <!-- PARTICIPANTS ROW  -->

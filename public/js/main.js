@@ -793,7 +793,7 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    this.addChannelButton();
+    
   },
   render: function() {
     var templateData =  _.clone(websiteText[app.user.get('lang')]);
@@ -801,6 +801,7 @@ Views.RoomSidebar = Backbone.View.extend({
     this.$el.append(this.template(templateData));
     this.renderParticipants();
     this.renderChannels();
+    new Views.AddChannelButton().render(templateData);
     return this;
   },
   renderParticipants: function() {
@@ -885,9 +886,6 @@ Views.RoomSidebar = Backbone.View.extend({
     return this;
 
   },
-  /**
-   * Adds click handler to #add-channel-button, which launches Views.AddChannelModal
-   */
   addChannelButton: function() {
     $('#add-channel-button').click(function(){
       if( app.room.get('channels').length < 1 ) {
@@ -896,10 +894,29 @@ Views.RoomSidebar = Backbone.View.extend({
       else {
         $(this).prop('disabled', true);
       }
-  });
-
+    });
   }
 
+});
+
+/**
+ * Creates Add Channel Button
+ */
+
+Views.AddChannelButton = Backbone.View.extend({
+  template: _.template($('#add-channel-button-template').html()),
+  el: '#add-channel-button-container',
+  render: function(templateData) {
+    this.$el.html(this.template(templateData));
+    this.$el.find('#add-channel-button').click(function(){
+      if( app.room.get('channels').length < 1 ) {
+        new Views.AddChannelModal({model: app.room}).render();
+      }
+      else {
+        $(this).prop('disabled', true);
+      }
+    });
+  }
 });
 
 /**
