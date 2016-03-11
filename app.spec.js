@@ -222,6 +222,40 @@ describe('rooms', function(){
     });
   });
 
+  describe('Add/remove Users from channel', function(){
+    it('should add user to channel', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/join')
+        .send({_id: '123userid'})
+        .end(function(err, res){
+          res.body.channels.length.should.eql(1);
+          res.body.channels[0].users.length.should.eql(1);
+          res.body.channels[0].users[0].should.eql('123userid');
+          done();
+        });
+    });
+
+    it('should updated db', function(done){
+      db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+        room.channels.length.should.eql(1);
+        room.channels[0].lang.should.eql('es');
+        room.channels[0].users[0].should.eql('123userid');
+        done();
+      });
+    });
+
+    it('should remove user from channel', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
+        .send({_id: '123userid'})
+        .end(function(err, res){
+          res.body.channels.length.should.eql(1);
+          res.body.channels[0].users.length.should.eql(0);
+          done();
+        });
+    });
+  });
+
   describe('update channel', function() {
     
     it('should add new interpreter', function(done){
@@ -247,6 +281,7 @@ describe('rooms', function(){
           done();
         });
     });
+
   });
 
   describe('hand raising', function(){
