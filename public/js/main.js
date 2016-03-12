@@ -777,7 +777,7 @@ Views.util.participants = {};
 
 Views.util.participants.moderator = function(user) {
   // If room is moderated
-  if( app.room.attributes.isModerated ) {
+  if( app.room.get('isModerated') ) {
     // Add moderator indicator to row of moderator
     if(Views.isModerator( user._id )) {
       var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
@@ -798,7 +798,7 @@ Views.util.participants.channelInfo  = function(user) {
 
 Views.util.participants.moderatorControls = function(user) {
   // If room is moderated
-  if( app.room.attributes.isModerated ) {
+  if( app.room.get('isModerated') ) {
     // If current user is moderator, add moderator controls to all but own row
     if(Views.isModerator( app.user.id )) {
       var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
@@ -824,7 +824,7 @@ Views.util.participants.userControls = function(user) {
 
 Views.util.participants.queueDisplay = function(user) {
   // If room is moderated
-  if( app.room.attributes.isModerated ) {
+  if( app.room.get('isModerated') ) {
     var positionZeroIndexed= _.findIndex(app.room.get('handsQueue'), function(userInQueue){
       return user._id == userInQueue._id;
     });
