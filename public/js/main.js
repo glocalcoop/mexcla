@@ -1,5 +1,6 @@
 var app = {};
 var Views = {};
+Views.util = {};
 var Models = {};
 Models.util = {};
 Models.util.audio = {};
@@ -765,6 +766,78 @@ Views.Room = Backbone.View.extend({
 
 });
 
+
+
+
+/**
+ * Render Participants Helper Functions
+ */
+
+Views.util.participants = {};
+
+Views.util.participants.moderator = function(user) {
+  // If room is moderated
+  if( app.room.attributes.isModerated ) {
+    // Add moderator indicator to row of moderator
+    if(Views.isModerator( user._id )) {
+      var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
+      var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
+      $(moderatorInfoEl).append(moderatorInfoHtml);
+    }
+  }
+};
+
+Views.util.participants.channelInfo  = function(user) {
+  var inAChannel = Views.isInAChannel( user._id );
+  if(inAChannel) {
+    var channelInfoEl = $('#' + user._id + ' .is-in-channel');
+    var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="' + inAChannel + '"<i class="icon"></i>' + inAChannel + '</span>';
+    $(channelInfoEl).append(channelInfoHtml);
+  }
+}; 
+
+Views.util.participants.moderatorControls = function(user) {
+  // If room is moderated
+  if( app.room.attributes.isModerated ) {
+    // If current user is moderator, add moderator controls to all but own row
+    if(Views.isModerator( app.user.id )) {
+      var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
+      var muteControlsEl = $('#' + user._id + ' .mute-controls');
+      new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
+      new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+    }
+  }
+};
+
+Views.util.participants.userControls = function(user) {
+  // Add current user controls to row of current user
+  if(Views.isCurrentUser( user._id )) {
+    var currentUserEl = $('#' + user._id + ' .current-user-controls');
+    var muteControlsEl = $('#' + user._id + ' .mute-controls');
+    // If room is moderated
+    if( app.room.attributes.isModerated ) {
+      new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
+    }
+    new Views.MuteControls({ el: muteControlsEl }).render(user._id);
+  }
+};
+
+Views.util.participants.queueDisplay = function(user) {
+  // If room is moderated
+  if( app.room.attributes.isModerated ) {
+    var positionZeroIndexed= _.findIndex(app.room.get('handsQueue'), function(userInQueue){
+      return user._id == userInQueue._id;
+    });
+    
+    if (positionZeroIndexed !== -1) {
+      var queuePosition = (positionZeroIndexed + 1).toString();
+      var queueInfoEl = $('#' + user._id + ' .is-queued');
+      var queueInfoHtml = '<span class="queued" data-toggle="tooltip" title="Queued">' + queuePosition + '</span>';
+      $(queueInfoEl).append(queueInfoHtml);
+    }
+  }
+};
+
 /**
  * Room Sidebar
  * unlike the other Views, this one is appended to #content instead of replacing it
@@ -777,7 +850,7 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    
+    this.listenTo(this.model, "change:channels", this.renderParticipants);
   },
   render: function() {
     var templateData =  _.clone(websiteText[app.user.get('lang')]);
@@ -795,68 +868,14 @@ Views.RoomSidebar = Backbone.View.extend({
     _.each(this.model.attributes.users, function(user){
       var participantRow = _.template($('#participant-row-template').html());
       $(selector).append(participantRow(user));
-
-      // If room is moderated
-      if( app.room.attributes.isModerated ) {
-        // Add moderator indicator to row of moderator
-        if(Views.isModerator( user._id )) {
-          var moderatorInfoEl = $('#' + user._id + ' .is-moderator');
-          var moderatorInfoHtml = '<span class="moderator" data-toggle="tooltip" title="Moderator"><i class="icon"></i></span>';
-          $(moderatorInfoEl).append(moderatorInfoHtml);
-        }
-      }
-
-      // TODO: Add channel indicator to row if in channel
-      var inAChannel = Views.isInAChannel( user._id );
-      if(inAChannel) {
-        var channelInfoEl = $('#' + user._id + ' .is-in-channel');
-        var channelInfoHtml = '<span class="language" data-toggle="tooltip" title="' + inAChannel + '"<i class="icon"></i>' + inAChannel + '</span>';
-        $(channelInfoEl).append(channelInfoHtml);
-      }
-
-       // If room is moderated
-      if( app.room.attributes.isModerated ) {
-        // If current user is moderator, add moderator controls to all but own row
-        if(Views.isModerator( app.user.id )) {
-          var moderatorControlsEl = $('#' + user._id + ' .moderator-controls');
-          var muteControlsEl = $('#' + user._id + ' .mute-controls');
-          new Views.ModeratorControls({ el: moderatorControlsEl }).render(user._id);
-          new Views.MuteControls({ el: muteControlsEl }).render(user._id);
-        }
-      }
-
-      // Add current user controls to row of current user
-      if(Views.isCurrentUser( user._id )) {
-        var currentUserEl = $('#' + user._id + ' .current-user-controls');
-        var muteControlsEl = $('#' + user._id + ' .mute-controls');
-        // If room is moderated
-        if( app.room.attributes.isModerated ) {
-          new Views.CurrentUserControls({ el: currentUserEl }).render(user._id);
-        }
-        new Views.MuteControls({ el: muteControlsEl }).render(user._id);
-      }
-      
-      // If room is moderated
-      if( app.room.attributes.isModerated ) {
-        that.queueDisplay(user);
-      }
-
+      Views.util.participants.moderator(user);
+      Views.util.participants.channelInfo(user);
+      Views.util.participants.moderatorControls(user);
+      Views.util.participants.userControls(user);
+      Views.util.participants.queueDisplay(user);
     }); // end of each loop
     return this;
   },
-  queueDisplay: function(user) {
-    var positionZeroIndexed= _.findIndex(app.room.get('handsQueue'), function(userInQueue){
-      return user._id == userInQueue._id;
-    });
-    if (positionZeroIndexed !== -1) {
-      var queuePosition = (positionZeroIndexed + 1).toString();
-      var queueInfoEl = $('#' + user._id + ' .is-queued');
-      var queueInfoHtml = '<span class="queued" data-toggle="tooltip" title="Queued">' + queuePosition + '</span>';
-      $(queueInfoEl).append(queueInfoHtml);
-    }
-    return this;
-  },
-  
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
