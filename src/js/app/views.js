@@ -634,8 +634,7 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.addInterpreterToChannel(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.channel._id, app.user.id);
     });
   },
   joinChannel: function(data) {
@@ -643,8 +642,7 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
     $('#channels .join').click(function(event) {
       event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.addUserToChannel(data.data._id, app.user.id);
+      app.room.joinChannel(app.user.id, data.channel._id);
     });
   },
   leaveChannel: function(data) {
@@ -652,8 +650,7 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
     $('#channels .leave').click(function(event) {
       event.preventDefault();
-      console.log(data.data._id, app.user.id);
-      app.room.removeUserFromChannel(data.data._id, app.user.id);
+      app.room.leaveChannel(app.user.id, data.channel._id);
     });
   }
 });
