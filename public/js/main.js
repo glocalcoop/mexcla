@@ -1,6 +1,5 @@
 var app = {};
 var Views = {};
-Views.util = {};
 var Models = {};
 Models.util = {};
 Models.util.audio = {};
@@ -506,17 +505,18 @@ Views.isThereAUser = function() {
 
 Views.isModerator = function(userId) {
   return userId == app.room.get('moderator');
-};
+}
 
 Views.isCurrentUser = function(userId) {
   return userId == app.user.id;
-};
+}
 
 /**
  * Checks if user is in a Channel
  * @param {string} UserId
  * @returns {false|string} 
  */
+
 Views.isInAChannel = function(userId) {
   
   var channel = _.find(app.room.get('channels'), function(channel){
@@ -524,21 +524,22 @@ Views.isInAChannel = function(userId) {
   });
 
   return (_.isUndefined(channel)) ? false : channel.lang;
-};
+  
+}
 
 Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId
   });
   return channel.interpreter !== '';
-};
+}
 
 Views.isChannelInterpreter = function(channelId, userId) {
   return _.findWhere(app.room.get('channels'), {
     _id: channelId, 
     interpreter: userId
   });
-};
+}
 
 Views.isInChannel = function(channelId, userId) {
   var channel = _.findWhere(app.room.get('channels'), {_id: channelId });
@@ -547,14 +548,14 @@ Views.isInChannel = function(channelId, userId) {
   } else {
     return _.contains(channel.users, userId);
   }
-};
+}
 
 Views.isInQueue = function(userId) {
   return  _.chain(app.room.get('handsQueue'))
       .map(function(user){return user._id; })
       .contains(userId)
       .value();
-};
+}
 
 Views.isCalledOn = function(userId) {
   var whoIsCalledOn = app.room.get('calledon');
@@ -564,7 +565,7 @@ Views.isCalledOn = function(userId) {
   } else {
     return whoIsCalledOn._id == userId;
   }
-};
+}
 
 
 /**
@@ -776,7 +777,6 @@ Views.RoomSidebar = Backbone.View.extend({
     this.listenTo(this.model, "change:users", this.renderParticipants);
     this.listenTo(this.model, "change:handsQueue", this.renderParticipants);
     this.listenTo(this.model, "change:channels", this.renderChannels);
-    this.listenTo(this.model, "change:channels", this.renderParticipants);
     
   },
   render: function() {
@@ -806,6 +806,7 @@ Views.RoomSidebar = Backbone.View.extend({
         }
       }
 
+      // TODO: Add channel indicator to row if in channel
       var inAChannel = Views.isInAChannel( user._id );
       if(inAChannel) {
         var channelInfoEl = $('#' + user._id + ' .is-in-channel');
@@ -859,7 +860,6 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
-    $(channelsEl).empty();
     _.each(channels, function(channel){
         // display channel
         new Views.Channel({ el: channelsEl }).render(channel);
@@ -1102,16 +1102,27 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
-      app.room.addInterpreterToChannel(data.channel._id, app.user.id);
+      console.log(data.data._id, app.user.id);
+      app.room.addInterpreterToChannel(data.data._id, app.user.id);
     });
   },
   joinChannel: function(data) {
     var joinControlsEl = $('.join-controls');
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
+    $('#channels .join').click(function(event) {
+      event.preventDefault();
+      console.log(data.data._id, app.user.id);
+      app.room.addUserToChannel(data.data._id, app.user.id);
+    });
   },
   leaveChannel: function(data) {
     var leaveControlsEl = $('.leave-controls');
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
+    $('#channels .leave').click(function(event) {
+      event.preventDefault();
+      console.log(data.data._id, app.user.id);
+      app.room.removeUserFromChannel(data.data._id, app.user.id);
+    });
   }
 });
 
@@ -1140,10 +1151,7 @@ Views.ChannelInterpretControls = Backbone.View.extend({
 Views.ChannelJoinControls = Backbone.View.extend({
   template: _.template($('#join-channel-controls-template').html()),
   render: function(data) {
-    this.$el.html(this.template(data));
-    this.$el.find('button.join').click(function(e){
-      app.room.joinChannel(app.user.id, data.channel._id);
-    });
+    this.$el.html(this.template({text: data.text}));
   }
 });
 
@@ -1163,10 +1171,7 @@ Views.ChannelJoinControls = Backbone.View.extend({
 Views.ChannelLeaveControls = Backbone.View.extend({
   template: _.template($('#leave-channel-controls-template').html()),
   render: function(data) {
-    this.$el.html(this.template(data));
-    this.$el.find('button.leave').click(function(e){
-      app.room.leaveChannel(app.user.id, data.channel._id);
-    });
+    this.$el.html(this.template({text: data.text}));
   }
 });
 
@@ -1176,10 +1181,11 @@ Views.ChannelLeaveControls = Backbone.View.extend({
  * use: new Views.AddChannelModal({model: app.room})
  */
 Views.AddChannelModal = Backbone.View.extend({
-  initialize: function() {
-    new Views.ChannelTranslatorOptionsList({model: app.room});
-  },
+  template: _.template($('#add-channel-modal-template').html()),
+  el: '#add-channel-modal-container',
   render: function(model) {
+    this.$el.html(this.template());
+    new Views.ChannelTranslatorOptionsList({model: app.room});
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();

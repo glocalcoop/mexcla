@@ -713,10 +713,11 @@ Views.ChannelLeaveControls = Backbone.View.extend({
  * use: new Views.AddChannelModal({model: app.room})
  */
 Views.AddChannelModal = Backbone.View.extend({
-  initialize: function() {
-    new Views.ChannelTranslatorOptionsList({model: app.room});
-  },
+  template: _.template($('#add-channel-modal-template').html()),
+  el: '#add-channel-modal-container',
   render: function(model) {
+    this.$el.html(this.template());
+    new Views.ChannelTranslatorOptionsList({model: app.room});
     $('#channel-modal').modal("show");
     $('#channel-submit-button').click(function(e){
       var lang = $('#channel-lang-select').val();
