@@ -860,6 +860,7 @@ Views.RoomSidebar = Backbone.View.extend({
   renderChannels: function() {
     var channels = this.model.get('channels');
     var channelsEl = '#channels';
+    $(channelsEl).empty();
     _.each(channels, function(channel){
         // display channel
         new Views.Channel({ el: channelsEl }).render(channel);
