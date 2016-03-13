@@ -342,7 +342,6 @@ Models.Audio = Backbone.Model.extend({
    * we should investigate if there is a difference between these to options!'
    */
   mute: function(option) {
-    muteAudio: function(option) {
       if (!this.cur_call) {
         console.error('You must start a call before you mute yourself.');
         return false;
@@ -359,7 +358,6 @@ Models.Audio = Backbone.Model.extend({
         console.error('Mute user takes these options: "mute", "unmute", "status"');
         return false;
       }
-    }
   },
   /**
    * @param "mute", "unmute"

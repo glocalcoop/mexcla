@@ -449,7 +449,6 @@ Models.Audio = Backbone.Model.extend({
    * we should investigate if there is a difference between these to options!'
    */
   mute: function(option) {
-    muteAudio: function(option) {
       if (!this.cur_call) {
         console.error('You must start a call before you mute yourself.');
         return false;
@@ -466,7 +465,6 @@ Models.Audio = Backbone.Model.extend({
         console.error('Mute user takes these options: "mute", "unmute", "status"');
         return false;
       }
-    }
   },
   /**
    * @param "mute", "unmute"
@@ -1039,11 +1037,11 @@ Views.MuteControls = Backbone.View.extend({
   muteToggle: function(userId) {
     $('#' + userId + ' .mute').click(function(event) {
       event.preventDefault();
-      if(true === app.user.attributes.isMuted) {
+      if(app.user.get('isMuted')) {
         app.user.set('isMuted', false);
         app.audio.muteAudio('unmute');
         $(this).toggleClass('muted');
-      } else if (false === app.user.attributes.isMuted) {
+      } else {
         app.user.set('isMuted', true);
         app.audio.muteAudio('mute');
         $(this).toggleClass('muted');

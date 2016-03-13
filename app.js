@@ -59,7 +59,7 @@ app.post('/users/new', function(req, res){
  * Responds to user.fetch() in backbone
  */
 app.get('/users/:id', function(req,res){
-  getUserInfo(req.params.id, function(user){
+  getFullUserInfo(req.params.id, function(user){
     res.json(user);
   });
 });
@@ -86,7 +86,7 @@ app.get('/room/:roomnum', function(req,res){
     if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
-      getUsernameAndLang(userId, function(userInfo){
+      getUserInfo(userId, function(userInfo){
         room.users.push(userInfo);
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
@@ -253,7 +253,7 @@ app.post('/room/id/:id/calloff', function(req, res){
  */
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
-    getUserInfo(req.cookies.id, function(user){
+    getFullUserInfo(req.cookies.id, function(user){
       res.json(user);
     });
   });
@@ -289,7 +289,7 @@ function createRoom(req, res, userId, newRoomNumber) {
   });
   console.log(room);
   //get user info for our logged in user
-  getUsernameAndLang(userId, function(userInfo){
+  getUserInfo(userId, function(userInfo){
     room.addUser(userInfo, function(err){
       if (err) { console.log(err);}
       //save the room to the db
@@ -367,7 +367,7 @@ function getUsernameAndLangPromise(userId) {
 /**
  * passes user info object {_id,username,lang} to callback
  */
-function getUserInfo(userId, callback) {
+function getFullUserInfo(userId, callback) {
   models.User.findById(userId, function(err, user){
     if (err) {handleError(err);}
     callback(user);
@@ -375,11 +375,13 @@ function getUserInfo(userId, callback) {
 }
 
 /**
- * passes user info object {_id,username,lang} to callback
+ * passes user info object {_id,username,lang, isMuted} to callback
  */
-function getUsernameAndLang(userId, callback) {
+function getUserInfo(userId, callback) {
   models.User.findById(userId, 'username lang', function(err, user){
     if (err) {handleError(err);}
+    // adds isMuted field. This information does not need to be permanently stored with the user's information, but its need to be kept with the room.
+    user.isMuted = false;
     callback(user);
   });
 }
