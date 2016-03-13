@@ -443,6 +443,32 @@ Models.Audio = Backbone.Model.extend({
     return this;
   },
   /**
+   * @param "mute", "unmute", "status"
+   * @return {boolean}
+   * This is another way of muting. It's nicer that dialing '*' because you can find out if you are already muted or not...
+   * we should investigate if there is a difference between these to options!'
+   */
+  mute: function(option) {
+    muteAudio: function(option) {
+      if (!this.cur_call) {
+        console.error('You must start a call before you mute yourself.');
+        return false;
+      }
+      if (option === 'mute') {
+        console.log('muted');
+        return this.cur_call.setMute('off');
+      } else if (option === 'unmute') {
+        console.log('unmuted');
+        return this.cur_call.setMute('on');
+      } else if (option === 'status'){
+        return this.cur_call.setMute();
+      } else {
+        console.error('Mute user takes these options: "mute", "unmute", "status"');
+        return false;
+      }
+    }
+  },
+  /**
    * @param "mute", "unmute"
    * @return false or self
    */
