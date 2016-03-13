@@ -96,7 +96,15 @@ Models.User = Backbone.Model.extend({
     Models.callOffAjax(roomId, personCalledOnId).done(function(data){
       // when successful
     });
+  },
+  isInAChannel: function() {
+    var userId = this.get('_id');
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return _.contains(channel.users, userId);
+    });
+    return (_.isUndefined(channel)) ? false : channel.lang;
   }
+
 });
 
 Models.Room = Backbone.Model.extend({
@@ -155,11 +163,13 @@ Models.Room = Backbone.Model.extend({
   },
   // string, string -> removes user from channel
   leaveChannel: function(userId, channelId) {
+    this.trigger('leaveChannel', 'main', channelId);
     Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
       //
     });
   },
   joinChannel: function(userId, channelId) {
+    this.trigger('joinChannel', 'hear', channelId);
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });
@@ -223,7 +233,7 @@ Models.Audio = Backbone.Model.extend({
   initialize: function() {
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
-    this.setCallbacks(_.noop, _.noop, _.noop);
+    this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
     this.login();
   },
   login: function() { 
@@ -304,16 +314,20 @@ Models.Audio = Backbone.Model.extend({
    * input: "main", "hear", "interpret"
    * output: false or self
    */
-  switchChannel: function(option) {
+  switchChannel: function(option, channelId) {
+    console.log(channelId);
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
     }
     if (option === 'main') {
+      console.log('dtmf: 0');
       Models.util.audio.dtmf(this.cur_call, '0');
     } else if (option === 'hear') {
+      console.log('dtmf: 1');
       Models.util.audio.dtmf(this.cur_call, '1');
     } else if (option === 'interpret') {
+      console.log('dtmf: 2');
       Models.util.audio.dtmf(this.cur_call, '2');
     } else {
       console.error('Switch Channel takes these options: "main", "hear", "interpret"');
@@ -340,6 +354,17 @@ Models.Audio = Backbone.Model.extend({
     }
     return this;
   },
+  joinLeaveEventsOn: function() {
+    if (app.user.isInAChannel()) {
+      this.switchChannel('hear');
+    }
+    this.listenTo(app.room, 'joinChannel', this.switchChannel);
+    this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+  },
+  joinLeaveEventsOff: function() {
+    this.stopListening(app.room);
+  },
+  
   /**
    * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
     * Can we set user as `moderator` if they are moderator?
@@ -355,7 +380,7 @@ Models.Audio = Backbone.Model.extend({
      * evoluxbr.github.io/verto-docs
    */
   setFloor: function() {},
-  setMute: function() {},
-
+  setMute: function() {}
+  
  });
 
