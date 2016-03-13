@@ -214,6 +214,13 @@ Models.User = Backbone.Model.extend({
 
 });
 
+Models.util.room = {};
+Models.util.room.userById = function(users, userid) {
+  return _.find(users, function(user) {
+    return user._id === userid;
+  });
+};
+
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
   urlRoot: "/room/id",
@@ -280,8 +287,24 @@ Models.Room = Backbone.Model.extend({
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });
-  },// string, string -> changes interpreter of channel
-  // given a channel (object) it updates the db/server with any of the changed priorities
+  },
+  /**
+   * Mutes a user
+   * @param {string} - userid
+   */
+  mute: function(userid) {
+    
+  },
+  /**
+   * Reveals if user is muted or not
+   * @param {string} - userid
+   * @returns {boolean}
+   */
+  isUserMuted: function(userid) {
+    var users = this.get('users');
+    
+
+  },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
       alert(res.error);
@@ -1030,6 +1053,9 @@ Views.MuteControls = Backbone.View.extend({
   // Might need to change to use class, if not unique on page
   // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
+  initialize: function() {
+    this.userid = app.user.get('_id');
+  },
   render: function(userId) {
     this.$el.html(this.template({}));
     this.muteToggle(userId);
@@ -1038,12 +1064,12 @@ Views.MuteControls = Backbone.View.extend({
     $('#' + userId + ' .mute').click(function(event) {
       event.preventDefault();
       if(app.user.get('isMuted')) {
-        app.user.set('isMuted', false);
-        app.audio.muteAudio('unmute');
+        
+        // app.audio.muteAudio('unmute');
         $(this).toggleClass('muted');
       } else {
         app.user.set('isMuted', true);
-        app.audio.muteAudio('mute');
+        // app.audio.muteAudio('mute');
         $(this).toggleClass('muted');
       }
 

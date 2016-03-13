@@ -9,10 +9,15 @@ var THE_TESTING_ROOM = {
   users: 
   [ { lang: 'es',
       _id: '56b3c680b71df7e02b280bde',
-      username: 'FAKE SPANISH USER' },
+      username: 'FAKE SPANISH USER',
+      isMuted: true
+    },
+    
     { lang: 'en',
       _id: '56b3c680b71df7e02b280be0',
-      username: 'FAKE ENGLISH USER' } ] 
+      username: 'FAKE ENGLISH USER',
+      isMuted: false
+    } ] 
 };
 
 var mockCreateChannelAjax = function(info) {
@@ -25,10 +30,18 @@ var mockCreateChannelAjax = function(info) {
 };
 
 
-describe('room model', function(){
-  
-  var testRoom = new Models.Room(THE_TESTING_ROOM);
+describe('util', function(){
+  describe('room.userByRoom', function(){
+    it('should return userInfo given userid', function(){
+      var user = Models.util.room.userById(THE_TESTING_ROOM.users, '56b3c680b71df7e02b280be0');
+      user.username.should.eql('FAKE ENGLISH USER');
+    });
+  });
+});
 
+
+describe('room model', function(){
+  var testRoom = new Models.Room(THE_TESTING_ROOM);
   before(function(){
     simple.mock(testRoom, 'createChannelAjax', mockCreateChannelAjax);
   });

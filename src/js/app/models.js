@@ -107,6 +107,13 @@ Models.User = Backbone.Model.extend({
 
 });
 
+Models.util.room = {};
+Models.util.room.userById = function(users, userid) {
+  return _.find(users, function(user) {
+    return user._id === userid;
+  });
+};
+
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
   urlRoot: "/room/id",
@@ -173,8 +180,24 @@ Models.Room = Backbone.Model.extend({
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });
-  },// string, string -> changes interpreter of channel
-  // given a channel (object) it updates the db/server with any of the changed priorities
+  },
+  /**
+   * Mutes a user
+   * @param {string} - userid
+   */
+  mute: function(userid) {
+    
+  },
+  /**
+   * Reveals if user is muted or not
+   * @param {string} - userid
+   * @returns {boolean}
+   */
+  isUserMuted: function(userid) {
+    var users = this.get('users');
+    
+
+  },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
       alert(res.error);
