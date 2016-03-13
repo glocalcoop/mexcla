@@ -293,7 +293,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} - userid
    */
   mute: function(userid) {
-    
+    console.log('mute called: ' + userid);
   },
   /**
    * Reveals if user is muted or not
@@ -301,9 +301,8 @@ Models.Room = Backbone.Model.extend({
    * @returns {boolean}
    */
   isUserMuted: function(userid) {
-    var users = this.get('users');
-    
-
+    var user = Models.util.room.userById(this.get('users'), userid);
+    return user.isMuted;
   },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
@@ -1054,25 +1053,24 @@ Views.MuteControls = Backbone.View.extend({
   // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
   initialize: function() {
-    this.userid = app.user.get('_id');
+   //  this.userid = app.user.get('_id');
   },
-  render: function(userId) {
+  render: function(userid) {
+    this.userid = userid;
     this.$el.html(this.template({}));
-    this.muteToggle(userId);
+    this.muteToggle(userid);
   },
-  muteToggle: function(userId) {
-    $('#' + userId + ' .mute').click(function(event) {
+  muteToggle: function(userid) {
+    var that = this;
+    if(app.room.isUserMuted(userid)) {
+      $(this).addClass('muted');
+    } else {
+      $(this).removeClass('muted');
+    }
+    $('#' + userid + ' .mute').click(function(event) {
       event.preventDefault();
-      if(app.user.get('isMuted')) {
-        
-        // app.audio.muteAudio('unmute');
-        $(this).toggleClass('muted');
-      } else {
-        app.user.set('isMuted', true);
-        // app.audio.muteAudio('mute');
-        $(this).toggleClass('muted');
-      }
-
+      app.room.mute(that.userid);
+      $(this).toggleClass('muted');
     });
   }
 });

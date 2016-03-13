@@ -52,4 +52,16 @@ describe('room model', function(){
     assert.equal(testRoom.get('channels').length, 1);
     assert.equal(testRoom.get('channels')[0].lang, 'es');
   });
+
+  describe('isUserMuted', function(){
+
+    it('should determine if user is muted', function(){
+      var id = THE_TESTING_ROOM.users[0]._id;
+      testRoom.isUserMuted(id).should.eql(true);
+    });
+    it('should determine if user is not muted', function(){
+      var id = THE_TESTING_ROOM.users[1]._id;
+      testRoom.isUserMuted(id).should.eql(false);
+    });
+  });
 });

@@ -186,7 +186,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} - userid
    */
   mute: function(userid) {
-    
+    console.log('mute called: ' + userid);
   },
   /**
    * Reveals if user is muted or not
@@ -194,9 +194,8 @@ Models.Room = Backbone.Model.extend({
    * @returns {boolean}
    */
   isUserMuted: function(userid) {
-    var users = this.get('users');
-    
-
+    var user = Models.util.room.userById(this.get('users'), userid);
+    return user.isMuted;
   },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
