@@ -33,6 +33,26 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
 };
 
 /**
+ * Issues mute or unmute http request
+ * @param {string} - 'mute' or 'unmute'
+ * @param {string} - roomid
+ * @param {string} - userid
+ */
+Models.muteAjax = function(action, roomId, userId) {
+  if (action === 'mute' || action === 'unmute') {
+    console.error('first argument must be "mute" or "unmute"');
+    return false;
+  }
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+/**
  * @param {string} - action: 'join' or 'leave'
  * @param {string} - roomId
  * @param {string} - channelId
@@ -183,10 +203,21 @@ Models.Room = Backbone.Model.extend({
   },
   /**
    * Mutes a user
+   * Does two things:
+   * 1. Mutes user's audio
+   * 2. Updates isMuted field for user on server.
    * @param {string} - userid
    */
   mute: function(userid) {
-    console.log('mute called: ' + userid);
+    if (this.isUserMuted(userid)) {
+      // user is muted, so unmute:
+      Models.muteAjax('unmute', this.get('_id'), userid);
+      app.audio.mute('unmute');
+    } else {
+      Models.muteAjax('mute', this.get('_id'), userid);
+      app.audio.mute('mute');
+    }
+     console.log('mute called: ' + userid);
   },
   /**
    * Reveals if user is muted or not

@@ -2,6 +2,7 @@ var should = require('should');
 var request = require('superagent');
 var mongojs = require('mongojs');
 var db = mongojs('localhost:27018/mexcladb_test', ['rooms']);
+var _ = require('underscore');
 
 var url = 'localhost:8080';
 var util = require('./util');
@@ -254,6 +255,14 @@ describe('rooms', function(){
           done();
         });
     });
+
+    it('should remove user from db', function(done){
+      db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+        room.channels.length.should.eql(1);
+        room.channels[0].users.length.should.eql(0);
+        done();
+      });
+    })
   });
 
   describe('update channel', function() {
@@ -424,27 +433,22 @@ describe('rooms', function(){
 
       it('request should be recieved by the server', function(done){
         request
-          .post(url + '/room/id/' + roomId + '/muteon')
-          .send({_id: userId})
+          .post(url + '/room/id/' + roomId + '/mute')
+          .send({_id: userId}) // fake spanish user
           .set('cookie', 'id=' + newUserId)
           .end(function(err, res){
-            res.body.users[1].mute.should.eql(true);
+            _.findWhere(res.body.users, {_id: userId}).isMuted.should.eql(true);
             done();
           });
       });
 
       it('should be set to true in the db', function(done){
           db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
-            if (err) {console.log(err);}
-            console.log(room);
-            room.users[1].mute.should.eql(true);
+            room.users[1].isMuted.should.eql(true);
             done();
           });
         });
-
-
     });
-    
   });
 
 });

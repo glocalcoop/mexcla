@@ -13,7 +13,7 @@ var channelSchema = new Schema({
 var roomSchema = new Schema({
   roomnum: { type: Number, unique: true },
   // user: {_id, lang, username}
-  users: {type: Array, default: []},
+  users: [{_id: Schema.Types.ObjectId, username: String, lang: String, isMuted: Boolean}],
   creator: {type: Schema.Types.ObjectId},
   active: Boolean,
   isModerated: Boolean,

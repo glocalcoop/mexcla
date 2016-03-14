@@ -509,12 +509,7 @@ Views.CurrentUserControls = Backbone.View.extend({
  * Mute Controls
  */
 Views.MuteControls = Backbone.View.extend({
-  // Might need to change to use class, if not unique on page
-  // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
-  initialize: function() {
-   //  this.userid = app.user.get('_id');
-  },
   render: function(userid) {
     this.userid = userid;
     this.$el.html(this.template({}));
