@@ -448,6 +448,26 @@ describe('rooms', function(){
             done();
           });
         });
+
+      describe('unmute', function(){
+        it('request', function(done){
+          request
+            .post(url + '/room/id/' + roomId + '/unmute')
+            .send({_id: userId}) // fake spanish user
+            .set('cookie', 'id=' + newUserId)
+            .end(function(err, res){
+              _.findWhere(res.body.users, {_id: userId}).isMuted.should.eql(false);
+              done();
+            });
+        });
+        it('should be set to false in the db', function(done){
+          db.rooms.findOne({ _id: mongojs.ObjectId(roomId)}, function(err, room){
+            room.users[1].isMuted.should.eql(false);
+            done();
+          });
+        });
+      });
+      
     });
   });
 

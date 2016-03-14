@@ -246,6 +246,10 @@ app.post('/room/id/:id/calloff', function(req, res){
 
 });
 
+/**
+ * Mute and unmute
+ */
+
 app.post('/room/id/:id/mute', function(req, res){
   muteOrUnmute('mute', req.params.id, req.body._id, res);
 });
@@ -255,10 +259,8 @@ app.post('/room/id/:id/unmute', function(req, res){
 });
 
 /**
- * Lneave Room
- * Leave room and respond with user info
- * NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
- */
+ * TODO:Leave Room
+  */
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
     getFullUserInfo(req.cookies.id, function(user){
