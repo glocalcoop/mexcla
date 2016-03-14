@@ -39,10 +39,6 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
  * @param {string} - userid
  */
 Models.muteAjax = function(action, roomId, userId) {
-  if (action === 'mute' || action === 'unmute') {
-    console.error('first argument must be "mute" or "unmute"');
-    return false;
-  }
   return $.ajax({
     type: 'POST',
     url: '/room/id/' + roomId + '/' + action,

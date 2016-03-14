@@ -517,10 +517,11 @@ Views.MuteControls = Backbone.View.extend({
   },
   muteToggle: function(userid) {
     var that = this;
+    var selector = '#' + userid + ' .mute';
     if(app.room.isUserMuted(userid)) {
-      $(this).addClass('muted');
+      $(selector).addClass('muted');
     } else {
-      $(this).removeClass('muted');
+      $(selector).removeClass('muted');
     }
     $('#' + userid + ' .mute').click(function(event) {
       event.preventDefault();
