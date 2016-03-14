@@ -315,10 +315,16 @@ Models.Room = Backbone.Model.extend({
     if (this.isUserMuted(userid)) {
       // user is muted, so unmute:
       Models.muteAjax('unmute', this.get('_id'), userid);
-      app.audio.mute('unmute');
+      // if the user muted is the current user, unmute their audio
+      if (userid === app.user.get('_id')) {
+        app.audio.mute('unmute');
+      }
     } else {
       Models.muteAjax('mute', this.get('_id'), userid);
-      app.audio.mute('mute');
+      // if is the current user, mute their audio
+      if (userid === app.user.get('_id')) {
+        app.audio.mute('mute');
+      }
     }
      console.log('mute called: ' + userid);
   },
