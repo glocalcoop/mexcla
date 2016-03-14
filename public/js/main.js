@@ -397,6 +397,7 @@ Models.Audio = Backbone.Model.extend({
     this.set('name', app.user.get('username'));
     this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
     this.login();
+    this.listenTo(app.room, 'change:users', this.muteFromAfar);
   },
   login: function() { 
     this.verto = new $.verto({
@@ -539,6 +540,22 @@ Models.Audio = Backbone.Model.extend({
       return false;
     }
     return this;
+  },
+  /**
+   * When the moderator updates who is muted in a channel, this function will mute the participant 
+   * TODO: this will run every time there is a change to the user array. We should modify it so that it only runs when there is a change to a specific user.
+   */
+  muteFromAfar: function() {
+    var userid = app.user.get('_id');
+    if (app.room.isUserMuted(userid)) {
+      if (!this.mute('status')) {
+        this.mute('mute');
+      }
+    } else {
+      if (this.mute('status')) {
+        this.mute('unmute');
+      }
+    }
   },
   joinLeaveEventsOn: function() {
     if (app.user.isInAChannel()) {
