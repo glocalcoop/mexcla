@@ -1,0 +1,78 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+
+.btn-disabled {
+  @include button-variant($white, $brand-disabled, $brand-disabled);
+}
+
+.btn {
+    border-width: 2px;
+    &:hover,
+    &:focus {
+        border-width: 2px;
+    }
+}
+
+input[type="submit"],
+button {
+    @extend .btn;
+    a {
+        color: $white;
+    }
+}
+
+#connect-button {
+    transition: all 1s fade-in;
+    @extend .btn-lg;
+    @extend .btn-success;
+
+    .icon {
+        @extend %fa;
+        @extend %fa-phone;
+    }
+
+    &.connecting {
+        @extend .btn-warning;
+        .icon {
+            @extend %fa-spinner;
+            @extend .fa-pulse;
+        }
+    }
+
+    &.connected {
+        @extend .btn-danger;
+        .icon {
+            @extend %fa-sign-out;
+        }
+    }
+}
+
+.btn-group {
+    .btn {}
+}
+
+#mute-controls {
+    .btn {
+        @extend .btn-danger;
+    }
+}
+
+.copy-link {
+    cursor: pointer;
+}
+.submit-chat {
+    @extend .btn-primary;
+}
+
+.cursor-grab {
+    cursor: grab;
+}
+.cursor-grabbling {
+    cursor: grabbing;
+}
+
+button.accordion {
+    @include pull-right;
+}

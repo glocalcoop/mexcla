@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en"><!-- Need to modify language based on user input -->
+  <head>
+    <title>Mexcla Conferencing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="description" content="Mexcla is the free Simultaneous Interpretation Conference System">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="js/libs/jssip-0.6.18.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.js"></script>
+    <script type="text/javascript" src="js/libs/js.cookie.js"></script>
+    <script type="text/javascript" src="js/libs/underscore.js"></script>
+    <script type="text/javascript" src="js/libs/backbone.js"></script>
+    <script type="text/javascript" src="js/libs/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="js/libs/tether/tether.min.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/libs/clipboard/dist/clipboard.min.js"></script>
+
+    <script type="text/javascript" src="js/libs/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.FSRTC.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.jsonrpcclient.js"></script>
+    <script type="text/javascript" src="js/libs/jquery.verto.js"></script>
+
+  </head>
+  <body>
+    <!-- HEADER  -->
+     <header id="header">
+      <nav id="utility-nav" class="navbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsing-utility-nav">
+          &#9776;
+        </button>
+        <div class="collapse" id="collapsing-utility-nav">
+          <h3 id="tagline"><a href="/">Mexcla: title<!-- Tagline --></a></h3>
+          <ul id="language-links" class="nav">
+            <li class="nav-item"><div id="welcome-text"><!-- template #welcome-text-template --></div></li>
+            <li class="nav-item"><a id="es-switch-link" data-lang="en" class="nav-link english" href="#">English</a></li>
+            <li class="nav-item"><a id="en-switch-link" data-lang="es" class="nav-link espanol" href="#">Espa&ntilde;ol</a></li>
+          </ul>
+        </div>
+      </nav>
+     </header>
+     <!--CONTENT  -->
+
+     <div id="content"></div>
+     <audio id="audio-remote"></audio>
+     <div id="add-channel-modal-container"></div>
+
+    <!-- FOOTER -->
+    <footer id="footer" role="contentinfo">
+      <div class="colophon">
+        <ul>
+          <li class="license"><a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html" target="_blank"><i class="icon"></i>Mexcla</a></li>
+          <li class="source"><a href="https://github.com/glocalcoop/mexcla.git" target="_blank"><i class="icon"></i> Source</a></li>
+          <li class="terms"></li>
+        </ul>
+      </div>
+    </footer>
+    
+    <!--TEMPLATES  -->
+
+    <!--INDEX -->
+    <script type="text/template" id="index-template">
+      <main class="main-content index" role="main">
+          <section class="welcome-section">
+            <h1><%= welcome %></h1>
+            <h2 class="lead"><%= subhead %></h2>
+          </section>
+          <section class="go-to-rooms-section">
+            <div id="join-room">
+              <div class="card">
+                <h3><%= join %></h3>
+                <fieldset>
+                  <label for="roomnumber"><%= enter %></label>
+                  <input id="room-number" type ="text" value="", name="roomnumber" placeholder="Room number">
+                  <input id="room-number-button" type="submit" value="<%= enter_button %>" data-transition="fade">
+                </fieldset>
+              </div>
+            </div>
+            <div id="create-room">
+              <div class="card">
+                <h3><%= create %></h3>
+                <fieldset>
+                  <input id="create-new-room-button" type="submit" value="<%= create %>" data-transition="fade">
+                  <label for="moderation-option">
+                    <input id="moderation-option" name="moderation-option" type="checkbox" value="0"> 
+                    <%= moderated_room %>
+                  </label>
+                  <label for="private-option">
+                    <input id="private-option" name="private-option" type="checkbox" value="0">
+                    <%= private_room %>
+                  </label>
+                  
+                </fieldset>
+              </div>
+            </div>
+            
+          </section>
+      </main>
+    </script>
+
+
+    <!-- HEADER BRANDING TEXT-->
+    <script type="text/template" id="branding-text-template">
+      <a href="/">Mexcla: <%= title %></a>
+    </script>
+
+
+    <!-- HEADER WELCOME TEXT-->
+    <script type="text/template" id="welcome-text-template">
+      <span class="greeting"><%= greetings %></span><span class="user-name"><%= username %></span>
+    </script>
+
+
+    <!-- ROOM -->
+    <script type="text/template" id="room-template">
+    <main class="main-content room" role="main">
+
+      <header id="content-header">
+        <h2 id="conference-<%= roomnum %>" class="conference-id">
+          <%= conference %>
+          <span class="pstn-instructions-conference-number">
+            <%= roomnum %>
+          </span>
+        </h2>
+
+        <div id="userinfo-modal" style="display:none">
+          <a href="/userinfo" rel="ajax:modal"></a>
+        </div>
+
+      </header>
+
+      <section id="options">
+
+        <div id="call-options">
+          <div id="connect-icon-and-button">
+            <!-- TODO: Button should toggle to Disconnect once connected. Promises, promises... -->
+            <!-- Add connecting class once clicked -->
+            <!-- Add connected class once connected -->
+            <button class="button connect" data-toggle="tooltip" title="<%= connect %>" id="connect-button">
+              <%= connect %> <i class="icon"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <div id="interpretation-options">
+          <div class="btn-group" id="interpretation-mode" data-toggle="buttons">
+            <label for="mode-original" class="btn active">
+              <input type="radio" value="original" id="mode-original" name="mode" onclick="mexcla_mode_original();">
+              <%= original %>
+            </label>
+            <label for="mode-hear-interpretation" class="btn">
+              <input type="radio" value="hear-interpretation" id="mode-hear-interpretation" name="mode" onclick="mexcla_mode_hear_interpretation();">
+              <%= interpretation %></label>
+            <label for="mode-provide-interpretation" class="btn">
+              <input type="radio" value="provide-interpretation" id="mode-provide-interpretation" name="mode" onclick="mexcla_mode_provide_interpretation();">
+              <%= provide %>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section id="audio-handling">
+        <div id="audio">
+          <audio autoplay="autoplay" id="audio-remote">
+            Sorry, you have no audio capabilities! Please use Chrome or Chromium version 25 (or greater).
+          </audio>
+        </div>
+      </section>
+
+      <section id="collaboration">
+
+        <!-- Nav tabs -->
+        <ul class="nav" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link notepad" data-toggle="tab" href="#pad-frame" aria-controls="<%= notepad %>" role="tab"><i class="icon"></i> <%= notepad %></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link spreadsheet" data-toggle="tab" href="#spreadsheet-frame" aria-controls="<%= spreadsheet %>" role="tab"> <%= spreadsheet %></a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link chat" data-toggle="tab" href="#chat-frame" aria-controls="<%= chat %>" role="tab"><i class="icon"></i> <%= chat %></a>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane" id="pad-frame" data-src="https://pad.riseup.net/p/<%= roomnum %>?showChat=false&alwaysShowChat=false&chatAndUsers=false" role="tabpanel">
+
+            <!-- Copiable direct link -->
+            <div class="clipboard-group">
+              <input type="text" value="https://pad.riseup.net/p/<%= roomnum %>" id="pad-link">
+              <span for="pad-link" class="copy-link" data-clipboard-target="#pad-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
+            </div>
+            
+            <iframe id="pad-iframe" src=""></iframe>
+          </div>
+          <!-- <div class="tab-pane" id="spreadsheet-frame" data-src="https://calc.mayfirst.org/<%= roomnum %>" role="tabpanel">
+            <iframe src=""></iframe>
+          </div> -->
+          <div class="tab-pane" id="chat-frame" data-src="https://irc.koumbit.net/?channels=#<%= roomnum %>&nick=guest" role="tabpanel">
+            <!-- Copiable direct link -->
+            <div class="clipboard-group">
+              <input type="text" value="https://irc.koumbit.net/?channels=#<%= roomnum %>" id="chat-link">
+              <span for="chat-link" class="copy-link" data-clipboard-target="#chat-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
+            </div>
+            <iframe id="chat-iframe" src=""></iframe>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+    </script>
+
+
+    <!-- ROOM SIDEBAR  -->
+    <script type="text/template" id="room-sidebar-template">
+      <!-- Room Link  -->
+      <aside class="sidebar" id="room-info" role="complementary">
+        <div class="clipboard-group">
+            <label for="room-link"><%= link %></label>
+            <!-- TODO: Add real URL -->
+            <input type="text" value="http://url.org/room/<%= roomnum %>" id="room-link">
+            <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span> 
+          </div>
+      </aside>
+
+      
+
+      <!-- Participants  -->
+      <aside class="sidebar" role="complementary" id="participant-list">
+        <div class="participant-list">
+          <h3><%= participants %> <button class="accordion" type="button" data-toggle="collapse" data-target="#participants-collapse-list" aria-expanded="true" aria-controls="participants-collapse-list"> </button></h3>
+          <div id="participants-collapse-list" class="scroll-list collapse in">
+            <ul id="participants">
+            <!-- template #participant-row-template -->
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Channels  -->
+      <aside class="sidebar" role="complementary" id="channel-list">
+        <div class="channel-list">
+          <h3><%= channels %> <button class="accordion" type="button" data-toggle="collapse" data-target="#channels-collapse-list" aria-expanded="true" aria-controls="channels-collapse-list"> </button></h3>
+          <div id="channels-collapse-list" class="scroll-list collapse in">
+            <ul id="channels">
+            <!-- template #channel-row-template -->
+            </ul>
+          </div>
+          <div id="add-channel-button-container"></div>
+          <!-- Add Channel Button Template -->
+        </div>
+      </aside>
+
+    </script>
+
+    <!-- Add Channel Button Template -->
+    <script type="text/template" id="add-channel-button-template">
+      <footer id="add-channel" class="widget-footer">
+        <button class="add-channel" id="add-channel-button"><a href="" title="Add a channel"><i class="icon"></i><%= add_channel %></a></button>
+      </footer>
+    </script>
+
+    <!-- PARTICIPANTS ROW  -->
+    <script type="text/template" id="participant-row-template">
+      <li id="<%= _id %>" class="<%= app.user.id == _id ? 'current-user' : '' %>">
+
+        <div class="info">
+          <!-- Show channel participant is in -->
+          <span class="is-in-channel"></span>
+
+          <!-- Show if participant is moderator -->
+          <span class="is-moderator"></span>
+
+          <!-- Show if participant is queued -->
+          <span class="is-queued"></span>
+        </div>
+
+        <%= username %>
+
+        <div class="controls">
+          <span class="moderator-controls"></span>
+          <span class="mute-controls"></span>
+          <span class="current-user-controls"></span>
+        </div>
+
+      </li>
+    </script>
+
+
+    <!-- LANGUAGE CHANNEL ROW  -->
+    <script type="text/template" id="channel-row-template">
+      <li id="<%= channel._id %>">
+        <%= channel.name %>
+        <div class="controls">
+          <span class="interpret-controls">
+          <!-- template #interpret-controls-template -->
+          </span>
+
+          <span class="join-controls">
+          <!-- template #join-channel-controls-template -->
+          </span>
+
+          <span class="leave-controls">
+          <!-- template #leave-channel-controls-template -->
+          </span>
+        </div>
+      </li>
+    </script>
+
+    <!-- MODERATOR CONTROLS TEMPLATE  -->
+    <script type="text/template" id="moderator-controls-template">
+      <!-- Moderator controls -->
+      <!-- Show if `in queue` and not `called on` -->
+      <button class="call-on" data-toggle="tooltip" href="" title="Call On"><i class="icon"></i></button>
+    </script>
+
+
+    <!-- CURRENT PARTICIPANT CONTROLS TEMPLATE -->
+    <script type="text/template" id="current-user-controls-template">
+      <!-- Show if not in queue - Toggle raise hand/lower hand -->
+      <button class="raise-hand" data-toggle="tooltip" href="" title="Raise Hand"><i class="icon"></i></button>
+    </script>
+
+
+    <!-- MUTE/UNMUTE CONTROL TEMPLATE -->
+    <script type="text/template" id="mute-controls-template">
+      <!-- Toggle mute/unmute -->
+      <button class="mute" data-toggle="tooltip" href="" title="Mute"><i class="icon"></i></button>
+    </script>
+
+    <!-- INTERPRET CONTROLS TEMPLATE  -->
+    <script type="text/template" id="interpret-controls-template">
+      <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= text.interpret %></button>
+      <!-- Join appears when interpreter exists and user is not already in channel -->
+    </script>
+
+    <!-- JOIN CONTROLS TEMPLATE  -->
+    <script type="text/template" id="join-channel-controls-template">
+      <!-- Join appears when interpreter exists and user is not already in channel -->
+      <button class="join" data-toggle="tooltip" title="Join Channel"><%= text.join_channel %></button>
+    </script>
+
+    <!-- LEAVE CONTROLS TEMPLATE  -->
+    <script type="text/template" id="leave-channel-controls-template">
+      <!-- Leave appears when user is in channel -->
+      <button class="leave" data-toggle="tooltip" title="Leave Channel"><%= text.leave_channel %></button>
+    </script>
+
+
+    <!-- REGISTER MODAL -->
+    <div id="register-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="register-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card" role="document">
+            <header class="modal-header"><h2>Register</h2></header>
+            <fieldset>
+              <label for="username">Enter Your Name</label>
+              <input id="user-name" type="text" value="" name="username" placeholder="Enter Your Name" required />
+              <select name="lang" id="lang-select">
+                <option value="">Select Language</option>
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+              </select>
+            </fieldset>
+            <footer class="modal-footer">
+              <input type="submit" id="register-submit-button" data-dismiss="modal" value="Enter" />
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD CHANNEL MODAL -->
+<script type="text/template" id="add-channel-modal-template">
+    <div id="channel-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="chanel-modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="card" role="document">
+            <header class="modal-header"><h2>Add a Channel</h2></header>
+            <fieldset>
+              <input type="text" name="name" id="channel-name" placeholder="Enter Channel Name" required />
+              <select name="lang" id="channel-lang-select">
+                <option value="">Select Language</option>
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+                <option value="fr">Fran&ccedil;ais</option>
+              </select>
+              <select name="translator" id="channel-translator-options">
+                <option value="">Select a translator</option>
+                <option value="none">None</option>
+              </select>
+            </fieldset>
+            <footer class="modal-footer">
+              <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Create" />
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+</script>        
+    <!-- LOAD APP -->
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>

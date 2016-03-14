@@ -3,42 +3,48 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// Create the Room model for mongodb
-/*module.exports = function(mongoose) {
-  var RoomSchema = new mongoose.Schema({
-    room: { type: String, unique: true },
-    users: { type: Array },
-  });
+var channelSchema = new Schema({
+   name: { type: String },
+   lang: { type: String },
+   users: { type: Array },
+   interpreter: { type: String }
+ });
 
-  var Room = mongoose.model('Room', RoomSchema);
-
-  var createRoomCallback = function(err) {
-    if (err) {
-      return console.log(err);
-    };
-    return console.log('Room was created');
-  };
-
-  var createRoom = function(roominfo) {
-    console.log('Creating room ' + roominfo.roomnum);
-    var room = new Room({
-      room: roominfo.roomnum,
-      users: roominfo.users
-    });
-    room.save(createRoomCallback);
-    return console.log('Save command was sent');
-  }
-  return {
-    createRoom: createRoom,
-    Room: Room
-  }
-}*/
-
-// define the userSchema
 var roomSchema = new Schema({
-  roomnum   : { type: String, unique: true },
-  users  : { type: Array }
+  roomnum: { type: Number, unique: true },
+  // user: {_id, lang, username}
+  users: {type: Array, default: []},
+  creator: {type: Schema.Types.ObjectId},
+  active: Boolean,
+  isModerated: Boolean,
+  moderator: {type: Schema.Types.ObjectId},
+  channels: [channelSchema],
+  isPrivate: Boolean,
+  handsQueue: {type: Array, default: []},
+  calledon: Schema.Types.Mixed
 });
 
-// Export the User model
-exports.Room = mongoose.model('Room', roomSchema);
+roomSchema.methods.addUser = function(userInfo, cb) {
+  this.users.push(userInfo);
+  cb();
+};
+
+roomSchema.methods.setModerator = function(userId) {
+  userId = (this.isModerated) ? userId : '';
+  this.moderator = userId;
+  return userId;
+};
+
+channelSchema.methods.addUser = function(userInfo, cb) {
+  this.users.push(userInfo);
+  cb();
+};
+
+channelSchema.methods.setInterpreter = function(userId) {
+  this.interpreter = userId;
+  return userId;
+}
+
+// Export the model
+module.exports.Room = mongoose.model('Room', roomSchema);
+module.exports.Channel = mongoose.model('Channel', channelSchema);

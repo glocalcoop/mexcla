@@ -1,0 +1,221 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to icons.
+// -----------------------------------------------------------------------------
+
+.icon {
+    @include fa-icon();
+}
+
+.controls button {
+    @extend .label;
+    @extend .label-pill;
+}
+
+.label {
+    visibility: visible;
+    opacity: 1;
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+    
+    &:empty {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
+.info {
+    background-color: transparent;
+    .language,
+    .moderator,
+    .queued {
+        @extend .label;
+        @extend .label-pill;
+        @include outline($brand-default);
+    }
+}
+
+.info {
+   transition: all .25s ease-in-out;
+   -moz-transition: all .25s ease-in-out;
+   -webkit-transition: all .25s ease-in-out;
+
+    .moderator {
+        @include outline($brand-primary);
+        .icon {
+            @extend %fa-gavel;
+        }
+    }
+    .language {
+        @include outline($brand-default);
+    }
+    .queued {
+        @include outline($brand-success);
+    }
+}
+
+.controls {
+    transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -webkit-transition: all .25s ease-in-out;
+
+    .interpret {
+        @extend .btn-warning;
+        .icon {
+            @extend %fa-futbol-o;
+        }
+    }
+
+    .join {
+        @extend .btn-success;
+        visibility: visible;
+        opacity: 1;
+        .icon {
+            @extend %fa-sign-in;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
+        }
+    }
+
+    .leave {
+        @extend .btn-danger;
+        visibility: visible;
+        opacity: 1;
+        .icon {
+            @extend %fa-sign-out;
+        }
+        &.on {
+            // @extend .btn-danger;
+            display: none;
+        }
+    }
+
+    .mute {
+        @extend .btn-success;
+        .icon {
+            @extend %fa-microphone;
+        }
+        &.muted {
+            @extend .btn-disabled;
+            .icon {
+                @extend %fa-microphone-slash;
+            }
+        }
+    }
+
+    .raise-hand {
+        @extend .btn-success;
+        .icon {
+            @extend %fa-hand-paper-o;
+        }
+        &.on {
+            @extend .btn-disabled;
+            .icon {
+                @extend %fa-hand-o-down;
+            }
+        }
+    }
+
+    .call-on {
+        @extend .btn-danger;
+        a:hover {
+            color: $white;
+        }
+        .icon {
+            @extend %fa-toggle-on;
+        }
+        &.on {
+            @extend .btn-disabled;
+            .icon {
+                @extend %fa-toggle-off;
+            }
+        }
+    }
+
+}
+
+#collaboration {
+
+    .icon {
+        @extend %fa;
+    }
+
+    .notepad {
+        .icon {
+            @extend %fa-sticky-note;
+        }
+    }
+
+    .chat  {
+        .icon {
+            @extend %fa-comments;
+        }
+    }
+
+}
+
+.add-channel {
+    @extend .btn-primary;
+
+    .icon {
+        @extend %fa-plus;
+        margin-right: 4px;
+    }
+
+}
+
+.submit-chat {
+    .icon {
+        @extend %fa;
+        @extend %fa-arrow-right;
+    }
+}
+
+.copy-link {
+    @extend .input-group-addon;
+    .icon {
+        @extend %fa;
+        @extend %fa-clipboard;
+    }
+}
+
+.source {
+  .icon {
+    @extend %fa;
+    @extend %fa-git;
+  }
+}
+
+
+@font-face {
+  font-family: 'gpl3';
+  src: url('../fonts/gpl3.eot?11730615');
+  src: url('../fonts/gpl3.eot?11730615#iefix') format('embedded-opentype'),
+       url('../fonts/gpl3.woff?11730615') format('woff'),
+       url('../fonts/gpl3.ttf?11730615') format('truetype'),
+       url('../fonts/gpl3.svg?11730615#gpl3') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'gpl3';
+    src: url('../font/gpl3.svg?11730615#gpl3') format('svg');
+  }
+}
+*/
+ 
+.license .icon:before {
+  @extend %fa;
+  font-family: "gpl3";
+  content: '\e800';
+} /* '' */
+
+

@@ -1,0 +1,71 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+
+#header {
+  @extend .container;
+}
+
+.bg-inverse {
+  a {
+    color: $white;
+  }
+}
+
+#utility-nav {
+  @extend .navbar-fixed-top;
+  @extend .navbar-dark;
+  @extend .bg-inverse;
+
+  .navbar-toggler {
+    @extend .hidden-sm-up;
+  }
+  .collapse {
+    @extend .navbar-toggleable-xs;
+  }
+}
+
+#utility-nav #language-links {
+    li {
+      display: inline-block;
+    }
+    a.nav-link {
+      @extend .btn;
+      @extend .btn-sm;
+      @extend .label;
+      @extend .btn-default; 
+    }
+}
+
+#tagline {
+  @extend .navbar-brand;
+}
+
+#logo {
+
+  margin-top: 90px;
+
+  img {
+    @extend .img-fluid;
+    @extend .img-square;
+    max-height: 100px;
+  }
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 0;
+  }
+}
+
+#welcome-text {
+  @extend .navbar-brand;
+  font-size: 80%;
+  color: $gray-darker;
+}
+
+#language-links {
+  @extend .nav;
+  @extend .navbar-nav;
+  @extend .pull-xs-right;
+  @extend .nav-pills;
+
+}

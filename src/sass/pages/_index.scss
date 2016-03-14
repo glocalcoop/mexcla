@@ -1,0 +1,95 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the index page.
+// -----------------------------------------------------------------------------
+
+.main-content.index {
+
+    .welcome-section,
+    .go-to-rooms-section {
+       @extend .col-sm-12; 
+    }
+
+    .welcome-section {
+        @extend .jumbotron;
+        @extend .text-xs-center;
+
+        padding-top: 1.75em;
+        padding-bottom: 1.75em;
+        background-color: transparent;
+
+        h1 {
+            font-size: $font-size-h1;
+            font-weight: $display1-weight;
+
+            @include media-breakpoint-up(sm) {
+                font-size: $display4-size;
+            }
+
+            @include media-breakpoint-up(md) {
+                font-size: $display3-size;
+            }
+
+
+        }
+
+    }
+
+    #join-room,
+    #create-room {
+        
+        @extend .col-sm-6;
+        @extend .col-xs-12;
+
+        h3 {
+            @extend .card-header;
+        }
+
+        fieldset {
+            @extend .card-block;
+            @extend .form-inline;
+        }
+
+        #room-number-button,
+        #create-new-room-button {
+            @extend .btn-lg;
+            @extend .btn-primary;
+        }
+        #room-number-button {
+            margin-top: .5em;
+        }
+        #create-new-room-button {
+            &:after {
+                @extend %clearfix;
+            }
+        }
+
+        label {
+            display: block;
+        }
+
+        label[for="roomnumber"] {
+            margin-bottom: 0;
+        }
+
+        // label[for="private-option"],
+        // label[for="moderation-option"] {
+
+        //     @extend .c-input;
+        //     @extend .c-checkbox;
+                        
+        // }
+
+        label[for="moderation-option"] {
+            margin-top: .5em;
+            clear: both;
+        }
+
+        label[for="private-option"] {
+            display: none;
+        }
+
+        
+        
+    }
+
+}

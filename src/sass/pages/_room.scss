@@ -1,0 +1,22 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the room page.
+// -----------------------------------------------------------------------------
+
+.main-content.room {
+    @extend .col-xs-12;
+    @extend .col-md-8;
+
+    header {
+        margin-bottom: 1em;
+    }
+
+    #connect-button {
+        @extend .center-block;
+    }
+
+    #mute-controls,
+    #interpretation-options {
+        display: none;
+    }
+
+}

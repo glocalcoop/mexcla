@@ -1,16 +1,39 @@
 'use strict';
 
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var userSchema = new mongoose.Schema({
+  username: { type: String },
+  currentRoom: {type: Schema.ObjectId, default: null},
+  lang: {type: String, default: 'en'},
+  //sess: {type: String, unique: true },
+  admin: {type: Boolean, default: false},
+  isMuted: {type: Boolean, default: false}
+});
+
+var User = mongoose.model( 'User', userSchema );
+
+module.exports = User;
+
+/*
 module.exports = function(mongoose) {
-  var userSchema = new mongoose.Schema({
-    username : { type: String },
-    roomnum : { type: String },
-    lang : { type: String, default: 'en' },
-    sess : { type: String, unique: true }
-  });
+  return {
+    findByRoom: findByRoom,
+    findBySessionId: findBySessionId,
+    findUsersByRoom: findUsersByRoom,
+    findOneAndUpdateRoom: findOneAndUpdateRoom,
+    findOneAndUpdateUsername: findOneAndUpdateUsername,
+    register: register,
+    remove: remove,
+    findOneAndUpdate: findOneAndUpdate,
+    User: User
+  };
+};
+*/
 
-  var User = mongoose.model( 'User', userSchema );
-
-  var registerCallback = function(err) {
+/* 
+var registerCallback = function(err) {
     if (err) {
       return console.log(err);
     };
@@ -105,17 +128,6 @@ module.exports = function(mongoose) {
           console.log(model);
         }
       }
-    );
-  };
-  return {
-    findByRoom: findByRoom,
-    findBySessionId: findBySessionId,
-    findUsersByRoom: findUsersByRoom,
-    findOneAndUpdateRoom: findOneAndUpdateRoom,
-    findOneAndUpdateUsername: findOneAndUpdateUsername,
-    register: register,
-    remove: remove,
-    findOneAndUpdate: findOneAndUpdate,
-    User: User
-  }
-};
+  
+
+*/

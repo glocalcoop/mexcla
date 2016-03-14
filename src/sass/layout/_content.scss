@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the content of the site/application.
+// -----------------------------------------------------------------------------
+
+#content {
+  @extend .container;
+  @extend .clear-fix;
+  min-height: 100%;
+  padding-top: 1em;
+}
+
+.main-content.index {
+    @extend .row;
+    margin-bottom: 5em;
+}

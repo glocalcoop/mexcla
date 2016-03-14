@@ -1,0 +1,56 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the form component.
+// -----------------------------------------------------------------------------
+
+form {
+    @extend .form-inline;
+}
+
+fieldset {
+  @extend .card-block;
+  @extend .form-group;
+  @extend .form-inline;
+}
+
+input[type="text"],
+select {
+  @extend .form-control;
+}
+
+label {
+  font-weight: bold;
+  color: $brand-info;
+}
+
+input[type="checkbox"]{
+  @extend .checkbox;
+}
+
+input[type="radio"]{
+  @extend .radio;
+}
+
+.clipboard-group,
+.chat-group {
+  @extend .input-group;
+}
+
+.clipboard-group {
+
+  label,
+  .copy-link {
+      @extend .input-group-addon;
+  }
+
+  label {
+    @extend .bg-inverse;
+    background-color:       $brand-default;
+    color:                  $white;
+  }
+
+  .copy-link {
+    @include button-variant($white, $brand-primary, $brand-primary);
+  }
+
+}
+
