@@ -509,26 +509,23 @@ Views.CurrentUserControls = Backbone.View.extend({
  * Mute Controls
  */
 Views.MuteControls = Backbone.View.extend({
-  // Might need to change to use class, if not unique on page
-  // el: $('.mute-controls');
   template: _.template($('#mute-controls-template').html()),
-  render: function(userId) {
+  render: function(userid) {
+    this.userid = userid;
     this.$el.html(this.template({}));
-    this.muteToggle(userId);
+    this.muteToggle(userid);
   },
-  muteToggle: function(userId) {
-    $('#' + userId + ' .mute').click(function(event) {
+  muteToggle: function(userid) {
+    var that = this;
+    if(app.room.isUserMuted(userid)) {
+      $(this).addClass('muted');
+    } else {
+      $(this).removeClass('muted');
+    }
+    $('#' + userid + ' .mute').click(function(event) {
       event.preventDefault();
-      if(true === app.user.attributes.isMuted) {
-        app.user.set('isMuted', false);
-        app.audio.muteAudio('unmute');
-        $(this).toggleClass('muted');
-      } else if (false === app.user.attributes.isMuted) {
-        app.user.set('isMuted', true);
-        app.audio.muteAudio('mute');
-        $(this).toggleClass('muted');
-      }
-
+      app.room.mute(that.userid);
+      $(this).toggleClass('muted');
     });
   }
 });

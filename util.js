@@ -50,9 +50,16 @@ function removeFromQueue(queue, userId) {
   });
 }
 
+function userIndex(users, userId) {
+  return _.findIndex(users, function(user){
+    return user._id.equals(userId);
+  });
+}
+
 module.exports = {
   generateRoomNumber: generateRoomNumber,
   isRoomNumAvailable: isRoomNumAvailable,
   isUserInRoom: isUserInRoom,
-  removeFromQueue: removeFromQueue
+  removeFromQueue: removeFromQueue,
+  userIndex: userIndex
 };

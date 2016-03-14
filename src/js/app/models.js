@@ -33,6 +33,26 @@ Models.callOffAjax = function(roomId, personCalledOnId) {
 };
 
 /**
+ * Issues mute or unmute http request
+ * @param {string} - 'mute' or 'unmute'
+ * @param {string} - roomid
+ * @param {string} - userid
+ */
+Models.muteAjax = function(action, roomId, userId) {
+  if (action === 'mute' || action === 'unmute') {
+    console.error('first argument must be "mute" or "unmute"');
+    return false;
+  }
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+/**
  * @param {string} - action: 'join' or 'leave'
  * @param {string} - roomId
  * @param {string} - channelId
@@ -96,8 +116,23 @@ Models.User = Backbone.Model.extend({
     Models.callOffAjax(roomId, personCalledOnId).done(function(data){
       // when successful
     });
+  },
+  isInAChannel: function() {
+    var userId = this.get('_id');
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return _.contains(channel.users, userId);
+    });
+    return (_.isUndefined(channel)) ? false : channel.lang;
   }
+
 });
+
+Models.util.room = {};
+Models.util.room.userById = function(users, userid) {
+  return _.find(users, function(user) {
+    return user._id === userid;
+  });
+};
 
 Models.Room = Backbone.Model.extend({
   idAttribute: "_id",
@@ -155,16 +190,44 @@ Models.Room = Backbone.Model.extend({
   },
   // string, string -> removes user from channel
   leaveChannel: function(userId, channelId) {
+    this.trigger('leaveChannel', 'main', channelId);
     Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
       //
     });
   },
   joinChannel: function(userId, channelId) {
+    this.trigger('joinChannel', 'hear', channelId);
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });
-  },// string, string -> changes interpreter of channel
-  // given a channel (object) it updates the db/server with any of the changed priorities
+  },
+  /**
+   * Mutes a user
+   * Does two things:
+   * 1. Mutes user's audio
+   * 2. Updates isMuted field for user on server.
+   * @param {string} - userid
+   */
+  mute: function(userid) {
+    if (this.isUserMuted(userid)) {
+      // user is muted, so unmute:
+      Models.muteAjax('unmute', this.get('_id'), userid);
+      app.audio.mute('unmute');
+    } else {
+      Models.muteAjax('mute', this.get('_id'), userid);
+      app.audio.mute('mute');
+    }
+     console.log('mute called: ' + userid);
+  },
+  /**
+   * Reveals if user is muted or not
+   * @param {string} - userid
+   * @returns {boolean}
+   */
+  isUserMuted: function(userid) {
+    var user = Models.util.room.userById(this.get('users'), userid);
+    return user.isMuted;
+  },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
       alert(res.error);
@@ -223,7 +286,7 @@ Models.Audio = Backbone.Model.extend({
   initialize: function() {
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
-    this.setCallbacks(_.noop, _.noop, _.noop);
+    this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
     this.login();
   },
   login: function() { 
@@ -304,22 +367,50 @@ Models.Audio = Backbone.Model.extend({
    * input: "main", "hear", "interpret"
    * output: false or self
    */
-  switchChannel: function(option) {
+  switchChannel: function(option, channelId) {
+    console.log(channelId);
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
     }
     if (option === 'main') {
+      console.log('dtmf: 0');
       Models.util.audio.dtmf(this.cur_call, '0');
     } else if (option === 'hear') {
+      console.log('dtmf: 1');
       Models.util.audio.dtmf(this.cur_call, '1');
     } else if (option === 'interpret') {
+      console.log('dtmf: 2');
       Models.util.audio.dtmf(this.cur_call, '2');
     } else {
       console.error('Switch Channel takes these options: "main", "hear", "interpret"');
       return false;
     }
     return this;
+  },
+  /**
+   * @param "mute", "unmute", "status"
+   * @return {boolean}
+   * This is another way of muting. It's nicer that dialing '*' because you can find out if you are already muted or not...
+   * we should investigate if there is a difference between these to options!'
+   */
+  mute: function(option) {
+      if (!this.cur_call) {
+        console.error('You must start a call before you mute yourself.');
+        return false;
+      }
+      if (option === 'mute') {
+        console.log('muted');
+        return this.cur_call.setMute('off');
+      } else if (option === 'unmute') {
+        console.log('unmuted');
+        return this.cur_call.setMute('on');
+      } else if (option === 'status'){
+        return this.cur_call.setMute();
+      } else {
+        console.error('Mute user takes these options: "mute", "unmute", "status"');
+        return false;
+      }
   },
   /**
    * @param "mute", "unmute"
@@ -340,6 +431,17 @@ Models.Audio = Backbone.Model.extend({
     }
     return this;
   },
+  joinLeaveEventsOn: function() {
+    if (app.user.isInAChannel()) {
+      this.switchChannel('hear');
+    }
+    this.listenTo(app.room, 'joinChannel', this.switchChannel);
+    this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+  },
+  joinLeaveEventsOff: function() {
+    this.stopListening(app.room);
+  },
+  
   /**
    * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
     * Can we set user as `moderator` if they are moderator?
@@ -355,7 +457,7 @@ Models.Audio = Backbone.Model.extend({
      * evoluxbr.github.io/verto-docs
    */
   setFloor: function() {},
-  setMute: function() {},
-
+  setMute: function() {}
+  
  });
 

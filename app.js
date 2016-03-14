@@ -59,7 +59,7 @@ app.post('/users/new', function(req, res){
  * Responds to user.fetch() in backbone
  */
 app.get('/users/:id', function(req,res){
-  getUserInfo(req.params.id, function(user){
+  getFullUserInfo(req.params.id, function(user){
     res.json(user);
   });
 });
@@ -86,7 +86,7 @@ app.get('/room/:roomnum', function(req,res){
     if (util.isUserInRoom(userId, room.users)) {
       res.json(room);
     } else {
-      getUsernameAndLang(userId, function(userInfo){
+      getUserInfo(userId, function(userInfo){
         room.users.push(userInfo);
         room.save(function(err, roomInfo){
           if (err) {handleError(err);}
@@ -226,7 +226,7 @@ app.post('/room/id/:id/lowerhand', function(req,res){
 });
 
 /**
- * Create On
+ * Call On
  */
 app.post('/room/id/:id/callon', function(req,res){
   callOn(req.body._id, req.params.id, function(room){
@@ -236,7 +236,7 @@ app.post('/room/id/:id/callon', function(req,res){
 });
 
 /**
- * Create Off
+ * Call Off
  */
 app.post('/room/id/:id/calloff', function(req, res){
   callOff(req.body._id, req.params.id, function(room){
@@ -247,13 +247,23 @@ app.post('/room/id/:id/calloff', function(req, res){
 });
 
 /**
- * Leave Room
- * Leave room and respond with user info
- * NOTE: perhaps add a message or boolean to indicate to the front-end that it needs to display the home page?
+ * Mute and unmute
  */
+
+app.post('/room/id/:id/mute', function(req, res){
+  muteOrUnmute('mute', req.params.id, req.body._id, res);
+});
+
+app.post('/room/id/:id/unmute', function(req, res){
+  muteOrUnmute('unmute', req.params.id, req.body._id, res); 
+});
+
+/**
+ * TODO:Leave Room
+  */
 app.get('/room/:roomnum/leave', function(req,res){
   removeUserFromRoom(req.cookies.id, req.params.roomnum, function(room){
-    getUserInfo(req.cookies.id, function(user){
+    getFullUserInfo(req.cookies.id, function(user){
       res.json(user);
     });
   });
@@ -289,7 +299,7 @@ function createRoom(req, res, userId, newRoomNumber) {
   });
   console.log(room);
   //get user info for our logged in user
-  getUsernameAndLang(userId, function(userInfo){
+  getUserInfo(userId, function(userInfo){
     room.addUser(userInfo, function(err){
       if (err) { console.log(err);}
       //save the room to the db
@@ -367,7 +377,7 @@ function getUsernameAndLangPromise(userId) {
 /**
  * passes user info object {_id,username,lang} to callback
  */
-function getUserInfo(userId, callback) {
+function getFullUserInfo(userId, callback) {
   models.User.findById(userId, function(err, user){
     if (err) {handleError(err);}
     callback(user);
@@ -375,11 +385,13 @@ function getUserInfo(userId, callback) {
 }
 
 /**
- * passes user info object {_id,username,lang} to callback
+ * passes user info object {_id,username,lang, isMuted} to callback
  */
-function getUsernameAndLang(userId, callback) {
+function getUserInfo(userId, callback) {
   models.User.findById(userId, 'username lang', function(err, user){
     if (err) {handleError(err);}
+    // adds isMuted field. This information does not need to be permanently stored with the user's information, but its need to be kept with the room.
+    user.isMuted = false;
     callback(user);
   });
 }
@@ -413,8 +425,6 @@ function removeUserFromChannel (users, userToRemove) {
   });
 }
 
-
-
 /**
  * Input: @string roomid, @string channelid
  * Output: @callback channelDoc
@@ -423,6 +433,44 @@ function getChannel(roomid, channelid, callback) {
   models.Room.findById(roomid, function(err, room){
     if (err) {handleError(err);}
     callback(room.channels.id(channelid));
+  });
+}
+
+/**
+ * @param {boolean} - updated isMuted status
+ * @param {string} - userid
+ * @return {function}
+ */
+function changeMuteStatus(status, userid) {
+  return function(user) {
+    if (user._id.equals(userid)) {
+      user.isMuted = status;
+      return user;
+    } else {
+      return user;
+    }
+  };
+}
+/**
+ * @param {string} - 'mute' or 'unmute'
+ * @param {string} - roomrid
+ * @param {string} - userid
+ * @param {object} - response object from express
+ */
+
+function muteOrUnmute(action, roomid, userid, res) {
+  var isMutedStatus = (action === 'mute') ? true : false;
+  console.log(isMutedStatus);
+  models.Room.findById(roomid, function(err, room){
+    if (err) {handleError(err);}
+    room.users  = _.map(room.toObject().users, changeMuteStatus(isMutedStatus, userid));
+    room.save(function(err){
+      if (err) {
+        console.error(err);
+      } 
+      res.json(room);
+      emitRoom(room);
+    });
   });
 }
 
