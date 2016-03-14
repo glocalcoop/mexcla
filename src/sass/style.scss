@@ -3,13 +3,14 @@
 // 0. Override variables
 @import
   'utils/settings',
-  'themes/theme-default';
+  'themes/theme-default',
+  'utils/variables';
 
 // 1. Vendors
 @import
-  'vendor/bootstrap/scss/bootstrap',
   'vendor/tether/tether',
-  'vendor/font-awesome/scss/font-awesome';
+  'libs/bootstrap',
+  'libs/font-awesome';
   
 // 2. Configuration and helpers
 @import
@@ -19,10 +20,7 @@
 // 3. Base stuff
 @import
   'base/base',
-  'base/typography',
-  'base/webicons';
-//   'base/fonts',
-//   'base/helpers';
+  'base/typography';
 
 // 4. Layout-related sections
 @import
