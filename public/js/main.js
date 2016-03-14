@@ -13,6 +13,8 @@ var config = {
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
 
+
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -855,6 +857,7 @@ Views.RoomSidebar = Backbone.View.extend({
   render: function() {
     var templateData =  _.clone(websiteText[app.user.get('lang')]);
     templateData.roomnum = this.model.get('roomnum');
+    templateData.roomLink = $(location).attr('href');
     this.$el.append(this.template(templateData));
     this.renderParticipants();
     this.renderChannels();
@@ -1340,23 +1343,6 @@ $(function() {
         }
      
     });
-
-
-    /**
-     * Room Link
-     * Add URL to room-link field so it can be copied
-     */
-    $('#room-link').val( $(location).attr('href') );
-
-    /**
-     * Participants
-     * Toggle `on` class when participant controls are clicked
-     */
-    // $('#participants').on('click', 'button', function(event) {
-
-    //     $(this).toggleClass('on');
-
-    // });
 
 
     /**

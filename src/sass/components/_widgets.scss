@@ -75,6 +75,10 @@
     
 }
 
+#room-link {
+    @include font-size($small);
+}
+
 .username {
     font-weight: bold;
     &:after {
