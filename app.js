@@ -339,7 +339,7 @@ function callOn(userId, roomId, callback){
 function callOff(userId, roomId, callback){
   models.Room.findById(roomId, function(err, room){
     if (err) {handleError(err);}
-    if (room.calledon._id.equals(userId)) {
+    if (room.calledon && room.calledon._id.equals(userId)) {
       room.calledon = false;
       room.save(function(err, roomInfo){
         (err) ? callback(err) : callback(roomInfo);
