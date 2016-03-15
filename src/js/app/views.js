@@ -386,6 +386,7 @@ Views.RoomSidebar = Backbone.View.extend({
   render: function() {
     var templateData =  _.clone(websiteText[app.user.get('lang')]);
     templateData.roomnum = this.model.get('roomnum');
+    templateData.roomLink = $(location).attr('href');
     this.$el.append(this.template(templateData));
     this.renderParticipants();
     this.renderChannels();

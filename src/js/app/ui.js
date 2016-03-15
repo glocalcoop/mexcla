@@ -19,23 +19,6 @@ $(function() {
 
 
     /**
-     * Room Link
-     * Add URL to room-link field so it can be copied
-     */
-    $('#room-link').val( $(location).attr('href') );
-
-    /**
-     * Participants
-     * Toggle `on` class when participant controls are clicked
-     */
-    // $('#participants').on('click', 'button', function(event) {
-
-    //     $(this).toggleClass('on');
-
-    // });
-
-
-    /**
      * Collaboration
      * Load collaboration iframes when tab is clicked
      */
