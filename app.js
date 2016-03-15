@@ -477,6 +477,12 @@ function muteOrUnmute(action, roomid, userid, res) {
  * pushes a 'room update' event to the namespace for the given room
  */
 function emitRoom(room) {
+  if (_.isUndefined(namespaces[room.roomnum])) {
+    console.error({error: 'room namespace is undefined'});
+    // create name space
+    // after a server crash, we have to re-create the namespaces
+    namespaces['' + room.roomnum] = io.of('/' + room.roomnum);
+  }
   namespaces[room.roomnum].emit('room update', room);
 }
 
