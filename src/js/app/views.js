@@ -742,7 +742,7 @@ Views.AddChannelModal = Backbone.View.extend({
         'name': name,
         'lang': lang, 
         'interpreter': interpreter,
-        'users': [app.user.id]
+        'users': []
       });
     });
   }
