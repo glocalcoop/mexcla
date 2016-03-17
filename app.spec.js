@@ -267,7 +267,24 @@ describe('rooms', function(){
 
   describe('update channel', function() {
     
-    it('should add new interpreter', function(done){
+    it('should add user to channel as interpreter', function(done){
+       request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/interpret')
+        .set('cookie', 'id=' + newUserId)
+        .send({_id: newUserId})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql(newUserId);
+          res.body.channels[0].users.length.should.eql(1);
+          done();
+        });
+        
+
+    });
+
+    // These are no longer how we update the channels
+    /*
+     it('should add new interpreter', function(done){
       request
         .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
         .send({interpreter: 'pointsman'})
@@ -280,7 +297,7 @@ describe('rooms', function(){
     });
 
     it('should change the interpreter and the language', function(done){
-      request
+      requestn
         .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
         .send({interpreter: 'der springer', lang: 'gr'})
         .set('cookie', 'id=' + userId)
@@ -290,7 +307,7 @@ describe('rooms', function(){
           done();
         });
     });
-
+     */
   });
 
   describe('hand raising', function(){
