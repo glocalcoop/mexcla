@@ -275,7 +275,7 @@ Models.Room = Backbone.Model.extend({
   }, 
   // string, string -> changes interpreter of channel
   becomeInterpreter: function(userId, channelId) {
-    this.trigger('becomeInterpreter', 'main', channelId);
+    this.trigger('becomeInterpreter', 'interpret', channelId);
     Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
       //
     });
