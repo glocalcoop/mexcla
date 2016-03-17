@@ -178,8 +178,8 @@ app.post('/room/id/:roomid/channel/:channelid/join', function(req,res){
  * Join Channel as Interpreter
  * 
  */
-app.post('/room/id/:roomId/channel/:channelid/interpret', function(req,res){
-  models.Room.findById(req.params.roomId, function(err, room) {
+app.post('/room/id/:roomid/channel/:channelid/interpret', function(req,res){
+  models.Room.findById(req.params.roomid, function(err, room) {
     var channel = room.channels.id(req.params.channelid);
     channel.users.push(req.body._id);
     channel.interpreter = req.body._id;
@@ -196,8 +196,8 @@ app.post('/room/id/:roomId/channel/:channelid/interpret', function(req,res){
  * Leave Channel
  * 
  */
-app.post('/room/id/:roomId/channel/:channelid/leave', function(req,res){
-  models.Room.findById(req.params.roomId, function(err, room) {
+app.post('/room/id/:roomid/channel/:channelid/leave', function(req,res){
+  models.Room.findById(req.params.roomid, function(err, room) {
     var channel = room.channels.id(req.params.channelid);
     channel.users = removeUserFromChannel(channel.users, req.body._id);
     channel.interpreter = removeInterpreterFromChannel(channel.interpreter, req.body._id);
