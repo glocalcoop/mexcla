@@ -278,7 +278,6 @@ describe('rooms', function(){
           res.body.channels[0].users.length.should.eql(1);
           done();
         });
-        
     });
 
     it('should add user to channel as non-interpreter', function(done){
@@ -292,7 +291,22 @@ describe('rooms', function(){
           res.body.channels[0].users[1].should.eql('123userid');
           done();
         });
+    });
+    
+     it('should remove non-interpreter from channel', function(done){
+        
+        request
+          .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
+          .send({_id: '123userid'})
+          .end(function(err, res){
+            console.log(res.body);
+            // should.not.exist(err);
+            res.body.channels[0].interpreter.should.eql(newUserId);
+            res.body.channels[0].users.length.should.eql(1);
+            done();
+          });
 
+      });
 
     });
 
@@ -322,7 +336,7 @@ describe('rooms', function(){
         });
     });
      */
-  });
+
 
   describe('hand raising', function(){
 
@@ -501,7 +515,7 @@ describe('rooms', function(){
       
     });
   });
-
 });
+
 
 
