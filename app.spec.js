@@ -209,7 +209,7 @@ describe('rooms', function(){
     it('should add new Spanish channel', function(done){
       request
         .post(url + '/room/id/' + roomId + '/channel/create')
-        .send({lang: 'es'})
+        .send({lang: 'es', interpreter: '', name: 'new channel name'})
         .set('cookie', 'id=' + userId)
         .end(function(err,res){
           res.body.roomnum.should.eql(roomNumber);
@@ -279,6 +279,20 @@ describe('rooms', function(){
           done();
         });
         
+    });
+
+    it('should add user to channel as non-interpreter', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/join')
+        .send({_id: '123userid'})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql(newUserId);
+          res.body.channels[0].users.length.should.eql(2);
+          res.body.channels[0].users[1].should.eql('123userid');
+          done();
+        });
+
 
     });
 
@@ -297,7 +311,7 @@ describe('rooms', function(){
     });
 
     it('should change the interpreter and the language', function(done){
-      requestn
+      request
         .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
         .send({interpreter: 'der springer', lang: 'gr'})
         .set('cookie', 'id=' + userId)
