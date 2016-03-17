@@ -200,7 +200,7 @@ app.post('/room/id/:roomid/channel/:channelid/leave', function(req,res){
   models.Room.findById(req.params.roomid, function(err, room) {
     var channel = room.channels.id(req.params.channelid);
     channel.users = removeUserFromChannel(channel.users, req.body._id);
-    channel.interpreter = removeInterpreterFromChannel(channel.interpreter, req.body._id);
+    channel = removeInterpreterFromChannel(channel, req.body._id);
     room.save(function(err){
       if (err) {handleError(err);}
       res.json(room);
@@ -440,13 +440,15 @@ function removeUserFromChannel (users, userToRemove) {
 }
 
 /**
- * @param {string} - Intepreter ID
+ * @param {object} - channel
  * @param {string} - Userid of user that should be removed
+ * @returns {object} - channel
  */
-function removeInterpreterFromChannel(interpreterId, userId) {
-  if(!_.isUndefined(interpreterId) && interpreterId == userId) {
-    return '';
+function removeInterpreterFromChannel(channel, userId) {
+  if(!_.isUndefined(channel.interpreter) && channel.interpreter === userId) {
+     channel.interpreter = '';
   }
+  return channel;
 }
 
 /**

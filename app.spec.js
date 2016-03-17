@@ -299,8 +299,7 @@ describe('rooms', function(){
           .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
           .send({_id: '123userid'})
           .end(function(err, res){
-            console.log(res.body);
-            // should.not.exist(err);
+            should.not.exist(err);
             res.body.channels[0].interpreter.should.eql(newUserId);
             res.body.channels[0].users.length.should.eql(1);
             done();
