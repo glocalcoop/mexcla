@@ -274,24 +274,11 @@ Models.Room = Backbone.Model.extend({
     });
   }, 
   // string, string -> changes interpreter of channel
-  addInterpreterToChannel: function(interpreterId, channelId) {
-    var that = this;
-    var channels = this.get('channels');
-    var updatedChannels = _.map(channels, function(channel){
-      if (channel._id === channelId) {
-        that.addUserToChannel(interpreterId, channelId);
-        channel.interpreter = interpreterId;
-        that.updateChannelAjax(channel).done(function(channel){
-          // callback...could check for errors here
-          // console.log(channel);
-        });
-        return channel;
-      } else {
-        return channel;
-      }
+  becomeInterpreter: function(userId, channelId) {
+    this.trigger('becomeInterpreter', 'main', channelId);
+    Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
+      //
     });
-    this.set('channels', updatedChannels); // updated before server...should eventually ensure it is saved to the db
-    return this;
   },
   // string, string -> removes user from channel
   leaveChannel: function(userId, channelId) {
@@ -1244,7 +1231,7 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
-      app.room.addInterpreterToChannel(data.channel._id, app.user.id);
+      app.room.becomeInterpreter(app.user.id, data.channel._id);
     });
   },
   joinChannel: function(data) {
