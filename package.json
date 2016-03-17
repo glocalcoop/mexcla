@@ -7,7 +7,7 @@
   "homepage": "https://github.com/glocalcoop/mexcla",
   "scripts": {
     "start": "node app",
-    "test": "node_modules/.bin/mocha -w",
+    "test": "node_modules/.bin/mocha app.spec.js",
     "mongod": "mkdir -p db; mongod -dbpath db --port 27018"
   },
   "keywords": [
