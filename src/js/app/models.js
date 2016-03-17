@@ -443,6 +443,7 @@ Models.Audio = Backbone.Model.extend({
     }
     this.listenTo(app.room, 'joinChannel', this.switchChannel);
     this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
   },
   joinLeaveEventsOff: function() {
     this.stopListening(app.room);

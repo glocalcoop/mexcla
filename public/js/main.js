@@ -13,8 +13,6 @@ var config = {
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
 
-
-
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -552,6 +550,7 @@ Models.Audio = Backbone.Model.extend({
     }
     this.listenTo(app.room, 'joinChannel', this.switchChannel);
     this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
   },
   joinLeaveEventsOff: function() {
     this.stopListening(app.room);
