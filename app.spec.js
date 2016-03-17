@@ -305,7 +305,19 @@ describe('rooms', function(){
             done();
           });
 
-      });
+     });
+
+    it("should remove the interpreter from the channel and set the channel's interpreter to be a blank string", function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
+        .send({_id: newUserId})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql('');
+          res.body.channels[0].users.length.should.eql(0);
+          done();
+        });
+    });
 
     });
 
