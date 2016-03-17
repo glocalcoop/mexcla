@@ -652,7 +652,7 @@ Views.Channel = Backbone.View.extend({
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
-      app.room.addInterpreterToChannel(data.channel._id, app.user.id);
+      app.room.becomeInterpreter(app.user.id, data.channel._id);
     });
   },
   joinChannel: function(data) {

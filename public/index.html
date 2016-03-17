@@ -377,34 +377,35 @@
     </div>
 
     <!-- ADD CHANNEL MODAL -->
-<script type="text/template" id="add-channel-modal-template">
-    <div id="channel-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="chanel-modalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="card" role="document">
-            <header class="modal-header"><h2>Add a Channel</h2></header>
-            <fieldset>
-              <input type="text" name="name" id="channel-name" placeholder="Enter Channel Name" required />
-              <select name="lang" id="channel-lang-select">
-                <option value="">Select Language</option>
-                <option value="de">Deutsch</option>
-                <option value="en">English</option>
-                <option value="es">Espa&ntilde;ol</option>
-                <option value="fr">Fran&ccedil;ais</option>
-              </select>
-              <select name="translator" id="channel-translator-options">
-                <option value="">Select a translator</option>
-                <option value="none">None</option>
-              </select>
-            </fieldset>
-            <footer class="modal-footer">
-              <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Create" />
-            </footer>
+    <script type="text/template" id="add-channel-modal-template">
+        <div id="channel-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="chanel-modalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="card" role="document">
+                <header class="modal-header"><h2>Add a Channel</h2></header>
+                <fieldset>
+                  <input type="text" name="name" id="channel-name" placeholder="Enter Channel Name" required />
+                  <select name="lang" id="channel-lang-select">
+                    <option value="">Select Language</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">English</option>
+                    <option value="es">Espa&ntilde;ol</option>
+                    <option value="fr">Fran&ccedil;ais</option>
+                  </select>
+                  <select name="translator" id="channel-translator-options">
+                    <option value="">Select a translator</option>
+                    <option value="">None</option>
+                  </select>
+                </fieldset>
+                <footer class="modal-footer">
+                  <input type="submit" id="channel-submit-button" data-dismiss="modal" value="Create" />
+                </footer>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-</script>        
+    </script>
+
     <!-- LOAD APP -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>

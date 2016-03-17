@@ -209,7 +209,7 @@ describe('rooms', function(){
     it('should add new Spanish channel', function(done){
       request
         .post(url + '/room/id/' + roomId + '/channel/create')
-        .send({lang: 'es'})
+        .send({lang: 'es', interpreter: '', name: 'new channel name'})
         .set('cookie', 'id=' + userId)
         .end(function(err,res){
           res.body.roomnum.should.eql(roomNumber);
@@ -267,7 +267,63 @@ describe('rooms', function(){
 
   describe('update channel', function() {
     
-    it('should add new interpreter', function(done){
+    it('should add user to channel as interpreter', function(done){
+       request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/interpret')
+        .set('cookie', 'id=' + newUserId)
+        .send({_id: newUserId})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql(newUserId);
+          res.body.channels[0].users.length.should.eql(1);
+          done();
+        });
+    });
+
+    it('should add user to channel as non-interpreter', function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/join')
+        .send({_id: '123userid'})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql(newUserId);
+          res.body.channels[0].users.length.should.eql(2);
+          res.body.channels[0].users[1].should.eql('123userid');
+          done();
+        });
+    });
+    
+     it('should remove non-interpreter from channel', function(done){
+        
+        request
+          .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
+          .send({_id: '123userid'})
+          .end(function(err, res){
+            should.not.exist(err);
+            res.body.channels[0].interpreter.should.eql(newUserId);
+            res.body.channels[0].users.length.should.eql(1);
+            done();
+          });
+
+     });
+
+    it("should remove the interpreter from the channel and set the channel's interpreter to be a blank string", function(done){
+      request
+        .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/leave')
+        .send({_id: newUserId})
+        .end(function(err, res){
+          should.not.exist(err);
+          res.body.channels[0].interpreter.should.eql('');
+          res.body.channels[0].users.length.should.eql(0);
+          done();
+        });
+    });
+
+    });
+
+    // These are no longer how we update the channels
+    /*
+     it('should add new interpreter', function(done){
       request
         .post(url + '/room/id/' + roomId + '/channel/' + channelid + '/update')
         .send({interpreter: 'pointsman'})
@@ -290,8 +346,8 @@ describe('rooms', function(){
           done();
         });
     });
+     */
 
-  });
 
   describe('hand raising', function(){
 
@@ -470,7 +526,7 @@ describe('rooms', function(){
       
     });
   });
-
 });
+
 
 
