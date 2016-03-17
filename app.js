@@ -174,25 +174,40 @@ app.post('/room/id/:roomid/channel/:channelid/join', function(req,res){
 });
 
 
+/**
+ * Join Channel as Interpreter
+ * 
+ */
+app.post('/room/id/:roomId/channel/:channelid/interpret', function(req,res){
+  models.Room.findById(req.params.roomId, function(err, room) {
+    var channel = room.channels.id(req.params.channelid);
+    channel.users.push(req.body._id);
+    channel.interpreter = req.body._id;
+    room.save(function(err, roomInfo){
+      if (err) {handleError(err);}
+      res.json(roomInfo);
+      emitRoom(roomInfo);
+    });
+  });
+});
 
 
 /**
  * Leave Channel
  * 
  */
-app.post('/room/id/:roomid/channel/:channelid/leave', function(req,res){
-  models.Room.findById(req.params.roomid, function(err, room) {
+app.post('/room/id/:roomId/channel/:channelid/leave', function(req,res){
+  models.Room.findById(req.params.roomId, function(err, room) {
     var channel = room.channels.id(req.params.channelid);
     channel.users = removeUserFromChannel(channel.users, req.body._id);
+    channel.interpreter = removeInterpreterFromChannel(channel.interpreter, req.body._id);
     room.save(function(err){
       if (err) {handleError(err);}
       res.json(room);
       emitRoom(room);
      });
     });
-
 });
-
 
 
 /**
@@ -415,34 +430,44 @@ function removeUserFromRoom(id, roomNumber, callback) {
 }
 
 /**
- * @param {array} - Channels
- * @param {string} - Userid of user that shoulbe removed
+ * @param {array} - Users
+ * @param {string} - Userid of user that should be removed
  */
 function removeUserFromChannel (users, userToRemove) {
-  return _.reject(users, function(userid){
-    return userid === userToRemove;
+  return _.reject(users, function(userId){
+    return userId === userToRemove;
   });
 }
 
 /**
- * Input: @string roomid, @string channelid
+ * @param {string} - Intepreter ID
+ * @param {string} - Userid of user that should be removed
+ */
+function removeInterpreterFromChannel(interpreterId, userId) {
+  if(!_.isUndefined(interpreterId) && interpreterId == userId) {
+    return '';
+  }
+}
+
+/**
+ * Input: @string roomId, @string channelid
  * Output: @callback channelDoc
  */
-function getChannel(roomid, channelid, callback) {
-  models.Room.findById(roomid, function(err, room){
+function getChannel(roomId, channelId, callback) {
+  models.Room.findById(roomId, function(err, room){
     if (err) {handleError(err);}
-    callback(room.channels.id(channelid));
+    callback(room.channels.id(channelId));
   });
 }
 
 /**
  * @param {boolean} - updated isMuted status
- * @param {string} - userid
+ * @param {string} - userId
  * @return {function}
  */
-function changeMuteStatus(status, userid) {
+function changeMuteStatus(status, userId) {
   return function(user) {
-    if (user._id.equals(userid)) {
+    if (user._id.equals(userId)) {
       user.isMuted = status;
       return user;
     } else {
@@ -453,16 +478,16 @@ function changeMuteStatus(status, userid) {
 /**
  * @param {string} - 'mute' or 'unmute'
  * @param {string} - roomrid
- * @param {string} - userid
+ * @param {string} - userId
  * @param {object} - response object from express
  */
 
-function muteOrUnmute(action, roomid, userid, res) {
+function muteOrUnmute(action, roomId, userId, res) {
   var isMutedStatus = (action === 'mute') ? true : false;
   console.log(isMutedStatus);
-  models.Room.findById(roomid, function(err, room){
+  models.Room.findById(roomId, function(err, room){
     if (err) {handleError(err);}
-    room.users  = _.map(room.toObject().users, changeMuteStatus(isMutedStatus, userid));
+    room.users  = _.map(room.toObject().users, changeMuteStatus(isMutedStatus, userId));
     room.save(function(err){
       if (err) {
         console.error(err);
