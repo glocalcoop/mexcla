@@ -13,6 +13,8 @@ var config = {
   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
 };
 
+
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",

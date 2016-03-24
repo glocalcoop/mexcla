@@ -5,52 +5,52 @@
  */
 
 // Core variables and mixins
-@import "vendor/bootstrap/scss/variables";
-@import "vendor/bootstrap/scss/mixins";
+@import "../libs/bootstrap/scss/variables";
+@import "../libs/bootstrap/scss/mixins";
 
 // Reset and dependencies
-@import "vendor/bootstrap/scss/normalize";
-// @import "vendor/bootstrap/scss/print";
+@import "../libs/bootstrap/scss/normalize";
+// @import "../libs/bootstrap/scss/print";
 
 // Core CSS
-@import "vendor/bootstrap/scss/reboot";
-// @import "vendor/bootstrap/scss/type";
-// @import "vendor/bootstrap/scss/images";
-// @import "vendor/bootstrap/scss/code";
-@import "vendor/bootstrap/scss/grid";
-@import "vendor/bootstrap/scss/tables";
-@import "vendor/bootstrap/scss/forms";
-@import "vendor/bootstrap/scss/buttons";
+@import "../libs/bootstrap/scss/reboot";
+// @import "../libs/bootstrap/scss/type";
+// @import "../libs/bootstrap/scss/images";
+// @import "../libs/bootstrap/scss/code";
+@import "../libs/bootstrap/scss/grid";
+@import "../libs/bootstrap/scss/tables";
+@import "../libs/bootstrap/scss/forms";
+@import "../libs/bootstrap/scss/buttons";
 
 // Components
-@import "vendor/bootstrap/scss/animation";
-@import "vendor/bootstrap/scss/dropdown";
-@import "vendor/bootstrap/scss/button-group";
-@import "vendor/bootstrap/scss/input-group";
-@import "vendor/bootstrap/scss/custom-forms";
-@import "vendor/bootstrap/scss/nav";
-@import "vendor/bootstrap/scss/navbar";
-@import "vendor/bootstrap/scss/card";
-// @import "vendor/bootstrap/scss/breadcrumb";
-// @import "vendor/bootstrap/scss/pagination";
-// @import "vendor/bootstrap/scss/pager";
-@import "vendor/bootstrap/scss/labels";
-@import "vendor/bootstrap/scss/jumbotron";
-@import "vendor/bootstrap/scss/alert";
-// @import "vendor/bootstrap/scss/progress";
-// @import "vendor/bootstrap/scss/media";
-@import "vendor/bootstrap/scss/list-group";
-@import "vendor/bootstrap/scss/responsive-embed";
-@import "vendor/bootstrap/scss/close";
+@import "../libs/bootstrap/scss/animation";
+@import "../libs/bootstrap/scss/dropdown";
+@import "../libs/bootstrap/scss/button-group";
+@import "../libs/bootstrap/scss/input-group";
+@import "../libs/bootstrap/scss/custom-forms";
+@import "../libs/bootstrap/scss/nav";
+@import "../libs/bootstrap/scss/navbar";
+@import "../libs/bootstrap/scss/card";
+// @import "../libs/bootstrap/scss/breadcrumb";
+// @import "../libs/bootstrap/scss/pagination";
+// @import "../libs/bootstrap/scss/pager";
+@import "../libs/bootstrap/scss/labels";
+@import "../libs/bootstrap/scss/jumbotron";
+@import "../libs/bootstrap/scss/alert";
+// @import "../libs/bootstrap/scss/progress";
+// @import "../libs/bootstrap/scss/media";
+@import "../libs/bootstrap/scss/list-group";
+@import "../libs/bootstrap/scss/responsive-embed";
+@import "../libs/bootstrap/scss/close";
 
 // Components w/ JavaScript
-@import "vendor/bootstrap/scss/modal";
-@import "vendor/bootstrap/scss/tooltip";
-@import "vendor/bootstrap/scss/popover";
-// @import "vendor/bootstrap/scss/carousel";
+@import "../libs/bootstrap/scss/modal";
+@import "../libs/bootstrap/scss/tooltip";
+@import "../libs/bootstrap/scss/popover";
+// @import "../libs/bootstrap/scss/carousel";
 
 // Utility classes
-@import "vendor/bootstrap/scss/utilities";
-@import "vendor/bootstrap/scss/utilities-background";
-@import "vendor/bootstrap/scss/utilities-spacing";
-@import "vendor/bootstrap/scss/utilities-responsive";
+@import "../libs/bootstrap/scss/utilities";
+@import "../libs/bootstrap/scss/utilities-background";
+@import "../libs/bootstrap/scss/utilities-spacing";
+@import "../libs/bootstrap/scss/utilities-responsive";
