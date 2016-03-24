@@ -30,6 +30,7 @@
     "backbone": "1.1.2",
     "jquery": "1.11.2",
     "js-cookie": "2.1.0",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "socket.io-client": "1.4.5"
   }
 }
