@@ -90,7 +90,7 @@ Models.Room = Backbone.Model.extend({
   },
   serverErrorCheck: function(res) {
     if (_.has(res, 'error')) {
-      alert(res.error);
+      console.log('error message received: ' + res.error);
       return false;
     } else {
       return true;

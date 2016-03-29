@@ -170,16 +170,16 @@ describe('room model', function(){
       app.audio = {};
       app.audio.mute = sinon.spy();
       sinon.spy($, "ajax");
+      
     });
 
     after(function(){
       app.audio = null;
       app.user = null;
-      Models.muteAjax.restore();
       $.ajax.restore();
     });
 
-    it('unmutes user', function(){
+    it('unmutes user and sends unmute ajax request', function(){
       var room = new Models.Room(room6433Attr);
       app.user = new Models.User(MrButtonsAttr);
       room.mute(MrButtonsAttr._id);
@@ -189,7 +189,7 @@ describe('room model', function(){
       app.audio.mute.getCall(0).args[0].should.eql('unmute');
     });
 
-    it('mutes user', function() {
+    it('mutes user and sends mute ajax request', function() {
       var room = new Models.Room(room6433Attr);
       app.user = new Models.User(AliceAttr);
       room.mute(AliceAttr._id);
@@ -197,9 +197,17 @@ describe('room model', function(){
       $.ajax.getCall(1).args[0].url.should.eql('/room/id/56faea72ef6b9d2e0726881f/mute');
       $.ajax.getCall(1).args[0].data._id.should.eql(AliceAttr._id);
       app.audio.mute.getCall(1).args[0].should.equal('mute');
-      
     });
-    
+  });
+
+  describe('serverErrorCheck', function(){
+
+    it("returns true if there is no error and false if there is an error", function(){
+      var room = new Models.Room({});
+      room.serverErrorCheck({'error': 'some error message'}).should.be.false;
+      room.serverErrorCheck(room6433Attr).should.be.true;
+    });
+
   });
 
   
