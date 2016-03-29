@@ -15,27 +15,24 @@
     </script>
     <script>mocha.setup('bdd')</script>
     <!-- SCRIPTS FROM index.HTML -->
-    <script type="text/javascript" src="../public/js/libs/jssip-0.6.18.js"></script>
-    <script type="text/javascript" src="../public/js/libs/jquery.js"></script>
-    <script type="text/javascript" src="../public/js/libs/js.cookie.js"></script>
-    <script type="text/javascript" src="../public/js/libs/underscore.js"></script>
-    <script type="text/javascript" src="../public/js/libs/backbone.js"></script>
-    <script type="text/javascript" src="../public/js/libs/socket.io-1.4.5.js"></script>
-    <script type="text/javascript" src="../public/js/libs/tether/tether.min.js"></script>
-    <script type="text/javascript" src="../public/js/libs/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../public/js/libs/clipboard/dist/clipboard.min.js"></script>
-
-    <script type="text/javascript" src="../public/js/libs/jquery.json-2.4.min.js"></script>
-    <script type="text/javascript" src="../public/js/libs/jquery.FSRTC.js"></script>
-    <script type="text/javascript" src="../public/js/libs/jquery.jsonrpcclient.js"></script>
-    <script type="text/javascript" src="../public/js/libs/jquery.verto.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/libs/js-cookie/src/js.cookie.js"></script>
+    <script type="text/javascript" src="../public/libs/underscore/underscore.js"></script>
+    <script type="text/javascript" src="../public/libs/backbone/backbone.js"></script>
+    <script type="text/javascript" src="../public/libs/socket.io-client/socket.io.js"></script>
+    <script type="text/javascript" src="../public/libs/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../public/libs/clipboard/dist/clipboard.min.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.FSRTC.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.jsonrpcclient.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.verto.js"></script>
 
 
     <!-- load code you want to test here -->
-    <script src="../src/js/app/masterfile.js"></script>
-    <script src="../src/js/app/models.js"></script>
+    <script src="../public/js/main.js"></script>
     <!-- mock library -->
-    <script src="../node_modules/simple-mock/index.js"></script>
+    <script src="lib/sinon-1.17.3.js"></script>
     <!-- Load your test files here -->
     <script type="text/javascript" src="roomTest.js"></script>
     <script>
