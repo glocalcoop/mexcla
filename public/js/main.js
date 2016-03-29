@@ -346,11 +346,8 @@ Models.Room = Backbone.Model.extend({
   }, 
   fetchByNum: function() {
     var that = this;
-    $.ajax({
-      type: 'GET',
-      url: '/room/' + this.attributes.roomnum
-    }).done(function(room){
-      that.set(room);
+    this.fetchByNumAjax().done(function(room){
+        that.set(room);
     });
     return this;
   },
@@ -371,7 +368,13 @@ Models.Room = Backbone.Model.extend({
       url: '/room/id/' + this.get('_id') + '/channel/create',
       data: channel
     });
-  }, 
+  },
+  fetchByNumAjax: function() {
+    return $.ajax({
+      type: 'GET',
+      url: '/room/' + this.get('roomnum')
+    });
+  },
   // string, string -> changes interpreter of channel
   becomeInterpreter: function(userId, channelId) {
     this.trigger('becomeInterpreter', 'interpret', channelId);

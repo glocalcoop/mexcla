@@ -64,4 +64,23 @@ describe('room model', function(){
       testRoom.isUserMuted(id).should.eql(false);
     });
   });
+
+  describe('fetchByNum', function(){
+    
+    it("gets room attributes and updates the room's attributes", function(){
+      var room  = new Models.Room({roomnum: 4858});
+      sinon.stub(room, 'fetchByNumAjax', function(){
+        return {
+          done: function(callback) {
+            callback(THE_TESTING_ROOM);
+          }
+        };
+      });
+      (typeof room.get('creator')).should.eql('undefined');
+      room.fetchByNum();
+      room.get('creator').should.eql('56b3c680b71df7e02b280bde');
+    });
+    
+  });
+
 });
