@@ -94,7 +94,7 @@ describe('room model', function(){
     });
   });
 
-  describe('becomeInterpreter', function(){
+  describe('Methods that trigger custom events', function(){
 
     before(function(){
       sinon.stub(Models, 'updateChannelAjax', stubAjax('data'));
@@ -104,15 +104,41 @@ describe('room model', function(){
       Models.updateChannelAjax.restore();
     });
     
-    it('triggers bcomeInterpreter', function(){
-      
-      var spy = sinon.spy();
-      testRoom.on('becomeInterpreter', spy);
-      testRoom.becomeInterpreter('user123', 'channel123');
+    describe('becomeInterpreter', function(){
+      it('triggers becomeInterpreter', function(){
+        
+        var spy = sinon.spy();
+        testRoom.on('becomeInterpreter', spy);
+        testRoom.becomeInterpreter('user123', 'channel123');
 
-      spy.calledOnce.should.be.true;
-      spy.calledWithExactly('interpret', 'channel123').should.be.true;
+        spy.calledOnce.should.be.true;
+        spy.calledWithExactly('interpret', 'channel123').should.be.true;
+      });
     });
+
+    describe('leaveChannel', function(){
+      it('triggers leaveChannel event', function(){
+        var spy = sinon.spy();
+        testRoom.on('leaveChannel', spy);
+        testRoom.leaveChannel('user123', 'channel123');
+        
+        spy.calledOnce.should.be.true;
+        spy.calledWithExactly('main', 'channel123').should.be.true;
+      });
+    });
+
+    describe('joinChannel', function(){
+      it('triggers joinChannel event', function(){
+        var spy = sinon.spy();
+        testRoom.on('joinChannel', spy);
+        testRoom.joinChannel('user123', 'channel123');
+        
+        spy.calledOnce.should.be.true;
+        spy.calledWithExactly('hear', 'channel123').should.be.true;
+
+      });
+    });
+    
   });
 
   
