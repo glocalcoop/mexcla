@@ -43,7 +43,7 @@ describe('util', function(){
 describe('room model', function(){
   var testRoom = new Models.Room(THE_TESTING_ROOM);
   before(function(){
-    simple.mock(testRoom, 'createChannelAjax', mockCreateChannelAjax);
+    sinon.stub(testRoom, 'createChannelAjax', mockCreateChannelAjax);
   });
 
   it('should create a channel', function(){
@@ -66,8 +66,7 @@ describe('room model', function(){
   });
 
   describe('fetchByNum', function(){
-    
-    it("gets room attributes and updates the room's attributes", function(){
+    it("gets room info and then updates the room's attributes", function(){
       var room  = new Models.Room({roomnum: 4858});
       sinon.stub(room, 'fetchByNumAjax', function(){
         return {
@@ -80,7 +79,7 @@ describe('room model', function(){
       room.fetchByNum();
       room.get('creator').should.eql('56b3c680b71df7e02b280bde');
     });
-    
   });
 
+  
 });
