@@ -105,254 +105,6 @@ var websiteText = {
     }
 };
 
-Models.raiseHandAjax = function(roomId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/raisehand'
-  });
-};
-
-Models.lowerHandAjax = function(roomId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/lowerhand'
-  });
-};
-
-Models.callOnAjax = function(roomId, personCalledOnId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/callon',
-    data: {
-      _id: personCalledOnId
-    }
-  });
-};
-
-Models.callOffAjax = function(roomId, personCalledOnId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/calloff',
-    data: {
-      _id: personCalledOnId
-    }
-  });
-};
-
-/**
- * Issues mute or unmute http request
- * @param {string} - 'mute' or 'unmute'
- * @param {string} - roomid
- * @param {string} - userid
- */
-Models.muteAjax = function(action, roomId, userId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/' + action,
-    data: {
-      _id: userId
-    }
-  });
-};
-
-/**
- * @param {string} - action: 'join' or 'leave'
- * @param {string} - roomId
- * @param {string} - channelId
- * @param {string} - userId
- * @returns {jqHXR}
- */
-Models.updateChannelAjax = function(action, roomId, channelId, userId) {
-  return $.ajax({
-    type: 'POST',
-    url: '/room/id/' + roomId + '/channel/' + channelId + '/' + action,
-    data: {
-      _id: userId
-    }
-  });
-};
-
-/**
- * Interpretation Rules
- *
- * Interpret
- *   When user opts to become interpreter
- *   - She is added to the channel's users array
- *   - She is added as channel interpreter
- *   - Only Leave button appears
- *   Interpret button appears when channel has no interpreter
- * Hear (Join)
- *   When user opts to become a listener
- *   - She is added to the channel's users array
- *   - Only the Leave button appears
- *   Join button appears when user is not already in the channel (as 
- *   listener or interpreter)
- * Main (Leave)
- *   Leave button appears when user is in the channel
- *
- */
-
-Models.User = Backbone.Model.extend({
-  idAttribute: "_id",
-  urlRoot: "/users",
-  raiseHand: function() {
-    var roomId = app.room.get('_id');
-    Models.raiseHandAjax(roomId).done(function(data){
-      // Do something when successful?
-      // or show 'raising hand in progress?'
-    });
-  },
-  lowerHand: function() {
-    var roomId = app.room.get('_id');
-    Models.lowerHandAjax(roomId).done(function(data){
-      // 
-    });
-  },
-  callOn: function(personCalledOnId) {
-    var roomId = app.room.get('_id');
-    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
-      // when successful
-    });
-  },
-  callOff: function(personCalledOnId) {
-    var roomId = app.room.get('_id');
-    Models.callOffAjax(roomId, personCalledOnId).done(function(data){
-      // when successful
-    });
-  },
-  isInAChannel: function() {
-    var userId = this.get('_id');
-    var channel = _.find(app.room.get('channels'), function(channel){
-      return _.contains(channel.users, userId);
-    });
-    return (_.isUndefined(channel)) ? false : channel.lang;
-  }
-
-});
-
-Models.util.room = {};
-Models.util.room.userById = function(users, userid) {
-  return _.find(users, function(user) {
-    return user._id === userid;
-  });
-};
-
-Models.Room = Backbone.Model.extend({
-  idAttribute: "_id",
-  urlRoot: "/room/id",
-  initialize: function() {
-    this.establishSocket();
-  }, 
-  fetchByNum: function() {
-    var that = this;
-    $.ajax({
-      type: 'GET',
-      url: '/room/' + this.attributes.roomnum
-    }).done(function(room){
-      that.set(room);
-    });
-    return this;
-  },
-  // channel (object) -> adds new channel to room;
-  createChannel: function(channel) {
-    var that = this;
-    
-    this.createChannelAjax(channel).done(function(res){
-      if (that.serverErrorCheck(res)) {
-        that.set(res);
-      }
-    });
-    return this;
-  },
-  createChannelAjax: function(channel) {
-    return $.ajax({
-      type: 'POST',
-      url: '/room/id/' + this.get('_id') + '/channel/create',
-      data: channel
-    });
-  }, 
-  // string, string -> changes interpreter of channel
-  becomeInterpreter: function(userId, channelId) {
-    this.trigger('becomeInterpreter', 'interpret', channelId);
-    Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
-      //
-    });
-  },
-  // string, string -> removes user from channel
-  leaveChannel: function(userId, channelId) {
-    this.trigger('leaveChannel', 'main', channelId);
-    Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
-      //
-    });
-  },
-  joinChannel: function(userId, channelId) {
-    this.trigger('joinChannel', 'hear', channelId);
-    Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
-      //
-    });
-  },
-  /**
-   * Mutes a user
-   * Does two things:
-   * 1. Mutes user's audio
-   * 2. Updates isMuted field for user on server.
-   * @param {string} - userid
-   */
-  mute: function(userid) {
-    if (this.isUserMuted(userid)) {
-      // user is muted, so unmute:
-      Models.muteAjax('unmute', this.get('_id'), userid);
-      // if the user muted is the current user, unmute their audio
-      if (userid === app.user.get('_id')) {
-        app.audio.mute('unmute');
-      }
-    } else {
-      Models.muteAjax('mute', this.get('_id'), userid);
-      // if is the current user, mute their audio
-      if (userid === app.user.get('_id')) {
-        app.audio.mute('mute');
-      }
-    }
-     console.log('mute called: ' + userid);
-  },
-  /**
-   * Reveals if user is muted or not
-   * @param {string} - userid
-   * @returns {boolean}
-   */
-  isUserMuted: function(userid) {
-    var user = Models.util.room.userById(this.get('users'), userid);
-    return user.isMuted;
-  },
-  serverErrorCheck: function(res) {
-    if (_.has(res, 'error')) {
-      alert(res.error);
-      return false;
-    } else {
-      return true;
-    }
-  },
-  establishSocket: function() {
-    var that = this;
-    var roomnum = this.get('roomnum');
-    this.socket = io('/' + roomnum);
-    this.socket.on('room update', function(room){
-      that.set(room);
-    });
-  }
-});
-
-Models.Language = Backbone.Model.extend({});
-
-Models.Languages = Backbone.Collection.extend({
-  model: Models.Language,
-  url: '/js/languages.json',
-
-  parse: function(response){
-      return response;
-  }
-});
-
 Models.util.audio.dtmf = function (cur_call, key) {
   if(cur_call) {
     var ret = cur_call.dtmf(key);
@@ -573,7 +325,256 @@ Models.Audio = Backbone.Model.extend({
   setFloor: function() {},
   setMute: function() {}
   
- });
+});
+
+Models.Language = Backbone.Model.extend({});
+
+Models.Languages = Backbone.Collection.extend({
+  model: Models.Language,
+  url: '/js/languages.json',
+
+  parse: function(response){
+    return response;
+  }
+});
+
+Models.Room = Backbone.Model.extend({
+  idAttribute: "_id",
+  urlRoot: "/room/id",
+  initialize: function() {
+    this.establishSocket();
+  }, 
+  fetchByNum: function() {
+    var that = this;
+    $.ajax({
+      type: 'GET',
+      url: '/room/' + this.attributes.roomnum
+    }).done(function(room){
+      that.set(room);
+    });
+    return this;
+  },
+  // channel (object) -> adds new channel to room;
+  createChannel: function(channel) {
+    var that = this;
+    
+    this.createChannelAjax(channel).done(function(res){
+      if (that.serverErrorCheck(res)) {
+        that.set(res);
+      }
+    });
+    return this;
+  },
+  createChannelAjax: function(channel) {
+    return $.ajax({
+      type: 'POST',
+      url: '/room/id/' + this.get('_id') + '/channel/create',
+      data: channel
+    });
+  }, 
+  // string, string -> changes interpreter of channel
+  becomeInterpreter: function(userId, channelId) {
+    this.trigger('becomeInterpreter', 'interpret', channelId);
+    Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
+      //
+    });
+  },
+  // string, string -> removes user from channel
+  leaveChannel: function(userId, channelId) {
+    this.trigger('leaveChannel', 'main', channelId);
+    Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
+      //
+    });
+  },
+  joinChannel: function(userId, channelId) {
+    this.trigger('joinChannel', 'hear', channelId);
+    Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
+      //
+    });
+  },
+  /**
+   * Mutes a user
+   * Does two things:
+   * 1. Mutes user's audio
+   * 2. Updates isMuted field for user on server.
+   * @param {string} - userid
+   */
+  mute: function(userid) {
+    if (this.isUserMuted(userid)) {
+      // user is muted, so unmute:
+      Models.muteAjax('unmute', this.get('_id'), userid);
+      // if the user muted is the current user, unmute their audio
+      if (userid === app.user.get('_id')) {
+        app.audio.mute('unmute');
+      }
+    } else {
+      Models.muteAjax('mute', this.get('_id'), userid);
+      // if is the current user, mute their audio
+      if (userid === app.user.get('_id')) {
+        app.audio.mute('mute');
+      }
+    }
+     console.log('mute called: ' + userid);
+  },
+  /**
+   * Reveals if user is muted or not
+   * @param {string} - userid
+   * @returns {boolean}
+   */
+  isUserMuted: function(userid) {
+    var user = Models.util.room.userById(this.get('users'), userid);
+    return user.isMuted;
+  },
+  serverErrorCheck: function(res) {
+    if (_.has(res, 'error')) {
+      alert(res.error);
+      return false;
+    } else {
+      return true;
+    }
+  },
+  establishSocket: function() {
+    var that = this;
+    var roomnum = this.get('roomnum');
+    this.socket = io('/' + roomnum);
+    this.socket.on('room update', function(room){
+      that.set(room);
+    });
+  }
+});
+
+/**
+ * Interpretation Rules
+ *
+ * Interpret
+ *   When user opts to become interpreter
+ *   - She is added to the channel's users array
+ *   - She is added as channel interpreter
+ *   - Only Leave button appears
+ *   Interpret button appears when channel has no interpreter
+ * Hear (Join)
+ *   When user opts to become a listener
+ *   - She is added to the channel's users array
+ *   - Only the Leave button appears
+ *   Join button appears when user is not already in the channel (as 
+ *   listener or interpreter)
+ * Main (Leave)
+ *   Leave button appears when user is in the channel
+ *
+ */
+
+Models.User = Backbone.Model.extend({
+  idAttribute: "_id",
+  urlRoot: "/users",
+  raiseHand: function() {
+    var roomId = app.room.get('_id');
+    Models.raiseHandAjax(roomId).done(function(data){
+      // Do something when successful?
+      // or show 'raising hand in progress?'
+    });
+  },
+  lowerHand: function() {
+    var roomId = app.room.get('_id');
+    Models.lowerHandAjax(roomId).done(function(data){
+      // 
+    });
+  },
+  callOn: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOnAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
+  },
+  callOff: function(personCalledOnId) {
+    var roomId = app.room.get('_id');
+    Models.callOffAjax(roomId, personCalledOnId).done(function(data){
+      // when successful
+    });
+  },
+  isInAChannel: function() {
+    var userId = this.get('_id');
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return _.contains(channel.users, userId);
+    });
+    return (_.isUndefined(channel)) ? false : channel.lang;
+  }
+
+});
+
+Models.raiseHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/raisehand'
+  });
+};
+
+Models.lowerHandAjax = function(roomId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/lowerhand'
+  });
+};
+
+Models.callOnAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/callon',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
+
+Models.callOffAjax = function(roomId, personCalledOnId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/calloff',
+    data: {
+      _id: personCalledOnId
+    }
+  });
+};
+
+/**
+ * Issues mute or unmute http request
+ * @param {string} - 'mute' or 'unmute'
+ * @param {string} - roomid
+ * @param {string} - userid
+ */
+Models.muteAjax = function(action, roomId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+/**
+ * @param {string} - action: 'join' or 'leave'
+ * @param {string} - roomId
+ * @param {string} - channelId
+ * @param {string} - userId
+ * @returns {jqHXR}
+ */
+Models.updateChannelAjax = function(action, roomId, channelId, userId) {
+  return $.ajax({
+    type: 'POST',
+    url: '/room/id/' + roomId + '/channel/' + channelId + '/' + action,
+    data: {
+      _id: userId
+    }
+  });
+};
+
+Models.util.room = {};
+
+Models.util.room.userById = function(users, userid) {
+  return _.find(users, function(user) {
+    return user._id === userid;
+  });
+};
 
 
 /**
