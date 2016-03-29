@@ -20,6 +20,10 @@ var THE_TESTING_ROOM = {
     } ] 
 };
 
+var AliceAttr = {"lang":"en","__v":0,"username":"Alice","_id":"56faea72ef6b9d2e0726881e","isMuted":false,"admin":false,"currentRoom":null};
+
+var room6433Attr = {"__v":1,"roomnum":6433,"active":true,"creator":"56faea72ef6b9d2e0726881e","isModerated":false,"moderator":null,"_id":"56faea72ef6b9d2e0726881f","handsQueue":[],"channels":[],"users":[{"lang":"en","_id":"56faea72ef6b9d2e0726881e","username":"Alice","isMuted":false},{"lang":"en","_id":"56faee7eef6b9d2e07268820","username":"MrButtons","isMuted":true}]};
+
 var mockCreateChannelAjax = function(info) {
   return {
     done: function(next) {
@@ -40,11 +44,21 @@ var stubAjax = function(returnMe) {
 };
 
 
-describe('util', function(){
+describe('Models.util', function(){
   describe('room.userByRoom', function(){
     it('should return userInfo given userid', function(){
       var user = Models.util.room.userById(THE_TESTING_ROOM.users, '56b3c680b71df7e02b280be0');
       user.username.should.eql('FAKE ENGLISH USER');
+    });
+  });
+  describe('room.userById', function(){
+    var room = new Models.Room(room6433Attr);
+    it('returns user object', function(){
+      var user = Models.util.room.userById(room.get('users'), AliceAttr._id);
+      user.username.should.eql("Alice");
+    });
+    it('returns undefined if no user is found', function(){
+      _.isUndefined(Models.util.room.userById(room.get('users'), "USERID")).should.be.true;
     });
   });
 });
@@ -138,7 +152,14 @@ describe('room model', function(){
 
       });
     });
-    
+  });
+
+  describe('isUserMuted', function(){
+    it('determines if user is muted', function(){
+      var room = new Models.Room(room6433Attr);
+      room.isUserMuted("56faea72ef6b9d2e0726881e").should.eql(false);
+      room.isUserMuted("56faee7eef6b9d2e07268820").should.eql(true);
+    });
   });
 
   
