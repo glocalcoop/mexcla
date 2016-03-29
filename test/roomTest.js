@@ -1,39 +1,8 @@
-var THE_TESTING_ROOM = { 
-  __v: 1,
-  _id: '56b3c680b71df7e02b280be1',
-  active: true,
-  creator: '56b3c680b71df7e02b280bde',
-  moderator: '56b3c680b71df7e02b280bde',
-  roomnum: 4845,
-  channels: [],
-  users: 
-  [ { lang: 'es',
-      _id: '56b3c680b71df7e02b280bde',
-      username: 'FAKE SPANISH USER',
-      isMuted: true
-    },
-    
-    { lang: 'en',
-      _id: '56b3c680b71df7e02b280be0',
-      username: 'FAKE ENGLISH USER',
-      isMuted: false
-    } ] 
-};
-
 var AliceAttr = {"lang":"en","__v":0,"username":"Alice","_id":"56faea72ef6b9d2e0726881e","isMuted":false,"admin":false,"currentRoom":null};
 
 var MrButtonsAttr = {"__v":0,"username":"MrButtons","_id":"56faee7eef6b9d2e07268820","isMuted":true,"admin":false,"lang":"en","currentRoom":null};
 
 var room6433Attr = {"__v":1,"roomnum":6433,"active":true,"creator":"56faea72ef6b9d2e0726881e","isModerated":false,"moderator":null,"_id":"56faea72ef6b9d2e0726881f","handsQueue":[],"channels":[],"users":[{"lang":"en","_id":"56faea72ef6b9d2e0726881e","username":"Alice","isMuted":false},{"lang":"en","_id":"56faee7eef6b9d2e07268820","username":"MrButtons","isMuted":true}]};
-
-var mockCreateChannelAjax = function(info) {
-  return {
-    done: function(next) {
-      var room = _.extend(THE_TESTING_ROOM, {channels:[{"lang":"es","_id":"56b3d01331301f243699d1d0","users":[]}]});
-      next(room);
-    }
-  };
-};
 
 var stubAjax = function(returnMe) {
   return function(){
@@ -45,14 +14,14 @@ var stubAjax = function(returnMe) {
   };
 };
 
-
 describe('Models.util', function(){
   describe('room.userByRoom', function(){
     it('should return userInfo given userid', function(){
-      var user = Models.util.room.userById(THE_TESTING_ROOM.users, '56b3c680b71df7e02b280be0');
-      user.username.should.eql('FAKE ENGLISH USER');
+      var user = Models.util.room.userById(room6433Attr.users, "56faee7eef6b9d2e07268820");
+      user.username.should.eql('MrButtons');
     });
   });
+
   describe('room.userById', function(){
     var room = new Models.Room(room6433Attr);
     it('returns user object', function(){
@@ -63,55 +32,50 @@ describe('Models.util', function(){
       _.isUndefined(Models.util.room.userById(room.get('users'), "USERID")).should.be.true;
     });
   });
+
+  describe('room.serverErrorCheck', function(){
+    it("returns true if there is no error and false if there is an error", function(){
+      var room = new Models.Room({});
+      Models.util.room.serverErrorCheck({'error': 'some error message'}).should.be.false;
+      Models.util.room.serverErrorCheck(room6433Attr).should.be.true;
+    });
+  });
+
 });
 
 
 describe('room model', function(){
-  var testRoom = new Models.Room(THE_TESTING_ROOM);
+  describe('createChannel', function(){
   
-  before(function(){
-    sinon.stub(testRoom, 'createChannelAjax', mockCreateChannelAjax);
-  });
-
-  describe('createchannel', function(){
     it('should create a channel', function(){
-      assert.equal(testRoom.get('channels').length, 0);
-      testRoom.createChannel({'lang': 'es'});
-      assert.equal(testRoom.get('channels').length, 1);
-      assert.equal(testRoom.get('channels')[0].lang, 'es');
-    });
-  });
-  
-  describe('isUserMuted', function(){
-
-    it('should determine if user is muted', function(){
-      var id = THE_TESTING_ROOM.users[0]._id;
-      testRoom.isUserMuted(id).should.eql(true);
-    });
-    it('should determine if user is not muted', function(){
-      var id = THE_TESTING_ROOM.users[1]._id;
-      testRoom.isUserMuted(id).should.eql(false);
+      var room = new Models.Room(room6433Attr);
+      var newChannel = {channels: [{"name":"some new channel","lang":"es","interpreter":"","_id":"56fb016cef6b9d2e07268821","users":[]}]};
+      
+      sinon.stub(room, 'createChannelAjax', stubAjax(_.extend(room.toJSON(), newChannel)));
+      
+      room.get('channels').should.have.lengthOf(0);
+      room.createChannel({'lang': 'es'});
+      
+      room.get('channels').should.have.lengthOf(1);
+      room.get('channels')[0].lang.should.eql('es');
     });
   });
 
   describe('fetchByNum', function(){
     it("gets room info and then updates the room's attributes", function(){
-      var room  = new Models.Room({roomnum: 4858});
-      sinon.stub(room, 'fetchByNumAjax', function(){
-        return {
-          done: function(callback) {
-            callback(THE_TESTING_ROOM);
-          }
-        };
-      });
+      var room  = new Models.Room({roomnum: 6433});
+      sinon.stub(room, 'fetchByNumAjax', stubAjax(room6433Attr));
+
       (typeof room.get('creator')).should.eql('undefined');
       room.fetchByNum();
-      room.get('creator').should.eql('56b3c680b71df7e02b280bde');
+      room.get('creator').should.eql("56faea72ef6b9d2e0726881e");
     });
   });
 
   describe('Methods that trigger custom events', function(){
-
+    
+    var testRoom = new Models.Room();
+    
     before(function(){
       sinon.stub(Models, 'updateChannelAjax', stubAjax('data'));
     });
@@ -199,16 +163,5 @@ describe('room model', function(){
       app.audio.mute.getCall(1).args[0].should.equal('mute');
     });
   });
-
-  describe('serverErrorCheck', function(){
-
-    it("returns true if there is no error and false if there is an error", function(){
-      var room = new Models.Room({});
-      room.serverErrorCheck({'error': 'some error message'}).should.be.false;
-      room.serverErrorCheck(room6433Attr).should.be.true;
-    });
-
-  });
-
   
 });

@@ -73,3 +73,16 @@ Models.util.room.userById = function(users, userid) {
   });
 };
 
+/**
+ * Checks if the server responded with an error message
+ * @param {string} userid
+ * @returns {boolean}
+ */
+Models.util.room.serverErrorCheck = function(res) {
+  if (_.has(res, 'error')) {
+    console.log('error message received: ' + res.error);
+    return false;
+  } else {
+    return true;
+  }
+};

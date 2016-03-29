@@ -11,12 +11,16 @@ Models.Room = Backbone.Model.extend({
     });
     return this;
   },
-  // channel (object) -> adds new channel to room;
+  /**
+   * Adds a Channel to the room
+   * @param {object} channel
+   * @returns {this}
+   */
   createChannel: function(channel) {
     var that = this;
     
     this.createChannelAjax(channel).done(function(res){
-      if (that.serverErrorCheck(res)) {
+      if (Models.util.room.serverErrorCheck(res)) {
         that.set(res);
       }
     });
@@ -35,20 +39,33 @@ Models.Room = Backbone.Model.extend({
       url: '/room/' + this.get('roomnum')
     });
   },
-  // string, string -> changes interpreter of channel
+  /**
+   * Changes Interpreter of the Channel
+   * @param {string} userId
+   * @param {string} channelId
+   */
   becomeInterpreter: function(userId, channelId) {
     this.trigger('becomeInterpreter', 'interpret', channelId);
     Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
       //
     });
   },
-  // string, string -> removes user from channel
+  /**
+   * Removes user from channel
+   * @param {string} userId
+   * @param {string} channelId
+   */
   leaveChannel: function(userId, channelId) {
     this.trigger('leaveChannel', 'main', channelId);
     Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
       //
     });
   },
+  /**
+   * Adds user to a channel
+   * @param {string} userId
+   * @param {string} channelId
+   */
   joinChannel: function(userId, channelId) {
     this.trigger('joinChannel', 'hear', channelId);
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
@@ -81,20 +98,12 @@ Models.Room = Backbone.Model.extend({
   },
   /**
    * Reveals if user is muted or not
-   * @param {string} - userid
+   * @param {string} userid
    * @returns {boolean}
    */
   isUserMuted: function(userid) {
     var user = Models.util.room.userById(this.get('users'), userid);
     return user.isMuted;
-  },
-  serverErrorCheck: function(res) {
-    if (_.has(res, 'error')) {
-      console.log('error message received: ' + res.error);
-      return false;
-    } else {
-      return true;
-    }
   },
   establishSocket: function() {
     var that = this;
@@ -105,3 +114,5 @@ Models.Room = Backbone.Model.extend({
     });
   }
 });
+
+
