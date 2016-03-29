@@ -22,6 +22,8 @@ var THE_TESTING_ROOM = {
 
 var AliceAttr = {"lang":"en","__v":0,"username":"Alice","_id":"56faea72ef6b9d2e0726881e","isMuted":false,"admin":false,"currentRoom":null};
 
+var MrButtonsAttr = {"__v":0,"username":"MrButtons","_id":"56faee7eef6b9d2e07268820","isMuted":true,"admin":false,"lang":"en","currentRoom":null};
+
 var room6433Attr = {"__v":1,"roomnum":6433,"active":true,"creator":"56faea72ef6b9d2e0726881e","isModerated":false,"moderator":null,"_id":"56faea72ef6b9d2e0726881f","handsQueue":[],"channels":[],"users":[{"lang":"en","_id":"56faea72ef6b9d2e0726881e","username":"Alice","isMuted":false},{"lang":"en","_id":"56faee7eef6b9d2e07268820","username":"MrButtons","isMuted":true}]};
 
 var mockCreateChannelAjax = function(info) {
@@ -160,6 +162,44 @@ describe('room model', function(){
       room.isUserMuted("56faea72ef6b9d2e0726881e").should.eql(false);
       room.isUserMuted("56faee7eef6b9d2e07268820").should.eql(true);
     });
+  });
+
+  describe('Mute', function(){
+    
+    before(function(){
+      app.audio = {};
+      app.audio.mute = sinon.spy();
+      sinon.spy($, "ajax");
+    });
+
+    after(function(){
+      app.audio = null;
+      app.user = null;
+      Models.muteAjax.restore();
+      $.ajax.restore();
+    });
+
+    it('unmutes user', function(){
+      var room = new Models.Room(room6433Attr);
+      app.user = new Models.User(MrButtonsAttr);
+      room.mute(MrButtonsAttr._id);
+      
+      $.ajax.getCall(0).args[0].url.should.eql('/room/id/56faea72ef6b9d2e0726881f/unmute');
+      $.ajax.getCall(0).args[0].data._id.should.eql(MrButtonsAttr._id);
+      app.audio.mute.getCall(0).args[0].should.eql('unmute');
+    });
+
+    it('mutes user', function() {
+      var room = new Models.Room(room6433Attr);
+      app.user = new Models.User(AliceAttr);
+      room.mute(AliceAttr._id);
+      
+      $.ajax.getCall(1).args[0].url.should.eql('/room/id/56faea72ef6b9d2e0726881f/mute');
+      $.ajax.getCall(1).args[0].data._id.should.eql(AliceAttr._id);
+      app.audio.mute.getCall(1).args[0].should.equal('mute');
+      
+    });
+    
   });
 
   
