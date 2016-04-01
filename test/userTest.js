@@ -19,4 +19,13 @@ describe('User', function(){
   
   });
 
+  describe('lowerHand', function(){
+    
+    it('executes raise hand ajax call', function(){
+      new Models.User().lowerHand();
+      $.ajax.getCall(1).args[0].url.should.eql('/room/id/123/lowerhand');
+    });
+    
+  });
+
 });
