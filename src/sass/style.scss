@@ -1,0 +1,51 @@
+@charset 'UTF-8';
+
+// 0. Override variables
+@import
+  'utils/settings',
+  'themes/theme-default',
+  'utils/variables';
+
+// 1. Vendors
+@import
+  '../libs/tether/dist/css/tether',
+  'libs/bootstrap',
+  'libs/font-awesome';
+  
+// 2. Configuration and helpers
+@import
+  'utils/functions',
+  'utils/mixins';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/typography';
+
+// 4. Layout-related sections
+@import
+  'layout/header',
+  'layout/footer',
+  'layout/content',
+  'layout/aside';
+
+// // 5. Components
+@import
+  'components/lists',
+  'components/buttons',
+  'components/forms',
+  'components/alerts',
+  'components/widgets',
+  'components/icons',
+  'components/tooltips',
+  'components/tabs',
+  'components/modals',
+  'components/collaboration',
+  'components/cards';
+
+// 6. Page-specific styles
+@import
+  'pages/registration',
+  'pages/index',
+  'pages/room';
+

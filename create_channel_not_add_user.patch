@@ -1,0 +1,35 @@
+diff --git a/public/js/main.js b/public/js/main.js
+index 2446e18..418e09e 100644
+--- a/public/js/main.js
++++ b/public/js/main.js
+@@ -13,6 +13,8 @@ var config = {
+   websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
+ };
+ 
++
++
+ var websiteText = {
+     en: {
+       title: "Simultaneous Interpretation Conference System",
+@@ -1212,7 +1214,7 @@ Views.AddChannelModal = Backbone.View.extend({
+         'name': name,
+         'lang': lang, 
+         'interpreter': interpreter,
+-        'users': [app.user.id]
++        'users': []
+       });
+     });
+   }
+diff --git a/src/js/app/views.js b/src/js/app/views.js
+index 7651ce6..89d1cb6 100644
+--- a/src/js/app/views.js
++++ b/src/js/app/views.js
+@@ -743,7 +743,7 @@ Views.AddChannelModal = Backbone.View.extend({
+         'name': name,
+         'lang': lang, 
+         'interpreter': interpreter,
+-        'users': [app.user.id]
++        'users': []
+       });
+     });
+   }

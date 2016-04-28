@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to modals.
+// -----------------------------------------------------------------------------
+
+.modal {
+    @extend %fade;
+    .modal-dialog {
+        @extend .modal-sm;
+    }
+    footer {
+        input[type="submit"] {
+            @extend .btn-primary;
+        }
+    }
+}

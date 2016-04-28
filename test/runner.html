@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mexcla Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script>
+      var assert = chai.assert;
+      var should = chai.should();
+    </script>
+    <script>mocha.setup('bdd')</script>
+    <!-- SCRIPTS FROM index.HTML -->
+    <script type="text/javascript" src="../public/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../public/libs/js-cookie/src/js.cookie.js"></script>
+    <script type="text/javascript" src="../public/libs/underscore/underscore.js"></script>
+    <script type="text/javascript" src="../public/libs/backbone/backbone.js"></script>
+    <script type="text/javascript" src="../public/libs/socket.io-client/socket.io.js"></script>
+    <script type="text/javascript" src="../public/libs/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../public/libs/clipboard/dist/clipboard.min.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.FSRTC.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.jsonrpcclient.js"></script>
+    <script type="text/javascript" src="../public/libs/jquery.verto.js"></script>
+
+
+    <!-- load code you want to test here -->
+    <script src="../public/js/main.js"></script>
+    <!-- mock library -->
+    <script src="lib/sinon-1.17.3.js"></script>
+    <!-- Load your test files here -->
+    <script type="text/javascript" src="roomTest.js"></script>
+    <script type="text/javascript" src="userTest.js"></script>
+    
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

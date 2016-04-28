@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to tabs.
+// -----------------------------------------------------------------------------
+
+#collaboration {
+
+    .nav {
+        @extend .nav-tabs;
+    }
+
+    .tab-content {
+        background-color: $gray-lightest;
+        // height: 100%;
+        @extend .embed-responsive;
+        @extend .embed-responsive-4by3;
+
+        iframe {
+            margin-top: 40px;
+            height: 90%;
+        }
+    }
+
+    .nav-link {
+        border: solid 1px $brand-info;
+    }
+}
+
