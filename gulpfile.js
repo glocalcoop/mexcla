@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     notify = require( 'gulp-notify' ),
     include = require( 'gulp-include' ),
     sass = require( 'gulp-sass' ),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    inject = require('gulp-inject');
 
 var onError = function( err ) {
     console.log( 'An error occurred:', err.message );
@@ -21,22 +22,23 @@ var onError = function( err ) {
 };
 
 var paths = {
-    /* Source paths */
-    styles: './src/sass/**/*.scss',
-    scripts: './src/js/app/',
-    images: './src/images/**/*',
-    fonts: './src/fonts/*',
-    libs: './src/libs/**/*',
-       vertoLibs: './src/js/verto/*',
-    index: './src/index.html',
+  /* Source paths */
+  styles: './src/sass/**/*.scss',
+  scripts: './src/js/app/',
+  images: './src/images/**/*',
+  fonts: './src/fonts/*',
+  libs: './src/libs/**/*',
+  vertoLibs: './src/js/verto/*',
+  index: './src/index.html',
+  templates: './src/templates/*.html',
 
-    /* Output paths */
-    stylesOutput: './public/css',
-    scriptsOutput: './public/js',
-    imagesOutput: './public/images',
-    fontsOutput: './public/fonts',
-    indexOutput: './public/',
-    libsOutput: './public/libs'
+  /* Output paths */
+  stylesOutput: './public/css',
+  scriptsOutput: './public/js',
+  imagesOutput: './public/images',
+  fontsOutput: './public/fonts',
+  indexOutput: './public/',
+  libsOutput: './public/libs'
 };
 
 
@@ -89,6 +91,12 @@ gulp.task('vertoLibs', function(){
 
 gulp.task('index', function(){
   return gulp.src(paths.index)
+    .pipe(inject(gulp.src(paths.templates),{
+      starttag: '<!-- inject:templates:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString('utf8');
+      }
+    }))  
     .pipe(gulp.dest(paths.indexOutput));
 });
 
