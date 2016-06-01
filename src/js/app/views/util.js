@@ -28,6 +28,13 @@ Views.createRoomAjax = function(moderated) {
   });
 };
 
+/**
+ * Returns true if item is not undefined or null
+ */
+Views.util.exists = function(x) {
+  return !(_.isUndefined(x) || _.isNull(x));
+};
+
 
 /**
  * Checks if there is an 'id' cookie
@@ -169,3 +176,4 @@ Views.util.participants.queueDisplay = function(user) {
     }
   }
 };
+

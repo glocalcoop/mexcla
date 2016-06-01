@@ -1013,37 +1013,16 @@ Views.IndexView = Backbone.View.extend({
    * @returns {this} 
    */
   render: function () {
-    var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
     this.switchLang();
 
-    if (!_.isUndefined(app.user)) {
+    if (Views.util.exists(app.user)) {
       new Views.WelcomeText({model: app.user});
       new Views.BrandingText({model: app.user});
     }
 
-    this.$('#create-new-room-button').click(function(e){
-      var moderationChecked = $('#moderation-option').is(":checked");
-      if (Views.isThereAUser()) {
-        that.createRoom(moderationChecked);
-      } else {
-        var wrappedCreateRoom = _.wrap(that.createRoom, function(func){
-          func(moderationChecked);
-        });
-        new Views.RegisterModal().render(wrappedCreateRoom);
-      }
-    });
-    this.$('#room-number-button').click(function(e){
-      if (Views.isThereAUser()) {
-        /**
-         * JoinRoom()() is not a typo
-         * JoinRoom @returns a {function}
-         */
-        that.joinRoom()();
-      } else {
-        new Views.RegisterModal().render(that.JoinRoom());
-      }
-    });
+    this.$('#create-new-room-button').click(this.createNewRoomClickHandler());
+    this.$('#room-number-button').click(this.roomNumberButtonHandler());
     
     return this;
   },
@@ -1083,6 +1062,40 @@ Views.IndexView = Backbone.View.extend({
     var roomnum = $('#room-number').val();
     return function() {
       app.router.navigate('room/' + roomnum, {trigger: true});
+    };
+  },
+  /**
+   * If there is a log-in user, this calls createRoom. Otherwise, it renders the registerModal and passes it a wrapped version of createRoom
+   * @private
+   * @returns {function}
+   */
+  createNewRoomClickHandler: function() {
+    var that = this;
+    return function(e){
+      var moderationChecked = $('#moderation-option').is(":checked");
+      if (Views.isThereAUser()) {
+        that.createRoom(moderationChecked);
+      } else {
+        var wrappedCreateRoom = _.wrap(that.createRoom, function(func){
+          func(moderationChecked);
+        });
+        new Views.RegisterModal().render(wrappedCreateRoom);
+      }
+    };
+  },
+  /**
+   * If there's a user, it joins the room, otherwise, it launches the RegisterModal and then joins the room.
+   * @private
+   * @returns {function}
+   */
+  roomNumberButtonHandler: function(){
+    var that = this;
+    return function(e){
+      if (Views.isThereAUser()) {
+        that.joinRoom()();
+      } else {
+        new Views.RegisterModal().render(that.joinRoom());
+      }
     };
   }
 });
@@ -1261,6 +1274,13 @@ Views.createRoomAjax = function(moderated) {
   });
 };
 
+/**
+ * Returns true if item is not undefined or null
+ */
+Views.util.exists = function(x) {
+  return !(_.isUndefined(x) || _.isNull(x));
+};
+
 
 /**
  * Checks if there is an 'id' cookie
@@ -1402,6 +1422,7 @@ Views.util.participants.queueDisplay = function(user) {
     }
   }
 };
+
 
 var MexclaRouter = Backbone.Router.extend({
   routes: {

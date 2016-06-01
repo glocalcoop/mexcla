@@ -51,4 +51,14 @@ describe('Views/util.js', function(){
     });
 
   });
+
+  describe('exists()',function(){
+    it('returns true for anything except undefined and null',function(){
+      Views.util.exists(undefined).should.eql(false);
+      Views.util.exists(null).should.eql(false);
+      Views.util.exists('something').should.eql(true);
+      Views.util.exists('').should.eql(true);
+      Views.util.exists({}).should.eql(true);
+    });
+  })
 });

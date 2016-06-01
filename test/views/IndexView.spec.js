@@ -1,12 +1,20 @@
-describe.only('IndexView', function(){
+describe('IndexView', function(){
   
   describe('initialize()', function(){
-    it('calls setLang, listenTo, and render',function(){
+    before(function(){
       app.user = 'user';
       sinon.stub(Views.IndexView.prototype, "setLang");
       sinon.stub(Views.IndexView.prototype, "render");
       sinon.stub(Views.IndexView.prototype, "listenTo");
+    });
+    
+    after(function(){
+      Views.IndexView.prototype.setLang.restore();
+      Views.IndexView.prototype.render.restore();
+      Views.IndexView.prototype.listenTo.restore();
+    });
 
+    it('calls setLang, listenTo, and render',function(){
       var indexView = new Views.IndexView();
 
       indexView.setLang.calledOnce.should.eql(true);
@@ -15,24 +23,21 @@ describe.only('IndexView', function(){
       indexView.listenTo.args[0][0].should.eql('user');
       indexView.listenTo.args[0][1].should.eql('change:lang');
       indexView.listenTo.args[0][2].should.be.a('Function');
-      
-      Views.IndexView.prototype.setLang.restore();
-      Views.IndexView.prototype.render.restore();
-      Views.IndexView.prototype.listenTo.restore();
+    
     });
   });
 
   describe('setLang()', function(){
     before(function(){
       sinon.stub(Views.IndexView.prototype, "initialize");
-      
     });
+
     after(function(){
       app.user = null;
       Views.IndexView.prototype.initialize.restore();
     });
 
-    it('sets lang to be user\'s lang', function(){
+    it('sets IndewView.lang to be user\'s lang', function(){
       app.user = new Models.User({lang:'de'});
       var indexView = new Views.IndexView();
       should.not.exist(indexView.lang);
@@ -40,7 +45,7 @@ describe.only('IndexView', function(){
       indexView.lang.should.eql('de');
     });
 
-    it('sets english by default',function(){
+    it('has english as the default',function(){
       app.user = new Models.User();
       var indexView = new Views.IndexView();
       indexView.setLang();
@@ -121,15 +126,160 @@ describe.only('IndexView', function(){
 
   describe('render()', function(){
 
-    it('renders template html');
+    before(function(){
+      sinon.stub(Views.IndexView.prototype, "initialize");
+    });
 
-    it('calls switchLang');
-
-    it('creates new WelcomeText & BrandingText if app.user is not undefined');
-
-    it('adds click handler to "#create-new-room-button"');
-
-    it('adds click handler to "#room-number-button"');
+    after(function(){
+      Views.IndexView.prototype.initialize.restore();
+    });
     
+    it('renders template html', function(){
+      var indexView = getIndexView();
+      indexView.render();
+      
+      indexView.$el.html().should.not.eql('');
+      indexView.$el.find('main').should.have.length(1);
+      indexView.$el.find('fieldset').should.have.length(2);
+    });
+
+    it('calls switchLang', function(){
+      var indexView = getIndexView();
+      var spy = sinon.spy(indexView, 'switchLang');
+      indexView.render();
+      sinon.assert.calledOnce(spy);
+    });
+
+
+    it('creates new WelcomeText & BrandingText if there is a user', function(){
+      var WelcomeText = sinon.spy(Views, 'WelcomeText');
+      var BrandingText = sinon.spy(Views, 'BrandingText');
+      
+      var indexView = getIndexView();
+      app.user = new Models.User();
+      indexView.render();
+      
+      sinon.assert.calledOnce(WelcomeText);
+      sinon.assert.calledOnce(BrandingText);
+      
+      WelcomeText.restore();
+      BrandingText.restore();
+      
+    });
+
+    it('does not create new WelcomeText & BrandingText when app.user is undefined', function(){
+      var WelcomeText = sinon.spy(Views, 'WelcomeText');
+      var BrandingText = sinon.spy(Views, 'BrandingText');
+      
+      var indexView = getIndexView();
+      app.user = undefined;
+      indexView.render();
+
+      sinon.assert.notCalled(WelcomeText);
+      sinon.assert.notCalled(BrandingText);
+
+      app.user = null;
+      indexView.render();
+
+      sinon.assert.notCalled(WelcomeText);
+      sinon.assert.notCalled(BrandingText);
+
+      WelcomeText.restore();
+      BrandingText.restore();
+    });
+
+    it('adds click handlers to #create-new-room-button & #room-number-button' , function(){
+      var indexView = getIndexView();
+      var handler1 = sinon.spy(indexView, 'createNewRoomClickHandler');
+      var handler2 = sinon.spy(indexView, 'roomNumberButtonHandler');
+
+      indexView.render();
+      sinon.assert.calledOnce(handler1);
+      sinon.assert.calledOnce(handler2);
+      
+    });
+  });
+
+  describe('click handlers: ', function(){
+    before(function(){
+      sinon.stub(Views.IndexView.prototype, "initialize");
+    });
+
+    after(function(){
+      Views.IndexView.prototype.initialize.restore();
+    });
+    
+    describe('createNewRoomClickHandler()',function(){
+      
+      it('returns a function', function(){
+        getIndexView().createNewRoomClickHandler().should.be.a('Function');
+      });
+
+      it('calls createRoom when there is a user', function(){
+        sinon.stub(Views, 'isThereAUser').returns(true);
+        var indexView = getIndexView();
+        var createRoomSpy = sinon.spy(indexView, 'createRoom');
+        indexView.createNewRoomClickHandler()();
+        createRoomSpy.calledOnce.should.eql(true);
+        Views.isThereAUser.restore();
+      });
+
+      it('calls RegisterModal with wrappedVersion of Create room when there is no user', function(){
+        sinon.stub(Views, 'isThereAUser').returns(false);
+        var indexView = getIndexView();
+        var renderSpy = sinon.spy();
+        sinon.stub(Views, 'RegisterModal').returns({render: renderSpy});
+        
+        indexView.createNewRoomClickHandler()();
+        
+        Views.RegisterModal.calledOnce.should.eql(true);
+        renderSpy.calledOnce.should.eql(true);
+        renderSpy.args[0][0].should.be.a('Function');
+        
+        Views.RegisterModal.restore();
+        Views.isThereAUser.restore();
+      });
+      
+    });
+    
+
+    describe('roomNumberButtonHandler()',function(){
+      it('returns a function', function(){
+        getIndexView().roomNumberButtonHandler().should.be.a('Function');
+      });
+
+      it('calls joinRoom when there is a user',function(){
+        sinon.stub(Views, 'isThereAUser').returns(true);
+        var indexView = getIndexView();
+        var joinRoomSpy = sinon.stub(indexView, 'joinRoom').returns(sinon.spy());
+        indexView.roomNumberButtonHandler()();
+        
+        joinRoomSpy.calledOnce.should.eql(true);
+        Views.isThereAUser.restore();
+      });
+
+      it('calls RegisterModal passing joinRoom to .render', function(){
+        sinon.stub(Views, 'isThereAUser').returns(false);
+        var indexView = getIndexView();
+        var renderSpy = sinon.spy();
+        sinon.stub(Views, 'RegisterModal').returns({render: renderSpy});
+        
+        indexView.roomNumberButtonHandler()();
+        
+        Views.RegisterModal.calledOnce.should.eql(true);
+        renderSpy.calledOnce.should.eql(true);
+        renderSpy.args[0][0].should.be.a('Function');
+        
+        Views.RegisterModal.restore();
+        Views.isThereAUser.restore();
+      });
+    });
   });
 });
+
+
+function getIndexView(){
+  var indexView = new Views.IndexView({el: undefined});
+  indexView.lang = 'en';
+  return indexView;
+}
