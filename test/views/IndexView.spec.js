@@ -1,6 +1,6 @@
-describe('IndexView', function(){
+describe.only('IndexView', function(){
   
-  describe('initalize()', function(){
+  describe('initialize()', function(){
     it('calls setLang, listenTo, and render',function(){
       app.user = 'user';
       sinon.stub(Views.IndexView.prototype, "setLang");
@@ -23,7 +23,6 @@ describe('IndexView', function(){
   });
 
   describe('setLang()', function(){
-
     before(function(){
       sinon.stub(Views.IndexView.prototype, "initialize");
       
@@ -82,17 +81,55 @@ describe('IndexView', function(){
       createRoomAjax.args[0][0].should.eql(false);
     });
 
-    it('if createRoomAjax is sucuessful, it creates new room', function(){
+    it('if createRoomAjax is successful, it creates new room', function(){
       stubDone.calledOnce.should.eql(true);
       app.room.should.be.instanceOf(Models.Room);
       app.room.get('roomnum').should.eql(666);
     });
 
-    it('naviates to room/roomnumber', function(){
+    it('navigates to room/roomnumber', function(){
       app.router.navigate.calledOnce.should.eql(true);
       app.router.navigate.args[0][0].should.eql('room/666');
       app.router.navigate.args[0][1].should.eql({trigger: true});
     });
+    
+  });
+
+  describe('joinRoom()', function(){
+    before(function(){
+      sinon.stub(Views.IndexView.prototype, "initialize");
+      sinon.stub($.fn, 'val').returns(666);
+      app.router.navigate = sinon.spy();
+    });
+    after(function(){
+      Views.IndexView.prototype.initialize.restore();
+      $.fn.val.restore();
+      app.router = {};
+    });
+    
+    it('returns a function', function(){
+      (new Views.IndexView().joinRoom()).should.be.a('Function');
+    });
+
+    it('returned function navigates to room/roomnum', function(){
+      new Views.IndexView().joinRoom()();
+      app.router.navigate.calledOnce.should.eql(true);
+      app.router.navigate.args[0][0].should.eql('room/666');
+      app.router.navigate.args[0][1].should.eql({trigger: true});
+    });
+  });
+
+  describe('render()', function(){
+
+    it('renders template html');
+
+    it('calls switchLang');
+
+    it('creates new WelcomeText & BrandingText if app.user is not undefined');
+
+    it('adds click handler to "#create-new-room-button"');
+
+    it('adds click handler to "#room-number-button"');
     
   });
 });

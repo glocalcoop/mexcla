@@ -28,12 +28,13 @@ Views.createRoomAjax = function(moderated) {
   });
 };
 
+
+/**
+ * Checks if there is an 'id' cookie
+ * @returns {boolean} 
+ */
 Views.isThereAUser = function() {
-  if (_.isUndefined(Cookies.get('id'))) {
-    return false;
-  } else {
-    return true;
-  }
+  return (!_.isUndefined(Cookies.get('id')));
 };
 
 Views.isModerator = function(userId) {

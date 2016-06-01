@@ -30,4 +30,25 @@ describe('Views/util.js', function(){
 
   });
   
+  describe('isThereAUser()', function(){
+
+    before(function(){
+      sinon.stub(Cookies, 'get')
+        .onFirstCall().returns('userid')
+        .onSecondCall().returns(undefined);
+    });
+
+    after(function(){
+      Cookies.get.restore();
+    });
+    
+    it('returns true if there is an id cookie', function(){
+      Views.isThereAUser().should.eql(true);
+    });
+
+    it('returns false if there is not an id cookie', function(){
+      Views.isThereAUser().should.eql(false);
+    });
+
+  });
 });
