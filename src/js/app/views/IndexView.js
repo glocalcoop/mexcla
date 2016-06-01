@@ -1,6 +1,7 @@
 /**
  * Index
  * View: "main" page where user picks between creating a room or joining an existing one it renders language according to app.user.attributes.lang and re-renders when user model language changes
+ * @class
  */
 Views.IndexView = Backbone.View.extend({
   el: $('#content'),

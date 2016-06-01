@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
   </head>
   <body>
+    
+    <!-- inject:templates:html -->
+    <!-- endinject -->
+      
     <div id="mocha"></div>
+    <div id="content"></div>
+
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
     <script>
@@ -27,15 +33,14 @@
     <script type="text/javascript" src="../public/libs/jquery.FSRTC.js"></script>
     <script type="text/javascript" src="../public/libs/jquery.jsonrpcclient.js"></script>
     <script type="text/javascript" src="../public/libs/jquery.verto.js"></script>
-
-
-    <!-- load code you want to test here -->
-    <script src="../public/js/main.js"></script>
     <!-- mock library -->
     <script src="lib/sinon-1.17.3.js"></script>
+    <!-- load code you want to test here -->
+    <script src="../public/js/main.js"></script>
     <!-- Load your test files here -->
     <script type="text/javascript" src="roomTest.js"></script>
     <script type="text/javascript" src="userTest.js"></script>
+    <script src="views/IndexView.spec.js"></script>
     
     <script>
       mocha.run();

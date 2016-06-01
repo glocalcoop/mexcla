@@ -100,6 +100,18 @@ gulp.task('index', function(){
     .pipe(gulp.dest(paths.indexOutput));
 });
 
+gulp.task('test-runner', function(){
+  return gulp.src('./test/runner.html')
+    .pipe(inject(gulp.src(paths.templates),{
+      starttag: '<!-- inject:templates:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString('utf8');
+      }
+    }))
+    .pipe(concat('index.html'))
+    .pipe(gulp.dest('./test/'));
+});
+
 gulp.task( 'watch', function() {
     livereload.listen();
     gulp.watch( './src/sass/**/*.scss', [ 'styles' ] );
@@ -107,7 +119,10 @@ gulp.task( 'watch', function() {
     gulp.watch( './src/images/*', [ 'images' ] );
     gulp.watch( './src/fonts/*', [ 'fonts' ] );
     gulp.watch( './src/libs/*.js', [ 'libs' ] );
+    gulp.watch( './test/runner.html', [ 'test-runner' ] );
     gulp.watch( paths.index, [ 'index' ] );
 } );
 
-gulp.task( 'default', [ 'watch', 'libs', 'vertoLibs', 'scripts', 'index', 'styles', 'images', 'fonts'], function() {});
+
+
+gulp.task( 'default', [ 'watch', 'libs', 'vertoLibs', 'scripts', 'index', 'styles', 'images', 'fonts', 'test-runner'], function() {});
