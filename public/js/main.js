@@ -1,10 +1,13 @@
 var app = {};
+
+/** @namespace */
 var Views = {};
 Views.util = {};
+
+/** @namespace */
 var Models = {};
 Models.util = {};
 Models.util.audio = {};
-
 
 var config = {
   realm: 'talk.mayfirst.org', 
@@ -1040,7 +1043,7 @@ Views.IndexView = Backbone.View.extend({
     /**
      * Fallback to English if lang is missing
      */
-    this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
+    this.lang = (_.isUndefined(app.user.get('lang'))) ? 'en' : app.user.get('lang');
   },
   switchLang: function() {
     $('#language-links a').click(function(event) {
@@ -1217,9 +1220,10 @@ Views.RoomSidebar = Backbone.View.extend({
 });
 
 /**
- * Create User
- * input: string, string ('en' or 'es')
- * output: jqXHR-promise
+ * Create User Ajax
+ * @param {string} username
+ * @param {string} lang
+ * @returns {jqXHR}
  */
 Views.createUserAjax = function (username, lang) {
   return $.ajax({
@@ -1234,7 +1238,7 @@ Views.createUserAjax = function (username, lang) {
 
 /**
  * Create Room Ajax Call
- * @param {boolean}
+ * @param {boolean} moderated
  * @returns {jqXHR} 
  */
 Views.createRoomAjax = function(moderated) {

@@ -1,7 +1,8 @@
 /**
- * Create User
- * input: string, string ('en' or 'es')
- * output: jqXHR-promise
+ * Create User Ajax
+ * @param {string} username
+ * @param {string} lang
+ * @returns {jqXHR}
  */
 Views.createUserAjax = function (username, lang) {
   return $.ajax({
@@ -16,7 +17,7 @@ Views.createUserAjax = function (username, lang) {
 
 /**
  * Create Room Ajax Call
- * @param {boolean}
+ * @param {boolean} moderated
  * @returns {jqXHR} 
  */
 Views.createRoomAjax = function(moderated) {
