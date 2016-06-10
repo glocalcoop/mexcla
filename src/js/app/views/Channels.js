@@ -47,7 +47,7 @@ Views.Channel = Backbone.View.extend({
     return this;
   },
   becomeInterpreter: function(data) {
-    var interpretControlsEl = $('.interpret-controls');
+    var interpretControlsEl = '.interpret-controls';
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
@@ -55,7 +55,7 @@ Views.Channel = Backbone.View.extend({
     });
   },
   joinChannel: function(data) {
-    var joinControlsEl = $('.join-controls');
+    var joinControlsEl = '.join-controls';
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
     $('#channels .join').click(function(event) {
       event.preventDefault();
@@ -63,7 +63,7 @@ Views.Channel = Backbone.View.extend({
     });
   },
   leaveChannel: function(data) {
-    var leaveControlsEl = $('.leave-controls');
+    var leaveControlsEl = '.leave-controls';
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
     $('#channels .leave').click(function(event) {
       event.preventDefault();
