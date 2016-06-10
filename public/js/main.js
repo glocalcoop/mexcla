@@ -1,10 +1,13 @@
 var app = {};
+
+/** @namespace */
 var Views = {};
 Views.util = {};
+
+/** @namespace */
 var Models = {};
 Models.util = {};
 Models.util.audio = {};
-
 
 var config = {
   realm: 'talk.mayfirst.org', 
@@ -991,12 +994,11 @@ Views.BrandingText = Backbone.View.extend({
 
 
 /**
- * Index
- * View: "main" page where user picks between creating a room or joining an existing one it renders language according to app.user.attributes.lang and re-renders when user model language changes
+ * IndexView: the main page where a user picks between creating a room or joining an existing one. It renders language according to the user's language property.
  * @class
  */
 Views.IndexView = Backbone.View.extend({
-  el: $('#content'),
+  el: '#content',
   template: _.template($("#index-template").html()),
   initialize: function() {
       this.setLang();
@@ -1006,13 +1008,70 @@ Views.IndexView = Backbone.View.extend({
       });
       this.render();
   },
+  /**
+   * @memberof Views.IndexView#
+   * @returns {this} 
+   */
   render: function () {
-    var that = this;
     this.$el.html(this.template(websiteText[this.lang]));
     this.switchLang();
-    this.welcomeText();
-    this.brandingText();
-    this.$('#create-new-room-button').click(function(e){
+
+    if (Views.util.exists(app.user)) {
+      new Views.WelcomeText({model: app.user});
+      new Views.BrandingText({model: app.user});
+    }
+
+    this.$('#create-new-room-button').click(this.createNewRoomClickHandler());
+    this.$('#room-number-button').click(this.roomNumberButtonHandler());
+    
+    return this;
+  },
+  /**
+   * sets this.lang to be user's lang - uses 'english' as default
+   * @memberof Views.IndexView#
+   */
+  setLang: function() {
+    this.lang = (_.isUndefined(app.user.get('lang'))) ? 'en' : app.user.get('lang');
+  },
+  /**
+   * @memberof Views.IndexView# 
+   */
+  switchLang: function() {
+    $('#language-links a').click(function(event) {
+      event.preventDefault();
+      app.user.set('lang', $(this).data('lang'));
+    });
+  },
+  /**
+   * Fires a createRoom ajax request and then navigates to room when the call returns
+   * @memberof Views.IndexView# 
+   * @param {boolean} moderated
+   */
+  createRoom: function(moderated) {
+    Views.createRoomAjax(moderated).done(function(room){
+      app.room = new Models.Room(room);
+      app.router.navigate('room/' + room.roomnum, {trigger: true});
+    }); 
+  },
+  /**
+   * Joins a room based on #room-number
+   * @memberof Views.IndexView# 
+   * @returns {function} 
+   */
+  joinRoom: function() {
+    var roomnum = $('#room-number').val();
+    return function() {
+      app.router.navigate('room/' + roomnum, {trigger: true});
+    };
+  },
+  /**
+   * If there is a log-in user, this calls createRoom. Otherwise, it renders the registerModal and passes it a wrapped version of createRoom
+   * @private
+   * @returns {function}
+   */
+  createNewRoomClickHandler: function() {
+    var that = this;
+    return function(e){
       var moderationChecked = $('#moderation-option').is(":checked");
       if (Views.isThereAUser()) {
         that.createRoom(moderationChecked);
@@ -1022,53 +1081,22 @@ Views.IndexView = Backbone.View.extend({
         });
         new Views.RegisterModal().render(wrappedCreateRoom);
       }
-    });
-    this.$('#room-number-button').click(function(e){
-      if (Views.isThereAUser()) {
-        /**
-         * JoinRoom()() is not a typo
-         * JoinRoom @returns a {function}
-         */
-        that.JoinRoom()();
-      } else {
-        new Views.RegisterModal().render(that.JoinRoom());
-      }
-    });
-    return this;
-  },
-  setLang: function() {
-    /**
-     * Fallback to English if lang is missing
-     */
-    this.lang = (_.isUndefined(app.user.attributes.lang)) ? 'en' : app.user.attributes.lang;
-  },
-  switchLang: function() {
-    $('#language-links a').click(function(event) {
-      event.preventDefault();
-      app.user.set('lang', $(this).data('lang'));
-    });
-  },
-  createRoom: function(moderated) {
-    Views.createRoomAjax(moderated).done(function(room){
-      app.room = new Models.Room(room);
-      app.router.navigate('room/' + room.roomnum, {trigger: true});
-    }); 
-  },
-  JoinRoom: function() {
-    var roomnum = $('#room-number').val();
-    return function() {
-      app.router.navigate('room/' + roomnum, {trigger: true});
     };
   },
-  welcomeText: function() {
-    if (!_.isUndefined(app.user)) {
-      new Views.WelcomeText({model: app.user});
-    }
-  },
-  brandingText: function() {
-    if (!_.isUndefined(app.user)) {
-      new Views.BrandingText({model: app.user});
-    }
+  /**
+   * If there's a user, it joins the room, otherwise, it launches the RegisterModal and then joins the room.
+   * @private
+   * @returns {function}
+   */
+  roomNumberButtonHandler: function(){
+    var that = this;
+    return function(e){
+      if (Views.isThereAUser()) {
+        that.joinRoom()();
+      } else {
+        new Views.RegisterModal().render(that.joinRoom());
+      }
+    };
   }
 });
 
@@ -1217,9 +1245,10 @@ Views.RoomSidebar = Backbone.View.extend({
 });
 
 /**
- * Create User
- * input: string, string ('en' or 'es')
- * output: jqXHR-promise
+ * Create User Ajax
+ * @param {string} username
+ * @param {string} lang
+ * @returns {jqXHR}
  */
 Views.createUserAjax = function (username, lang) {
   return $.ajax({
@@ -1234,7 +1263,7 @@ Views.createUserAjax = function (username, lang) {
 
 /**
  * Create Room Ajax Call
- * @param {boolean}
+ * @param {boolean} moderated
  * @returns {jqXHR} 
  */
 Views.createRoomAjax = function(moderated) {
@@ -1245,12 +1274,20 @@ Views.createRoomAjax = function(moderated) {
   });
 };
 
+/**
+ * Returns true if item is not undefined or null
+ */
+Views.util.exists = function(x) {
+  return !(_.isUndefined(x) || _.isNull(x));
+};
+
+
+/**
+ * Checks if there is an 'id' cookie
+ * @returns {boolean} 
+ */
 Views.isThereAUser = function() {
-  if (_.isUndefined(Cookies.get('id'))) {
-    return false;
-  } else {
-    return true;
-  }
+  return (!_.isUndefined(Cookies.get('id')));
 };
 
 Views.isModerator = function(userId) {
@@ -1385,6 +1422,7 @@ Views.util.participants.queueDisplay = function(user) {
     }
   }
 };
+
 
 var MexclaRouter = Backbone.Router.extend({
   routes: {

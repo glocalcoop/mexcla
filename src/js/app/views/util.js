@@ -1,7 +1,8 @@
 /**
- * Create User
- * input: string, string ('en' or 'es')
- * output: jqXHR-promise
+ * Create User Ajax
+ * @param {string} username
+ * @param {string} lang
+ * @returns {jqXHR}
  */
 Views.createUserAjax = function (username, lang) {
   return $.ajax({
@@ -16,7 +17,7 @@ Views.createUserAjax = function (username, lang) {
 
 /**
  * Create Room Ajax Call
- * @param {boolean}
+ * @param {boolean} moderated
  * @returns {jqXHR} 
  */
 Views.createRoomAjax = function(moderated) {
@@ -27,12 +28,20 @@ Views.createRoomAjax = function(moderated) {
   });
 };
 
+/**
+ * Returns true if item is not undefined or null
+ */
+Views.util.exists = function(x) {
+  return !(_.isUndefined(x) || _.isNull(x));
+};
+
+
+/**
+ * Checks if there is an 'id' cookie
+ * @returns {boolean} 
+ */
 Views.isThereAUser = function() {
-  if (_.isUndefined(Cookies.get('id'))) {
-    return false;
-  } else {
-    return true;
-  }
+  return (!_.isUndefined(Cookies.get('id')));
 };
 
 Views.isModerator = function(userId) {
@@ -59,6 +68,12 @@ Views.isInAChannel = function(userId) {
   
 };
 
+
+/**
+ * Returns true if channel already has an interpreter
+ * @param {string} channelId
+ * @returns {Boolean} 
+ */
 Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId
@@ -167,3 +182,4 @@ Views.util.participants.queueDisplay = function(user) {
     }
   }
 };
+
