@@ -60,5 +60,24 @@ describe('Views/util.js', function(){
       Views.util.exists('').should.eql(true);
       Views.util.exists({}).should.eql(true);
     });
-  })
+  });
+
+  describe('hasChannelInterpreter()', function(){
+    before(function(){
+      app.room = new Models.Room();
+      app.room.set('channels', [{_id: '123', interpreter:'666'}]);
+    });
+
+    after(function(){
+      app.room = null;
+    });
+
+    it('returns true if the channel has an interpreter', function(){
+      Views.hasChannelInterpreter('123').should.eql(true);
+    });
+    it('returns false if the channel doesn\'t have an interpreter', function(){
+      app.room.set('channels', [{_id: '123', interpreter:''}]);
+      Views.hasChannelInterpreter('123').should.eql(false);
+    });
+  });
 });

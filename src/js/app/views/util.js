@@ -68,6 +68,12 @@ Views.isInAChannel = function(userId) {
   
 };
 
+
+/**
+ * Returns true if channel already has an interpreter
+ * @param {string} channelId
+ * @returns {Boolean} 
+ */
 Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId
