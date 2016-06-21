@@ -4,7 +4,7 @@
 
 #content {
   @extend .container;
-  @extend .clear-fix;
+  @include clearfix;
   min-height: 100%;
   padding-top: 1em;
 }

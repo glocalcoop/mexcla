@@ -15,6 +15,10 @@
     }
 }
 
+.btn-default {
+    background-color: $brand-default;
+}
+
 input[type="submit"],
 button {
     @extend .btn;

@@ -58,9 +58,7 @@
             margin-top: .5em;
         }
         #create-new-room-button {
-            &:after {
-                @extend %clearfix;
-            }
+            @include clearfix;
         }
 
         label {
@@ -71,14 +69,6 @@
             margin-bottom: 0;
         }
 
-        // label[for="private-option"],
-        // label[for="moderation-option"] {
-
-        //     @extend .c-input;
-        //     @extend .c-checkbox;
-                        
-        // }
-
         label[for="moderation-option"] {
             margin-top: .5em;
             clear: both;
@@ -87,8 +77,6 @@
         label[for="private-option"] {
             display: none;
         }
-
-        
         
     }
 

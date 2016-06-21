@@ -362,6 +362,36 @@ output {
 [hidden] {
   display: none !important; }
 
+.img-fluid, #logo img {
+  display: block;
+  max-width: 100%;
+  height: auto; }
+
+.img-thumbnail, #logo img {
+  padding: 0.25rem;
+  line-height: 1.5;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  transition: all .2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto; }
+
+.img-circle {
+  border-radius: 50%; }
+
+.figure {
+  display: inline-block; }
+
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1; }
+
+.figure-caption {
+  font-size: 90%;
+  color: #A2A8AB; }
+
 .container, #header, #content {
   margin-left: auto;
   margin-right: auto;
@@ -3582,69 +3612,21 @@ select {
       #chat-list .chat-list + .card,
       #chat-list .card-group .chat-list + .card, .card-group #participant-list .card + .participant-list, #participant-list .card-group .card + .participant-list, .card-group #participant-list .participant-list + .participant-list, #participant-list .card-group .participant-list + .participant-list, .card-group #participant-list .channel-list + .participant-list, #participant-list .card-group .channel-list + .participant-list, .card-group #participant-list .chat-list + .participant-list, #participant-list .card-group .chat-list + .participant-list, .card-group
       #participant-list .card + .channel-list,
-      #participant-list .card-group .card + .channel-list, .card-group
-      #participant-list .participant-list + .channel-list,
-      #participant-list .card-group .participant-list + .channel-list, .card-group
-      #participant-list .channel-list + .channel-list,
-      #participant-list .card-group .channel-list + .channel-list, .card-group
-      #participant-list .chat-list + .channel-list,
-      #participant-list .card-group .chat-list + .channel-list, .card-group
+      #participant-list .card-group .card + .channel-list, .card-group #participant-list .participant-list + .channel-list, #participant-list .card-group .participant-list + .channel-list, .card-group #participant-list .channel-list + .channel-list, #participant-list .card-group .channel-list + .channel-list, .card-group #participant-list .chat-list + .channel-list, #participant-list .card-group .chat-list + .channel-list, .card-group
       #participant-list .card + .chat-list,
-      #participant-list .card-group .card + .chat-list, .card-group
-      #participant-list .participant-list + .chat-list,
-      #participant-list .card-group .participant-list + .chat-list, .card-group
-      #participant-list .channel-list + .chat-list,
-      #participant-list .card-group .channel-list + .chat-list, .card-group
-      #participant-list .chat-list + .chat-list,
-      #participant-list .card-group .chat-list + .chat-list, .card-group
+      #participant-list .card-group .card + .chat-list, .card-group #participant-list .participant-list + .chat-list, #participant-list .card-group .participant-list + .chat-list, .card-group #participant-list .channel-list + .chat-list, #participant-list .card-group .channel-list + .chat-list, .card-group #participant-list .chat-list + .chat-list, #participant-list .card-group .chat-list + .chat-list, .card-group
       #channel-list .card + .participant-list,
-      #channel-list .card-group .card + .participant-list, .card-group
-      #channel-list .participant-list + .participant-list,
-      #channel-list .card-group .participant-list + .participant-list, .card-group
-      #channel-list .channel-list + .participant-list,
-      #channel-list .card-group .channel-list + .participant-list, .card-group
-      #channel-list .chat-list + .participant-list,
-      #channel-list .card-group .chat-list + .participant-list, .card-group
+      #channel-list .card-group .card + .participant-list, .card-group #channel-list .participant-list + .participant-list, #channel-list .card-group .participant-list + .participant-list, .card-group #channel-list .channel-list + .participant-list, #channel-list .card-group .channel-list + .participant-list, .card-group #channel-list .chat-list + .participant-list, #channel-list .card-group .chat-list + .participant-list, .card-group
       #channel-list .card + .channel-list,
-      #channel-list .card-group .card + .channel-list, .card-group
-      #channel-list .participant-list + .channel-list,
-      #channel-list .card-group .participant-list + .channel-list, .card-group
-      #channel-list .channel-list + .channel-list,
-      #channel-list .card-group .channel-list + .channel-list, .card-group
-      #channel-list .chat-list + .channel-list,
-      #channel-list .card-group .chat-list + .channel-list, .card-group
+      #channel-list .card-group .card + .channel-list, .card-group #channel-list .participant-list + .channel-list, #channel-list .card-group .participant-list + .channel-list, .card-group #channel-list .channel-list + .channel-list, #channel-list .card-group .channel-list + .channel-list, .card-group #channel-list .chat-list + .channel-list, #channel-list .card-group .chat-list + .channel-list, .card-group
       #channel-list .card + .chat-list,
-      #channel-list .card-group .card + .chat-list, .card-group
-      #channel-list .participant-list + .chat-list,
-      #channel-list .card-group .participant-list + .chat-list, .card-group
-      #channel-list .channel-list + .chat-list,
-      #channel-list .card-group .channel-list + .chat-list, .card-group
-      #channel-list .chat-list + .chat-list,
-      #channel-list .card-group .chat-list + .chat-list, .card-group
+      #channel-list .card-group .card + .chat-list, .card-group #channel-list .participant-list + .chat-list, #channel-list .card-group .participant-list + .chat-list, .card-group #channel-list .channel-list + .chat-list, #channel-list .card-group .channel-list + .chat-list, .card-group #channel-list .chat-list + .chat-list, #channel-list .card-group .chat-list + .chat-list, .card-group
       #chat-list .card + .participant-list,
-      #chat-list .card-group .card + .participant-list, .card-group
-      #chat-list .participant-list + .participant-list,
-      #chat-list .card-group .participant-list + .participant-list, .card-group
-      #chat-list .channel-list + .participant-list,
-      #chat-list .card-group .channel-list + .participant-list, .card-group
-      #chat-list .chat-list + .participant-list,
-      #chat-list .card-group .chat-list + .participant-list, .card-group
+      #chat-list .card-group .card + .participant-list, .card-group #chat-list .participant-list + .participant-list, #chat-list .card-group .participant-list + .participant-list, .card-group #chat-list .channel-list + .participant-list, #chat-list .card-group .channel-list + .participant-list, .card-group #chat-list .chat-list + .participant-list, #chat-list .card-group .chat-list + .participant-list, .card-group
       #chat-list .card + .channel-list,
-      #chat-list .card-group .card + .channel-list, .card-group
-      #chat-list .participant-list + .channel-list,
-      #chat-list .card-group .participant-list + .channel-list, .card-group
-      #chat-list .channel-list + .channel-list,
-      #chat-list .card-group .channel-list + .channel-list, .card-group
-      #chat-list .chat-list + .channel-list,
-      #chat-list .card-group .chat-list + .channel-list, .card-group
+      #chat-list .card-group .card + .channel-list, .card-group #chat-list .participant-list + .channel-list, #chat-list .card-group .participant-list + .channel-list, .card-group #chat-list .channel-list + .channel-list, #chat-list .card-group .channel-list + .channel-list, .card-group #chat-list .chat-list + .channel-list, #chat-list .card-group .chat-list + .channel-list, .card-group
       #chat-list .card + .chat-list,
-      #chat-list .card-group .card + .chat-list, .card-group
-      #chat-list .participant-list + .chat-list,
-      #chat-list .card-group .participant-list + .chat-list, .card-group
-      #chat-list .channel-list + .chat-list,
-      #chat-list .card-group .channel-list + .chat-list, .card-group
-      #chat-list .chat-list + .chat-list,
-      #chat-list .card-group .chat-list + .chat-list {
+      #chat-list .card-group .card + .chat-list, .card-group #chat-list .participant-list + .chat-list, #chat-list .card-group .participant-list + .chat-list, .card-group #chat-list .channel-list + .chat-list, #chat-list .card-group .channel-list + .chat-list, .card-group #chat-list .chat-list + .chat-list, #chat-list .card-group .chat-list + .chat-list {
         margin-left: 0;
         border-left: 0; } }
 
@@ -3876,11 +3858,9 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 #channel-list ul .list-group-item,
 #chat-list ul .list-group-item, .list-group-flush #participant-list li, #participant-list .list-group-flush li, #participant-list ul li, .list-group-flush
 #channel-list li,
-#channel-list .list-group-flush li,
-#channel-list ul li, .list-group-flush
+#channel-list .list-group-flush li, #channel-list ul li, .list-group-flush
 #chat-list li,
-#chat-list .list-group-flush li,
-#chat-list ul li {
+#chat-list .list-group-flush li, #chat-list ul li {
   border-width: 1px 0;
   border-radius: 0; }
 
@@ -3888,22 +3868,18 @@ a.label:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #lang
 #channel-list ul:first-child .list-group-item:first-child,
 #chat-list ul:first-child .list-group-item:first-child, .list-group-flush:first-child #participant-list li:first-child, #participant-list .list-group-flush:first-child li:first-child, #participant-list ul:first-child li:first-child, .list-group-flush:first-child
 #channel-list li:first-child,
-#channel-list .list-group-flush:first-child li:first-child,
-#channel-list ul:first-child li:first-child, .list-group-flush:first-child
+#channel-list .list-group-flush:first-child li:first-child, #channel-list ul:first-child li:first-child, .list-group-flush:first-child
 #chat-list li:first-child,
-#chat-list .list-group-flush:first-child li:first-child,
-#chat-list ul:first-child li:first-child {
+#chat-list .list-group-flush:first-child li:first-child, #chat-list ul:first-child li:first-child {
   border-top: 0; }
 
 .list-group-flush:last-child .list-group-item:last-child, #participant-list ul:last-child .list-group-item:last-child,
 #channel-list ul:last-child .list-group-item:last-child,
 #chat-list ul:last-child .list-group-item:last-child, .list-group-flush:last-child #participant-list li:last-child, #participant-list .list-group-flush:last-child li:last-child, #participant-list ul:last-child li:last-child, .list-group-flush:last-child
 #channel-list li:last-child,
-#channel-list .list-group-flush:last-child li:last-child,
-#channel-list ul:last-child li:last-child, .list-group-flush:last-child
+#channel-list .list-group-flush:last-child li:last-child, #channel-list ul:last-child li:last-child, .list-group-flush:last-child
 #chat-list li:last-child,
-#chat-list .list-group-flush:last-child li:last-child,
-#chat-list ul:last-child li:last-child {
+#chat-list .list-group-flush:last-child li:last-child, #chat-list ul:last-child li:last-child {
   border-bottom: 0; }
 
 a.list-group-item,
@@ -4969,9 +4945,33 @@ a.bg-danger:focus, a.bg-danger:hover {
   font-weight: normal;
   font-style: normal; }
 
-.fa {
+.fa, #connect-button .icon, #connect-button #participant-list button.accordion, #participant-list #connect-button button.accordion, #connect-button
+#channel-list button.accordion,
+#channel-list #connect-button button.accordion, #connect-button
+#chat-list button.accordion,
+#chat-list #connect-button button.accordion, #collaboration .icon, #collaboration #participant-list button.accordion, #participant-list #collaboration button.accordion, #collaboration
+#channel-list button.accordion,
+#channel-list #collaboration button.accordion, #collaboration
+#chat-list button.accordion,
+#chat-list #collaboration button.accordion, .submit-chat .icon, .submit-chat #participant-list button.accordion, #participant-list .submit-chat button.accordion, .submit-chat
+#channel-list button.accordion,
+#channel-list .submit-chat button.accordion, .submit-chat
+#chat-list button.accordion,
+#chat-list .submit-chat button.accordion, .copy-link .icon, .copy-link #participant-list button.accordion, #participant-list .copy-link button.accordion, .copy-link
+#channel-list button.accordion,
+#channel-list .copy-link button.accordion, .copy-link
+#chat-list button.accordion,
+#chat-list .copy-link button.accordion, .source .icon, .source #participant-list button.accordion, #participant-list .source button.accordion, .source
+#channel-list button.accordion,
+#channel-list .source button.accordion, .source
+#chat-list button.accordion,
+#chat-list .source button.accordion, .license .icon:before, .license #participant-list button.accordion:before, #participant-list .license button.accordion:before, .license
+#channel-list button.accordion:before,
+#channel-list .license button.accordion:before, .license
+#chat-list button.accordion:before,
+#chat-list .license button.accordion:before {
   display: inline-block;
-  font: normal normal normal 14px / 1 FontAwesome;
+  font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -5231,6 +5231,10 @@ h3 {
 #content {
   min-height: 100%;
   padding-top: 1em; }
+  #content:after {
+    content: "";
+    display: table;
+    clear: both; }
 
 .main-content.index {
   margin-bottom: 5em; }
@@ -5299,6 +5303,9 @@ button {
   button:hover, .btn:focus, #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #footer .colophon ul li a:focus, #footer .colophon ul li #utility-nav #language-links a:focus, input[type="submit"]:focus,
   button:focus {
     border-width: 2px; }
+
+.btn-default, #utility-nav #language-links a.nav-link, #utility-nav #language-links #footer .colophon ul li a, #footer .colophon ul li #utility-nav #language-links a {
+  background-color: #79858A; }
 
 input[type="submit"] a,
 button a {
@@ -5407,7 +5414,7 @@ label {
 #channel-list button.accordion,
 #chat-list button.accordion {
   display: inline-block;
-  font: normal normal normal 14px / 1 FontAwesome;
+  font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -5571,6 +5578,12 @@ label {
 .main-content.index #join-room #room-number-button,
 .main-content.index #create-room #room-number-button {
   margin-top: .5em; }
+
+.main-content.index #join-room #create-new-room-button:after,
+.main-content.index #create-room #create-new-room-button:after {
+  content: "";
+  display: table;
+  clear: both; }
 
 .main-content.index #join-room label,
 .main-content.index #create-room label {
