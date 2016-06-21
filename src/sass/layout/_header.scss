@@ -47,7 +47,7 @@
 
   img {
     @extend .img-fluid;
-    @extend .img-square;
+    @extend .img-thumbnail;
     max-height: 100px;
   }
 

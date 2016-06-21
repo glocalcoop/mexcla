@@ -3,7 +3,7 @@
 // -----------------------------------------------------------------------------
 
 .modal {
-    @extend %fade;
+    @extend %fade !optional;
     .modal-dialog {
         @extend .modal-sm;
     }

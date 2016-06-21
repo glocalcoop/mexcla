@@ -27,7 +27,7 @@
         background-color {
             &:hover,
             &:focus {
-                @extend .hover;
+                @extend .hover !optional;
             }
         }
 
