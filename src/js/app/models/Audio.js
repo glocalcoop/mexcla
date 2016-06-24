@@ -58,8 +58,8 @@ Models.Audio = Backbone.Model.extend({
       return;
     }
 
-    this.cur_call =  this.verto.newCall({
-      destination_number: "9999",
+    this.cur_call = this.verto.newCall({
+      destination_number: '' + conf,
       caller_id_name: name,
       caller_id_number: conf,
       useVideo: false,
@@ -90,7 +90,7 @@ Models.Audio = Backbone.Model.extend({
           break;
         case $.verto.enum.state.active:
           active();
-          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          Models.util.audio.dtmf(that.cur_call, '1#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           that.trigger('status', 'active');

@@ -10,11 +10,12 @@ Models.util = {};
 Models.util.audio = {};
 
 var config = {
-  realm: 'talk.mayfirst.org', 
-  impi: 'public', 
-  password: 'public',
-  websocket_proxy_url: 'wss://talk.mayfirst.org:8082'
+  realm: 'freeswitch.ziggy.space',
+  impi: 'guest', 
+  password: 'mexcla',
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082'
 };
+
 
 var websiteText = {
     en: {
@@ -168,8 +169,8 @@ Models.Audio = Backbone.Model.extend({
       return;
     }
 
-    this.cur_call =  this.verto.newCall({
-      destination_number: "9999",
+    this.cur_call = this.verto.newCall({
+      destination_number: '' + conf,
       caller_id_name: name,
       caller_id_number: conf,
       useVideo: false,
@@ -200,7 +201,7 @@ Models.Audio = Backbone.Model.extend({
           break;
         case $.verto.enum.state.active:
           active();
-          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          Models.util.audio.dtmf(that.cur_call, '1#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           that.trigger('status', 'active');
@@ -688,16 +689,23 @@ Views.ConnectAudio = Backbone.View.extend({
 
 /**
  * Channel
+ * @class 
  */
 Views.Channel = Backbone.View.extend({
   template: _.template($('#channel-row-template').html()),
+  
+  /**
+   * Render
+   * @memberOf Views.Channel#
+   * @param {}
+   * @returns {this} 
+   */
   render: function(channel) {
     var data = {
       text: websiteText[app.user.attributes.lang],
       channel: channel
     };
     this.$el.append(this.template(data));
-
     /**
      * Moderator can't be interpreter
      * Moderator can't join a channel
@@ -708,22 +716,27 @@ Views.Channel = Backbone.View.extend({
     
     return this;
   },
+  /**
+   * Renders the controls for each channel
+   * @param {Object} data - Contains channel and other information for template rendering
+   * @param {Object} data.channel
+   * @returns {this} 
+   */
   renderControls: function(data) {
     if(!Views.hasChannelInterpreter(data.channel._id)) {
       this.becomeInterpreter(data);
     }
-
+    
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
     } else {
       this.joinChannel(data);
     }
-
+    
     return this;
-
   },
   becomeInterpreter: function(data) {
-    var interpretControlsEl = $('.interpret-controls');
+    var interpretControlsEl = '.interpret-controls';
     new Views.ChannelInterpretControls({ el: interpretControlsEl }).render(data);
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
@@ -731,7 +744,7 @@ Views.Channel = Backbone.View.extend({
     });
   },
   joinChannel: function(data) {
-    var joinControlsEl = $('.join-controls');
+    var joinControlsEl = '.join-controls';
     new Views.ChannelJoinControls({ el: joinControlsEl }).render(data);
     $('#channels .join').click(function(event) {
       event.preventDefault();
@@ -739,7 +752,7 @@ Views.Channel = Backbone.View.extend({
     });
   },
   leaveChannel: function(data) {
-    var leaveControlsEl = $('.leave-controls');
+    var leaveControlsEl = '.leave-controls';
     new Views.ChannelLeaveControls({ el: leaveControlsEl }).render(data);
     $('#channels .leave').click(function(event) {
       event.preventDefault();
@@ -1314,6 +1327,12 @@ Views.isInAChannel = function(userId) {
   
 };
 
+
+/**
+ * Returns true if channel already has an interpreter
+ * @param {string} channelId
+ * @returns {Boolean} 
+ */
 Views.hasChannelInterpreter = function(channelId) {
   var channel = _.findWhere(app.room.get('channels'), {
     _id: channelId

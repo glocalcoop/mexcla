@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <include>
   <context name="mexcla">
-    <extension name="tone_stream">
-      <condition field="destination_number" expression="^9999$">
-	<action application="answer"/>
-	<action application="javascript" data="/usr/share/freeswitch/scripts/mexcla.js"/>
-        <action application="playback" data="/usr/share/freeswitch/sounds/music/default/8000/ponce-preludio-in-e-major.wav"/>
+    <extension name="9999">
+      <condition field="destination_number" expression="^(\d{4})$">
+          <action application="answer"/>
+	  <action application="conference" data="$1@mexcla"/>
       </condition>
     </extension>
+
+
+<!-- <action application="answer"/> -->
+	<!-- <action application="javascript" data="/usr/share/freeswitch/scripts/mexcla.js"/> -->
+        <!-- <action application="playback" data="/usr/share/freeswitch/sounds/music/default/8000/ponce-preludio-in-e-major.wav"/> -->
+    <!-- <extension name="conf"> -->
+    <!--     <condition field="destination_number" expression="^(\d{4})$"> -->
+    <!--    </condition> -->
+    <!-- </extension> -->
   </context>
 </include>
