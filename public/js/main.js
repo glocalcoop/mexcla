@@ -161,7 +161,8 @@ Models.Audio = Backbone.Model.extend({
   },
   call_init: function() {
     var conf = this.get("conf");
-    var name = this.get("name");
+    var userName = this.get("name");
+    var userId = app.user.id;
     var callbacksObj = this.get("verto_call_callbacks");
     
     if(this.cur_call) {
@@ -171,8 +172,8 @@ Models.Audio = Backbone.Model.extend({
 '' +
     this.cur_call =  this.verto.newCall({
       destination_number: conf.toString(),
-      caller_id_name: name,
-      caller_id_number: name,
+      caller_id_name: userName,
+      caller_id_number: userId,
       useVideo: false,
       useStereo: false
     }, callbacksObj);
