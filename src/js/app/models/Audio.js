@@ -57,11 +57,11 @@ Models.Audio = Backbone.Model.extend({
       console.error("There is already a calling going on. Hand up first if you'd like to start another call.");
       return;
     }
-
+'' +
     this.cur_call =  this.verto.newCall({
-      destination_number: "9999",
+      destination_number: conf.toString(),
       caller_id_name: name,
-      caller_id_number: conf,
+      caller_id_number: name,
       useVideo: false,
       useStereo: false
     }, callbacksObj);
