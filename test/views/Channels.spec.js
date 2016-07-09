@@ -1,4 +1,4 @@
-describe.only('Channel (channel-row)', function(){
+describe('Channel (channel-row)', function(){
   describe('render()',function(){
     it('appends html');
     it('it renders controls, unless the user is a moderator');

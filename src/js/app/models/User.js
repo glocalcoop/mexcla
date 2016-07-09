@@ -52,6 +52,32 @@ Models.User = Backbone.Model.extend({
       return _.contains(channel.users, userId);
     });
     return (_.isUndefined(channel)) ? false : channel.lang;
+  },
+  /**
+   * Is a user the interpreter of the given language channel?
+   * @param {string} lang
+   * @returns {boolean} 
+   */
+  isInterpreter: function(lang) {
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return channel.lang === lang;
+    });
+    return (channel.interpreter === this.get('_id'));
+  },
+  /**
+   * Returns user status: 'main', 'interpret', 'hear'
+   * @return {string}
+   */
+  getStatus: function(){
+    var userChannelLang = this.isInAChannel();
+    if (userChannelLang) {
+      if (this.isInterpreter(userChannelLang)) {
+        return 'interpret';
+      } else {
+        return 'hear';
+      }
+    } else {
+      return 'main';
+    }
   }
-
 });
