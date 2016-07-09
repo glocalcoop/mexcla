@@ -172,7 +172,7 @@ Models.Audio = Backbone.Model.extend({
     this.cur_call =  this.verto.newCall({
       destination_number: conf.toString(),
       caller_id_name: userName,
-      caller_id_number: userId,
+      caller_id_number: app.user.getStatus(),
       useVideo: false,
       useStereo: false
     }, callbacksObj);
