@@ -154,6 +154,7 @@ Models.Audio = Backbone.Model.extend({
     this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
     this.login();
     this.listenTo(app.room, 'change:users', this.muteFromAfar);
+    this.setUpFreeswitchClient();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -326,7 +327,7 @@ Models.Audio = Backbone.Model.extend({
   },
   setFloor: function() {},
   setMute: function() {},
-  setUpRelateClient: function() {
+  setUpFreeswitchClient: function() {
     this.listenTo(this,
                   'status', 
                   this._freeswitchAction);

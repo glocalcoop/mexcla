@@ -1,4 +1,4 @@
-describe.only('Audio', function(){
+describe('Audio', function(){
   describe('util.audio.freeswitchAction', function(){
     
     before(function(){
@@ -20,11 +20,15 @@ describe.only('Audio', function(){
     });
   });
 
-  describe('setUpRelateClient()', function(){
+  describe('setUpFreeswitchClient()', function(){
+    var audio;
+
     before(function(){
       app.room = new Models.Room({roomnum: 1111});
       app.user = new Models.User({username: 'user'});
       sinon.spy(Models.util.audio, "freeswitchAction");
+      audio = new Models.Audio();
+      audio.trigger('status', 'active');
     });
 
     after(function(){
@@ -34,16 +38,12 @@ describe.only('Audio', function(){
     });
     
     it('calls freeswitchAction after connected, but not after other events', function(){
-      var audio = new Models.Audio();
-      audio.setUpRelateClient();
-      audio.trigger('status', 'active');
       Models.util.audio.freeswitchAction.callCount.should.eql(1);
       audio.trigger('status', 'connecting');
       Models.util.audio.freeswitchAction.callCount.should.eql(1);
       audio.trigger('status', 'hangup');
       Models.util.audio.freeswitchAction.callCount.should.eql(1);
     });
-
     
   });
   
