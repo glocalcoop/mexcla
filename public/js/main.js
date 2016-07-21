@@ -13,11 +13,8 @@ var config = {
   realm: 'freeswitch.ziggy.space',
   impi: 'guest', 
   password: 'mexcla',
-  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
-  controller_url: 'https://freeswitch.ziggy.space:4224'
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082'
 };
-
-
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
