@@ -13,8 +13,11 @@ var config = {
   realm: 'freeswitch.ziggy.space',
   impi: 'guest', 
   password: 'mexcla',
-  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082'
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
+  controller_url: 'https://freeswitch.ziggy.space:4224'
 };
+
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -212,7 +215,7 @@ Models.Audio = Backbone.Model.extend({
           break;
         case $.verto.enum.state.active:
           active();
-          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          // Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           that.trigger('status', 'active');
@@ -232,7 +235,7 @@ Models.Audio = Backbone.Model.extend({
    * output: false or self
    */
   switchChannel: function(option, channelId) {
-    console.log(channelId);
+    
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
@@ -547,6 +550,20 @@ Models.User = Backbone.Model.extend({
       }
     } else {
       return 'main';
+    }
+  },
+  
+  /**
+   * Toggles between interpret speak state
+   * @param {String} action - 'on' or 'off'
+   */
+  interpretSpeak: function(action) {
+    if (!this.isInterpreter) {
+      console.log("Only interpreters can toggle the speakon/speakoff action");
+    } else if (action === 'on' || action === 'off') {
+      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
+    } else {
+      console.error('action must be either "on" or "off"');
     }
   }
 });

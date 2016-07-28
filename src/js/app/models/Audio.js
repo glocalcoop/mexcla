@@ -103,7 +103,7 @@ Models.Audio = Backbone.Model.extend({
           break;
         case $.verto.enum.state.active:
           active();
-          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          // Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           that.trigger('status', 'active');
@@ -123,7 +123,7 @@ Models.Audio = Backbone.Model.extend({
    * output: false or self
    */
   switchChannel: function(option, channelId) {
-    console.log(channelId);
+    
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
