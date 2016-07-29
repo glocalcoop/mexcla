@@ -15,6 +15,18 @@ Models.util.audio.onWSLogin = function (verto, success) {
   }
 };
 
+/**
+ * 
+ * @param {string} roomNum
+ * @param {string} action - update, speakon, speakoff
+ */
+Models.util.audio.freeswitchAction = function(roomNum, action) {
+  $.ajax({
+    type: 'GET',
+    url: config.controller_url + /conf/ + roomNum + '/' + action
+  }).done(function(res){});
+};
+
 // there are 3 custom events on this model that can be listened to: 'connecting', 'active', 'hangup'
 Models.Audio = Backbone.Model.extend({
   verto: null,
@@ -30,6 +42,7 @@ Models.Audio = Backbone.Model.extend({
     this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
     this.login();
     this.listenTo(app.room, 'change:users', this.muteFromAfar);
+    this.setUpFreeswitchClient();
   },
   login: function() { 
     this.verto = new $.verto({
@@ -90,7 +103,7 @@ Models.Audio = Backbone.Model.extend({
           break;
         case $.verto.enum.state.active:
           active();
-          Models.util.audio.dtmf(that.cur_call, confNum + '#');
+          // Models.util.audio.dtmf(that.cur_call, confNum + '#');
           // Record what my unique key is so I can reference it when sending special chat messages.
           that.set('my_key', that.cur_call.callID);
           that.trigger('status', 'active');
@@ -110,7 +123,7 @@ Models.Audio = Backbone.Model.extend({
    * output: false or self
    */
   switchChannel: function(option, channelId) {
-    console.log(channelId);
+    
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
@@ -200,22 +213,17 @@ Models.Audio = Backbone.Model.extend({
   joinLeaveEventsOff: function() {
     this.stopListening(app.room);
   },
-  
-  /**
-   * API Ref: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-APIReference
-    * Can we set user as `moderator` if they are moderator?
-    * `mute`, `unmute`
-      * `dtmf` Send DTMF to any member of the conference `conference <confname> dtmf <member_id>|all|last|non_moderator <digits>`
-      * `mute` Mutes a conference member `conference <confname> mute <member_id>|all|last|non_moderator [quiet]`
-      * `unmute` Unmute a conference member  `conference <confname> unmute <member_id>|all|last|non_moderator [quiet]`
-    * Is our call-on the same as `floor`?
-      * `floor` Toggle floor status of the member. `conference <confname> <member_id>|all|last|non_moderator `
-    * Settable Variables: https://freeswitch.org/confluence/display/FREESWITCH/mod_conference#mod_conference-SettableChannelVariables
-      * `conference_flags` and `conference_member_flags`
-
-     * evoluxbr.github.io/verto-docs
-   */
   setFloor: function() {},
-  setMute: function() {}
+  setMute: function() {},
+  setUpFreeswitchClient: function() {
+    this.listenTo(this,
+                  'status', 
+                  this._freeswitchAction);
+  },
+  _freeswitchAction: function(status) {
+    if (status === 'active') {
+      Models.util.audio.freeswitchAction(String(this.get('conf')), 'update');
+    }
+  }
   
 });
