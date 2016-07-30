@@ -37,6 +37,18 @@ Views.Channel = Backbone.View.extend({
     if(!Views.hasChannelInterpreter(data.channel._id)) {
       this.becomeInterpreter(data);
     }
+
+    /**
+     * `app.user.isInterpreter(data.channel._id)` produces an error
+     * `TypeError: channel is undefined`
+     * 
+     * @todo fix this so button only appears for the interpreter
+     */
+    // if(app.user.isInterpreter(data.channel._id)) {
+    //   this.switchAudio(data);
+    // }
+
+    this.switchAudio(data);
     
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
@@ -52,6 +64,22 @@ Views.Channel = Backbone.View.extend({
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
       app.room.becomeInterpreter(app.user.id, data.channel._id);
+    });
+  },
+  switchAudio: function(data) {
+    $('#channels .switch-audio').click(function(event) {
+      event.preventDefault();
+      $(this).attr('data-status', function(index,attr){
+        return attr == 'on' ? 'off' : 'on';
+      });
+      /**
+       * This is rigged up, but produces an error
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakoff`
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakon`
+       *
+       * @todo Fix this issue
+       */
+      app.audio.interpretSpeak($(this).attr('data-status'));
     });
   },
   joinChannel: function(data) {
