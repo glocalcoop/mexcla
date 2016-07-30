@@ -13,11 +13,8 @@ var config = {
   realm: 'freeswitch.ziggy.space',
   impi: 'guest', 
   password: 'mexcla',
-  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
-  controller_url: 'https://freeswitch.ziggy.space:4224'
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082'
 };
-
-
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -53,6 +50,7 @@ var websiteText = {
       channel_language: "Channel Language",
       channel_abbreviation: "Language Abbreviation",
       interpret: "Interpret",
+      interpret_switch_direction: "Switch Direction",
       join_channel: "Join",
       leave_channel: "Leave",
       moderator: "Moderator",
@@ -97,6 +95,7 @@ var websiteText = {
       channel_language: "Channel Language [es]",
       channel_abbreviation: "Language Abbreviation [es]",
       interpret: "Interpret [es]",
+      interpret_switch_direction: "Switch Direction [es]",
       join_channel: "Join [es]",
       leave_channel: "Leave [es]",
       moderator: "Moderator [es]",
@@ -256,6 +255,19 @@ Models.Audio = Backbone.Model.extend({
     return this;
   },
   /**
+   * Toggles between interpret speak state
+   * @param {String} action - 'on' or 'off'
+   */
+  interpretSpeak: function(action) {
+    if (!app.user.isInterpreter) {
+      console.log("Only interpreters can toggle the speakon/speakoff action");
+    } else if (action === 'on' || action === 'off') {
+      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
+    } else {
+      console.error('action must be either "on" or "off"');
+    }
+  },
+  /**
    * @param "mute", "unmute", "status"
    * @return {boolean}
    * This is another way of muting. It's nicer that dialing '*' because you can find out if you are already muted or not...
@@ -320,6 +332,7 @@ Models.Audio = Backbone.Model.extend({
     }
     this.listenTo(app.room, 'joinChannel', this.switchChannel);
     this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
     this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
   },
   joinLeaveEventsOff: function() {
@@ -551,20 +564,6 @@ Models.User = Backbone.Model.extend({
     } else {
       return 'main';
     }
-  },
-  
-  /**
-   * Toggles between interpret speak state
-   * @param {String} action - 'on' or 'off'
-   */
-  interpretSpeak: function(action) {
-    if (!this.isInterpreter) {
-      console.log("Only interpreters can toggle the speakon/speakoff action");
-    } else if (action === 'on' || action === 'off') {
-      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
-    } else {
-      console.error('action must be either "on" or "off"');
-    }
   }
 });
 
@@ -775,6 +774,18 @@ Views.Channel = Backbone.View.extend({
     if(!Views.hasChannelInterpreter(data.channel._id)) {
       this.becomeInterpreter(data);
     }
+
+    /**
+     * `app.user.isInterpreter(data.channel._id)` produces an error
+     * `TypeError: channel is undefined`
+     * 
+     * @todo fix this so button only appears for the interpreter
+     */
+    // if(app.user.isInterpreter(data.channel._id)) {
+    //   this.switchAudio(data);
+    // }
+
+    this.switchAudio(data);
     
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
@@ -790,6 +801,22 @@ Views.Channel = Backbone.View.extend({
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
       app.room.becomeInterpreter(app.user.id, data.channel._id);
+    });
+  },
+  switchAudio: function(data) {
+    $('#channels .switch-audio').click(function(event) {
+      event.preventDefault();
+      $(this).attr('data-status', function(index,attr){
+        return attr == 'on' ? 'off' : 'on';
+      });
+      /**
+       * This is rigged up, but produces an error
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakoff`
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakon`
+       *
+       * @todo Fix this issue
+       */
+      app.audio.interpretSpeak($(this).attr('data-status'));
     });
   },
   joinChannel: function(data) {
