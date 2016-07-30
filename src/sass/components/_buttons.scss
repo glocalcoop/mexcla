@@ -80,3 +80,19 @@ button {
 button.accordion {
     @include pull-right;
 }
+
+button.switch-audio {
+    @extend .btn-danger;
+    @include font-size(1.25);
+
+    .icon {
+        margin-right: .25em;
+        @extend %fa-volume-up;
+    }
+
+    &[data-status='off'] {
+        .icon {
+            @extend .fa-rotate-180;
+        }
+    }
+}

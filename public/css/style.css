@@ -2012,24 +2012,24 @@ fieldset[disabled] a {
     border-color: #BB992F; }
 
 .btn-danger, #connect-button.connected, #mute-controls .btn, #mute-controls #utility-nav #language-links a.nav-link, #utility-nav #language-links #mute-controls a.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a, #utility-nav #language-links #footer .colophon ul li #mute-controls a, #mute-controls #footer .colophon ul li #utility-nav #language-links a, #footer .colophon ul li #utility-nav #language-links #mute-controls a, #mute-controls input[type="submit"], #mute-controls
-button, .controls .leave, .controls .call-on {
+button, button.switch-audio, .controls .leave, .controls .call-on {
   color: #fff;
   background-color: #EB5E28;
   border-color: #EB5E28; }
   .btn-danger:hover, #connect-button.connected:hover, #mute-controls .btn:hover, #mute-controls #utility-nav #language-links a.nav-link:hover, #utility-nav #language-links #mute-controls a.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:hover, #mute-controls input[type="submit"]:hover, #mute-controls
-  button:hover, .controls .leave:hover, .controls .call-on:hover {
+  button:hover, button.switch-audio:hover, .controls .leave:hover, .controls .call-on:hover {
     color: #fff;
     background-color: #cd4713;
     border-color: #c44312; }
   .btn-danger:focus, #connect-button.connected:focus, #mute-controls .btn:focus, #mute-controls #utility-nav #language-links a.nav-link:focus, #utility-nav #language-links #mute-controls a.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:focus, #mute-controls input[type="submit"]:focus, #mute-controls
-  button:focus, .controls .leave:focus, .controls .call-on:focus, .btn-danger.focus, .focus#connect-button.connected, #mute-controls .focus.btn, #mute-controls #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #mute-controls a.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.focus, #mute-controls input.focus[type="submit"], #mute-controls
-  button.focus, .controls .focus.leave, .controls .focus.call-on {
+  button:focus, button.switch-audio:focus, .controls .leave:focus, .controls .call-on:focus, .btn-danger.focus, .focus#connect-button.connected, #mute-controls .focus.btn, #mute-controls #utility-nav #language-links a.focus.nav-link, #utility-nav #language-links #mute-controls a.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.focus, #mute-controls input.focus[type="submit"], #mute-controls
+  button.focus, button.focus.switch-audio, .controls .focus.leave, .controls .focus.call-on {
     color: #fff;
     background-color: #cd4713;
     border-color: #c44312; }
   .btn-danger:active, #connect-button.connected:active, #mute-controls .btn:active, #mute-controls #utility-nav #language-links a.nav-link:active, #utility-nav #language-links #mute-controls a.nav-link:active, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active, #mute-controls input[type="submit"]:active, #mute-controls
-  button:active, .controls .leave:active, .controls .call-on:active, .btn-danger.active, .active#connect-button.connected, #mute-controls .active.btn, #mute-controls #utility-nav #language-links a.active.nav-link, #utility-nav #language-links #mute-controls a.active.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active, #mute-controls input.active[type="submit"], #mute-controls
-  button.active, .controls .active.leave, .controls .active.call-on,
+  button:active, button.switch-audio:active, .controls .leave:active, .controls .call-on:active, .btn-danger.active, .active#connect-button.connected, #mute-controls .active.btn, #mute-controls #utility-nav #language-links a.active.nav-link, #utility-nav #language-links #mute-controls a.active.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active, #mute-controls input.active[type="submit"], #mute-controls
+  button.active, button.active.switch-audio, .controls .active.leave, .controls .active.call-on,
   .open > .btn-danger.dropdown-toggle,
   .open > .dropdown-toggle#connect-button.connected, #mute-controls
   .open > .dropdown-toggle.btn, #mute-controls #utility-nav #language-links
@@ -2041,7 +2041,8 @@ button, .controls .leave, .controls .call-on {
   .open > a.dropdown-toggle, #mute-controls
   .open > input.dropdown-toggle[type="submit"], #mute-controls
   .open >
-  button.dropdown-toggle, .controls
+  button.dropdown-toggle,
+  .open > button.dropdown-toggle.switch-audio, .controls
   .open > .dropdown-toggle.leave, .controls
   .open > .dropdown-toggle.call-on {
     color: #fff;
@@ -2049,12 +2050,12 @@ button, .controls .leave, .controls .call-on {
     border-color: #c44312;
     background-image: none; }
     .btn-danger:active:hover, #connect-button.connected:active:hover, #mute-controls .btn:active:hover, #mute-controls #utility-nav #language-links a.nav-link:active:hover, #utility-nav #language-links #mute-controls a.nav-link:active:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active:hover, #mute-controls input[type="submit"]:active:hover, #mute-controls
-    button:active:hover, .controls .leave:active:hover, .controls .call-on:active:hover, .btn-danger:active:focus, #connect-button.connected:active:focus, #mute-controls .btn:active:focus, #mute-controls #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #mute-controls a.nav-link:active:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active:focus, #mute-controls input[type="submit"]:active:focus, #mute-controls
-    button:active:focus, .controls .leave:active:focus, .controls .call-on:active:focus, .btn-danger:active.focus, #connect-button.connected:active.focus, #mute-controls .btn:active.focus, #mute-controls #utility-nav #language-links a.nav-link:active.focus, #utility-nav #language-links #mute-controls a.nav-link:active.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active.focus, #mute-controls input[type="submit"]:active.focus, #mute-controls
-    button:active.focus, .controls .leave:active.focus, .controls .call-on:active.focus, .btn-danger.active:hover, .active#connect-button.connected:hover, #mute-controls .active.btn:hover, #mute-controls #utility-nav #language-links a.active.nav-link:hover, #utility-nav #language-links #mute-controls a.active.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:hover, #mute-controls input.active[type="submit"]:hover, #mute-controls
-    button.active:hover, .controls .active.leave:hover, .controls .active.call-on:hover, .btn-danger.active:focus, .active#connect-button.connected:focus, #mute-controls .active.btn:focus, #mute-controls #utility-nav #language-links a.active.nav-link:focus, #utility-nav #language-links #mute-controls a.active.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:focus, #mute-controls input.active[type="submit"]:focus, #mute-controls
-    button.active:focus, .controls .active.leave:focus, .controls .active.call-on:focus, .btn-danger.active.focus, .active.focus#connect-button.connected, #mute-controls .active.focus.btn, #mute-controls #utility-nav #language-links a.active.focus.nav-link, #utility-nav #language-links #mute-controls a.active.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active.focus, #mute-controls input.active.focus[type="submit"], #mute-controls
-    button.active.focus, .controls .active.focus.leave, .controls .active.focus.call-on,
+    button:active:hover, button.switch-audio:active:hover, .controls .leave:active:hover, .controls .call-on:active:hover, .btn-danger:active:focus, #connect-button.connected:active:focus, #mute-controls .btn:active:focus, #mute-controls #utility-nav #language-links a.nav-link:active:focus, #utility-nav #language-links #mute-controls a.nav-link:active:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active:focus, #mute-controls input[type="submit"]:active:focus, #mute-controls
+    button:active:focus, button.switch-audio:active:focus, .controls .leave:active:focus, .controls .call-on:active:focus, .btn-danger:active.focus, #connect-button.connected:active.focus, #mute-controls .btn:active.focus, #mute-controls #utility-nav #language-links a.nav-link:active.focus, #utility-nav #language-links #mute-controls a.nav-link:active.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:active.focus, #mute-controls input[type="submit"]:active.focus, #mute-controls
+    button:active.focus, button.switch-audio:active.focus, .controls .leave:active.focus, .controls .call-on:active.focus, .btn-danger.active:hover, .active#connect-button.connected:hover, #mute-controls .active.btn:hover, #mute-controls #utility-nav #language-links a.active.nav-link:hover, #utility-nav #language-links #mute-controls a.active.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:hover, #mute-controls input.active[type="submit"]:hover, #mute-controls
+    button.active:hover, button.active.switch-audio:hover, .controls .active.leave:hover, .controls .active.call-on:hover, .btn-danger.active:focus, .active#connect-button.connected:focus, #mute-controls .active.btn:focus, #mute-controls #utility-nav #language-links a.active.nav-link:focus, #utility-nav #language-links #mute-controls a.active.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active:focus, #mute-controls input.active[type="submit"]:focus, #mute-controls
+    button.active:focus, button.active.switch-audio:focus, .controls .active.leave:focus, .controls .active.call-on:focus, .btn-danger.active.focus, .active.focus#connect-button.connected, #mute-controls .active.focus.btn, #mute-controls #utility-nav #language-links a.active.focus.nav-link, #utility-nav #language-links #mute-controls a.active.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.active.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.active.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.active.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.active.focus, #mute-controls input.active.focus[type="submit"], #mute-controls
+    button.active.focus, button.active.focus.switch-audio, .controls .active.focus.leave, .controls .active.focus.call-on,
     .open > .btn-danger.dropdown-toggle:hover,
     .open > .dropdown-toggle#connect-button.connected:hover, #mute-controls
     .open > .dropdown-toggle.btn:hover, #mute-controls #utility-nav #language-links
@@ -2066,7 +2067,8 @@ button, .controls .leave, .controls .call-on {
     .open > a.dropdown-toggle:hover, #mute-controls
     .open > input.dropdown-toggle[type="submit"]:hover, #mute-controls
     .open >
-    button.dropdown-toggle:hover, .controls
+    button.dropdown-toggle:hover,
+    .open > button.dropdown-toggle.switch-audio:hover, .controls
     .open > .dropdown-toggle.leave:hover, .controls
     .open > .dropdown-toggle.call-on:hover,
     .open > .btn-danger.dropdown-toggle:focus,
@@ -2080,7 +2082,8 @@ button, .controls .leave, .controls .call-on {
     .open > a.dropdown-toggle:focus, #mute-controls
     .open > input.dropdown-toggle[type="submit"]:focus, #mute-controls
     .open >
-    button.dropdown-toggle:focus, .controls
+    button.dropdown-toggle:focus,
+    .open > button.dropdown-toggle.switch-audio:focus, .controls
     .open > .dropdown-toggle.leave:focus, .controls
     .open > .dropdown-toggle.call-on:focus,
     .open > .btn-danger.dropdown-toggle.focus,
@@ -2094,22 +2097,23 @@ button, .controls .leave, .controls .call-on {
     .open > a.dropdown-toggle.focus, #mute-controls
     .open > input.dropdown-toggle.focus[type="submit"], #mute-controls
     .open >
-    button.dropdown-toggle.focus, .controls
+    button.dropdown-toggle.focus,
+    .open > button.dropdown-toggle.focus.switch-audio, .controls
     .open > .dropdown-toggle.focus.leave, .controls
     .open > .dropdown-toggle.focus.call-on {
       color: #fff;
       background-color: #ac3b10;
       border-color: #872e0d; }
   .btn-danger.disabled:focus, .disabled#connect-button.connected:focus, #mute-controls .disabled.btn:focus, #mute-controls #utility-nav #language-links a.disabled.nav-link:focus, #utility-nav #language-links #mute-controls a.disabled.nav-link:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled:focus, #mute-controls input.disabled[type="submit"]:focus, #mute-controls
-  button.disabled:focus, .controls .disabled.leave:focus, .controls .disabled.call-on:focus, .btn-danger.disabled.focus, .disabled.focus#connect-button.connected, #mute-controls .disabled.focus.btn, #mute-controls #utility-nav #language-links a.disabled.focus.nav-link, #utility-nav #language-links #mute-controls a.disabled.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled.focus, #mute-controls input.disabled.focus[type="submit"], #mute-controls
-  button.disabled.focus, .controls .disabled.focus.leave, .controls .disabled.focus.call-on, .btn-danger:disabled:focus, #connect-button.connected:disabled:focus, #mute-controls .btn:disabled:focus, #mute-controls #utility-nav #language-links a.nav-link:disabled:focus, #utility-nav #language-links #mute-controls a.nav-link:disabled:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:focus, #mute-controls input[type="submit"]:disabled:focus, #mute-controls
-  button:disabled:focus, .controls .leave:disabled:focus, .controls .call-on:disabled:focus, .btn-danger:disabled.focus, #connect-button.connected:disabled.focus, #mute-controls .btn:disabled.focus, #mute-controls #utility-nav #language-links a.nav-link:disabled.focus, #utility-nav #language-links #mute-controls a.nav-link:disabled.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled.focus, #mute-controls input[type="submit"]:disabled.focus, #mute-controls
-  button:disabled.focus, .controls .leave:disabled.focus, .controls .call-on:disabled.focus {
+  button.disabled:focus, button.disabled.switch-audio:focus, .controls .disabled.leave:focus, .controls .disabled.call-on:focus, .btn-danger.disabled.focus, .disabled.focus#connect-button.connected, #mute-controls .disabled.focus.btn, #mute-controls #utility-nav #language-links a.disabled.focus.nav-link, #utility-nav #language-links #mute-controls a.disabled.focus.nav-link, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled.focus, #mute-controls input.disabled.focus[type="submit"], #mute-controls
+  button.disabled.focus, button.disabled.focus.switch-audio, .controls .disabled.focus.leave, .controls .disabled.focus.call-on, .btn-danger:disabled:focus, #connect-button.connected:disabled:focus, #mute-controls .btn:disabled:focus, #mute-controls #utility-nav #language-links a.nav-link:disabled:focus, #utility-nav #language-links #mute-controls a.nav-link:disabled:focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:focus, #mute-controls input[type="submit"]:disabled:focus, #mute-controls
+  button:disabled:focus, button.switch-audio:disabled:focus, .controls .leave:disabled:focus, .controls .call-on:disabled:focus, .btn-danger:disabled.focus, #connect-button.connected:disabled.focus, #mute-controls .btn:disabled.focus, #mute-controls #utility-nav #language-links a.nav-link:disabled.focus, #utility-nav #language-links #mute-controls a.nav-link:disabled.focus, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled.focus, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled.focus, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled.focus, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled.focus, #mute-controls input[type="submit"]:disabled.focus, #mute-controls
+  button:disabled.focus, button.switch-audio:disabled.focus, .controls .leave:disabled.focus, .controls .call-on:disabled.focus {
     background-color: #EB5E28;
     border-color: #EB5E28; }
   .btn-danger.disabled:hover, .disabled#connect-button.connected:hover, #mute-controls .disabled.btn:hover, #mute-controls #utility-nav #language-links a.disabled.nav-link:hover, #utility-nav #language-links #mute-controls a.disabled.nav-link:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a.disabled:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a.disabled:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a.disabled:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a.disabled:hover, #mute-controls input.disabled[type="submit"]:hover, #mute-controls
-  button.disabled:hover, .controls .disabled.leave:hover, .controls .disabled.call-on:hover, .btn-danger:disabled:hover, #connect-button.connected:disabled:hover, #mute-controls .btn:disabled:hover, #mute-controls #utility-nav #language-links a.nav-link:disabled:hover, #utility-nav #language-links #mute-controls a.nav-link:disabled:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:hover, #mute-controls input[type="submit"]:disabled:hover, #mute-controls
-  button:disabled:hover, .controls .leave:disabled:hover, .controls .call-on:disabled:hover {
+  button.disabled:hover, button.disabled.switch-audio:hover, .controls .disabled.leave:hover, .controls .disabled.call-on:hover, .btn-danger:disabled:hover, #connect-button.connected:disabled:hover, #mute-controls .btn:disabled:hover, #mute-controls #utility-nav #language-links a.nav-link:disabled:hover, #utility-nav #language-links #mute-controls a.nav-link:disabled:hover, #mute-controls #utility-nav #language-links #footer .colophon ul li a:disabled:hover, #utility-nav #language-links #footer .colophon ul li #mute-controls a:disabled:hover, #mute-controls #footer .colophon ul li #utility-nav #language-links a:disabled:hover, #footer .colophon ul li #utility-nav #language-links #mute-controls a:disabled:hover, #mute-controls input[type="submit"]:disabled:hover, #mute-controls
+  button:disabled:hover, button.switch-audio:disabled:hover, .controls .leave:disabled:hover, .controls .call-on:disabled:hover {
     background-color: #EB5E28;
     border-color: #EB5E28; }
 
@@ -4977,6 +4981,24 @@ a.bg-danger:focus, a.bg-danger:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+/* makes the font 33% larger relative to the icon container */
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -15%; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
@@ -5005,8 +5027,72 @@ a.bg-danger:focus, a.bg-danger:hover {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
+.fa-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.fa-rotate-180, button.switch-audio[data-status='off'] .icon, button.switch-audio[data-status='off'] #participant-list button.accordion, #participant-list button.switch-audio[data-status='off'] button.accordion, button.switch-audio[data-status='off']
+#channel-list button.accordion,
+#channel-list button.switch-audio[data-status='off'] button.accordion, button.switch-audio[data-status='off']
+#chat-list button.accordion,
+#chat-list button.switch-audio[data-status='off'] button.accordion {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.fa-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+.fa-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); }
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root button.switch-audio[data-status='off'] .icon,
+:root button.switch-audio[data-status='off'] #participant-list button.accordion,
+:root #participant-list button.switch-audio[data-status='off'] button.accordion, #participant-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root button.switch-audio[data-status='off']
+#channel-list button.accordion,
+:root
+#channel-list button.switch-audio[data-status='off'] button.accordion,
+#channel-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root button.switch-audio[data-status='off']
+#chat-list button.accordion,
+:root
+#chat-list button.switch-audio[data-status='off'] button.accordion,
+#chat-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  filter: none; }
+
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
+button.switch-audio .icon:before, button.switch-audio #participant-list button.accordion:before, #participant-list button.switch-audio button.accordion:before, button.switch-audio
+#channel-list button.accordion:before,
+#channel-list button.switch-audio button.accordion:before, button.switch-audio
+#chat-list button.accordion:before,
+#chat-list button.switch-audio button.accordion:before {
+  content: ""; }
+
 .submit-chat .icon:before, .submit-chat #participant-list button.accordion:before, #participant-list .submit-chat button.accordion:before, .submit-chat
 #channel-list button.accordion:before,
 #channel-list .submit-chat button.accordion:before, .submit-chat
@@ -5325,6 +5411,16 @@ button a {
 
 button.accordion {
   float: right !important; }
+
+button.switch-audio {
+  font-size: 20px;
+  font-size: 1.25rem; }
+  button.switch-audio .icon, button.switch-audio #participant-list button.accordion, #participant-list button.switch-audio button.accordion, button.switch-audio
+  #channel-list button.accordion,
+  #channel-list button.switch-audio button.accordion, button.switch-audio
+  #chat-list button.accordion,
+  #chat-list button.switch-audio button.accordion {
+    margin-right: .25em; }
 
 label {
   font-weight: bold;
