@@ -79,19 +79,5 @@ Models.User = Backbone.Model.extend({
     } else {
       return 'main';
     }
-  },
-  
-  /**
-   * Toggles between interpret speak state
-   * @param {String} action - 'on' or 'off'
-   */
-  interpretSpeak: function(action) {
-    if (!this.isInterpreter) {
-      console.log("Only interpreters can toggle the speakon/speakoff action");
-    } else if (action === 'on' || action === 'off') {
-      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
-    } else {
-      console.error('action must be either "on" or "off"');
-    }
   }
 });
