@@ -38,10 +38,11 @@ Models.Audio = Backbone.Model.extend({
   initialize: function() {
     this.set('conf', app.room.get('roomnum'));
     this.set('name', app.user.get('username'));
-    this.setCallbacks(_.noop, _.bind(this.joinLeaveEventsOn, this), _.bind(this.joinLeaveEventsOff, this));
+    this.setCallbacks(_.noop, _.noop, _.noop);
     this.login();
     this.listenTo(app.room, 'change:users', this.muteFromAfar);
     this.setUpFreeswitchClient();
+    this.roomAudioEvents();
   },
   login: function() {
     
@@ -125,24 +126,13 @@ Models.Audio = Backbone.Model.extend({
    * input: "main", "hear", "interpret"
    * output: false or self
    */
-  switchChannel: function(option, channelId) {
+  switchChannel: function() {
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
     }
-    if (option === 'main') {
-      console.log('dtmf: 0');
-      Models.util.audio.dtmf(this.cur_call, '0');
-    } else if (option === 'hear') {
-      console.log('dtmf: 1');
-      Models.util.audio.dtmf(this.cur_call, '1');
-    } else if (option === 'interpret') {
-      console.log('dtmf: 2');
-      Models.util.audio.dtmf(this.cur_call, '2');
-    } else {
-      console.error('Switch Channel takes these options: "main", "hear", "interpret"');
-      return false;
-    }
+    this.hangup();
+    this.call_init();
     return this;
   },
   /**
@@ -215,24 +205,15 @@ Models.Audio = Backbone.Model.extend({
       }
     }
   },
-  joinLeaveEventsOn: function() {
-    if (app.user.isInAChannel()) {
-      this.switchChannel('hear');
-    }
+  roomAudioEvents: function() {
     this.listenTo(app.room, 'joinChannel', this.switchChannel);
     this.listenTo(app.room, 'leaveChannel', this.switchChannel);
     this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
-    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
-  },
-  joinLeaveEventsOff: function() {
-    this.stopListening(app.room);
   },
   setFloor: function() {},
   setMute: function() {},
   setUpFreeswitchClient: function() {
-    this.listenTo(this,
-                  'status', 
-                  this._freeswitchAction);
+    this.listenTo(this,'status', this._freeswitchAction);
   },
   _freeswitchAction: function(status) {
     if (status === 'active') {
