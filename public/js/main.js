@@ -10,12 +10,13 @@ Models.util = {};
 Models.util.audio = {};
 
 var config = {
-    realm: 'freeswitch.ziggy.space',
-    impi: 'guest',
-    password: 'mexcla',
-    websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
-    controller_url: 'https://freeswitch.ziggy.space:4224'
+  realm: 'freeswitch.ziggy.space',
+  impi: 'guest', 
+  password: 'mexcla',
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
+  controller_url: 'https://freeswitch.ziggy.space:4224'
 };
+
 
 var websiteText = {
     en: {
@@ -123,7 +124,6 @@ Models.util.audio.dtmf = function (cur_call, key) {
 
 Models.util.audio.onWSLogin = function (verto, success) {
   if (success) {
-    this.verto.hangup();
     this.trigger('logged_in');
   }
 };
@@ -157,7 +157,11 @@ Models.Audio = Backbone.Model.extend({
     this.listenTo(app.room, 'change:users', this.muteFromAfar);
     this.setUpFreeswitchClient();
   },
-  login: function() { 
+  login: function() {
+    
+    // this prevents verto from re-connecting audio upon browser refresh.
+    localStorage.removeItem("verto_session_uuid");
+    
     this.verto = new $.verto({
       login: config.impi,
       passwd: config.password,
@@ -236,7 +240,6 @@ Models.Audio = Backbone.Model.extend({
    * output: false or self
    */
   switchChannel: function(option, channelId) {
-    
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
@@ -261,9 +264,7 @@ Models.Audio = Backbone.Model.extend({
    * @param {String} action - 'on' or 'off'
    */
   interpretSpeak: function(action) {
-    if (!app.user.isInterpreter) {
-      console.log("Only interpreters can toggle the speakon/speakoff action");
-    } else if (action === 'on' || action === 'off') {
+    if (action === 'on' || action === 'off') {
       Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
     } else {
       console.error('action must be either "on" or "off"');
@@ -352,7 +353,6 @@ Models.Audio = Backbone.Model.extend({
       Models.util.audio.freeswitchAction(String(this.get('conf')), 'update');
     }
   }
-  
 });
 
 Models.Language = Backbone.Model.extend({});
