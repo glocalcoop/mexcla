@@ -24,7 +24,7 @@ Views.AddChannelButton = Backbone.View.extend({
 Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function(userId) {
-    // reset 
+    // reset
     this.$el.html('');
     // only show if in queue or is called on
     if(Views.isInQueue(userId) || Views.isCalledOn(userId)){
@@ -50,7 +50,7 @@ Views.ModeratorControls = Backbone.View.extend({
       $('#' + userId).find('button.call-on').removeClass('on');
     }
   }
-  
+
 });
 
 /**
@@ -111,7 +111,7 @@ Views.MuteControls = Backbone.View.extend({
 
 
 /**
- * Conditions: no interpreter assigned to channel and 
+ * Conditions: no interpreter assigned to channel and
  * user isn't moderator
  * On click:
  *   User should be added to channel users
@@ -120,6 +120,17 @@ Views.MuteControls = Backbone.View.extend({
  */
 Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  },
+});
+
+/**
+ * Render Switch Audio Control
+ * If user is interpreter in channel, render control
+ */
+Views.SwitchAudioControls = Backbone.View.extend({
+  template: _.template($('#switch-audio-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   },
@@ -172,7 +183,7 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
     var html = '<option value="">Select a Translator</option>';
     html += '<option value="null">None</option>';
     this.$el.html(html);
-    
+
     // Let's use a dynamic list someday
     // var languageList = new Models.Languages();
 
@@ -241,4 +252,3 @@ Views.BrandingText = Backbone.View.extend({
     this.listenTo(this.model, 'change:username', this.render);
   }
 });
-
