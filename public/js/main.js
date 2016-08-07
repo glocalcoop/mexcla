@@ -10,13 +10,12 @@ Models.util = {};
 Models.util.audio = {};
 
 var config = {
-  realm: 'freeswitch.ziggy.space',
-  impi: 'guest', 
-  password: 'mexcla',
-  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
-  controller_url: 'https://freeswitch.ziggy.space:4224'
+    realm: 'freeswitch.ziggy.space',
+    impi: 'guest',
+    password: 'mexcla',
+    websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
+    controller_url: 'https://freeswitch.ziggy.space:4224'
 };
-
 
 var websiteText = {
     en: {
@@ -751,16 +750,16 @@ Views.ConnectAudio = Backbone.View.extend({
 
 /**
  * Channel
- * @class 
+ * @class
  */
 Views.Channel = Backbone.View.extend({
   template: _.template($('#channel-row-template').html()),
-  
+
   /**
    * Render
    * @memberOf Views.Channel#
    * @param {}
-   * @returns {this} 
+   * @returns {this}
    */
   render: function(channel) {
     var data = {
@@ -775,14 +774,14 @@ Views.Channel = Backbone.View.extend({
     if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
-    
+
     return this;
   },
   /**
    * Renders the controls for each channel
    * @param {Object} data - Contains channel and other information for template rendering
    * @param {Object} data.channel
-   * @returns {this} 
+   * @returns {this}
    */
   renderControls: function(data) {
     if(!Views.hasChannelInterpreter(data.channel._id)) {
@@ -790,23 +789,18 @@ Views.Channel = Backbone.View.extend({
     }
 
     /**
-     * `app.user.isInterpreter(data.channel._id)` produces an error
-     * `TypeError: channel is undefined`
-     * 
-     * @todo fix this so button only appears for the interpreter
+     * Render switchAudio if isInterpreterByChannelID
      */
-    // if(app.user.isInterpreter(data.channel._id)) {
-    //   this.switchAudio(data);
-    // }
+    if(app.user.isInterpreterByChannelId(data.channel._id)) {
+      this.switchAudio(data);
+    }
 
-    this.switchAudio(data);
-    
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
     } else {
       this.joinChannel(data);
     }
-    
+
     return this;
   },
   becomeInterpreter: function(data) {
@@ -818,6 +812,8 @@ Views.Channel = Backbone.View.extend({
     });
   },
   switchAudio: function(data) {
+    var switchAudioControlsEl = '.switch-audio-controls';
+    new Views.SwitchAudioControls({ el: switchAudioControlsEl  }).render(data);
     $('#channels .switch-audio').click(function(event) {
       event.preventDefault();
       $(this).attr('data-status', function(index,attr){
@@ -877,7 +873,7 @@ Views.AddChannelButton = Backbone.View.extend({
 Views.ModeratorControls = Backbone.View.extend({
   template: _.template($('#moderator-controls-template').html()),
   render: function(userId) {
-    // reset 
+    // reset
     this.$el.html('');
     // only show if in queue or is called on
     if(Views.isInQueue(userId) || Views.isCalledOn(userId)){
@@ -903,7 +899,7 @@ Views.ModeratorControls = Backbone.View.extend({
       $('#' + userId).find('button.call-on').removeClass('on');
     }
   }
-  
+
 });
 
 /**
@@ -964,7 +960,7 @@ Views.MuteControls = Backbone.View.extend({
 
 
 /**
- * Conditions: no interpreter assigned to channel and 
+ * Conditions: no interpreter assigned to channel and
  * user isn't moderator
  * On click:
  *   User should be added to channel users
@@ -973,6 +969,17 @@ Views.MuteControls = Backbone.View.extend({
  */
 Views.ChannelInterpretControls = Backbone.View.extend({
   template: _.template($('#interpret-controls-template').html()),
+  render: function(data) {
+    this.$el.html(this.template({text: data.text}));
+  },
+});
+
+/**
+ * Render Switch Audio Control
+ * If user is interpreter in channel, render control
+ */
+Views.SwitchAudioControls = Backbone.View.extend({
+  template: _.template($('#switch-audio-controls-template').html()),
   render: function(data) {
     this.$el.html(this.template({text: data.text}));
   },
@@ -1025,7 +1032,7 @@ Views.ChannelTranslatorOptionsList = Backbone.View.extend({
     var html = '<option value="">Select a Translator</option>';
     html += '<option value="null">None</option>';
     this.$el.html(html);
-    
+
     // Let's use a dynamic list someday
     // var languageList = new Models.Languages();
 
@@ -1094,7 +1101,6 @@ Views.BrandingText = Backbone.View.extend({
     this.listenTo(this.model, 'change:username', this.render);
   }
 });
-
 
 /**
  * IndexView: the main page where a user picks between creating a room or joining an existing one. It renders language according to the user's language property.
