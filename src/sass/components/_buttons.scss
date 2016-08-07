@@ -82,8 +82,9 @@ button.accordion {
 }
 
 button.switch-audio {
-    @extend .btn-danger;
+    @extend .btn-info;
     @include font-size(1.25);
+    border-radius: 10px;
 
     .icon {
         margin-right: .25em;
