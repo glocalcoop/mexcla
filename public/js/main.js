@@ -13,8 +13,11 @@ var config = {
   realm: 'freeswitch.ziggy.space',
   impi: 'guest', 
   password: 'mexcla',
-  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082'
+  websocket_proxy_url: 'wss://freeswitch.ziggy.space:8082',
+  controller_url: 'https://freeswitch.ziggy.space:4224'
 };
+
+
 var websiteText = {
     en: {
       title: "Simultaneous Interpretation Conference System",
@@ -546,6 +549,17 @@ Models.User = Backbone.Model.extend({
   isInterpreter: function(lang) {
     var channel = _.find(app.room.get('channels'), function(channel){
       return channel.lang === lang;
+    });
+    return (channel.interpreter === this.get('_id'));
+  },
+  /**
+   * Is a user the interpreter of the given language channel? (Channel ID Version)
+   * @param {string} channelId
+   * @returns {boolean} 
+   */
+  isInterpreterByChannelId: function(channelId) {
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return channel._id === channelId;
     });
     return (channel.interpreter === this.get('_id'));
   },
