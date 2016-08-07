@@ -65,6 +65,17 @@ Models.User = Backbone.Model.extend({
     return (channel.interpreter === this.get('_id'));
   },
   /**
+   * Is a user the interpreter of the given language channel? (Channel ID Version)
+   * @param {string} channelId
+   * @returns {boolean} 
+   */
+  isInterpreterByChannelId: function(channelId) {
+    var channel = _.find(app.room.get('channels'), function(channel){
+      return channel._id === channelId;
+    });
+    return (channel.interpreter === this.get('_id'));
+  },
+  /**
    * Returns user status: 'main', 'interpret', 'hear'
    * @return {string}
    */
@@ -78,20 +89,6 @@ Models.User = Backbone.Model.extend({
       }
     } else {
       return 'main';
-    }
-  },
-  
-  /**
-   * Toggles between interpret speak state
-   * @param {String} action - 'on' or 'off'
-   */
-  interpretSpeak: function(action) {
-    if (!this.isInterpreter) {
-      console.log("Only interpreters can toggle the speakon/speakoff action");
-    } else if (action === 'on' || action === 'off') {
-      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
-    } else {
-      console.error('action must be either "on" or "off"');
     }
   }
 });

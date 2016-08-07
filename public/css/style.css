@@ -1891,35 +1891,39 @@ fieldset[disabled] a {
     background-color: #fff;
     border-color: #ccc; }
 
-.btn-info {
+.btn-info, button.switch-audio {
   color: #fff;
   background-color: #3091B2;
   border-color: #3091B2; }
-  .btn-info:hover {
+  .btn-info:hover, button.switch-audio:hover {
     color: #fff;
     background-color: #25708a;
     border-color: #236a82; }
-  .btn-info:focus, .btn-info.focus {
+  .btn-info:focus, button.switch-audio:focus, .btn-info.focus, button.focus.switch-audio {
     color: #fff;
     background-color: #25708a;
     border-color: #236a82; }
-  .btn-info:active, .btn-info.active,
-  .open > .btn-info.dropdown-toggle {
+  .btn-info:active, button.switch-audio:active, .btn-info.active, button.active.switch-audio,
+  .open > .btn-info.dropdown-toggle,
+  .open > button.dropdown-toggle.switch-audio {
     color: #fff;
     background-color: #25708a;
     border-color: #236a82;
     background-image: none; }
-    .btn-info:active:hover, .btn-info:active:focus, .btn-info:active.focus, .btn-info.active:hover, .btn-info.active:focus, .btn-info.active.focus,
+    .btn-info:active:hover, button.switch-audio:active:hover, .btn-info:active:focus, button.switch-audio:active:focus, .btn-info:active.focus, button.switch-audio:active.focus, .btn-info.active:hover, button.active.switch-audio:hover, .btn-info.active:focus, button.active.switch-audio:focus, .btn-info.active.focus, button.active.focus.switch-audio,
     .open > .btn-info.dropdown-toggle:hover,
+    .open > button.dropdown-toggle.switch-audio:hover,
     .open > .btn-info.dropdown-toggle:focus,
-    .open > .btn-info.dropdown-toggle.focus {
+    .open > button.dropdown-toggle.switch-audio:focus,
+    .open > .btn-info.dropdown-toggle.focus,
+    .open > button.dropdown-toggle.focus.switch-audio {
       color: #fff;
       background-color: #1e596e;
       border-color: #153f4e; }
-  .btn-info.disabled:focus, .btn-info.disabled.focus, .btn-info:disabled:focus, .btn-info:disabled.focus {
+  .btn-info.disabled:focus, button.disabled.switch-audio:focus, .btn-info.disabled.focus, button.disabled.focus.switch-audio, .btn-info:disabled:focus, button.switch-audio:disabled:focus, .btn-info:disabled.focus, button.switch-audio:disabled.focus {
     background-color: #3091B2;
     border-color: #3091B2; }
-  .btn-info.disabled:hover, .btn-info:disabled:hover {
+  .btn-info.disabled:hover, button.disabled.switch-audio:hover, .btn-info:disabled:hover, button.switch-audio:disabled:hover {
     background-color: #3091B2;
     border-color: #3091B2; }
 
@@ -4977,6 +4981,24 @@ a.bg-danger:focus, a.bg-danger:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
+/* makes the font 33% larger relative to the icon container */
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -15%; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear; }
@@ -5005,8 +5027,72 @@ a.bg-danger:focus, a.bg-danger:hover {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
+.fa-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+.fa-rotate-180, button.switch-audio[data-status='off'] .icon, button.switch-audio[data-status='off'] #participant-list button.accordion, #participant-list button.switch-audio[data-status='off'] button.accordion, button.switch-audio[data-status='off']
+#channel-list button.accordion,
+#channel-list button.switch-audio[data-status='off'] button.accordion, button.switch-audio[data-status='off']
+#chat-list button.accordion,
+#chat-list button.switch-audio[data-status='off'] button.accordion {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg); }
+
+.fa-flip-horizontal {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  transform: scale(-1, 1); }
+
+.fa-flip-vertical {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  -ms-transform: scale(1, -1);
+  transform: scale(1, -1); }
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root button.switch-audio[data-status='off'] .icon,
+:root button.switch-audio[data-status='off'] #participant-list button.accordion,
+:root #participant-list button.switch-audio[data-status='off'] button.accordion, #participant-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root button.switch-audio[data-status='off']
+#channel-list button.accordion,
+:root
+#channel-list button.switch-audio[data-status='off'] button.accordion,
+#channel-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root button.switch-audio[data-status='off']
+#chat-list button.accordion,
+:root
+#chat-list button.switch-audio[data-status='off'] button.accordion,
+#chat-list
+:root button.switch-audio[data-status='off'] button.accordion,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  filter: none; }
+
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
+button.switch-audio .icon:before, button.switch-audio #participant-list button.accordion:before, #participant-list button.switch-audio button.accordion:before, button.switch-audio
+#channel-list button.accordion:before,
+#channel-list button.switch-audio button.accordion:before, button.switch-audio
+#chat-list button.accordion:before,
+#chat-list button.switch-audio button.accordion:before {
+  content: ""; }
+
 .submit-chat .icon:before, .submit-chat #participant-list button.accordion:before, #participant-list .submit-chat button.accordion:before, .submit-chat
 #channel-list button.accordion:before,
 #channel-list .submit-chat button.accordion:before, .submit-chat
@@ -5325,6 +5411,17 @@ button a {
 
 button.accordion {
   float: right !important; }
+
+button.switch-audio {
+  font-size: 20px;
+  font-size: 1.25rem;
+  border-radius: 10px; }
+  button.switch-audio .icon, button.switch-audio #participant-list button.accordion, #participant-list button.switch-audio button.accordion, button.switch-audio
+  #channel-list button.accordion,
+  #channel-list button.switch-audio button.accordion, button.switch-audio
+  #chat-list button.accordion,
+  #chat-list button.switch-audio button.accordion {
+    margin-right: .25em; }
 
 label {
   font-weight: bold;

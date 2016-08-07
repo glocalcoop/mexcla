@@ -144,6 +144,19 @@ Models.Audio = Backbone.Model.extend({
     return this;
   },
   /**
+   * Toggles between interpret speak state
+   * @param {String} action - 'on' or 'off'
+   */
+  interpretSpeak: function(action) {
+    if (!app.user.isInterpreter) {
+      console.log("Only interpreters can toggle the speakon/speakoff action");
+    } else if (action === 'on' || action === 'off') {
+      Models.util.audio.freeswitchAction(app.room.get('roomnum'), 'speak' + action);
+    } else {
+      console.error('action must be either "on" or "off"');
+    }
+  },
+  /**
    * @param "mute", "unmute", "status"
    * @return {boolean}
    * This is another way of muting. It's nicer that dialing '*' because you can find out if you are already muted or not...
@@ -208,6 +221,7 @@ Models.Audio = Backbone.Model.extend({
     }
     this.listenTo(app.room, 'joinChannel', this.switchChannel);
     this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
     this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
   },
   joinLeaveEventsOff: function() {

@@ -32,22 +32,22 @@
                     <fieldset>
                         <input id="create-new-room-button" type="submit" value="<%= create %>" data-transition="fade">
                         <label for="moderation-option">
-                            <input id="moderation-option" name="moderation-option" type="checkbox" value="0"> 
+                            <input id="moderation-option" name="moderation-option" type="checkbox" value="0">
                             <%= moderated_room %>
                         </label>
                         <label for="private-option">
                             <input id="private-option" name="private-option" type="checkbox" value="0">
                             <%= private_room %>
                         </label>
-                        
+
                     </fieldset>
                 </div>
             </div>
-            
+
         </section>
     </main>
 
-    
+
 </script>
 
 
@@ -144,7 +144,7 @@
                         <input type="text" value="https://pad.riseup.net/p/<%= roomnum %>" id="pad-link">
                         <span for="pad-link" class="copy-link" data-clipboard-target="#pad-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
                     </div>
-                    
+
                     <iframe id="pad-iframe" src=""></iframe>
                 </div>
                 <!-- <div class="tab-pane" id="spreadsheet-frame" data-src="https://calc.mayfirst.org/<%= roomnum %>" role="tabpanel">
@@ -174,11 +174,11 @@
             <label for="room-link"><%= link %></label>
             <!-- TODO: Add real URL -->
             <input type="text" value="<%= roomLink %>" id="room-link">
-            <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span> 
+            <span for="room-link" class="copy-link" data-clipboard-target="#room-link" data-toggle="tooltip" title="<%= click_copy %>"><i class="icon"></i></span>
         </div>
     </aside>
 
-    
+
 
     <!-- Participants  -->
     <aside class="sidebar" role="complementary" id="participant-list">
@@ -258,6 +258,11 @@
             <span class="leave-controls">
                 <!-- template #leave-channel-controls-template -->
             </span>
+
+            <span class="switch-audio-controls">
+                <!-- template #switch-audio-controls-template -->
+            </span>
+
         </div>
     </li>
 </script>
@@ -287,6 +292,11 @@
 <script type="text/template" id="interpret-controls-template">
     <button class="interpret" data-toggle="tooltip" title="Become interpreter"><%= text.interpret %></button>
     <!-- Join appears when interpreter exists and user is not already in channel -->
+</script>
+
+<!-- SWITCH AUDIO CONTROLS TEMPLATE  -->
+<script type="text/template" id="switch-audio-controls-template">
+    <button class="switch-audio" data-status="on" data-toggle="tooltip" title="Switch audio"><i class="icon"></i><%= text.interpret_switch_direction %></button>
 </script>
 
 <!-- JOIN CONTROLS TEMPLATE  -->

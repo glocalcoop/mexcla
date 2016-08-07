@@ -1,15 +1,15 @@
 /**
  * Channel
- * @class 
+ * @class
  */
 Views.Channel = Backbone.View.extend({
   template: _.template($('#channel-row-template').html()),
-  
+
   /**
    * Render
    * @memberOf Views.Channel#
    * @param {}
-   * @returns {this} 
+   * @returns {this}
    */
   render: function(channel) {
     var data = {
@@ -24,26 +24,33 @@ Views.Channel = Backbone.View.extend({
     if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
-    
+
     return this;
   },
   /**
    * Renders the controls for each channel
    * @param {Object} data - Contains channel and other information for template rendering
    * @param {Object} data.channel
-   * @returns {this} 
+   * @returns {this}
    */
   renderControls: function(data) {
     if(!Views.hasChannelInterpreter(data.channel._id)) {
       this.becomeInterpreter(data);
     }
-    
+
+    /**
+     * Render switchAudio if isInterpreterByChannelID
+     */
+    if(app.user.isInterpreterByChannelId(data.channel._id)) {
+      this.switchAudio(data);
+    }
+
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
     } else {
       this.joinChannel(data);
     }
-    
+
     return this;
   },
   becomeInterpreter: function(data) {
@@ -52,6 +59,24 @@ Views.Channel = Backbone.View.extend({
     $('#channels .interpret').click(function(event) {
       event.preventDefault();
       app.room.becomeInterpreter(app.user.id, data.channel._id);
+    });
+  },
+  switchAudio: function(data) {
+    var switchAudioControlsEl = '.switch-audio-controls';
+    new Views.SwitchAudioControls({ el: switchAudioControlsEl  }).render(data);
+    $('#channels .switch-audio').click(function(event) {
+      event.preventDefault();
+      $(this).attr('data-status', function(index,attr){
+        return attr == 'on' ? 'off' : 'on';
+      });
+      /**
+       * This is rigged up, but produces an error
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakoff`
+       * `GET XHR http://localhost:8080/undefined/conf/1750/speakon`
+       *
+       * @todo Fix this issue
+       */
+      app.audio.interpretSpeak($(this).attr('data-status'));
     });
   },
   joinChannel: function(data) {
