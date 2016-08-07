@@ -1,15 +1,15 @@
 /**
  * Channel
- * @class 
+ * @class
  */
 Views.Channel = Backbone.View.extend({
   template: _.template($('#channel-row-template').html()),
-  
+
   /**
    * Render
    * @memberOf Views.Channel#
    * @param {}
-   * @returns {this} 
+   * @returns {this}
    */
   render: function(channel) {
     var data = {
@@ -24,14 +24,14 @@ Views.Channel = Backbone.View.extend({
     if( !Views.isModerator(app.user.id) ) {
       this.renderControls(data);
     }
-    
+
     return this;
   },
   /**
    * Renders the controls for each channel
    * @param {Object} data - Contains channel and other information for template rendering
    * @param {Object} data.channel
-   * @returns {this} 
+   * @returns {this}
    */
   renderControls: function(data) {
     if(!Views.hasChannelInterpreter(data.channel._id)) {
@@ -39,23 +39,18 @@ Views.Channel = Backbone.View.extend({
     }
 
     /**
-     * `app.user.isInterpreter(data.channel._id)` produces an error
-     * `TypeError: channel is undefined`
-     * 
-     * @todo fix this so button only appears for the interpreter
+     * Render switchAudio if isInterpreterByChannelID
      */
-    // if(app.user.isInterpreter(data.channel._id)) {
-    //   this.switchAudio(data);
-    // }
+    if(app.user.isInterpreterByChannelId(data.channel._id)) {
+      this.switchAudio(data);
+    }
 
-    this.switchAudio(data);
-    
     if(Views.isInChannel(data.channel._id, app.user.id)) {
       this.leaveChannel(data);
     } else {
       this.joinChannel(data);
     }
-    
+
     return this;
   },
   becomeInterpreter: function(data) {
@@ -67,6 +62,8 @@ Views.Channel = Backbone.View.extend({
     });
   },
   switchAudio: function(data) {
+    var switchAudioControlsEl = '.switch-audio-controls';
+    new Views.SwitchAudioControls({ el: switchAudioControlsEl  }).render(data);
     $('#channels .switch-audio').click(function(event) {
       event.preventDefault();
       $(this).attr('data-status', function(index,attr){
