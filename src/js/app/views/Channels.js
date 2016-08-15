@@ -66,17 +66,10 @@ Views.Channel = Backbone.View.extend({
     new Views.SwitchAudioControls({ el: switchAudioControlsEl  }).render(data);
     $('#channels .switch-audio').click(function(event) {
       event.preventDefault();
+      app.audio.interpretSpeak($(this).attr('data-status'));
       $(this).attr('data-status', function(index,attr){
         return attr == 'on' ? 'off' : 'on';
       });
-      /**
-       * This is rigged up, but produces an error
-       * `GET XHR http://localhost:8080/undefined/conf/1750/speakoff`
-       * `GET XHR http://localhost:8080/undefined/conf/1750/speakon`
-       *
-       * @todo Fix this issue
-       */
-      app.audio.interpretSpeak($(this).attr('data-status'));
     });
   },
   joinChannel: function(data) {
