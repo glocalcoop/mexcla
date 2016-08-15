@@ -45,7 +45,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   becomeInterpreter: function(userId, channelId) {
-    this.trigger('becomeInterpreter', 'interpret', channelId);
+    this.trigger('switchChannel', 'interpret', channelId);
     Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
       //
     });
@@ -56,7 +56,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   leaveChannel: function(userId, channelId) {
-    this.trigger('leaveChannel', 'main', channelId);
+    this.trigger('switchChannel', 'main', channelId);
     Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
       //
     });
@@ -67,7 +67,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   joinChannel: function(userId, channelId) {
-    this.trigger('joinChannel', 'hear', channelId);
+    this.trigger('switchChannel', 'hear', channelId);
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });

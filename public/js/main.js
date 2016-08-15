@@ -179,11 +179,12 @@ Models.Audio = Backbone.Model.extend({
       onWSLogin: _.bind(Models.util.audio.onWSLogin, this)
     });
   },
-  call_init: function() {
+  call_init: function(status) {
     var conf = this.get("conf");
     var userName = this.get("name");
     var userId = app.user.id;
     var callbacksObj = this.get("verto_call_callbacks");
+    var caller_id_number = (_.isUndefined(status)) ? app.user.getStatus() : status;
     
     if(this.cur_call) {
       console.error("There is already a calling going on. Hand up first if you'd like to start another call.");
@@ -191,8 +192,8 @@ Models.Audio = Backbone.Model.extend({
     }
     this.cur_call =  this.verto.newCall({
       destination_number: conf.toString(),
-      caller_id_name: userName,
-      caller_id_number: app.user.getStatus(),
+      caller_id_name: app.user.get('username'),
+      caller_id_number: caller_id_number,
       useVideo: false,
       useStereo: false
     }, callbacksObj);
@@ -240,13 +241,18 @@ Models.Audio = Backbone.Model.extend({
    * input: "main", "hear", "interpret"
    * output: false or self
    */
-  switchChannel: function() {
+  switchChannel: function(status) {
+    console.log(status);
+    if (_.isUndefined(status)) {
+      status = 'main';
+    }
+    
     if (!this.cur_call) {
       console.error('You must start a call before you switch channels.');
       return false;
     }
     this.hangup();
-    this.call_init();
+    this.call_init(status);
     return this;
   },
   /**
@@ -320,9 +326,10 @@ Models.Audio = Backbone.Model.extend({
     }
   },
   roomAudioEvents: function() {
-    this.listenTo(app.room, 'joinChannel', this.switchChannel);
-    this.listenTo(app.room, 'leaveChannel', this.switchChannel);
-    this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
+    this.listenTo(app.room, 'switchChannel', this.switchChannel);
+    // this.listenTo(app.room, 'joinChannel', this.switchChannel);
+    // this.listenTo(app.room, 'leaveChannel', this.switchChannel);
+    // this.listenTo(app.room, 'becomeInterpreter', this.switchChannel);
   },
   setFloor: function() {},
   setMute: function() {},
@@ -394,7 +401,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   becomeInterpreter: function(userId, channelId) {
-    this.trigger('becomeInterpreter', 'interpret', channelId);
+    this.trigger('switchChannel', 'interpret', channelId);
     Models.updateChannelAjax('interpret', this.get('_id'), channelId, userId).done(function(data){
       //
     });
@@ -405,7 +412,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   leaveChannel: function(userId, channelId) {
-    this.trigger('leaveChannel', 'main', channelId);
+    this.trigger('switchChannel', 'main', channelId);
     Models.updateChannelAjax('leave', this.get('_id'), channelId, userId).done(function(data){
       //
     });
@@ -416,7 +423,7 @@ Models.Room = Backbone.Model.extend({
    * @param {string} channelId
    */
   joinChannel: function(userId, channelId) {
-    this.trigger('joinChannel', 'hear', channelId);
+    this.trigger('switchChannel', 'hear', channelId);
     Models.updateChannelAjax('join', this.get('_id'), channelId, userId).done(function(data){
       //
     });
