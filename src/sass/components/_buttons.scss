@@ -27,6 +27,10 @@ button {
     }
 }
 
+input[disabled="disabled"] {
+    display: none;
+}
+
 #connect-button {
     transition: all 1s fade-in;
     @extend .btn-lg;

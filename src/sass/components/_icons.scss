@@ -17,7 +17,7 @@
     transition: all .25s ease-in-out;
     -moz-transition: all .25s ease-in-out;
     -webkit-transition: all .25s ease-in-out;
-    
+
     &:empty {
         visibility: hidden;
         opacity: 0;
@@ -108,35 +108,63 @@
     }
 
     .raise-hand {
+      display: none;
+
+      &.active {
+        display: unset;
         @extend .btn-success;
         .icon {
             @extend %fa-hand-paper-o;
         }
-        &.on {
-            @extend .btn-disabled;
-            .icon {
-                @extend %fa-hand-o-down;
-            }
+      }
+    }
+
+    .lower-hand {
+      display: none;
+
+      &.active {
+        display: unset;
+        @extend .btn-disabled;
+        .icon {
+            @extend %fa-hand-paper-o;
+            @extend .fa-flip-vertical;
         }
+      }
     }
 
     .call-on {
-        @extend .btn-danger;
-        a:hover {
-            color: $white;
+        display: none;
+
+        &.active {
+          display: unset;
+          @extend .btn-danger;
+          a:hover {
+              color: $white;
+          }
+          .icon {
+              @extend %fa-toggle-on;
+          }
         }
-        .icon {
-            @extend %fa-toggle-on;
-        }
-        &.on {
-            @extend .btn-disabled;
-            .icon {
-                @extend %fa-toggle-off;
-            }
+    }
+
+    .call-off {
+        display: none;
+
+        &.active {
+          display: unset;
+          @extend .btn-disabled;
+          a:hover {
+              color: $white;
+          }
+          .icon {
+              @extend %fa-toggle-off;
+          }
         }
     }
 
 }
+
+/*fa-volume-up */
 
 #collaboration {
 
@@ -211,11 +239,9 @@
   }
 }
 */
- 
+
 .license .icon:before {
   @extend %fa;
   font-family: "gpl3";
   content: '\e800';
 } /* '' */
-
-
