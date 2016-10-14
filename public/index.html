@@ -246,6 +246,9 @@
             <!-- Show if participant is moderator -->
             <span class="is-moderator"></span>
 
+            <!-- Show if participant has floor -->
+            <span class="has-floor"></span>
+
             <!-- Show if participant is queued -->
             <span class="is-queued"></span>
         </div>
@@ -253,9 +256,15 @@
         <%= username %>
 
         <div class="controls">
-            <span class="moderator-controls"></span>
-            <span class="mute-controls"></span>
-            <span class="current-user-controls"></span>
+            <span class="moderator-controls">
+              <!-- template #moderator-controls-template -->
+            </span>
+            <span class="mute-controls">
+              <!-- template #mute-controls-template -->
+            </span>
+            <span class="current-user-controls">
+              <!-- template #current-user-controls-template -->
+            </span>
         </div>
 
     </li>
@@ -289,16 +298,19 @@
 
 <!-- MODERATOR CONTROLS TEMPLATE  -->
 <script type="text/template" id="moderator-controls-template">
-    <!-- Moderator controls -->
     <!-- Show if `in queue` and not `called on` -->
     <button class="call-on" data-toggle="tooltip" href="" title="Call On"><i class="icon"></i></button>
+    <!-- Show if `has floor` -->
+    <button class="call-off" data-toggle="tooltip" href="" title="Call Off"><i class="icon"></i></button>
 </script>
 
 
 <!-- CURRENT PARTICIPANT CONTROLS TEMPLATE -->
 <script type="text/template" id="current-user-controls-template">
-    <!-- Show if not in queue - Toggle raise hand/lower hand -->
+    <!-- Show if not in queue - Raise hand -->
     <button class="raise-hand" data-toggle="tooltip" href="" title="Raise Hand"><i class="icon"></i></button>
+    <!-- Show if in queue - Lower hand -->
+    <button class="lower-hand" data-toggle="tooltip" href="" title="Lower Hand"><i class="icon"></i></button>
 </script>
 
 
