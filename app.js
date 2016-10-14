@@ -3,7 +3,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://127.0.0.1:27018/mexcladb_test');
+mongoose.connect('mongodb://127.0.0.1:27017/mexcladb');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var _ = require('underscore');

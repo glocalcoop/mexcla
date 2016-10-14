@@ -358,6 +358,7 @@ Models.Room = Backbone.Model.extend({
   urlRoot: "/room/id",
   initialize: function() {
     this.establishSocket();
+    this.userId = _.isUndefined(app.user) ? null : app.user.id;
   }, 
   fetchByNum: function() {
     var that = this;
@@ -390,6 +391,7 @@ Models.Room = Backbone.Model.extend({
   },
   fetchByNumAjax: function() {
     return $.ajax({
+
       type: 'GET',
       url: '/room/' + this.get('roomnum')
     });
@@ -459,6 +461,22 @@ Models.Room = Backbone.Model.extend({
   isUserMuted: function(userid) {
     var user = Models.util.room.userById(this.get('users'), userid);
     return user.isMuted;
+  },
+  
+  /**
+   * Is it a moderated room?
+   */
+  isModerated: function(){
+    return this.get('isModerated');
+  },
+  /**
+   * Determines if user in the queue
+   */
+  isInQueue: function(){
+    var userId = this.userId;
+    return !_.isUndefined(_.find(this.get('handsQueue'), function(x){
+    	return x === userId;
+      }));
   },
   establishSocket: function() {
     var that = this;

@@ -1,5 +1,5 @@
 var AliceAttr = {"lang":"en","__v":0,"username":"Alice","_id":"56faea72ef6b9d2e0726881e","isMuted":false,"admin":false,"currentRoom":null};
-
+ 
 var MrButtonsAttr = {"__v":0,"username":"MrButtons","_id":"56faee7eef6b9d2e07268820","isMuted":true,"admin":false,"lang":"en","currentRoom":null};
 
 var room6433Attr = {"__v":1,"roomnum":6433,"active":true,"creator":"56faea72ef6b9d2e0726881e","isModerated":false,"moderator":null,"_id":"56faea72ef6b9d2e0726881f","handsQueue":[],"channels":[],"users":[{"lang":"en","_id":"56faea72ef6b9d2e0726881e","username":"Alice","isMuted":false},{"lang":"en","_id":"56faee7eef6b9d2e07268820","username":"MrButtons","isMuted":true}]};
@@ -125,6 +125,40 @@ describe('room model', function(){
       room.isUserMuted("56faea72ef6b9d2e0726881e").should.eql(false);
       room.isUserMuted("56faee7eef6b9d2e07268820").should.eql(true);
     });
+  });
+  
+  describe('isModerated', function(){
+    
+    it('returns true for moderated room', function(){
+      new Models.Room({isModerated: true}).isModerated().should.eql(true);
+    });
+
+    it('returns false for non-moderated room', function(){
+      new Models.Room({isModerated: false}).isModerated().should.eql(false);
+    });
+
+  });
+
+  describe('isInQueue', function(){
+  
+    before(function(){
+      app.user = new Models.User(AliceAttr);
+    });
+    
+    after(function(){
+      app.user = null;
+    });
+
+    it('finds the user in the queue', function(){
+      var room = new Models.Room({'handsQueue': ['123', '456', AliceAttr._id, '789']});
+      room.isInQueue().should.eql(true);
+    });
+
+    it('return false if the user is not in the queue', function(){
+      var room = new Models.Room({'handsQueue': ['123', '456', '789']});
+      room.isInQueue().should.eql(false);
+    });
+  
   });
 
   describe('Mute', function(){
