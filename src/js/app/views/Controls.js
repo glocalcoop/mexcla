@@ -7,8 +7,9 @@ Views.AddChannelButton = Backbone.View.extend({
   el: '#add-channel-button-container',
   render: function(templateData) {
     this.$el.html(this.template(templateData));
-    this.$el.find('#add-channel-button').click(function(){
+    this.$el.find('#add-channel-button').click(function(event){
       if( app.room.get('channels').length < 1 ) {
+        event.preventDefault();
         new Views.AddChannelModal({model: app.room}).render();
       }
       else {
@@ -26,28 +27,35 @@ Views.ModeratorControls = Backbone.View.extend({
   render: function(userId) {
     // reset
     this.$el.html('');
-    // only show if in queue or is called on
+    // Render Call on / Call off if participant is in queue or has floor
     if(Views.isInQueue(userId) || Views.isCalledOn(userId)){
       this.$el.html(this.template({}));
+      this.callOnToggle(userId);
       this.callOnClick(userId);
-      this.ensureCorrectTogglePosition(userId);
+      this.callOffClick(userId);
     }
     return this;
   },
   callOnClick: function(userId) {
-    $('#' + userId).find('button.call-on').click(function(e){
-      if (Views.isCalledOn(userId)) {
-        app.user.callOff(userId);
-      } else {
-        app.user.callOn(userId);
-      }
+    $('#' + userId).find('button.call-on').click(function(event){
+      event.preventDefault();
+      app.user.callOn(userId);
+      $(this).removeClass('active');
     });
   },
-  ensureCorrectTogglePosition: function(userId) {
-    if (Views.isCalledOn(userId)) {
-      $('#' + userId).find('button.call-on').addClass('on');
-    } else {
-      $('#' + userId).find('button.call-on').removeClass('on');
+  callOffClick: function(userId) {
+    $('#' + userId).find('button.call-off').click(function(event){
+      event.preventDefault();
+      app.user.callOff(userId);
+      $(this).removeClass('active');
+    });
+  },
+  callOnToggle: function(userId) {
+    if( Views.isInQueue(userId) ) {
+      $('#' + userId).find('button.call-on').addClass('active');
+    }
+    if( Views.isCalledOn(userId) ) {
+      $('#' + userId).find('button.call-off').addClass('active');
     }
   }
 
@@ -64,22 +72,29 @@ Views.CurrentUserControls = Backbone.View.extend({
     this.$el.html(this.template({}));
     this.raiseHandToggle(userId);
     this.raiseHandClick(userId);
-  },
-  raiseHandToggle: function(userId) {
-    if (Views.isInQueue(userId)){
-      $('#' + userId).find('button.raise-hand').addClass('on');
-    } else {
-      $('#' + userId).find('button.raise-hand').removeClass('on');
-    }
+    this.lowerHandClick(userId);
   },
   raiseHandClick: function(userId) {
-    $('#' + userId + ' .current-user-controls .raise-hand').click(function(e){
-      if (Views.isInQueue(userId)) {
-        app.user.lowerHand();
-      } else {
-        app.user.raiseHand();
-      }
+    $('#' + userId + ' .current-user-controls .raise-hand').click(function(event){
+      event.preventDefault();
+      app.user.raiseHand();
+      $(this).removeClass('active');
     });
+  },
+  lowerHandClick: function(userId) {
+    $('#' + userId + ' .current-user-controls .lower-hand').click(function(event){
+      event.preventDefault();
+      app.user.lowerHand();
+      $(this).removeClass('active');
+    });
+  },
+  raiseHandToggle: function(userId) {
+    if( Views.isInQueue(userId) ) {
+      $('#' + userId).find('button.lower-hand').addClass('active');
+    }
+    if( !Views.isInQueue(userId) && !Views.isCalledOn(userId) ) {
+      $('#' + userId).find('button.raise-hand').addClass('active');
+    }
   }
 });
 
