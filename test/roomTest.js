@@ -85,10 +85,9 @@ describe('room model', function(){
     });
     
     describe('becomeInterpreter', function(){
-      it('triggers becomeInterpreter', function(){
-        
+      it('triggers switchChannel', function(){
         var spy = sinon.spy();
-        testRoom.on('becomeInterpreter', spy);
+        testRoom.on('switchChannel', spy);
         testRoom.becomeInterpreter('user123', 'channel123');
 
         spy.calledOnce.should.be.true;
@@ -97,9 +96,9 @@ describe('room model', function(){
     });
 
     describe('leaveChannel', function(){
-      it('triggers leaveChannel event', function(){
+      it('triggers switchChannel event', function(){
         var spy = sinon.spy();
-        testRoom.on('leaveChannel', spy);
+        testRoom.on('switchChannel', spy);
         testRoom.leaveChannel('user123', 'channel123');
         
         spy.calledOnce.should.be.true;
@@ -108,9 +107,9 @@ describe('room model', function(){
     });
 
     describe('joinChannel', function(){
-      it('triggers joinChannel event', function(){
+      it('triggers switchChannel event', function(){
         var spy = sinon.spy();
-        testRoom.on('joinChannel', spy);
+        testRoom.on('switchChannel', spy);
         testRoom.joinChannel('user123', 'channel123');
         
         spy.calledOnce.should.be.true;
